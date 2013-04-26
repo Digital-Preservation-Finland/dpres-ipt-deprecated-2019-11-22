@@ -1,0 +1,15 @@
+.tox
+__pycache__
+.cache
+.pyc
+.swp
+~
+egg-info
+_build
+build
+dist
+\.orig\..*$
+\.orig$
+\.chg\..*$
+\.rej$
+\.conflict\~$

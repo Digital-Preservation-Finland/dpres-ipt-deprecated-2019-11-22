@@ -1,0 +1,37 @@
+# Instructions
+
+ 1. Start ingest server with vagrant up.
+
+ 1. Install msysgit first if you are windows user (http://code.google.com/p/msysgit/downloads/list). 
+    Go to scratch directory first, in windows users case go to Git bash and give commands below. 
+    Linux and Mac users just use command line.
+    
+  		cd /c/workspace/home/tenhunen/scratch
+  		while true ; do rsync -e ssh -avz microservice spock@ingest:scratch/ ; sleep 1 ; done
+  		
+  	This will synchronize tests and microservice code to ingest server
+  
+  3. On ingest server run
+  
+  		cd /home/spock/scratch/microservice
+  		while true; do make test; sleep 5 ; done
+  		
+  		
+  	Now the tests are being built and run and you should see following text (or similar)		
+  
+  		# Run tests
+    	prove t
+   	 	t/01_test_unzip.t .. ok
+      	All tests successful.
+		Files=1, Tests=3,  0 wallclock secs ( 0.02 usr +  0.00 sys =  0.02 CPU)
+		Result: PASS
+		
+	If you want to see time statistics of tests run
+	
+		while true; do time make test; sleep 5 ; done
+	
+	Now you have established continuous deployment and automated unit testing 
+	
+	4. Enjoy programming!
+		
+  	
