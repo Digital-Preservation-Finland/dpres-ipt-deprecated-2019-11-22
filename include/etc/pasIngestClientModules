@@ -28,7 +28,7 @@
 #elasticSearchAIPIndex_v0.0 = %clientScriptsDirectory%elasticSearchIndexProcessAIP.py
 #elasticSearchIndex_v0.0 = %clientScriptsDirectory%elasticSearchIndexProcessTransfer.py
 #restructureDIPForContentDMUpload_v0.0 = %clientScriptsDirectory%restructureDIPForContentDMUpload.py
-#storeAIP_v0.0 = %clientScriptsDirectory%storeAIP.py
+storeAIP_v0.0 = %clientScriptsDirectory%storeAIP.py
 #upload-contentDM_v0.0 = %clientScriptsDirectory%upload-contentDM.py
 #upload-qubit_v0.0 = upload-qubit
 
@@ -44,7 +44,7 @@
 #checkForServiceDirectory_v0.0 = %clientScriptsDirectory%checkForServiceDirectory.py
 #checkForSubmissionDocumenation_v0.0 = %clientScriptsDirectory%checkForSubmissionDocumenation.py
 #checkTransferDirectoryForObjects_v0.0 = %clientScriptsDirectory%checkTransferDirectoryForObjects.py
-#copy_v0.0 = cp
+copy_v0.0 = cp
 #copyTransfersMetadataAndLogs_v0.0 = %clientScriptsDirectory%copyTransfersMetadataAndLogs.py
 #copyTransferSubmissionDocumentation_v0.0 = %clientScriptsDirectory%copyTransferSubmissionDocumentation.py
 #createDirectory_v0.0 = mkdir
@@ -53,7 +53,7 @@
 #createMETS_v2.0 = %clientScriptsDirectory%archivematicaCreateMETS2.py
 #createSIPfromTransferObjects_v0.0 = %clientScriptsDirectory%createSIPfromTransferObjects.py
 #createSIPsfromTRIMTransferContainers_v0.0 = %clientScriptsDirectory%createSIPsfromTRIMTransferContainers.py
-#echo_v0.0 = /bin/echo
+echo_v0.0 = /bin/echo
 #emailFailReport_v0.0 = %clientScriptsDirectory%emailFailReport.py
 #extractBAG_v0.0 = %clientScriptsDirectory%extractBAG.sh
 #extractBagTransfer_v0.0 = %clientScriptsDirectory%extractBagTransfer.py
@@ -70,12 +70,12 @@
 #manualNormalizationIdentifyFilesIncluded_v0.0 = %clientScriptsDirectory%manualNormalizationIdentifyFilesIncluded.py
 #manualNormalizationMoveAccessFilesToDIP_v0.0 = %clientScriptsDirectory%manualNormalizationMoveAccessFilesToDIP.py
 #manualNormalizationRemoveMNDirectories_v0.0 = %clientScriptsDirectory%manualNormalizationRemoveMNDirectories.py
-#move_v0.0 = sudo mv
+move_v0.0 = sudo mv
 #moveDspaceLicenseFilesToDSpaceLicenses_v0.0 = %clientScriptsDirectory%moveDspaceLicenseFilesToDSpaceLicenses.py
 #moveDspaceMetsFilesToDSpaceMETS_v0.0 = %clientScriptsDirectory%moveDspaceMetsFilesToDSpaceMETS.py
-#moveSIP_v0.0 =  %clientScriptsDirectory%archivematicaMoveSIP.py
-#moveTransfer_v0.0 =  %clientScriptsDirectory%archivematicaMoveTransfer.py
-#remove_v0.0 = rm
+moveSIP_v0.0 =  %clientScriptsDirectory%archivematicaMoveSIP.py
+moveTransfer_v0.0 =  %clientScriptsDirectory%archivematicaMoveTransfer.py
+remove_v0.0 = rm
 #removeEmptyDirectories_v0.0 = %clientScriptsDirectory%removeEmptyDirectories.py
 #removeFilesWithoutPresmisMetadata_v0.0 = %clientScriptsDirectory%removeFilesWithoutPresmisMetadata.py
 #removeHiddenFilesAndDirectories_v0.0 = %clientScriptsDirectory%removeHiddenFilesAndDirectories.py
@@ -88,7 +88,7 @@
 #sanitizeObjectNames_v0.0 = %clientScriptsDirectory%sanitizeObjectNames.py
 #sanitizeSIPName_v0.0 = %clientScriptsDirectory%sanitizeSIPName.py
 #setDirectoryPermissionsForAppraisal_v0.0 = %clientScriptsDirectory%setDirectoryPermissionsForAppraisal.sh
-#setFilePermission_v0.0 = chmod
+setFilePermission_v0.0 = chmod
 #setSIPQuarantine_v0.0 = %clientScriptsDirectory%quarantineSIP.sh
 #sha256deepRelative_v0.0 = %clientScriptsDirectory%sha256deepRelative.sh
 #transcoderExtractPackages_v0.0 = /usr/lib/archivematica/transcoder/transcoderExtraction.py
