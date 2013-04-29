@@ -35,6 +35,6 @@ devinstall:
 	
 install_deps:
 	# only for testing environment
-	yum install schematron pas-mets-validator
+	yum -y install zip
 
 	
