@@ -35,6 +35,6 @@ devinstall:
 	
 install_deps:
 	# only for testing environment
-	yum -y install zip
+	yum -y install zip unzip
 
 	
