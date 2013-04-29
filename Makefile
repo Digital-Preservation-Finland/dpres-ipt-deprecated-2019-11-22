@@ -1,5 +1,7 @@
 
-INSTALLDIR=/usr/lib/pas/microservices
+PREFIX=
+ETC=${PREFIX}/etc
+INSTALLDIR=${PREFIX}/usr/lib/pas/microservices
 
 all: info
 
@@ -25,6 +27,7 @@ install:
 	# Install all
 	[ -d "${INSTALLDIR}" ] || mkdir -p "${INSTALLDIR}"
 	install -m 755 src/* "${INSTALLDIR}/"
+	install -m 644 include/etc/* "${ETC}/archivematica/MCPClient/"
 
 devinstall:
 	# quick and dirty installation...
