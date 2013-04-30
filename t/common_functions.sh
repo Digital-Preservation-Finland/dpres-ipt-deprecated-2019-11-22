@@ -16,6 +16,14 @@ equals() {
     [ "$VAR1" == "$VAR2" ] || echo "not ok $TESTNUMBER $* '$VAR1' == '$VAR2'"
 }
 
+not_equals() {
+    start_test
+    VAR1=$1 ; shift
+    VAR2=$1 ; shift
+    [ "$VAR1" == "$VAR2" ] || echo "ok $TESTNUMBER $* '$VAR1' == '$VAR2'"
+    [ "$VAR1" == "$VAR2" ] && echo "not ok $TESTNUMBER $*"
+}
+
 is_file() {
     start_test
     VAR1=$1 ; shift
