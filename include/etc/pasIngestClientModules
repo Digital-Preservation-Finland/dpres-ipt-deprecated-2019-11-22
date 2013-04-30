@@ -24,15 +24,33 @@
 #the version numbers are versions of the protocol, not versions of the programs themselves.
 
 [supportedCommandsSpecial]
+storeAIP_v0.0 = %clientScriptsDirectory%storeAIP.py
+
 #7z_v0.0 = /usr/bin/7z
 #elasticSearchAIPIndex_v0.0 = %clientScriptsDirectory%elasticSearchIndexProcessAIP.py
 #elasticSearchIndex_v0.0 = %clientScriptsDirectory%elasticSearchIndexProcessTransfer.py
 #restructureDIPForContentDMUpload_v0.0 = %clientScriptsDirectory%restructureDIPForContentDMUpload.py
-storeAIP_v0.0 = %clientScriptsDirectory%storeAIP.py
 #upload-contentDM_v0.0 = %clientScriptsDirectory%upload-contentDM.py
 #upload-qubit_v0.0 = upload-qubit
 
 [supportedCommands]
+
+# PAS commands
+checkSIPTransferType_v0.0 = %clientScriptsDirectory%checkSIPTransferType.sh
+verifyMetsSignature_v0.0 = %clientScriptsDirectory%verifyMetsSignature.sh
+extractZippedFile_v0.0 = %clientScriptsDirectory%extractZippedFile.sh
+
+# Archivemativa commands
+setFilePermission_v0.0 = chmod
+moveSIP_v0.0 =  %clientScriptsDirectory%archivematicaMoveSIP.py
+moveTransfer_v0.0 =  %clientScriptsDirectory%archivematicaMoveTransfer.py
+
+remove_v0.0 = rm
+copy_v0.0 = cp
+echo_v0.0 = /bin/echo
+move_v0.0 = sudo mv
+
+
 #archivematicaClamscan_v0.0 = %clientScriptsDirectory%archivematicaClamscan.py
 #archivematicaSetTransferType_v0.0 = %clientScriptsDirectory%archivematicaSetTransferType.py
 #archivematicaVerifyMets_v0.0 = %clientScriptsDirectory%archivematicaVerifyMets.sh
@@ -44,7 +62,6 @@ storeAIP_v0.0 = %clientScriptsDirectory%storeAIP.py
 #checkForServiceDirectory_v0.0 = %clientScriptsDirectory%checkForServiceDirectory.py
 #checkForSubmissionDocumenation_v0.0 = %clientScriptsDirectory%checkForSubmissionDocumenation.py
 #checkTransferDirectoryForObjects_v0.0 = %clientScriptsDirectory%checkTransferDirectoryForObjects.py
-copy_v0.0 = cp
 #copyTransfersMetadataAndLogs_v0.0 = %clientScriptsDirectory%copyTransfersMetadataAndLogs.py
 #copyTransferSubmissionDocumentation_v0.0 = %clientScriptsDirectory%copyTransferSubmissionDocumentation.py
 #createDirectory_v0.0 = mkdir
@@ -53,7 +70,6 @@ copy_v0.0 = cp
 #createMETS_v2.0 = %clientScriptsDirectory%archivematicaCreateMETS2.py
 #createSIPfromTransferObjects_v0.0 = %clientScriptsDirectory%createSIPfromTransferObjects.py
 #createSIPsfromTRIMTransferContainers_v0.0 = %clientScriptsDirectory%createSIPsfromTRIMTransferContainers.py
-echo_v0.0 = /bin/echo
 #emailFailReport_v0.0 = %clientScriptsDirectory%emailFailReport.py
 #extractBAG_v0.0 = %clientScriptsDirectory%extractBAG.sh
 #extractBagTransfer_v0.0 = %clientScriptsDirectory%extractBagTransfer.py
@@ -70,12 +86,8 @@ echo_v0.0 = /bin/echo
 #manualNormalizationIdentifyFilesIncluded_v0.0 = %clientScriptsDirectory%manualNormalizationIdentifyFilesIncluded.py
 #manualNormalizationMoveAccessFilesToDIP_v0.0 = %clientScriptsDirectory%manualNormalizationMoveAccessFilesToDIP.py
 #manualNormalizationRemoveMNDirectories_v0.0 = %clientScriptsDirectory%manualNormalizationRemoveMNDirectories.py
-move_v0.0 = sudo mv
 #moveDspaceLicenseFilesToDSpaceLicenses_v0.0 = %clientScriptsDirectory%moveDspaceLicenseFilesToDSpaceLicenses.py
 #moveDspaceMetsFilesToDSpaceMETS_v0.0 = %clientScriptsDirectory%moveDspaceMetsFilesToDSpaceMETS.py
-moveSIP_v0.0 =  %clientScriptsDirectory%archivematicaMoveSIP.py
-moveTransfer_v0.0 =  %clientScriptsDirectory%archivematicaMoveTransfer.py
-remove_v0.0 = rm
 #removeEmptyDirectories_v0.0 = %clientScriptsDirectory%removeEmptyDirectories.py
 #removeFilesWithoutPresmisMetadata_v0.0 = %clientScriptsDirectory%removeFilesWithoutPresmisMetadata.py
 #removeHiddenFilesAndDirectories_v0.0 = %clientScriptsDirectory%removeHiddenFilesAndDirectories.py
@@ -88,7 +100,6 @@ remove_v0.0 = rm
 #sanitizeObjectNames_v0.0 = %clientScriptsDirectory%sanitizeObjectNames.py
 #sanitizeSIPName_v0.0 = %clientScriptsDirectory%sanitizeSIPName.py
 #setDirectoryPermissionsForAppraisal_v0.0 = %clientScriptsDirectory%setDirectoryPermissionsForAppraisal.sh
-setFilePermission_v0.0 = chmod
 #setSIPQuarantine_v0.0 = %clientScriptsDirectory%quarantineSIP.sh
 #sha256deepRelative_v0.0 = %clientScriptsDirectory%sha256deepRelative.sh
 #transcoderExtractPackages_v0.0 = /usr/lib/archivematica/transcoder/transcoderExtraction.py
