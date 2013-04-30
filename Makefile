@@ -20,8 +20,7 @@ build:
 	# Build all
 
 test:
-	# Run tests
-	prove t
+	@prove -r t
 
 install:
 	# Install all
