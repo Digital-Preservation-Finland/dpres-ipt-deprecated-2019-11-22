@@ -1,5 +1,6 @@
 # Instructions
 
+
  1. Start ingest server with vagrant up.
 
  1. Install msysgit first if you are windows user (http://code.google.com/p/msysgit/downloads/list). 
