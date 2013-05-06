@@ -4,4 +4,17 @@
 <pydev_project>
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">Default</pydev_property>
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python 2.7</pydev_property>
+<pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
+<path>C:\Python26</path>
+<path>C:\Python26\Lib</path>
+<path>C:\Python26\Lib\site-packages</path>
+<path>C:\Python26\Lib\distutils\tests</path>
+</pydev_pathproperty>
+<pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
+<path>/microservice/src</path>
+<path>/microservice/src/pythonblocks</path>
+<path>/microservice/src/pythonblocks/blocks</path>
+<path>/microservice/src/pythonblocks/dist</path>
+<path>/microservice</path>
+</pydev_pathproperty>
 </pydev_project>
