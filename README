@@ -8,7 +8,7 @@
     Linux and Mac users just use command line.
     
   		cd /c/workspace/home/tenhunen/scratch
-  		while true ; do rsync -e ssh -avz microservice spock@ingest:scratch/ ; sleep 1 ; done
+  		while true ; do rsync -delete -e ssh -avz microservice spock@ingest:scratch/ ; sleep 1 ; done
   		
   	This will synchronize tests and microservice code to ingest server
   
