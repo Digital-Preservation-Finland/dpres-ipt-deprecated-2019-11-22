@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mets:mets xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rts="http://cosimo.stanford.edu/sdr/metsrights" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mets="http://www.loc.gov/METS/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:premis="info:lc/xmlns/premis-v2" xmlns:dcterms="http://purl.org/dc/terms/" xsi:schemaLocation="http://www.loc.gov/METS/ kdk_mets.xsd" OBJID="CSC_test001" PROFILE="http://www.kdk.fi/kdk-mets-profile">
+<mets:mets xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rts="http://cosimo.stanford.edu/sdr/metsrights" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mets="http://www.loc.gov/METS/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:premis="info:lc/xmlns/premis-v2" xmlns:dcterms="http://purl.org/dc/terms/" xsi:schemaLocation="http://www.loc.gov/METS/ kdk_mets.xsd" OBJID="CSC_test003" PROFILE="http://www.kdk.fi/kdk-mets-profile">
 
 
 <mets:metsHdr CREATEDATE="2012-07-13T12:23:44">
@@ -8,11 +8,11 @@
 </mets:agent>
 </mets:metsHdr>
 
-<mets:dmdSec ID="CSC_test001_object001" CREATED="2012-07-13T00:00:00">
+<mets:dmdSec ID="CSC_test003_object001" CREATED="2012-07-13T00:00:00">
 <mets:mdWrap MDTYPE="DC" xsi:schemaLocation="http://purl.org/dc/elements/1.1/ http://dublincore.org/schemas/xmls/qdc/2008/02/11/dc.xsd http://purl.org/dc/terms/ http://dublincore.org/schemas/xmls/qdc/dcterms.xsd">
 <mets:xmlData>
 <dc:record>
-<dc:identifier>CSC_test001_object001</dc:identifier>
+<dc:identifier>CSC_test003_object001</dc:identifier>
 <dc:title>Testikuva</dc:title>
 <dc:type xsi:type="dcterms:DCMIType">Image</dc:type>
 <dc:type xml:lang="fi">valokuva</dc:type>
@@ -21,7 +21,7 @@
 <dc:description xml:lang="fi">Vaellusreitti Galdhøpiggenille.</dc:description>
 <dc:source>CSC_source001</dc:source>
 <dcterms:isPartOf>Juhan vaelluskokoelma</dcterms:isPartOf>
-<dcterms:isPartOf>CSC_test001</dcterms:isPartOf>
+<dcterms:isPartOf>CSC_test003</dcterms:isPartOf>
 <dcterms:spatial>Galdhøpiggen</dcterms:spatial>
 <dcterms:spatial>Norja</dcterms:spatial>
 <dcterms:temporal>2009</dcterms:temporal>
@@ -33,11 +33,11 @@
 </mets:mdWrap>
 </mets:dmdSec>
 
-<mets:dmdSec ID="CSC_test001_object002" CREATED="2012-07-13T00:00:00">
+<mets:dmdSec ID="CSC_test003_object002" CREATED="2012-07-13T00:00:00">
 <mets:mdWrap MDTYPE="DC" xsi:schemaLocation="http://purl.org/dc/elements/1.1/ http://dublincore.org/schemas/xmls/qdc/2008/02/11/dc.xsd http://purl.org/dc/terms/ http://dublincore.org/schemas/xmls/qdc/dcterms.xsd">
 <mets:xmlData>
 <dc:record>
-<dc:identifier>CSC_test001_object001</dc:identifier>
+<dc:identifier>CSC_test003_object001</dc:identifier>
 <dc:title>Testikuva</dc:title>
 <dc:type xsi:type="dcterms:DCMIType">Image</dc:type>
 <dc:type xml:lang="fi">valokuva</dc:type>
@@ -46,7 +46,7 @@
 <dc:description xml:lang="fi">Jäätikkö Galdhøpiggenilla.</dc:description>
 <dc:source>CSC_source001</dc:source>
 <dcterms:isPartOf>Juhan vaelluskokoelma</dcterms:isPartOf>
-<dcterms:spatial>CSC_test001</dcterms:spatial>
+<dcterms:spatial>CSC_test003</dcterms:spatial>
 <dcterms:spatial>Galdhøpiggen</dcterms:spatial>
 <dcterms:spatial>Norja</dcterms:spatial>
 <dcterms:temporal>2006</dcterms:temporal>
@@ -58,68 +58,24 @@
 </mets:mdWrap>
 </mets:dmdSec>
 
-<mets:dmdSec ID="CSC_test001_object003" CREATED="2012-07-13T00:00:00">
+<mets:dmdSec ID="CSC_test003_object003" CREATED="2012-07-13T00:00:00">
 <mets:mdWrap MDTYPE="DC" xsi:schemaLocation="http://purl.org/dc/elements/1.1/ http://dublincore.org/schemas/xmls/qdc/2008/02/11/dc.xsd http://purl.org/dc/terms/ http://dublincore.org/schemas/xmls/qdc/dcterms.xsd">
 <mets:xmlData>
 <dc:record>
-<dc:identifier>CSC_test001_object003</dc:identifier>
-<dc:title>Testikuva</dc:title>
-<dc:type xsi:type="dcterms:DCMIType">Image</dc:type>
-<dc:type xml:lang="fi">valokuva</dc:type>
-<dc:subject xml:lang="fi">jurtta</dc:subject>
-<dc:subject xml:lang="fi">asuinalue</dc:subject>
-<dc:description xml:lang="fi">Asutusta Ulan Batorin laidalla.</dc:description>
-<dc:source>CSC_source001</dc:source>
-<dcterms:isPartOf>Juhan retkikokoelma</dcterms:isPartOf>
-<dcterms:isPartOf>CSC_test001</dcterms:isPartOf>
-<dcterms:spatial>Ulan Bator</dcterms:spatial>
-<dcterms:spatial>Mongolia</dcterms:spatial>
-<dcterms:temporal>2010</dcterms:temporal>
-<dc:creator>Lehtonen, Juha</dc:creator>
-<dc:publisher>CSC - IT Center for Science</dc:publisher>
-<dc:format>digitaalikuva</dc:format>
+<dc:identifier>CSC_test003_object003</dc:identifier>
 </dc:record>
 </mets:xmlData>
 </mets:mdWrap>
 </mets:dmdSec>
 
 <mets:amdSec>
-    <mets:techMD ID="CSC_test001_tech002" CREATED="2012-07-13T00:00:00">
+    <mets:techMD ID="CSC_test003_tech002" CREATED="2012-07-13T00:00:00">
       <mets:mdWrap MDTYPE="PREMIS:OBJECT">
         <mets:xmlData>
           <premis:object xmlns="info:lc/xmlns/premis-v2" xsi:type="file" xsi:schemaLocation="info:lc/xmlns/premis-v2 http://www.loc.gov/standards/premis/v2/premis-v2-1.xsd" version="2.1">
             <premis:objectIdentifier>
-              <premis:objectIdentifierType>UUID</premis:objectIdentifierType>
-              <premis:objectIdentifierValue>6abebf94-94f5-417c-9b60-05c16b985fdd</premis:objectIdentifierValue>
-            </premis:objectIdentifier>
-            <premis:objectCharacteristics>
-              <premis:compositionLevel>0</premis:compositionLevel>
-              <premis:fixity>
-                <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
-                <premis:messageDigest>762108c2ca8680fdb55fb67170a55e70</premis:messageDigest>
-              </premis:fixity>
-              <premis:size>1422762</premis:size>
-              <premis:format>
-                <premis:formatDesignation>
-                  <premis:formatName>image/jpeg</premis:formatName>
-                </premis:formatDesignation>
-                <premis:formatRegistry>
-                  <premis:formatRegistryName>PRONOM</premis:formatRegistryName>
-                  <premis:formatRegistryKey>x-fmt/391</premis:formatRegistryKey>
-                </premis:formatRegistry>
-              </premis:format>
-	    </premis:objectCharacteristics>
-	  </premis:object>
-        </mets:xmlData>
-      </mets:mdWrap>
-    </mets:techMD>
-    <mets:techMD ID="CSC_test001_tech001" CREATED="2012-07-13T00:00:00">
-      <mets:mdWrap MDTYPE="PREMIS:OBJECT">
-        <mets:xmlData>
-          <premis:object xmlns="info:lc/xmlns/premis-v2" xsi:type="file" xsi:schemaLocation="info:lc/xmlns/premis-v2 http://www.loc.gov/standards/premis/v2/premis-v2-1.xsd" version="2.1">
-            <premis:objectIdentifier>
-              <premis:objectIdentifierType>UUID</premis:objectIdentifierType>
-              <premis:objectIdentifierValue>5daa71c9-2241-4816-9357-cd34eef4df60</premis:objectIdentifierValue>
+              <premis:objectIdentifierType>local</premis:objectIdentifierType>
+              <premis:objectIdentifierValue>CSC_test003_testid002</premis:objectIdentifierValue>
             </premis:objectIdentifier>
             <premis:objectCharacteristics>
               <premis:compositionLevel>0</premis:compositionLevel>
@@ -127,44 +83,57 @@
                 <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
                 <premis:messageDigest>11c128030f203b76f2e30eeb7454c42b</premis:messageDigest>
               </premis:fixity>
+              <premis:size>1422762</premis:size>
+              <premis:format>
+                <premis:formatDesignation>
+                  <premis:formatName>image/jpeg</premis:formatName>
+                </premis:formatDesignation>
+              </premis:format>
+	    </premis:objectCharacteristics>
+	  </premis:object>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:techMD>
+    <mets:techMD ID="CSC_test003_tech001" CREATED="2012-07-13T00:00:00">
+      <mets:mdWrap MDTYPE="PREMIS:OBJECT">
+        <mets:xmlData>
+          <premis:object xmlns="info:lc/xmlns/premis-v2" xsi:type="file" xsi:schemaLocation="info:lc/xmlns/premis-v2 http://www.loc.gov/standards/premis/v2/premis-v2-1.xsd" version="2.1">
+            <premis:objectIdentifier>
+              <premis:objectIdentifierType>local</premis:objectIdentifierType>
+              <premis:objectIdentifierValue>CSC_test003_testid001</premis:objectIdentifierValue>
+            </premis:objectIdentifier>
+            <premis:objectCharacteristics>
+              <premis:compositionLevel>0</premis:compositionLevel>
+              <premis:fixity>
+                <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+                <premis:messageDigest>762108c2ca8680fdb55fb67170a55e70</premis:messageDigest>
+              </premis:fixity>
               <premis:size>1242594</premis:size>
               <premis:format>
                 <premis:formatDesignation>
                   <premis:formatName>image/jpeg</premis:formatName>
                 </premis:formatDesignation>
-                <premis:formatRegistry>
-                  <premis:formatRegistryName>PRONOM</premis:formatRegistryName>
-                  <premis:formatRegistryKey>x-fmt/391</premis:formatRegistryKey>
-                </premis:formatRegistry>
               </premis:format>
             </premis:objectCharacteristics>
           </premis:object>
         </mets:xmlData>
       </mets:mdWrap>
     </mets:techMD>
-    <mets:techMD ID="CSC_test001_tech003" CREATED="2012-07-13T00:00:00">
+    <mets:techMD ID="CSC_test003_tech003" CREATED="2012-07-13T00:00:00">
       <mets:mdWrap MDTYPE="PREMIS:OBJECT">
         <mets:xmlData>
           <premis:object xmlns="info:lc/xmlns/premis-v2" xsi:type="file" xsi:schemaLocation="info:lc/xmlns/premis-v2 http://www.loc.gov/standards/premis/v2/premis-v2-1.xsd" version="2.1">
             <premis:objectIdentifier>
-              <premis:objectIdentifierType>UUID</premis:objectIdentifierType>
-              <premis:objectIdentifierValue>e899fab9-293a-4282-82e7-1613889b8ad1</premis:objectIdentifierValue>
+              <premis:objectIdentifierType>local</premis:objectIdentifierType>
+              <premis:objectIdentifierValue>CSC_test003_testid003</premis:objectIdentifierValue>
             </premis:objectIdentifier>
             <premis:objectCharacteristics>
               <premis:compositionLevel>0</premis:compositionLevel>
-              <premis:fixity>
-                <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
-                <premis:messageDigest>c29f1b25b22318d11bc7f60cdb48029d</premis:messageDigest>
-              </premis:fixity>
-              <premis:size>5901192</premis:size>
+              <premis:size>15327</premis:size>
               <premis:format>
                 <premis:formatDesignation>
-                  <premis:formatName>image/jpeg</premis:formatName>
+                  <premis:formatName>text/xml</premis:formatName>
                 </premis:formatDesignation>
-                <premis:formatRegistry>
-                  <premis:formatRegistryName>PRONOM</premis:formatRegistryName>
-                  <premis:formatRegistryKey>fmt/41</premis:formatRegistryKey>
-                </premis:formatRegistry>
               </premis:format>
             </premis:objectCharacteristics>
           </premis:object>
@@ -184,13 +153,13 @@
 		</mets:mdWrap>
 	</mets:rightsMD>
 
-	<mets:digiprovMD ID="CSC_test001_digiprov001" CREATED="2012-07-13T00:00:00">
+	<mets:digiprovMD ID="CSC_test003_digiprov001" CREATED="2012-07-13T00:00:00">
 		<mets:mdWrap MDTYPE="PREMIS:EVENT">
 			<mets:xmlData>
 				<premis:event>
 					<premis:eventIdentifier>
 						<premis:eventIdentifierType>local</premis:eventIdentifierType>
-						<premis:eventIdentifierValue>CSC_test001_event001</premis:eventIdentifierValue>
+						<premis:eventIdentifierValue>CSC_test003_event001</premis:eventIdentifierValue>
 					</premis:eventIdentifier>
 					<premis:eventType>creation</premis:eventType>
 					<premis:eventDateTime>2009-08-17</premis:eventDateTime>
@@ -202,19 +171,19 @@
 					</premis:eventOutcomeInformation>
 					<premis:linkingAgentIdentifier>
 						<premis:linkingAgentIdentifierType>local</premis:linkingAgentIdentifierType>
-						<premis:linkingAgentIdentifierValue>CSC_test001_agent001</premis:linkingAgentIdentifierValue>
+						<premis:linkingAgentIdentifierValue>CSC_test003_agent001</premis:linkingAgentIdentifierValue>
 					</premis:linkingAgentIdentifier>
 				</premis:event>
 			</mets:xmlData>
 		</mets:mdWrap>
 	</mets:digiprovMD>
-	<mets:digiprovMD ID="CSC_test001_digiprov002" CREATED="2012-07-13T00:00:00">
+	<mets:digiprovMD ID="CSC_test003_digiprov002" CREATED="2012-07-13T00:00:00">
 		<mets:mdWrap MDTYPE="PREMIS:EVENT">
 			<mets:xmlData>
 				<premis:event>
 					<premis:eventIdentifier>
 						<premis:eventIdentifierType>local</premis:eventIdentifierType>
-						<premis:eventIdentifierValue>CSC_test001_event002</premis:eventIdentifierValue>
+						<premis:eventIdentifierValue>CSC_test003_event002</premis:eventIdentifierValue>
 					</premis:eventIdentifier>
 					<premis:eventType>creation</premis:eventType>
 					<premis:eventDateTime>2006-08-23</premis:eventDateTime>
@@ -226,59 +195,35 @@
 					</premis:eventOutcomeInformation>
 					<premis:linkingAgentIdentifier>
 						<premis:linkingAgentIdentifierType>local</premis:linkingAgentIdentifierType>
-						<premis:linkingAgentIdentifierValue>CSC_test001_agent001</premis:linkingAgentIdentifierValue>
+						<premis:linkingAgentIdentifierValue>CSC_test003_agent001</premis:linkingAgentIdentifierValue>
 					</premis:linkingAgentIdentifier>
 				</premis:event>
 			</mets:xmlData>
 		</mets:mdWrap>
 	</mets:digiprovMD>
-	<mets:digiprovMD ID="CSC_test001_digiprov003" CREATED="2012-07-13T00:00:00">
+	<mets:digiprovMD ID="CSC_test003_digiprov003" CREATED="2012-07-13T00:00:00">
 		<mets:mdWrap MDTYPE="PREMIS:EVENT">
 			<mets:xmlData>
 				<premis:event>
 					<premis:eventIdentifier>
 						<premis:eventIdentifierType>local</premis:eventIdentifierType>
-						<premis:eventIdentifierValue>CSC_test001_event001</premis:eventIdentifierValue>
+						<premis:eventIdentifierValue>CSC_test003_event001</premis:eventIdentifierValue>
 					</premis:eventIdentifier>
 					<premis:eventType>creation</premis:eventType>
 					<premis:eventDateTime>2012-06-20</premis:eventDateTime>
-					<premis:eventOutcomeInformation>
-						<premis:eventOutcome>successful</premis:eventOutcome>
-						<premis:eventOutcomeDetail>
-							<premis:eventOutcomeDetailNote>Valokuvan ottohetki</premis:eventOutcomeDetailNote>
-						</premis:eventOutcomeDetail>
-					</premis:eventOutcomeInformation>
-					<premis:linkingAgentIdentifier>
-						<premis:linkingAgentIdentifierType>local</premis:linkingAgentIdentifierType>
-						<premis:linkingAgentIdentifierValue>CSC_test001_agent002</premis:linkingAgentIdentifierValue>
-					</premis:linkingAgentIdentifier>
 				</premis:event>
 			</mets:xmlData>
 		</mets:mdWrap>
 	</mets:digiprovMD>
-	<mets:digiprovMD ID="CSC_test001_agent001" CREATED="2012-07-13T00:00:00">
+	<mets:digiprovMD ID="CSC_test003_agent001" CREATED="2012-07-13T00:00:00">
 		<mets:mdWrap MDTYPE="PREMIS:AGENT">
 		<mets:xmlData>
 		<premis:agent>
 		<premis:agentIdentifier>
 		<premis:agentIdentifierType>local</premis:agentIdentifierType>
-		<premis:agentIdentifierValue>CSC_test001_cam001</premis:agentIdentifierValue>
+		<premis:agentIdentifierValue>CSC_test003_cam001</premis:agentIdentifierValue>
 		</premis:agentIdentifier>
 		<premis:agentName>Konica Minolta DiMAGE Z2</premis:agentName>
-		<premis:agentType>kamera</premis:agentType>
-		</premis:agent>
-		</mets:xmlData>
-		</mets:mdWrap>
-	</mets:digiprovMD>
-	<mets:digiprovMD ID="CSC_test001_agent002" CREATED="2012-07-13T00:00:00">
-		<mets:mdWrap MDTYPE="PREMIS:AGENT">
-		<mets:xmlData>
-		<premis:agent>
-		<premis:agentIdentifier>
-		<premis:agentIdentifierType>local</premis:agentIdentifierType>
-		<premis:agentIdentifierValue>CSC_test001_cam002</premis:agentIdentifierValue>
-		</premis:agentIdentifier>
-		<premis:agentName>Panasonic DMC-TZ6</premis:agentName>
 		<premis:agentType>kamera</premis:agentType>
 		</premis:agent>
 		</mets:xmlData>
@@ -288,27 +233,27 @@
 
 	<mets:fileSec>
 		<mets:fileGrp USE="testing">
-			<mets:file ID="CSC_test001_file001" ADMID="CSC_test001_tech001 CSC_test001_digiprov001 CSC_rights001" CREATED="2012-07-13T00:00:00">
+			<mets:file ID="CSC_test003_file001" ADMID="CSC_test003_tech001 CSC_test003_digiprov001 CSC_rights001" CREATED="2012-07-13T00:00:00">
 				<mets:FLocat xlink:href="file://kuvat/PICT0081.JPG" LOCTYPE="URL"/>
 			</mets:file>
-			<mets:file ID="CSC_test001_file002" ADMID="CSC_test001_tech002 CSC_test001_digiprov002 CSC_rights001" CREATED="2012-07-13T00:00:00">
+			<mets:file ID="CSC_test003_file002" ADMID="CSC_test003_tech002 CSC_test003_digiprov002 CSC_rights001" CREATED="2012-07-13T00:00:00">
 				<mets:FLocat xlink:href="file://kuvat/PICT0102.JPG" LOCTYPE="URL"/>
 			</mets:file>
-			<mets:file ID="CSC_test001_file003" ADMID="CSC_test001_tech003 CSC_test001_digiprov003 CSC_rights001" CREATED="2012-07-13T00:00:00">
-				<mets:FLocat xlink:href="file://kuvat/P1020137.JPG" LOCTYPE="URL"/>
+			<mets:file ID="CSC_test003_file003" ADMID="CSC_test003_tech003 CSC_test003_digiprov003 CSC_rights001" CREATED="2012-07-13T00:00:00">
+				<mets:FLocat xlink:href="file://metadata.xml" LOCTYPE="URL"/>
 			</mets:file>
 		</mets:fileGrp>
 	</mets:fileSec>
 	<mets:structMap>
 		<mets:div TYPE="LOGICAL" LABEL="Testikuvia">
-			<mets:div TYPE="PHOTOGRAPHY" LABEL="CSC_source001" DMDID="CSC_test001_object001">
-				<mets:fptr FILEID="CSC_test001_file001"/>
+			<mets:div TYPE="PHOTOGRAPHY" LABEL="CSC_source001" DMDID="CSC_test003_object001">
+				<mets:fptr FILEID="CSC_test003_file001"/>
 			</mets:div>
-			<mets:div TYPE="PHOTOGRAPHY" LABEL="CSC_source002" DMDID="CSC_test001_object002">
-				<mets:fptr FILEID="CSC_test001_file002"/>
+			<mets:div TYPE="PHOTOGRAPHY" LABEL="CSC_source002" DMDID="CSC_test003_object002">
+				<mets:fptr FILEID="CSC_test003_file002"/>
 			</mets:div>
-			<mets:div TYPE="PHOTOGRAPHY" LABEL="CSC_source003" DMDID="CSC_test001_object003">
-				<mets:fptr FILEID="CSC_test001_file003"/>
+			<mets:div TYPE="METADATA" LABEL="CSC_source003" DMDID="CSC_test003_object003">
+				<mets:fptr FILEID="CSC_test003_file003"/>
 			</mets:div>
 		</mets:div>
 	</mets:structMap>

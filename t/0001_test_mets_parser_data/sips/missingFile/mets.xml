@@ -96,7 +96,7 @@
               <premis:compositionLevel>0</premis:compositionLevel>
               <premis:fixity>
                 <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
-                <premis:messageDigest>762108c2ca8680fdb55fb67170a55e70</premis:messageDigest>
+                <premis:messageDigest>11c128030f203b76f2e30eeb7454c42b</premis:messageDigest>
               </premis:fixity>
               <premis:size>1422762</premis:size>
               <premis:format>
@@ -125,7 +125,7 @@
               <premis:compositionLevel>0</premis:compositionLevel>
               <premis:fixity>
                 <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
-                <premis:messageDigest>11c128030f203b76f2e30eeb7454c42b</premis:messageDigest>
+                <premis:messageDigest>762108c2ca8680fdb55fb67170a55e70</premis:messageDigest>
               </premis:fixity>
               <premis:size>1242594</premis:size>
               <premis:format>

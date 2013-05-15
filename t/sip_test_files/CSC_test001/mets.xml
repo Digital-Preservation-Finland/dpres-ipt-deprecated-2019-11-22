@@ -83,36 +83,7 @@
 </mets:mdWrap>
 </mets:dmdSec>
 
-<mets:amdSec>
-    <mets:techMD ID="CSC_test001_tech002" CREATED="2012-07-13T00:00:00">
-      <mets:mdWrap MDTYPE="PREMIS:OBJECT">
-        <mets:xmlData>
-          <premis:object xmlns="info:lc/xmlns/premis-v2" xsi:type="file" xsi:schemaLocation="info:lc/xmlns/premis-v2 http://www.loc.gov/standards/premis/v2/premis-v2-1.xsd" version="2.1">
-            <premis:objectIdentifier>
-              <premis:objectIdentifierType>UUID</premis:objectIdentifierType>
-              <premis:objectIdentifierValue>6abebf94-94f5-417c-9b60-05c16b985fdd</premis:objectIdentifierValue>
-            </premis:objectIdentifier>
-            <premis:objectCharacteristics>
-              <premis:compositionLevel>0</premis:compositionLevel>
-              <premis:fixity>
-                <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
-                <premis:messageDigest>762108c2ca8680fdb55fb67170a55e70</premis:messageDigest>
-              </premis:fixity>
-              <premis:size>1422762</premis:size>
-              <premis:format>
-                <premis:formatDesignation>
-                  <premis:formatName>image/jpeg</premis:formatName>
-                </premis:formatDesignation>
-                <premis:formatRegistry>
-                  <premis:formatRegistryName>PRONOM</premis:formatRegistryName>
-                  <premis:formatRegistryKey>x-fmt/391</premis:formatRegistryKey>
-                </premis:formatRegistry>
-              </premis:format>
-	    </premis:objectCharacteristics>
-	  </premis:object>
-        </mets:xmlData>
-      </mets:mdWrap>
-    </mets:techMD>
+
     <mets:techMD ID="CSC_test001_tech001" CREATED="2012-07-13T00:00:00">
       <mets:mdWrap MDTYPE="PREMIS:OBJECT">
         <mets:xmlData>
@@ -125,7 +96,7 @@
               <premis:compositionLevel>0</premis:compositionLevel>
               <premis:fixity>
                 <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
-                <premis:messageDigest>11c128030f203b76f2e30eeb7454c42b</premis:messageDigest>
+                <premis:messageDigest>762108c2ca8680fdb55fb67170a55e70</premis:messageDigest>
               </premis:fixity>
               <premis:size>1242594</premis:size>
               <premis:format>
@@ -139,6 +110,36 @@
               </premis:format>
             </premis:objectCharacteristics>
           </premis:object>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:techMD>
+    <mets:amdSec>
+    <mets:techMD ID="CSC_test001_tech002" CREATED="2012-07-13T00:00:00">
+      <mets:mdWrap MDTYPE="PREMIS:OBJECT">
+        <mets:xmlData>
+          <premis:object xmlns="info:lc/xmlns/premis-v2" xsi:type="file" xsi:schemaLocation="info:lc/xmlns/premis-v2 http://www.loc.gov/standards/premis/v2/premis-v2-1.xsd" version="2.1">
+            <premis:objectIdentifier>
+              <premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+              <premis:objectIdentifierValue>6abebf94-94f5-417c-9b60-05c16b985fdd</premis:objectIdentifierValue>
+            </premis:objectIdentifier>
+            <premis:objectCharacteristics>
+              <premis:compositionLevel>0</premis:compositionLevel>
+              <premis:fixity>
+                <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+                <premis:messageDigest>11c128030f203b76f2e30eeb7454c42b</premis:messageDigest>
+              </premis:fixity>
+              <premis:size>1422762</premis:size>
+              <premis:format>
+                <premis:formatDesignation>
+                  <premis:formatName>image/jpeg</premis:formatName>
+                </premis:formatDesignation>
+                <premis:formatRegistry>
+                  <premis:formatRegistryName>PRONOM</premis:formatRegistryName>
+                  <premis:formatRegistryKey>x-fmt/391</premis:formatRegistryKey>
+                </premis:formatRegistry>
+              </premis:format>
+	    </premis:objectCharacteristics>
+	  </premis:object>
         </mets:xmlData>
       </mets:mdWrap>
     </mets:techMD>
