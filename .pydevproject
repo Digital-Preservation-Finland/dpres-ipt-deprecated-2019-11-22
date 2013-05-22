@@ -16,5 +16,6 @@
 <path>/microservice/src/pythonblocks/blocks</path>
 <path>/microservice/src/pythonblocks/dist</path>
 <path>/microservice</path>
+<path>/microservice/src/pythonblocks/dist/lxml/src/lxml</path>
 </pydev_pathproperty>
 </pydev_project>

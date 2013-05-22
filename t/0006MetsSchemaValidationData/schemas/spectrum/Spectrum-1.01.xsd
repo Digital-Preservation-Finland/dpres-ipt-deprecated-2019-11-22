@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://www.ivoa.net/xml/Spectrum/Spectrum-1.01.xsd"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+targetNamespace="http://www.ivoa.net/xml/Spectrum/Spectrum-1.01.xsd"
+elementFormDefault="qualified" jxb:version="1.0">
+<xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="http://www.ivoa.net/xml/Xlink/xlink.xsd"/>
+
+<!-- Customization for code generation with JAXB: not required otherwise -->
+<xs:annotation>
+  <xs:appinfo>
+    <jxb:globalBindings
+        generateIsSetMethod="true"/>
+  </xs:appinfo>
+ </xs:annotation>
+
+
+<!-- A single segment corresponding to a spectrum or single point -->
+
+<xs:element name="BaseSegment" type="segmentType"/>
+<xs:element name="Spectrum" type="spectrumType" substitutionGroup="BaseSegment"/>
+<xs:element name="Segment" type="spectrumType" substitutionGroup="BaseSegment"/>
+<xs:element name="TimeSeries" type="timeSeriesType" substitutionGroup="BaseSegment"/>
+
+<xs:complexType name="spectrumType">
+<xs:complexContent mixed="false">
+<xs:extension base="segmentType"/>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="timeSeriesType">
+<xs:complexContent mixed="false">
+<xs:extension base="segmentType"/>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="segmentType">
+<xs:complexContent mixed="false">
+<xs:extension base="Group">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Target" type="targetType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Char" type="characterizationType" />
+<xs:element minOccurs="0" maxOccurs="1" name="CoordSys" type="coordSysType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Curation" type="curationType" />
+<xs:element minOccurs="0" maxOccurs="1" name="DataID" type="dataIDType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Derived" type="derivedDataType" />
+<xs:element minOccurs="0" maxOccurs="1" name="CustomParams" type="arrayOfParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Type" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Length" type="intParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="TimeSI" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="SpectralSI" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="FluxSI" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" ref="Data"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+
+
+<!-- The top level element: an SED with one target and many segments -->
+<xs:element name="SED" nillable="true" type="sedType" />
+
+<xs:complexType name="sedType">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Date" type="timeParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Target" type="targetType" />
+<xs:element minOccurs="0" maxOccurs="1" name="CustomParams" type="arrayOfParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Type" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="NSegments" type="intParamType" />
+<xs:element minOccurs="0" maxOccurs="unbounded" ref="BaseSegment"/>
+<xs:element minOccurs="0" maxOccurs="1" name="Creator" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="CreatorDID" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="SpectralMinWavelength" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="SpectralMaxWavelength" type="doubleParamType" />
+</xs:sequence>
+</xs:complexType>
+
+
+<!-- Define the UCDs etc for the SED coordinate and the flux coordinate,
+and include a global to specify accuracy etc which happens to be
+constant for the entire segment (note that in SEDCoord,
+value has minOccurs=0 so it can be omitted) -->
+<!-- A single SEDCoord (time or spectral coord) value, or two values if it is spatial. -->
+
+<xs:complexType name="sedBaseCoordType">
+<xs:complexContent mixed="false">
+<xs:extension base="Group"/>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="sedCoordType">
+<xs:complexContent mixed="false">
+<xs:extension base="sedBaseCoordType">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Value" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Accuracy" type="accuracyType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Resolution" type="doubleParamType" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="sedQuantityType">
+<xs:complexContent mixed="false">
+<xs:extension base="sedBaseCoordType">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Value" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Accuracy" type="accuracyType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Resolution" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Quality" type="intParamType" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+
+
+
+<!-- A set of useful types to add UCDs and units to base types; like BasicQuantity -->
+<xs:complexType name="Group" >
+<xs:attribute name="id" type="xs:ID" use="optional"/>
+<xs:attribute name="idref" type="xs:IDREF" use="optional"/>
+</xs:complexType>
+
+
+<xs:complexType name="textParamType">
+<xs:simpleContent>
+<xs:extension base="paramType" />
+</xs:simpleContent>
+</xs:complexType>
+
+<xs:complexType name="paramType">
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute name="name" type="xs:string" />
+<xs:attribute name="ucd" type="xs:string" />
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+
+<xs:complexType name="dateParamType">
+<xs:simpleContent>
+<xs:extension base="paramType" />
+</xs:simpleContent>
+</xs:complexType>
+
+
+<xs:complexType name="positionParamType">
+<xs:sequence>
+<xs:element minOccurs="2" maxOccurs="2" name="value" type="doubleParamType" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="doubleParamType">
+<xs:simpleContent>
+<xs:extension base="paramType">
+<xs:attribute name="unit" type="xs:string" />
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+
+<xs:complexType name="timeParamType">
+<xs:simpleContent>
+<xs:extension base="paramType">
+<xs:attribute name="unit" type="xs:string" />
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+
+<xs:complexType name="intParamType">
+<xs:simpleContent>
+<xs:extension base="paramType">
+<xs:attribute name="unit" type="xs:string" />
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+
+
+
+
+<!-- The error model. Bin entries will usually be omitted for the flux coordinate -->
+<xs:complexType name="accuracyType">
+<xs:complexContent mixed="false">
+<xs:extension base="Group">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="BinLow" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="BinHigh" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="BinSize" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="StatError" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="StatErrLow" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="StatErrHigh" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="SysError" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Confidence" type="doubleParamType" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+
+<!-- The Field type allows us to define what our axes are -->
+<xs:complexType name="arrayOfFieldType">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="Field" nillable="true" type="fieldType" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="fieldType">
+<xs:attribute name="name" type="xs:string" />
+<xs:attribute name="unit" type="xs:string" />
+<xs:attribute name="ucd" type="xs:string" />
+</xs:complexType>
+
+<!-- The Point type groups a single set of time, spectral and flux values -->
+<xs:element name="Data" type="arrayOfGenPointType"/>
+
+<xs:complexType name="arrayOfGenPointType"/>
+
+<xs:complexType name="arrayOfPointType">
+<xs:complexContent mixed="false">
+<xs:extension base="arrayOfGenPointType">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="Point" nillable="true" type="pointType" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:element name="ArrayOfPoint" type="arrayOfPointType" substitutionGroup="Data"/>
+
+<xs:complexType name="pointType">
+<xs:sequence>
+<xs:element name="TimeAxis" minOccurs="0" maxOccurs="1" type="sedCoordType" />
+<xs:element name="SpectralAxis" minOccurs="0" maxOccurs="1" type="sedCoordType" />
+<xs:element name="FluxAxis" minOccurs="0" maxOccurs="1" type="sedQuantityType" />
+<xs:element name="BackgroundModel" minOccurs="0" maxOccurs="1" type="sedQuantityType" />
+</xs:sequence>
+</xs:complexType>
+
+
+
+<xs:element name="ArrayOfFlatPoint" type="arrayOfFlatPointType" substitutionGroup="Data"/>
+
+<xs:complexType name="arrayOfFlatPointType">
+<xs:complexContent mixed="false">
+<xs:extension base="arrayOfGenPointType">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="Point" nillable="true" type="flatPointType" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+
+
+<xs:complexType name="flatPointType">
+
+<xs:attribute name="T" type="xs:double"/>
+<xs:attribute name="T_BinL" type="xs:double" />
+<xs:attribute name="T_BinH" type="xs:double" />
+<xs:attribute name="T_Size" type="xs:double" />
+<xs:attribute name="T_Res" type="xs:double" />
+<xs:attribute name="SP" type="xs:double" />
+<xs:attribute name="SP_BinL" type="xs:double" />
+<xs:attribute name="SP_BinH" type="xs:double" />
+<xs:attribute name="SP_Size" type="xs:double" />
+<xs:attribute name="SP_Res" type="xs:double" />
+<xs:attribute name="F" type="xs:double" />
+<xs:attribute name="F_ErrL" type="xs:double" />
+<xs:attribute name="F_ErrH" type="xs:double" />
+<xs:attribute name="F_Sys" type="xs:double" />
+<xs:attribute name="F_Qual" type="xs:int" />
+<xs:attribute name="BG" type="xs:double" />
+<xs:attribute name="BG_ErrL" type="xs:double" />
+<xs:attribute name="BG_ErrH" type="xs:double" />
+<xs:attribute name="BG_Sys" type="xs:double" />
+<xs:attribute name="BG_Qual" type="xs:int" />
+</xs:complexType>
+
+
+
+
+<!-- Now we define the higher level metadata -->
+<xs:complexType name="contactType">
+<xs:complexContent mixed="false">
+<xs:extension base="Group">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Name" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Email" type="textParamType" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="curationType">
+<xs:complexContent mixed="false">
+<xs:extension base="Group">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Publisher" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="PublisherID" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Reference" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Version" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Contact" type="contactType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Rights" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Date" type="dateParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="PublisherDID" type="textParamType" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+
+<xs:complexType name="characterizationType">
+<xs:complexContent mixed="false">
+<xs:extension base="Group">
+<xs:sequence>
+<xs:element name="SpatialAxis" type="characterizationAxisType" minOccurs="0" maxOccurs="1"/>
+<xs:element name="TimeAxis" type="characterizationAxisType"  minOccurs="0" maxOccurs="1"/>
+<xs:element name="SpectralAxis" type="spectralCharacterizationAxisType"  minOccurs="0" maxOccurs="1"/>
+<xs:element name="FluxAxis" type="characterizationAxisType"  minOccurs="0" maxOccurs="1"/>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="CharacterizationAxis"
+                                type="characterizationAxisType"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="characterizationAxisType">
+<xs:complexContent mixed="false">
+ <xs:extension base="Group">
+ <xs:sequence>
+ <xs:element minOccurs="0" maxOccurs="1" name="CoordSystem" type="coordSysType" /> 
+ <xs:element minOccurs="0" maxOccurs="1" name="Coverage" type="coverageType" />
+ <xs:element minOccurs="0" maxOccurs="1" name="Resolution" type="doubleParamType"/>
+ <xs:element minOccurs="0" maxOccurs="1" name="Accuracy" type="accuracyType" />
+ <xs:element minOccurs="0" maxOccurs="1" name="SamplingPrecision" type="samplingPrecisionType" /> 
+ <xs:element minOccurs="0" maxOccurs="1" name="Calibration" type="textParamType" />
+ </xs:sequence>
+ <xs:attribute name="name" type="xs:string" />
+ <xs:attribute name="ucd" type="xs:string" />
+ <xs:attribute name="unit" type="xs:string" />   
+ </xs:extension>
+ </xs:complexContent>
+</xs:complexType>
+
+
+
+
+<xs:element name="CharacterizationAxis" type="characterizationAxisType"/>
+
+  <xs:complexType name="coverageType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Group">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Location" type="coverageLocationType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Bounds" type="coverageBoundsType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Support" type="coverageSupportType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+<xs:complexType name="spectralCharacterizationAxisType">
+<xs:complexContent mixed="false">
+ <xs:extension base="characterizationAxisType">
+ <xs:sequence>
+ <xs:element minOccurs="0" maxOccurs="1" name="ResPower" type="doubleParamType" /> 
+ </xs:sequence>
+ </xs:extension>
+ </xs:complexContent>
+</xs:complexType>
+
+ <xs:complexType name="coverageLocationType">
+  <xs:complexContent mixed="false">
+     <xs:extension base="sedBaseCoordType">
+     <xs:sequence>
+       <xs:element minOccurs="0" maxOccurs="2" name="Value" type="doubleParamType" />
+       <xs:element minOccurs="0" maxOccurs="1" name="Accuracy" type="accuracyType" />
+       <xs:element minOccurs="0" maxOccurs="1" name="Resolution" type="doubleParamType" />
+      </xs:sequence>
+      </xs:extension>
+   </xs:complexContent>
+ </xs:complexType>
+
+
+  <xs:complexType name="coverageBoundsType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Group">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Extent" type="doubleParamType" />
+           <xs:element minOccurs="0" maxOccurs="1" name="Range" type="intervalType" />
+         </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+   <xs:complexType name="coverageSupportType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Group">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Area" type="skyRegionType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Extent" type="doubleParamType" />
+           <xs:element minOccurs="0" maxOccurs="unbounded" name="Range" type="intervalType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+<xs:complexType name="intervalType">
+<xs:complexContent mixed="false">
+<xs:extension base="Group">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Min" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Max" type="doubleParamType" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="samplingPrecisionType">
+<xs:complexContent mixed="false">
+<xs:extension base="Group">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="SamplingPrecisionRefVal" type="samplingPrecisionRefValType" />
+<xs:element minOccurs="0" maxOccurs="1" name="SampleExtent" type="doubleParamType" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+
+<xs:complexType name="samplingPrecisionRefValType">
+<xs:complexContent mixed="false">
+<xs:extension base="Group">
+<xs:sequence>
+     <xs:element minOccurs="0" maxOccurs="1" name="FillFactor" type="doubleParamType" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+
+
+
+
+
+
+
+
+<xs:complexType name="skyRegionType">
+<xs:complexContent mixed="false">
+<xs:extension base="textParamType"/>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="derivedDataType">
+<xs:complexContent mixed="false">
+<xs:extension base="Group">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="SNR" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="VarAmpl" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Redshift" type="sedQuantityType" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+
+<xs:complexType name="dataIDType">
+<xs:complexContent mixed="false">
+<xs:extension base="Group">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Title" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Creator" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="unbounded" name="Collection" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="DatasetID" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Date" type="dateParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Version" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Instrument" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="CreationType" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Bandpass" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="CreatorDID" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="unbounded" name="Contributor" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Logo" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="DataSource" type="textParamType" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+
+<xs:complexType name="targetType">
+<xs:complexContent mixed="false">
+<xs:extension base="Group">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="1" name="Name" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Description" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="TargetClass" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="SpectralClass" type="textParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Redshift" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="Pos" type="positionParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="VarAmpl" type="doubleParamType" />
+<xs:element minOccurs="0" maxOccurs="1" name="CustomParams" type="arrayOfParamType" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+
+
+
+
+
+
+<xs:complexType name="arrayOfParamType">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="Param" nillable="true" type="paramType" />
+</xs:sequence>
+</xs:complexType>
+
+
+  <xs:attributeGroup name="STCReference">
+    <xs:annotation>
+      <xs:documentation>These four attributes represent the standard IVOA referencing system: internal (within the document) referencing through "id" and "idref", external referencing through Xlink, using only "type=simple" and "href".</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="id" type="xs:ID" use="optional"/>
+    <xs:attribute name="idref" type="xs:IDREF" use="optional"/>
+    <xs:attribute name="ucd" type="xs:string" use="optional"/>
+    <xs:attribute ref="xlink:type" use="optional" default="simple"/>
+    <xs:attribute ref="xlink:href" use="optional"/>
+  </xs:attributeGroup>
+
+  <xs:complexType name="coordSysType">
+    <!--<xs:complexContent> -->
+        <xs:sequence maxOccurs="unbounded">
+          <xs:element ref="CoordFrame" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+       <xs:attributeGroup ref="STCReference"/>
+    <!-- </xs:complexContent>-->
+  </xs:complexType>
+
+  <xs:element name="CoordFrame" type="coordFrameType" abstract="true"/>
+  <xs:element name="SpaceFrame" type="spaceFrameType" substitutionGroup="CoordFrame"/>
+  <xs:element name="RedshiftFrame" type="redshiftFrameType" substitutionGroup="CoordFrame"/>
+  <xs:element name="SpectralFrame" type="spectralFrameType" substitutionGroup="CoordFrame"/> 
+  <xs:element name="GenericCoordFrame" type="coordFrameType" substitutionGroup="CoordFrame"/>
+  <xs:element name="TimeFrame" type="timeFrameType" substitutionGroup="CoordFrame"/>
+
+  <xs:complexType name="coordFrameType">
+    <xs:annotation>
+      <xs:documentation>Simplification of STC version: RefPos is string</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string" minOccurs="0"/>
+      <xs:element name="ReferencePosition" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID"/>
+    <xs:attribute name="ucd" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="spectralFrameType">
+    <xs:complexContent>
+      <xs:extension base="coordFrameType">
+       <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="Redshift" type="doubleParamType" />
+       </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+
+
+
+  <xs:complexType name="timeFrameType">
+    <xs:complexContent>
+      <xs:extension base="coordFrameType">
+       <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="Zero" type="doubleParamType" />
+       </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+  <xs:complexType name="redshiftFrameType">
+    <xs:complexContent>
+      <xs:extension base="coordFrameType">
+        <xs:sequence>
+          <xs:element name="DopplerDefinition" type="xs:string" nillable="true"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="spaceFrameType">
+    <xs:complexContent>
+      <xs:extension base="coordFrameType">
+        <xs:sequence>
+         <xs:element minOccurs="0" maxOccurs="1" name="Equinox" type="doubleParamType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+</xs:schema>
+
