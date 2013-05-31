@@ -8,14 +8,14 @@
     Linux and Mac users just use command line.
     
   		cd /c/workspace/home/tenhunen/scratch
-  		while true ; do rsync -delete -e ssh -avz microservice spock@ingest:scratch/ ; sleep 1 ; done
+  		while true ; do rsync -delete -e ssh -avz information-package-tools spock@ingest:scratch/ ; sleep 1 ; done
   		
-  	This will synchronize tests and microservice code to ingest server
+  	This will synchronize tests and information-package-tools code to ingest server
   
   3. On ingest server run
   
-  		cd /home/spock/scratch/microservice
-  		while true; do make test; sleep 5 ; done
+  		cd /home/spock/scratch/information-package-tools
+  		while true; do py.test; sleep 5 ; done
   		
   		
   	Now the tests are being built and run and you should see following text (or similar)		

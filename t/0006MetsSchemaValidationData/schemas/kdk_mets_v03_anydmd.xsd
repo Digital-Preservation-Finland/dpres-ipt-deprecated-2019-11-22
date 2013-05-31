@@ -174,7 +174,7 @@ xmlns:audiomd="http://www.loc.gov/audioMD/"
 xmlns:videomd="http://www.loc.gov/videoMD/"
 xmlns:metsrights="http://cosimo.stanford.edu/sdr/metsrights/"
 elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="kdk-xlink.xsd"/>
+	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/xlink/kdk-xlink.xsd"/>
 	<xsd:import namespace="info:lc/xmlns/premis-v2" schemaLocation="http://www.loc.gov/standards/premis/premis.xsd"/>
 	<xsd:import namespace="http://www.loc.gov/mix/v20" schemaLocation="http://www.loc.gov/standards/mix/mix.xsd"/>
 	<xsd:import namespace="info:lc/xmlns/textMD-v3" schemaLocation="http://www.loc.gov/standards/textMD/textMD-v3.01a.xsd"/>

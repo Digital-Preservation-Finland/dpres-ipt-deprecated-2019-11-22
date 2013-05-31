@@ -11,11 +11,11 @@
 <path>C:\Python26\Lib\distutils\tests</path>
 </pydev_pathproperty>
 <pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
-<path>/microservice/src</path>
-<path>/microservice/src/pythonblocks</path>
-<path>/microservice/src/pythonblocks/blocks</path>
-<path>/microservice/src/pythonblocks/dist</path>
-<path>/microservice</path>
-<path>/microservice/src/pythonblocks/dist/lxml/src/lxml</path>
+<path>/information-package-tools/src</path>
+<path>/information-package-tools/src/pythonblocks</path>
+<path>/information-package-tools/src/pythonblocks/blocks</path>
+<path>/information-package-tools/src/pythonblocks/dist</path>
+<path>/information-package-tools</path>
+<path>/information-package-tools/src/pythonblocks/dist/lxml/src/lxml</path>
 </pydev_pathproperty>
 </pydev_project>

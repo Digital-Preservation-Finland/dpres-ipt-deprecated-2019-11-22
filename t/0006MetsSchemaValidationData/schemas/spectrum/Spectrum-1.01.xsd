@@ -5,7 +5,7 @@ xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
 xmlns:xlink="http://www.w3.org/1999/xlink"
 targetNamespace="http://www.ivoa.net/xml/Spectrum/Spectrum-1.01.xsd"
 elementFormDefault="qualified" jxb:version="1.0">
-<xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="http://www.ivoa.net/xml/Xlink/xlink.xsd"/>
+<xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/xlink/kdk-xlink.xsd"/>
 
 <!-- Customization for code generation with JAXB: not required otherwise -->
 <xs:annotation>

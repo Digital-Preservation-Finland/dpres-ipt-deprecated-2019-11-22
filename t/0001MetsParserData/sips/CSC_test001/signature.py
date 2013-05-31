@@ -1,6 +1,6 @@
 import subprocess
 import sys
-sys.path.append("/home/spock/scratch/microservice/src/pythonblocks")
+sys.path.append("/home/spock/scratch/information-package-tools/src/pythonblocks")
 from blocks.utils import JSONErrorVar
 
 

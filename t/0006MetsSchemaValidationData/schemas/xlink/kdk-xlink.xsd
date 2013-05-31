@@ -2,7 +2,8 @@
 <!-- KDK METS XLink Schema, v. 2, Nov. 15, 2004 -->
 <schema targetNamespace="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" elementFormDefault="qualified">
 
-  <include schemaLocation="http://www.w3.org/1999/xlink.xsd"/>
+  <include schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/xlink/kdk-xlink.xsd"/>
+  
   
   <attributeGroup name="simpleLink">
     <attribute ref="xlink:type" fixed="simple"/>

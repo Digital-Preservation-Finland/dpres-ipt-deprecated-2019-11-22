@@ -1,11 +1,11 @@
 
 TESTNUMBERFILE="`mktemp`"
-echo 0 > /tmp/microservice_testnumberfile
+echo 0 > /tmp/information-package-tools_testnumberfile
 
 start_test() {
-    TESTNUMBER="`cat /tmp/microservice_testnumberfile`"
+    TESTNUMBER="`cat /tmp/information-package-tools_testnumberfile`"
     TESTNUMBER="$((TESTNUMBER+1))"
-    echo "$TESTNUMBER" > /tmp/microservice_testnumberfile
+    echo "$TESTNUMBER" > /tmp/information-package-tools_testnumberfile
 }
 
 equals() {
@@ -39,5 +39,5 @@ is_dir() {
 }
 
 end_test() {
-    rm -f /tmp/microservice_testnumberfile
+    rm -f /tmp/information-package-tools_testnumberfile
 }

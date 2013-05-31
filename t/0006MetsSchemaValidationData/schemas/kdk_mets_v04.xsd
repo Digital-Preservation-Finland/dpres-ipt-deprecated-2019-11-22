@@ -173,14 +173,34 @@ xmlns:textmd="info:lc/xmlns/textMD-v3"
 xmlns:audiomd="http://www.loc.gov/audioMD/"
 xmlns:videomd="http://www.loc.gov/videoMD/"
 xmlns:metsrights="http://cosimo.stanford.edu/sdr/metsrights/"
+xmlns:marc21="http://www.loc.gov/MARC21/slim"
+xmlns:mods="http://www.loc.gov/mods/v3"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:dcterms="http://purl.org/dc/terms/"
+xmlns:dcmitype="http://purl.org/dc/dcmitype/"
+xmlns:ead="urn:isbn:1-931666-22-9"
+xmlns:eac="urn:isbn:1-931666-33-4"
+xmlns:vra="http://www.vraweb.org/vracore4.htm"
+xmlns:lido="http://www.lido-schema.org"
+xmlns:spectrum="http://www.ivoa.net/xml/Spectrum/Spectrum-1.01.xsd"
 elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="kdk-xlink.xsd"/>
-	<xsd:import namespace="info:lc/xmlns/premis-v2" schemaLocation="http://www.loc.gov/standards/premis/premis.xsd"/>
-	<xsd:import namespace="http://www.loc.gov/mix/v20" schemaLocation="http://www.loc.gov/standards/mix/mix.xsd"/>
-	<xsd:import namespace="info:lc/xmlns/textMD-v3" schemaLocation="http://www.loc.gov/standards/textMD/textMD-v3.01a.xsd"/>
-	<xsd:import namespace="http://www.loc.gov/audioMD/" schemaLocation="http://www.loc.gov/standards/amdvmd/audioMD.xsd"/>
-	<xsd:import namespace="http://www.loc.gov/videoMD/" schemaLocation="http://www.loc.gov/standards/amdvmd/videoMD.xsd"/>
-	<xsd:import namespace="http://cosimo.stanford.edu/sdr/metsrights/" schemaLocation="http://www.loc.gov/standards/rights/METSRights.xsd"/>
+	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/xlink/kdk-xlink.xsd"/>
+	<xsd:import namespace="info:lc/xmlns/premis-v2" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/premis/premis.xsd"/>
+	<xsd:import namespace="http://www.loc.gov/mix/v20" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/mix/mix.xsd"/>
+	<xsd:import namespace="info:lc/xmlns/textMD-v3" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/textmd/textMD-v3.01a.xsd"/>
+	<xsd:import namespace="http://www.loc.gov/audioMD/" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/audiomd/audioMD.xsd"/>
+	<xsd:import namespace="http://www.loc.gov/videoMD/" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/videomd/videoMD.xsd"/>
+	<xsd:import namespace="http://cosimo.stanford.edu/sdr/metsrights/" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/metsrights/METSRights.xsd"/>
+	<xsd:import namespace="http://www.loc.gov/MARC21/slim" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/marc21slim/MARC21slim.xsd"/>
+	<xsd:import namespace="http://www.loc.gov/mods/v3" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/mods/mods.xsd"/>
+	<xsd:import namespace="http://purl.org/dc/elements/1.1/" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/dc/dc.xsd"/>
+	<xsd:import namespace="http://purl.org/dc/terms/" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/dcterms/dcterms.xsd"/>
+	<xsd:import namespace="http://purl.org/dc/dcmitype/" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/dcmitype/dcmitype.xsd"/>
+	<xsd:import namespace="urn:isbn:1-931666-22-9" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/ead/ead.xsd"/>
+	<xsd:import namespace="urn:isbn:1-931666-33-4" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/cpf/cpf.xsd"/>
+	<xsd:import namespace="http://www.vraweb.org/vracore4.htm" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/vra/vra.xsd"/>
+	<xsd:import namespace="http://www.lido-schema.org" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/lido/lido-v1.0.xsd"/>
+	<xsd:import namespace="http://www.ivoa.net/xml/Spectrum/Spectrum-1.01.xsd" schemaLocation="/home/spock/scratch/information-package-tools/t/0006MetsSchemaValidationData/schemas/spectrum/Spectrum-1.01.xsd"/>
 
 	<xsd:element name="mets">
 		<xsd:annotation>
@@ -881,7 +901,19 @@ TCF.
 							</xsd:annotation>
 							<xsd:complexType>
 								<xsd:sequence>
-									<xsd:any namespace="##any" maxOccurs="unbounded" processContents="lax"/>
+									<xsd:choice>
+										<xsd:any namespace="http://www.loc.gov/MARC21/slim"/>
+										<xsd:any namespace="http://www.loc.gov/mods/v3"/>
+										<xsd:any namespace="http://purl.org/dc/elements/1.1/"/>
+										<xsd:any namespace="http://purl.org/dc/terms/"/>
+										<xsd:any namespace="http://purl.org/dc/dcmitype/"/>
+										<xsd:any namespace="urn:isbn:1-931666-22-9"/>
+										<xsd:any namespace="urn:isbn:1-931666-33-4"/>
+										<xsd:any namespace="http://www.vraweb.org/vracore4.htm"/>
+										<xsd:any namespace="http://www.lido-schema.org"/>
+										<xsd:any namespace="http://www.ivoa.net/xml/Spectrum/Spectrum-1.01.xsd"/>
+										<!-- puuttuu -->
+									</xsd:choice>
 								</xsd:sequence>
 							</xsd:complexType>
 						</xsd:element>
@@ -1219,10 +1251,9 @@ TCF.
 							</xsd:documentation>
 						</xsd:annotation>
 						<xsd:complexType>
-								<xsd:choice>
-									<xsd:element ref="premis:event"/>
-									<xsd:element ref="premis:agent"/>
-								</xsd:choice>
+							<xsd:sequence>
+								<xsd:any namespace="##any" maxOccurs="unbounded" processContents="lax"/>
+							</xsd:sequence>
 						</xsd:complexType>
 					</xsd:element>
 					</xsd:choice>
