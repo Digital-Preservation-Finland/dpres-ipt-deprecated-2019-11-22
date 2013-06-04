@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+KDK PREMIS Schema
+CSC, 2013-05-24
+Patches the PREMIS 2.2 schema with making <fixity> element mandatory.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="info:lc/xmlns/premis-v2" targetNamespace="info:lc/xmlns/premis-v2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+<xs:redefine schemaLocation="../external/premis/premis.xsd">
+
+	<xs:complexType name="objectCharacteristicsComplexType">
+		<xs:complexContent>
+			<xs:restriction base="objectCharacteristicsComplexType">
+				<xs:sequence>
+					<xs:element ref="compositionLevel"/>
+					<xs:element ref="fixity" minOccurs="1" maxOccurs="unbounded"/>
+					<xs:element ref="size" minOccurs="0"/>
+					<xs:element ref="format" maxOccurs="unbounded"/>
+					<xs:element ref="creatingApplication" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="inhibitors" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="objectCharacteristicsExtension" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="mdSec" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	
+</xs:redefine>
+
+</xs:schema>
