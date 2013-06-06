@@ -4,7 +4,8 @@ KDK METS Schema
 CSC, 2013-05-23
 METS schema based on original version 1.9.1. Updated to match KDK METS profile.
 -->
-<?oasis-xml-catalog catalog="http://kdk.fi/standards/catalog-web.xml"?>
+<!--<?oasis-xml-catalog catalog="http://kdk.fi/standards/catalog-web.xml"?>-->
+<?oasis-xml-catalog catalog="/etc/xml/catalog-web.xml"?>
 <xsd:schema targetNamespace="http://www.loc.gov/METS/"
 xmlns="http://www.loc.gov/METS/"
 xmlns:xlink="http://www.w3.org/1999/xlink"

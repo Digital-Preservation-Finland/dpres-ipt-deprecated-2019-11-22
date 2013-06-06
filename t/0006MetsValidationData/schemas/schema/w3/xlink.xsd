@@ -6,7 +6,7 @@ Necessary to avoid overlapping between METS XLINK and W3 XLINK, since those have
  -->
 <schema targetNamespace="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" elementFormDefault="qualified">
 
-  <redefine schemaLocation="../external/w3/xlink.xsd"/>
+  <redefine schemaLocation="../external/w3/xlink.xsd"/> 
   
   <attributeGroup name="simpleLink">
     <attribute ref="xlink:type" fixed="simple"/>

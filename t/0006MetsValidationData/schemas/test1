@@ -1,0 +1,175 @@
+time sudo python 0006MetsValidation_test.py
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/mets/mets.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/sips/CSC_test001/mets.xml
+/home/spock/scratch/information-package-tools/src/lib/xsd2isosch2010/ExtractSchFromXSD-2.xsl
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/resultfiles/
+kdkmets.stron
+mkdir: cannot create directory `/home/spock/scratch/information-package-tools/t/0006MetsValidationData/resultfiles/': File exists
+total 8
+drwxr-xr-x 2 root  root  4096 Jun  5 12:49 .
+dr-x------ 5 spock spock 4096 Jun  4 14:14 ..
+-rwxrw-rw- 1 root  root     0 Jun  5 12:49 kdkmets.stron
+Variable $SGML_CATALOG_FILES not set
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/mets/mets.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/w3/xlink.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/w3/xlink.xsd
+new input from file: http://www.w3.org/2001/xml.xsd
+
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/mets/mets-extensions.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/premis/premis.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/premis/premis.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/premis/premis.xsd:75: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.loc.gov/standards/xlink/xlink.xsd' for the namespace 'http://www.w3.org/1999/xlink', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/w3/xlink.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/mix/mix.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/textmd/textmd.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/avmd/audiomd.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/avmd/videomd.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/metsrights/METSRights.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/marc/MARC21slim.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/mods/mods.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/mods/mods.xsd:1: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.loc.gov/mods/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/mods/mods.xsd:1: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.loc.gov/standards/xlink/xlink.xsd' for the namespace 'http://www.w3.org/1999/xlink', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/w3/xlink.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/dc/dcterms.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/dc/dcterms.xsd:66: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.w3.org/2001/03/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/dc/dc.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/dc/dc.xsd:42: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.w3.org/2001/03/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/dc/dcmitype.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ead/ead.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ead/ead.xsd:72: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.loc.gov/standards/xlink/xlink.xsd' for the namespace 'http://www.w3.org/1999/xlink', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/w3/xlink.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/eac/cpf.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/eac/cpf.xsd:63: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.loc.gov/standards/xlink/xlink.xsd' for the namespace 'http://www.w3.org/1999/xlink', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/w3/xlink.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/eac/cpf.xsd:65: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.w3.org/2007/08/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/vra/vra-strict.xsd
+new input from file: http://www.loc.gov/standards/vracore/vra.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/lido/lido.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/lido/lido.xsd:58: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.w3.org/2001/03/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/feature.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/gml.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/dynamicFeature.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/direction.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/geometryBasic0d1d.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/measures.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/units.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/dictionary.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/gmlBase.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/basicTypes.xsd
+http://schemas.opengis.net/gml/3.1.1/base/gmlBase.xsd:29: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.w3.org/1999/xlink.xsd' for the namespace 'http://www.w3.org/1999/xlink', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/w3/xlink.xsd'.
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/topology.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/geometryComplexes.xsd
+
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/geometryAggregates.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/geometryPrimitives.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/geometryBasic2d.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/coverage.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/valueObjects.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/temporal.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/grids.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/coordinateReferenceSystems.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/coordinateSystems.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/referenceSystems.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/datums.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/coordinateOperations.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/dataQuality.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/observation.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/defaultStyle.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/smil/smil20.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/smil/smil20-language.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/temporalReferenceSystems.xsd
+new input from file: http://schemas.opengis.net/gml/3.1.1/base/temporalTopology.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/instance.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/instance.xsd:23: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/archive.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/reusable.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/reusable.xsd:24: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/ddi-xhtml11.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/ddi-xhtml11.xsd:91: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/ddi-xhtml11-model-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/ddi-xhtml11-modules-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-framework-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-notations-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-datatypes-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-attribs-1.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-attribs-1.xsd:16: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-charent-1.xsd
+new blanks wrapper for entity: HTMLlat1
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-charent-1.xsd(10): Pushing input 2 :  %HTMLlat1;
+PEReference: HTMLlat1
+new input from entity: HTMLlat1
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-lat1.ent
+Pushing input 3 :
+Popping input 3
+Popping input 2
+new blanks wrapper for entity: HTMLsymbol
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-charent-1.xsd(15): Pushing input 2 :  %HTMLsymbol;
+PEReference: HTMLsymbol
+new input from entity: HTMLsymbol
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-symbol.ent
+Pushing input 3 :
+Popping input 3
+Popping input 2
+new blanks wrapper for entity: HTMLspecial
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-charent-1.xsd(20): Pushing input 2 :  %HTMLspecial;
+PEReference: HTMLspecial
+new input from entity: HTMLspecial
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-special.ent
+Pushing input 3 :
+Popping input 3
+Popping input 2
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-text-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-blkphras-1.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-blkphras-1.xsd:27: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-blkstruct-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-inlphras-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-inlstruct-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-hypertext-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-list-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-bdo-1.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-bdo-1.xsd:23: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-pres-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-blkpres-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-inlpres-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-inlstyle-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-table-1.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/dcelements.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/dcelements.xsd:23: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/simpledc20021212.xsd' for the namespace 'http://purl.org/dc/elements/1.1/', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/dc/dc.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/comparative.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/datacollection.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/datacollection.xsd:24: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/logicalproduct.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/conceptualcomponent.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/dataset.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/physicaldataproduct.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/ddiprofile.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/group.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/physicalinstance.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/studyunit.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/physicaldataproduct_ncube_inline.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/physicaldataproduct_ncube_inline.xsd:24: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/physicaldataproduct_ncube_normal.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/physicaldataproduct_ncube_normal.xsd:24: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/physicaldataproduct_ncube_tabular.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/physicaldataproduct_ncube_tabular.xsd:24: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/physicaldataproduct_proprietary.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/physicaldataproduct_proprietary.xsd:25: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/ddi-codebook/codebook.xsd
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/ddi-codebook/dcterms.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/ddi-codebook/dcterms.xsd:70: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://dublincore.org/schemas/xmls/qdc/2008/02/11/dc.xsd' for the namespace 'http://purl.org/dc/elements/1.1/', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/dc/dc.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/ddi-codebook/dcterms.xsd:73: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://dublincore.org/schemas/xmls/qdc/dcmitype.xsd' for the namespace 'http://purl.org/dc/dcmitype/', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/dc/dcmitype.xsd'.
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-codebook/codebook.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-codebook/codebook.xsd:39: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-codebook/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-codebook/codebook.xsd:40: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-codebook/ddi-xhtml11.xsd' for the namespace 'http://www.w3.org/1999/xhtml', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/ddi-xhtml11.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-codebook/codebook.xsd:41: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-codebook/dcterms.xsd' for the namespace 'http://purl.org/dc/terms/', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/dc/dcterms.xsd'.
+http://schemas.opengis.net/gml/3.1.1/base/valueObjects.xsd:216: element complexType: Schemas parser error : local list type: A type, derived by list or union, must have the simple ur-type definition as base type, not '{http://www.opengis.net/gml}doubleOrNullList'.
+http://schemas.opengis.net/gml/3.1.1/base/valueObjects.xsd:234: element complexType: Schemas parser error : local list type: A type, derived by list or union, must have the simple ur-type definition as base type, not '{http://www.opengis.net/gml}NameOrNullList'.
+WXS schema /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/mets/mets.xsd failed to compile
+new input from file: file:///etc/xml/catalog-web.xml
+DOCUMENT
+No entities in internal subset
+No entities in external subset
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/sips/CSC_test001/mets.xml
+DOCUMENT
+No entities in internal subset
+No entities in external subset
+
+real    3m17.770s
+user    0m0.440s
+sys     0m0.184s

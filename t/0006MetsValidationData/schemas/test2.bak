@@ -1,0 +1,434 @@
+time python 0006MetsValidation_test.py
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/mets/mets.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/sips/CSC_test001/mets.xml
+/home/spock/scratch/information-package-tools/src/lib/xsd2isosch2010/ExtractSchFromXSD-2.xsl
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/resultfiles/
+kdkmets.stron
+mkdir: cannot create directory `/home/spock/scratch/information-package-tools/t/0006MetsValidationData/resultfiles/': File exists
+total 8
+drwxr-xr-x 2 root  root  4096 Jun  5 10:18 .
+dr-x------ 5 spock spock 4096 Jun  4 14:14 ..
+-rwxrw-rw- 1 root  root     0 Jun  5 10:18 kdkmets.stron
+Adding document catalog http://kdk.fi/standards/catalog-web.xml
+Free catalog entry http://kdk.fi/standards/catalog-web.xml
+Resolve: sysID http://www.w3.org/2001/xml.xsd
+Failed to parse catalog file:///etc/xml/catalog
+Resolve URI http://www.w3.org/2001/xml.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/premis/premis.xsd:75: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.loc.gov/standards/xlink/xlink.xsd' for the namespace 'http://www.w3.org/1999/xlink', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/w3/xlink.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/mods/mods.xsd:1: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.loc.gov/mods/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/mods/mods.xsd:1: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.loc.gov/standards/xlink/xlink.xsd' for the namespace 'http://www.w3.org/1999/xlink', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/w3/xlink.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/dc/dcterms.xsd:66: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.w3.org/2001/03/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/dc/dc.xsd:42: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.w3.org/2001/03/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ead/ead.xsd:72: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.loc.gov/standards/xlink/xlink.xsd' for the namespace 'http://www.w3.org/1999/xlink', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/w3/xlink.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/eac/cpf.xsd:63: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.loc.gov/standards/xlink/xlink.xsd' for the namespace 'http://www.w3.org/1999/xlink', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/w3/xlink.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/eac/cpf.xsd:65: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.w3.org/2007/08/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+Resolve: sysID http://www.loc.gov/standards/vracore/vra.xsd
+Resolve URI http://www.loc.gov/standards/vracore/vra.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/lido/lido.xsd:58: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.w3.org/2001/03/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/feature.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/feature.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/gml.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/gml.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/dynamicFeature.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/dynamicFeature.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/direction.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/direction.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/geometryBasic0d1d.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/geometryBasic0d1d.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/measures.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/measures.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/units.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/units.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/dictionary.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/dictionary.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/gmlBase.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/gmlBase.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/basicTypes.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/basicTypes.xsd
+http://schemas.opengis.net/gml/3.1.1/base/gmlBase.xsd:29: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://www.w3.org/1999/xlink.xsd' for the namespace 'http://www.w3.org/1999/xlink', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/w3/xlink.xsd'.
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/topology.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/topology.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/geometryComplexes.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/geometryComplexes.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/geometryAggregates.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/geometryAggregates.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/geometryPrimitives.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/geometryPrimitives.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/geometryBasic2d.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/geometryBasic2d.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/coverage.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/coverage.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/valueObjects.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/valueObjects.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/temporal.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/temporal.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/grids.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/grids.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/coordinateReferenceSystems.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/coordinateReferenceSystems.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/coordinateSystems.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/coordinateSystems.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/referenceSystems.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/referenceSystems.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/datums.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/datums.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/coordinateOperations.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/coordinateOperations.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/dataQuality.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/dataQuality.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/observation.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/observation.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/defaultStyle.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/defaultStyle.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/smil/smil20.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/smil/smil20.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/smil/smil20-language.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/smil/smil20-language.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/temporalReferenceSystems.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/temporalReferenceSystems.xsd
+Resolve: sysID http://schemas.opengis.net/gml/3.1.1/base/temporalTopology.xsd
+Resolve URI http://schemas.opengis.net/gml/3.1.1/base/temporalTopology.xsd
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/instance.xsd:23: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/reusable.xsd:24: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/ddi-xhtml11.xsd:91: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-attribs-1.xsd:16: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-blkphras-1.xsd:27: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/XHTML/xhtml-bdo-1.xsd:23: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/dcelements.xsd:23: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/simpledc20021212.xsd' for the namespace 'http://purl.org/dc/elements/1.1/', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/dc/dc.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/datacollection.xsd:24: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/physicaldataproduct_ncube_inline.xsd:24: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/physicaldataproduct_ncube_normal.xsd:24: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/physicaldataproduct_ncube_tabular.xsd:24: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/physicaldataproduct_proprietary.xsd:25: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/ddi-codebook/dcterms.xsd:70: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://dublincore.org/schemas/xmls/qdc/2008/02/11/dc.xsd' for the namespace 'http://purl.org/dc/elements/1.1/', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/dc/dc.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/ddi-codebook/dcterms.xsd:73: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at 'http://dublincore.org/schemas/xmls/qdc/dcmitype.xsd' for the namespace 'http://purl.org/dc/dcmitype/', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/dc/dcmitype.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-codebook/codebook.xsd:39: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-codebook/xml.xsd' for the namespace 'http://www.w3.org/XML/1998/namespace', since this namespace was already imported with the schema located at 'http://www.w3.org/2001/xml.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-codebook/codebook.xsd:40: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-codebook/ddi-xhtml11.xsd' for the namespace 'http://www.w3.org/1999/xhtml', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-lifecycle/ddi-xhtml11.xsd'.
+/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-codebook/codebook.xsd:41: element import: Schemas parser warning : Element '{http://www.w3.org/2001/XMLSchema}import': Skipping import of schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/ddi-codebook/dcterms.xsd' for the namespace 'http://purl.org/dc/terms/', since this namespace was already imported with the schema located at '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/external/dc/dcterms.xsd'.
+http://schemas.opengis.net/gml/3.1.1/base/valueObjects.xsd:216: element complexType: Schemas parser error : local list type: A type, derived by list or union, must have the simple ur-type definition as base type, not '{http://www.opengis.net/gml}doubleOrNullList'.
+http://schemas.opengis.net/gml/3.1.1/base/valueObjects.xsd:234: element complexType: Schemas parser error : local list type: A type, derived by list or union, must have the simple ur-type definition as base type, not '{http://www.opengis.net/gml}NameOrNullList'.
+WXS schema /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schema/mets/mets.xsd failed to compile
+<?xml version="1.0" encoding="UTF-8"?>
+<mets:mets xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rts="http://cosimo.stanford.edu/sdr/metsrights" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mets="http://www.loc.gov/METS/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:premis="info:lc/xmlns/premis-v2" xmlns:dcterms="http://purl.org/dc/terms/" xsi:schemaLocation="http://www.loc.gov/METS/ kdk_mets.xsd" OBJID="CSC_test001" PROFILE="http://www.kdk.fi/kdk-mets-profile">
+
+
+<mets:metsHdr CREATEDATE="2012-07-13T12:23:44">
+<mets:agent ROLE="CREATOR" TYPE="ORGANIZATION">
+<mets:name>CSC - IT Center for Science</mets:name>
+</mets:agent>
+</mets:metsHdr>
+
+<mets:dmdSec ID="CSC_test001_object001" CREATED="2012-07-13T00:00:00">
+<mets:mdWrap MDTYPE="DC" xsi:schemaLocation="http://purl.org/dc/elements/1.1/ http://dublincore.org/schemas/xmls/qdc/2008/02/11/dc.xsd http://purl.org/dc/terms/ http://dublincore.org/schemas/xmls/qdc/dcterms.xsd">
+<mets:xmlData>
+<dc:record>
+<dc:identifier>CSC_test001_object001</dc:identifier>
+<dc:title>Testikuva</dc:title>
+<dc:type xsi:type="dcterms:DCMIType">Image</dc:type>
+<dc:type xml:lang="fi">valokuva</dc:type>
+<dc:subject xml:lang="fi">vuori</dc:subject>
+<dc:subject xml:lang="fi">vaellusreitti</dc:subject>
+<dc:description xml:lang="fi">Vaellusreitti Galdhøpiggenille.</dc:description>
+<dc:source>CSC_source001</dc:source>
+<dcterms:isPartOf>Juhan vaelluskokoelma</dcterms:isPartOf>
+<dcterms:isPartOf>CSC_test001</dcterms:isPartOf>
+<dcterms:spatial>Galdhøpiggen</dcterms:spatial>
+<dcterms:spatial>Norja</dcterms:spatial>
+<dcterms:temporal>2009</dcterms:temporal>
+<dc:creator>Lehtonen, Juha</dc:creator>
+<dc:publisher>CSC - IT Center for Science</dc:publisher>
+<dc:format>digitaalikuva</dc:format>
+</dc:record>
+</mets:xmlData>
+</mets:mdWrap>
+</mets:dmdSec>
+
+<mets:dmdSec ID="CSC_test001_object002" CREATED="2012-07-13T00:00:00">
+<mets:mdWrap MDTYPE="DC" xsi:schemaLocation="http://purl.org/dc/elements/1.1/ http://dublincore.org/schemas/xmls/qdc/2008/02/11/dc.xsd http://purl.org/dc/terms/ http://dublincore.org/schemas/xmls/qdc/dcterms.xsd">
+<mets:xmlData>
+<dc:record>
+<dc:identifier>CSC_test001_object001</dc:identifier>
+<dc:title>Testikuva</dc:title>
+<dc:type xsi:type="dcterms:DCMIType">Image</dc:type>
+<dc:type xml:lang="fi">valokuva</dc:type>
+<dc:subject xml:lang="fi">jäätikkö</dc:subject>
+<dc:subject xml:lang="fi">vuoristo</dc:subject>
+<dc:description xml:lang="fi">Jäätikkö Galdhøpiggenilla.</dc:description>
+<dc:source>CSC_source001</dc:source>
+<dcterms:isPartOf>Juhan vaelluskokoelma</dcterms:isPartOf>
+<dcterms:spatial>CSC_test001</dcterms:spatial>
+<dcterms:spatial>Galdhøpiggen</dcterms:spatial>
+<dcterms:spatial>Norja</dcterms:spatial>
+<dcterms:temporal>2006</dcterms:temporal>
+<dc:creator>Lehtonen, Juha</dc:creator>
+<dc:publisher>CSC - IT Center for Science</dc:publisher>
+<dc:format>digitaalikuva</dc:format>
+</dc:record>
+</mets:xmlData>
+</mets:mdWrap>
+</mets:dmdSec>
+
+<mets:dmdSec ID="CSC_test001_object003" CREATED="2012-07-13T00:00:00">
+<mets:mdWrap MDTYPE="DC" xsi:schemaLocation="http://purl.org/dc/elements/1.1/ http://dublincore.org/schemas/xmls/qdc/2008/02/11/dc.xsd http://purl.org/dc/terms/ http://dublincore.org/schemas/xmls/qdc/dcterms.xsd">
+<mets:xmlData>
+<dc:record>
+<dc:identifier>CSC_test001_object003</dc:identifier>
+<dc:title>Testikuva</dc:title>
+<dc:type xsi:type="dcterms:DCMIType">Image</dc:type>
+<dc:type xml:lang="fi">valokuva</dc:type>
+<dc:subject xml:lang="fi">jurtta</dc:subject>
+<dc:subject xml:lang="fi">asuinalue</dc:subject>
+<dc:description xml:lang="fi">Asutusta Ulan Batorin laidalla.</dc:description>
+<dc:source>CSC_source001</dc:source>
+<dcterms:isPartOf>Juhan retkikokoelma</dcterms:isPartOf>
+<dcterms:isPartOf>CSC_test001</dcterms:isPartOf>
+<dcterms:spatial>Ulan Bator</dcterms:spatial>
+<dcterms:spatial>Mongolia</dcterms:spatial>
+<dcterms:temporal>2010</dcterms:temporal>
+<dc:creator>Lehtonen, Juha</dc:creator>
+<dc:publisher>CSC - IT Center for Science</dc:publisher>
+<dc:format>digitaalikuva</dc:format>
+</dc:record>
+</mets:xmlData>
+</mets:mdWrap>
+</mets:dmdSec>
+
+<mets:amdSec>
+
+    <mets:techMD ID="CSC_test001_tech002" CREATED="2012-07-13T00:00:00">
+      <mets:mdWrap MDTYPE="PREMIS:OBJECT">
+        <mets:xmlData>
+          <premis:object xmlns="info:lc/xmlns/premis-v2" xsi:type="file" xsi:schemaLocation="info:lc/xmlns/premis-v2 http://www.loc.gov/standards/premis/v2/premis-v2-1.xsd" version="2.1">
+            <premis:objectIdentifier>
+              <premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+              <premis:objectIdentifierValue>6abebf94-94f5-417c-9b60-05c16b985fdd</premis:objectIdentifierValue>
+            </premis:objectIdentifier>
+            <premis:objectCharacteristics>
+              <premis:compositionLevel>0</premis:compositionLevel>
+              <premis:fixity>
+                <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+                <premis:messageDigest>11c128030f203b76f2e30eeb7454c42b</premis:messageDigest>
+              </premis:fixity>
+              <premis:size>1422762</premis:size>
+              <premis:format>
+                <premis:formatDesignation>
+                  <premis:formatName>image/jpeg</premis:formatName>
+                </premis:formatDesignation>
+                <premis:formatRegistry>
+                  <premis:formatRegistryName>PRONOM</premis:formatRegistryName>
+                  <premis:formatRegistryKey>x-fmt/391</premis:formatRegistryKey>
+                </premis:formatRegistry>
+              </premis:format>
+            </premis:objectCharacteristics>
+          </premis:object>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:techMD>
+    <mets:techMD ID="CSC_test001_tech001" CREATED="2012-07-13T00:00:00">
+      <mets:mdWrap MDTYPE="PREMIS:OBJECT">
+        <mets:xmlData>
+          <premis:object xmlns="info:lc/xmlns/premis-v2" xsi:type="file" xsi:schemaLocation="info:lc/xmlns/premis-v2 http://www.loc.gov/standards/premis/v2/premis-v2-1.xsd" version="2.1">
+            <premis:objectIdentifier>
+              <premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+              <premis:objectIdentifierValue>5daa71c9-2241-4816-9357-cd34eef4df60</premis:objectIdentifierValue>
+            </premis:objectIdentifier>
+            <premis:objectCharacteristics>
+              <premis:compositionLevel>0</premis:compositionLevel>
+              <premis:fixity>
+                <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+                <premis:messageDigest>762108c2ca8680fdb55fb67170a55e70</premis:messageDigest>
+              </premis:fixity>
+              <premis:size>1242594</premis:size>
+              <premis:format>
+                <premis:formatDesignation>
+                  <premis:formatName>image/jpeg</premis:formatName>
+                </premis:formatDesignation>
+                <premis:formatRegistry>
+                  <premis:formatRegistryName>PRONOM</premis:formatRegistryName>
+                  <premis:formatRegistryKey>x-fmt/391</premis:formatRegistryKey>
+                </premis:formatRegistry>
+              </premis:format>
+            </premis:objectCharacteristics>
+          </premis:object>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:techMD>
+    <mets:techMD ID="CSC_test001_tech003" CREATED="2012-07-13T00:00:00">
+      <mets:mdWrap MDTYPE="PREMIS:OBJECT">
+        <mets:xmlData>
+          <premis:object xmlns="info:lc/xmlns/premis-v2" xsi:type="file" xsi:schemaLocation="info:lc/xmlns/premis-v2 http://www.loc.gov/standards/premis/v2/premis-v2-1.xsd" version="2.1">
+            <premis:objectIdentifier>
+              <premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+              <premis:objectIdentifierValue>e899fab9-293a-4282-82e7-1613889b8ad1</premis:objectIdentifierValue>
+            </premis:objectIdentifier>
+            <premis:objectCharacteristics>
+              <premis:compositionLevel>0</premis:compositionLevel>
+              <premis:fixity>
+                <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+                <premis:messageDigest>c29f1b25b22318d11bc7f60cdb48029d</premis:messageDigest>
+              </premis:fixity>
+              <premis:size>5901192</premis:size>
+              <premis:format>
+                <premis:formatDesignation>
+                  <premis:formatName>image/jpeg</premis:formatName>
+                </premis:formatDesignation>
+                <premis:formatRegistry>
+                  <premis:formatRegistryName>PRONOM</premis:formatRegistryName>
+                  <premis:formatRegistryKey>fmt/41</premis:formatRegistryKey>
+                </premis:formatRegistry>
+              </premis:format>
+            </premis:objectCharacteristics>
+          </premis:object>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:techMD>
+
+        <mets:rightsMD ID="CSC_rights001" CREATED="2012-07-13T00:00:00">
+                <mets:mdWrap MDTYPE="METSRIGHTS">
+                        <mets:xmlData>
+                                <rts:RightsDeclarationMD RIGHTSCATEGORY="CONTRACTUAL">
+                                        <rts:Context CONTEXTCLASS="GENERAL PUBLIC">
+                                        <rts:Permissions DISCOVER="true" DISPLAY="true" COPY="false" DUPLICATE="false" MODIFY="false" DELETE="false" PRINT="true" OTHER="false"/>
+                                </rts:Context>
+                                </rts:RightsDeclarationMD>
+                        </mets:xmlData>
+                </mets:mdWrap>
+        </mets:rightsMD>
+
+        <mets:digiprovMD ID="CSC_test001_digiprov001" CREATED="2012-07-13T00:00:00">
+                <mets:mdWrap MDTYPE="PREMIS:EVENT">
+                        <mets:xmlData>
+                                <premis:event>
+                                        <premis:eventIdentifier>
+                                                <premis:eventIdentifierType>local</premis:eventIdentifierType>
+                                                <premis:eventIdentifierValue>CSC_test001_event001</premis:eventIdentifierValue>
+                                        </premis:eventIdentifier>
+                                        <premis:eventType>creation</premis:eventType>
+                                        <premis:eventDateTime>2009-08-17</premis:eventDateTime>
+                                        <premis:eventOutcomeInformation>
+                                                <premis:eventOutcome>successful</premis:eventOutcome>
+                                                <premis:eventOutcomeDetail>
+                                                        <premis:eventOutcomeDetailNote>Valokuvan ottohetki</premis:eventOutcomeDetailNote>
+                                                </premis:eventOutcomeDetail>
+                                        </premis:eventOutcomeInformation>
+                                        <premis:linkingAgentIdentifier>
+                                                <premis:linkingAgentIdentifierType>local</premis:linkingAgentIdentifierType>
+                                                <premis:linkingAgentIdentifierValue>CSC_test001_agent001</premis:linkingAgentIdentifierValue>
+                                        </premis:linkingAgentIdentifier>
+                                </premis:event>
+                        </mets:xmlData>
+                </mets:mdWrap>
+        </mets:digiprovMD>
+        <mets:digiprovMD ID="CSC_test001_digiprov002" CREATED="2012-07-13T00:00:00">
+                <mets:mdWrap MDTYPE="PREMIS:EVENT">
+                        <mets:xmlData>
+                                <premis:event>
+                                        <premis:eventIdentifier>
+                                                <premis:eventIdentifierType>local</premis:eventIdentifierType>
+                                                <premis:eventIdentifierValue>CSC_test001_event002</premis:eventIdentifierValue>
+                                        </premis:eventIdentifier>
+                                        <premis:eventType>creation</premis:eventType>
+                                        <premis:eventDateTime>2006-08-23</premis:eventDateTime>
+                                        <premis:eventOutcomeInformation>
+                                                <premis:eventOutcome>successful</premis:eventOutcome>
+                                                <premis:eventOutcomeDetail>
+                                                        <premis:eventOutcomeDetailNote>Valokuvan ottohetki</premis:eventOutcomeDetailNote>
+                                                </premis:eventOutcomeDetail>
+                                        </premis:eventOutcomeInformation>
+                                        <premis:linkingAgentIdentifier>
+                                                <premis:linkingAgentIdentifierType>local</premis:linkingAgentIdentifierType>
+                                                <premis:linkingAgentIdentifierValue>CSC_test001_agent001</premis:linkingAgentIdentifierValue>
+                                        </premis:linkingAgentIdentifier>
+                                </premis:event>
+                        </mets:xmlData>
+                </mets:mdWrap>
+        </mets:digiprovMD>
+        <mets:digiprovMD ID="CSC_test001_digiprov003" CREATED="2012-07-13T00:00:00">
+                <mets:mdWrap MDTYPE="PREMIS:EVENT">
+                        <mets:xmlData>
+                                <premis:event>
+                                        <premis:eventIdentifier>
+                                                <premis:eventIdentifierType>local</premis:eventIdentifierType>
+                                                <premis:eventIdentifierValue>CSC_test001_event001</premis:eventIdentifierValue>
+                                        </premis:eventIdentifier>
+                                        <premis:eventType>creation</premis:eventType>
+                                        <premis:eventDateTime>2012-06-20</premis:eventDateTime>
+                                        <premis:eventOutcomeInformation>
+                                                <premis:eventOutcome>successful</premis:eventOutcome>
+                                                <premis:eventOutcomeDetail>
+                                                        <premis:eventOutcomeDetailNote>Valokuvan ottohetki</premis:eventOutcomeDetailNote>
+                                                </premis:eventOutcomeDetail>
+                                        </premis:eventOutcomeInformation>
+                                        <premis:linkingAgentIdentifier>
+                                                <premis:linkingAgentIdentifierType>local</premis:linkingAgentIdentifierType>
+                                                <premis:linkingAgentIdentifierValue>CSC_test001_agent002</premis:linkingAgentIdentifierValue>
+                                        </premis:linkingAgentIdentifier>
+                                </premis:event>
+                        </mets:xmlData>
+                </mets:mdWrap>
+        </mets:digiprovMD>
+        <mets:digiprovMD ID="CSC_test001_agent001" CREATED="2012-07-13T00:00:00">
+                <mets:mdWrap MDTYPE="PREMIS:AGENT">
+                <mets:xmlData>
+                <premis:agent>
+                <premis:agentIdentifier>
+                <premis:agentIdentifierType>local</premis:agentIdentifierType>
+                <premis:agentIdentifierValue>CSC_test001_cam001</premis:agentIdentifierValue>
+                </premis:agentIdentifier>
+                <premis:agentName>Konica Minolta DiMAGE Z2</premis:agentName>
+                <premis:agentType>kamera</premis:agentType>
+                </premis:agent>
+                </mets:xmlData>
+                </mets:mdWrap>
+        </mets:digiprovMD>
+        <mets:digiprovMD ID="CSC_test001_agent002" CREATED="2012-07-13T00:00:00">
+                <mets:mdWrap MDTYPE="PREMIS:AGENT">
+                <mets:xmlData>
+                <premis:agent>
+                <premis:agentIdentifier>
+                <premis:agentIdentifierType>local</premis:agentIdentifierType>
+                <premis:agentIdentifierValue>CSC_test001_cam002</premis:agentIdentifierValue>
+                </premis:agentIdentifier>
+                <premis:agentName>Panasonic DMC-TZ6</premis:agentName>
+                <premis:agentType>kamera</premis:agentType>
+                </premis:agent>
+                </mets:xmlData>
+                </mets:mdWrap>
+        </mets:digiprovMD>
+        </mets:amdSec>
+
+        <mets:fileSec>
+                <mets:fileGrp USE="testing">
+                        <mets:file ID="CSC_test001_file001" ADMID="CSC_test001_tech001 CSC_test001_digiprov001 CSC_rights001" CREATED="2012-07-13T00:00:00">
+                                <mets:FLocat xlink:href="file://kuvat/PICT0081.JPG" LOCTYPE="URL"/>
+                        </mets:file>
+                        <mets:file ID="CSC_test001_file002" ADMID="CSC_test001_tech002 CSC_test001_digiprov002 CSC_rights001" CREATED="2012-07-13T00:00:00">
+                                <mets:FLocat xlink:href="file://kuvat/PICT0102.JPG" LOCTYPE="URL"/>
+                        </mets:file>
+                        <mets:file ID="CSC_test001_file003" ADMID="CSC_test001_tech003 CSC_test001_digiprov003 CSC_rights001" CREATED="2012-07-13T00:00:00">
+                                <mets:FLocat xlink:href="file://kuvat/P1020137.JPG" LOCTYPE="URL"/>
+                        </mets:file>
+                </mets:fileGrp>
+        </mets:fileSec>
+        <mets:structMap>
+                <mets:div TYPE="LOGICAL" LABEL="Testikuvia">
+                        <mets:div TYPE="PHOTOGRAPHY" LABEL="CSC_source001" DMDID="CSC_test001_object001">
+                                <mets:fptr FILEID="CSC_test001_file001"/>
+                        </mets:div>
+                        <mets:div TYPE="PHOTOGRAPHY" LABEL="CSC_source002" DMDID="CSC_test001_object002">
+                                <mets:fptr FILEID="CSC_test001_file002"/>
+                        </mets:div>
+                        <mets:div TYPE="PHOTOGRAPHY" LABEL="CSC_source003" DMDID="CSC_test001_object003">
+                                <mets:fptr FILEID="CSC_test001_file003"/>
+                        </mets:div>
+                </mets:div>
+        </mets:structMap>
+</mets:mets>
+Catalogs cleanup
+Free catalog entry
+
+real    3m0.849s
+user    0m0.447s
+sys     0m0.196s
+[root@ingest tests]#
+
