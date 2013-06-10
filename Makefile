@@ -26,15 +26,15 @@ test:
 
 install:
 	# Install all
-	#[ -d "${INSTALLDIR}" ] || mkdir -p "${INSTALLDIR}"
-	#install -m 755 src/* "${INSTALLDIR}/"
-	#install -m 644 include/etc/* "${ETC}/archivematica/MCPClient/"
 	
 	[ -d "${SHAREDIR}" ] || mkdir -p "${SHAREDIR}"
-	install -m 644 include/share/* "${SHAREDIR}/"
+	cp -r include/share/* "${SHAREDIR}/"
+	chmod -R 755 "${SHAREDIR}"
+	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
 	
 	[ -d "${PYTHONDIR}" ] || mkdir -p "${PYTHONDIR}"
-	install -m 644 src/SIPValidation_python/* "${PYTHONDIR}/"
+	install -m 644 src/SIPValidation_python/src/* "${PYTHONDIR}/"
+	
 
 devinstall:
 	# quick and dirty installation...
