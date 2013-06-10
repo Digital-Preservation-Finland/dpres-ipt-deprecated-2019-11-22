@@ -1,0 +1,1658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2009 DDI Alliance, DDI 3.1, 2009-10-18
+
+This file is part of DDI 3.1 XML Schema.
+
+DDI 3.1 XML Schema is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+
+DDI 3.1 XML Schema is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with DDI 3.1 XML Schema. If not, see <http://www.gnu.org/licenses/>.
+
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:datacollection:3_1" xmlns:r="ddi:reusable:3_1" xmlns:l="ddi:logicalproduct:3_1" targetNamespace="ddi:datacollection:3_1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+   <xs:import namespace="ddi:reusable:3_1" schemaLocation="reusable.xsd"/>
+   <xs:import namespace="ddi:logicalproduct:3_1" schemaLocation="logicalproduct.xsd"/>
+   <!-- DATA COLLECTION -->
+   <xs:element name="DataCollection" type="DataCollectionType">
+      <xs:annotation>
+         <xs:documentation>The DataCollection element contains all of the metadata about the data collection process of the study or studies being described. This includes methodologies used for determining data sources, sample, and repetitions for data collection, question structures, flow logic for questionnaires (traditional or computer-assisted), and data processing occurring during data collection and data product creation.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="DataCollectionType">
+      <xs:annotation>
+         <xs:documentation>Includes information about the data collection and post-collection processing.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+               <xs:element ref="DataCollectionModuleName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded"/>            
+               <xs:element ref="r:Coverage" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Describes the coverage of the data collection activity.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:OtherMaterial" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Other materials related to the data collection.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Note" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Notes regarding the data collection metadata.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Methodology" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Methodological metadata for the data collection.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="CollectionEvent" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A set of metadata describing a data collection event. Several events may be described in a single data collection activity.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="QuestionScheme" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Describes a set of questions used in the data collection. Several sets of questions may be used. A single scheme always is maintained by a single agency.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ControlConstructScheme" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A collection of control constructs used in data collection by one or more instruments.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="InterviewerInstructionScheme" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A collection of interviewer instructions used in data collection by instruments.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Instrument" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A description of an instrument used in the data collection activity.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ProcessingEvent" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Metadata regarding a processing event occurring as part of the data collection or data file preparation.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="DataCollectionModuleName" type="r:NameType"/>
+   <!-- METHODOLOGY -->
+   <xs:complexType name="MethodologyType">
+      <xs:annotation>
+         <xs:documentation>MethodologyType describes the methodology used for data collection.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+      <xs:extension base="r:VersionableType">
+      <xs:sequence>
+         <xs:element ref="DataCollectionMethodology" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes a methodology for data collection.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="TimeMethod" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes the time method or time dimension of the data collection.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="SamplingProcedure" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes the type of sample, sample design and provides details on drawing the sample. May include reference to the target sample size and the sampling fraction.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="DeviationFromSampleDesign" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes deviations from the sample design.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="r:Software" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Metadata regarding a software package used to instantiate a data collection method.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <!-- COLLECTION EVENT -->
+   <xs:complexType name="CollectionEventType">
+      <xs:annotation>
+         <xs:documentation>Provides information regarding a data collection event.</xs:documentation>
+      </xs:annotation>
+       <xs:complexContent>
+               <xs:extension base="r:IdentifiableType">
+                  <xs:sequence>
+                     <xs:sequence>
+                <xs:element ref="DataCollectorOrganizationReference" minOccurs="0" maxOccurs="unbounded">
+                   <xs:annotation>
+                      <xs:documentation>Reference to an organization, defined in the organziation scheme, responsible for the data collection</xs:documentation>
+                   </xs:annotation>
+                </xs:element>
+                <xs:element ref="DataSource" minOccurs="0" maxOccurs="unbounded">
+                   <xs:annotation>
+                      <xs:documentation>Describes a source of the data.</xs:documentation>
+                   </xs:annotation>
+                </xs:element>
+                <xs:element ref="DataCollectionDate">
+                   <xs:annotation>
+                      <xs:documentation>Provides a date or range of dates for the described data collection event as well as  a cycle number when the collection is part of a series of data collection events.</xs:documentation>
+                   </xs:annotation>
+                </xs:element>
+                <xs:element ref="DataCollectionFrequency" minOccurs="0" maxOccurs="unbounded">
+                   <xs:annotation>
+                      <xs:documentation>Documents the intended frequency of data collection, for example monthly, yearly, weekly, etc., preferably using an optional controlled vocabulary in the IntendedFrequency element. Date of first collection should be provided in StartDate as a basis for defining periodicity. EndDate should be entered for data collection cycles with a known or anticipated end date. EndDate is omitted in data collection series that are intended to be on-going. </xs:documentation>
+                   </xs:annotation>
+                </xs:element>
+                <xs:element ref="ModeOfCollection" minOccurs="0" maxOccurs="unbounded">
+                   <xs:annotation>
+                      <xs:documentation>Describes the mode of collection.</xs:documentation>
+                   </xs:annotation>
+                </xs:element>
+                <xs:element ref="CollectionSituation" minOccurs="0" maxOccurs="unbounded">
+                   <xs:annotation>
+                      <xs:documentation>Describes the situation in which the data collection event takes place. </xs:documentation>
+                   </xs:annotation>
+                </xs:element>
+                <xs:element ref="ActionToMinimizeLosses" minOccurs="0" maxOccurs="unbounded">
+                   <xs:annotation>
+                      <xs:documentation>Describes action taken to minimize loss of data from the collection event.</xs:documentation>
+                   </xs:annotation>
+                </xs:element>
+                    </xs:sequence>
+                  </xs:sequence>
+               </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="DataCollectionFrequencyType">
+ <xs:annotation>
+         <xs:documentation>Documents the intended frequency of data collection, for example monthly, yearly, weekly, etc.,  preferably using an optional controlled vocabulary in the IntendedFrequency element. Date of first collection should be provided in StartDate as a basis for defining periodicity. EndDate should be entered for data collection cycles with a known or anticipated end date. EndDate is omitted in data collection series that are intended to be on-going.</xs:documentation>
+      </xs:annotation>
+       <xs:complexContent>
+               <xs:extension base="r:DateType">
+                 <xs:sequence>
+                    <xs:element name="IntendedFrequency" type="r:CodeValueType" minOccurs="0">
+                   <xs:annotation>
+                      <xs:documentation>Documents the intended frequency of data collection, for example monthly, yearly, weekly, etc.,  preferably using an optional controlled vocabulary</xs:documentation>
+                   </xs:annotation>
+                </xs:element>
+                 </xs:sequence>
+               </xs:extension>
+       </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="DataSourceType">
+      <xs:annotation>
+         <xs:documentation>Describes a source for the data.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="SourceDescription" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A description of the source from which data are collected.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="SourceType" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes the type of source, and may be from a controlled vocabulary.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Origin" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A citation or URI for the source of the data. Note that this is an external reference, and should not be used to point to DDI descriptions of the data, or to DDI-encoded data.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Characteristic" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A significant characteristic of the data source that may affect understanding or collection of the data. This will include the level of documentation of the source data. For example: 'Legibility of data source affected due to water damage.'</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="SourceDescription" type="r:StructuredStringType">
+      <xs:annotation>
+            <xs:documentation></xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SourceType" type="r:CodeValueType">
+      <xs:annotation>
+            <xs:documentation>SourceType allows for the provision of a term describing primary or secondary data sources, and may be from a controlled vocabulary.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+
+   <xs:complexType name="OriginType">
+      <xs:annotation>
+         <xs:documentation>A citation or URI for the source of the data. Note that this is an external reference, and should not be used to point to DDI descriptions of the data, or to DDI-encoded data.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="r:Citation" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Citation for the data source.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+        <xs:element name="OriginLocation" type="xs:anyURI" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>URI to the data source.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+
+
+   <!-- PROCESSING -->
+   <xs:complexType name="ProcessingType">
+      <xs:annotation>
+         <xs:documentation>ProcessingType provides a structure for describing the processing within data collection.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+      <xs:extension base="r:IdentifiableType">
+      <xs:sequence>
+         <xs:element ref="ControlOperation" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes a control operation.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="CleaningOperation" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes a raw data cleaning operation.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Weighting" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes the weighting used in the process.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="DataAppraisalInformation" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Information about the data appraisal.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Coding" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A structure for the description of the computation used in the data collection or data processing such as recoding, derivations, or incorporation of external data sources.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="OperationType">
+      <xs:annotation>
+         <xs:documentation>Provides a structure for cleaning and control operations within a data collection process.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A description of the operation.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="AgencyOrganizationReference" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A reference to the listing in Organization of the agency responsible for the operation.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="DataAppraisalInformationType">
+      <xs:annotation>
+         <xs:documentation>Metadata regarding the appraisal of the collected data.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="ResponseRate" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A response rate.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="SamplingError" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>The sampling error of the data.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="OtherAppraisalProcess" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Description of any other form of data appraisal.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="CodingType">
+      <xs:annotation>
+         <xs:documentation>A structure for the description of the computation used in the data collection or data processing such as recoding, derivations, or incorporation of external data sources.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:IdentifiableType">
+            <xs:sequence>
+               <xs:choice>
+                  <xs:element ref="GeneralInstruction">
+                     <xs:annotation>
+                        <xs:documentation>Coding instructions that pertain to data collection or data processing overall such as handling of non-response to questions, imputation practices, suppression rules, etc. Coding instructions should be listed separately to allow for referencing of specific processes.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="GenerationInstruction">
+                     <xs:annotation>
+                        <xs:documentation>Instructions for recodes, derivations from multiple question or variable sources, and derivations based on external sources. Instructions should be listed separately so they can be referenced by variables in the logical product.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="StandardWeight" type="xs:float">
+                     <xs:annotation>
+                        <xs:documentation>A standard weighting factor used by all or a group of variables within the data set.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>                  
+               </xs:choice>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="GeneralInstructionType">
+      <xs:annotation>
+         <xs:documentation>Coding instructions that pertain to data collection or data processing overall such as handling of non-response to questions, imputation practices, suppression rules, etc. Coding instructions should be listed separately to allow for referencing of specific processes.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="r:Description" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A human-readable description of the coding instruction.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="r:Command" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A machine-actionable command for processing the coding process.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="IsOverride" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Used when attribute of the containing GeneralInstruction isOverride equals true. This element provides the reference to the Coding Element containing the GeneralInstruction that is being overriden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="isOverride" type="xs:boolean" default="false">
+         <xs:annotation>
+            <xs:documentation>When changed to true, indicates that this coding instruction overrides a more generally used process.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:complexType name="GenerationInstructionType">
+      <xs:annotation>
+         <xs:documentation> For recodes, derivations from multiple question or variable sources, and derivations based on external sources. Instructions should be listed separately so they can be referenced by variables in the logical product.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="SourceQuestion" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Reference to a question used in the coding process</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="SourceVariable" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Reference to a variable used in the coding process</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="ExternalInformation" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Reference to an external source of information used in the coding process, for example a value from a chart, etc.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A human-readable description of the coding instruction.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+    <xs:element ref="r:Command" minOccurs="0" maxOccurs="unbounded">
+       <xs:annotation>
+          <xs:documentation>A machine-actionable command for processing the coding process.</xs:documentation>
+       </xs:annotation>
+    </xs:element>
+         <xs:element ref="ControlConstructReference" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A control construct within the derivation instruction.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Aggregation" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Describes the aggregation.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="isDerived" type="xs:boolean" default="true">
+         <xs:annotation>
+               <xs:documentation>When set to true, the instruction describes a derivation. When false, indicates a simple recode.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:element name="Aggregation" type="AggregationType"/>
+   <xs:complexType name="AggregationType">
+      <xs:annotation>
+         <xs:documentation>Describes the aggregation of a generation instruction.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="Method"/>
+        <xs:choice>
+            <xs:element ref="VariableSet">
+              <xs:annotation>
+             <xs:documentation>Provides detail on a variable set of dependent and independent variables.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element ref="VariableSetReference">
+              <xs:annotation>
+             <xs:documentation>A reference to a variable set of dependent and independent variables.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+        </xs:choice>
+      </xs:sequence>
+   </xs:complexType>
+  <xs:element name="Method" type="r:CodeValueType"/>
+  <xs:element name="VariableSet" type="VariableSetType"/>
+  <xs:element name="VariableSetReference" type="r:ReferenceType"/>
+   <xs:complexType name="VariableSetType">
+      <xs:annotation>
+         <xs:documentation>Provides detail on a variable set of dependent and independent variables.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+        <xs:extension base="r:IdentifiableType">
+           <xs:sequence>
+            <xs:element ref="IndependentVariableReference" minOccurs="0" maxOccurs="unbounded">
+                    <xs:annotation>
+                  <xs:documentation>A reference to a variable, which is an important constraint for the computed aggregation measure and has the potential to invoke a change in a dependent variable like sex for average of income.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="DependentVariableReference" maxOccurs="unbounded">
+                    <xs:annotation>
+                  <xs:documentation>A reference to a variable, for which the aggregate measure is computed like average of income.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+           </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="IndependentVariableReference" type="r:ReferenceType"/>
+   <xs:element name="DependentVariableReference" type="r:ReferenceType"/>
+   <xs:complexType name="SourceReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to a variable or question used in the deriviation or coding instruction.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:ReferenceType">
+            <xs:sequence>
+               <xs:element name="Mnemonic" type="xs:string" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Allows for assigning a mnemonic name used to reference this item in a command.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <!-- INTERVIEWER INSTRUCTIONS -->
+ <xs:element name="InterviewerInstructionScheme" type="InterviewerInstructionSchemeType"/>
+ <xs:complexType name="InterviewerInstructionSchemeType">
+      <xs:annotation>
+          <xs:documentation> series of interviewer instructuctions including routing information to be displayed within the instrument, definitions, and explanations of terminology and questions.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+               <xs:element ref="InterviewerInstructionSchemeName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the interviewer instruction scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A description of the use of the interviewer instruction scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="InterviewerInstructionSchemeReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Allows for inclusion by reference of other interviewer instruction schemes.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Instruction" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A description of a particular interviewer instruction.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="InterviewerInstructionSchemeName" type="r:NameType"/>
+   <xs:element name="Instruction" type="InstructionType"/>
+
+   <xs:complexType name="InstructionType">
+      <xs:annotation>
+         <xs:documentation>A description of a particular interviewer instruction.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:VersionableType">
+            <xs:sequence>
+               <xs:element ref="InstructionName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">               
+                  <xs:annotation>
+                     <xs:documentation>A display label for the interviewer instruction.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded"/>               
+               <xs:element name="AssociatedImage" type="xs:anyURI" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>An image associated with the interviewer instruction, located at the provided URI.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="InstructionText" type="DynamicTextType" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>This provides the textual content of the instruction. If conditional content is used, a generic text version should also be provided.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="InstructionName" type="r:NameType"/>
+   <xs:element name="InterviewerInstructionSchemeReference" type="r:SchemeReferenceType"/>
+
+
+   <!-- INSTRUMENT -->
+   <xs:complexType name="InstrumentType">
+      <xs:annotation>
+         <xs:documentation>Structures the metadata describing a collection instrument used in the data collection.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+		<xs:element ref="InstrumentName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded"/>  
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded"/>             
+               <xs:element ref="Type" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Describes the type of the instrument, according to the documentor's type classification.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Software" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Describes a software package associated with the  collection instrument.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ExternalInstrumentLocation" type="xs:anyURI" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A reference to an external representation of the data collection instrument.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ControlConstructReference" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>A reference to the control construct that initiates the sequence of the instrument content.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="InstrumentName" type="r:NameType"/>
+   <xs:element name="ControlConstructScheme" type="ControlConstructSchemeType">
+      <xs:annotation>
+         <xs:documentation>A set of control constructs maintained by an agency, and used in the instrument. </xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="ControlConstructSchemeType">
+      <xs:annotation>
+         <xs:documentation>A set of control constructs maintained by an agency, and used in the instrument. </xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+               <xs:element ref="ControlConstructSchemeName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the Control Construct Scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A further human-readable description of the Control Construct Scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ControlConstructSchemeReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Provides for inclusion by reference of external Control Construct Schemes.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ControlConstruct" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Extensible structure for control elements used in describing flow logic within the instrument.: IfThenElse, RepeatUntil, RepeatWhile, Loop, Sequence, ComputationItem, StatementItem, and QuestionConstruct.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="ControlConstructSchemeName" type="r:NameType" />
+   <xs:element name="ControlConstruct" type="ControlConstructType" abstract="true">
+      <xs:annotation>
+         <xs:documentation>The global element ControlConstruct serves as the head of a substitution group for describing the order and flow of questions and supporting information within a data collection instrument.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="ControlConstructType" abstract="true">
+      <xs:annotation>
+         <xs:documentation>Provides the basic, extensible structure for control elements used in describing flow logic within the instrument. The only data point which is inherited by the extended constructs based on this type is the identification of the control construct.</xs:documentation>
+      </xs:annotation>
+    <xs:complexContent>
+        <xs:extension base="r:VersionableType">
+           <xs:sequence>
+               <xs:element ref="ConstructName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="ExternalAid" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                 <xs:documentation>A pointer to an exteral aid presented by the instrument such as a text card, image, audio, or audiovisual aid. Typically a URN. Use type attribute to describe the type of external aid provided. Example of terms to use would include: imageOnly audioOnly audioVisual multiMedia. ExternalAid will be be available each time the control construct is invoked. Care should be taken when placing an ExternalAid in RepeatWhile, RepeatUntil and Loop constructs as it will recure each time the conditional statement is checked. This does not include interviewer instructions, which are handled separately.</xs:documentation>
+              </xs:annotation>
+               </xs:element>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:element ref="ExternalInterviewerInstructionReference">
+                 <xs:annotation>
+                <xs:documentation>External reference to an interviewer instruction not expressed as DDI XML.</xs:documentation>
+                 </xs:annotation>
+              </xs:element>
+              <xs:element ref="InterviewerInstructionReference">
+                 <xs:annotation>
+                <xs:documentation>Reference to an interviewer instruction expressed as DDI XML.</xs:documentation>
+                 </xs:annotation>
+              </xs:element>
+               </xs:choice>
+               </xs:sequence>
+        </xs:extension>
+    </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="ConstructName" type="r:NameType"/>
+   <xs:element name="IfThenElse" type="IfThenElseType" substitutionGroup="ControlConstruct"/>
+   <xs:complexType name="IfThenElseType">
+      <xs:annotation>
+         <xs:documentation>Provides an if-then-else construct, so that if the stated condition is met, the Then clause is triggered, and otherwise the Else clause is triggered.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="ControlConstructType">
+            <xs:sequence>
+               <xs:element ref="IfCondition">
+                  <xs:annotation>
+                     <xs:documentation>The condition which must be met to trigger the Then clause, expressed as a Coding. The condition is an expression in the programming language used in the instrument.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ThenConstructReference">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the control construct which should be triggered if the associated condition is met.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ElseIf" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Use for multiple branching from a single point in the flow logic represpented by the flow logic If, Then, ElseIf, Then, etc.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>               
+               <xs:element ref="ElseConstructReference" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the control construct which is triggered if the associated condition is not met.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ElseIfType">
+      <xs:annotation>
+         <xs:documentation>Use for multiple branching from a single point in the flow logic represpented by the flow logic If, Then, ElseIf, Then, etc.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+               <xs:element ref="IfCondition">
+                  <xs:annotation>
+                     <xs:documentation>The condition which must be met to trigger the Then clause, expressed as a Coding. The condition is an expression in the programming language used in the instrument.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>    
+               <xs:element ref="ThenConstructReference">
+               
+                  <xs:annotation>
+                     <xs:documentation>Reference to the control construct which should be triggered if the associated condition is met.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>               
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="ElseIf" type="ElseIfType"/>
+   <xs:element name="RepeatUntil" type="RepeatUntilType" substitutionGroup="ControlConstruct"/>
+   <xs:complexType name="RepeatUntilType">
+      <xs:annotation>
+         <xs:documentation>Structures the control construct which allows a Coding to be repeated until a specified condition is met.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="ControlConstructType">
+            <xs:sequence>
+               <xs:element ref="UntilCondition">
+                  <xs:annotation>
+                     <xs:documentation>The condition which must be met to stop the repeated operation of the Coding in the associated UntilConstruct. The condition is an expression in the programming language used in the instrument.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="UntilConstructReference">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the Coding which runs until the UntilCondition is met. When the operation ceases, the flow returns to the containing control construct.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="RepeatWhile" type="RepeatWhileType" substitutionGroup="ControlConstruct"/>
+   <xs:complexType name="RepeatWhileType">
+      <xs:annotation>
+         <xs:documentation>Structures a control construct which repeats while a specified condition is met. Before each iteration the condition is tested. When the condition is not met, control passes back to the containing control construct.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="ControlConstructType">
+            <xs:sequence>
+               <xs:element ref="WhileCondition">
+                  <xs:annotation>
+                     <xs:documentation>The condition which must be met to trigger the operation of the associated Coding.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="WhileConstructReference">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the Coding which is to be run when the associated condition has been met.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="Loop" type="LoopType" substitutionGroup="ControlConstruct"/>
+   <xs:complexType name="LoopType">
+      <xs:annotation>
+         <xs:documentation>Structures a control construct which loops until a limiting condition is met. The ControlConstruct contained in the Loop operates on the LoopVariable until the LoopWhile condition is met, and then control is handed back to the containing control construct.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="ControlConstructType">
+            <xs:sequence>
+               <xs:element ref="LoopVariableReference" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>A reference to the variable (as used in the associated Codings) which is incremented or otherwise manipulated to meet the conditions stated in the LoopWhile condition.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="InitialValue" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>The initial value to which the LoopVariable is set.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="LoopWhile">
+                  <xs:annotation>
+                     <xs:documentation>The condition which must be met for the Loop's functioning to cease; when this condition is met, control is handed back to the containing control construct.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="StepValue" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>A Coding which is used to manipulate the LoopVariable after each iteration of the Loop's associated ControlConstruct element.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ControlConstructReference" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="Sequence" type="SequenceType" substitutionGroup="ControlConstruct"/>
+   <xs:complexType name="SequenceType">
+      <xs:annotation>
+         <xs:documentation>A sequence of operations expressed as control constructs performed by the instrument.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="ControlConstructType">
+            <xs:sequence>
+               <xs:element ref="Type" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Used to assign a type to the control construct within the Sequence, according to a classification used by the Documentor.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ControlConstructReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>References control constructs in the order that they should appear within the instrument.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ConstructSequence" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>If you are going to set the sequence to anything other than order of appearance the only allowable children are QuestionConstruct or Sequence. Contents must be randomizable.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="ConstructSequence" type="SpecificSequenceType"/>
+   <xs:element name="ComputationItem" type="ComputationItemType" substitutionGroup="ControlConstruct"/>
+   <xs:annotation>
+      <xs:documentation>Structures a computational item by assigning a value to a variable.</xs:documentation>
+   </xs:annotation>
+   <xs:complexType name="ComputationItemType">
+      <xs:complexContent>
+         <xs:extension base="ControlConstructType">
+            <xs:sequence>
+               <xs:element ref="Code">
+                  <xs:annotation>
+                     <xs:documentation>The Code which contains the value of the variable in programming terms.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="AssignedVariableReference" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>A reference to a variable to which the associated value in the Code element is assigned.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="StatementItem" type="StatementItemType" substitutionGroup="ControlConstruct"/>
+   <xs:complexType name="StatementItemType">
+      <xs:annotation>
+         <xs:documentation>A textual statement used in the Instrument.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="ControlConstructType">
+            <xs:sequence>
+               <xs:element ref="DisplayText" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>The string to be displayed in the instrument. Repetition is for the purpose of supporting multiple languages.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A description of the string's purpose within the instrument.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="DynamicTextType">
+      <xs:annotation>
+         <xs:documentation>Structures the behavior of dynamic or static text within the instrument.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="Text" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>The element containing the text. It is never used directly, but is always replaced by one of the derived elements in the substitution group for which the Text elements acts as the head.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute ref="xml:lang"/>
+      <xs:attribute name="translated" type="xs:boolean" default="false"/>
+      <xs:attribute name="translatable" type="xs:boolean" default="true"/>
+      <xs:attribute name="isStructureRequired" type="xs:boolean" default="false">
+                  <xs:annotation>
+                     <xs:documentation>If textual structure (e.g. size, color, font, etc) is required to understand the question change value to "true".</xs:documentation>
+            </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:element name="Text" type="TextType" abstract="true">
+      <xs:annotation>
+         <xs:documentation>Text exists only to act as the head of a substitution group for the various types of derived text elements within the instrument.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="TextType" abstract="true">
+      <xs:annotation>
+         <xs:documentation>Provides a structure to be inherited by derivation for elements belonging to the substitution group of which the Text element is the head.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A description of the text element.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="LiteralText" type="LiteralTextType" substitutionGroup="Text"/>
+   <xs:complexType name="LiteralTextType">
+      <xs:annotation>
+         <xs:documentation>Literal (static) text to be used in the instrument.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="TextType">
+            <xs:sequence>
+               <xs:element name="Text" type="r:StructuredStringType">
+                  <xs:annotation>
+                     <xs:documentation>The value of the static text string. If a section of the question text is in another language than that stated by the parent element, create a separate LiteralText with the appropriate xs:lang value for the segment in an alternate language.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="ConditionalText" type="ConditionalTextType" substitutionGroup="Text"/>
+   <xs:complexType name="ConditionalTextType">
+      <xs:annotation>
+         <xs:documentation>Text which has a changeable value, based on a condition expressed in Code.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="TextType">
+            <xs:sequence>
+               <xs:element ref="Expression">
+                  <xs:annotation>
+                     <xs:documentation>The condition on which the associated text varies. </xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="QuestionSchemeType">
+      <xs:annotation>
+         <xs:documentation>A set of questions maintained by an agency, and used in the instrument. </xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+               <xs:element ref="QuestionSchemeName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the question scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A description of the use of the question scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="QuestionSchemeReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Provides for inclusion by reference of external question schemes.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:choice maxOccurs="unbounded">
+               <xs:element ref="QuestionItem">
+                  <xs:annotation>
+                     <xs:documentation>An item (that is, a question) belonging to the Question Scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="MultipleQuestionItem">
+                  <xs:annotation>
+                     <xs:documentation>An item (that is, a question) belonging to the Question Scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               </xs:choice>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="QuestionSchemeName" type="r:NameType"/>
+   <xs:element name="QuestionItem" type="QuestionItemType">
+      <xs:annotation>
+         <xs:documentation>Acts as the head of a substitution group for a set of derived question items.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="QuestionItemType">
+      <xs:annotation>
+         <xs:documentation>Structures the QuestionItem, and provides a structure inherited by other derived question item types.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+        <xs:extension base="r:VersionableType">
+            <xs:sequence>
+               <xs:element ref="QuestionItemName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="QuestionText" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>The text of the question presented in the instrument. this can occur multiple times for multi lingual questions.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="QuestionIntent" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>The purpose of the question vis-a-vis the data being collected.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:choice>
+               <xs:element ref="ResponseDomain">
+              <xs:annotation>
+                 <xs:documentation>Contains a response domain for the question. Typically used to describe simple response domains (textual, numeric, etc.)</xs:documentation>
+              </xs:annotation>
+               </xs:element>
+               <xs:element ref="StructuredMixedResponseDomain">
+              <xs:annotation>
+                 <xs:documentation>Contains a response domain for the question. Typically used to describe simple response domains (textual, numeric, etc.)</xs:documentation>
+              </xs:annotation>
+               </xs:element>
+        </xs:choice>
+               <xs:element ref="ConceptReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A reference to the concept associated with the response to the question.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ExternalAid" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A pointer to an exteral aid presented by the instrument such as a text card, image, audio, or audiovisual aid. Typically a URN. Use type attribute to describe the type of external aid provided. Example of terms to use would include: imageOnly audioOnly audioVisual multiMedia.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="QuestionItemName" type="r:NameType"/>
+   <xs:element name="StructuredMixedResponseDomain" type="StructuredMixedResponseDomainType">
+      <xs:annotation>
+         <xs:documentation>ResponseDomains should be chosen that do NOT duplicate responses such as CodeSchemes with overlapping codes. Be aware that certain instruments may collect responses in such a way that confusion between a code response and text response may be possible. The process of resolving such conflicts should be addressed in the data processing instructions. There is an assumption that if a text or numeric response duplicates a coded response to a question, that the value is that of the coded category.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="StructuredMixedResponseDomainType">
+      <xs:annotation>
+         <xs:documentation>ResponseDomains should be chosen that do NOT duplicate responses such as CodeSchemes with overlapping codes. Be aware that certain instruments may collect responses in such a way that confusion between a code response and text response may be possible. The process of resolving such conflicts should be addressed in the data processing instructions. There is an assumption that if a text or numeric response duplicates a coded response to a question, that the value is that of the coded category. At least one ResponseDomain must be provided.</xs:documentation>
+      </xs:annotation>
+      <xs:choice minOccurs="2" maxOccurs="unbounded">
+            <xs:element ref="ResponseText"/>
+            <xs:element ref="ResponseDomain"/>
+      </xs:choice>
+   </xs:complexType>
+   <xs:element name="MultipleQuestionItem" type="MultipleQuestionItemType">
+      <xs:annotation>
+         <xs:documentation>Describes a multiple-question question item. Inherits from QuestionItem.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="MultipleQuestionItemType">
+      <xs:annotation>
+         <xs:documentation>Structures a multiple-question question item.</xs:documentation>
+      </xs:annotation>
+       <xs:complexContent>
+        <xs:extension base="r:VersionableType">
+            <xs:sequence>
+               <xs:element ref="MultipleQuestionItemName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="QuestionText" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>The text of the top-level question presented in the instrument. This can occur multiple times for multi lingual questions.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="QuestionIntent" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>The purpose of the question vis-a-vis the data being collected.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ConceptReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A reference to the concept associated with the response to the question.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ExternalAid" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A pointer to an exteral aid presented by the instrument such as a text card, image, audio, or audiovisual aid. Typically a URN. Use type attribute to describe the type of external aid provided. Example of terms to use would include: imageOnly audioOnly audioVisual multiMedia.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="SubQuestionSequence" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Prescribes the order in which the sub-questions should appear.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="SubQuestions">
+                  <xs:annotation>
+                     <xs:documentation>A group of question items forming a group of sub-questions.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="MultipleQuestionItemName" type="r:NameType"/>
+   <xs:element name="SubQuestionSequence" type="SpecificSequenceType">
+      <xs:annotation>
+         <xs:documentation>Prescribes the order in which the sub-questions should appear.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="QuestionGroupType">
+      <xs:annotation>
+         <xs:documentation>Structures a group of question items.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+         <xs:element ref="QuestionItem">
+            <xs:annotation>
+               <xs:documentation>A reference to a question item within the group.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="MultipleQuestionItem">
+            <xs:annotation>
+               <xs:documentation>A reference to a multiple question item within the group.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+        </xs:choice>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="ResponseDomain" type="r:RepresentationType" abstract="true">
+      <xs:annotation>
+         <xs:documentation>A response domain for a question item, used only as the head of a substitution group for the various derived types of response domains.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="QuestionConstruct" type="QuestionConstructType" substitutionGroup="ControlConstruct"/>
+   <xs:complexType name="QuestionConstructType">
+      <xs:annotation>
+         <xs:documentation>Structures the construct which ties together questions and the programmatic logic of the control constructs.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="ControlConstructType">
+            <xs:sequence>
+               <xs:element ref="QuestionReference">
+                  <xs:annotation>
+                     <xs:documentation>A reference to a question.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ResponseSequence" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Describes the sequencing of the response categories or response options to a question</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ResponseUnit" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>The response unit.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:AnalysisUnit" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>The analysis unit, expressed as a term which may come from a controlled vocabulary.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:UniverseReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the description of the persons or other elements that are the object of the research and to which any analytic results refer.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="ResponseSequence" type="SpecificSequenceType"/>
+   <xs:element name="TextDomain" type="r:TextDomainType" substitutionGroup="ResponseDomain"/>
+   <xs:element name="DateTimeDomain" type="DateTimeDomainType" substitutionGroup="ResponseDomain"/>
+   <xs:complexType name="DateTimeDomainType">
+      <xs:annotation>
+         <xs:documentation>Structures the response domain for a Date, Time, or DateTime response.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:DateTimeRepresentationType">
+            <xs:sequence>
+               <xs:element ref="Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Label for the response domain as a human-readable string.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A human-readable description of the response domain.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="NumericDomain" type="NumericDomainType" substitutionGroup="ResponseDomain"/>
+   <xs:complexType name="NumericDomainType">
+      <xs:annotation>
+         <xs:documentation>Structures the response domain for a numeric response. May be a range or specific value, or a list of ranges. </xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:NumericRepresentationType">
+            <xs:sequence>
+               <xs:element ref="Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Label for the response domain as a human-readable string.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A human-readable description of the response domain.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="CodeDomain" type="CodeDomainType" substitutionGroup="ResponseDomain"/>
+   <xs:complexType name="CodeDomainType">
+      <xs:annotation>
+         <xs:documentation>Describes a coded response domain.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:CodeRepresentationType">
+            <xs:sequence>
+               <xs:element ref="Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Label for the response domain as a human-readable string.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A human-readable description of the response domain.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="CategoryDomain" type="CategoryDomainType" substitutionGroup="ResponseDomain"/>
+   <xs:complexType name="CategoryDomainType">
+      <xs:annotation>
+         <xs:documentation>Structures a response domain based on categorization.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:CategoryRepresentationType">
+            <xs:sequence>
+               <xs:element ref="Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Label for the response domain as a human-readable string.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A human-readable description of the response domain.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="GeographicDomain" type="GeographicDomainType" substitutionGroup="ResponseDomain"/>
+   <xs:complexType name="GeographicDomainType">
+      <xs:annotation>
+         <xs:documentation>Structures the response domain for a geographic point to ensure collection of relevant information. The point may be associated with a polygon (such as the centroid of the polygon) or a line (end or shape points of a line).</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:GeographicRepresentationType">
+            <xs:sequence>
+               <xs:element ref="Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Label for the response domain as a human-readable string.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A human-readable description of the response domain.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ExternalInterviewerInstructionReferenceType">
+      <xs:annotation>
+         <xs:documentation>External reference to an interviewer instruction not expressed as DDI XML.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:OtherMaterialType">
+            <xs:attribute name="isDisplayed" type="xs:boolean" default="true"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="InterviewerInstructionReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to an interviewer instruction expressed as DDI XML.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:ReferenceType">
+            <xs:attribute name="displayText" type="xs:boolean" default="true"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SpecificSequenceType">
+      <xs:annotation>
+         <xs:documentation>Describes the ordering of items when not otherwise indicated. There are a set number of values for ItemSequenceType, but also a provision for describing an alternate ordering using a command language.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="ItemSequenceType"/>
+        <xs:element ref="AlternateSequenceType" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="ItemSequenceType" type="ItemSequenceTypeType" default="InOrderOfAppearance"/>
+   <xs:simpleType name="ItemSequenceTypeType">
+      <xs:annotation>
+         <xs:documentation>Describes the types of sequences of items.</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="InOrderOfAppearance">
+            <xs:annotation>
+               <xs:documentation>In the order of appearance per the DDI instance, for each use.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Random">
+            <xs:annotation>
+               <xs:documentation>Randomly resorts sequence for each use.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Rotate">
+            <xs:annotation>
+               <xs:documentation>Rotates order of sequence for each use where first use is 1 2 3 4, second use is 2 3 4 1, third use is 3 4 1 2 etc.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Other">
+            <xs:annotation>
+               <xs:documentation>Any other means of reordering sequence. When value is Other, AlterativeSequenceType must be specified to describe the resequencing process.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:element name="AlternateSequenceType" type="r:CommandType"/>
+
+   <xs:element name="Type" type="r:CodeValueType">
+      <xs:annotation>
+         <xs:documentation>A generic element for specifying a further classification of an object. Note that this element can be substituted with an element that extends the reusable code type to restrict the possible values to an enumeration.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Methodology" type="MethodologyType">
+      <xs:annotation>
+         <xs:documentation>Methodological metadata for the data collection.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CollectionEvent" type="CollectionEventType">
+      <xs:annotation>
+         <xs:documentation>A set of metadata describing a data collection event. Several events may be described in a single data collection activity.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="QuestionScheme" type="QuestionSchemeType">
+      <xs:annotation>
+         <xs:documentation>Describes a set of questions used in the data collection. Several sets of questions may be used. A single scheme always is maintained by a single agency.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="QuestionSchemeReference" type="r:SchemeReferenceType">
+      <xs:annotation>
+         <xs:documentation>Provides for inclusion by reference of one question scheme in another.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Instrument" type="InstrumentType">
+      <xs:annotation>
+         <xs:documentation>A description of an instrument related to the data collection activity.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ProcessingEvent" type="ProcessingType">
+      <xs:annotation>
+         <xs:documentation>Metadata regarding a processing event occurring as part of the data collection.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DataCollectionMethodology" type="r:IdentifiedStructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Describes a methodology for data collection.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="TimeMethod" type="r:IdentifiedStructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Describes how time fits into the data collection methodology.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SamplingProcedure" type="r:IdentifiedStructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Describes a sampling procedure.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DeviationFromSampleDesign" type="r:IdentifiedStructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Describes deviation from a sample design.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DataSource" type="DataSourceType">
+      <xs:annotation>
+         <xs:documentation>Describes a data source.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Origin" type="OriginType">
+      <xs:annotation>
+         <xs:documentation>A citation or URI indicating the origin of the data. Note that this is an external reference, and should not be used to point to DDI descriptions of the data, or to DDI-encoded data.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Characteristic" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>A significant characteristic of the data source that may effect understanding or collection of the data. For example: legibility of data source affected due to water damage.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DataCollectionFrequency" type="DataCollectionFrequencyType">
+      <xs:annotation>
+         <xs:documentation>Provides the intended frequency of data collection, for example monthly, yearly, weekly preferably using an optional controlled vocabulary in the attribute intendedFrequncy. Date of first collection should be provided in StartDate as a basis for defining periodicity. EndDate should be entered for data collection cycles with a known or anticipated end date. EndDate is omitted in data collection series that are intended to be on-going. </xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ModeOfCollection" type="r:IdentifiedStructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Describes the mode of collection.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CollectionSituation" type="r:IdentifiedStructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Describes the situation in which the data collection event takes place. </xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ActionToMinimizeLosses" type="r:IdentifiedStructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Describes action taken to minimize loss of data from the collection event.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ControlOperation" type="OperationType">
+      <xs:annotation>
+         <xs:documentation>Describes a control operation.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CleaningOperation" type="OperationType">
+      <xs:annotation>
+         <xs:documentation>Describes a raw data cleaning operation.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Weighting" type="r:IdentifiedStructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Describes the weighting used in the process.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DataAppraisalInformation" type="DataAppraisalInformationType">
+      <xs:annotation>
+         <xs:documentation>Information about the data appraisal.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Coding" type="CodingType">
+      <xs:annotation>
+         <xs:documentation>A description of the coding of the data within the process.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Expression" type="r:CodeType">
+      <xs:annotation>
+         <xs:documentation>A computational expression used in the coding.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SourceVariableReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>A reference to a source variable used as an input in the preceding Expression.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="IfCondition" type="r:CodeType">
+      <xs:annotation>
+         <xs:documentation>The condition which must be met to trigger the Then clause, expressed as a Coding. The condition is an expression in the programming language used in the instrument.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ThenConstructReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>A reference to the control construct which should be triggered if the associated condition is met.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ElseConstructReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>A reference to the control construct which is triggered if the associated condition is not met.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="UntilCondition" type="r:CodeType">
+      <xs:annotation>
+         <xs:documentation>The condition which must be met to stop the repeated operation of the Coding in the associated UntilConstruct. The condition is an expression in the programming language used in the instrument.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="UntilConstructReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>A reference to the Coding which runs until the UntilCondition is met. When the operation ceases, the flow returns to the containing control construct.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="WhileCondition" type="r:CodeType">
+      <xs:annotation>
+         <xs:documentation>The condition which must be met to trigger the operation of the associated Coding.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="WhileConstructReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>A reference to the Coding which is to be run when the associated condition has been met.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LoopVariableReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>A reference to the variable (as used in the associated Codings) which is incremented or otherwise manipulated to meet the conditions stated in the LoopWhile condition.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="InitialValue" type="r:CodeType">
+      <xs:annotation>
+         <xs:documentation>The initial value to which the LoopVariable is set.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LoopWhile" type="r:CodeType">
+      <xs:annotation>
+         <xs:documentation>The condition which must be met for the Loop's functioning to cease; when this condition is met, control is handed back to the containing control construct.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="StepValue" type="r:CodeType">
+      <xs:annotation>
+         <xs:documentation>A Coding which is used to manipulate the LoopVariable after each iteration of the Loop's associated ControlConstruct element.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Code" type="r:CodeType">
+      <xs:annotation>
+         <xs:documentation>The Code which contains the value of the variable.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="AssignedVariableReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>A reference to a variable to which the associated value in the Code element is assigned.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DisplayText" type="DynamicTextType">
+      <xs:annotation>
+         <xs:documentation>The string to be displayed in the instrument.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="QuestionText" type="DynamicTextType">
+      <xs:annotation>
+         <xs:documentation>The text of the question presented in the instrument.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="QuestionIntent" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>The purpose of the question vis-a-vis the data being collected.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ConceptReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>A reference to the concept associated with the response to the question.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="AssociatedItems" type="QuestionGroupType">
+      <xs:annotation>
+         <xs:documentation>Question items associated with the Question Item.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SubQuestions" type="QuestionGroupType">
+      <xs:annotation>
+         <xs:documentation>A group of question items forming a group of sub-questions.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Label" type="r:InternationalStringType">
+      <xs:annotation>
+         <xs:documentation>Label for the response domain as a human-readable string.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="QuestionReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>A reference to a question.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ResponseText" type="DynamicTextType">
+      <xs:annotation>
+         <xs:documentation>The text of a response.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SamplingError" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>The sampling error of the data.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="OtherAppraisalProcess" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Description of any other form of data appraisal.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ResponseUnit" type="r:InternationalStringType">
+      <xs:annotation>
+         <xs:documentation>The response unit.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="GeneralInstruction" type="GeneralInstructionType">
+      <xs:annotation>
+         <xs:documentation>Coding instructions that pertain to data collection or data processing overall such as handling of non-response to questions, imputation practices, suppression rules, etc. Coding instructions should be listed separately to allow for referencing of specific processes.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="GenerationInstruction" type="GenerationInstructionType">
+      <xs:annotation>
+         <xs:documentation>Instructions for recodes, derivations from multiple question or variable sources, and derivations based on external sources. Instructions should be listed separately so they can be referenced by variables in the logical product.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SourceQuestion" type="SourceReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to a question used in the coding process.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ControlConstructReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to an element in the substitution group headed by the abstract element ControlConstruct.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ControlConstructSchemeReference" type="r:SchemeReferenceType">
+      <xs:annotation>
+         <xs:documentation>Provides for inclusion by reference of external Control Construct Schemes.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SourceVariable" type="SourceReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to a variable used in the coding process.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ExternalInformation" type="r:OtherMaterialType">
+      <xs:annotation>
+         <xs:documentation>Reference to an external source of information used in the coding process, for example a value from a chart, etc.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DataCollectorOrganizationReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to an organization, defined in the organization scheme, responsible for the data collection.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="AgencyOrganizationReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to an organization, defined in the organziation scheme, responsible for the operation.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ExternalInterviewerInstructionReference" type="ExternalInterviewerInstructionReferenceType">
+      <xs:annotation>
+         <xs:documentation>External reference to an interviewer instruction not expressed as DDI XML.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="InterviewerInstructionReference" type="InterviewerInstructionReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to an interviewer instruction expressed as DDI XML.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="IsOverride" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Used when attribute of the containing GeneralInstruction isOverride equals true. This element provides the reference to the Coding Element containing the GeneralInstruction that is being overriden.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DataCollectionDate" type="r:DateType">
+      <xs:annotation>
+         <xs:documentation>Provides a date or range of dates for the described data collection event as well as  a cycle number when the collection is part of a series of data collection events.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ExternalAid" type="r:OtherMaterialType">
+      <xs:annotation>
+         <xs:documentation>A pointer to an exteral aid presented by the instrument such as a text card, image, audio, or audiovisual aid. Typically a URN. Use type attribute to describe the type of external aid provided. Example of terms to use would include: imageOnly audioOnly audioVisual multiMedia.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+</xs:schema>

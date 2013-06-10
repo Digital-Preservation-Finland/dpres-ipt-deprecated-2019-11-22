@@ -1,17 +1,19 @@
 
 PREFIX=
 ETC=${PREFIX}/etc
-INSTALLDIR=${PREFIX}/usr/lib/pas/microservices
+INSTALLDIR=${PREFIX}/usr/lib/pas/information-package-tools
+SHAREDIR=${PREFIX}/usr/share/information-package-tools
+PYTHONDIR=${PREFIX}/usr/lib/python2.6/site-packages/SIPValidation
 
 all: info
 
 info:
 	@echo
-	@echo "PAS Microservices"
+	@echo "PAS information-package-tools"
 	@echo
 	@echo "Usage:"
 	@echo "  make test 			- Run all unit tests"
-	@echo "  make install		- Install microservices"
+	@echo "  make install		- Install information-package-tools"
 	@echo "  make devinstall	- Quick and Dirty development installation"
 	@echo "  make install_deps	- Install required packages with yum"
 	@echo
@@ -24,9 +26,15 @@ test:
 
 install:
 	# Install all
-	[ -d "${INSTALLDIR}" ] || mkdir -p "${INSTALLDIR}"
-	install -m 755 src/* "${INSTALLDIR}/"
-	install -m 644 include/etc/* "${ETC}/archivematica/MCPClient/"
+	#[ -d "${INSTALLDIR}" ] || mkdir -p "${INSTALLDIR}"
+	#install -m 755 src/* "${INSTALLDIR}/"
+	#install -m 644 include/etc/* "${ETC}/archivematica/MCPClient/"
+	
+	[ -d "${SHAREDIR}" ] || mkdir -p "${SHAREDIR}"
+	install -m 644 include/share/* "${SHAREDIR}/"
+	
+	[ -d "${PYTHONDIR}" ] || mkdir -p "${PYTHONDIR}"
+	install -m 644 src/SIPValidation_python/* "${PYTHONDIR}/"
 
 devinstall:
 	# quick and dirty installation...

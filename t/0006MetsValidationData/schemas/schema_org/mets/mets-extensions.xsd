@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+KDK METS Schema Extensions
+CSC, 2013-05-22
+Extension schema used in KDK METS schema.
+-->
+
+<xsd:schema 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns:premis="info:lc/xmlns/premis-v2"
+xmlns:mix="http://www.loc.gov/mix/v20"
+xmlns:textmd="http://kdk.fi/standards/textmd"
+xmlns:audiomd="http://www.loc.gov/audioMD/"
+xmlns:videomd="http://www.loc.gov/videoMD/"
+xmlns:metsrights="http://cosimo.stanford.edu/sdr/metsrights/"
+xmlns:marc21="http://www.loc.gov/MARC21/slim"
+xmlns:mods="http://www.loc.gov/mods/v3"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:dcterms="http://purl.org/dc/terms/"
+xmlns:dcmitype="http://purl.org/dc/dcmitype/"
+xmlns:ead="urn:isbn:1-931666-22-9"
+xmlns:eac="urn:isbn:1-931666-33-4"
+xmlns:vra="http://www.vraweb.org/vracore4.htm"
+xmlns:lido="http://www.lido-schema.org"
+xmlns:ddilc="ddi:instance:3_1"
+xmlns:ddicb="ddi:codebook:2_5"
+elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:import namespace="info:lc/xmlns/premis-v2" schemaLocation="../premis/premis.xsd"/>
+	<xsd:import namespace="http://www.loc.gov/mix/v20" schemaLocation="../mix/mix.xsd"/>
+	<xsd:import namespace="http://kdk.fi/standards/textmd" schemaLocation="../textmd/textmd.xsd"/>
+	<xsd:import namespace="http://www.loc.gov/audioMD/" schemaLocation="../avmd/audiomd.xsd"/>
+	<xsd:import namespace="http://www.loc.gov/videoMD/" schemaLocation="../avmd/videomd.xsd"/>
+	<xsd:import namespace="http://cosimo.stanford.edu/sdr/metsrights/" schemaLocation="../external/metsrights/METSRights.xsd"/>
+	<xsd:import namespace="http://www.loc.gov/MARC21/slim" schemaLocation="../external/marc/MARC21slim.xsd"/>
+	<xsd:import namespace="http://www.loc.gov/mods/v3" schemaLocation="../external/mods/mods.xsd"/>
+	<xsd:import namespace="http://purl.org/dc/terms/" schemaLocation="../external/dc/dcterms.xsd"/>
+	<xsd:import namespace="urn:isbn:1-931666-22-9" schemaLocation="../external/ead/ead.xsd"/>
+	<xsd:import namespace="urn:isbn:1-931666-33-4" schemaLocation="../external/eac/cpf.xsd"/>
+	<xsd:import namespace="http://www.vraweb.org/vracore4.htm" schemaLocation="../external/vra/vra-strict.xsd"/>
+	<xsd:import namespace="http://www.lido-schema.org" schemaLocation="../external/lido/lido.xsd"/>
+	<xsd:import namespace="ddi:instance:3_1" schemaLocation="../external/ddi-lifecycle/instance.xsd"/>
+	<xsd:import namespace="ddi:codebook:2_5" schemaLocation="../ddi-codebook/codebook.xsd"/>
+
+	<xsd:complexType name="kdk_dmdExtensionType">
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:element ref="marc21:record"/>
+				<xsd:element ref="marc21:collection"/>
+				<xsd:element ref="mods:mods"/>
+				<xsd:element ref="mods:modsCollection"/>
+				<xsd:group ref="dcterms:elementsAndRefinementsGroup"/>
+				<xsd:element ref="ead:ead"/>
+				<xsd:element ref="eac:eac-cpf"/>
+				<xsd:element ref="vra:vra"/>
+				<xsd:element ref="vra:collection"/>
+				<xsd:element ref="vra:work"/>
+				<xsd:element ref="vra:image"/>
+				<xsd:element ref="lido:lido"/>
+				<xsd:element ref="lido:lidoWrap"/>
+				<xsd:sequence>
+					<xsd:element ref="ddilc:DDIInstance"/>
+					<xsd:element ref="ddilc:TranslationInformation" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:any namespace="ddi:codebook:2_5" maxOccurs="unbounded"/>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="kdk_techExtensionType">
+		<xsd:choice>
+			<xsd:element ref="premis:object"/>
+			<xsd:element ref="mix:mix"/>
+			<xsd:element ref="textmd:textMD"/>
+			<xsd:element ref="audiomd:AUDIOMD"/>
+			<xsd:element ref="videomd:VIDEOMD"/>
+		</xsd:choice>
+	</xsd:complexType>
+	
+	<xsd:complexType name="kdk_rightsExtensionType">
+		<xsd:sequence>
+			<xsd:any namespace="##any" maxOccurs="unbounded" processContents="lax"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="kdk_sourceExtensionType">
+		<xsd:sequence>
+			<xsd:any namespace="##any" maxOccurs="unbounded" processContents="lax"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="kdk_digiprovExtensionType">
+		<xsd:sequence>
+			<xsd:any namespace="##any" maxOccurs="unbounded" processContents="lax"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="kdk_dmdExtensionMDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="MARC"/>
+			<xsd:enumeration value="MODS"/>
+			<xsd:enumeration value="EAD"/>
+			<xsd:enumeration value="DC"/>
+			<xsd:enumeration value="VRA"/>
+			<xsd:enumeration value="DDI"/>
+			<xsd:enumeration value="EAC-CPF"/>
+			<xsd:enumeration value="OTHER"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="kdk_dmdExtensionOtherMDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="LIDO"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="kdk_techExtensionMDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="PREMIS:OBJECT"/>
+			<xsd:enumeration value="NISOIMG"/>
+			<xsd:enumeration value="TEXTMD"/>
+			<xsd:enumeration value="OTHER"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+			
+	<xsd:simpleType name="kdk_techExtensionOtherMDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="AudioMD"/>
+			<xsd:enumeration value="VideoMD"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="kdk_rightsExtensionMDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="METSRIGHTS"/>
+			<xsd:enumeration value="OTHER"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="kdk_rightsExtensionOtherMDType">
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="kdk_sourceExtensionMDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="MARC"/>
+			<xsd:enumeration value="MODS"/>
+			<xsd:enumeration value="EAD"/>
+			<xsd:enumeration value="DC"/>
+			<xsd:enumeration value="NISOIMG"/>
+			<xsd:enumeration value="LC-AV"/>
+			<xsd:enumeration value="VRA"/>
+			<xsd:enumeration value="TEIHDR"/>
+			<xsd:enumeration value="DDI"/>
+			<xsd:enumeration value="FGDC"/>
+		    <xsd:enumeration value="LOM"/>
+			<xsd:enumeration value="PREMIS"/>
+			<xsd:enumeration value="PREMIS:OBJECT"/>
+			<xsd:enumeration value="PREMIS:AGENT"/>
+			<xsd:enumeration value="PREMIS:RIGHTS"/>
+			<xsd:enumeration value="PREMIS:EVENT"/>
+			<xsd:enumeration value="TEXTMD"/>
+			<xsd:enumeration value="METSRIGHTS"/>
+			<xsd:enumeration value="ISO 19115:2003 NAP"/>
+			<xsd:enumeration value="EAC-CPF"/>
+			<xsd:enumeration value="OTHER"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="kdk_sourceExtensionOtherMDType">
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="kdk_digiprovExtensionMDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="PREMIS:AGENT"/>
+			<xsd:enumeration value="PREMIS:EVENT"/>
+			<xsd:enumeration value="OTHER"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="kdk_digiprovExtensionOtherMDType">
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="kdk_digiprovExtensionRefMDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="OTHER"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="kdk_digiprovExtensionOtherRefMDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="KDKPreservationPlan"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	
+</xsd:schema>
