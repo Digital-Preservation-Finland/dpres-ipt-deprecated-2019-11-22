@@ -1,7 +1,6 @@
 
 PREFIX=
 ETC=${PREFIX}/etc
-INSTALLDIR=${PREFIX}/usr/lib/pas/information-package-tools
 SHAREDIR=${PREFIX}/usr/share/information-package-tools
 PYTHONDIR=${PREFIX}/usr/lib/python2.6/site-packages/SIPValidation
 
