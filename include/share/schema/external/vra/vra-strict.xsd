@@ -44,8 +44,10 @@
   </xsd:annotation>
 
   <!-- include the unrestricted schema -->
-  <xsd:redefine
-    schemaLocation="http://www.loc.gov/standards/vracore/vra.xsd">
+  <!--  <xsd:redefine
+    schemaLocation="http://www.loc.gov/standards/vracore/vra.xsd"> -->
+    <xsd:redefine
+    schemaLocation="vra.xsd">
 
     <!--== Controlled Value Lists ==========================================-->
 
