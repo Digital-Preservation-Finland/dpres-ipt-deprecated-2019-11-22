@@ -1,0 +1,3 @@
+mets_general_rules-ISO.sch: ISO Schematron schema to check for general METS usage rules.
+
+tiny_sample_mets.xml: Sample METS XML file for testing schematron files contained in this repo.
