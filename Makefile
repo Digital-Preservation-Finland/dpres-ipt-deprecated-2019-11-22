@@ -3,6 +3,7 @@ PREFIX=
 ETC=${PREFIX}/etc
 SHAREDIR=${PREFIX}/usr/share/information-package-tools
 PYTHONDIR=${PREFIX}/usr/lib/python2.6/site-packages/SIPValidation
+SHELLDIR=${PREFIX}/usr/bin
 
 all: info
 
@@ -33,6 +34,9 @@ install:
 	
 	[ -d "${PYTHONDIR}" ] || mkdir -p "${PYTHONDIR}"
 	install -m 644 tools/SIP_python/src/* "${PYTHONDIR}/"
+	
+	[ -d "${SHELLDIR}" ] || mkdir -p "${SHELLDIR}"
+	install -m 644 tools/SIP_shell/* "${SHELLDIR}/"
 	
 
 devinstall:
