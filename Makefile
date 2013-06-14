@@ -32,7 +32,7 @@ install:
 	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
 	
 	[ -d "${PYTHONDIR}" ] || mkdir -p "${PYTHONDIR}"
-	install -m 644 src/SIP_python/src/* "${PYTHONDIR}/"
+	install -m 644 tools/SIP_python/src/* "${PYTHONDIR}/"
 	
 
 devinstall:
