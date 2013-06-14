@@ -37,7 +37,7 @@ install:
 	
 	[ -d "${SHELLDIR}" ] || mkdir -p "${SHELLDIR}"
 	#install -m 644 tools/SIP_shell/* "${SHELLDIR}/"
-	cp - tools/SIP_shell/* "${SHELLDIR}"
+	cp -r tools/SIP_shell/* "${SHELLDIR}"
 	
 
 devinstall:
