@@ -36,7 +36,7 @@ install:
 	install -m 644 tools/SIP_python/src/* "${PYTHONDIR}/"
 	
 	[ -d "${SHELLDIR}" ] || mkdir -p "${SHELLDIR}"
-	install -m 644 tools/SIP_shell/* "${SHELLDIR}/"
+	install -m 755 tools/SIP_shell/* "${SHELLDIR}/"
 	#cp -r tools/SIP_shell/* "${SHELLDIR}"
 	
 
