@@ -36,16 +36,7 @@
 	4. Enjoy programming!
 		
 		
-Adding document catalog http://kdk.fi/standards/catalog-web.xml
-Free catalog entry http://kdk.fi/standards/catalog-web.xml
-Resolve: sysID http://www.w3.org/2001/xml.xsd
-Failed to parse catalog file:///etc/xml/catalog
-Resolve URI http://www.w3.org/2001/xml.xsd
-  	
-
-
-
-
+java -Djava.net.preferIPv4Stack=true -jar tools/hudson-cli.jar -s http://build:8080/ create-job archivemativa < /var/lib/jenkins/jobs/archivematica/config.xml
 
 
 
