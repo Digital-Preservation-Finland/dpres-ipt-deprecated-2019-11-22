@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron">
-    <sch:title>Joku otsikko</sch:title>
+
+<!--
+Validates various internal issues in METS metadata.
+Juha Lehtonen 2013-07-08 : Initial version
+-->
+
+    <sch:title>METS internal inspection</sch:title>
+	
 	<sch:ns prefix="mets" uri="http://www.loc.gov/METS/"/>
 
+	<!-- Check that METS includes at least one agent with attribute values ROLE='CREATOR' and TYPE='ORGANIZATION' -->
     <sch:pattern name="MetsCreator">
         <sch:rule context="mets:metsHdr">
 			<sch:assert test="mets:agent[@ROLE='CREATOR' and @TYPE='ORGANIZATION']">
-				Ei natsaa 2
+				METS header requires atleast one agent where ROLE attribute is 'CREATOR' and TYPE attribute is 'ORGANIZATION'.
 			</sch:assert>
 		</sch:rule>	
 	</sch:pattern>
 	
+	<!-- Check that OTHERMDTYPE is used, if MDTYPE='OTHER' -->
     <sch:pattern name="WrapOtherType">
         <sch:rule context="mets:mdWrap[@MDTYPE='OTHER']">
 			<sch:assert test="@OTHERMDTYPE">
@@ -19,81 +28,89 @@
 		</sch:rule>
     </sch:pattern>
     
+	<!-- Check that mdWrap element contains both CHECKSUM and CHECKSUMTYPE attributes or niether of them -->
 	<sch:pattern name="WrapChecksum">
         <sch:rule context="mets:mdWrap">
             <sch:assert test="count(@CHECKSUM) = count(@CHECKSUMTYPE)">
-                Ei natsaa
+                CHECKSUM attribute requires the use of CHECKSUMTYPE attribute (and vice versa) in &lt;mdWrap&gt; element. The other of these attributes is missing.
             </sch:assert>
         </sch:rule>
 	</sch:pattern>
     
+	<!-- Check that file element contains both CHECKSUM and CHECKSUMTYPE attributes or niether of them -->
 	<sch:pattern name="FileChecksum">
         <sch:rule context="mets:file">
             <sch:assert test="count(@CHECKSUM) = count(@CHECKSUMTYPE)">
-                Ei natsaa
+                CHECKSUM attribute requires the use of CHECKSUMTYPE attribute (and vice versa) in &lt;file&gt; element. The other of these attributes is missing.
             </sch:assert>
         </sch:rule>
 	</sch:pattern>
-    	
+    
+	<!-- Check that descriptive metadata has a reference -->
 	<sch:pattern name="IDReferencesDesc">
 		<sch:rule context="mets:dmdSec">
 			<sch:let name="id" value="normalize-space(@ID)"/>
             <sch:assert test="count(ancestor::mets:mets//mets:div/@DMDID[contains(concat(' ', normalize-space(), ' '), concat(' ', $id, ' '))]) &gt; 0">
-				Ei natsaa dmdid
+				The ID attribute in element &lt;dmdSec&gt; must be referenced in DMDID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
     
+	<!-- Check that technical metadata has a reference -->
 	<sch:pattern name="IDReferencesTech">
         <sch:rule context="mets:techMD">
 			<sch:let name="id" value="normalize-space(@ID)"/>
             <sch:assert test="count(ancestor::mets:mets//mets:file|mets:div/@ADMID[contains(concat(' ', normalize-space(), ' '), concat(' ', $id, ' '))]) &gt; 0">
-				Ei natsaa tech id				
+				The ID attribute in element &lt;techMD&gt; must be referenced in ADMID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
     
+	<!-- Check that rights metadata has a reference -->
 	<sch:pattern name="IDReferencesRights">
         <sch:rule context="mets:rightsMD">
 			<sch:let name="id" value="normalize-space(@ID)"/>
             <sch:assert test="count(ancestor::mets:mets//mets:file|mets:div/@ADMID[contains(concat(' ', normalize-space(), ' '), concat(' ', $id, ' '))]) &gt; 0">
-				Ei natsaa rights id				
+				The ID attribute in element &lt;rightsMD&gt; must be referenced in ADMID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
     
+	<!-- Check that source metadata has a reference -->
 	<sch:pattern name="IDReferencesSource">
         <sch:rule context="mets:sourceMD">
 			<sch:let name="id" value="normalize-space(@ID)"/>
             <sch:assert test="count(ancestor::mets:mets//mets:file|mets:div/@ADMID[contains(concat(' ', normalize-space(), ' '), concat(' ', $id, ' '))]) &gt; 0">
-				Ei natsaa source id				
+				The ID attribute in element &lt;sourceMD&gt; must be referenced in ADMID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
     
+	<!-- Check that provenance metadata has a reference -->
 	<sch:pattern name="IDReferencesProv">
         <sch:rule context="mets:digiprovMD">
 			<sch:let name="id" value="normalize-space(@ID)"/>
             <sch:assert test="count(ancestor::mets:mets//mets:file|mets:div/@ADMID[contains(concat(' ', normalize-space(), ' '), concat(' ', $id, ' '))]) &gt; 0">
-				Ei natsaa digiprov id				
+				The ID attribute in element &lt;digiprovMD&gt; must be referenced in ADMID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
     
+	<!-- Check that files have a reference -->
 	<sch:pattern name="IDReferencesFile">
         <sch:rule context="mets:file">
 			<sch:let name="id" value="normalize-space(@ID)"/>
             <sch:assert test="count(ancestor::mets:mets//mets:fptr|mets:area/@FILEID[contains(concat(' ', normalize-space(), ' '), concat(' ', $id, ' '))]) &gt; 0">
-				Ei natsaa file id				
+				The ID attribute in element &lt;file&gt; must be referenced in FILEID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
 	
+	<!-- Check that FILEID attribute is not used in fptr element, if it contains an area element -->
 	<sch:pattern name="IDReferencesFptrArea">
         <sch:rule context="mets:fptr">
-			<sch:let name="id" value="normalize-space(@FILEID)"/>
-            <sch:assert test="count(/mets:area/@FILEID[contains(normalize-space(), $id)]) = 0">
-				Ei natsaa file id 2	
+            <sch:assert test=".//mets:area and string-length(normalize-space(@FILEID))>0">
+				If &lt;area&gt; element is used inside &lt;fprt&gt; element, then FILEID attribut should not be used in &lt;fprt&gt; element.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>	
