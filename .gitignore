@@ -2,4 +2,6 @@
 .*.swo
 .pydev*
 .project*
+*.pyc
+__pycache__
 
