@@ -2,7 +2,7 @@
 PREFIX=
 ETC=${PREFIX}/etc
 SHAREDIR=${PREFIX}/usr/share/information-package-tools
-PYTHONDIR=${PREFIX}/usr/lib/python2.6/site-packages/SIPValidation
+PYTHONDIR=${PREFIX}/usr/lib/python2.6/site-packages
 SHELLDIR=${PREFIX}/usr/bin
 
 all: info
@@ -32,12 +32,13 @@ install:
 	chmod -R 755 "${SHAREDIR}"
 	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
 	
-	[ -d "${PYTHONDIR}" ] || mkdir -p "${PYTHONDIR}"
-	install -m 644 tools/SIP_python/src/* "${PYTHONDIR}/"
+	[ -d "${PYTHONDIR}/SIP" ] || mkdir -p "${PYTHONDIR}/SIP"
+	cp -r tools/SIP_python/src/SIP/* "${PYTHONDIR}/SIP/"
+	find "${PYTHONDIR}/SIP" -type d -exec chmod 755 "{}" \;
+	find "${PYTHONDIR}/SIP" -type f -exec chmod 644 "{}" \;
 	
 	[ -d "${SHELLDIR}" ] || mkdir -p "${SHELLDIR}"
 	install -m 755 tools/SIP_shell/* "${SHELLDIR}/"
-	#cp -r tools/SIP_shell/* "${SHELLDIR}"
 	
 
 devinstall:
