@@ -27,25 +27,15 @@ test:
 	@prove -r t
 
 install:
-	# Install all
-	
+
+	# Common data files
 	[ -d "${SHAREDIR}" ] || mkdir -p "${SHAREDIR}"
 	cp -r include/share/* "${SHAREDIR}/"
 	chmod -R 755 "${SHAREDIR}"
 	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
 
-	ls -d src/* | while read module ; do \
-		echo $$module ; \
-	done
-
-
-	#	[ -d "${PYTHONDIR}" ] || mkdir -p "${PYTHONDIR}"
-	#	cp -r tools/SIP_python/src/* "${PYTHONDIR}/"
-	#	find "${PYTHONDIR}/" -type d -exec chmod 755 "{}" \;
-	#	find "${PYTHONDIR}/" -type f -exec chmod 644 "{}" \;
-	#	
-	#	[ -d "${SHELLDIR}" ] || mkdir -p "${SHELLDIR}"
-	#	install -m 755 tools/SIP_shell/* "${SHELLDIR}/"
+	# SIP_python package is using Python setuptools
+	cd tools/SIP_python ; python setup.py install
 	
 
 devinstall:

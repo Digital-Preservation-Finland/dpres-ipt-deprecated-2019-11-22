@@ -14,7 +14,7 @@ Juha Lehtonen 2013-07-08 : Initial version
 	<sch:ns prefix="textmd" uri="http://kdk.fi/standards/textmd"/>
 	<sch:ns prefix="audiomd" uri="http://www.loc.gov/audioMD/"/>
 	<sch:ns prefix="videomd" uri="http://www.loc.gov/videoMD/"/>
-	<sch:ns prefix="metsrights" uri="http://cosimo.stanford.edu/sdr/metsrights/"/>
+	<sch:ns prefix="metsrights" uri="http://cosimo.stanford.edu/sdr/metsrights"/>
 	<sch:ns prefix="marc21" uri="http://www.loc.gov/MARC21/slim"/>
 	<sch:ns prefix="mods" uri="http://www.loc.gov/mods/v3"/>
 	<sch:ns prefix="dc" uri="http://purl.org/dc/elements/1.1/"/>
@@ -27,7 +27,7 @@ Juha Lehtonen 2013-07-08 : Initial version
 	<sch:ns prefix="ddilc" uri="ddi:instance:3_1"/>
 	<sch:ns prefix="ddicb" uri="ddi:codebook:2_5"/>
 
-	<!-- Check the case PREMIS:OBJECT -->
+    <!-- Check the case PREMIS:OBJECT -->
     <sch:pattern name="CheckPremisObject">
         <sch:rule context="mets:mdWrap[@MDTYPE='PREMIS:OBJECT']">
 			<sch:assert test="mets:xmlData/premis:object">
@@ -36,32 +36,32 @@ Juha Lehtonen 2013-07-08 : Initial version
 		</sch:rule>
     </sch:pattern>
 	
-	<!-- Check the case PREMIS:EVENT -->
-    <sch:pattern name="CheckPremisEvent">
-        <sch:rule context="mets:mdWrap[@MDTYPE='PREMIS:EVENT']">
+    <!-- Check the case PREMIS:EVENT -->
+	<sch:pattern name="CheckPremisEvent">
+		<sch:rule context="mets:mdWrap[@MDTYPE='PREMIS:EVENT']">
 			<sch:assert test="mets:xmlData/premis:event">
 				MDTYPE attribute is 'PREMIS:EVENT', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
-    </sch:pattern>
+	</sch:pattern>
 
 	<!-- Check the case PREMIS:AGENT -->
-    <sch:pattern name="CheckPremisAgent">
-        <sch:rule context="mets:mdWrap[@MDTYPE='PREMIS:AGENT']">
+	<sch:pattern name="CheckPremisAgent">
+		<sch:rule context="mets:mdWrap[@MDTYPE='PREMIS:AGENT']">
 			<sch:assert test="mets:xmlData/premis:agent">
 				MDTYPE attribute is 'PREMIS:AGENT', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
-    </sch:pattern>
+	</sch:pattern>
 
 	<!-- Check the case METSRIGHTS -->
 	<sch:pattern name="CheckMetsrights">
-        <sch:rule context="mets:mdWrap[@MDTYPE='METSRIGHTS']">
+		<sch:rule context="mets:mdWrap[@MDTYPE='METSRIGHTS']">
 			<sch:assert test="mets:xmlData/metsrights:*">
 				MDTYPE attribute is 'METSRIGHTS', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
-    </sch:pattern>
+	</sch:pattern>
 	
 	<!-- Check the case NISOIMG (MIX) -->
 	<sch:pattern name="CheckMix">

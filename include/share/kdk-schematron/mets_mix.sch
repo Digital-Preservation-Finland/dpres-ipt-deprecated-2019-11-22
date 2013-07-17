@@ -61,7 +61,7 @@ Juha Lehtonen 2013-07-08 : Initial version
 	<!-- The pixels in palette color images can contain only one sample -->
     <sch:pattern name="PixelSamplesInPaletteColor">
         <sch:rule context="mix:mix//mix:PhotometricInterpretation[mix:colorSpace='PaletteColor']">
-			<sch:assert test="ancester::mix:mix//mix:samplesPerPixel=1">
+			<sch:assert test="ancester//mix:mix//mix:samplesPerPixel=1">
 				Palette color image can contain only one sample per pixel, and &lt;mix:samplesPerPixel&gt; must be set as '1'.
 			</sch:assert>
 		</sch:rule>
@@ -70,10 +70,10 @@ Juha Lehtonen 2013-07-08 : Initial version
 	<!-- Colormap is obligatory in palette color images -->
     <sch:pattern name="ColorMap">
         <sch:rule context="mix:mix//mix:PhotometricInterpretation[mix:colorSpace='PaletteColor']">
-			<sch:assert test="ancester::mix:mix//mix:Colormap">
+			<sch:assert test="ancester//mix:mix//mix:Colormap">
 				The &lt;mix:Colormap&gt; element is obligatory for palette images.
 			</sch:assert>
-			<sch:assert test="ancester::mix:mix//mix:colormapReference">
+			<sch:assert test="ancester//mix:mix//mix:colormapReference">
 				The &lt;mix:colormapReference&gt; element is obligatory for palette images.
 			</sch:assert>
 		</sch:rule>
