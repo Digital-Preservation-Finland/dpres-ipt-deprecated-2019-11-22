@@ -5,6 +5,8 @@ SHAREDIR=${PREFIX}/usr/share/information-package-tools
 PYTHONDIR=${PREFIX}/usr/lib/python2.6/site-packages
 SHELLDIR=${PREFIX}/usr/bin
 
+MODULES=fileutils mets schematron sip xml xmllint
+
 all: info
 
 info:
@@ -31,14 +33,19 @@ install:
 	cp -r include/share/* "${SHAREDIR}/"
 	chmod -R 755 "${SHAREDIR}"
 	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
-	
-	[ -d "${PYTHONDIR}/SIP" ] || mkdir -p "${PYTHONDIR}/SIP"
-	cp -r tools/SIP_python/src/SIP/* "${PYTHONDIR}/SIP/"
-	find "${PYTHONDIR}/SIP" -type d -exec chmod 755 "{}" \;
-	find "${PYTHONDIR}/SIP" -type f -exec chmod 644 "{}" \;
-	
-	[ -d "${SHELLDIR}" ] || mkdir -p "${SHELLDIR}"
-	install -m 755 tools/SIP_shell/* "${SHELLDIR}/"
+
+	ls -d src/* | while read module ; do \
+		echo $$module ; \
+	done
+
+
+	#	[ -d "${PYTHONDIR}" ] || mkdir -p "${PYTHONDIR}"
+	#	cp -r tools/SIP_python/src/* "${PYTHONDIR}/"
+	#	find "${PYTHONDIR}/" -type d -exec chmod 755 "{}" \;
+	#	find "${PYTHONDIR}/" -type f -exec chmod 644 "{}" \;
+	#	
+	#	[ -d "${SHELLDIR}" ] || mkdir -p "${SHELLDIR}"
+	#	install -m 755 tools/SIP_shell/* "${SHELLDIR}/"
 	
 
 devinstall:
