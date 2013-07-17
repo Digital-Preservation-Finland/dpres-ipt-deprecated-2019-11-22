@@ -26,7 +26,7 @@ xmlns:ddilc="ddi:instance:3_1"
 xmlns:ddicb="ddi:codebook:2_5"
 elementFormDefault="qualified" attributeFormDefault="unqualified">
 
-	<xsd:import namespace="info:lc/xmlns/premis-v2" schemaLocation="../premis/premis.xsd"/>
+	<xsd:import namespace="info:lc/xmlns/premis-v2" schemaLocation="../external/premis/premis.xsd"/>
 	<xsd:import namespace="http://www.loc.gov/mix/v20" schemaLocation="../mix/mix.xsd"/>
 	<xsd:import namespace="http://kdk.fi/standards/textmd" schemaLocation="../textmd/textmd.xsd"/>
 	<xsd:import namespace="http://www.loc.gov/audioMD/" schemaLocation="../avmd/audiomd.xsd"/>
