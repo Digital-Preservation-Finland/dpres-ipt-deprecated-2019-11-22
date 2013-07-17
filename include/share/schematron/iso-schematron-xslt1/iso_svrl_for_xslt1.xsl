@@ -131,11 +131,12 @@
 <xsl:stylesheet
    version="1.0"
    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
    xmlns:axsl="http://www.w3.org/1999/XSL/TransformAlias"
    xmlns:schold="http://www.ascc.net/xml/schematron" 
    xmlns:iso="http://purl.oclc.org/dsdl/schematron"
    xmlns:svrl="http://purl.oclc.org/dsdl/svrl" 
+   xmlns:saxon="http://icl.com/saxon"
 >
 
 <!-- Select the import statement and adjust the path as 
@@ -287,10 +288,14 @@
 			</axsl:attribute>
 		</xsl:if>
 		  
+		<svrl:line-number>
+			<axsl:value-of select="saxon:line-number()"/>
+		</svrl:line-number>
+
 		<svrl:text>
 			<xsl:apply-templates mode="text" />
-	
 		</svrl:text>
+
 		    <xsl:if test="$diagnose = 'yes' or $diagnose= 'true' ">
 			<!-- true/false is the new way -->
 				<xsl:call-template name="diagnosticsSplit">
@@ -355,8 +360,8 @@
 	 
 		<svrl:text>
 			<xsl:apply-templates mode="text" />
-
 		</svrl:text>
+
 			<xsl:if test="$diagnose = 'yes' or $diagnose='true' ">
 			<!-- true/false is the new way -->
 				<xsl:call-template name="diagnosticsSplit">
