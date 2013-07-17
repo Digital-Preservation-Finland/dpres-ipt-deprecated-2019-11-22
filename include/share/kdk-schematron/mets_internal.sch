@@ -108,10 +108,10 @@ Juha Lehtonen 2013-07-08 : Initial version
 	
 	<!-- Check that FILEID attribute is not used in fptr element, if it contains an area element -->
 	<sch:pattern name="IDReferencesFptrArea">
-        <sch:rule context="mets:fptr">
-            <sch:assert test=".//mets:area and string-length(normalize-space(@FILEID))>0">
-				If &lt;area&gt; element is used inside &lt;fprt&gt; element, then FILEID attribut should not be used in &lt;fprt&gt; element.
-			</sch:assert>
+        <sch:rule context="mets:fptr[@FILEID]">
+		<sch:assert test="not (.//mets:area)">
+			If &lt;area&gt; element is used inside &lt;fprt&gt; element, then FILEID attribute should not be used in &lt;fprt&gt; element.
+		</sch:assert>
         </sch:rule>
 	</sch:pattern>	
 	
