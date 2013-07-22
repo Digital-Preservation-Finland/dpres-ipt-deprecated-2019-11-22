@@ -35,7 +35,7 @@ install:
 	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
 
 	# SIP_python package is using Python setuptools
-	cd tools/SIP_python ; python setup.py install --prefix="${PREFIX}"
+	cd tools/SIP_python ; python setup.py install --prefix="${PREFIX}/usr/"
 	
 
 devinstall:
