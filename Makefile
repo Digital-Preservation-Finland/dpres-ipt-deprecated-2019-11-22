@@ -36,7 +36,7 @@ install:
 	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
 
 	# SIP_python package is using Python setuptools
-	cd tools/SIP_python ; python ./setup.py install --prefix="${PREFIX}" --root="${BUILDROOT}" --record=INSTALLED_FILES
+	cd tools/sip ; python ./setup.py install --prefix="${PREFIX}" --root="${BUILDROOT}" --record=INSTALLED_FILES
 
 devinstall:
 	# quick and dirty installation...
