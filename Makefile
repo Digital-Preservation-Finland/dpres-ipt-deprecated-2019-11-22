@@ -24,7 +24,7 @@ build:
 	# Build all
 
 test:
-	@prove -r t
+	make -C tools/sip test
 
 install:
 
@@ -34,8 +34,8 @@ install:
 	chmod -R 755 "${SHAREDIR}"
 	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
 
-	# SIP_python package is using Python setuptools
-	cd tools/SIP_python ; python setup.py install --prefix="${PREFIX}/usr"
+	# Package SIP is using Python setuptools
+	cd tools/sip ; python setup.py install --prefix="${PREFIX}/usr"
 	
 
 devinstall:
