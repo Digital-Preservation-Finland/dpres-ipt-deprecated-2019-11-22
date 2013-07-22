@@ -1,10 +1,10 @@
 
 PREFIX=
 BUILDROOT=
-ETC=${PREFIX}/etc
-SHAREDIR=${PREFIX}/usr/share/information-package-tools
-PYTHONDIR=${PREFIX}/usr/lib/python2.6/site-packages
-SHELLDIR=${PREFIX}/usr/bin
+ETC=${ROOT}/etc
+SHAREDIR=${ROOT}/${PREFIX}/share/information-package-tools
+PYTHONDIR=${ROOT}/${PREFIX}/lib/python2.6/site-packages
+SHELLDIR=${ROOT}/${PREFIX}/bin
 
 MODULES=fileutils mets schematron sip xml xmllint
 
