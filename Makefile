@@ -37,6 +37,7 @@ install:
 
 	# SIP_python package is using Python setuptools
 	cd tools/sip ; python ./setup.py install --prefix="${PREFIX}" --root="${ROOT}" --record=INSTALLED_FILES
+	cat tools/sip/INSTALLED_FILES >> INSTALLED_FILES
 
 devinstall:
 	# quick and dirty installation...
