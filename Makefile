@@ -1,6 +1,6 @@
 
 PREFIX=
-BUILDROOT=
+ROOT=
 ETC=${ROOT}/etc
 SHAREDIR=${ROOT}/${PREFIX}/share/information-package-tools
 PYTHONDIR=${ROOT}/${PREFIX}/lib/python2.6/site-packages
@@ -36,7 +36,7 @@ install:
 	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
 
 	# SIP_python package is using Python setuptools
-	cd tools/sip ; python ./setup.py install --prefix="${PREFIX}" --root="${BUILDROOT}" --record=INSTALLED_FILES
+	cd tools/sip ; python ./setup.py install --prefix="${PREFIX}" --root="${ROOT}" --record=INSTALLED_FILES
 
 devinstall:
 	# quick and dirty installation...
