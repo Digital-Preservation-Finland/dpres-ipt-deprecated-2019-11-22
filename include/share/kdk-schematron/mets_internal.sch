@@ -60,7 +60,7 @@ Juha Lehtonen 2013-07-08 : Initial version
 	<sch:pattern name="IDReferencesTech">
         <sch:rule context="mets:techMD">
 			<sch:let name="id" value="normalize-space(@ID)"/>
-            <sch:assert test="count(ancestor::mets:mets//mets:file|mets:div/@ADMID[contains(concat(' ', normalize-space(), ' '), concat(' ', $id, ' '))]) &gt; 0">
+            <sch:assert test="count(ancestor::mets:mets//mets:file|mets:div/@ADMID[contains(concat(' ', normalize-space(), ' '), concat(' ', $id, ' '))]) = 1">
 				The ID attribute in element &lt;techMD&gt; must be referenced in ADMID attribute.
 			</sch:assert>
         </sch:rule>
@@ -106,13 +106,18 @@ Juha Lehtonen 2013-07-08 : Initial version
         </sch:rule>
 	</sch:pattern>
 	
-	<!-- Check that FILEID attribute is not used in fptr element, if it contains an area element -->
+	<!-- Check that either FILEID attribute or area element is used in fptr element, but not both -->
 	<sch:pattern name="IDReferencesFptrArea">
         <sch:rule context="mets:fptr[@FILEID]">
-		<sch:assert test="not (.//mets:area)">
-			If &lt;area&gt; element is used inside &lt;fprt&gt; element, then FILEID attribute should not be used in &lt;fprt&gt; element.
-		</sch:assert>
+			<sch:assert test="not(.//mets:area)">
+				If &lt;area&gt; element is used inside &lt;fprt&gt; element, then FILEID attribute should not be used in &lt;fprt&gt; element.
+			</sch:assert>
         </sch:rule>
+        <sch:rule context="mets:fptr">
+			<sch:assert test=".//mets:area or @FILEID">
+				Either &lt;area&gt; element or FILEID attribute should be used inside &lt;fprt&gt; element.
+			</sch:assert>
+        </sch:rule>		
 	</sch:pattern>	
 	
 </sch:schema>
