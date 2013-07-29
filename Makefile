@@ -1,6 +1,6 @@
 
-PREFIX=
-ROOT=
+PREFIX=usr
+ROOT=/
 ETC=${ROOT}/etc
 SHAREDIR=${ROOT}/${PREFIX}/share/information-package-tools
 PYTHONDIR=${ROOT}/${PREFIX}/lib/python2.6/site-packages
