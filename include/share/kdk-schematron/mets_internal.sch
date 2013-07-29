@@ -60,7 +60,9 @@ Juha Lehtonen 2013-07-08 : Initial version
 	<sch:pattern name="IDReferencesTech">
         <sch:rule context="mets:techMD">
 			<sch:let name="id" value="normalize-space(@ID)"/>
-            <sch:assert test="count(ancestor::mets:mets//mets:file|mets:div/@ADMID[contains(concat(' ', normalize-space(), ' '), concat(' ', $id, ' '))]) = 1">
+			<sch:assert test="count(
+				ancestor::mets:mets//mets:file[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))] |
+				ancestor::mets:mets//mets:div[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))]) = 1">
 				The ID attribute in element &lt;techMD&gt; must be referenced in ADMID attribute.
 			</sch:assert>
         </sch:rule>
