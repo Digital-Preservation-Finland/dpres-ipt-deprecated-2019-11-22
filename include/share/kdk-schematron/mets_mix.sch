@@ -48,7 +48,7 @@ Juha Lehtonen 2013-07-08 : Initial version
 
 	<!-- The values of sampling frequency must be used, if the unit is given -->
     <sch:pattern name="SamplingFrequency">
-        <sch:rule context="mix:SpatialMetrics[mix:samplingFrequencyUnit=2|mix:samplingFrequencyUnit=3]">
+        <sch:rule context="mix:SpatialMetrics[mix:samplingFrequencyUnit=2 or mix:samplingFrequencyUnit=3]">
 			<sch:assert test="mix:xSamplingFrequency">
 				Element &lt;mix:xSamplingFrequency&gt; must be used if sampling frequency unit is inch or centimeter.
 			</sch:assert>

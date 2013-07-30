@@ -146,9 +146,9 @@ Juha Lehtonen 2013-07-08 : Initial version
 
 	<!-- Check the case MARC -->
 	<sch:pattern name="CheckMarc">
-        <sch:rule context="mets:mdWrap[@MDTYPE='MARC21' or @MDTYPE='FINMARC']">
+        <sch:rule context="mets:mdWrap[@MDTYPE='MARC']">
 			<sch:assert test="mets:xmlData/marc21:*">
-				MDTYPE attribute is 'MARC21' or 'FINMARC', but the contained XML data is something else.
+				MDTYPE attribute is 'MARC', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
@@ -165,7 +165,7 @@ Juha Lehtonen 2013-07-08 : Initial version
 	<!-- Check the case DDI -->
 	<sch:pattern name="CheckDDI">
         <sch:rule context="mets:mdWrap[@MDTYPE='DDI']">
-			<sch:assert test="mets:xmlData/ddilc:*|ddicb:*">
+			<sch:assert test="(mets:xmlData/ddilc:*) | (mets:xmlData/ddicb:*)">
 				MDTYPE attribute is 'DDI', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
