@@ -39,6 +39,11 @@ install:
 	cd tools/sip ; python setup.py build ; python ./setup.py install -O1 --prefix="${PREFIX}" --root="${ROOT}" --record=INSTALLED_FILES
 	cat tools/sip/INSTALLED_FILES >> INSTALLED_FILES
 
+	# setup.py seems to be unable to create directories,
+	# we create them here
+	mkdir -p ${ROOT}/${PREFIX}/var/cache/schematron-validation
+	chmod 777 ${ROOT}/${PREFIX}/var/cache/schematron-validation
+
 devinstall:
 	# quick and dirty installation...
 	# not for production
