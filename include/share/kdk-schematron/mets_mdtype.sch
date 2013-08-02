@@ -14,7 +14,7 @@ Juha Lehtonen 2013-07-08 : Initial version
 	<sch:ns prefix="textmd" uri="http://kdk.fi/standards/textmd"/>
 	<sch:ns prefix="audiomd" uri="http://www.loc.gov/audioMD/"/>
 	<sch:ns prefix="videomd" uri="http://www.loc.gov/videoMD/"/>
-	<sch:ns prefix="metsrights" uri="http://cosimo.stanford.edu/sdr/metsrights"/>
+	<sch:ns prefix="metsrights" uri="http://cosimo.stanford.edu/sdr/metsrights/"/>
 	<sch:ns prefix="marc21" uri="http://www.loc.gov/MARC21/slim"/>
 	<sch:ns prefix="mods" uri="http://www.loc.gov/mods/v3"/>
 	<sch:ns prefix="dc" uri="http://purl.org/dc/elements/1.1/"/>
