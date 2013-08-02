@@ -51,7 +51,7 @@ Juha Lehtonen 2013-07-08 : Initial version
 		<sch:rule context="mets:dmdSec">
 			<sch:let name="id" value="normalize-space(@ID)"/>
             <sch:assert test="count(ancestor::mets:mets//mets:div/@DMDID[contains(concat(' ', normalize-space(), ' '), concat(' ', $id, ' '))]) &gt; 0">
-				The ID attribute in element &lt;dmdSec&gt; must be referenced in DMDID attribute.
+				The ID attribute '<sch:value-of select="$id"/>' in element &lt;dmdSec&gt; must be referenced in DMDID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -61,7 +61,7 @@ Juha Lehtonen 2013-07-08 : Initial version
         <sch:rule context="mets:techMD">
 			<sch:let name="id" value="normalize-space(@ID)"/>
 			<sch:assert test="count(ancestor::mets:mets//mets:file[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))]) = 1">
-				The ID attribute in element &lt;techMD&gt; must be referenced in ADMID attribute.
+				The ID attribute '<sch:value-of select="$id"/>' in element &lt;techMD&gt; must be referenced in ADMID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -71,7 +71,7 @@ Juha Lehtonen 2013-07-08 : Initial version
         <sch:rule context="mets:rightsMD">
 			<sch:let name="id" value="normalize-space(@ID)"/>
             <sch:assert test="count(ancestor::mets:mets//mets:file[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))]) &gt; 0">
-				The ID attribute in element &lt;rightsMD&gt; must be referenced in ADMID attribute.
+				The ID attribute '<sch:value-of select="$id"/>' in element &lt;rightsMD&gt; must be referenced in ADMID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -81,7 +81,7 @@ Juha Lehtonen 2013-07-08 : Initial version
         <sch:rule context="mets:sourceMD">
 			<sch:let name="id" value="normalize-space(@ID)"/>
             <sch:assert test="count(ancestor::mets:mets//mets:file[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))]) &gt; 0">
-				The ID attribute in element &lt;sourceMD&gt; must be referenced in ADMID attribute.
+				The ID attribute '<sch:value-of select="$id"/>' in element &lt;sourceMD&gt; must be referenced in ADMID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -90,8 +90,8 @@ Juha Lehtonen 2013-07-08 : Initial version
 	<sch:pattern name="IDReferencesProv">
         <sch:rule context="mets:digiprovMD">
 			<sch:let name="id" value="normalize-space(@ID)"/>
-            <sch:assert test="count(ancestor::mets:mets//mets:file[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))]) &gt; 0">
-				The ID attribute in element &lt;digiprovMD&gt; must be referenced in ADMID attribute.
+			<sch:assert test="count(ancestor::mets:mets//mets:file[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))]) > 0">
+				The ID attribute '<sch:value-of select="$id"/>' in element &lt;digiprovMD&gt; must be referenced in ADMID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -102,7 +102,7 @@ Juha Lehtonen 2013-07-08 : Initial version
 			<sch:let name="id" value="normalize-space(@ID)"/>
             <sch:assert test="count((ancestor::mets:mets//mets:fptr[contains(concat(' ', normalize-space(@FILEID), ' '), concat(' ', $id, ' '))]) | 
 								(ancestor::mets:mets//mets:area[contains(concat(' ', normalize-space(@FILEID), ' '), concat(' ', $id, ' '))])) &gt; 0">
-				The ID attribute in element &lt;file&gt; must be referenced in FILEID attribute.
+				The ID attribute '<sch:value-of select="$id"/>' in element &lt;file&gt; must be referenced in FILEID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
