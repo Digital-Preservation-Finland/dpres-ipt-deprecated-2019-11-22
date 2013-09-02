@@ -41,8 +41,8 @@ install:
 
 	# setup.py seems to be unable to create directories,
 	# we create them here
-	mkdir -p ${ROOT}/${PREFIX}/var/cache/schematron-validation
-	chmod 777 ${ROOT}/${PREFIX}/var/cache/schematron-validation
+	mkdir -p ${ROOT}/var/cache/schematron-validation
+	chmod 777 ${ROOT}/var/cache/schematron-validation
 
 devinstall:
 	# quick and dirty installation...
