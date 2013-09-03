@@ -1,6 +1,6 @@
 
 PREFIX=usr
-ROOT=/
+ROOT=
 ETC=${ROOT}/etc
 SHAREDIR=${ROOT}/${PREFIX}/share/information-package-tools
 PYTHONDIR=${ROOT}/${PREFIX}/lib/python2.6/site-packages
@@ -29,6 +29,9 @@ test:
 
 install:
 
+	# Cleanup temporary files
+	rm -f INSTALLED_FILES
+
 	# Common data files
 	[ -d "${SHAREDIR}" ] || mkdir -p "${SHAREDIR}"
 	cp -r include/share/* "${SHAREDIR}/"
@@ -36,7 +39,7 @@ install:
 	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
 
 	# SIP_python package is using Python setuptools
-	cd tools/sip ; python setup.py build ; python ./setup.py install -O1 --prefix="${PREFIX}" --root="${ROOT}" --record=INSTALLED_FILES
+	cd tools/sip ; python setup.py build ; python ./setup.py install -O1 --prefix="${PREFIX}" --root="${ROOT}/" --record=INSTALLED_FILES
 	cat tools/sip/INSTALLED_FILES >> INSTALLED_FILES
 
 	# setup.py seems to be unable to create directories,
