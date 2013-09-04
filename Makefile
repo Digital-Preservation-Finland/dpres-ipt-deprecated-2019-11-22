@@ -1,10 +1,10 @@
 
-PREFIX=usr
-ROOT=
+PREFIX=/usr
+ROOT=/
 ETC=${ROOT}/etc
-SHAREDIR=${ROOT}/${PREFIX}/share/information-package-tools
-PYTHONDIR=${ROOT}/${PREFIX}/lib/python2.6/site-packages
-SHELLDIR=${ROOT}/${PREFIX}/bin
+SHAREDIR=${ROOT}${PREFIX}/share/information-package-tools
+PYTHONDIR=${ROOT}${PREFIX}/lib/python2.6/site-packages
+SHELLDIR=${ROOT}${PREFIX}/bin
 
 MODULES=fileutils mets schematron sip xml xmllint
 
@@ -39,13 +39,13 @@ install:
 	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
 
 	# SIP_python package is using Python setuptools
-	cd tools/sip ; python setup.py build ; python ./setup.py install -O1 --prefix="${PREFIX}" --root="${ROOT}/" --record=INSTALLED_FILES
-	cat tools/sip/INSTALLED_FILES >> INSTALLED_FILES
+	cd tools/sip ; python setup.py build ; python ./setup.py install -O1 --prefix="${PREFIX}" --root="${ROOT}" --record=INSTALLED_FILES
+	cat tools/sip/INSTALLED_FILES | sed 's/^/\//g' >> INSTALLED_FILES
 
 	# setup.py seems to be unable to create directories,
 	# we create them here
-	mkdir -p ${ROOT}/var/cache/schematron-validation
-	chmod 777 ${ROOT}/var/cache/schematron-validation
+	mkdir -p ${ROOT}var/cache/schematron-validation
+	chmod 777 ${ROOT}var/cache/schematron-validation
 
 devinstall:
 	# quick and dirty installation...
