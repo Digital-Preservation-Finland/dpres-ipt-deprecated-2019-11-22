@@ -1,4 +1,3 @@
-
 PREFIX=/usr
 ROOT=/
 ETC=${ROOT}/etc
@@ -21,14 +20,7 @@ info:
 	@echo "  make install_deps	- Install required packages with yum"
 	@echo
 
-build:
-	# Build all
-
-test:
-	make -C tools/sip test
-
 install:
-
 	# Cleanup temporary files
 	rm -f INSTALLED_FILES
 
@@ -39,8 +31,8 @@ install:
 	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
 
 	# SIP_python package is using Python setuptools
-	cd tools/sip ; python setup.py build ; python ./setup.py install -O1 --prefix="${PREFIX}" --root="${ROOT}" --record=INSTALLED_FILES
-	cat tools/sip/INSTALLED_FILES | sed 's/^/\//g' >> INSTALLED_FILES
+	python setup.py build ; python ./setup.py install -O1 --prefix="${PREFIX}" --root="${ROOT}" --record=INSTALLED_FILES
+	INSTALLED_FILES | sed 's/^/\//g' >> INSTALLED_FILES
 
 	# setup.py seems to be unable to create directories,
 	# we create them here
@@ -54,5 +46,22 @@ devinstall:
 install_deps:
 	# only for testing environment
 	yum -y install zip unzip
-
 	
+test:
+	py.test
+
+docs:
+	make -C doc html
+	make -C doc pdf
+
+docserver:
+	make -C doc docserver
+
+killdocserver:
+	make -C doc killdocserver
+
+coverage:
+	coverage -e
+	coverage -x test.py
+	coverage -r -m
+	coverage -b -d coverage-html
