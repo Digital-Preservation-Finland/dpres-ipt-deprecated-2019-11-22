@@ -4,7 +4,8 @@
 .project*
 *.pyc
 __pycache__
-INSTALLED_FILES
+INSTALLED_FILES*
+PKG-INFO
 
 build/
 dist/
