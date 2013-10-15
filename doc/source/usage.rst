@@ -24,45 +24,31 @@ Validating Digital Objects
 Creating Archival Information Packages (AIP)
 ********************************************
 
-.. note:: TODO: This will be moved to separated repository / documentation after code refactoring.
+Creating Archival Information Package (AIP) is splitted in three different parts
 
-Creating AIP package consists of two stages. First we restructure transfer SIP to archival SIP aka. to following directory structure::
-       
-        transfer-id/mets.xml
+    1. Restructure transferred SIP to unified directory structure
+    2. Create Bagit compliant directory structure and metadata
+    3. Compress AIP directory
 
-        -->
+This process is not dependend of AIP or SIP file naming scheme so
+file/directory names are decided outside these components.
 
-        sip-id/transfers/transfer-id/mets.xml
-        sip-id/logs
-        sip-id/metadata
+Command line example for creating AIP::
 
-For restructuring you may use the :file:`restructure-sip` command line utility:
+    restructure-sip sip-directory-name
+    mv sip-directory-name aip-directory-name     # Optional step
+    create-aip aip-directory name
+    tar czvf aip-directory-name.tar.gz aip-directory-name
 
-.. automodule:: kdkpas_scripts.restructure_sip
+This results compressed AIP that is ready for archival storage. This file
+contains necessary metatada to check integrity of archived digital objects.
 
-Next we make Bagit package with command :file:`create-aip`::
+Structure of AIP is described in modules :mod:`sip.restructure`, :mod:`aiptools.create_aip`.
 
-        sip-id/transfers/transfer-id/mets.xml
-        sip-id/logs
-        sip-id/metadata
+Restructuring Submission Information Package
+--------------------------------------------
+.. automodule:: pas_scripts.restructure_sip
 
-        -->
-
-        sip-id/bagit.txt
-        sip-id/manifest.txt
-        sip-id/data/transfers/transfer-id/mets.xml
-        sip-id/data/logs
-        sip-id/data/metadata
-
-For AIP creation use the :file:`create-aip` command:
-
-.. automodule:: kdkpas_scripts.create_aip
-
-
-Storing and Fetching files to/from Disk Storage
-***************************************************
-
-.. note::
-
-        TODO: This will be moved to separated repository / documentation after code refactoring
-
+Creating Archival Information Package
+-------------------------------------
+.. automodule:: pas_scripts.create_aip
