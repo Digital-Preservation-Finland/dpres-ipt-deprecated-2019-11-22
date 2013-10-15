@@ -15,7 +15,7 @@ import tempfile
 
 SHARE_PATH = os.path.abspath(os.path.os.path.join(
                              os.path.dirname(__file__),
-                             '../../../../../',
+                             '../../../',
                              'include/share'))
 
 SCHEMATRON_PATH = os.path.join(SHARE_PATH, 'kdk-schematron')

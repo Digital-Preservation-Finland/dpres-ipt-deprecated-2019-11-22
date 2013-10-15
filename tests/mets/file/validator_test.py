@@ -34,7 +34,7 @@ TESTDATADIR = os.path.abspath(os.path.join(
 
 SHARE_PATH = os.path.abspath(os.path.os.path.join(
                          os.path.dirname(__file__),
-                         '../../../../../',
+                         '../../../',
                          'include/share'))
 
 TEST_CONFIG_FILENAME = os.path.join(SHARE_PATH, 'validators/validators.json')
@@ -163,7 +163,7 @@ class TestCommandLineTools:
         filename = os.path.join(TESTDATADIR_BASE, 'test-sips',
                                 input["filename"], 'mets.xml')
 
-        configfile =  os.path.abspath(os.path.join(TOOLSPATH, '../../../' 'include/share',
+        configfile =  os.path.abspath(os.path.join(TOOLSPATH, '../' 'include/share',
                 'validators', 'validators.json'))
 
         # TODO: Remove this!

@@ -14,7 +14,7 @@ import subprocess
 
 ROOTPATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__),
-    '../../../../../'))
+    '../../../'))
 
 SHAREPATH = os.path.join(ROOTPATH, 'include/share')
 
@@ -63,11 +63,11 @@ class TestMetsValidation:
     def test_mets_validation(self, testcase, expected):
 
         validator = mets.validator.xmllint.XSDCatalog(CATALOGPATH, SCHEMAPATH)
-
+        print "TESTDATAPATH", testcommon.settings.TESTDATAPATH
         mets_path = os.path.join(
             testcommon.settings.TESTDATAPATH, testcase["metspath"])
         result = validator.validate_file(mets_path)
-
+        print "mets_path", mets_path
         print result.returncode, result.messages, result.errors
 
         assert result.returncode == expected["returncode"]

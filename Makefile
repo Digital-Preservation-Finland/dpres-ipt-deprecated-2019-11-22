@@ -48,7 +48,7 @@ install_deps:
 	yum -y install zip unzip
 	
 test:
-	py.test
+	cd tests ; py.test
 
 docs:
 	make -C doc html

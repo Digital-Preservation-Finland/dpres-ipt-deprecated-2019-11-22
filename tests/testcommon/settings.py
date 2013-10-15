@@ -10,7 +10,7 @@ TOOLSPATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
 print sys.path
 
 TESTDATAPATH = os.path.join(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), '..')),
-    'data')
-
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')),
+    'tests/data')
+print os.path.dirname(__file__)
 print 'testdatapath = ', TESTDATAPATH
