@@ -57,7 +57,7 @@
             { "formatVersion":"" , "formatRegistryKey":"fmt/392" , "validator":"" }]
         }, 
         { "image/jpeg" : [
-            { "formatVersion":"" , "formatRegistryKey":"fmt/42" , "validator":"filevalidator.jhove.Jpeg" },
+            { "formatVersion":"" , "formatRegistryKey":"fmt/42" , "validator":"validator.plugin.jhove.Jpeg" },
             { "formatVersion":"1.00" , "formatRegistryKey":"fmt/42" , "validator":"" }]
         }, 
         { "image/jp2" : [
@@ -96,8 +96,8 @@
         }, 
         { "application/pdf" : [
             { "formatVersion":"1.2" , "formatRegistryKey":"fmt/16" , "validator":"" },
-            { "formatVersion":"1.3" , "formatRegistryKey":"fmt/17" , "validator":"filevalidator.jhove.Pdf"},
-            { "formatVersion":"1.4" , "formatRegistryKey":"fmt/18" , "validator":"filevalidator.jhove.Pdf"},
+            { "formatVersion":"1.3" , "formatRegistryKey":"fmt/17" , "validator":"validator.plugin.jhove.Pdf"},
+            { "formatVersion":"1.4" , "formatRegistryKey":"fmt/18" , "validator":"validator.plugin.jhove.Pdf"},
             { "formatVersion":"1.5" , "formatRegistryKey":"fmt/19" , "validator":"" },
             { "formatVersion":"1.6" , "formatRegistryKey":"fmt/20" , "validator":"" },
             { "formatVersion":"1.7" , "formatRegistryKey":"fmt/276" , "validator":"" },

@@ -10,13 +10,13 @@ import testcommon.settings
 import json
 
 # Module to test
-import mets.file.validator
+import validator.filelist
 import mets.parser
 import mets.manifest
 
 #import pas_scripts.check_sip_digital_objects
 #import pas_scripts.jhove_pas
-import filevalidator.mockup
+import validator.plugin.mockup
 
 # Other imports
 import random
@@ -67,12 +67,12 @@ class TestMetsFileValidator:
 
                 filelist = manifest.get_filelist()
 
-                validator = mets.file.validator.Validator(
+                validate = validator.filelist.Validator(
                                 base_path=os.path.join(TESTDATADIR, mimetype))
 
-                validator.load_config(TEST_CONFIG_FILENAME)
+                validate.load_config(TEST_CONFIG_FILENAME)
 
-                (ret, report, errors) = validator.validate_files(filelist)
+                (ret, report, errors) = validate.validate_files(filelist)
 
                 for match_stdout in test_config["match_stdout"]:
                     match = re.match('(?s).*%s' % match_stdout, report) != None
@@ -89,24 +89,24 @@ class TestMetsFileValidator:
                 assert ret == test_config["exitstatus"]
 
     def test_get_class_instance_by_name(self):
-        validator = mets.file.validator.Validator()
-        instance = validator.get_class_instance_by_name("json.JSONDecoder", None)
+        validate = validator.filelist.Validator()
+        instance = validate.get_class_instance_by_name("json.JSONDecoder", None)
         assert isinstance( instance, json.JSONDecoder)  
                 
     def test_validate_file(self):
-        fileinfo = mets.file.validator.FileInfo()
+        fileinfo = validator.filelist.FileInfo()
         fileinfo.format_mimetype = "application/pdf"
         fileinfo.filename = "abc"
         
-        validator_path = "filevalidator.mockup.ValidatorMockup"
-        validator = mets.file.validator.Validator() 
+        validator_path = "validator.plugin.mockup.ValidatorMockup"
+        validate = validator.filelist.Validator() 
 
         # Generate expected return values randomly
         random_int = 50
         while random_int < 50:
             random_string = ''.join(random.choice(string.lowercase) for i in range(random_int))        
             return_values = ( random_int, random_string, random_string*2 )
-            assert validator.validate_file(fileinfo, validator_path, return_values ) == return_values
+            assert validate.validate_file(fileinfo, validator_path, return_values ) == return_values
             random_int = random.randint(0,100)
 
 class TestCommandLineTools:

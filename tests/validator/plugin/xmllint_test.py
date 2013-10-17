@@ -7,7 +7,7 @@ import testcommon.settings
 from testcommon.casegenerator import pytest_generate_tests
 
 # Module to test
-import mets.validator.xmllint
+import validator.plugin.xmllint
 
 # Other imports
 import subprocess
@@ -62,11 +62,11 @@ class TestMetsValidation:
 
     def test_mets_validation(self, testcase, expected):
 
-        validator = mets.validator.xmllint.XSDCatalog(CATALOGPATH, SCHEMAPATH)
+        validate = validator.plugin.xmllint.XSDCatalog(CATALOGPATH, SCHEMAPATH)
         print "TESTDATAPATH", testcommon.settings.TESTDATAPATH
         mets_path = os.path.join(
             testcommon.settings.TESTDATAPATH, testcase["metspath"])
-        result = validator.validate_file(mets_path)
+        result = validate.validate_file(mets_path)
         print "mets_path", mets_path
         print result.returncode, result.messages, result.errors
 

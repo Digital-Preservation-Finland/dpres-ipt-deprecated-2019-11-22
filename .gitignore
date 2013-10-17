@@ -6,10 +6,10 @@
 __pycache__
 INSTALLED_FILES*
 PKG-INFO
-
 build/
 dist/
 *.egg-info
 .coverage
 coverage-html
 doc/source/tests
+*~

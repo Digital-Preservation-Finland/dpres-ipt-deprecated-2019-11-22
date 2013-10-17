@@ -6,7 +6,7 @@ import pytest
 import testcommon.settings
 
 # Module to test
-import filevalidator.jhove
+import validator.plugin.jhove
 
 class TestJhoveFilevalidator:
 

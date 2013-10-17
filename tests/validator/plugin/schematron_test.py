@@ -7,7 +7,7 @@ import testcommon.settings
 from testcommon.casegenerator import pytest_generate_tests
 
 # Module to test
-import mets.validator.schematron
+import validator.plugin.schematron
 
 # Other imports
 import shutil
@@ -93,11 +93,11 @@ class TestSchematronValidator:
 
         try:
 
-            validator = mets.validator.schematron.XSLT()
+            validate = validator.plugin.schematron.XSLT()
             validator.cachepath = temppath
             validator.sharepath = SHARE_PATH
 
-            xslt_filename = validator.schematron_to_xslt(filename)
+            xslt_filename = validate.schematron_to_xslt(filename)
 
             self.file_is_stylesheet(xslt_filename)
 
@@ -139,7 +139,7 @@ class TestSchematronValidator:
 
         try:
 
-            validator = mets.validator.schematron.XSLT()
+            validate = validator.plugin.schematron.XSLT()
             validator.cachepath = temppath
             validator.sharepath = SHARE_PATH
 
@@ -151,7 +151,7 @@ class TestSchematronValidator:
                 mets_path = os.path.join(TESTROOT, filename)
                 schema_path = os.path.join(SCHEMATRON_PATH, schema)
 
-                result = validator.validate_file(schema_path, mets_path)
+                result = validate.validate_file(schema_path, mets_path)
 
                 print result
 
