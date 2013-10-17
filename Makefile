@@ -65,3 +65,7 @@ coverage:
 	coverage -x test.py
 	coverage -r -m
 	coverage -b -d coverage-html
+
+clean:
+	find . -iname '*.pyc' -type f -delete
+	find . -iname '__pycache__' -exec rm -rf '{}' \; | true
