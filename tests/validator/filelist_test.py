@@ -2,9 +2,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(
-		os.path.dirname(__file__), '../../../src')))
-sys.path.insert(0, os.path.abspath(os.path.join(
-		os.path.dirname(__file__), '../../../tests')))
+		os.path.dirname(__file__), '..')))
 import pytest
 import testcommon.settings
 import json
@@ -28,7 +26,7 @@ TOOLSPATH = testcommon.settings.TOOLSPATH
 
 TESTDATADIR_BASE = os.path.abspath(os.path.join(
                         os.path.dirname(__file__),
-                        '../../data'))
+                        '../data'))
 
 TESTDATADIR = os.path.abspath(os.path.join(
                         TESTDATADIR_BASE,
@@ -36,7 +34,7 @@ TESTDATADIR = os.path.abspath(os.path.join(
 
 SHARE_PATH = os.path.abspath(os.path.os.path.join(
                          os.path.dirname(__file__),
-                         '../../../',
+                         '../../',
                          'include/share'))
 
 TEST_CONFIG_FILENAME = os.path.join(SHARE_PATH, 'validators/validators.json')
