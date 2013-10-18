@@ -58,7 +58,7 @@
         }, 
         { "image/jpeg" : [
             { "formatVersion":"" , "formatRegistryKey":"fmt/42" , "validator":"validator.plugin.jhove.Jpeg" },
-            { "formatVersion":"1.00" , "formatRegistryKey":"fmt/42" , "validator":"" }]
+            { "formatVersion":"1.00" , "formatRegistryKey":"fmt/42" , "validator":"validator.plugin.jhove.Jpeg" }]
         }, 
         { "image/jp2" : [
             { "formatVersion":"" , "formatRegistryKey":"x-fmt/392" , "validator":"" }]
