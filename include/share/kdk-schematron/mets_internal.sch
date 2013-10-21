@@ -64,7 +64,7 @@ Juha Lehtonen 2013-07-08 : Initial version
 							(ancestor::mets:mets//mets:div[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))])) &gt; 0">
 				The ID attribute '<sch:value-of select="$id"/>' in element &lt;techMD&gt; must be referenced in ADMID attribute.
 			</sch:assert>
-        </sch:rule>
+        </sch:rule>u
 	</sch:pattern>
     
 	<!-- Check that rights metadata has a reference -->

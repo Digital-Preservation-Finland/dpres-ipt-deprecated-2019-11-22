@@ -1,0 +1,64 @@
+#!/usr/bin/python
+# vim:ft=python
+"""Check METS XML optional features according to KDK-METS specifications"""
+
+import os
+import sys
+import optparse
+
+# Development feature: append src/ to sys.path if we are running
+# from development tree
+SOURCEPATH = os.path.abspath(os.path.dirname(__file__))
+if SOURCEPATH.find('information-package-tools') >= 0:
+    sys.path.insert(0, os.path.join(SOURCEPATH, '../src'))
+
+import mets.validator.schematron
+import mets.search
+
+def main():
+    """Main loop"""
+    usage = "usage: %prog mets-filename.xml"
+    sharepath = "/usr/share/information-package-tools"
+
+    parser = optparse.OptionParser(usage=usage)
+    parser.add_option("-s", "--schemapath", dest="schemapath",
+                default=os.path.join(sharepath, "kdk-schematron"),
+                help="Path to KDK-PAS schematron schemas",
+                metavar="PATH")
+
+    (options, args) = parser.parse_args()
+
+    if len(args) != 1:
+        parser.error("Must give METS filename or SIP path as argument")
+
+    mets_filename = mets.search.search_mets(args[0])
+
+    if mets_filename is None:
+        parser.error("METS XML not found in path: %s" % args[0])
+        exit(1)
+
+    validator = mets.validator.schematron.XSLT()
+
+    schemas = [ "mets_internal.sch", "mets_mdtype.sch", "mets_mix.sch" ]
+ 
+    exitstatus = 0
+    for schema in schemas:
+
+        print "Validating '%s' with '%s'..." % (mets_filename, schema)
+
+        schema = os.path.join(options.schemapath, schema)
+        result = validator.validate_file(schema, mets_filename)
+
+        if len(result.errors.strip('\n \t')) > 0:
+            print >> sys.stderr, result.errors
+
+        print result.messages
+
+        if result.has_errors():
+            print result
+            exitstatus = 1
+
+    exit(exitstatus)
+
+if __name__ == '__main__':
+        main()

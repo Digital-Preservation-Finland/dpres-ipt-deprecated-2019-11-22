@@ -4,5 +4,12 @@
 .project*
 *.pyc
 __pycache__
-INSTALLED_FILES
-
+INSTALLED_FILES*
+PKG-INFO
+build/
+dist/
+*.egg-info
+.coverage
+coverage-html
+doc/source/tests
+*~

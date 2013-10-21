@@ -1,0 +1,141 @@
+{
+"formatNameList" : [
+	{ "application/epub+zip" : [
+ 	    { "formatVersion":"2.0.1" , "formatRegistryKey":"fmt/483" , "validator":"" }]
+        },
+        { "application/xhtml+xml" : [
+            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/102" , "validator":"" },
+            { "formatVersion":"1.1" , "formatRegistryKey":"fmt/102" , "validator":"" }]
+        },
+        { "text/xml" : [
+            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/101" , "validator":"" }]
+        },
+        { "text/html" : [
+            { "formatVersion":"4.01" , "formatRegistryKey":"fmt/100" , "validator":"" }]
+        },
+        { "application/vnd.oasis.opendocument.text" : [
+            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/136" , "validator":"" }]
+        },
+        { "application/vnd.oasis.opendocument.spreadsheet" : [
+            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/137" , "validator":"" }]
+        },
+        { "application/vnd.oasis.opendocument.database" : [
+            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/138" , "validator":"" }]
+        },
+        { "application/vnd.oasis.opendocument.presentation" : [
+            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/140" , "validator":"" }]
+        },
+        { "application/vnd.oasis.opendocument.graphics" : [
+            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/139" , "validator":"" }]
+        }, 
+        { "text/plain" : [
+            { "formatVersion":"8859-15" , "formatRegistryKey":"x-fmt/111" , "validator":"" },
+            { "formatVersion":"UTF-8" , "formatRegistryKey":"x-fmt/111" , "validator":"" },
+            { "formatVersion":"UTF-16" , "formatRegistryKey":"x-fmt/111" , "validator":"" },
+            { "formatVersion":"UTF-32" , "formatRegistryKey":"x-fmt/111" , "validator":"" },
+            { "formatVersion":"A-2u" , "formatRegistryKey":"fmt/478" , "validator":"" }]
+        }, 
+        { "audio/x-aiff" : [
+            { "formatVersion":"" , "formatRegistryKey":"x-fmt/135" , "validator":"" }]
+        }, 
+        { "audio/x-wave" : [
+            { "formatVersion":"2" , "formatRegistryKey":"x-fmt/2" , "validator":"" }]
+        }, 
+        { "audio/flac" : [
+            { "formatVersion":"1.2.1" , "formatRegistryKey":"x-fmt/279" , "validator":"" }]
+        }, 
+        { "audio/aac" : [
+            { "formatVersion":"" , "formatRegistryKey":"" , "validator":"" }]
+        }, 
+        { "audio/xwav" : [
+            { "formatVersion":"" , "formatRegistryKey":"fmt/141" , "validator":"" }]
+        }, 
+        { "video/mj2" : [
+            { "formatVersion":"" , "formatRegistryKey":"fmt/337" , "validator":"" }]
+        }, 
+        { "video/jpeg2000" : [
+            { "formatVersion":"" , "formatRegistryKey":"fmt/392" , "validator":"" }]
+        }, 
+        { "image/jpeg" : [
+            { "formatVersion":"" , "formatRegistryKey":"fmt/42" , "validator":"validator.plugin.jhove.Jpeg" },
+            { "formatVersion":"1.00" , "formatRegistryKey":"fmt/42" , "validator":"validator.plugin.jhove.Jpeg" }]
+        }, 
+        { "image/jp2" : [
+            { "formatVersion":"" , "formatRegistryKey":"x-fmt/392" , "validator":"" }]
+        },
+        { "image/tiff" : [
+            { "formatVersion":"6.0" , "formatRegistryKey":"fmt/353" , "validator":"" }]
+        },
+        { "application/warc" : [
+            { "formatVersion":"" , "formatRegistryKey":"fmt/298" , "validator":"" }]
+        }, 
+        { "application/msword" : [
+            { "formatVersion":"8.0" , "formatRegistryKey":"fmt/40" , "validator":"" },
+            { "formatVersion":"8.5" , "formatRegistryKey":"fmt/40" , "validator":"" },
+            { "formatVersion":"9.0" , "formatRegistryKey":"fmt/40" , "validator":"" },
+            { "formatVersion":"10.0" , "formatRegistryKey":"fmt/40" , "validator":"" },
+            { "formatVersion":"11.0" , "formatRegistryKey":"fmt/40" , "validator":"" },
+            { "formatVersion":"12.0" , "formatRegistryKey":"fmt/412" , "validator":"" },
+            { "formatVersion":"14.0" , "formatRegistryKey":"fmt/412" , "validator":"" }]
+        }, 
+        { "application/vnd.ms-excel" : [
+            { "formatVersion":"8.0" , "formatRegistryKey":"fmt/61" , "validator":"" },
+            { "formatVersion":"9.0" , "formatRegistryKey":"fmt/62" , "validator":"" },
+            { "formatVersion":"10.0" , "formatRegistryKey":"fmt/62" , "validator":"" },
+            { "formatVersion":"11.0" , "formatRegistryKey":"fmt/62" , "validator":"" },
+            { "formatVersion":"12.0" , "formatRegistryKey":"fmt/214" , "validator":"" },
+            { "formatVersion":"14.0" , "formatRegistryKey":"fmt/214" , "validator":"" }]
+        }, 
+        { "application/vnd.ms-powerpoint" : [
+            { "formatVersion":"8.0" , "formatRegistryKey":"fmt/126" , "validator":"" },
+            { "formatVersion":"9.0" , "formatRegistryKey":"" , "validator":"" },
+            { "formatVersion":"10.0" , "formatRegistryKey":"" , "validator":"" },
+            { "formatVersion":"11.0" , "formatRegistryKey":"" , "validator":"" },
+            { "formatVersion":"12.0" , "formatRegistryKey":"fmt/215" , "validator":"" },
+            { "formatVersion":"14.0" , "formatRegistryKey":"fmt/215" , "validator":"" }]
+        }, 
+        { "application/pdf" : [
+            { "formatVersion":"1.2" , "formatRegistryKey":"fmt/16" , "validator":"" },
+            { "formatVersion":"1.3" , "formatRegistryKey":"fmt/17" , "validator":"validator.plugin.jhove.Pdf"},
+            { "formatVersion":"1.4" , "formatRegistryKey":"fmt/18" , "validator":"validator.plugin.jhove.Pdf"},
+            { "formatVersion":"1.5" , "formatRegistryKey":"fmt/19" , "validator":"" },
+            { "formatVersion":"1.6" , "formatRegistryKey":"fmt/20" , "validator":"" },
+            { "formatVersion":"1.7" , "formatRegistryKey":"fmt/276" , "validator":"" },
+            { "formatVersion":"A-1a" , "formatRegistryKey":"fmt/95" , "validator":"" },
+            { "formatVersion":"A-1b" , "formatRegistryKey":"fmt/354" , "validator":"" },
+            { "formatVersion":"A-2a" , "formatRegistryKey":"fmt/476" , "validator":"" },
+            { "formatVersion":"A-2b" , "formatRegistryKey":"fmt/477" , "validator":"" },
+            { "formatVersion":"A-2u" , "formatRegistryKey":"fmt/478" , "validator":"" }]
+        },    
+        { "audio/x-aiff" : [
+            { "formatVersion":"1.3" , "formatRegistryKey":"x-fmt/135" , "validator":"" }]
+        },  
+        { "audio/mpeg" : [
+            { "formatVersion":"" , "formatRegistryKey":"fmt/134" , "validator":"" }]
+        },   
+        { "audio/x-ms-wma" : [
+            { "formatVersion":"9" , "formatRegistryKey":"fmt/132" , "validator":"" }]
+        },
+        { "video/dv" : [
+            { "formatVersion":"" , "formatRegistryKey":"x-fmt/152" , "validator":"" }]
+        },
+        { "video/mpeg" : [
+            { "formatVersion":"1" , "formatRegistryKey":"x-fmt/386" , "validator":"" },
+            { "formatVersion":"2" , "formatRegistryKey":"x-fmt/386" , "validator":"" },
+            { "formatVersion":"4" , "formatRegistryKey":"fmt/199" , "validator":"" }]
+        }, 
+        { "video/x-ma-wmv" : [
+            { "formatVersion":"9" , "formatRegistryKey":"fmt/133" , "validator":"" }]
+        },
+        { "image/tiff" : [
+            { "formatVersion":"1.3" , "formatRegistryKey":"fmt/438" , "validator":"" }]
+        },
+        { "application/postscript" : [
+            { "formatVersion":"3.0" , "formatRegistryKey":"fmt/124" , "validator":"" }]
+        },
+        { "image/gif" : [
+            { "formatVersion":"1987a" , "formatRegistryKey":"fmt/3" , "validator":"" },
+            { "formatVersion":"1989a" , "formatRegistryKey":"fmt/4" , "validator":"" }]
+        }              
+	]
+} 
