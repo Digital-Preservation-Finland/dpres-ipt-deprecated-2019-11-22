@@ -177,25 +177,14 @@ Creating PDF documentation is as simple, but you will also need pdflatex_ tool (
 .. _pdflatex: http://www.tug.org/applications/pdftex/
 .. _pdfjam: http://freecode.com/projects/pdfjam
 
-.. note::
 
-        For now documentation is built automatically at pastesti4.csc.fi (build server) & scratch.csc.fi. Just one server should be enough!
-
-To update the online documentation, run::
-
-    scp -r _build/html/* sampo:/p/net/scratch.csc.fi/projects/passi
-
-after rebuilding the docs. If you get a permission error when accessing
-https://scratch.csc.fi/projects/passi/, you need to log in to sampo and run::
-
-    chmod -R g+rwX /p/net/scratch.csc.fi/projects/passi
-    chmod -R o+rX /p/net/scratch.csc.fi/projects/passi
+Documentation is built automatically by Jenkins at pastesti4.csc.fi (build server).
 
 For for developing documentation you can use Python SimpleHTTPServer to access HTML-documentation from browser::
 
     make docserver
     while true ; do make html ; sleep 5 ; done
-    ... edit documentation and preview with browser ...
+    ... edit documentation and preview with browser http://devhost:8090...
 
     ... done anf finished ...
     make killdocserver
