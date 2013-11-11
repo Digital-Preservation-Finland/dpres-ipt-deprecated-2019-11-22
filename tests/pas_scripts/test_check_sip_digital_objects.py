@@ -77,7 +77,8 @@ class TestCommandLineTools:
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                 command, arguments)
 
-        print stdout, stderr, returncode
+        print stdout
+        print >> sys.stderr, stderr
 
         function_name = "%s.%s" % (command.__module__, command.func_name)
         for match_string in expected["stdout"]:
