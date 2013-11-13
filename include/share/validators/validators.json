@@ -136,6 +136,9 @@
         { "image/gif" : [
             { "formatVersion":"1987a" , "formatRegistryKey":"fmt/3" , "validator":"" },
             { "formatVersion":"1989a" , "formatRegistryKey":"fmt/4" , "validator":"" }]
-        }              
+        },
+        { "image/png" : [
+            { "" , "formatRegistryKey":"" , "validator":"validator.plugin.pngcheck.Pngcheck" }]
+        }
 	]
 } 
