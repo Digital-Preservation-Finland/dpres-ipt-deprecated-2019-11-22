@@ -138,7 +138,7 @@
             { "formatVersion":"1989a" , "formatRegistryKey":"fmt/4" , "validator":"" }]
         },
         { "image/png" : [
-            { "" , "formatRegistryKey":"" , "validator":"validator.plugin.pngcheck.Pngcheck" }]
+            { "formatVersion": "" , "formatRegistryKey":"" , "validator":"validator.plugin.pngcheck.Pngcheck" }]
         }
 	]
 } 
