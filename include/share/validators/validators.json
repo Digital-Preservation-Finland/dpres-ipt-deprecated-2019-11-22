@@ -134,8 +134,8 @@
             { "formatVersion":"3.0" , "formatRegistryKey":"fmt/124" , "validator":"" }]
         },
         { "image/gif" : [
-            { "formatVersion":"1987a" , "formatRegistryKey":"fmt/3" , "validator":"" },
-            { "formatVersion":"1989a" , "formatRegistryKey":"fmt/4" , "validator":"" }]
+            { "formatVersion":"1987a" , "formatRegistryKey":"fmt/3" , "validator":"validator.plugin.jhove.Jhove" },
+            { "formatVersion":"1989a" , "formatRegistryKey":"fmt/4" , "validator":"validator.plugin.jhove.Jhove" }]
         },
         { "image/png" : [
             { "formatVersion": "" , "formatRegistryKey":"" , "validator":"validator.plugin.pngcheck.Pngcheck" }]
