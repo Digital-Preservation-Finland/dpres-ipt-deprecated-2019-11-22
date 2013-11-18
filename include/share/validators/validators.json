@@ -64,10 +64,11 @@
             { "formatVersion":"" , "formatRegistryKey":"x-fmt/392" , "validator":"validator.plugin.jhove.Jhove" }]
         },
         { "image/tiff" : [
-            { "formatVersion":"6.0" , "formatRegistryKey":"fmt/353" , "validator":"" }]
+            { "formatVersion":"6.0" , "formatRegistryKey":"fmt/353" , "validator":"validator.plugin.jhove.Jhove" }]
         },
         { "application/warc" : [
-            { "formatVersion":"" , "formatRegistryKey":"fmt/298" , "validator":"" }]
+            { "formatVersion":"0.17" , "formatRegistryKey":"fmt/298" , "validator":"validator.plugin.warctools.WarcTools" },
+            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/298" , "validator":"validator.plugin.warctools.WarcTools" }]
         }, 
         { "application/msword" : [
             { "formatVersion":"8.0" , "formatRegistryKey":"fmt/40" , "validator":"" },
