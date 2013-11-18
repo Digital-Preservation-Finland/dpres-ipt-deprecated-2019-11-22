@@ -67,8 +67,8 @@
             { "formatVersion":"6.0" , "formatRegistryKey":"fmt/353" , "validator":"validator.plugin.jhove.Jhove" }]
         },
         { "application/warc" : [
-            { "formatVersion":"0.17" , "formatRegistryKey":"fmt/298" , "validator":"validator.plugin.warctools.WarcTools" },
-            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/298" , "validator":"validator.plugin.warctools.WarcTools" }]
+            { "formatVersion":"0.17" , "formatRegistryKey":"fmt/298" , "validator": "validator.plugin.warctools.WarcTools" },
+            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/298" , "validator":  "validator.plugin.warctools.WarcTools" }]
         }, 
         { "application/msword" : [
             { "formatVersion":"8.0" , "formatRegistryKey":"fmt/40" , "validator":"" },
