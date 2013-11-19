@@ -1,7 +1,8 @@
 <!DOCTYPE catalog PUBLIC "-//OASIS//DTD XML Catalogs V1.0//EN" "http://kdk.fi/standards/catalog.dtd">
+
 <!-- XML Catalog for web usage. -->
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public" xml:base="http://kdk.fi/standards/">
-    
+
 	<!-- W3C XML Related schemas -->
 	<rewriteURI uriStartString="http://www.w3.org/2001/xml.xsd" rewritePrefix="external/w3/xml.xsd"/>
 	<rewriteURI uriStartString="http://www.w3.org/2001/03/xml.xsd" rewritePrefix="external/w3/xml.xsd"/>
@@ -48,6 +49,7 @@
 
 	<!-- METS schemas -->
 	<uri name="http://cosimo.stanford.edu/sdr/metsrights/" uri="external/metsrights/METSRights.xsd"/>
+	<uri name="http://www.kdk.fi/standards/mets/kdk-extensions" uri="mets/kdk-mets-extensions.xsd"/>
 	<uri name="http://www.loc.gov/METS/" uri="mets/mets.xsd"/>
-	
+   
 </catalog>
