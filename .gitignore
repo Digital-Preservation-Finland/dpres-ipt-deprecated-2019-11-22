@@ -13,3 +13,10 @@ dist/
 coverage-html
 doc/source/tests
 *~
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
