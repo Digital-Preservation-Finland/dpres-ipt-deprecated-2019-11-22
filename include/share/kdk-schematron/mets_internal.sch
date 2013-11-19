@@ -10,7 +10,7 @@ Juha Lehtonen 2013-10-21 : CATALOG, SPECIFICATION, CREATED, PID, PIDTYPE attribu
     <sch:title>METS internal inspection</sch:title>
 	
 	<sch:ns prefix="mets" uri="http://www.loc.gov/METS/"/>
-	<sch:ns prefix="kdk" uri="http://kdk.fi/standards/mets/kdk-extensions"/>
+	<sch:ns prefix="kdk" uri="http://www.kdk.fi/standards/mets/kdk-extensions"/>
 
 	<!-- Check that METS includes CATALOG or SPECIFICATION attribute -->
     <sch:pattern name="MetsCatalog">
