@@ -1,0 +1,1297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2009 DDI Alliance, DDI 3.1, 2009-10-18
+
+This file is part of DDI 3.1 XML Schema.
+
+DDI 3.1 XML Schema is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+
+DDI 3.1 XML Schema is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with DDI 3.1 XML Schema. If not, see <http://www.gnu.org/licenses/>.
+
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:archive:3_1" xmlns:r="ddi:reusable:3_1" targetNamespace="ddi:archive:3_1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+   <xs:import namespace="ddi:reusable:3_1" schemaLocation="reusable.xsd"/>
+   <xs:element name="Archive" type="ArchiveType">
+      <xs:annotation>
+         <xs:documentation>Archive is the element which contains relevant archival information pertinent to the contents of a DDI instance.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="ArchiveType">
+      <xs:annotation>
+         <xs:documentation>Includes documentation about the archive and its relationship to the data being described. This encompasses metadata about the archive, relevant organizations, access, funding for the archive process, and contents and lifecycle events for the data.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+               <xs:element ref="ArchiveModuleName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="ArchiveSpecific">
+                  <xs:annotation>
+                     <xs:documentation>Contains metadata specific to a particular archive's holding.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="OrganizationScheme">
+                  <xs:annotation>
+                     <xs:documentation>A list of the organizations related to the DDI instance. This includes information on the archives responsible for creating and maintaining the instance. All agencies must be defined as an Organization in an Archive schema (which can be defined inline or resolved externally).</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:LifecycleInformation" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>LifecycleInformation contains the description of a set of events in the life cycle of the data. It may be extended by specific users.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:OtherMaterial" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Material related to this item from the archive's perspective.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Note" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Notes on any archival information presented in this module.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+     
+   </xs:complexType>
+   <xs:element name="ArchiveModuleName" type="r:NameType"/>
+   <xs:complexType name="ArchiveSpecificType">
+      <xs:annotation>
+         <xs:documentation>Contains metadata specific to a particular archive's holding.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="ArchiveOrganizationReference">
+            <xs:annotation>
+               <xs:documentation>A reference to the organization or an individual acting as the archive.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Item" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes the subject of the DDI metadata as viewed by the archive (e.g., as a single item which has been archived). This may be a Group, Element, or StudyUnit.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Collection" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes the archive's collections.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="DefaultAccess" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes access to the archive in general. The restrictions noted at this level apply to all holdings of the archive unless overridden for specified collections or items.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="r:FundingInformation" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes the archive's sources of funding (grants, etc.)</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="ArchiveOrganizationReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>A reference to the organization acting as the archive.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ArchiveSpecific" type="ArchiveSpecificType">
+      <xs:annotation>
+         <xs:documentation>Contains metadata specific to a particular archive's holding.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="ItemType">
+      <xs:annotation>
+         <xs:documentation>Describes individual items held or distributed by the archive in connection with a study. These may be data file(s) in a variety of formats, statistical setups, codebooks, questionnaires, etc.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="LocationInArchive" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes the location of the item in an archive. Can be repeated to support different languages.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="CallNumber" type="xs:string" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>The Item's call number as used by the archive.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="URI" type="xs:anyURI" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>The URL or URN for the described item.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Format" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes the item's format. Can be repeated to support different languages.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Media" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes the medium, or media, for the item. Can be repeated to support different languages.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="StudyClass" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>The type of study according to an internal description and controlled vocabulary.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Access" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>The access restrictions specific to the item.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="OriginalArchiveOrganizationReference" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>The original archive for item, expressed as a reference to the organization listed in the organization scheme.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="AvailabilityStatus" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A human-readable description of the availability status. Can be repeated to support different languages.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="DataFileQuantity" type="xs:integer" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>The number of data files of the documented holding, expressed as an integer.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="CollectionCompleteness" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>The completeness of the collection, described in human-readable terms.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Item" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes an item that is subordinated to the current item.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="CollectionType">
+      <xs:annotation>
+         <xs:documentation>Describes a collection of items held or distributed by the archive in connection with a study. These may be data file(s) in a variety of formats, statistical setups, codebooks, questionnaires, etc.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="LocationInArchive" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes the location of the collection in an archive. Can be repeated to support different languages.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="CallNumber" type="xs:string" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>The call number used by the archive.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="URI" type="xs:anyURI" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>The URL or URN for the collection.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ItemQuantity" type="xs:integer" minOccurs="0">
+             <xs:annotation>
+                    <xs:documentation>The number of items in the collection..</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="StudyClass" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>The type of study which is documented by the DDI instance.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="DefaultAccess" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Default access restriction information applying to all of the items in the collection.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="OriginalArchiveOrganizationReference" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>The original archive for the described collection, expressed as a reference to an organization listed in the organization scheme.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="AvailabilityStatus" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A human-readable description of the availability status. Can be repeated to support different languages.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="DataFileQuantity" type="xs:integer" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>The number of data files in the described collection, expressed as an integer.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="CollectionCompleteness" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>The completeness of the collection, described in human-readable terms.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Item" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes an item that is part of this collection.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Collection" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Documents a sub-collection that is part of the current collection.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+
+   <xs:complexType name="StudyClassType">
+      <xs:annotation>
+         <xs:documentation>The type of study documented by the DDI metadata, expressed in human-readable form and as a value from a controlled vocabulary.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="ClassDescription" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Human-readable description of the type of the study.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="ClassType" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Description of the type of the study taken from a controlled vocabulary.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="ClassDescription" type="r:InternationalStringType">
+      <xs:annotation>
+         <xs:documentation>Human-readable description of the type of the study.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ClassType" type="r:CodeValueType">
+      <xs:annotation>
+         <xs:documentation>Description of the type of the study taken from a controlled vocabulary.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="AccessType">
+      <xs:annotation>
+         <xs:documentation>Describes the aspects of access to the archive's holding.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:IdentifiableType">
+            <xs:sequence>
+               <xs:element ref="AccessTypeName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="ConfidentialityStatement" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Provides confidentiality statement and/or reference to its network location.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="AccessPermission" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Gives the network location and identifying number of the access permission and confidentiality agreement forms, and whether they are required or not.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Restrictions" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Restrictions to access, described in a human-readable fashion.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="CitationRequirement" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Describes a citation requirement. May be repeated for different languages.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="DepositRequirement" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Describes deposit requirements. May be repeated for different languages.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="AccessConditions" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Describes conditions for access. May be repeated for different languages.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Disclaimer" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Describes a disclaimer related to use of the data. May be repeated for different languages.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="AccessRestrictionDate" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Provides dates for which access is restricted. Describes the date or range of dates for access restrictions to all or portions of the data.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ContactOrganizationReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Provides contact information regarding the archive's holding, expressed as a reference to an individual or organization listed in the organization scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="AccessTypeName" type="r:NameType"/>
+   <xs:complexType name="FormType">
+      <xs:annotation>
+         <xs:documentation>FormType describes the forms needed for such functions as access permission to the archive and statements of confidentiality.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="Required" type="xs:boolean" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>States whether or not the form is required.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="FormNumber" type="xs:string" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Provides the number of the concerned form.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="URI" type="xs:anyURI" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>An Internet location such as a URL or URN where the form is to be found.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Statement" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Provides a textual statement regarding access forms.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="Item" type="ItemType">
+      <xs:annotation>
+         <xs:documentation>Describes individual items held or distributed by the archive in connection with a study. These may be data file(s) in a variety of formats, statistical setups, codebooks, questionnaires, etc.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Collection" type="CollectionType">
+      <xs:annotation>
+         <xs:documentation>Describes a collection of items held or distributed by the archive in connection with a study. These may be data file(s) in a variety of formats, statistical setups, codebooks, questionnaires, etc.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DefaultAccess" type="AccessType">
+      <xs:annotation>
+         <xs:documentation>Describes the aspects of access to the archive's holding.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Access" type="AccessType">
+      <xs:annotation>
+         <xs:documentation>Describes the aspects of access to the archive's holding.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LocationInArchive" type="r:InternationalStringType">
+      <xs:annotation>
+         <xs:documentation>Describes the location of the item in an archive. Can be repeated to support different languages.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Format" type="r:InternationalStringType">
+      <xs:annotation>
+         <xs:documentation>Describes the format of data or metadata holdings. Can be repeated to support different languages.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Media" type="r:InternationalStringType">
+      <xs:annotation>
+         <xs:documentation>Describes the media of data or metadata holdings. Can be repeated to support different languages.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="StudyClass" type="StudyClassType">
+      <xs:annotation>
+         <xs:documentation>The type of study which is documented by the DDI instance.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="OriginalArchiveOrganizationReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>The original archive for the documented material, expressed in human-readable form. Can be repeated to support different languages.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="AvailabilityStatus" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>A human-readable description of the availability status. Can be repeated to support different languages.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CollectionCompleteness" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>The completeness of the collection, described in human-readable terms.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ConfidentialityStatement" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Provides confidentiality statement and/or reference to its network location.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="AccessPermission" type="FormType">
+      <xs:annotation>
+         <xs:documentation>Gives the network location and identifying number of the access permission and confidentiality agreement forms, and whether they are required or not.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Restrictions" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Restrictions to access, described in a human-readable fashion.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CitationRequirement" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Describes a citation requirement. May be repeated for different languages.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DepositRequirement" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Describes deposit requirements. May be repeated for different languages.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="AccessConditions" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Describes conditions for access. May be repeated for different languages.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Disclaimer" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Describes a disclaimer. May be repeated for different languages.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="AccessRestrictionDate" type="r:AccessRestrictionDateType">
+      <xs:annotation>
+         <xs:documentation>Provides dates for which access is restricted. Describes the date or range of dates for access restrictions to all or portions of the data.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ContactOrganizationReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Provides contact information regarding the archive's holding.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Statement" type="r:InternationalStringType">
+      <xs:annotation>
+         <xs:documentation>Provides a textual statement regarding access forms.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+    <!--ORGANIZATION IDENTIFICATION -->
+      <xs:attributeGroup name="PRIVACY">
+         <xs:attribute name="privacy" type="PrivacyCodeType" use="optional"/>
+      </xs:attributeGroup>
+      <xs:simpleType name="PrivacyCodeType">
+         <xs:annotation>
+            <xs:documentation>Element's privacy/security</xs:documentation>
+         </xs:annotation>
+         <xs:union memberTypes="xs:string RecommendedPrivacyCodeType"/>
+      </xs:simpleType>
+      <xs:simpleType name="RecommendedPrivacyCodeType">
+         <xs:annotation>
+            <xs:documentation>Enumeration of recommended  privacy type</xs:documentation>
+         </xs:annotation>
+         <xs:restriction base="xs:string">
+            <xs:enumeration value="public"/>
+            <xs:enumeration value="restricted"/>
+            <xs:enumeration value="private"/>
+         </xs:restriction>
+      </xs:simpleType>
+
+      <!--ROOT-->
+      <xs:element name="OrganizationScheme" type="OrganizationSchemeType">
+         <xs:annotation>
+            <xs:documentation>Contains descriptions of organizations and individuals which are referenced by other areas of the DDI. All agencies must be defined as an Organization in an Archive module (which can be defined inline or resolved externally).  Where noted, elements map directly to vCard, a file format standard for electronic business cards.</xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:complexType name="OrganizationSchemeType">
+         <xs:complexContent>
+            <xs:extension base="r:MaintainableType">
+               <xs:sequence>
+               <xs:element ref="OrganizationSchemeName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded"/>               
+                  <xs:element ref="Organization" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Describes an organization.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Individual" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Describes an individual.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Role" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Describes the role played by organizations and individuals in the life cycle of the data.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Relation" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Describes relations between two organizations and/or individuals.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="OrganizationSchemeReference" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Used to import other Organization schemes into this one by reference.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="OrganizationSchemeName" type="r:NameType"/> 
+      <xs:element name="OrganizationSchemeReference" type="r:SchemeReferenceType"/>
+      <!--ORGANIZATION-->
+      <xs:complexType name="OrganizationType">
+         <xs:annotation>
+            <xs:documentation>Describes an organization. All agencies must be defined as an Organization in an Archive module (which can be defined inline or resolved externally). </xs:documentation>
+         </xs:annotation>
+         <xs:complexContent>
+            <xs:extension base="r:VersionableType">
+               <xs:sequence>
+                  <xs:choice>
+                     <xs:element ref="OrganizationReference">
+                        <xs:annotation>
+                           <xs:documentation>Reference to an organization described externally.</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:sequence>
+                        <xs:element ref="OrganizationName" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>The official name of the organization. This may be repeated for multiple languages. Alternate names should be placed in Nickname.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="Nickname" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>An abbreviation or a brief name for an organization.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="DDIMaintenanceAgencyID" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>Contains the official DDI ID of the maintence agency as registered with the DDI registry by the parent organization or individual. A single organization or individual may have one or more DDI Maintenance Agency IDs registered within the DDI registry (i.e., an organization may have a DDI Maintenance Agency ID for each project managed by the organization) The structure of this string is described by Part I of the Technical Documentation and the content is registered within the DDI registry as a unique identifer.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>Description of the organization.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="Keyword" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>Keyword used to classify the organization or its activities.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="Location" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>A physical (or virtual) location.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="Telephone" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>Telephone number of an organization.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="URL" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>URL of organization's Web site</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="Email" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>Generic email address of organization</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="InstantMessaging" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>IMessaging identification for the organization (can be used for live technical support, sales, etc.)</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="RegionalCoverage" minOccurs="0">
+                           <xs:annotation>
+                              <xs:documentation>The geographic coverage for the activity and/or jurisdiction of the organization</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="r:Note" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>Generic note about the organization.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="Individual" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>Provides flexibility to define individuals directly within an organization (i.e. staff).</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="Relation" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>Describes relations between actors in the context of the organization.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="r:Image" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>Provides an external link to images associated with the organization (logos, etc.).</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="VersionDistinction" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>Describes the data versioning scheme(s) used by an organization. If more than one, Name should differentiate between a standard versioning structure used by the oranization and special structures used by specific projects or studies. Information on what drives and major and minor change and how they are structured.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>                        
+                     </xs:sequence>
+                  </xs:choice>
+               </xs:sequence>
+                 <xs:attributeGroup ref="PRIVACY"/>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="DDIMaintenanceAgencyID" type="DDIMaintenanceAgencyIDType"/>
+      <xs:complexType name="DDIMaintenanceAgencyIDType">
+	   <xs:annotation>
+	      <xs:documentation>Provides the official DDI ID of a maintenance agency as a value taken from the registry cited in @registryID.</xs:documentation>
+	   </xs:annotation> 
+	   <xs:simpleContent>
+	   	<xs:extension base="xs:string">
+	   		<xs:attribute name="registryID" type="xs:string" use="required"/>
+	        </xs:extension>
+           </xs:simpleContent>
+      </xs:complexType>
+      <xs:element name="VersionDistinction" type="VersionDistinctionType"/>
+      <xs:complexType name="VersionDistinctionType">
+	   <xs:annotation>
+	      <xs:documentation>Describes the data versioning scheme(s) used by an organization. If more than one, Name should differentiate between a standard versioning structure used by the oranization and special structures used by specific projects or studies. Information on what drives and major and minor change and how they are structured.</xs:documentation>
+	   </xs:annotation>      
+	   <xs:sequence>
+	   <xs:element ref="VersionDistinctionName" maxOccurs="unbounded"/>
+	   <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded"/>
+	   <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded"/>
+	   </xs:sequence>
+      </xs:complexType>
+      <xs:element name="VersionDistinctionName" type="r:NameType"/>
+      <!--INDIVIDUAL-->
+      <xs:complexType name="IndividualType">
+         <xs:annotation>
+            <xs:documentation>Describes an individual</xs:documentation>
+         </xs:annotation>
+         <xs:complexContent>
+            <xs:extension base="r:VersionableType">
+               <xs:sequence>
+                  <xs:element ref="IndividualName" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Full name of the individual.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="DisplayName" type="xs:string" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Name of the individual used for display.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Nickname" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Brief name of the individual.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                        <xs:element ref="DDIMaintenanceAgencyID" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>Contains the official DDI ID of the maintence agency as registered with the DDI registry by the parent organization or individual. A single organization or individual may have one or more DDI Maintenance Agency IDs registered within the DDI registry (i.e., an organization may have a DDI Maintenance Agency ID for each project managed by the organization) The structure of this string is described by Part I of the Technical Documentation and the content is registered within the DDI registry as a unique identifer.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="ResearcherID" minOccurs="0" maxOccurs="unbounded">
+                           <xs:annotation>
+                              <xs:documentation>Captures an individuals assigned researcher ID within a specified system. Includes the type or researcher ID provided, the ID, a URI of the location or link, and a description of the researcher ID provided. E.g., Rajiv Agrwal, type=researcherID,  ID=A-8725-2008), URI=www.researcherid.com/rid/A-8725-2008 which brings you to the researchers page.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>                        
+                  <xs:element ref="Organization" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Organization with which an individual is associated if the individual is not nested within an organization or if the individual is associated with an additional organziation.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Position" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>The job title, functional position or function of the individual - Maps to vCard TITLE</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Additional information about the individual</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Keyword" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Keyword used to classify the individual or its activities.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Location" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Physical address of the individual</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Telephone" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Telephone number of the individual</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="URL" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>URL of the individual's website</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Email" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Individual's email</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="InstantMessaging" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>IMessaging identification for the individual</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Language" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Language used by individual (may be repeated to cover multiple languages)</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="r:Note" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Note regarding the individual described</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Relation" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Describes relations between this individual and other organizations or individuals</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+        <xs:element ref="r:Image" minOccurs="0" maxOccurs="unbounded">
+           <xs:annotation>
+              <xs:documentation>Provides an external link to images associated with the individual.</xs:documentation>
+           </xs:annotation>
+       </xs:element>
+
+               </xs:sequence>
+               <xs:attributeGroup ref="PRIVACY"/>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="IndividualNameType">
+         <xs:annotation>
+            <xs:documentation>An individual name</xs:documentation>
+         </xs:annotation>
+         <xs:sequence minOccurs="0">
+            <xs:element name="Prefix" type="xs:string" minOccurs="0">
+              <xs:annotation>
+                 <xs:documentation>Title that preceded the name of the individual, such as Ms., or Dr.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="First" type="xs:string" minOccurs="0">
+              <xs:annotation>
+                 <xs:documentation>First (given) name of the individual</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Middle" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                 <xs:documentation>Middle name or initial of the individual</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Last" type="xs:string" minOccurs="0">
+              <xs:annotation>
+                 <xs:documentation>Last (family) name /surname of the individual</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Suffix" type="xs:string" minOccurs="0">
+              <xs:annotation>
+                 <xs:documentation>Title that follows the name of the individual, such as Esq.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+     </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PositionType">
+         <xs:annotation>
+            <xs:documentation>Title and position of an individual, with provision for referencing an organization to provide context.</xs:documentation>
+         </xs:annotation>
+         <xs:sequence>
+            <xs:element name="Title" type="xs:string">
+              <xs:annotation>
+                 <xs:documentation>Title / position of an individual</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element ref="OrganizationReference" minOccurs="0">
+              <xs:annotation>
+                 <xs:documentation>Referfence to the organization in which the individual holds the title.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element ref="Period" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                 <xs:documentation>The period(s) when the individual held the position.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+         </xs:sequence>
+         <xs:attributeGroup ref="PRIVACY"/>
+      </xs:complexType>
+      <xs:complexType name="IndividualLanguageType">
+         <xs:annotation>
+            <xs:documentation>Language of an individual</xs:documentation>
+         </xs:annotation>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="ISO" type="xs:language" use="optional">
+                <xs:annotation>
+                   <xs:documentation>ISO code for the language described</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+               <xs:attribute name="read" type="LanguageLevelCodeType" use="optional">
+                <xs:annotation>
+                   <xs:documentation>Indicates reading knowledge of the language described</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+               <xs:attribute name="write" type="LanguageLevelCodeType" use="optional">
+                <xs:annotation>
+                   <xs:documentation>Indicates writing knowledge of the language described</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+               <xs:attribute name="speak" type="LanguageLevelCodeType" use="optional">
+                <xs:annotation>
+                   <xs:documentation>Indicates speaking knowledge of the language described</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="ResearcherIDType">
+         <xs:annotation>
+            <xs:documentation>Captures an individuals assigned researcher ID within a specified system. Includes the type or researcher ID provided, the ID, a URI of the location or link, and a description of the researcher ID provided. E.g., Rajiv Agrwal, type=researcherID,  ID=A-8725-2008), URI=www.researcherid.com/rid/A-8725-2008 which brings you to the researchers page.</xs:documentation>
+         </xs:annotation>
+         <xs:sequence>
+         	<xs:element name="Type" type="r:CodeValueType"/>
+         	<xs:element name="Identifier" type="xs:string"/>
+         	<xs:element name="URI" type="xs:anyURI" minOccurs="0"/>
+         	<xs:element ref="r:Description" minOccurs="0"/>
+         </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="LanguageLevelCodeType">
+         <xs:annotation>
+            <xs:documentation>Describes the level of fluency of an individual in a natural language.</xs:documentation>
+         </xs:annotation>
+         <xs:restriction base="xs:NMTOKENS">
+            <xs:enumeration value="Native"/>
+            <xs:enumeration value="Fluent"/>
+            <xs:enumeration value="Good"/>
+            <xs:enumeration value="Basic"/>
+            <xs:enumeration value="Unspecified"/>
+         </xs:restriction>
+      </xs:simpleType>
+      
+      <!--RELATION AND ROLE-->
+      <xs:complexType name="RoleType">
+         <xs:annotation>
+            <xs:documentation>Describes the role of individuals or organizations in relation to the DDI instance.and the life cycle of the data that is being documented </xs:documentation>
+         </xs:annotation>
+         <xs:complexContent>
+            <xs:extension base="r:IdentifiableType">
+            	<xs:sequence>
+                  <xs:choice maxOccurs="unbounded">
+                     <xs:element ref="OrganizationReference">
+                       <xs:annotation>
+                          <xs:documentation>Reference to an organization playing this role </xs:documentation>
+                       </xs:annotation>
+                     </xs:element>
+                     <xs:element ref="IndividualReference">
+                       <xs:annotation>
+                          <xs:documentation>Reference to an individual playing this role</xs:documentation>
+                       </xs:annotation>
+                     </xs:element>
+                  </xs:choice>
+                  <xs:element ref="r:Description" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Description of the role played by the actor(s) referenced above</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Keyword" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Keyword used to classify the role of the organization or individual</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Period" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Time period when this role is/was being played</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="Note" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Note regarding the role being described.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                 </xs:sequence>
+               <xs:attributeGroup ref="PRIVACY"/>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="RelationType">
+         <xs:annotation>
+            <xs:documentation>Describes a relation between actors (organizations and/or individuals)</xs:documentation>
+         </xs:annotation>
+         <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
+               <xs:element ref="OrganizationReference">
+                  <xs:annotation>
+                     <xs:documentation>Reference to an organization</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="IndividualReference">
+                  <xs:annotation>
+                     <xs:documentation>Reference to an individual</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:choice>
+            <xs:element ref="r:Description" maxOccurs="unbounded">
+               <xs:annotation>
+                  <xs:documentation>Description of the relationship</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:element ref="Keyword" minOccurs="0" maxOccurs="unbounded">
+               <xs:annotation>
+                  <xs:documentation>Keyword used to classify the relationship</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:element ref="Period" minOccurs="0" maxOccurs="unbounded">
+               <xs:annotation>
+                  <xs:documentation>Time period during which this relationship is valid.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:element name="Note" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+               <xs:annotation>
+                  <xs:documentation>Note regarding the relationship being described</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+         </xs:sequence>
+         <xs:attributeGroup ref="PRIVACY"/>
+      </xs:complexType><!--LOCATION-->
+      <xs:complexType name="LocationType">
+         <xs:annotation>
+            <xs:documentation>Describes a physical location</xs:documentation>
+         </xs:annotation>
+         <xs:complexContent>
+            <xs:extension base="r:IdentifiableType">
+               <xs:sequence>
+                  <xs:element ref="LocationReference" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Allows for inclusion by reference of a location</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="LocationName" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Location name</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Nickname" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Brief name for the location</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Address" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Street address of the location</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Country" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Country of the location</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Telephone" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Telephone number for the location</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="URL" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>URL for the location's website.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="Email" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Generic email address for the location</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="InstantMessaging" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>IMessaging identification for the location</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="GeographicLocation" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Geographic coordinate point for the location</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="RegionalCoverage" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>The region where the organization is active.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="r:TimeZone" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Time zone of the location expressed as code.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="Note" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Note regarding the location being described.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+               <xs:attribute name="type" type="xs:string">
+                  <xs:annotation>
+                     <xs:documentation>Type of location e.g. home, primary office, alternate office etc.</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attributeGroup ref="PRIVACY"/>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="AddressType" mixed="true">
+         <xs:annotation>
+            <xs:documentation>A location address. (Note that country is not included in this element)</xs:documentation>
+         </xs:annotation>
+         <xs:sequence>
+            <xs:element name="Line" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+               <xs:annotation>
+                  <xs:documentation>Number and street including office or suite number. May use multiple lines.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:element name="City" type="xs:string" minOccurs="0">
+               <xs:annotation>
+                  <xs:documentation>City</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:element name="State" type="xs:string" minOccurs="0">
+               <xs:annotation>
+                  <xs:documentation>State</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:element name="Postal" type="xs:string" minOccurs="0">
+               <xs:annotation>
+                  <xs:documentation>Postal or ZIP Code</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+         </xs:sequence>
+         <xs:attributeGroup ref="PRIVACY"/>
+         <xs:attribute name="type" type="xs:string" use="optional">
+            <xs:annotation>
+               <xs:documentation>Indicates address type (i.e. home, office, etc.)</xs:documentation>
+            </xs:annotation>
+         </xs:attribute>
+         <xs:attribute name="vcardType" type="xs:NMTOKENS" use="optional">
+            <xs:annotation>
+               <xs:documentation>Indicates the vCard address type</xs:documentation>
+            </xs:annotation>
+         </xs:attribute>
+      </xs:complexType>
+      <xs:simpleType name="AddressTypeCodeType">
+         <xs:annotation>
+            <xs:documentation>Type of address</xs:documentation>
+         </xs:annotation>
+         <xs:union memberTypes="xs:NMTOKENS VCardAddressTypeCodeType"/>
+      </xs:simpleType>
+      <xs:simpleType name="VCardAddressTypeCodeType">
+         <xs:annotation>
+            <xs:documentation>Enumeration of vCard address types. Default is intl postal parcel work</xs:documentation>
+         </xs:annotation>
+         <xs:restriction base="xs:NMTOKENS">
+            <xs:enumeration value="dom"/>
+            <xs:enumeration value="intl"/>
+            <xs:enumeration value="postal"/>
+            <xs:enumeration value="parcel"/>
+            <xs:enumeration value="home"/>
+            <xs:enumeration value="pref"/>
+         </xs:restriction>
+      </xs:simpleType>
+<!--TELEPHONE-->
+      <xs:complexType name="TelephoneType">
+         <xs:annotation>
+            <xs:documentation>A telephone number</xs:documentation>
+         </xs:annotation>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attributeGroup ref="PRIVACY"/>
+               <xs:attribute name="type" type="TelephoneTypeCodeType" use="optional"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+      <xs:simpleType name="TelephoneTypeCodeType">
+         <xs:annotation>
+            <xs:documentation>Indicates type of telephone number</xs:documentation>
+         </xs:annotation>
+         <xs:union memberTypes="xs:NMTOKENS VCardTelephoneTypeCodeType"/>
+      </xs:simpleType>
+      <xs:simpleType name="VCardTelephoneTypeCodeType">
+         <xs:annotation>
+            <xs:documentation>Enumeration of telephone type defined by the vCard specification. Default is voice</xs:documentation>
+         </xs:annotation>
+         <xs:restriction base="xs:NMTOKENS">
+            <xs:enumeration value="home"/>
+            <xs:enumeration value="msg"/>
+            <xs:enumeration value="work"/>
+            <xs:enumeration value="pref"/>
+            <xs:enumeration value="voice"/>
+            <xs:enumeration value="fax"/>
+            <xs:enumeration value="cell"/>
+            <xs:enumeration value="video"/>
+            <xs:enumeration value="pager"/>
+            <xs:enumeration value="bbs"/>
+            <xs:enumeration value="modem"/>
+            <xs:enumeration value="car"/>
+            <xs:enumeration value="isdn"/>
+         </xs:restriction>
+      </xs:simpleType><!--INSTANT MESSAGING-->
+      <xs:complexType name="InstantMessagingType">
+         <xs:annotation>
+            <xs:documentation>Indicates type of Instant messaging account identification</xs:documentation>
+         </xs:annotation>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attributeGroup ref="PRIVACY"/>
+               <xs:attribute name="type" type="InstantMessagingTypeCodeType" use="optional"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+      <xs:simpleType name="InstantMessagingTypeCodeType">
+         <xs:annotation>
+            <xs:documentation>Type of Instant Messaging account</xs:documentation>
+         </xs:annotation>
+         <xs:union memberTypes="xs:string CommonInstantMessagingTypeCodeType"/>
+      </xs:simpleType>
+      <xs:simpleType name="CommonInstantMessagingTypeCodeType">
+         <xs:annotation>
+            <xs:documentation>Enumeration of common public instant messaging networks. See http://en.wikipedia.org/wiki/Instant_messaging</xs:documentation>
+         </xs:annotation>
+         <xs:restriction base="xs:string">
+            <xs:enumeration value="aim">
+               <xs:annotation>
+                  <xs:documentation>AOL Instant Messenger</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="icq">
+               <xs:annotation>
+                  <xs:documentation>ICQ</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="jabber">
+               <xs:annotation>
+                  <xs:documentation>Jabber</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="google">
+               <xs:annotation>
+                  <xs:documentation>Google Talk</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="msn">
+               <xs:annotation>
+                  <xs:documentation>Microsoft Messenger</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="qq">
+               <xs:annotation>
+                  <xs:documentation>QQ or OICQ (China)</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="skype">
+               <xs:annotation>
+                  <xs:documentation>Skype</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="yahoo">
+               <xs:annotation>
+                  <xs:documentation>Yahoo Messenger</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+         </xs:restriction>
+      </xs:simpleType><!--WEB SITE URL-->
+      <xs:complexType name="URLType">
+         <xs:annotation>
+            <xs:documentation>A web site URL</xs:documentation>
+         </xs:annotation>
+         <xs:simpleContent>
+            <xs:extension base="xs:anyURI">
+               <xs:attributeGroup ref="PRIVACY"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+      <xs:element name="Organization" type="OrganizationType">
+         <xs:annotation>
+            <xs:documentation>Describes an organization or an individual</xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:element name="OrganizationReference" type="r:ReferenceType">
+         <xs:annotation>
+            <xs:documentation>Reference to an existing organization.</xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:element name="Individual" type="IndividualType">
+         <xs:annotation>
+            <xs:documentation>Describes an organization or an individual</xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:element name="Role" type="RoleType">
+         <xs:annotation>
+            <xs:documentation>Describes the role of organizations and/or individuals in relation to a DDI entity like a survey</xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:element name="Relation" type="RelationType">
+         <xs:annotation>
+            <xs:documentation>Describes relations between two actors (organizations and/or individuals)</xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:element name="Nickname" type="r:InternationalStringType"/>
+      <xs:element name="Keyword" type="r:InternationalStringType">
+         <xs:annotation>
+            <xs:documentation>For classification, </xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:element name="Location" type="LocationType">
+         <xs:annotation>
+            <xs:documentation>A physical (or virtual) location</xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:element name="Telephone" type="TelephoneType"/>
+      <xs:element name="URL" type="URLType">
+         <xs:annotation>
+            <xs:documentation>Organization web site</xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:element name="Email" type="r:EmailType">
+         <xs:annotation>
+            <xs:documentation>Generic email address</xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:element name="InstantMessaging" type="InstantMessagingType">
+         <xs:annotation>
+            <xs:documentation>Instant messaging for the organization (can be used for live technical support, sales, etc.)</xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:element name="RegionalCoverage" type="r:CodeValueType">
+         <xs:annotation>
+            <xs:documentation>A coded value or string indicating the region where the organization is active.</xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:element name="IndividualName" type="IndividualNameType"/>
+      <xs:element name="ResearcherID" type="ResearcherIDType"/>
+      <xs:element name="Position" type="PositionType">
+         <xs:annotation>
+            <xs:documentation>The job title, functional position or function. Applies only to individuals. Maps to vCard TITLE.</xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:element name="Language" type="IndividualLanguageType">
+         <xs:annotation>
+            <xs:documentation>Language spoken by individual</xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:element name="LocationReference" type="r:ReferenceType">
+         <xs:annotation>
+            <xs:documentation>Reference to a related location for an individual or organization.</xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:element name="EntityReference" type="r:ReferenceType"/>
+      <xs:element name="IndividualReference" type="r:ReferenceType"/>
+      <xs:element name="Period" type="r:DateType">
+         <xs:annotation>
+            <xs:documentation>Time period of this role. </xs:documentation>
+         </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="r:InternationalStringType"/>
+      <xs:element name="LocationName" type="r:NameType"/>
+      <xs:element name="Address" type="AddressType"/>
+      <xs:element name="Country" type="r:CountryType"/>
+      <xs:element name="GeographicLocation" type="r:PointType"/>
+    <xs:element name="OrganizationName" type="r:InternationalStringType">
+       <xs:annotation>
+          <xs:documentation>The official name of the organization. This may be repeated for multiple languages. Alternate names should be placed in Nickname.</xs:documentation>
+       </xs:annotation>
+    </xs:element>
+
+</xs:schema>
