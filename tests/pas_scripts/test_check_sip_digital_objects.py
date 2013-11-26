@@ -37,7 +37,7 @@ class TestCommandLineTools:
             "filename": 'CSC_test003',
             "expected_result": {
                 "returncode": 1,
-                "stdout": ['Status: Not well-formed'],
+                "stdout": ['Not well-formed'],
                 "stderr": ''
             }
          }, {
@@ -45,7 +45,7 @@ class TestCommandLineTools:
             "filename": 'CSC_test004',
             "expected_result": {
                 "returncode": 1,
-                "stdout": ['Status: Well-Formed and valid',
+                "stdout": ['Well-Formed and valid',
                            'No validator for mimetype:text/xml version:ALTO ' +
                            'schema Version 1.4'],
                 "stderr": ''
@@ -82,14 +82,16 @@ class TestCommandLineTools:
 
         function_name = "%s.%s" % (command.__module__, command.func_name)
         for match_string in expected["stdout"]:
-            message = "\n".join(["got:", stdout, "expected:", match_string,
-                "function:", function_name])
-            assert re.match('(?s).*' + match_string, stdout), message
+            assert match_string in stdout
+        #message = "\n".join(["got:", stdout, "expected:", match_string,
+                                 #        "function:", function_name])
+        #assert re.match('(?s).*' + match_string, stdout), message
 
         for match_string in expected["stderr"]:
-            message = "\n".join(["got:", stderr, "expected:", match_string,
-                "function:", function_name])
-            assert re.match('(?s).*' + match_string, stderr), message
+            assert match_string in stderr
+            #message = "\n".join(["got:", stderr, "expected:", match_string,
+            #    "function:", function_name])
+            #assert re.match('(?s).*' + match_string, stderr), message
 
         message = "\n".join(["got:", str(returncode), "expected:",
             str(expected["returncode"]), "stdout:", stdout, "stderr:",
