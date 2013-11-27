@@ -102,8 +102,8 @@
             { "formatVersion":"1.5" , "formatRegistryKey":"fmt/19" , "validator":"" },
             { "formatVersion":"1.6" , "formatRegistryKey":"fmt/20" , "validator":"" },
             { "formatVersion":"1.7" , "formatRegistryKey":"fmt/276" , "validator":"" },
-            { "formatVersion":"A-1a" , "formatRegistryKey":"fmt/95" , "validator":"" },
-            { "formatVersion":"A-1b" , "formatRegistryKey":"fmt/354" , "validator":"" },
+            { "formatVersion":"A-1a" , "formatRegistryKey":"fmt/95" , "validator":"validator.plugin.jhove.Jhove" },
+            { "formatVersion":"A-1b" , "formatRegistryKey":"fmt/354" , "validator":"validator.plugin.jhove.Jhove" },
             { "formatVersion":"A-2a" , "formatRegistryKey":"fmt/476" , "validator":"" },
             { "formatVersion":"A-2b" , "formatRegistryKey":"fmt/477" , "validator":"" },
             { "formatVersion":"A-2u" , "formatRegistryKey":"fmt/478" , "validator":"" }]
