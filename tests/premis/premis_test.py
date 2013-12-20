@@ -11,8 +11,7 @@ from testcommon.casegenerator import pytest_generate_tests
 import random
 import lxml.etree
 
-import premis
-import premis.premis
+from premis import premis
 import validator.filelist
 
 PREMIS_NS = "info:lc/xmlns/premis-v2"
@@ -76,11 +75,13 @@ class TestPremisClass:
         
 
         fileinfo = validator.filelist.FileInfo(fileinfo)
-        event = premis.premis.Event("validation",
+        
+        object = premis.Object( identifierValue = fileinfo.object_id )
+        event = premis.Event("validation",
                                     fileinfo,
-                                    0, "", "")
+                                    0, "", "", object)
 
-        prem = premis.premis.Premis()
+        prem = premis.Premis()
         
         assert abs( len(prem.events) - 0 ) < 0.1
         
@@ -96,11 +97,15 @@ class TestPremisClass:
                                          expected_result):
 
         fileinfo = validator.filelist.FileInfo(fileinfo)
-        event = premis.premis.Event("validation",
-                                    fileinfo,
-                                    arguments["return_value"],
-                                    arguments["stdout"],
-                                    arguments["stderr"])
+        
+        
+        object = premis.Object( identifierValue = fileinfo.object_id )
+        event = premis.Event("validation",
+                             fileinfo,
+                             arguments["return_value"],
+                             arguments["stdout"],
+                             arguments["stderr"],
+                             object)
 
         premis_el  = event.get_element()
 
