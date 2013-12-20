@@ -78,8 +78,7 @@ class TestPremisClass:
         
         object = premis.Object( identifierValue = fileinfo.object_id )
         event = premis.Event("validation",
-                                    fileinfo,
-                                    0, "", "", object)
+                             0, "", "", object)
 
         prem = premis.Premis()
         
@@ -101,7 +100,6 @@ class TestPremisClass:
         
         object = premis.Object( identifierValue = fileinfo.object_id )
         event = premis.Event("validation",
-                             fileinfo,
                              arguments["return_value"],
                              arguments["stdout"],
                              arguments["stderr"],
