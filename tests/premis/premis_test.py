@@ -1,6 +1,8 @@
 # Common test imports / boilerplate
 import os
 import sys
+import tempfile
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..'))
 
@@ -13,6 +15,7 @@ import lxml.etree
 
 from premis import premis
 import validator.filelist
+from validator.plugin.libxml import Libxml
 
 PREMIS_NS = "info:lc/xmlns/premis-v2"
 PREMIS = "{%s}" % PREMIS_NS
@@ -29,6 +32,11 @@ class TestPremisClass:
         [{
           "testcase": 'Test premis class insert method',
           "fileinfo": fileinfo
+        }],
+        "test_premis_xsd_validation":
+        [{
+            "testcase": 'Test XSD validation of Premis report',
+            "fileinfo": fileinfo
         }],
         "test_init_event_class":
         [{
@@ -69,6 +77,31 @@ class TestPremisClass:
          }]
         }
     
+    
+    def test_premis_xsd_validation(self, testcase, fileinfo):
+
+        premis_document = premis.Premis()
+        object = premis.Object()
+        event = premis.Event("validation",
+                             0,
+                             "stdout message",
+                             "stderr message",
+                             object)
+                             
+        premis_document.insert(object)
+        premis_document.insert(event)
+
+        with tempfile.NamedTemporaryFile() as temp:
+            temp.write( premis_document.serialize() )
+            temp.flush()
+        
+            validator = Libxml('text/xml', '1.0', temp.name)
+        
+            (returncode, stdout, stderr) = validator.validate()
+            assert "XSD validation success" in stdout
+        
+        #print premis_document.serialize()
+
     def test_premis_insert(self,
                            testcase,
                            fileinfo):
