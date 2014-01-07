@@ -82,6 +82,8 @@ class TestPremisClass:
 
         premis_document = premis.Premis()
         object = premis.Object()
+        object.fromvalidator()
+        
         event = premis.Event()
         event.fromvalidator("validation",
                             0,
@@ -110,7 +112,8 @@ class TestPremisClass:
 
         fileinfo = validator.filelist.FileInfo(fileinfo)
         
-        object = premis.Object( identifierValue = fileinfo.object_id )
+        object = premis.Object()
+        object.fromvalidator( identifierValue = fileinfo.object_id )
         event = premis.Event()
         event.fromvalidator("validation",
                             0, "", "", object)
@@ -138,7 +141,8 @@ class TestPremisClass:
         fileinfo = validator.filelist.FileInfo(fileinfo)
         
         
-        object = premis.Object( identifierValue = fileinfo.object_id )
+        object = premis.Object()
+        object.fromvalidator( identifierValue = fileinfo.object_id )
         event = premis.Event()
         event.fromvalidator("validation",
                             arguments["return_value"],
