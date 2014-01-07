@@ -38,7 +38,7 @@ install:
 	# we create them here
 	mkdir -p ${ROOT}var/cache/schematron-validation
 	chmod 777 ${ROOT}var/cache/schematron-validation
-
+	echo "/var/cache/schematron-validation" >> INSTALLED_FILES"
 devinstall:
 	# quick and dirty installation...
 	# not for production
