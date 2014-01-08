@@ -103,7 +103,7 @@ class TestPremisClass:
             (returncode, stdout, stderr) = validator.validate()
             assert "XSD validation success" in stdout
         
-        #print premis_document.serialize()
+        print premis_document.serialize()
 
     def test_premis_insert(self,
                            testcase,
@@ -128,7 +128,7 @@ class TestPremisClass:
                 
         prem2 = premis.Premis()
         prem2.fromstring(prem.serialize())
-        print prem2.serialize()
+        #print prem2.serialize()
 
         
 
