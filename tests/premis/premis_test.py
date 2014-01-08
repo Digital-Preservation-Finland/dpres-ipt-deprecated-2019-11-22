@@ -128,7 +128,7 @@ class TestPremisClass:
                 
         prem2 = premis.Premis()
         prem2.fromstring(prem.serialize())
-        print prem2.serialize()
+        #print prem2.serialize()
 
         
 
@@ -150,7 +150,7 @@ class TestPremisClass:
                             arguments["stderr"],
                             object)
 
-        premis_el  = event.find()
+        premis_el  = event.root
 
         #assert event.ttype != None
         #assert event.linking_object_identifier != None
