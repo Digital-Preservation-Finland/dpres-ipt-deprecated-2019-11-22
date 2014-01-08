@@ -82,6 +82,8 @@ class TestPremisClass:
 
         premis_document = premis.Premis()
         object = premis.Object()
+        object.fromvalidator()
+        
         event = premis.Event()
         event.fromvalidator("validation",
                             0,
@@ -101,7 +103,7 @@ class TestPremisClass:
             (returncode, stdout, stderr) = validator.validate()
             assert "XSD validation success" in stdout
         
-        #print premis_document.serialize()
+        print premis_document.serialize()
 
     def test_premis_insert(self,
                            testcase,
@@ -110,7 +112,8 @@ class TestPremisClass:
 
         fileinfo = validator.filelist.FileInfo(fileinfo)
         
-        object = premis.Object( identifierValue = fileinfo.object_id )
+        object = premis.Object()
+        object.fromvalidator( identifierValue = fileinfo.object_id )
         event = premis.Event()
         event.fromvalidator("validation",
                             0, "", "", object)
@@ -125,7 +128,7 @@ class TestPremisClass:
                 
         prem2 = premis.Premis()
         prem2.fromstring(prem.serialize())
-        print prem2.serialize()
+        #print prem2.serialize()
 
         
 
@@ -138,7 +141,8 @@ class TestPremisClass:
         fileinfo = validator.filelist.FileInfo(fileinfo)
         
         
-        object = premis.Object( identifierValue = fileinfo.object_id )
+        object = premis.Object()
+        object.fromvalidator( identifierValue = fileinfo.object_id )
         event = premis.Event()
         event.fromvalidator("validation",
                             arguments["return_value"],
