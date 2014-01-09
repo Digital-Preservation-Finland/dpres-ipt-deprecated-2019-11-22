@@ -119,6 +119,7 @@ class TestPremisClass:
                             0, "", "", object)
 
         prem = premis.Premis()
+        prem.insert(object)
         
         assert abs( len(prem.events) - 0 ) < 0.1
         
@@ -128,7 +129,7 @@ class TestPremisClass:
                 
         prem2 = premis.Premis()
         prem2.fromstring(prem.serialize())
-        #print prem2.serialize()
+        print prem2.serialize()
 
         
 
