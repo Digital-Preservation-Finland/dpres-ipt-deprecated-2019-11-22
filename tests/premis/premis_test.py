@@ -118,8 +118,13 @@ class TestPremisClass:
         event.fromvalidator("validation",
                             0, "", "", object)
 
+
+        agent = premis.Agent()
+        agent.fromvalidator()
+
         prem = premis.Premis()
         prem.insert(object)
+        prem.insert(agent)
         
         assert abs( len(prem.events) - 0 ) < 0.1
         
@@ -144,6 +149,7 @@ class TestPremisClass:
         
         object = premis.Object()
         object.fromvalidator( identifierValue = fileinfo.object_id )
+    
         event = premis.Event()
         event.fromvalidator("validation",
                             arguments["return_value"],
