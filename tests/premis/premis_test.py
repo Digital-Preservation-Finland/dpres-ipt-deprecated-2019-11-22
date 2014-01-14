@@ -85,11 +85,7 @@ class TestPremisClass:
         object.fromvalidator()
         
         event = premis.Event()
-        event.fromvalidator("validation",
-                            0,
-                            "stdout message",
-                            "stderr message",
-                            object)
+        event.fromvalidator(linkingObject = object)
                              
         premis_document.insert(object)
         premis_document.insert(event)
@@ -115,8 +111,7 @@ class TestPremisClass:
         object = premis.Object()
         object.fromvalidator( identifierValue = fileinfo.object_id )
         event = premis.Event()
-        event.fromvalidator("validation",
-                            0, "", "", object)
+        event.fromvalidator(linkingObject = object)
 
 
         agent = premis.Agent()
@@ -151,11 +146,10 @@ class TestPremisClass:
         object.fromvalidator( identifierValue = fileinfo.object_id )
     
         event = premis.Event()
-        event.fromvalidator("validation",
-                            arguments["return_value"],
-                            arguments["stdout"],
-                            arguments["stderr"],
-                            object)
+        event.fromvalidator(returnstatus = arguments["return_value"],
+                            messages = arguments["stdout"],
+                            errors = arguments["stderr"],
+                            linkingObject = object)
 
         premis_el  = event.root
 
