@@ -75,7 +75,8 @@ class TestCommandLineTools:
 
         arguments = [
                 "-c%s" % configfile,
-                "%s" % filename]
+                "%s" % filename,
+                "abc34ge" ]
         
         self.do(pas_scripts.check_sip_digital_objects.main, arguments,
                 expected_result)

@@ -109,7 +109,7 @@ class TestPremisClass:
         fileinfo = validator.filelist.FileInfo(fileinfo)
         
         object = premis.Object()
-        object.fromvalidator( identifierValue = fileinfo.object_id )
+        object.fromvalidator( fileinfo = fileinfo )
         event = premis.Event()
         event.fromvalidator(linkingObject = object)
 
@@ -143,7 +143,7 @@ class TestPremisClass:
         
         
         object = premis.Object()
-        object.fromvalidator( identifierValue = fileinfo.object_id )
+        object.fromvalidator( fileinfo = fileinfo)
     
         event = premis.Event()
         event.fromvalidator(returnstatus = arguments["return_value"],
