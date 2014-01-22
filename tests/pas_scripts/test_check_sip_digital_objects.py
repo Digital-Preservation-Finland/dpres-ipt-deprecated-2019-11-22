@@ -32,15 +32,8 @@ class TestCommandLineTools:
                 "stdout": '',
                 "stderr": ''
             }
-         }, {
-            "testcase": 'Test invalid sip package (invalid jpeg header)',
-            "filename": 'CSC_test003',
-            "expected_result": {
-                "returncode": 1,
-                "stdout": ['Not well-formed'],
-                "stderr": ''
-            }
-         }, {
+         },
+         {
             "testcase": 'Test valid sip package with non-existing validator (ALTO)',
             "filename": 'CSC_test004',
             "expected_result": {
