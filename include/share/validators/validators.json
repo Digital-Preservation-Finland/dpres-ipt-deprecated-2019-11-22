@@ -68,8 +68,11 @@
         },
         { "application/warc" : [
             { "formatVersion":"0.17" , "formatRegistryKey":"fmt/298" , "validator": "validator.plugin.warctools.WarcTools" },
-            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/298" , "validator":  "validator.plugin.warctools.WarcTools" }]
-        }, 
+            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/298" , "validator":  "validator.plugin.jhove2.Jhove2" }]
+        },
+        { "application/x-ia-arc" : [
+            { "formatVersion":"1.1" , "formatRegistryKey":"x-fmt/219" , "validator": "validator.plugin.jhove2.Jhove2" }]
+        },
         { "application/msword" : [
             { "formatVersion":"8.0" , "formatRegistryKey":"fmt/40" , "validator":"" },
             { "formatVersion":"8.5" , "formatRegistryKey":"fmt/40" , "validator":"" },
