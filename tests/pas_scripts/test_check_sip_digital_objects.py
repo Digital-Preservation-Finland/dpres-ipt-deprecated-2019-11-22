@@ -32,6 +32,14 @@ class TestCommandLineTools:
                 "stdout": '',
                 "stderr": ''
             }
+         }, {
+            "testcase": 'Test sip with whitespace sip package #3',
+            "filename": 'CSC whitespace',
+            "expected_result": {
+                "returncode": 0,
+                "stdout": '',
+                "stderr": ''
+            }
          },
          {
             "testcase": 'Test valid sip package with non-existing validator (ALTO)',
@@ -53,7 +61,7 @@ class TestCommandLineTools:
             }
          }]
     }
-    
+
 
     def test_check_sip_digital_objects(self, testcase,
                                        filename, expected_result):
@@ -79,7 +87,7 @@ class TestCommandLineTools:
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                 command, arguments)
 
-        print stdout
+        #print stdout
         print >> sys.stderr, stderr
 
         function_name = "%s.%s" % (command.__module__, command.func_name)
