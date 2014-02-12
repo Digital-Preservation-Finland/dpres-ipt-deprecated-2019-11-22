@@ -16,7 +16,7 @@ Juha Lehtonen 2013-10-21 : CATALOG, SPECIFICATION, CREATED, PID, PIDTYPE attribu
     <sch:pattern name="MetsCatalog">
         <sch:rule context="mets:mets">
 			<sch:assert test="@kdk:CATALOG or @kdk:SPECIFICATION">
-				METS root reqires attribute kdk:CATALOG or kdk:SPECIFICATION (or both) where the used KDK catalog or KDK METS specification version is defined, respectively.
+				METS root requires attribute kdk:CATALOG or kdk:SPECIFICATION (or both) where the used KDK catalog or KDK METS specification version is defined, respectively.
 			</sch:assert>
 		</sch:rule>	
 	</sch:pattern>
@@ -147,6 +147,91 @@ Juha Lehtonen 2013-10-21 : CATALOG, SPECIFICATION, CREATED, PID, PIDTYPE attribu
         </sch:rule>
 	</sch:pattern>
     
+	<!-- Check that the descriptive metadata references in <div> element have the elements -->
+	<sch:pattern name="IDRefDivDesc">
+		<sch:rule context="mets:div[@DMDID]">
+			<sch:let name="refstr" value="normalize-space(@DMDID)"/>
+			<sch:let name="refs" value="distinct-values(tokenize($refstr,' '))"/>
+			<sch:let name="ids" value="distinct-values(ancestor::mets:mets/mets:dmdSec//@ID)"/>
+			<sch:let name="idcount" value="count($ids)"/>
+			<sch:let name="allcount" value="count(distinct-values(($refs, $ids)))"/>
+            <sch:assert test="$allcount = $idcount">
+				The DMDID attribute '<sch:value-of select="$refstr"/>' in element &lt;div&gt; contains a reference to missing element.
+			</sch:assert>
+        </sch:rule>
+	</sch:pattern>
+
+	<!-- Check that the descriptive metadata references in <file> element have the elements -->
+	<sch:pattern name="IDRefFileDesc">
+		<sch:rule context="mets:file[@DMDID]">
+			<sch:let name="refstr" value="normalize-space(@DMDID)"/>
+			<sch:let name="refs" value="distinct-values(tokenize($refstr,' '))"/>
+			<sch:let name="ids" value="distinct-values(ancestor::mets:mets/mets:dmdSec//@ID)"/>
+			<sch:let name="idcount" value="count($ids)"/>
+			<sch:let name="allcount" value="count(distinct-values(($refs, $ids)))"/>
+            <sch:assert test="$allcount = $idcount">
+				The DMDID attribute '<sch:value-of select="$refstr"/>' in element &lt;file&gt; contains a reference to missing element.
+			</sch:assert>
+        </sch:rule>
+	</sch:pattern>
+
+	<!-- Check that the adminitrative metadata references in <file> element have the elements -->
+	<sch:pattern name="IDRefFileAdm">
+		<sch:rule context="mets:file[@ADMID]">
+			<sch:let name="refstr" value="normalize-space(@ADMID)"/>
+			<sch:let name="refs" value="distinct-values(tokenize($refstr,' '))"/>
+			<sch:let name="ids" value="distinct-values(ancestor::mets:mets/mets:amdSec//@ID)"/>
+			<sch:let name="idcount" value="count($ids)"/>
+			<sch:let name="allcount" value="count(distinct-values(($refs, $ids)))"/>
+            <sch:assert test="$allcount = $idcount">
+				The AMDID attribute '<sch:value-of select="$refstr"/>' in element &lt;file&gt; contains a reference to missing element.
+			</sch:assert>
+        </sch:rule>
+	</sch:pattern>
+	
+	<!-- Check that the adminitrative metadata references in <div> element have the elements -->
+	<sch:pattern name="IDRefDivAdm">
+		<sch:rule context="mets:div[@ADMID]">
+			<sch:let name="refstr" value="normalize-space(@ADMID)"/>
+			<sch:let name="refs" value="distinct-values(tokenize($refstr,' '))"/>
+			<sch:let name="ids" value="distinct-values(ancestor::mets:mets/mets:amdSec//@ID)"/>
+			<sch:let name="idcount" value="count($ids)"/>
+			<sch:let name="allcount" value="count(distinct-values(($refs, $ids)))"/>
+            <sch:assert test="$allcount = $idcount">
+				The ADMID attribute '<sch:value-of select="$refstr"/>' in element &lt;div&gt; contains a reference to missing element.
+			</sch:assert>
+        </sch:rule>
+	</sch:pattern>
+
+	<!-- Check that the file reference in <fptr> element have the file element -->
+	<sch:pattern name="IDRefFptr">
+		<sch:rule context="mets:fptr[@FILEID]">
+			<sch:let name="refstr" value="normalize-space(@FILEID)"/>
+			<sch:let name="refs" value="$refstr"/>
+			<sch:let name="ids" value="distinct-values(ancestor::mets:mets//mets:file/@ID)"/>
+			<sch:let name="idcount" value="count($ids)"/>
+			<sch:let name="allcount" value="count(distinct-values(($refs, $ids)))"/>
+            <sch:assert test="$allcount = $idcount">
+				The FILEID attribute '<sch:value-of select="$refstr"/>' in element &lt;fptr&gt; contains a reference to missing element.
+			</sch:assert>
+        </sch:rule>
+	</sch:pattern>
+
+	<!-- Check that the file reference in <area> element have the file element -->
+	<sch:pattern name="IDRefFptr">
+		<sch:rule context="mets:area[@FILEID]">
+			<sch:let name="refstr" value="normalize-space(@FILEID)"/>
+			<sch:let name="refs" value="$refstr"/>
+			<sch:let name="ids" value="distinct-values(ancestor::mets:mets//mets:file/@ID)"/>
+			<sch:let name="idcount" value="count($ids)"/>
+			<sch:let name="allcount" value="count(distinct-values(($refs, $ids)))"/>
+            <sch:assert test="$allcount = $idcount">
+				The FILEID attribute '<sch:value-of select="$refstr"/>' in element &lt;fptr&gt; contains a reference to missing element.
+			</sch:assert>
+        </sch:rule>
+	</sch:pattern>
+	
+	
 	<!-- Check that descriptive metadata has a reference -->
 	<sch:pattern name="IDReferencesDesc">
 		<sch:rule context="mets:dmdSec">
