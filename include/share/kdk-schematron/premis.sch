@@ -5,7 +5,10 @@
 <!--
 Validates various PREMIS issues.
 Juha Lehtonen 2013-10-21 : Initial version
-Juha Lehtonen 2013-02-07 : MIME type added for ARC files. Filetype versions and Pronom keys added.
+Juha Lehtonen 2014-02-07 : MIME type added for ARC files. Filetype versions and Pronom keys added.
+Jukka Kervinen 2014-02-12 : Added <sch:value-of select="."/> to identifier test outputs.
+Jukka Kervinen 2014-02-13 : Fixed premis:rightsIdentifierValue -> premis:rightsStatementIdentifierValue.
+Juha Lehtonen 2014-02-14 : MIME type related check restricted only in mets:techMD section
 -->
 
 	<sch:ns prefix="mets" uri="http://www.loc.gov/METS/"/>
@@ -34,13 +37,13 @@ Juha Lehtonen 2013-02-07 : MIME type added for ARC files. Filetype versions and 
 	
 	<!-- Check that mime type and registy key is correct. Version and registry key not obligatory. -->
     <sch:pattern name="CheckFormat">
-	    <sch:rule context="premis:format">
-            <sch:assert test="premis:formatDesignation">
+	    <sch:rule context="mets:techMD//premis:format">
+            <sch:assert test=".//premis:formatDesignation">
            		Missing MIME type inside the element &lt;premis:format&gt;.
 			</sch:assert>
 			<sch:let name="index" value="index-of($mime, normalize-space(.//premis:formatName))"/>
             <sch:assert test="count($index) > 0">
-           		Invalid MIME type in element &lt;premis:formatName&gt;.
+           		Invalid MIME type '<sch:value-of select=".//premis:formatName"/>' in element &lt;premis:formatName&gt;.
 			</sch:assert>
             <sch:assert test="(count(.//premis:formatVersion) = 0) or contains(concat(' ', normalize-space($mimeVersion[$index[1]]), ' '), concat(' ', normalize-space(.//premis:formatVersion), ' ')) or (normalize-space(.//premis:formatVersion) = '') or ($mimeVersion[$index[1]] = '')">
            		Invalid version '<sch:value-of select=".//premis:formatVersion"/>' in element &lt;premis:formatVersion&gt;, when format name is '<sch:value-of select=".//premis:formatName"/>'.
@@ -53,7 +56,7 @@ Juha Lehtonen 2013-02-07 : MIME type added for ARC files. Filetype versions and 
 
 	<!-- Check that checksum algorithms are correct -->
     <sch:pattern name="CheckDigestAlgorithm">
-	    <sch:rule context="premis:messageDigestAlgorithm">
+		<sch:rule context="premis:messageDigestAlgorithm">
            <sch:assert test="contains(concat(' ', normalize-space($checksum), ' '), concat(' ', normalize-space(), ' '))">
 				Invalid checksum algorithm '<sch:value-of select="."/>' used in element &lt;premis:messageDigestAlgorithm&gt;.
 			</sch:assert>
@@ -65,22 +68,22 @@ Juha Lehtonen 2013-02-07 : MIME type added for ARC files. Filetype versions and 
         <sch:rule context="premis:objectIdentifierValue">
 			<sch:let name="id" value="normalize-space(.)"/>
             <sch:assert test="count(ancestor::mets:mets//premis:objectIdentifierValue[normalize-space(.) = $id]) = 1">
-				The PREMIS object identifiers must be unique. Another object identifier with the same value exists in Premis.
+            	The PREMIS object identifiers must be unique. Another object identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
             <sch:assert test="count(ancestor::mets:mets//premis:eventIdentifierValue[normalize-space(.) = $id]) = 0">
-				The PREMIS object identifiers must be unique. Another event identifier with the same value exists in Premis.
+            	The PREMIS object identifiers must be unique. Another event identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
             <sch:assert test="count(ancestor::mets:mets//premis:agentIdentifierValue[normalize-space(.) = $id]) = 0">
-				The PREMIS object identifiers must be unique. Another agent identifier with the same value exists in Premis.
+            	The PREMIS object identifiers must be unique. Another agent identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
-            <sch:assert test="count(ancestor::mets:mets//premis:rightsIdentifierValue[normalize-space(.) = $id]) = 0">
-				The PREMIS object identifiers must be unique. Another rights identifier with the same value exists in Premis.
+        	<sch:assert test="count(ancestor::mets:mets//premis:rightsStatementIdentifierValue[normalize-space(.) = $id]) = 0">
+            	The PREMIS object identifiers must be unique. Another rights identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
         </sch:rule>		
         <sch:rule context="premis:linkingObjectIdentifierValue">
 			<sch:let name="id" value="normalize-space(.)"/>
             <sch:assert test="count(ancestor::mets:mets//premis:objectIdentifierValue[normalize-space(.) = $id]) = 1">
-				Missing target with the linking object identifier.
+            	Missing target '<sch:value-of select="."/>' with the linking object identifier.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -90,22 +93,22 @@ Juha Lehtonen 2013-02-07 : MIME type added for ARC files. Filetype versions and 
         <sch:rule context="premis:eventIdentifierValue">
 			<sch:let name="id" value="normalize-space(.)"/>
             <sch:assert test="count(ancestor::mets:mets//premis:objectIdentifierValue[normalize-space(.) = $id]) = 0">
-				The PREMIS event identifiers must be unique. Another object identifier with the same value exists in Premis.
+            	The PREMIS event identifiers must be unique. Another object identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
             <sch:assert test="count(ancestor::mets:mets//premis:eventIdentifierValue[normalize-space(.) = $id]) = 1">
-				The PREMIS event identifiers must be unique. Another event identifier with the same value exists in Premis.
+            	The PREMIS event identifiers must be unique. Another event identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
             <sch:assert test="count(ancestor::mets:mets//premis:agentIdentifierValue[normalize-space(.) = $id]) = 0">
-				The PREMIS event identifiers must be unique. Another agent identifier with the same value exists in Premis.
+            	The PREMIS event identifiers must be unique. Another agent identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
-            <sch:assert test="count(ancestor::mets:mets//premis:rightsIdentifierValue[normalize-space(.) = $id]) = 0">
-				The PREMIS event identifiers must be unique. Another rights identifier with the same value exists in Premis.
+        	<sch:assert test="count(ancestor::mets:mets//premis:rightsStatementIdentifierValue[normalize-space(.) = $id]) = 0">
+            	The PREMIS event identifiers must be unique. Another rights identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
         </sch:rule>		
         <sch:rule context="premis:linkingEventIdentifierValue">
 			<sch:let name="id" value="normalize-space(.)"/>
             <sch:assert test="count(ancestor::mets:mets//premis:eventIdentifierValue[normalize-space(.) = $id]) = 1">
-				Missing target with the linking event identifier.
+            	Missing target '<sch:value-of select="."/>'  with the linking event identifier.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -115,47 +118,47 @@ Juha Lehtonen 2013-02-07 : MIME type added for ARC files. Filetype versions and 
         <sch:rule context="premis:agentIdentifierValue">
 			<sch:let name="id" value="normalize-space(.)"/>
             <sch:assert test="count(ancestor::mets:mets//premis:objectIdentifierValue[normalize-space(.) = $id]) = 0">
-				The PREMIS agent identifiers must be unique. Another object identifier with the same value exists in Premis.
+            	The PREMIS agent identifiers must be unique. Another object identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
             <sch:assert test="count(ancestor::mets:mets//premis:eventIdentifierValue[normalize-space(.) = $id]) = 0">
-				The PREMIS agent identifiers must be unique. Another event identifier with the same value exists in Premis.
+            	The PREMIS agent identifiers must be unique. Another event identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
             <sch:assert test="count(ancestor::mets:mets//premis:agentIdentifierValue[normalize-space(.) = $id]) = 1">
-				The PREMIS agent identifiers must be unique. Another agent identifier with the same value exists in Premis.
+            	The PREMIS agent identifiers must be unique. Another agent identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
-            <sch:assert test="count(ancestor::mets:mets//premis:rightsIdentifierValue[normalize-space(.) = $id]) = 0">
-				The PREMIS agent identifiers must be unique. Another rights identifier with the same value exists in Premis.
+        	<sch:assert test="count(ancestor::mets:mets//premis:rightsStatementIdentifierValue[normalize-space(.) = $id]) = 0">
+            	The PREMIS agent identifiers must be unique. Another rights identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
         </sch:rule>		
         <sch:rule context="premis:linkingAgentIdentifierValue">
 			<sch:let name="id" value="normalize-space(.)"/>
             <sch:assert test="count(ancestor::mets:mets//premis:agentIdentifierValue[normalize-space(.) = $id]) = 1">
-				Missing target with the linking agent identifier.
+            	Missing target '<sch:value-of select="."/>' with the linking agent identifier.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
 	
 	<!-- Check that Premis rights identifiers are unique and linkingObjects have a target -->
 	<sch:pattern name="RightsID">
-        <sch:rule context="premis:rightsIdentifierValue">
+		<sch:rule context="premis:rightsStatementIdentifierValue">
 			<sch:let name="id" value="normalize-space(.)"/>
             <sch:assert test="count(ancestor::mets:mets//premis:objectIdentifierValue[normalize-space(.) = $id]) = 0">
-				The PREMIS rights identifiers must be unique. Another object identifier with the same value exists in Premis.
+            	The PREMIS rights identifiers must be unique. Another object identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
             <sch:assert test="count(ancestor::mets:mets//premis:eventIdentifierValue[normalize-space(.) = $id]) = 0">
-				The PREMIS rights identifiers must be unique. Another event identifier with the same value exists in Premis.
+            	The PREMIS rights identifiers must be unique. Another event identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
             <sch:assert test="count(ancestor::mets:mets//premis:agentIdentifierValue[normalize-space(.) = $id]) = 0">
-				The PREMIS rights identifiers must be unique. Another agent identifier with the same value exists in Premis.
+            	The PREMIS rights identifiers must be unique. Another agent identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
-            <sch:assert test="count(ancestor::mets:mets//premis:rightsIdentifierValue[normalize-space(.) = $id]) = 1">
-				The PREMIS rights identifiers must be unique. Another rights identifier with the same value exists in Premis.
+            <sch:assert test="count(ancestor::mets:mets//premis:rightsStatementIdentifierValue[normalize-space(.) = $id]) = 1">
+            	The PREMIS rights identifiers must be unique. Another rights identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
         </sch:rule>		
         <sch:rule context="premis:linkingRightsIdentifierValue">
 			<sch:let name="id" value="normalize-space(.)"/>
-            <sch:assert test="count(ancestor::mets:mets//premis:rightsIdentifierValue[normalize-space(.) = $id]) = 1">
-				Missing target with the linking rights identifier.
+        	<sch:assert test="count(ancestor::mets:mets//premis:rightsStatementIdentifierValue[normalize-space(.) = $id]) = 1">
+            	Missing target '<sch:value-of select="."/>' with the linking rights identifier.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
