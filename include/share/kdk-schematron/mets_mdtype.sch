@@ -101,9 +101,9 @@ Juha Lehtonen 2013-07-08 : Initial version
 
 	<!-- Check the case LIDO -->
 	<sch:pattern name="CheckLido">
-        <sch:rule context="mets:mdWrap[@MDTYPE='OTHER' and @MDTYPEOTHER='LIDO']">
+        <sch:rule context="mets:mdWrap[@MDTYPE='LIDO']">
 			<sch:assert test="mets:xmlData/lido:*">
-				MDTYPEOTHER attribute is 'LIDO', but the contained XML data is something else.
+				MDTYPE attribute is 'LIDO', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
