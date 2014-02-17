@@ -9,6 +9,7 @@ Juha Lehtonen 2014-02-14 : False messages related to PreviousImageMetadata eleme
 -->
 	
 	<sch:ns prefix="mix" uri="http://www.loc.gov/mix/v20"/>
+	<sch:ns prefix="str" uri="http://exslt.org/strings"/>
 
 	<!-- Compression scheme is in separate list -->
     <sch:pattern name="EnumeratedCompressionList">
@@ -60,8 +61,8 @@ Juha Lehtonen 2014-02-14 : False messages related to PreviousImageMetadata eleme
 	<!-- The number of values in bitsPerSampleValue must be same as the value in samplesPerPixel -->
     <sch:pattern name="BitsPerSample">
         <sch:rule context="mix:bitsPerSampleValue">
-			<sch:let name="countValues" value="count(tokenize(.,','))"/>
-			<sch:assert test="$countValues = number(../../mix:samplesPerPixel)">
+			<sch:let name="countValues" value="count(str:tokenize(.,','))"/>
+			<sch:assert test="$countValues = number(../../mix:samplesPerPixel) or $countValues=1">
 				Element &lt;mix:bitsPerSampleValue&gt; must have same count of values (separated with comma character) as the value in &lt;mix:samplesPerPixel&gt;.
 			</sch:assert>
 		</sch:rule>
