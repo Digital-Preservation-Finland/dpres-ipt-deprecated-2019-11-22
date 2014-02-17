@@ -41,11 +41,12 @@
 	<uri name="ddi:codebook:2_5" uri="ddi-codebook/codebook.xsd"/>
 
  	<!-- Technical metadata -->
+	<rewriteURI uriStartString="http://www.loc.gov/standards/premis/premis.xsd" rewritePrefix="external/premis/premis.xsd"/>
+	<uri name="info:lc/xmlns/premis-v2" uri="external/premis/premis.xsd"/>
 	<uri name="http://www.loc.gov/mix/v20" uri="mix/mix.xsd"/>
 	<uri name="info:lc/xmlns/textMD" uri="textmd/textmd.xsd"/>
 	<uri name="http://www.loc.gov/audioMD/" uri="avmd/audiomd.xsd"/>
 	<uri name="http://www.loc.gov/videoMD/" uri="avmd/videomd.xsd"/>
-	<uri name="info:lc/xmlns/premis-v2" uri="external/premis/premis.xsd"/>
 
 	<!-- METS schemas -->
 	<uri name="http://cosimo.stanford.edu/sdr/metsrights/" uri="external/metsrights/METSRights.xsd"/>

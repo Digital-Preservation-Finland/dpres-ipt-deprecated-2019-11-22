@@ -20,12 +20,15 @@ from validator.plugin.libxml import Libxml
 PREMIS_NS = "info:lc/xmlns/premis-v2"
 PREMIS = "{%s}" % PREMIS_NS
 NAMESPACES = {'p': PREMIS_NS }
-PREMIS_VERSION = "2.0"
+PREMIS_VERSION = "2.2"
+
+CATALOGPATH = os.path.join(testcommon.settings.SHAREDIR, 'schema/catalog-local.xml')
+
 
 class TestPremisClass:
 
     # Generate random fileinfo array: seven random strings in a array
-    fileinfo = ['%030x' % random.randrange(16**30) for _ in range(0, 7)]
+    fileinfo = ['%030x' % random.randrange(16**30) for _ in range(0, 8)]
     
     testcases = {
         "test_premis_insert":
@@ -49,10 +52,8 @@ class TestPremisClass:
             },
             "expected_result": {
                 "number_of_events": 1,
-                "eventIdentifierValue": "pas-validation-" + fileinfo[6],
-                "linkingObjectidenfierValue": fileinfo[6],
                 "eventtype": "validation",
-                "outcome": "Passed",
+                "outcome": "success",
                 "outcome_details": "stdout messagestderr message",
                 "datetime": 1
             }
@@ -67,10 +68,8 @@ class TestPremisClass:
              },
              "expected_result": {
                "number_of_events": 1,
-               "eventIdentifierValue": "pas-validation-" + fileinfo[6],
-               "linkingObjectidenfierValue": fileinfo[6],
                "eventtype": "validation",
-               "outcome": "Failed",
+               "outcome": "failure",
                "outcome_details": "stdout messagestderr message",
                "datetime": 1
              }
@@ -95,6 +94,7 @@ class TestPremisClass:
             temp.flush()
         
             validator = Libxml('text/xml', '1.0', temp.name)
+            validator.addCatalog(CATALOGPATH)   
         
             (returncode, stdout, stderr) = validator.validate()
             assert "XSD validation success" in stdout
@@ -133,11 +133,8 @@ class TestPremisClass:
 
         
 
-    def test_init_event_class(self,
-                                         testcase,
-                                         fileinfo,
-                                         arguments,
-                                         expected_result):
+    def test_init_event_class(self, testcase, fileinfo, arguments,
+                              expected_result):
 
         fileinfo = validator.filelist.FileInfo(fileinfo)
         
@@ -165,20 +162,7 @@ class TestPremisClass:
         queries["number_of_events"] = \
             'count(/p:event)'
 
-        # Is there a p:eventIdentifierValue
-        queries["eventIdentifierValue"] = \
-            '/p:event/p:eventIdentifier/p:eventIdentifierValue/text()'
-
-        # Is there a p:eventIdentifierValue
-        queries["eventIdentifierValue"] = \
-            '/p:event/p:eventIdentifier/p:eventIdentifierValue/text()'
-
-        # Is thera a p:linkingObjectIdentifierValue
-        queries["linkingObjectidenfierValue"] = \
-            '/p:event/p:linkingObjectIdentifier' + \
-            '/p:linkingObjectIdentifierValue/text()'
-
-        # Does p:eventtype match
+            # Does p:eventtype match
         queries["eventtype"] = \
             '/p:event/p:eventType/text()'
 
@@ -195,12 +179,12 @@ class TestPremisClass:
         queries["datetime"] = \
             'count(/p:event/p:eventDateTime)'
         
-        # For validating p:eventDateTime take a look
+        # For validating p:eventDateTime take a look at 
         # http://digital2.library.unt.edu/edtf/
 
 
         for query in queries:
-            result = premis_el.xpath( queries[query]  , namespaces=NAMESPACES)
+            result = premis_el.xpath( queries[query], namespaces=NAMESPACES)
             
             if type(result) is list:
                 assert result[0] in expected_result[query]

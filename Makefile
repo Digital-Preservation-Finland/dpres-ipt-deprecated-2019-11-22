@@ -30,6 +30,9 @@ install:
 	chmod -R 755 "${SHAREDIR}"
 	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
 
+	# write version module
+	python print_version_module.py > "src/version.py"
+
 	# SIP_python package is using Python setuptools
 	python setup.py build ; python ./setup.py install -O1 --prefix="${PREFIX}" --root="${ROOT}" --record=INSTALLED_FILES
 	INSTALLED_FILES | sed 's/^/\//g' >> INSTALLED_FILES
