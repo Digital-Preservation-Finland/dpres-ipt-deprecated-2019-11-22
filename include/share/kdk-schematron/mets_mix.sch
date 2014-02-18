@@ -6,6 +6,7 @@
 Validates various issues in NISOIMG (MIX) metadata.
 Juha Lehtonen 2013-07-08 : Initial version
 Juha Lehtonen 2014-02-14 : False messages related to PreviousImageMetadata element fixed. Checks for JPEG2000 and bitsPerSampleValue elements added.
+Juha Lehtonen 2014-02-17 : Fixed to meet XPath 1.0 and EXSLT. A single integer for bitsPerSampleValue element accepted.
 -->
 	
 	<sch:ns prefix="mix" uri="http://www.loc.gov/mix/v20"/>

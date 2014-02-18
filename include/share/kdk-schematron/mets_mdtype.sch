@@ -5,6 +5,7 @@
 <!--
 Validates that the used metadata type inside mdWrap element is same as defined in MDTYPE or MDTYPEOTHER attribute.
 Juha Lehtonen 2013-07-08 : Initial version
+Juha Lehtonen 2013-07-17 : LIDO bugfix.
 -->
 
 	

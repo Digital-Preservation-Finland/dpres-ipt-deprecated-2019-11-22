@@ -5,7 +5,7 @@
 Validates various internal issues in METS metadata.
 Juha Lehtonen 2013-07-08 : Initial version
 Juha Lehtonen 2013-10-21 : CATALOG, SPECIFICATION, CREATED, PID, PIDTYPE attribute check added. FILEID check modified.
-Juha Lehtonen 2014-02-17 : ID/IDREF check added. Fixed to meet xsltproc.
+Juha Lehtonen 2014-02-17 : ID/IDREF check added. Fixed to meet XPath 1.0 and EXSLT.
 -->
 
     <sch:title>METS internal inspection</sch:title>
