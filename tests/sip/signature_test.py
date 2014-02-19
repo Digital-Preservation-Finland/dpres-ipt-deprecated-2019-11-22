@@ -1,5 +1,4 @@
-# Common coilerplate
-import pytest
+import testcommon.test_utils
 import testcommon.settings
 
 # Module to test
@@ -8,10 +7,8 @@ import sip.signature
 # Other imports
 import shutil
 import tempfile
-import time
 import os
 import sys
-import re
 import subprocess
 
 DATAROOT = os.path.join(
@@ -19,6 +16,27 @@ DATAROOT = os.path.join(
 
 
 class TestVerifyManifestSMIME:
+
+    def test_create_report_signature(self):
+
+        test_util = testcommon.test_utils.Utils()
+        test_util.tempdir('reports')
+        self.report_path = os.path.join(test_util.tempdir('reports'), 'varmiste.sig')
+
+        #creating a test xml-report
+        report_path = os.path.join(os.path.dirname(self.report_path), 'report.xml')
+        testcommon.test_utils.run_command("echo 'report' >> " + report_path)
+
+        # creating signaturefile for report
+        signature = sip.signature.ManifestSMIME(
+                        signature_filename=self.report_path,
+                        private_key="/home/spock/.ssl/keys/kdk-pas-sip-signing-key.pem",
+                        public_key="/home/spock/.ssl/keys/kdk-pas-sip-signing-key.pem")
+
+        #signature.new_signing_key()
+        signature.write_signature_file()
+        print testcommon.test_utils.run_command("cat " + self.report_path)
+
 
     def set_defaults(self):
 
@@ -48,11 +66,10 @@ class TestVerifyManifestSMIME:
 
         self.signature = None
 
-    def test_01_new_rsa_keypair(self):
+    def Xtest_01_new_rsa_keypair(self):
 
         try:
             self.init_test()
-
             self.signature.new_signing_key()
 
             assert os.path.isfile(self.private_key), "Private key found %s" % (
@@ -67,8 +84,6 @@ class TestVerifyManifestSMIME:
                                  close_fds=False, shell=True)
 
             (stdout, stderr) = p.communicate()
-
-            # print stderr
 
             assert len(stderr) == 0, "No errors in certificate"
             assert stdout.find("Subject: C=FI, ST=Uusimaa, L=Helsinki, " +
@@ -141,7 +156,7 @@ class TestVerifyManifestSMIME:
             assert stdout.find(
                 ':mets.xml') == 45, "Contains checksum file name"
 
-    def test_04_valid_certificate(self):
+    def Xtest_04_valid_certificate(self):
         try:
             self.init_sip_test()
             self.signature.new_signing_key()
@@ -167,7 +182,7 @@ class TestVerifyManifestSMIME:
         finally:
             self.cleanup_sip_test()
 
-    def test_04_no_certificate(self):
+    def Xtest_04_no_certificate(self):
         try:
             self.init_sip_test()
 
@@ -186,7 +201,7 @@ class TestVerifyManifestSMIME:
         finally:
             self.cleanup_sip_test()
 
-    def test_05_invalid_certificate(self):
+    def Xtest_05_invalid_certificate(self):
 
         try:
             self.init_sip_test()
@@ -221,7 +236,7 @@ class TestVerifyManifestSMIME:
         finally:
             self.cleanup_sip_test()
 
-    def test_06_expired_certificate(self):
+    def Xtest_06_expired_certificate(self):
         try:
             self.init_sip_test()
 
@@ -251,7 +266,7 @@ class TestVerifyManifestSMIME:
             self.cleanup_sip_test()
         pass
 
-    def test_08_altered_mets_xml(self):
+    def Xtest_08_altered_mets_xml(self):
         try:
             self.init_sip_test()
             self.signature.new_signing_key()
