@@ -1,14 +1,16 @@
-import testcommon.test_utils
+import os
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import testcommon.settings
-
+import testcommon.test_utils
 # Module to test
 import sip.signature
 
 # Other imports
 import shutil
 import tempfile
-import os
-import sys
+
+
 import subprocess
 
 DATAROOT = os.path.join(
@@ -33,10 +35,13 @@ class TestVerifyManifestSMIME:
                         private_key="/home/spock/.ssl/keys/kdk-pas-sip-signing-key.pem",
                         public_key="/home/spock/.ssl/keys/kdk-pas-sip-signing-key.pem")
 
-        #signature.new_signing_key()
+        signature.new_signing_key()
         signature.write_signature_file()
-        print testcommon.test_utils.run_command("cat " + self.report_path)
-
+        (ret, stdout, stderr) = testcommon.test_utils.run_command("cat " + self.report_path)
+        print stdout, stderr
+        (ret, stdout, stderr) = testcommon.test_utils.run_command("ls -la " + self.report_path)
+        print stdout, stderr
+        assert ret == 0
 
     def set_defaults(self):
 
@@ -66,7 +71,7 @@ class TestVerifyManifestSMIME:
 
         self.signature = None
 
-    def Xtest_01_new_rsa_keypair(self):
+    def test_01_new_rsa_keypair(self):
 
         try:
             self.init_test()
@@ -156,7 +161,7 @@ class TestVerifyManifestSMIME:
             assert stdout.find(
                 ':mets.xml') == 45, "Contains checksum file name"
 
-    def Xtest_04_valid_certificate(self):
+    def test_04_valid_certificate(self):
         try:
             self.init_sip_test()
             self.signature.new_signing_key()
@@ -182,7 +187,7 @@ class TestVerifyManifestSMIME:
         finally:
             self.cleanup_sip_test()
 
-    def Xtest_04_no_certificate(self):
+    def test_04_no_certificate(self):
         try:
             self.init_sip_test()
 
@@ -201,7 +206,7 @@ class TestVerifyManifestSMIME:
         finally:
             self.cleanup_sip_test()
 
-    def Xtest_05_invalid_certificate(self):
+    def test_05_invalid_certificate(self):
 
         try:
             self.init_sip_test()
@@ -236,7 +241,7 @@ class TestVerifyManifestSMIME:
         finally:
             self.cleanup_sip_test()
 
-    def Xtest_06_expired_certificate(self):
+    def test_06_expired_certificate(self):
         try:
             self.init_sip_test()
 
@@ -266,7 +271,7 @@ class TestVerifyManifestSMIME:
             self.cleanup_sip_test()
         pass
 
-    def Xtest_08_altered_mets_xml(self):
+    def test_08_altered_mets_xml(self):
         try:
             self.init_sip_test()
             self.signature.new_signing_key()
