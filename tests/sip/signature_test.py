@@ -1,17 +1,16 @@
-# Common coilerplate
-import pytest
+import os
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import testcommon.settings
-
+import testcommon.test_utils
 # Module to test
 import sip.signature
 
 # Other imports
 import shutil
 import tempfile
-import time
-import os
-import sys
-import re
+
+
 import subprocess
 
 DATAROOT = os.path.join(
@@ -19,6 +18,30 @@ DATAROOT = os.path.join(
 
 
 class TestVerifyManifestSMIME:
+
+    def test_create_report_signature(self):
+
+        test_util = testcommon.test_utils.Utils()
+        test_util.tempdir('reports')
+        self.report_path = os.path.join(test_util.tempdir('reports'), 'varmiste.sig')
+
+        #creating a test xml-report
+        report_path = os.path.join(os.path.dirname(self.report_path), 'report.xml')
+        testcommon.test_utils.run_command("echo 'report' >> " + report_path)
+
+        # creating signaturefile for report
+        signature = sip.signature.ManifestSMIME(
+                        signature_filename=self.report_path,
+                        private_key="/home/spock/.ssl/keys/kdk-pas-sip-signing-key.pem",
+                        public_key="/home/spock/.ssl/keys/kdk-pas-sip-signing-key.pem")
+
+        signature.new_signing_key()
+        signature.write_signature_file()
+        (ret, stdout, stderr) = testcommon.test_utils.run_command("cat " + self.report_path)
+        print stdout, stderr
+        (ret, stdout, stderr) = testcommon.test_utils.run_command("ls -la " + self.report_path)
+        print stdout, stderr
+        assert ret == 0
 
     def set_defaults(self):
 
@@ -52,7 +75,6 @@ class TestVerifyManifestSMIME:
 
         try:
             self.init_test()
-
             self.signature.new_signing_key()
 
             assert os.path.isfile(self.private_key), "Private key found %s" % (
@@ -67,8 +89,6 @@ class TestVerifyManifestSMIME:
                                  close_fds=False, shell=True)
 
             (stdout, stderr) = p.communicate()
-
-            # print stderr
 
             assert len(stderr) == 0, "No errors in certificate"
             assert stdout.find("Subject: C=FI, ST=Uusimaa, L=Helsinki, " +
