@@ -31,9 +31,7 @@ class TestVerifyManifestSMIME:
 
         # creating signaturefile for report
         signature = sip.signature.ManifestSMIME(
-                        signature_filename=self.report_path,
-                        private_key="/home/spock/.ssl/keys/kdk-pas-sip-signing-key.pem",
-                        public_key="/home/spock/.ssl/keys/kdk-pas-sip-signing-key.pem")
+                        signature_filename=self.report_path)
 
         signature.new_signing_key()
         signature.write_signature_file()
