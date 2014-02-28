@@ -70,17 +70,6 @@ class TestCommandLineTools:
                 "stderr": "",
                 "in_stderr": ""
             }
-         },
-         {
-            "testcase": "Test invalid signature",
-            "sipname": "CSC_test005",
-            "expected_result": {
-                "returncode": 1,
-                "in_stdout": ["Error"],
-                "not_in_stdout": [],
-                "stderr": "",
-                "in_stderr": []
-            }
          }
          ],
             "test_create_aip":
@@ -318,13 +307,30 @@ class TestCommandLineTools:
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
                                'test-sips/' + sipname + '/mets.xml')
 
+
+
+        certificate_dir = os.path.join(testcommon.settings.TESTDATADIR,
+                                'sip-signature/')
+        certificate_path = certificate_dir + 'valid-certificate.pem'
+                                
+        sip_dir = tempfile.mkdtemp()
+        os.chdir(sip_dir)
+        shutil.copy(mets_path, sip_dir)
+        mets_path = sip_dir + '/mets.xml'
+        
+        command = pas_scripts.sign_xml_file.main
+        arguments = [certificate_path, mets_path]
+        (returncode, stdout, stderr) = testcommon.shell.run_main(
+                                                         command, arguments)
+                                                         
+        assert returncode == 0
         
         command = pas_scripts.check_sip_signature.main
-        arguments = [mets_path]
+        arguments = ["-c" + certificate_dir, mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command, arguments)
 
-        assert returncode == expected_result['returncode'], stdout+stderr
+        assert returncode == expected_result['returncode']
         assert stderr == expected_result['stderr']
     
         for message in expected_result['in_stdout']:
