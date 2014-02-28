@@ -313,7 +313,7 @@ class TestCommandLineTools:
         for message in expected_result['in_stderr']:
             assert message in stderr
 
-    def test_check_sip_signature(self, testcase, sipname,   expected_result):
+    def test_check_sip_signature(self, testcase, sipname, expected_result):
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
                                'test-sips/' + sipname + '/mets.xml')
@@ -324,7 +324,7 @@ class TestCommandLineTools:
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command, arguments)
 
-        assert returncode == expected_result['returncode']
+        assert returncode == expected_result['returncode'], stdout+stderr
         assert stderr == expected_result['stderr']
     
         for message in expected_result['in_stdout']:
