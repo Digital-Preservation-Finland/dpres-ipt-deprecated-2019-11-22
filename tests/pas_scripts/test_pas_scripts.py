@@ -14,7 +14,7 @@ from testcommon.casegenerator import pytest_generate_tests
 # Modules to test
 import pas_scripts.restructure_sip
 import pas_scripts.create_aip
-import pas_scripts.sign_sip
+import pas_scripts.sign_xml_file
 import pas_scripts.check_sip_signature
 import pas_scripts.check_sip_file_checksums
 import pas_scripts.check_sip_digital_objects
@@ -34,7 +34,7 @@ class TestCommandLineTools:
                 "stderr": ""
             }
          }],
-            "test_sign_sip":
+            "test_sign_xml_file":
         [{
             "testcase": "Test valid signature",
             "certificate": "valid-certificate.pem",
@@ -50,8 +50,8 @@ class TestCommandLineTools:
             "testcase": "Test invalid signature",
             "certificate": "invalid-certificate.pem",
             "expected_result": {
-                "returncode": 0, # sign_sip returns zero even in case of error
-                                 # and prints errors to stdout 
+                "returncode": 0, # sign_xml_file returns zero even in case of
+                                 # error and prints errors to stdout
                 "in_stdout": ["No such file or directory"],
                 "not_in_stdout": ["File does not exist", "Nonlisted file"],
                 "stderr": "",
@@ -76,7 +76,7 @@ class TestCommandLineTools:
             "sipname": "CSC_test005",
             "expected_result": {
                 "returncode": 1,
-                "in_stdout": ["Can\'t open input file"],
+                "in_stdout": ["Error"],
                 "not_in_stdout": [],
                 "stderr": "",
                 "in_stderr": []
@@ -283,7 +283,7 @@ class TestCommandLineTools:
         for file in restructure_files:
             assert file in restructure_files
 
-    def test_sign_sip(self, testcase, certificate, expected_result):
+    def test_sign_xml_file(self, testcase, certificate, expected_result):
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
                                  'test-sips/CSC_test005/mets.xml')
@@ -294,8 +294,8 @@ class TestCommandLineTools:
         os.chdir(sip_dir)
         shutil.copy(mets_path, sip_dir)
         
-        command = pas_scripts.sign_sip.main
-        arguments = [certificate_path]
+        command = pas_scripts.sign_xml_file.main
+        arguments = [certificate_path, mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command, arguments)
                                                          
