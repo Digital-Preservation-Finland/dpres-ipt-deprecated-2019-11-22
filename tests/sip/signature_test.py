@@ -153,11 +153,9 @@ class TestVerifyManifestSMIME:
             print "stdout", stdout
             print "stderr", stderr
 
-            assert stderr.find(
-                'Verification successful') == 0, "Verification successful"
-            assert stdout.find('sha1:') == 0, "Contains checksum algorithm"
-            assert stdout.find(
-                ':mets.xml') == 45, "Contains checksum file name"
+            assert 'Verification successful' in stderr, "Verification successful"
+            assert 'sha1' in stdout, "Contains checksum algorithm"
+            assert 'mets.xml' in stdout, "Contains checksum file name"
 
     def test_04_valid_certificate(self):
         try:
