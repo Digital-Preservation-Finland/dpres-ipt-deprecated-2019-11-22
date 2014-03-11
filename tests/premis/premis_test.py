@@ -52,7 +52,7 @@ class TestPremisClass:
             },
             "expected_result": {
                 "number_of_events": 1,
-                "eventtype": "validation",
+                "eventtype": "object validation",
                 "outcome": "success",
                 "outcome_details": "stdout messagestderr message",
                 "datetime": 1
@@ -68,7 +68,7 @@ class TestPremisClass:
              },
              "expected_result": {
                "number_of_events": 1,
-               "eventtype": "validation",
+               "eventtype": "object validation",
                "outcome": "failure",
                "outcome_details": "stdout messagestderr message",
                "datetime": 1
