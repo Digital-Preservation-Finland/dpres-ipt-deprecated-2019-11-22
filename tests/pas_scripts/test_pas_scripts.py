@@ -223,7 +223,7 @@ class TestCommandLineTools:
     }
 
 
-    def test_create_aip(self, testcase, expected_result):
+    def xtest_create_aip(self, testcase, expected_result):
 
         sip_dir = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips/CSC_test005')
         aip_dir = tempfile.mkdtemp() + '/aip '
@@ -252,7 +252,7 @@ class TestCommandLineTools:
         # Test that aip doesn't contain anything more
         assert len(baggit_files) == len(aip_files)
 
-    def test_restructure_sip(self, testcase, expected_result):
+    def xtest_restructure_sip(self, testcase, expected_result):
 
         sip_dir = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips/CSC_test006')
         restructure_dir = tempfile.mkdtemp() + '/restructure'
@@ -289,7 +289,7 @@ class TestCommandLineTools:
                                                          command, arguments)
                                                          
         print os.listdir(sip_dir)
-
+        print returncode, stdout, stderr
         assert returncode == expected_result['returncode']
         assert stderr == expected_result['stderr']
     
@@ -322,14 +322,14 @@ class TestCommandLineTools:
         arguments = [certificate_path, mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command, arguments)
-                                                         
+        print returncode, stdout, stderr                                               
         assert returncode == 0
         
         command = pas_scripts.check_sip_signature.main
         arguments = ["-c" + certificate_dir, mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command, arguments)
-
+        print returncode, stdout, stderr                                                
         assert returncode == expected_result['returncode']
         assert stderr == expected_result['stderr']
     
@@ -343,7 +343,7 @@ class TestCommandLineTools:
             assert message in stdout
 
 
-    def test_check_sip_file_checksums(self, testcase, sipname, expected_result):
+    def xtest_check_sip_file_checksums(self, testcase, sipname, expected_result):
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
                                'test-sips/' + sipname + '/mets.xml')
@@ -364,7 +364,7 @@ class TestCommandLineTools:
                 assert message not in stdout
 
 
-    def test_check_mets_schema_features(self, testcase, sipname,   expected_result):
+    def xtest_check_mets_schema_features(self, testcase, sipname,   expected_result):
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
                                'test-sips/' + sipname + '/mets.xml')
@@ -387,7 +387,7 @@ class TestCommandLineTools:
             assert message in stderr
 
 
-    def test_check_mets_optional_features(self, testcase, sipname,   expected_result):
+    def xtest_check_mets_optional_features(self, testcase, sipname,   expected_result):
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
                                'test-sips/' + sipname + '/mets.xml')
@@ -410,7 +410,7 @@ class TestCommandLineTools:
             assert message in stderr
 
 
-    def test_check_sip_digital_objects(self, testcase,
+    def xtest_check_sip_digital_objects(self, testcase,
                                        filename, expected_result):
 
         filename = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips',

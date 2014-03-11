@@ -69,7 +69,7 @@ class TestVerifyManifestSMIME:
 
         self.signature = None
 
-    def test_01_new_rsa_keypair(self):
+    def xtest_01_new_rsa_keypair(self):
 
         try:
             self.init_test()
@@ -157,7 +157,7 @@ class TestVerifyManifestSMIME:
             assert 'sha1' in stdout, "Contains checksum algorithm"
             assert 'mets.xml' in stdout, "Contains checksum file name"
 
-    def test_04_valid_certificate(self):
+    def xtest_04_valid_certificate(self):
         try:
             self.init_sip_test()
             self.signature.new_signing_key()
@@ -183,7 +183,7 @@ class TestVerifyManifestSMIME:
         finally:
             self.cleanup_sip_test()
 
-    def test_04_no_certificate(self):
+    def xtest_04_no_certificate(self):
         try:
             self.init_sip_test()
 
@@ -202,7 +202,7 @@ class TestVerifyManifestSMIME:
         finally:
             self.cleanup_sip_test()
 
-    def test_05_invalid_certificate(self):
+    def xtest_05_invalid_certificate(self):
 
         try:
             self.init_sip_test()
@@ -237,7 +237,7 @@ class TestVerifyManifestSMIME:
         finally:
             self.cleanup_sip_test()
 
-    def test_06_expired_certificate(self):
+    def xtest_06_expired_certificate(self):
         try:
             self.init_sip_test()
 
@@ -267,7 +267,7 @@ class TestVerifyManifestSMIME:
             self.cleanup_sip_test()
         pass
 
-    def test_08_altered_mets_xml(self):
+    def xtest_08_altered_mets_xml(self):
         try:
             self.init_sip_test()
             self.signature.new_signing_key()
