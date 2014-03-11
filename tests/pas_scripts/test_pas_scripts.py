@@ -223,7 +223,7 @@ class TestCommandLineTools:
     }
 
 
-    def xtest_create_aip(self, testcase, expected_result):
+    def test_create_aip(self, testcase, expected_result):
 
         sip_dir = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips/CSC_test005')
         aip_dir = tempfile.mkdtemp() + '/aip '
@@ -252,7 +252,7 @@ class TestCommandLineTools:
         # Test that aip doesn't contain anything more
         assert len(baggit_files) == len(aip_files)
 
-    def xtest_restructure_sip(self, testcase, expected_result):
+    def test_restructure_sip(self, testcase, expected_result):
 
         sip_dir = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips/CSC_test006')
         restructure_dir = tempfile.mkdtemp() + '/restructure'
@@ -343,7 +343,7 @@ class TestCommandLineTools:
             assert message in stdout
 
 
-    def xtest_check_sip_file_checksums(self, testcase, sipname, expected_result):
+    def test_check_sip_file_checksums(self, testcase, sipname, expected_result):
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
                                'test-sips/' + sipname + '/mets.xml')
@@ -364,7 +364,7 @@ class TestCommandLineTools:
                 assert message not in stdout
 
 
-    def xtest_check_mets_schema_features(self, testcase, sipname,   expected_result):
+    def test_check_mets_schema_features(self, testcase, sipname,   expected_result):
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
                                'test-sips/' + sipname + '/mets.xml')
@@ -387,7 +387,7 @@ class TestCommandLineTools:
             assert message in stderr
 
 
-    def xtest_check_mets_optional_features(self, testcase, sipname,   expected_result):
+    def test_check_mets_optional_features(self, testcase, sipname,   expected_result):
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
                                'test-sips/' + sipname + '/mets.xml')
@@ -410,7 +410,7 @@ class TestCommandLineTools:
             assert message in stderr
 
 
-    def xtest_check_sip_digital_objects(self, testcase,
+    def test_check_sip_digital_objects(self, testcase,
                                        filename, expected_result):
 
         filename = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips',
