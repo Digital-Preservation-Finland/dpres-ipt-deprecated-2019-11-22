@@ -188,7 +188,7 @@
 <!-- ================================================================ -->
 
 <xsl:template name="process-prolog">
-	<axsl:output method="xml" omit-xml-declaration="no" standalone="yes"
+	<axsl:output method="xml" omit-xml-declaration="yes" standalone="yes"
 		indent="yes">
 		<xsl:if test=" string-length($output-encoding) &gt; 0">
 			<xsl:attribute name="encoding"><xsl:value-of select=" $output-encoding" /></xsl:attribute>

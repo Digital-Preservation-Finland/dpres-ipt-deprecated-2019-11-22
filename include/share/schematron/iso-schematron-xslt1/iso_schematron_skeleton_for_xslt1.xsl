@@ -402,7 +402,7 @@
 
 
 <!-- Category: top-level-element -->
-<xsl:output method="xml" omit-xml-declaration="no" standalone="yes"  indent="yes"/>
+<xsl:output method="xml" omit-xml-declaration="yes" standalone="yes"  indent="yes"/>
 
 
 <xsl:param name="phase">
