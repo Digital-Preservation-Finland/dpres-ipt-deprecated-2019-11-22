@@ -433,7 +433,7 @@ class TestCommandLineTools:
           
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                 command, arguments)
-
+                
         print >> sys.stderr, stderr
 
         function_name = "%s.%s" % (command.__module__, command.func_name)
