@@ -1,18 +1,21 @@
 KDK SCHEMA CATALOG
 
-Current catalog version is 1.3, and it is based on the following files and directories.
+Current catalog version is 1.4, and it includes the following files and directories.
+
+NOTES:
+- XML Catalog version 1.3 has been removed.
 
 CATALOGS:
 ./catalog-local.xml				Current XML Catalog for local purposes.
 ./catalog-web.xml				Current XML Catalog for web purposes.
-./catalog-local-1.3.xml			XML Catalog version 1.3 for local purposes.
-./catalog-web-1.3.xml			XML Catalog version 1.3 for web purposes.
+./catalog-local-1.4.xml			XML Catalog version 1.4 for local purposes.
+./catalog-web-1.4.xml			XML Catalog version 1.4 for web purposes.
 ./catalog.dtd					OASIS Catalog specification file
 
 KDK XSD FILES:
 ./avmd/audiomd.xsd				KDK audioMD schema, based on version 2.0
 ./avmd/videomd.xsd				KDK videoMD schema, based on version 2.0
-./ddi-codebook/codebook.xsd		Patch for DDI-Codebook 2.5, since this has it's own Dublin Core Terms specification
+./ddi-codebook/codebook.xsd		Patch for DDI-Codebook 2.5.1, since this has it's own Dublin Core Terms specification
 ./ddi-codebook/dcterms.xsd		Dublin Core Terms file with KDK namespace for DDI-Codebook
 ./mets/kdk-mets-extensions.xsd	KDK extension for KDK METS schema
 ./mets/mets-extensions.xsd		METS extension for KDK METS schema
@@ -23,8 +26,8 @@ KDK XSD FILES:
 
 EXTERNAL DIRECTORIES:
 ./external/dc					Dublin Core 1.1 schema files (unchanged)
-./external/ddi-codebook			DDI Codebook 2.5 schema files (unchanged)
-./external/ddi-lifecycle		DDI Lifecycle 3.1 schema files (unchanged)
+./external/ddi-codebook			DDI Codebook 2.5.1 schema files (unchanged)
+./external/ddi-lifecycle		DDI Lifecycle 3.2 schema files (unchanged)
 ./external/eac					EAC-CPF 2010 schema files (unchanged)
 ./external/ead					EAD 2002 schema files (unchanged)
 ./external/gml					Opengis GML 3.1.1 schema files (unchanged, used by LIDO)
@@ -38,4 +41,5 @@ EXTERNAL DIRECTORIES:
 
 VERSION DIRECTORIES:
 ./								Current version
-./1.3							Catalog version 1.3
+./1.4							Catalog version 1.4
+
