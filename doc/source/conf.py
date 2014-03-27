@@ -53,7 +53,7 @@ copyright = u'2013, CSC - IT Center for Science'
 # built documents.
 #
 # The short X.Y version.
-git_version = version.get_version()
+git_version = '0.4' #version.get_version()
 git_version = git_version[1:]
 version = git_version
 # The full version, including alpha/beta/rc tags.
