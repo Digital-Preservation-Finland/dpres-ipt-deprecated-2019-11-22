@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<!-- This is XSLT stylesheet for converting Premis XML reports to more simplified HTML version.
+     Usage: xsltproc stylesheet.xml report.xml  > report.html -->
+
+<xsl:stylesheet version="1.0"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:premis="info:lc/xmlns/premis-v2">
+    
+    <xsl:template match="/">
+        <html lang="en">
+            <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+                <style>
+                    <xsl:value-of select="document('css/bootstrap.min.css')" disable-output-escaping="yes" />
+                    <xsl:value-of select="document('css/bootstrap.css')" disable-output-escaping="yes" />
+                    <xsl:value-of select="document('css/report.css')" disable-output-escaping="yes" />
+                </style>
+
+                <title>PAS – Inspection report</title>
+            </head>
+            <body>
+                <div id="row">
+                    <div class="col-md-10"><h1>PAS – Inspection report</h1></div>
+                    <div class="col-md-2 clearfix"><img class="pull-right logo"  height="50px"/></div>
+                </div>
+                <div id="row">
+                    <div class="col-md-12"><hr class="divider"/></div>
+                </div>
+                <div id="row">
+                    <div class="col-md-10"/>
+                    <div class="col-md-2">
+                        <h5 class="text-right">
+                            <small>
+                                <xsl:value-of select="//premis:event/premis:eventType[text() = 'preservation responsibility change']/../premis:eventDateTime/text()"/>
+                            </small>
+                        </h5>
+                    </div>
+                </div>
+
+                <xsl:choose>
+                    <xsl:when test="//premis:event/premis:eventOutcomeInformation/premis:eventOutcome = 'failure'">
+                        <p class="lead">PAS system has received your submission information package and performed following actions. Some actions have <span class="text-danger"><b>failed</b></span> and preservation responsability is not transfered to the PAS system.
+                        </p>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <p class="lead">PAS system has received your submission information package and performed following actions. All actions were <span class="text-success"><b>successful</b></span> and preservation responsability is now transfered to the PAS system.
+                        </p>
+                    </xsl:otherwise>
+                </xsl:choose>
+                
+
+                
+                <xsl:for-each select="//premis:object">
+                    <xsl:variable name="object_id_type" select="premis:objectIdentifier/premis:objectIdentifierType"/>
+                    <xsl:variable name="object_id_value" select="premis:objectIdentifier/premis:objectIdentifierValue"/>
+
+                    <xsl:if test="$object_id_type = 'pas-transfer-id'">
+                        <h2>Transfer <small><xsl:value-of select="premis:originalName"/></small></h2>
+                    </xsl:if>
+                    <xsl:if test="$object_id_type = 'pas-sip-id'">
+                        <h2>Submission information package <small><xsl:value-of select="premis:originalName"/></small></h2>
+                    </xsl:if>
+                    <xsl:if test="$object_id_type = 'pas-sig-id'">
+                        <h2>Digital signature <small><xsl:value-of select="premis:originalName"/></small></h2>
+                    </xsl:if>
+                    <xsl:if test="$object_id_type = 'pas-mets-id'">
+                        <h2>Metadata object <small><xsl:value-of select="premis:originalName"/></small></h2>
+                    </xsl:if>
+                    <xsl:if test="$object_id_type = 'pas-object-id'">
+                        <h2>Digital object <small><xsl:value-of select="premis:originalName"/></small></h2>
+                    </xsl:if>
+                    <xsl:if test="$object_id_type = 'pas-aip-id'">
+                        <h2>Archival information package <small><xsl:value-of select="premis:originalName"/></small></h2>
+                    </xsl:if>
+                    
+                    <table class="table table-condensed">
+                        <tr class="row">
+                            <th class="col-md-8">Event name</th>
+                            <th class="col-md-4">Outcome</th>
+                        </tr>
+                        
+                        <xsl:for-each select="//premis:event/premis:linkingObjectIdentifier/premis:linkingObjectIdentifierValue[text() = $object_id_value]">
+                        <xsl:choose>
+                            <xsl:when test="../../premis:eventOutcomeInformation/premis:eventOutcome = 'failure'">
+                                <tr class="danger row">
+                                    <td class="col-md-8"><xsl:value-of select="../../premis:eventDetail"/></td>
+                                    <td class="col-md-4"><xsl:value-of select="../../premis:eventOutcomeInformation/premis:eventOutcome"/></td>
+                                </tr>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <tr class="success row">
+                                    <td class="col-md-8"><xsl:value-of select="../../premis:eventDetail"/></td>
+                                    <td class="col-md-4"><xsl:value-of select="../../premis:eventOutcomeInformation/premis:eventOutcome"/></td>
+                                </tr>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        
+                        </xsl:for-each>
+                    </table>
+                </xsl:for-each>
+            <br/>
+            <hr/>
+            
+            <center>
+            <h6>Please note that this report is a summary of digitally signed and machine-readable report which is downloadable from PAS system via SFTP.</h6>
+            </center>
+
+            </body>
+        </html>
+    </xsl:template>
+</xsl:stylesheet>
