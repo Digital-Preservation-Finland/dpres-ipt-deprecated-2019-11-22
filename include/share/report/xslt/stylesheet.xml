@@ -39,11 +39,11 @@
 
                 <xsl:choose>
                     <xsl:when test="//premis:event/premis:eventOutcomeInformation/premis:eventOutcome = 'failure'">
-                        <p class="lead">PAS system has received your submission information package and performed following actions. Some actions have <span class="text-danger"><b>failed</b></span> and preservation responsability is not transfered to the PAS system.
+                        <p class="lead">PAS system has received your submission information package and performed following actions. Some actions have <span class="text-danger"><b>failed</b></span> and preservation responsibility has not been transferred to the PAS system.
                         </p>
                     </xsl:when>
                     <xsl:otherwise>
-                        <p class="lead">PAS system has received your submission information package and performed following actions. All actions were <span class="text-success"><b>successful</b></span> and preservation responsability is now transfered to the PAS system.
+                        <p class="lead">PAS system has received your submission information package and performed following actions. All actions were <span class="text-success"><b>successful</b></span> and preservation responsibility has been transferred to the PAS system.
                         </p>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -102,7 +102,7 @@
             <hr/>
             
             <center>
-            <h6>Please note that this report is a summary of digitally signed and machine-readable report which is downloadable from PAS system via SFTP.</h6>
+            <h6>Please note that this report is a summary of digitally signed and machine-readable report which is downloadable from the PAS system via SFTP.</h6>
             </center>
 
             </body>
