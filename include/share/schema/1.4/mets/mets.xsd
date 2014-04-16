@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 KDK METS Schema
-CSC, 2014-03-12
+CSC, 2014-04-15
 KDK METS schema based on METS version 1.10. Updated to match KDK METS specification 1.4.
 -->
 <xsd:schema targetNamespace="http://www.loc.gov/METS/"
@@ -246,8 +246,8 @@ A &lt;fileGrp&gt; may contain zero or more &lt;fileGrp&gt; elements and or &lt;f
 				<xsd:documentation xml:lang="en">ID (ID/O): This attribute uniquely identifies the element within the METS document, and would allow the element to be referenced unambiguously from another element or document via an IDREF or an XPTR. For more information on using ID attributes for internal and external linking see Chapter 4 of the METS Primer.
 				</xsd:documentation>
 			</xsd:annotation>
-		</xsd:attribute>
-		<xsd:attribute name="OBJID" type="xsd:string" use="required">
+		</xsd:attribute>		
+		<xsd:attribute name="OBJID" type="kdkGraphChar" use="required">
 			<xsd:annotation>
 				<xsd:documentation xml:lang="en">OBJID (string/O): Is the primary identifier assigned to the METS object as a whole. Although this attribute is not required, it is strongly recommended. This identifier is used to tag the entire METS object to external systems, in contrast with the ID identifier.
 				</xsd:documentation>
@@ -755,7 +755,7 @@ TCF.
 				</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute name="GROUPID" type="xsd:string" use="optional">
+		<xsd:attribute name="GROUPID" type="kdkGraphChar" use="optional">
 			<xsd:annotation>
 				<xsd:documentation xml:lang="en">GROUPID (string/O): This identifier is used to indicate that different metadata sections may be considered as part of a group. Two metadata sections with the same GROUPID value are to be considered part of the same group. For example this facility might be used to group changed versions of the same metadata if previous versions are maintained in a file for tracking purposes.
 				</xsd:documentation>
@@ -830,7 +830,7 @@ TCF.
 				</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute name="GROUPID" type="xsd:string" use="optional">
+		<xsd:attribute name="GROUPID" type="kdkGraphChar" use="optional">
 			<xsd:annotation>
 				<xsd:documentation xml:lang="en">GROUPID (string/O): This identifier is used to indicate that different metadata sections may be considered as part of a group. Two metadata sections with the same GROUPID value are to be considered part of the same group. For example this facility might be used to group changed versions of the same metadata if previous versions are maintained in a file for tracking purposes.
 				</xsd:documentation>
@@ -905,7 +905,7 @@ TCF.
 				</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute name="GROUPID" type="xsd:string" use="optional">
+		<xsd:attribute name="GROUPID" type="kdkGraphChar" use="optional">
 			<xsd:annotation>
 				<xsd:documentation xml:lang="en">GROUPID (string/O): This identifier is used to indicate that different metadata sections may be considered as part of a group. Two metadata sections with the same GROUPID value are to be considered part of the same group. For example this facility might be used to group changed versions of the same metadata if previous versions are maintained in a file for tracking purposes.
 				</xsd:documentation>
@@ -980,7 +980,7 @@ TCF.
 				</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute name="GROUPID" type="xsd:string" use="optional">
+		<xsd:attribute name="GROUPID" type="kdkGraphChar" use="optional">
 			<xsd:annotation>
 				<xsd:documentation xml:lang="en">GROUPID (string/O): This identifier is used to indicate that different metadata sections may be considered as part of a group. Two metadata sections with the same GROUPID value are to be considered part of the same group. For example this facility might be used to group changed versions of the same metadata if previous versions are maintained in a file for tracking purposes.
 				</xsd:documentation>
@@ -1086,7 +1086,7 @@ TCF.
 				</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute name="GROUPID" type="xsd:string" use="optional">
+		<xsd:attribute name="GROUPID" type="kdkGraphChar" use="optional">
 			<xsd:annotation>
 				<xsd:documentation xml:lang="en">GROUPID (string/O): This identifier is used to indicate that different metadata sections may be considered as part of a group. Two metadata sections with the same GROUPID value are to be considered part of the same group. For example this facility might be used to group changed versions of the same metadata if previous versions are maintained in a file for tracking purposes.
 				</xsd:documentation>
@@ -1159,7 +1159,7 @@ TCF.
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attributeGroup ref="FILECORE"></xsd:attributeGroup>
-		<xsd:attribute name="OWNERID" type="xsd:string" use="optional">
+		<xsd:attribute name="OWNERID" type="kdkGraphChar" use="optional">
 			<xsd:annotation>
 				<xsd:documentation xml:lang="en">OWNERID (string/O): A unique identifier assigned to the file by its owner.  This may be a URI which differs from the URI used to retrieve the file.
 				</xsd:documentation>
@@ -1177,7 +1177,7 @@ TCF.
 				</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute name="GROUPID" type="xsd:string" use="optional">
+		<xsd:attribute name="GROUPID" type="kdkGraphChar" use="optional">
 			<xsd:annotation>
 				<xsd:documentation xml:lang="en">GROUPID (string/O): An identifier that establishes a correspondence between this file and files in other file groups. Typically, this will be used to associate a master file in one file group with the derivative files made from it in other file groups.
 				</xsd:documentation>
@@ -1457,6 +1457,7 @@ TCF.
 				<xsd:documentation xml:lang="en">CHECKSUMTYPE (enumerated string/O): Specifies the checksum algorithm used to produce the value contained in the CHECKSUM attribute.  CHECKSUMTYPE must contain one of the following values:
 					MD5
 					SHA-1
+					SHA-224
 					SHA-256
 					SHA-384
 					SHA-512
@@ -1466,6 +1467,7 @@ TCF.
 				<xsd:restriction base="xsd:string">
 					<xsd:enumeration value="MD5"/>
 					<xsd:enumeration value="SHA-1"/>
+					<xsd:enumeration value="SHA-224"/>
 					<xsd:enumeration value="SHA-256"/>
 					<xsd:enumeration value="SHA-384"/>
 					<xsd:enumeration value="SHA-512"/>
@@ -1503,6 +1505,7 @@ TCF.
 				<xsd:documentation xml:lang="en">CHECKSUMTYPE (enumerated string/O): Specifies the checksum algorithm used to produce the value contained in the CHECKSUM attribute.  CHECKSUMTYPE must contain one of the following values:
 					MD5
 					SHA-1
+					SHA-224
 					SHA-256
 					SHA-384
 					SHA-512
@@ -1512,6 +1515,7 @@ TCF.
 				<xsd:restriction base="xsd:string">
 					<xsd:enumeration value="MD5"/>
 					<xsd:enumeration value="SHA-1"/>
+					<xsd:enumeration value="SHA-224"/>
 					<xsd:enumeration value="SHA-256"/>
 					<xsd:enumeration value="SHA-384"/>
 					<xsd:enumeration value="SHA-512"/>
@@ -1520,4 +1524,12 @@ TCF.
 		</xsd:attribute>
 	</xsd:attributeGroup>
 
+	<xsd:simpleType name="kdkGraphChar">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="([!-~])+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	
+	
 </xsd:schema>

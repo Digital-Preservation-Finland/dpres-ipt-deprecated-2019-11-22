@@ -19,14 +19,14 @@ elementFormDefault="qualified" attributeFormDefault="unqualified">
 			</xsd:documentation>
 		</xsd:annotation>
 	</xsd:attribute>
-	<xsd:attribute name="PID" type="xsd:string">
+	<xsd:attribute name="PID" type="kdkGraphChar">
 		<xsd:annotation>
 			<xsd:documentation xml:lang="en">
 				PID (string/O): Unique identifier for the metadata.
 			</xsd:documentation>
 		</xsd:annotation>
 	</xsd:attribute>
-	<xsd:attribute name="PIDTYPE" type="xsd:string">
+	<xsd:attribute name="PIDTYPE" type="kdkGraphChar">
 		<xsd:annotation>
 			<xsd:documentation xml:lang="en">
 				PIDTYPE (string/O): The identifier type used in the PID attribute.
@@ -67,6 +67,13 @@ elementFormDefault="qualified" attributeFormDefault="unqualified">
 			<xsd:pattern value="((\d{4}(-\d{2})?)|UNKNOWN)/((\d{4}(-\d{2})?)|UNKNOWN|OPEN)"/>
 			<xsd:pattern value="\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}((Z|(\+|-)\d{2}:\d{2}))?/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}((Z|(\+|-)\d{2}:\d{2}))?"/>
 			<xsd:pattern value="OPEN"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<!-- Graph characters -->
+	<xsd:simpleType name="kdkGraphChar">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="([!-~])+"/>
 		</xsd:restriction>
 	</xsd:simpleType>
 	
