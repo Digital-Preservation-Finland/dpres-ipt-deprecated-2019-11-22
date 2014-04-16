@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" schemaVersion="1.4">
 
 <!--
 Validates various internal issues in METS metadata.
 Juha Lehtonen 2013-07-08 : Initial version
 Juha Lehtonen 2013-10-21 : CATALOG, SPECIFICATION, CREATED, PID, PIDTYPE attribute check added. FILEID check modified.
 Juha Lehtonen 2014-02-17 : ID/IDREF check added. Fixed to meet XPath 1.0 and EXSLT.
+Juha Lehtonen 2014-04-16 : Schema version added.
 -->
 
     <sch:title>METS internal inspection</sch:title>

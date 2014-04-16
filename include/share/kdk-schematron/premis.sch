@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" schemaVersion="1.4">
     <sch:title>PREMIS metadata check</sch:title>
 
 <!--
@@ -11,6 +11,7 @@ Jukka Kervinen 2014-02-13 : Fixed premis:rightsIdentifierValue -> premis:rightsS
 Juha Lehtonen 2014-02-14 : MIME type related check restricted only in mets:techMD section
 Juha Lehtonen 2014-02-18 : Fixed to meet XPath 1.0 and EXSLT.
 Juha Lehtonen 2014-03-12 : Fixed to meet the KDK technical metadata specification.
+Juha Lehtonen 2014-04-16 : Identifier character set check added.
 -->
 
 	<sch:ns prefix="mets" uri="http://www.loc.gov/METS/"/>
@@ -18,6 +19,7 @@ Juha Lehtonen 2014-03-12 : Fixed to meet the KDK technical metadata specificatio
 	<sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
 	<sch:ns prefix="exsl" uri="http://exslt.org/common"/>
     <sch:ns prefix="str" uri="http://exslt.org/strings"/>
+	<sch:ns prefix="sets" uri="http://exslt.org/sets"/>
 
 	<!-- Maximum length of a MIME type value -->
 	<sch:let name="padval" value="80"/>
@@ -189,5 +191,63 @@ Juha Lehtonen 2014-03-12 : Fixed to meet the KDK technical metadata specificatio
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
+	
+	<!-- Check the characters in identifiers -->
+    <sch:pattern name="CheckIDChars">
+		<sch:let name="chars" value="string('!#$%()*+,-./0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~&amp;&lt;&gt;&quot;')"/>
+		<sch:let name="chars_apos" value='string("&apos;")'/>
+		<sch:let name="chars_all" value="concat($chars,$chars_apos)"/>
+		<sch:let name="tokens" value="sets:distinct(str:tokenize($chars_all, ''))"/>
+		<sch:let name="counttokens" value="count($tokens)"/>
+		<sch:rule context="premis:objectIdentifierType">
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:assert test="$countcomb=$counttokens"> -->
+				Invalid characters found in premis:objectIdentifierType element value: '<sch:value-of select="."/>'
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="premis:objectIdentifierValue">
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:assert test="$countcomb=$counttokens">
+				Invalid characters found in premis:objectIdentifierValue element value: '<sch:value-of select="."/>'
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="premis:eventIdentifierType">
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:assert test="$countcomb=$counttokens">
+				Invalid characters found in premis:eventIdentifierType element value: '<sch:value-of select="."/>'
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="premis:eventIdentifierValue">
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:assert test="$countcomb=$counttokens">
+				Invalid characters found in premis:eventIdentifierValue element value: '<sch:value-of select="."/>'
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="premis:agentIdentifierType">
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:assert test="$countcomb=$counttokens">
+				Invalid characters found in premis:agentIdentifierType element value: '<sch:value-of select="."/>'
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="premis:agentIdentifierValue">
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:assert test="$countcomb=$counttokens">
+				Invalid characters found in premis:agentIdentifierValue element value: '<sch:value-of select="."/>'
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="premis:rightsStatementIdentifierType">
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:assert test="$countcomb=$counttokens">
+				Invalid characters found in premis:rightsStatementIdentifierType element value: '<sch:value-of select="."/>'
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="premis:rightsStatementIdentifierValue">
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:assert test="$countcomb=$counttokens">
+				Invalid characters found in premis:rightsStatementIdentifierValue element value: '<sch:value-of select="."/>'
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+	
 	
 </sch:schema>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" schemaVersion="1.4">
     <sch:title>NISOIMG (MIX) metadata issues</sch:title>
 
 <!--
@@ -7,10 +7,17 @@ Validates various issues in NISOIMG (MIX) metadata.
 Juha Lehtonen 2013-07-08 : Initial version
 Juha Lehtonen 2014-02-14 : False messages related to PreviousImageMetadata element fixed. Checks for JPEG2000 and bitsPerSampleValue elements added.
 Juha Lehtonen 2014-02-17 : Fixed to meet XPath 1.0 and EXSLT. A single integer for bitsPerSampleValue element accepted.
+Juha Lehtonen 2014-04-16 : JPEG2000 specific check fixed. TIFF specific check added. Schema version added.
 -->
 	
+	<sch:ns prefix="mets" uri="http://www.loc.gov/METS/"/>
+	<sch:ns prefix="premis" uri="info:lc/xmlns/premis-v2"/>
 	<sch:ns prefix="mix" uri="http://www.loc.gov/mix/v20"/>
+	<sch:ns prefix="xlink" uri="http://www.w3.org/1999/xlink"/>
+	<sch:ns prefix="exsl" uri="http://exslt.org/common"/>
+	<sch:ns prefix="sets" uri="http://exslt.org/sets"/>
 	<sch:ns prefix="str" uri="http://exslt.org/strings"/>
+
 
 	<!-- Compression scheme is in separate list -->
     <sch:pattern name="EnumeratedCompressionList">
@@ -317,23 +324,30 @@ Juha Lehtonen 2014-02-17 : Fixed to meet XPath 1.0 and EXSLT. A single integer f
 	</sch:pattern>
 
 	<!-- JPEG2000 specific check -->
-	<sch:pattern name="JPEG2000">
-        <sch:rule context="mix:BasicImageInformation[../mix:BasicDigitalObjectInformation/mix:FormatDesignation/mix:formatName='image/jp2']">
-			<sch:assert test="mix:SpecialFormatCharacteristics">
-				Element &lt;mix:SpecialFormatCharacteristics&gt; must be used for JPEG2000 images.
+	<sch:let name="jp2_fileid" value=".//mets:techMD[.//premis:formatName='image/jp2']/@ID"/>
+	<sch:let name="jp2_mixsfcids" value=".//mets:techMD[.//mix:mix/mix:BasicImageInformation/mix:SpecialFormatCharacteristics]/@ID"/>
+	<sch:let name="jp2_mixjp2ids" value=".//mets:techMD[.//mix:mix/mix:BasicImageInformation/mix:SpecialFormatCharacteristics/mix:JPEG2000]/@ID"/>
+	<sch:let name="jp2_countfiles" value="count(sets:distinct(exsl:node-set($jp2_fileid)))"/>
+	<sch:let name="jp2_countmixsfc" value="count(sets:distinct(exsl:node-set($jp2_mixsfcids)))"/>
+	<sch:let name="jp2_countmixjp2" value="count(sets:distinct(exsl:node-set($jp2_mixjp2ids)))"/>
+	<sch:pattern name="JPEG2000SpecialFormatCharacteristics">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($jp2_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmixsfccomb" value="count(sets:distinct(exsl:node-set($jp2_mixsfcids) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmixjp2comb" value="count(sets:distinct(exsl:node-set($jp2_mixjp2ids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($jp2_countfiles+$countadm)=$countfilescomb) or not(($jp2_countmixsfc+$countadm)=$countmixsfccomb)">
+				Metadata element &lt;mix:SpecialFormatCharacteristics&gt; missing for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
+			</sch:assert>
+			<sch:assert test="(($jp2_countfiles+$countadm)=$countfilescomb) or not(($jp2_countmixjp2+$countadm)=$countmixjp2comb)">
+				Metadata element &lt;mix:JPEG2000&gt; missing for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
 			</sch:assert>
 		</sch:rule>
-        <sch:rule context="mix:SpecialFormatCharacteristics[../../mix:BasicDigitalObjectInformation/mix:FormatDesignation/mix:formatName='image/jp2']">
-			<sch:assert test="mix:JPEG2000">
-				Element &lt;mix:JPEG2000&gt; must be used for JPEG2000 images.
-			</sch:assert>
-		</sch:rule>
-        <sch:rule context="mix:SpecialFormatCharacteristics[../../mix:BasicDigitalObjectInformation/mix:FormatDesignation/mix:formatName
-		and not(../../mix:BasicDigitalObjectInformation/mix:FormatDesignation/mix:formatName='image/jp2')]">
-			<sch:assert test="not(mix:JPEG2000)">
-				Element &lt;mix:JPEG2000&gt; is not applicable for other types than JPEG2000 images.
-			</sch:assert>
-		</sch:rule>		
+    </sch:pattern>
+
+	<!-- JPEG2000 specific check -->
+	<sch:pattern name="JPEG2000Internal">
         <sch:rule context="mix:JPEG2000">
 			<sch:assert test="mix:EncodingOptions">
 				Element &lt;mix:EncodingOptions&gt; must be used for JPEG2000 images.
@@ -349,4 +363,36 @@ Juha Lehtonen 2014-02-17 : Fixed to meet XPath 1.0 and EXSLT. A single integer f
 		</sch:rule>
 	</sch:pattern>
 	
+	<!-- Not JPEG2000 file - specific check -->
+	<sch:let name="not_jp2_fileid" value=".//mets:techMD[.//premis:formatName!='image/jp2']/@ID"/>
+	<sch:let name="not_jp2_countfiles" value="count(sets:distinct(exsl:node-set($not_jp2_fileid)))"/>
+	<sch:pattern name="JPEG2000denied">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($not_jp2_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmixjp2comb" value="count(sets:distinct(exsl:node-set($jp2_mixjp2ids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($not_jp2_countfiles+$countadm)=$countfilescomb) or (($jp2_countmixjp2+$countadm)=$countmixjp2comb)">
+				Metadata element &lt;mix:JPEG2000&gt; is denied for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
+			</sch:assert>
+		</sch:rule>
+	</sch:pattern>
+		
+	<!-- TIFF specific check -->
+	<sch:let name="tiff_fileid" value=".//mets:techMD[.//premis:formatName='image/tiff']/@ID"/>
+	<sch:let name="tiff_mixids" value=".//mets:techMD[.//mix:mix/mix:BasicDigitalObjectInformation/mix:byteOrder]/@ID"/>
+	<sch:let name="tiff_countfiles" value="count(sets:distinct(exsl:node-set($tiff_fileid)))"/>
+	<sch:let name="tiff_countmix" value="count(sets:distinct(exsl:node-set($tiff_mixids)))"/>
+	<sch:pattern name="TiffByteOrder">
+		<sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($tiff_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmixcomb" value="count(sets:distinct(exsl:node-set($tiff_mixids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($tiff_countfiles+$countadm)=$countfilescomb) or not(($tiff_countmix+$countadm)=$countmixcomb)">
+				Metadata element &lt;mix:byteOrder&gt; missing for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+
 </sch:schema>

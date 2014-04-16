@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" schemaVersion="1.4">
     <sch:title>METS external metadata type check</sch:title>
 
 <!--
 Validates that the used metadata type inside mdWrap element is same as defined in MDTYPE or MDTYPEOTHER attribute.
 Juha Lehtonen 2013-07-08 : Initial version
-Juha Lehtonen 2013-07-17 : LIDO bugfix.
+Juha Lehtonen 2013-07-17 : LIDO bugfix
+Juha Lehtonen 2014-04-15 : Technical metadata presence check added. Schema version added.
 -->
 
 	
@@ -27,7 +28,18 @@ Juha Lehtonen 2013-07-17 : LIDO bugfix.
 	<sch:ns prefix="lido" uri="http://www.lido-schema.org"/>
 	<sch:ns prefix="ddilc" uri="ddi:instance:3_1"/>
 	<sch:ns prefix="ddicb" uri="ddi:codebook:2_5"/>
+	<sch:ns prefix="xlink" uri="http://www.w3.org/1999/xlink"/>
+	
+	<sch:ns prefix="exsl" uri="http://exslt.org/common"/>
+	<sch:ns prefix="sets" uri="http://exslt.org/sets"/>
+    <sch:ns prefix="str" uri="http://exslt.org/strings"/>
 
+	<!-- Mimetypes that has requirements for metadata -->
+	<sch:let name="textmd_types" value="string('application/xhtml+xml text/xml text/plain')"/>
+	<sch:let name="audiomd_types" value="string('audio/x-aiff audio/x-wave audio/flac audio/aac audio/x-wav audio/mpeg audio/x-ms-wma')"/>
+	<sch:let name="videomd_types" value="string('video/jpeg2000 video/mj2 video/dv video/mpeg video/x-ms-wmv')"/>
+	<sch:let name="mix_types" value="string('image/tiff image/jpeg image/jp2 image/png image/gif')"/>
+	
     <!-- Check the case PREMIS:OBJECT -->
     <sch:pattern name="CheckPremisObject">
         <sch:rule context="mets:mdWrap[@MDTYPE='PREMIS:OBJECT']">
@@ -181,4 +193,73 @@ Juha Lehtonen 2013-07-17 : LIDO bugfix.
 		</sch:rule>
     </sch:pattern>
 
+	<!-- Check the case textMD requirement -->
+	<sch:let name="textmd_fileid" value=".//mets:techMD[contains(concat(' ', $textmd_types, ' '), concat(' ', .//premis:formatName, ' '))]/@ID"/>
+	<sch:let name="textmd_mdids" value=".//mets:techMD[.//textmd:*]/@ID"/>
+	<sch:let name="textmd_countfiles" value="count(sets:distinct(exsl:node-set($textmd_fileid)))"/>
+	<sch:let name="textmd_countmd" value="count(sets:distinct(exsl:node-set($textmd_mdids)))"/>
+	<sch:pattern name="CheckTextMDRequirement">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($textmd_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmdcomb" value="count(sets:distinct(exsl:node-set($textmd_mdids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($textmd_countfiles+$countadm)=$countfilescomb) or not(($textmd_countmd+$countadm)=$countmdcomb)">
+				Reference to textMD metadata missing from ADMID attribute in element &lt;mets:file&gt; for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+
+	<!-- Check the case AudioMD requirement -->
+	<sch:let name="audiomd_fileid" value=".//mets:techMD[contains(concat(' ', $audiomd_types, ' '), concat(' ', .//premis:formatName, ' '))]/@ID"/>
+	<sch:let name="audiomd_mdids" value=".//mets:techMD[.//audiomd:*]/@ID"/>
+	<sch:let name="audiomd_countfiles" value="count(sets:distinct(exsl:node-set($audiomd_fileid)))"/>
+	<sch:let name="audiomd_countmd" value="count(sets:distinct(exsl:node-set($audiomd_mdids)))"/>
+	<sch:pattern name="CheckAudioMDRequirement">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($audiomd_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmdcomb" value="count(sets:distinct(exsl:node-set($audiomd_mdids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($audiomd_countfiles+$countadm)=$countfilescomb) or not(($audiomd_countmd+$countadm)=$countmdcomb)">
+				Reference to AudioMD metadata missing from ADMID attribute in element &lt;mets:file&gt; for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+
+	<!-- Check the case VideoMD requirement -->
+	<sch:let name="videomd_fileid" value=".//mets:techMD[contains(concat(' ', $videomd_types, ' '), concat(' ', .//premis:formatName, ' '))]/@ID"/>
+	<sch:let name="videomd_mdids" value=".//mets:techMD[.//videomd:*]/@ID"/>
+	<sch:let name="videomd_countfiles" value="count(sets:distinct(exsl:node-set($videomd_fileid)))"/>
+	<sch:let name="videomd_countmd" value="count(sets:distinct(exsl:node-set($videomd_mdids)))"/>
+	<sch:pattern name="CheckVideoMDRequirement">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($videomd_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmdcomb" value="count(sets:distinct(exsl:node-set($videomd_mdids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($videomd_countfiles+$countadm)=$countfilescomb) or not(($videomd_countmd+$countadm)=$countmdcomb)">
+				Reference to VideoMD metadata missing from ADMID attribute in element &lt;mets:file&gt; for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+
+	<!-- Check the case MIX requirement -->
+	<sch:let name="mix_fileid" value=".//mets:techMD[contains(concat(' ', $mix_types, ' '), concat(' ', .//premis:formatName, ' '))]/@ID"/>
+	<sch:let name="mix_mdids" value=".//mets:techMD[.//mix:*]/@ID"/>
+	<sch:let name="mix_countfiles" value="count(sets:distinct(exsl:node-set($mix_fileid)))"/>
+	<sch:let name="mix_countmd" value="count(sets:distinct(exsl:node-set($mix_mdids)))"/>
+	<sch:pattern name="CheckMixRequirement">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($mix_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmdcomb" value="count(sets:distinct(exsl:node-set($mix_mdids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($mix_countfiles+$countadm)=$countfilescomb) or not(($mix_countmd+$countadm)=$countmdcomb)">
+				Reference to MIX metadata missing from ADMID attribute in element &lt;mets:file&gt; for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+
+	
 </sch:schema>
