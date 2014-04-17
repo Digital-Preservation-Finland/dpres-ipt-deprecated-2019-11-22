@@ -113,7 +113,7 @@ Based on textMD schema version 2.2
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
-							<xs:element name="byte_order">
+							<xs:element name="byte_order" minOccurs="0" maxOccurs="1">
 								<xs:annotation>
 									<xs:documentation>Byte order, primarily useful for cases 
 									where it’s not clear just by specifying an IANA character set.  
@@ -127,7 +127,7 @@ Based on textMD schema version 2.2
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
-							<xs:element name="byte_size">
+							<xs:element name="byte_size" minOccurs="0" maxOccurs="1">
 								<xs:annotation>
 									<xs:documentation>The size of an individual byte within the
 									expressed as a number of bits.  This does not necessarily
@@ -140,7 +140,7 @@ Based on textMD schema version 2.2
 									</xs:simpleContent>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="character_size">
+							<xs:element name="character_size" minOccurs="0" maxOccurs="1">
 								<xs:annotation>
 									<xs:documentation>The size of an individual character within the
 									character set as a number of bytes of the size expressed in the
@@ -157,7 +157,7 @@ Based on textMD schema version 2.2
 									</xs:simpleContent>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="linebreak">
+							<xs:element name="linebreak" minOccurs="0" maxOccurs="1">
 								<xs:annotation>
 									<xs:documentation>How line breaks are represented in current 
 									file (which may differ from how they were originally encoded).  
