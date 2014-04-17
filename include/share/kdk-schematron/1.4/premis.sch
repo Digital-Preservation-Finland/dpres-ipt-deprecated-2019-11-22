@@ -200,49 +200,49 @@ Juha Lehtonen 2014-04-16 : Identifier character set check added.
 		<sch:let name="tokens" value="sets:distinct(str:tokenize($chars_all, ''))"/>
 		<sch:let name="counttokens" value="count($tokens)"/>
 		<sch:rule context="premis:objectIdentifierType">
-		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens"> -->
 				Invalid characters found in premis:objectIdentifierType element value: '<sch:value-of select="."/>'
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:objectIdentifierValue">
-		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens">
 				Invalid characters found in premis:objectIdentifierValue element value: '<sch:value-of select="."/>'
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:eventIdentifierType">
-		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens">
 				Invalid characters found in premis:eventIdentifierType element value: '<sch:value-of select="."/>'
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:eventIdentifierValue">
-		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens">
 				Invalid characters found in premis:eventIdentifierValue element value: '<sch:value-of select="."/>'
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:agentIdentifierType">
-		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens">
 				Invalid characters found in premis:agentIdentifierType element value: '<sch:value-of select="."/>'
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:agentIdentifierValue">
-		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens">
 				Invalid characters found in premis:agentIdentifierValue element value: '<sch:value-of select="."/>'
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:rightsStatementIdentifierType">
-		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens">
 				Invalid characters found in premis:rightsStatementIdentifierType element value: '<sch:value-of select="."/>'
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:rightsStatementIdentifierValue">
-		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(., '') | $tokens))"/>
+		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens">
 				Invalid characters found in premis:rightsStatementIdentifierValue element value: '<sch:value-of select="."/>'
 			</sch:assert>
