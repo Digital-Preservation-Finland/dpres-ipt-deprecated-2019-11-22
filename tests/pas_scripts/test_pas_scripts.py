@@ -12,6 +12,7 @@ import testcommon.settings
 from testcommon.casegenerator import pytest_generate_tests
 
 # Modules to test
+import pas_scripts.create_html_report
 import pas_scripts.restructure_sip
 import pas_scripts.create_aip
 import pas_scripts.sign_xml_file
@@ -32,6 +33,15 @@ class TestCommandLineTools:
                 "returncode": 0,
                 "stdout": "",
                 "stderr": ""
+            }
+        }],
+        "test_create_html_report":
+        [{
+            "testcase": "create failed report",
+            "expected_result": {
+                    "returncode": 0,
+                    "stderr": ""
+                
             }
          }],
             "test_sign_xml_file":
@@ -222,6 +232,21 @@ class TestCommandLineTools:
          ]
     }
 
+    def test_create_html_report(self, testcase, expected_result):
+
+        command = pas_scripts.create_html_report.main
+        report_dir = os.path.join(testcommon.settings.TESTDATADIR, 
+                                  "reports", 
+                                  "report-csc_test_invalid_digital_object_001-bb358d14-3092-458d-8b57-4a1c40206d8e-12345.xml")
+        test_dir = tempfile.mkdtemp()
+        html_path = os.path.join(test_dir, 'report.html')
+        arguments = [report_dir, html_path]
+        (returncode, stdout, stderr) = testcommon.shell.run_main(
+                                                         command, arguments)
+        shutil.rmtree(test_dir)
+        print returncode, stdout, stderr
+        assert returncode == expected_result['returncode']
+        assert stderr == expected_result['stderr']
 
     def test_create_aip(self, testcase, expected_result):
 
@@ -232,7 +257,8 @@ class TestCommandLineTools:
         command = pas_scripts.create_aip.main
         arguments = [aip_dir]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
-                                                         command, arguments)
+                                                         command,
+                                                         arguments)
                                                          
         assert returncode == expected_result['returncode']
         assert stderr == expected_result['stderr']
