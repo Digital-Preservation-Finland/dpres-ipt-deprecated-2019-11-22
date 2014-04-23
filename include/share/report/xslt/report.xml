@@ -1294,7 +1294,7 @@
         <premis:eventType>creation</premis:eventType>
         <premis:eventDateTime>2014-04-23T14:56:24</premis:eventDateTime>
         <premis:eventDetail>Creation of AIP</premis:eventDetail>
-        <premis:eventOutcomeInformation><premis:eventOutcome>success</premis:eventOutcome><premis:eventOutcomeDetail><premis:eventOutcomeDetailNote>AIP created succesfully</premis:eventOutcomeDetailNote></premis:eventOutcomeDetail></premis:eventOutcomeInformation>
+        <premis:eventOutcomeInformation><premis:eventOutcome>failure</premis:eventOutcome><premis:eventOutcomeDetail><premis:eventOutcomeDetailNote>AIP created succesfully</premis:eventOutcomeDetailNote></premis:eventOutcomeDetail></premis:eventOutcomeInformation>
         <premis:linkingAgentIdentifier>
             <premis:linkingAgentIdentifierType>pas-agent-id</premis:linkingAgentIdentifierType>
             <premis:linkingAgentIdentifierValue>pas-agent-createSIPInspectionReport.py-v0.2.post499-gcd9cb20</premis:linkingAgentIdentifierValue>
@@ -1309,7 +1309,7 @@
         <premis:eventType>preservation responsibility change</premis:eventType>
         <premis:eventDateTime>2014-04-23T14:56:24</premis:eventDateTime>
         <premis:eventDetail>Preservation responsibility change to the DP system</premis:eventDetail>
-        <premis:eventOutcomeInformation><premis:eventOutcome>success</premis:eventOutcome><premis:eventOutcomeDetail><premis:eventOutcomeDetailNote>Preservation responsability belongs to PAS system</premis:eventOutcomeDetailNote></premis:eventOutcomeDetail></premis:eventOutcomeInformation>
+        <premis:eventOutcomeInformation><premis:eventOutcome>failure</premis:eventOutcome><premis:eventOutcomeDetail><premis:eventOutcomeDetailNote>Preservation responsability belongs to PAS system</premis:eventOutcomeDetailNote></premis:eventOutcomeDetail></premis:eventOutcomeInformation>
         <premis:linkingAgentIdentifier>
             <premis:linkingAgentIdentifierType>pas-agent-id</premis:linkingAgentIdentifierType>
             <premis:linkingAgentIdentifierValue>pas-agent-createSIPInspectionReport.py-v0.2.post499-gcd9cb20</premis:linkingAgentIdentifierValue>

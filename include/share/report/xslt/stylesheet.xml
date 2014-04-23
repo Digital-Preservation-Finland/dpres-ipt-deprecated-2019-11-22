@@ -22,10 +22,10 @@
                 <div id="row">
                     <xsl:choose>
                         <xsl:when test="//premis:event/premis:eventOutcomeInformation/premis:eventOutcome = 'failure'">
-                            <div class="col-md-10"><h1>Inspection report – <span class="text-red">Ingestion rejected</span></h1></div>
+                            <div class="col-md-10"><h1>Inspection report – <span class="text-red">Submission rejected</span></h1></div>
                         </xsl:when>
                         <xsl:otherwise>
-                            <div class="col-md-10"><h1>Inspection report – <span class="text-success">Ingestion accepted</span></h1></div>
+                            <div class="col-md-10"><h1>Inspection report – <span class="text-success">Submission accepted</span></h1></div>
                         </xsl:otherwise>
                     </xsl:choose>
                     
@@ -50,14 +50,14 @@
                         <xsl:variable name="objid" select="//premis:object/premis:environment/premis:dependency/premis:dependencyIdentifier/premis:dependencyIdentifierType[text() = 'mets:OBJID']/../premis:dependencyIdentifierValue/text()"/>
                         <xsl:variable name="username" select="//premis:agent/premis:agentIdentifier/premis:agentIdentifierType[text() = 'pas-user-id']/../../premis:agentName/text()"/>
                         
-                        <p class="lead">PAS system has received submission information package <strong><xsl:value-of select="$objid"/></strong> from user <strong><xsl:value-of select="$username"/></strong> and performed following actions. Some actions have failed and preservation responsibility has not been transferred to the PAS system.
+                        <p class="lead">Digital preservation system has received submission information package <strong><xsl:value-of select="$objid"/></strong> from user <strong><xsl:value-of select="$username"/></strong> and performed following actions. Some actions have failed and preservation responsibility has not been transferred to the PAS system.
                         </p>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:variable name="objid" select="//premis:object/premis:environment/premis:dependency/premis:dependencyIdentifier/premis:dependencyIdentifierType[text() = 'mets:OBJID']/../premis:dependencyIdentifierValue/text()"/>
                         <xsl:variable name="username" select="//premis:agent/premis:agentIdentifier/premis:agentIdentifierType[text() = 'pas-user-id']/../../premis:agentName/text()"/>
                         
-                        <p class="lead">PAS system has received submission information package <strong><xsl:value-of select="$objid"/></strong> from user <strong><xsl:value-of select="$username"/></strong> and performed following actions. All actions were successful and preservation responsibility has been transferred to the PAS system.
+                        <p class="lead">Digital preservation system has received submission information package <strong><xsl:value-of select="$objid"/></strong> from user <strong><xsl:value-of select="$username"/></strong> and performed following actions. All actions were successful and preservation responsibility has been transferred to the PAS system.
                         </p>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -94,21 +94,25 @@
                         </tr>
                         
                         <xsl:for-each select="//premis:event/premis:linkingObjectIdentifier/premis:linkingObjectIdentifierValue[text() = $object_id_value]">
-                        <xsl:choose>
-                            <xsl:when test="../../premis:eventOutcomeInformation/premis:eventOutcome = 'failure'">
-                                <tr class="red row">
-                                    <td class="col-md-8"><xsl:value-of select="../../premis:eventDetail"/></td>
-                                    <td class="col-md-4"><xsl:value-of select="../../premis:eventOutcomeInformation/premis:eventOutcome"/></td>
-                                </tr>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <tr class="success row">
-                                    <td class="col-md-8"><xsl:value-of select="../../premis:eventDetail"/></td>
-                                    <td class="col-md-4"><xsl:value-of select="../../premis:eventOutcomeInformation/premis:eventOutcome"/></td>
-                                </tr>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                        
+                            <!-- Filter out some events -->
+                            <xsl:variable name="eventDetail" select="../../premis:eventDetail"/>
+                            <xsl:if test="not(contains($eventDetail, 'Validation compilation of a SIP')) and not(contains($eventDetail, 'Ingestion of the transfer'))">
+
+                                <xsl:choose>
+                                    <xsl:when test="../../premis:eventOutcomeInformation/premis:eventOutcome = 'failure'">
+                                        <tr class="red row">
+                                            <td class="col-md-8"><xsl:value-of select="../../premis:eventDetail"/></td>
+                                            <td class="col-md-4"><xsl:value-of select="../../premis:eventOutcomeInformation/premis:eventOutcome"/></td>
+                                        </tr>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <tr class="success row">
+                                            <td class="col-md-8"><xsl:value-of select="../../premis:eventDetail"/></td>
+                                            <td class="col-md-4"><xsl:value-of select="../../premis:eventOutcomeInformation/premis:eventOutcome"/></td>
+                                        </tr>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:if>
                         </xsl:for-each>
                     </table>
                 </xsl:for-each>
@@ -116,7 +120,7 @@
             <hr/>
             
             <center>
-            <h6>Please note that this report is a summary of digitally signed and machine-readable report which is downloadable from the PAS system via SFTP.</h6>
+            <h6>Please note that this report is a summary of digitally signed and machine-readable report generated by digital preservation system.</h6>
             </center>
 
             </body>
