@@ -259,8 +259,8 @@ Juha Lehtonen 2014-03-26 : Initial version
 	</xs:simpleType>
 	<xs:simpleType name="eventDetailSimpleType">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="Ingestion of digital content"/>
-			<xs:enumeration value="Decompression of transferred ZIP file"/>
+			<xs:enumeration value="Ingestion of transfer object"/>
+			<xs:enumeration value="Decompression of transferred object"/>
 			<xs:enumeration value="Virus check of transferred files"/>
 			<xs:enumeration value="SIP digital signature validation"/>
 			<xs:enumeration value="Fixity check of digital objects in a SIP"/>

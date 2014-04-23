@@ -21,10 +21,10 @@ Juha Lehtonen 2014-03-26 : Initial version
 	<sch:let name="idtype" value="exsl:node-set('pas-transfer-id') | exsl:node-set('pas-sip-id') | exsl:node-set('pas-sig-id') | exsl:node-set('pas-mets-id') | exsl:node-set('pas-object-id') | exsl:node-set('pas-aip-id')"/>
 	
 	<!-- All the node values here have been used as hard coded in content attribute -->
-	<sch:let name="eventtype" value="exsl:node-set('decompression') | exsl:node-set('virus check') | exsl:node-set('digital signature validation') | exsl:node-set('fixity check') | exsl:node-set('validation') | exsl:node-set('creation') | exsl:node-set('preservation responsibility change')"/>
+	<sch:let name="eventtype" value="exsl:node-set('decompression') | exsl:node-set('virus check') | exsl:node-set('digital signature validation') | exsl:node-set('fixity check') | exsl:node-set('validation') | exsl:node-set('creation') | exsl:node-set('preservation responsibility change') | exsl:node-set('ingestion')"/>
 	
 	<!-- Some of the node values here (values of indexes [5], [6], [7] and [8]) have been used as hard coded in content attribute -->
-	<sch:let name="eventdetail" value="exsl:node-set('Decompression of transferred ZIP file')
+	<sch:let name="eventdetail" value="exsl:node-set('Decompression of transferred object')
 		| exsl:node-set('Virus check of transferred files')
 		| exsl:node-set('SIP digital signature validation')
 		| exsl:node-set('Fixity check of digital objects in a SIP')
@@ -33,7 +33,8 @@ Juha Lehtonen 2014-03-26 : Initial version
 		| exsl:node-set('Digital object validation')
 		| exsl:node-set('Validation compilation of a SIP')
 		| exsl:node-set('Creation of AIP')
-		| exsl:node-set('Preservation responsibility change to the DP system')"/>
+		| exsl:node-set('Preservation responsibility change to the DP system')
+		| exsl:node-set('Ingestion of transfer object')"/>
 
 	<!-- Constant values from PREMIS report. The values of these variables below are not used as hard coded anywhere. -->
 	<sch:let name="idvalstart" value="exsl:node-set('pas-transfer-') | exsl:node-set('pas-sip-') | exsl:node-set('pas-sig-') | exsl:node-set('pas-mets-') | exsl:node-set('pas-object-') | exsl:node-set('pas-aip-')"/>
@@ -44,10 +45,11 @@ Juha Lehtonen 2014-03-26 : Initial version
 		| exsl:node-set('pas-agent-verifySIPFileChecksums')
 		| exsl:node-set('pas-agent-verifyMetsSchemaFeatures')
 		| exsl:node-set('pas-agent-verifyMetsRequiredFeatures')
-		| exsl:node-set('pas-agent-verifySIPDigitalObjects')
-		| exsl:node-set('pas-agent-createSIPInspectionReport')"/>
+		| exsl:node-set('pas-agent-check_sip_digital_objects')
+		| exsl:node-set('pas-agent-createSIPInspectionReport')
+		| exsl:node-set('pas-user-')"/>
 	<sch:let name="filenames" value="exsl:node-set('varmiste.sig') | exsl:node-set('mets.xml')"/>
-
+	<sch:let name="agenttype" value="exsl:node-set('software') | exsl:node-set('organization')"/>
 	
 	<!-- transfer object -->
     <sch:pattern name="TransferObject">
@@ -76,8 +78,8 @@ Juha Lehtonen 2014-03-26 : Initial version
 			<sch:assert test="./premis:originalName">
 				&lt;originalName&gt; element must be used in '<sch:value-of select=".//premis:objectIdentifierValue"/>'.
 			</sch:assert>
-			<sch:assert test="not(./premis:environment)">
-				&lt;environment&gt; element not allowed in '<sch:value-of select=".//premis:objectIdentifierValue"/>'.
+			<sch:assert test="./premis:environment">
+				&lt;environment&gt; element must be used in '<sch:value-of select=".//premis:objectIdentifierValue"/>'.
 			</sch:assert>
 			<sch:assert test="(.//premis:relationshipType=$relationship[1]) and (.//premis:relationshipSubType=$relationship[3])">
 				Object '<sch:value-of select=".//premis:objectIdentifierValue"/>' must have values relationshipType='<sch:value-of select="$relationship[1]"/>' and relationshipSubType='<sch:value-of select="$relationship[3]"/>'.
@@ -166,9 +168,9 @@ Juha Lehtonen 2014-03-26 : Initial version
 			<sch:assert test="contains(.//premis:objectIdentifierValue,$idvalstart[6])">
 				Wrong id type '<sch:value-of select=".//premis:objectIdentifierValue"/>'. The type must be '<sch:value-of select="$idtype[6]"/>'.
 			</sch:assert>
-			<sch:assert test="not(./premis:originalName)">
-				Original name not allowed in '<sch:value-of select=".//premis:objectIdentifierValue"/>'.
-			</sch:assert>			
+			<sch:assert test="./premis:originalName">
+				Original name must be used in '<sch:value-of select=".//premis:objectIdentifierValue"/>'.
+			</sch:assert>		
 			<sch:assert test="not(.//premis:environment)">
 				&lt;environment&gt; element not allowed in '<sch:value-of select=".//premis:objectIdentifierValue"/>'.
 			</sch:assert>
@@ -181,6 +183,21 @@ Juha Lehtonen 2014-03-26 : Initial version
 		</sch:rule>	
 	</sch:pattern>
 
+	<!-- Ingestion event inspection -->
+	<sch:pattern name="EventIngestion">
+        <sch:rule context="premis:event[./premis:eventType='ingestion']">
+			<sch:assert test="./premis:eventDetail=$eventdetail[11]">
+				Ingestion event '<sch:value-of select=".//premis:eventIdentifierValue"/>' must have an event detail: '<sch:value-of select="$eventdetail[11]"/>'
+			</sch:assert>
+			<sch:assert test="contains(.//premis:linkingAgentIdentifierValue,$agent[9])">
+				Ingestion event '<sch:value-of select=".//premis:eventIdentifierValue"/>' must have a ingestion user agent.
+			</sch:assert>
+			<sch:assert test="(.//premis:linkingObjectIdentifierType=$idtype[1]) and contains(.//premis:linkingObjectIdentifierValue,$idvalstart[1])">
+				Ingestion event '<sch:value-of select=".//premis:eventIdentifierValue"/>' must link to a transfer object.
+			</sch:assert>
+		</sch:rule>	
+	</sch:pattern>
+	
 	<!-- Decompression event inspection -->
 	<sch:pattern name="EventDecompression">
         <sch:rule context="premis:event[./premis:eventType='decompression']">
@@ -333,6 +350,9 @@ Juha Lehtonen 2014-03-26 : Initial version
         <sch:rule context="premis:agent">
 			<sch:assert test="contains(.//premis:agentIdentifierValue, ./premis:agentName)">
 				agentIdentifierValue '<sch:value-of select=".//premis:agentIdentifierValue"/>' must contain agent name '<sch:value-of select="./premis:agentName"/>'
+			</sch:assert>
+			<sch:assert test="(contains(.//premis:agentIdentifierValue, $agentid[9]) and .//premis:agentType=$agenttype[2]) or (.//premis:agentType=$agenttype[1])">
+				agentIdentifierValue '<sch:value-of select=".//premis:agentIdentifierValue"/>' must has illegal agent type
 			</sch:assert>
 		</sch:rule>
 	</sch:pattern>
