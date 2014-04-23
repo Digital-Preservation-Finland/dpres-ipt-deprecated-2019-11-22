@@ -241,6 +241,7 @@ Juha Lehtonen 2014-03-26 : Initial version
 	</xs:simpleType>
 	<xs:simpleType name="eventTypeSimpleType">
 		<xs:restriction base="xs:string">
+			<xs:enumeration value="ingestion"/>
 			<xs:enumeration value="decompression"/>
 			<xs:enumeration value="virus check"/>
 			<xs:enumeration value="digital signature validation"/>
@@ -258,6 +259,7 @@ Juha Lehtonen 2014-03-26 : Initial version
 	</xs:simpleType>
 	<xs:simpleType name="eventDetailSimpleType">
 		<xs:restriction base="xs:string">
+			<xs:enumeration value="Ingestion of digital content"/>
 			<xs:enumeration value="Decompression of transferred ZIP file"/>
 			<xs:enumeration value="Virus check of transferred files"/>
 			<xs:enumeration value="SIP digital signature validation"/>
@@ -275,16 +277,19 @@ Juha Lehtonen 2014-03-26 : Initial version
 	<xs:simpleType name="agentIdentifierTypeSimpleType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="pas-agent-id"/>
+			<xs:enumeration value="pas-user-id"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="agentIdentifierValueSimpleType">
 		<xs:restriction base="xs:token">
 			<xs:pattern value="pas-agent-(.)+"/>
+			<xs:pattern value="pas-user-(.)+"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="agentNameSimpleType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="software"/>
+			<xs:enumeration value="organization"/>
 		</xs:restriction>
 	</xs:simpleType>
 	
