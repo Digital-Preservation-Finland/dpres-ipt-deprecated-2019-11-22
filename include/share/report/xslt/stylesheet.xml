@@ -20,8 +20,16 @@
             </head>
             <body>
                 <div id="row">
-                    <div class="col-md-10"><h1>PAS – Inspection report</h1></div>
-                    <div class="col-md-2 clearfix"><img class="pull-right logo"  height="50px"/></div>
+                    <xsl:choose>
+                        <xsl:when test="//premis:event/premis:eventOutcomeInformation/premis:eventOutcome = 'failure'">
+                            <div class="col-md-10"><h1>Inspection report – <span class="text-red">Ingestion rejected</span></h1></div>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <div class="col-md-10"><h1>Inspection report – <span class="text-success">Ingestion accepted</span></h1></div>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    
+                    <div class="col-md-2 clearfix"><img class="pull-right logo"  height="100px"/></div>
                 </div>
                 <div id="row">
                     <div class="col-md-12"><hr class="divider"/></div>
@@ -31,7 +39,7 @@
                     <div class="col-md-2">
                         <h5 class="text-right">
                             <small>
-                                <xsl:value-of select="//premis:event/premis:eventType[text() = 'preservation responsibility change']/../premis:eventDateTime/text()"/>
+                                <xsl:value-of select="//premis:event/premis:eventType[text() = 'validation']/../premis:eventDateTime/text()"/>
                             </small>
                         </h5>
                     </div>
@@ -39,11 +47,17 @@
 
                 <xsl:choose>
                     <xsl:when test="//premis:event/premis:eventOutcomeInformation/premis:eventOutcome = 'failure'">
-                        <p class="lead">PAS system has received your submission information package and performed following actions. Some actions have <span class="text-danger"><b>failed</b></span> and preservation responsibility has not been transferred to the PAS system.
+                        <xsl:variable name="objid" select="//premis:object/premis:environment/premis:dependency/premis:dependencyIdentifier/premis:dependencyIdentifierType[text() = 'mets:OBJID']/../premis:dependencyIdentifierValue/text()"/>
+                        <xsl:variable name="username" select="//premis:agent/premis:agentIdentifier/premis:agentIdentifierType[text() = 'pas-user-id']/../../premis:agentName/text()"/>
+                        
+                        <p class="lead">PAS system has received submission information package <strong><xsl:value-of select="$objid"/></strong> from user <strong><xsl:value-of select="$username"/></strong> and performed following actions. Some actions have failed and preservation responsibility has not been transferred to the PAS system.
                         </p>
                     </xsl:when>
                     <xsl:otherwise>
-                        <p class="lead">PAS system has received your submission information package and performed following actions. All actions were <span class="text-success"><b>successful</b></span> and preservation responsibility has been transferred to the PAS system.
+                        <xsl:variable name="objid" select="//premis:object/premis:environment/premis:dependency/premis:dependencyIdentifier/premis:dependencyIdentifierType[text() = 'mets:OBJID']/../premis:dependencyIdentifierValue/text()"/>
+                        <xsl:variable name="username" select="//premis:agent/premis:agentIdentifier/premis:agentIdentifierType[text() = 'pas-user-id']/../../premis:agentName/text()"/>
+                        
+                        <p class="lead">PAS system has received submission information package <strong><xsl:value-of select="$objid"/></strong> from user <strong><xsl:value-of select="$username"/></strong> and performed following actions. All actions were successful and preservation responsibility has been transferred to the PAS system.
                         </p>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -82,7 +96,7 @@
                         <xsl:for-each select="//premis:event/premis:linkingObjectIdentifier/premis:linkingObjectIdentifierValue[text() = $object_id_value]">
                         <xsl:choose>
                             <xsl:when test="../../premis:eventOutcomeInformation/premis:eventOutcome = 'failure'">
-                                <tr class="danger row">
+                                <tr class="red row">
                                     <td class="col-md-8"><xsl:value-of select="../../premis:eventDetail"/></td>
                                     <td class="col-md-4"><xsl:value-of select="../../premis:eventOutcomeInformation/premis:eventOutcome"/></td>
                                 </tr>
