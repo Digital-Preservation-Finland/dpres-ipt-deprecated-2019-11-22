@@ -241,7 +241,7 @@ Juha Lehtonen 2014-03-26 : Initial version
 	</xs:simpleType>
 	<xs:simpleType name="eventTypeSimpleType">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="ingestion"/>
+			<xs:enumeration value="transfer"/>
 			<xs:enumeration value="decompression"/>
 			<xs:enumeration value="virus check"/>
 			<xs:enumeration value="digital signature validation"/>
@@ -259,8 +259,8 @@ Juha Lehtonen 2014-03-26 : Initial version
 	</xs:simpleType>
 	<xs:simpleType name="eventDetailSimpleType">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="Ingestion of transfer object"/>
-			<xs:enumeration value="Decompression of transferred object"/>
+			<xs:enumeration value="Transfer of a container that includes one or several submission information packages"/>
+			<xs:enumeration value="Decompression of transfer container"/>
 			<xs:enumeration value="Virus check of transferred files"/>
 			<xs:enumeration value="SIP digital signature validation"/>
 			<xs:enumeration value="Fixity check of digital objects in a SIP"/>
