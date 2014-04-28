@@ -84,10 +84,9 @@ Juha Lehtonen 2014-03-26 : Initial version
 			<sch:assert test="(.//premis:relationshipType=$relationship[1]) and (.//premis:relationshipSubType=$relationship[3])">
 				Object '<sch:value-of select=".//premis:objectIdentifierValue"/>' must have values relationshipType='<sch:value-of select="$relationship[1]"/>' and relationshipSubType='<sch:value-of select="$relationship[3]"/>'.
 			</sch:assert>
-            <!-- This doens't work because there's username prefix in sip objectIdentifierValue
 			<sch:assert test="(.//premis:relatedObjectIdentifierType=$idtype[1]) and contains(.//premis:relatedObjectIdentifierValue,$idvalstart[1])">
 				Object '<sch:value-of select=".//premis:objectIdentifierValue"/>' must have relation to a transfer object.
-			</sch:assert> -->
+			</sch:assert>
 		</sch:rule>	
 	</sch:pattern>
 	
