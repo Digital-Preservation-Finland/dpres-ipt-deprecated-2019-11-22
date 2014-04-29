@@ -259,7 +259,7 @@ class TestCommandLineTools:
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command,
                                                          arguments)
-                                                         
+                                                        
         assert returncode == expected_result['returncode']
         assert stderr == expected_result['stderr']
 
