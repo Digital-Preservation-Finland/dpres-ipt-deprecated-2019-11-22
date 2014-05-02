@@ -8,7 +8,7 @@
             { "formatVersion":"1.1" , "formatRegistryKey":"fmt/102" , "validator":"" }]
         },
         { "text/xml" : [
-            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/101" , "validator":"" }]
+            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/101" , "validator":"validator.plugin.libxml.Libxml" }]
         },
         { "text/html" : [
             { "formatVersion":"4.01" , "formatRegistryKey":"fmt/100" , "validator":"" }]
@@ -58,7 +58,9 @@
         }, 
         { "image/jpeg" : [
             { "formatVersion":"" , "formatRegistryKey":"fmt/42" , "validator":"validator.plugin.jhove.Jhove" },
-            { "formatVersion":"1.00" , "formatRegistryKey":"fmt/42" , "validator":"validator.plugin.jhove.Jhove" }]
+            { "formatVersion":"1.00" , "formatRegistryKey":"fmt/42" , "validator":"validator.plugin.jhove.Jhove" },
+            { "formatVersion":"1.01" , "formatRegistryKey":"fmt/42" , "validator":"validator.plugin.jhove.Jhove" }
+                          ]
         }, 
         { "image/jp2" : [
             { "formatVersion":"" , "formatRegistryKey":"x-fmt/392" , "validator":"validator.plugin.jhove.Jhove" }]
