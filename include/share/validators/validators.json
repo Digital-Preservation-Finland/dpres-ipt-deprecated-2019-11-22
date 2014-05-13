@@ -29,7 +29,7 @@
             { "formatVersion":"1.0" , "formatRegistryKey":"fmt/139" , "validator":"" }]
         }, 
         { "text/plain" : [
-            { "formatVersion":"8859-15" , "formatRegistryKey":"x-fmt/111" , "validator":"validator.plugin.filecommand.Filecommand" },
+            { "formatVersion":"ISO-8859-15" , "formatRegistryKey":"x-fmt/111" , "validator":"validator.plugin.filecommand.Filecommand" },
             { "formatVersion":"UTF-8" , "formatRegistryKey":"x-fmt/111" , "validator":"validator.plugin.jhove2.Jhove2" },
             { "formatVersion":"UTF-16" , "formatRegistryKey":"x-fmt/111" , "validator":"" },
             { "formatVersion":"UTF-32" , "formatRegistryKey":"x-fmt/111" , "validator":"" },
