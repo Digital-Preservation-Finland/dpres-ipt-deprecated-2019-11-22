@@ -34,7 +34,8 @@ Juha Lehtonen 2014-03-26 : Initial version
 		| exsl:node-set('Validation compilation of a SIP')
 		| exsl:node-set('Creation of AIP')
 		| exsl:node-set('Preservation responsibility change to the DP system')
-		| exsl:node-set('Transfer of a container that includes one or several submission information packages')"/>
+		| exsl:node-set('Transfer of a container that includes one or several submission information packages')
+		| exsl:node-set('Validation compilation of a Transfer')"/>
 
 	<!-- Constant values from PREMIS report. The values of these variables below are not used as hard coded anywhere. -->
 	<sch:let name="idvalstart" value="exsl:node-set('pas-transfer-') | exsl:node-set('pas-sip-') | exsl:node-set('pas-sig-') | exsl:node-set('pas-mets-') | exsl:node-set('pas-object-') | exsl:node-set('pas-aip-')"/>
@@ -306,10 +307,22 @@ Juha Lehtonen 2014-03-26 : Initial version
 		</sch:rule>
 	</sch:pattern>
 
+	<!-- Transfer validation compilation event inspection -->
+	<sch:pattern name="EventTransferValidation">
+        <sch:rule context="premis:event[./premis:eventType='validation' and ./premis:eventDetail='Validation compilation of a Transfer']">
+			<sch:assert test="contains(.//premis:linkingAgentIdentifierValue,$agent[8])">
+				Overall SIP validation event '<sch:value-of select=".//premis:eventIdentifierValue"/>' must have a inspection report creation agent.
+			</sch:assert>
+			<sch:assert test="(.//premis:linkingObjectIdentifierType=$idtype[1]) and contains(.//premis:linkingObjectIdentifierValue,$idvalstart[8])">
+				Overall SIP validation event '<sch:value-of select=".//premis:eventIdentifierValue"/>' must link to a SIP object.
+			</sch:assert>
+		</sch:rule>
+	</sch:pattern>
+
 	<!-- validation detail check -->
 	<sch:pattern name="EventValidationDetail">
         <sch:rule context="premis:event[./premis:eventType='validation']">
-			<sch:assert test="((./premis:eventDetail=$eventdetail[5]) or (./premis:eventDetail=$eventdetail[6])) or ((./premis:eventDetail=$eventdetail[7]) or (./premis:eventDetail=$eventdetail[8]))">
+			<sch:assert test="((./premis:eventDetail=$eventdetail[5]) or (./premis:eventDetail=$eventdetail[6])) or ((./premis:eventDetail=$eventdetail[7]) or (./premis:eventDetail=$eventdetail[8]) or (./premis:eventDetail=$eventdetail[12]))">
 				Incorrect event detail in '<sch:value-of select=".//premis:eventIdentifierValue"/>'.
 			</sch:assert>
 		</sch:rule>		

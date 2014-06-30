@@ -270,6 +270,7 @@ Juha Lehtonen 2014-03-26 : Initial version
 			<xs:enumeration value="Validation compilation of a SIP"/>
 			<xs:enumeration value="Creation of AIP"/>
 			<xs:enumeration value="Preservation responsibility change to the DP system"/>
+			<xs:enumeration value="Validation compilation of a Transfer"/>
 		</xs:restriction>
 	</xs:simpleType>
 	
