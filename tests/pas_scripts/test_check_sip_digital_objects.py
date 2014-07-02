@@ -75,8 +75,8 @@ class TestCommandLineTools:
                                                    'validators.json'))
 
         arguments = [
-                "-c%s" % configfile,
                 "%s" % filename,
+                "%s" % configfile,
                 "abc34ge" ]
         
         self.do(pas_scripts.check_sip_digital_objects.main, arguments,
