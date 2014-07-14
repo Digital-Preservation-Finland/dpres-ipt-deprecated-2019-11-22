@@ -50,14 +50,14 @@
                         <xsl:variable name="objid" select="//premis:object/premis:environment/premis:dependency/premis:dependencyIdentifier/premis:dependencyIdentifierType[text() = 'mets:OBJID']/../premis:dependencyIdentifierValue/text()"/>
                         <xsl:variable name="username" select="//premis:agent/premis:agentIdentifier/premis:agentIdentifierType[text() = 'pas-user-id']/../../premis:agentName/text()"/>
                         
-                        <p class="lead">Digital preservation system has received submission information package <strong><xsl:value-of select="$objid"/></strong> from user <strong><xsl:value-of select="$username"/></strong> and performed following actions. Some actions have failed and preservation responsibility has not been transferred to the PAS system.
+                        <p class="lead">Digital preservation system has received submission information package <strong><xsl:value-of select="$objid"/></strong> from user <strong><xsl:value-of select="$username"/></strong> and performed following actions. Some actions have failed and preservation responsibility has not been transferred to the digital preservation system.
                         </p>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:variable name="objid" select="//premis:object/premis:environment/premis:dependency/premis:dependencyIdentifier/premis:dependencyIdentifierType[text() = 'mets:OBJID']/../premis:dependencyIdentifierValue/text()"/>
                         <xsl:variable name="username" select="//premis:agent/premis:agentIdentifier/premis:agentIdentifierType[text() = 'pas-user-id']/../../premis:agentName/text()"/>
                         
-                        <p class="lead">Digital preservation system has received submission information package <strong><xsl:value-of select="$objid"/></strong> from user <strong><xsl:value-of select="$username"/></strong> and performed following actions. All actions were successful and preservation responsibility has been transferred to the PAS system.
+                        <p class="lead">Digital preservation system has received submission information package <strong><xsl:value-of select="$objid"/></strong> from user <strong><xsl:value-of select="$username"/></strong> and performed following actions. All actions were successful and preservation responsibility has been transferred to the digital preservation system.
                         </p>
                     </xsl:otherwise>
                 </xsl:choose>
