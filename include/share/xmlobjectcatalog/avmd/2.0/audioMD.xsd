@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- AudioMD version 2.0 -->
+<!-- edited with XML Spy v4.0.1 (http://www.xmlspy.com) by D. Casey (User Technology Associates, Inc.) -->
+<!-- edited with oXygen by K. Bredenberg -->
+<xs:schema targetNamespace="http://www.loc.gov/audioMD/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.loc.gov/audioMD/" elementFormDefault="qualified">
+	<!--============================================================
+
+  AUDIOMD: Audio Technical Metadata Extension Schema  
+  Initial Version:  AMD_020322.xsd (obtained from Carl's webpage on 03/27/2002)
+
+  Changes 03/27/2002:
+  DKC- Removed duplicate elements "note" and "num_channels" from the 
+        complexType node "physical_dataType".
+     - Removed "calibration" from "file_data" due to its inclusion in 
+        "calibration_info".
+     - Removed "duration" from "physical_data" due to its inclusion in 
+        "time_info".
+  Changes 04/03/2002:
+  DKC- Duplicated the AUDIOMD node to create the AUDIOSRC node.  Removed 
+        "physical_data" from AUDIOMD and "file_data" from AUDIOSRC.
+     - Created a "audio_info" node and moved the following nodes into it: note, 
+        num_channels, sound_field, sound_channel_map, duration
+  Changes 07/25/2002
+  DKC- Abstracted the root element in order to provide support for both analog 
+        and digital sources.
+     - Simplified the structure to eliminate the unecessary element references 
+        and complex types.
+  Changes 08/22/2002
+  DKC- Cleaned up much of the documentation and definitions.  This should 
+        continue.
+  
+  Changes 02/08/2010
+  	KB -added method element to material in element Physical_data
+  	   -added note element to element Physical_data 
+  	   -added used_sides element to material in element Physical_data
+  	   -added EBU_Storage_Media_Codes element to element Physical_data
+  	   
+Changes 06/29/2010
+KB - harmonized with PREMIS 2.0 and removed _ in element names.
+      - renamed chcksum as messageDigest
+      
+Changes 10/19/2010
+KB - added formatLocation to fileDataType-element
+
+Changes 03/23/2011
+KB - renamed reflectiveLayer to activeLayer since it describes the active parts of the disk.
+	- added a new element reflectiveLayer which describes the reflective layer e.g. gold, silver, aluminium etc.
+	- removed fileData, physicalData, audioInfo and calibrationInfo as top elements.
+	- renamed calibrationType calibrationInfoType
+	- renamed complexType trackingType to trackingInfoType to minimazie confusion with the element with the same name
+	
+Changes 04/15/2011
+KB - updates in comments	
+
+Changes 04/26/2011
+KB - updates in comments
+
+Changes 04/29/2011
+KB 	- updated name and namespace of the schema
+	- added value Other to the predefined list of element use
+	- added an element otherUse where a use not stated in the use element list can be described
+	- added value 2 to the byteOrder enumerated list
+	- added an element otherColor where a color not stated in the color element list can be described
+	- updates in comments
+	
+Changes 05/02/2011
+KB	- updates in comments
+============================================================ -->
+	<xs:element name="AUDIOMD" type="audioType"/>
+	<xs:element name="AUDIOSRC" type="audioType"/>
+	<xs:annotation>
+		<xs:documentation>AMD: LC-AV Audio Metadata Extension Schema. AMD contains technical
+			metadata that describes either a digital file or a physical source object. It is based
+			upon metadata elements developed by both LC and AES. AMD is an interim schema being used
+			until a final extension schema is adopted. AUDIOMD and AUDIOSRC both complex types named
+			"audioType" and contain 4 top-level elements and 2 attributes, ID: (XML ID)
+			ANALOGDIGITALFLAG: A major indicator of the type of audio object i.e Analog,
+			PhysDigital, or FileDigital. </xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="audioType">
+		<xs:annotation>
+			<xs:documentation>audioType: complexType for encapsulating and organizing within a
+				singleparent element the individual audio metadata elements that describe an object
+				or portion of an object. The four individual elements that comprise an audio object
+				are documented under their corresponding types.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="fileData" type="fileDataType" minOccurs="0"/>
+			<xs:element name="physicalData" type="physicalDataType" minOccurs="0"/>
+			<xs:element name="audioInfo" type="audioInfoType" minOccurs="0"/>
+			<xs:element name="calibrationInfo" type="calibrationInfoType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+		<xs:attribute name="ANALOGDIGITALFLAG" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Analog"/>
+					<xs:enumeration value="PhysDigital"/>
+					<xs:enumeration value="FileDigital"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="fileDataType">
+		<xs:annotation>
+			<xs:documentation>The element is used to describe technical characteristics of an audio file.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="audioBlockSize" type="xs:int" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Size of an audio block (frame or sample) in bytes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="audioDataEncoding" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Structure for audio data; current known types are pulse code modulation (PCM) and SONY's DSD structure.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bitsPerSample" type="xs:int" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Number of bits per audio sample, e.g., 16, 20, 24, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="byteOrder" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The order of bit significance in a byte from left to right. i.e. 0-least-to-most, 1-most-to-least, 2-mixed-endianess.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="messageDigest" type="messageDigestType" minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xs:element name="compression" type="compressionType" minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xs:element name="dataRate" type="xs:int" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Data rate of the audio in an MP3 or other compressed file, expressed in kbps, e.g., 64, 128, 256, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dataRateMode" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Indicator whether the data rate is fixed or variable.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Fixed"/>
+						<xs:enumeration value="Variable"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="firstSampleOffset" type="xs:int" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Location of the first valid sound byte in the file.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstValidByteBlock" type="xs:int" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Location of the first valid sound byte in the block.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="formatLocation" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The place where the referenced file is located</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="formatName" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The official name for the file format taken from the format documentation, e.g. "Broadcast Wave Format" or "Raw".</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="formatNote" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Application specific information about the audio file. e.g. SoundForge 5.0, WaveLab 3.0, etc....</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="formatVersion" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The version of the audio format specified in formatName e.g. for formatName="Broadcast Wave Format" formatVersion="3.0".</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastValidByteBlock" type="xs:int" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Location of the last valid sound byte in the block.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="numSampleFrames" type="xs:int" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The number of frames within an audio file.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="samplingFrequency" type="xs:float" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Rate at which the audio was sampled, expressed in kHz, e.g., 22, 44.1, 48, 96, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="security" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The type of security precautions applied to the file e.g. password, encryption, hidden, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="use" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The use of a digital audio file, e.g., Master, Service High, Service Low, Preview. Use Other if none of the preceding values pertains and clarify the use in the otherUse element</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Master"/>
+						<xs:enumeration value="Service"/>
+						<xs:enumeration value="Service_High"/>
+						<xs:enumeration value="Service_Low"/>
+						<xs:enumeration value="Preview"/>
+						<xs:enumeration value="Other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="otherUse" minOccurs="0" maxOccurs="unbounded" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Denotes a use not contained in the allowed values set if Other is indicated in the use element.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="wordSize" type="xs:int" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Number of bytes that comprise a single sample of audio data, which generally maps to bits_per_sample. Files with a bit depth of 24 will usually be expressed as a 3-byte word_size; however, some applications may store 24-bit audio in a 4-byte word.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="physicalDataType">
+		<xs:annotation>
+			<xs:documentation>The physicalData element describes the physical nature
+				of an audio object if it exists as such (i.e. it is not a file). This will generally
+				apply to analog items but may also be used to describe digital formats such as open
+				reel digital, DAT, ADAT tape, CD-R, etc....</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="EBUStorageMediaCodes" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The EBU Storage Media Code for the physical media. See http://www.ebu.ch/metadata/cs/ebu_StorageMediaTypeCodeCS.xml and http://www.ebu.ch/metadata/cs/web/ebu_StorageMediaTypeCodeCS_p.xml.htm </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="condition" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Narrative description of the physical condition of the item, e.g., brittle paper, sticky shed tape, chipped disc</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dimensions" type="dimensionsType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="disposition" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>What became of the source item, e.g., reshelved on shelf number 1234, discarded, loaned to XYZ organization, destroyed, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="equalization" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Equalization system inherent in source recording, e.g., FFRR (Full Frequency Range Recording), RIAA (Recording Industry Association Of America), etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="generation" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Generation of physical source item which was digitized, e.g., studio master, original disc, preservation tape copy, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="groove" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groove type of audio source, e.g., standard groove, hill and dale cutting, microgroove, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="material" type="materialType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="noiseReduction" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Noise reduction system inherent in source recording, e.g., DA ( Dolby A), DB ( Dolby S), FL (Flat) etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="physFormat" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Name for the physical format of the source e.g., Record, Audiocassette, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="speed" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Nominal speed of the source recording, including indication of the unit of measure, e.g., 1 7/8 ips, 4.75 cm/s, 15 ips, 78 rpm, 45 rpm, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="speedAdjustment" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Speed actually used at playback expressed as a percentage of nominal speed, e.g., 90 or 110.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="speedNote" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Note to state actual speed as a number (73 rpm) or to state a deviation such as "corrected to C sharp pitch.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="trackFormat" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Track format of a magnetic tape, e.g., full track, half track, quarter track stereo, video HiFi, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tracking" type="trackingInfoType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="note" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Miscellaneous information about the physical item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="audioInfoType">
+		<xs:annotation>
+			<xs:documentation>audioInfo: The audioInfo element is used to describe audio
+				characteristics of an object that not specific to either the physical object or a
+				digital representation.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="duration" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Elapsed time of the entire file, expressed using ISO 8601 syntax; see http://www.w3.org/TR/NOTE-datetime.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="note" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Miscellaneous information about the audio item. e.g. digital alterations or enhancements to improve quality.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="numChannels" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Number of audio channels, e.g., 1, 2, 4, 5, etc. See also soundChannelMap.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="soundChannelMap" type="soundChannelMapType" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Information about the channel configuration, e.g., mapping the audio channel to their intended aural position/loudspeakers. The values represent parseable compound metadata using commas as separators, e.g., 1=left_front, 2=right_front, 3=center, 4=left_</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="soundField" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Indicates aural space arrangement of the sound recording, e.g., monaural, stereo, joint stereo, surround sound DTS 5.1, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="calibrationInfoType">
+		<xs:annotation>
+			<xs:documentation>calibrationInfoType: complexType for storing the type of calibration
+				related characteristics of an audio object, regardless of physical or digital
+				format. calibrationInfoType has 1 attribute ID (XML ID) and 4 elements calibrationExtInt, calibrationLocation, calibrationTimeStamp and calibrationType.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="calibrationExtInt" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the calibration data is within digital audio file or in a separate file</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="calibrationLocation" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Location of the calibration file if it is external e.g. URN, URL, etc...</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="calibrationTimeStamp" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Exact location of calibration tones within a file i.e. HH:MM:SSss...</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="calibrationTrackType" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Defines the type of calibration, e.g., the ITU test sequences known as CCITT 0.33.00 (mono) and CCITT 0.33.01 (stereo).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="messageDigestType">
+		<xs:annotation>
+			<xs:documentation> messageDigestType: Complex Type for recording the type of
+				messageDigest used for a digital audio file. messageDigestType has 1 attribute ID (XML ID)  and 3
+				elements messageDigestDatetime, messageDigestAlgorithm and messageDigest.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="messageDigestDatetime" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The datetime when the messageDigest was calculated and applied.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="messageDigestAlgorithm" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Type of messageDigest used.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="messageDigest" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The messageDigest value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="compressionType">
+		<xs:annotation>
+			<xs:documentation>compressionType: complexType for recording the type of compression
+				used for a digital audio file. compressionType has 1 attribute ID XML ID) and 4 elements codecCreatorApp, codecCreatorAppVersion, codecName and codecQuality.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="codecCreatorApp" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Name of the creator of the compression application e.g. SoundForge, etc...</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="codecCreatorAppVersion" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Version of the compression application e.g. 5.0, etc...</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="codecName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Name and version (or subtype) of the compression algorithm used, e.g., Frauenhofer xyz ["xyz"] is a placeholder for versioning information]</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="codecQuality" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Impact of the compression on quality e.g. lossless or lossy.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="lossless"/>
+						<xs:enumeration value="lossy"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="dimensionsType">
+		<xs:annotation>
+			<xs:documentation>dimensionsType: Complex Type for recording the dimensions of an object. 
+				dimensionsType has the following attributes: 
+				1. DEPTH:  The depth of the object in the unit of measure indicated in dimensions_unit, e.g., 7, 12.; 
+				2. DIAMETER: The diameter of any circular object expressed in the unit of measure indicated in dimensions_unit, e.g., 3.5, 5, 7.; 
+				3. GAUGE: Gauge or width of source tape, including indication of unit of measure, e.g., 8 mm, 0.5 inch, 0.25 inch, etc..; 
+				4. HEIGHT: Height of the object in the unit of measure indicated in dimensions_unit, e.g., 23.; 
+				5. LENGTH: Length of source open-reel tape recording, including indication of unit of measure, e.g., 700 feet, 1200 feet, etc..; 
+				6. NOTE: Desciption of odd-shaped objects that cannot be described using the standard dimensions fields.; 
+				7. THICKNESS: The thickness of the medium unwound (e.g. tape); 
+				8. UNITS: Unit of measurement of the source object, e.g., inches.; 
+				9. WIDTH: Width of any non-circular object expressed in the unit of measure indicated in dimensions_unit, e.g., 3.5, 5, 7.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="DEPTH" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>The depth of the object in the unit of measure indicated in dimensions_unit, e.g., 7, 12.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DIAMETER" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>The diameter of any circular object expressed in the unit of measure indicated in dimensions_unit, e.g., 3.5, 5, 7.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="GAUGE" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Gauge or width of source tape, including indication of unit of measure, e.g., 8 mm, 0.5 inch, 0.25 inch, etc..</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HEIGHT" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>Height of the object in the unit of measure indicated in dimensions_unit, e.g., 23.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="LENGTH" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Length of source open-reel tape recording, including indication of unit of measure, e.g., 700 feet, 1200 feet, etc..</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NOTE" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Desciption of odd-shaped objects that cannot be described using the standard dimensions fields.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="THICKNESS" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The thickness of the medium unwound (e.g. tape)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="UNITS" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Unit of measurement of the source object, e.g., inches.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="WIDTH" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>Width of any non-circular object expressed in the unit of measure indicated in dimensions_unit, e.g., 3.5, 5, 7.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="materialType">
+		<xs:annotation>
+			<xs:documentation>materialType: Complex Type for recording the physical characteristics
+				of the construction and material of an audio source item. materialType has 1
+				attribute ID (XML ID) and 9 elements baseMaterial, binder, discSurface, oxide, activeLayer, reflectiveLayer, stockBrand, method and usedSides.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="baseMaterial" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Base material of the source sound recording, e.g., plastic, glass, vinyl, metal, wax, polycarbonate, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="binder" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of adhesive used to bind recording surface to base material, e.g., CA (cellulose acetate) , PVC (polyvinyl chloride) etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="discSurface" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of recording surface aluminium, celluloid etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oxide" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of oxide used for the coating of a tape recording, e.g., cobalt modified, chromium dioxide, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="activeLayer" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of material used on the recording surface, e.g. dye, tellurium-selenium alloy, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reflectiveLayer" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of material used on the recordings reflective surface, e.g. gold, silver aluminium etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="stockBrand" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Manufacturer and stock number for source recording, e.g., Scotch 208, Ampex 407, Webco steel wire, Quik-cut 3215 acetate disc, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="method" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Methods to press music records e.g. "Direct metal", "Lacquer Master", "Metal Master", "Metal mother", "Pressing", "Metal stamper" and "Test pressing".</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="usedSides" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Number of recorded sides of the material</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="soundChannelMapType">
+		<xs:annotation>
+			<xs:documentation>soundChannelMapType: Complex type for describing the aural layout of
+				any audio tracks. The soundChannelMap element is used to wrap any number of
+				channelAssignment elements. This structure is used to describe the relationship of
+				sound channels to their destination. Generally, the destination will be a location
+				on the sound stage though it could also be something more specialized such as a time
+				code reader or even the channels of a mixing board. The channelAssignment element
+				maps a sound channel to its destination. There are 2 required attributes. The
+				channeNum identifies the sound channel of this audio object. Note that the first
+				channelNum is 0 while each subsequent channel is incremented by 1. The mapLocation
+				attribute specifies the destination.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="channelAssignment" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute name="CHANNELNUM" type="xs:nonNegativeInteger"/>
+					<xs:attribute name="MAPLOCATION" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trackingInfoType">
+		<xs:annotation>
+			<xs:documentation>trackingInfoType: Complex Type for recording tracking information about an
+				audio source item. trackingInfoType has 1 attribute ID (XML ID) and 2 elements trackingType and trackingValue.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="trackingType" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The type of tracking code, e.g., system number, actual shelf numbers, bar-code, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="trackingValue" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Shelf number or other identifier for source, e.g., system number, actual shelf numbers, etc.. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+</xs:schema>

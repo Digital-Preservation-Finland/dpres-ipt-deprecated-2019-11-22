@@ -1,0 +1,2327 @@
+<?xml version="1.0"?>
+<!-- edited with Emacs -->
+<!-- created by Morgan Cundiff (Library of Congress) -->
+<!-- Version 0.2, July 30, 2004 -->
+
+<!--  7/15/06changed  ReferenceBlackWhite" to type="typeOfStringType"-->
+<!--  4/06/04 added image/x-mrsid-image to list of allowable mime types -->
+<!--  7/21/04 typo fix "PlanarConfiguraion" changed to "PlanarConfiguration" -->
+<!--  7/21/04 ScannerManufacturer element changed to optional (minOccurs="0") -->
+<!--  7/30/04 changed allowable values of DateTimeCreated and DateTimeProcessed -->
+<!--  elements to be any of the following dataTypes: date, dateTime, gYear, gYearMonth -->
+
+
+<xsd:schema targetNamespace="http://www.loc.gov/mix/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.loc.gov/mix/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.2">
+  <xsd:element name="mix">
+    <xsd:annotation>
+      <xsd:documentation>NISO Data Dictionary: Technical Metadata for Digital Still Images</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:complexContent>
+	<xsd:extension base="mixType"/>
+      </xsd:complexContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="mixType">
+    <xsd:annotation>
+      <xsd:documentation>A MIX document consists of four subsidiary
+      sections: BasicImageParameters (Basic Image Parameters),
+      ImageCreation (Image Creation), ImagingPerformanceAssessment
+      (Imaging Performance Assessment), and ChangeHistory (Change
+      History).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="BasicImageParameters" type="BasicImageParametersType" minOccurs="0">
+	<xsd:annotation>
+	  <xsd:documentation>The items in this section are fundamental
+	  to the reconstruction of the digital file as a viewable
+	  image on electronically interfaced displays.  It makes no
+	  presumption about the rendered or spatial accuracy of the
+	  displayed image, only that a reasonably appearing image can
+	  be reconstructed using these elements.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:element>
+      <xsd:element name="ImageCreation" type="ImageCreationType" minOccurs="0">
+	<xsd:annotation>
+	  <xsd:documentation>This section can best be described as
+	  descriptive technical metadata.  While it provides no
+	  quantitative information, per se, it can provide critical
+	  information with respect to the logistics and administrative
+	  conditions surrounding digital image data capture.
+	  Frequently, simple interrogation of these fields offers
+	  valuable diagnostics about the image creation step as well
+	  as those of subsequent image generations. This metadata
+	  block documents selected, irreversible attributes of the
+	  analog-to-digital conversion process that may be used for
+	  future quality assessment of the image data.  By definition,
+	  image creation occurs only once.
+
+	  See, 5.1 Image Processing for fields to record
+	  digital-to-digital conversion
+	  processes.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:element>
+      <xsd:element name="ImagingPerformanceAssessment" type="ImagingPerformanceAssessmentType" minOccurs="0">
+	<xsd:annotation>
+	  <xsd:documentation>The operative principle in this section
+	  is to maintain the attributes of the image inherent to its
+	  quality.  The title Performance Assessment has both a
+	  present and future context: these elements serve as metrics
+	  to assess the accuracy of output (today’s use), and
+	  to assess the accuracy of preservation techniques,
+	  particularly migration (future use).
+
+	  Sub-sections 4.1 Spatial Metrics and 4.2 Energetics are
+	  meant as high-level quantitative measures of imaging
+	  performance.  Sub-section 4.3 Targets is meant to
+	  complement the former by providing low-level benchmarking
+	  quantification of the absolute imaging performance of the
+	  digital capture process.  This information in this latter
+	  section should be closely tied to sanctioned imaging
+	  performance standards when available.  In the absence of
+	  such standards, de-facto standards are appropriate.
+
+	  To a large extent, the image of any source can be linked
+	  backed to that source with appropriate capture
+	  documentation and benchmarking targets.  While the
+	  original source characteristics are not unequivocally
+	  recoverable, suitably accurate reconstructions of the
+	  source can, in principle, occur.  The high level metrics
+	  of sub-sections 4.1 and 4.2 can provide nominal recovery
+	  of the original source characteristics.  Detailed imaging
+	  performance information in Section 4.3, if properly
+	  documented, is a reliable thread to more accurate source
+	  characteristics.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:element>
+      <xsd:element name="ChangeHistory" type="ChangeHistoryType" minOccurs="0">
+	<xsd:annotation>
+	  <xsd:documentation>Change History metadata serves the
+	  function of documenting processes applied to image data over
+	  the life cycle of an image.  As defined below,
+	  processes” result either in editing or in
+	  transforming the image.
+
+	  The Image Creation metadata block (Section 3) is used to
+	  document the source, scanning system, and capture settings
+	  used to create an image from an analog source.  The
+	  metadata blocks in Change History are used to document the
+	  source, systems, and settings used in all subsequent
+	  digital-to-digital operations.
+
+	  The Change History metadata contains:
+	  -	A summary of image processing operations applied to an image
+	  -	Previous versions of the technical metadata if image transformation creates a new generation of image.
+
+	  However,
+
+	  - The Change History metadata is not designed to be used
+	  to reverse image-editing operations, though
+	  documentation of change history and preservation
+	  of essential technical metadata may allow a
+	  simulated return to original image data.
+
+	  - The Change History metadata is not designed to be used
+	  to authenticate an image.  Consistent with other
+	  metadata blocks in this data dictionary, Change
+	  History limits its focus to quality assessment
+	  and preservation of image data and thus may not
+	  be sufficient to meet requirements defined for
+	  image integrity and authenticity.
+
+	  The following assumption and definitions govern the
+	  proposed logical structure for Change History:
+
+	  1. Image processing may occur multiple times throughout
+	  the life cycle of an image.
+
+	  2. The image life cycle may consist of multiple
+	  generations of the image.  The logical structure
+	  of this standard allows for the addition of
+	  change history information to the existing
+	  metadata.
+
+	  3. Image transformation refers to any processing that
+	  produces a new generation image (changes to any
+	  of the values in Section 2.1 Format create a new
+	  generation of the image).  In the case of image
+	  transformation, Section 5.2 is used to track the
+	  metadata from the previous generation of the
+	  image.  See Figure 5 for a visual representation
+	  of this.
+
+	  4. All other processes (i.e., those that do not create new
+	  values in Section 2.1) are classified as image
+	  editing and are recorded only in Section
+	  5.1.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- BasicImageParametersType Section  BIPT -->
+  <xsd:complexType name="BasicImageParametersType">
+    <xsd:sequence>
+      <xsd:element name="Format" minOccurs="0">
+	<xsd:complexType>
+	  <xsd:sequence>
+	    <xsd:element name="MIMEType" type="typeOfMIMETypeType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Designation of the
+		Multipurpose Internet Mail Extensions (MIME) type
+		associated with the image data.
+
+		The values listed below represent MIME types for
+		digital still image formats commonly used in
+		library and museum digital reformatting
+		initiatives.  The x- convention is used to
+		construct an unofficial type for any image format
+		lacking a formally registered MIME type.  See
+		http://www.mime-types.com/ for an up-to-date list
+		of formally registered MIME
+		types.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="ByteOrder" type="typeOfByteOrderType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Designates the byte order in multi-byte numbers are stored.
+
+		Virtually all computer architectures are byte addressable.  The bytes of a multi-byte data value can be stored in memory in different orders. "Little_endian" means that the low-order byte of the number is stored in memory at the lowest address, and the high-order byte at the highest address. Big_endian" means that the high-order byte of the number is stored in memory at the lowest address, and the low-order byte at the highest address.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="Compression" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="CompressionScheme" type="typeOfCompressionSchemeType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Designates the compression scheme used to store the image data.
+
+		      Values above are drawn from TIFF 6.0 specification (p117) though institutions are encouraged to devise a local enumerated list to allow for the addition of new values as technology changes.  This data element allows for the designation of subelements in order to record the level of compression applied.  See CompressionLevel.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="CompressionLevel" type="typeOfCompressionLevelType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Designates the level of compression used in CompressionScheme.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	    <xsd:element name="PhotometricInterpretation" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="ColorSpace" type="typeOfColorSpaceType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Designates the color space of the decompressed image data. Use value of TIFF Tag 262 (PhotometricInterpretation).</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="ICCProfile" minOccurs="0">
+		    <xsd:complexType>
+		      <xsd:sequence>
+			<xsd:element name="ProfileName" type="typeOfStringType" minOccurs="0">
+			  <xsd:annotation>
+			    <xsd:documentation>Definition: Designates the well-defined name of the ICC profile used.
+			    If ICC profile used is a well-known and
+			    well-documented profile, record the
+			    information in this data element.  If
+			    not, record the location of where the
+			    profile can be found in
+			    ProfileURL.</xsd:documentation>
+			  </xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProfileURL" type="typeOfReferenceType" minOccurs="0">
+			  <xsd:annotation>
+			    <xsd:documentation>Definition: Designates the URL/URN where the ICC profile is located.
+			    If ICC profile used is a well-known and
+			    well-documented profile, record the
+			    information in 2.1.4.2.1. ProfileName.
+			    If not, record the location of where the
+			    profile can be found in this data
+			    element.</xsd:documentation>
+			  </xsd:annotation>
+			</xsd:element>
+		      </xsd:sequence>
+		    </xsd:complexType>
+		  </xsd:element>
+		  <xsd:element name="YCbCrSubSampling" type="typeOfYCbCrSubSamplingType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Designates the subsampling factors used for the chrominance components of a YCbCr image. It is mandatory when PhotometricInterpretation = 6, and there are no defaults allowed.
+
+		      See TIFF Section 21 YCbCr Images and ISO/TC42N 4378 TIFF/EP standard, Section 5 -  TIFF/EP Tag definitions for additional information regarding TIFF YCbCr (Class Y) images.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="YCbCrPositioning" type="typeOfYCbCrPositioningType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Designates the positions of subsampled chrominance components relative to luminance samples. This tag is mandatory when PhotometricInterpretation = 6, and the value shall equal 2.
+
+		      See TIFF Section 21 YCbCr Images and ISO/TC42N 4378 TIFF/EP standard, Section 5 -  TIFF/EP Tag definitions for additional information regarding TIFF YCbCr (Class Y) images.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="YCbCrCoefficients" type="typeOfYCbCrCoefficientsType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Encodes the transformation from RGB to YCbCr image data. It is mandatory when PhotometricInterpretation = 6, and there are no defaults allowed. The transformation is specified as three rational values that represent the coefficients used to compute luminance, Y.
+
+		      See TIFF Section 21 YCbCr Images and ISO/TC42N 4378 TIFF/EP standard, Section 5 -  TIFF/EP Tag definitions for values and additional information regarding TIFF YCbCr (Class Y) images.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="ReferenceBlackWhite" type="typeOfStringType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Encodes a pair of headroom and footroom image data values for each pixel component. This tag is mandatory when PhotometricInterpretation = 6 (YCbCr), and there are no defaults allowed.
+
+		      See TIFF Section 21 YCbCr Images and ISO/TC42N 4378 TIFF/EP standard, Section 5 -  TIFF/EP Tag definitions for values and additional information regarding TIFF YCbCr (Class Y) images.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	    <xsd:element name="Segments" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="SegmentType" type="typeOfSegmentTypeType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Specifies whether image data is stored in strips or tiles.
+
+		      When value = 0, fields 2.1.5.5-2.1.5.8 are irrelevant.
+		      When value = 1, fields 2.1.5.2-2.1.5.4 are irrelevant.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="StripOffsets" type="typeOfStripOffsetsType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: For each strip, the byte offset of that strip.
+		      
+		      The StripOffsets field stores the offsets from the start of the image file to the start of each image data strip.” (TIFF/EP)</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="RowsPerStrip" type="typeOfRowsPerStripType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: The number of rows per strip.
+		      
+		      RowsPerStrip and ImageLength together tell us the number of strips in the entire image.  The equation is:…” (TIFF, p39)</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="StripByteCounts" type="typeOfStripByteCountsType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: The number of image data bytes stored within each strip after compression.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="TileWidth" type="typeOfTileWidthType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: The tile width in pixels. This is the number of columns in each tile.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="TileLength" type="typeOfTileLengthType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: The tile length (height) in pixels. This is the number of rows in each tile.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="TileOffsets" type="typeOfTileOffsetsType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: For each tile, the byte offset of that tile, as compressed and stored on disk.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="TileByteCounts" type="typeOfTileByteCountsType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: For each tile, the byte offset of that tile, as compressed and stored on disk.
+
+		      For each tile, the number of (compressed) bytes in that tile.  See TileOffsets for a description of how the byte counts are ordered.   No default. See also TileWidth, TileLength, TileOffsets.  (TIFF, p68)</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	    <xsd:element name="PlanarConfiguration" type="typeOfPlanarConfigurationType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Designates how the components of each pixel are stored.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	  </xsd:sequence>
+	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="File" minOccurs="0">
+	<xsd:complexType>
+	  <xsd:sequence>
+	    <xsd:element name="ImageIdentifier" type="typeOfImageIdentifierType" minOccurs="0"/>
+	    <xsd:element name="FileSize" type="typeOfFileSizeType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Extent of image in number of bytes.
+		
+		The file size must record the number of bytes as provided by the system.  Do not attempt to record file sizes in terms of KB, MB or other notation.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="Checksum" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="ChecksumMethod" type="typeOfChecksumMethodType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Type of error detection technique used: A checksum (or equivalent).
+
+		      Local repository policies regarding file integrity metadata should govern implementation of this field.  The enumerated type values should be defined locally, as should the rule regarding when the checksum is generated:  prior to deposit, at the time of deposit, or both.
+
+		      Depending upon local implementation, this field may be used to list the specific type of error detection technique used (e.g., checksum, CRC, MNP, etc.) and the subsequent value would then be recorded in 2.2.3.1 ChecksumValue.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="ChecksumValue" type="typeOfStringType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Checksum (or equivalent).  Note: Linked to ChecksumMethod</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	    <xsd:element name="Orientation" type="typeOfOrientationType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Designates the orientation of the image, with respect to the placement of its rows (ImageWidth) and columns (ImageLength), as it was saved to disk.
+
+		* normal” is defined as follows: when opened, the top (0th) row of pixels corresponds to the visual top of the image, and the first (0th) column of pixels on left corresponds to the visual left-hand side of the image.
+
+		Consult TIFF for additional values referring to mirrored images.  (Note that TIFF/EP supports only five values, which are proposed above as the finite list of enumerated type values.)
+
+		This field is to be used to record only the orientation of the image, not the orientation of the source to the device (e.g., camera) used to capture the image.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="DisplayOrientation" type="typeOfDisplayOrientationType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Designates the orientation in which the image should be presented to a conventional monitor with a 3:2 aspect ratio.
+
+		This value is important to record when the preferred orientation of the image sent to a 3:2 aspect ratio computer monitor is different from Orientation. 
+
+		While Orientation refers to the placement of pixels in the digital image file, DisplayOrientation refers to the preferred orientation in which to display the content (text, picture, table, etc.) within the file.
+
+		This field will likely become obsolete when standard” delivery applications, such as web browsers, incorporate an image rotation tool.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="TargetedDisplayAR" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="XTargetedDisplayAR" type="typeOfXTargetedDisplayARType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Unit of X orientation</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="YTargetedDisplayAR" type="typeOfYTargetedDisplayARType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Unit of Y orientation</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	  </xsd:sequence>
+	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="PreferredPresentation" type="typeOfStringType" minOccurs="0">
+	<xsd:annotation>
+	  <xsd:documentation>Definition: Designation of the device, application, medium, viewing environment (or any combination thereof) to render the image data.
+
+	  For image data that can be defined to have a best representation,” use this free-text field to recommend the target” device, application, medium, viewing environment (or combination thereof) presumed or proven to be meaningful to image quality.  This will be especially important as viewing devices other than the conventional 3:2 monitor become popular.  Calculation and automated optimal display from one display Aspect Ratio to another will be possible with the information from 2.2.5 DisplayOrientation and the host of measurements supported within this standard.
+
+	  The Library of Congress’s presentation_profile specifies the program (or equivalent) used to manage the presentation of this primary or intermediate object for users.” 
+
+	  Standard: ISO/DIS 3664 Viewing conditions for graphic technology and photography.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <!-- end of BIPT Section -->
+    <!-- beginning of ImageCreationType  (ICT) Section -->
+  </xsd:complexType>
+  <xsd:complexType name="ImageCreationType">
+    <xsd:sequence>
+      <xsd:element name="SourceType" type="typeOfStringType" minOccurs="0">
+	<xsd:annotation>
+	  <xsd:documentation>Definition: This field specifies the medium of the analog source material scanned to create a digital still image.
+
+	  Notes: General or specific physical nature of original item (i.e., still pictorial image).” (LC)
+
+	  Usage Notes: Do not record dimensions of source material in this field.  See, Source_Xdimension (4.1.7) and Source_Ydimension (4.1.8).
+
+	  When the source of the image data is another digital still image (e.g., a parent high-resolution image used to create a reduced-resolution image), see ImageProcessing (5.1).
+
+	  Values (Examples):
+	  daguerreotype
+	  reflection print
+	  silver gelatin print
+	  Acme Bronze 100
+	  chromagenic film
+	  35mm color negative Kodak Royal Gold 100 Emul. 3712011
+	  monograph
+	  microfilm</xsd:documentation>
+	</xsd:annotation>
+      </xsd:element>
+      <xsd:element name="SourceID" type="typeOfStringType" minOccurs="0">
+	<xsd:annotation>
+	  <xsd:documentation>Definition: A unique identifier for a descriptive record of the source of image.
+	  
+	  Notes: Link to existing data record for the source material.
+
+	  Values (Examples):
+	  RLIN ID
+	  OCLC record number
+	  Local system control number</xsd:documentation>
+	</xsd:annotation>
+      </xsd:element>
+      <xsd:element name="ImageProducer" type="typeOfStringType" minOccurs="0" maxOccurs="unbounded">
+	<xsd:annotation>
+	  <xsd:documentation>Definition: Identifies the organization-level producer(s) of the image.
+	  
+	  Notes: Identifies the organization-level producer of the ‘file/bitstream,’ i.e., the scanned image, transcribed text, audio file, etc.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Host" minOccurs="0">
+	<xsd:complexType>
+	  <xsd:sequence>
+	    <xsd:element name="HostComputer" type="typeOfStringType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Computer and/or operating system in use at the time of image creation.
+
+		Notes: The definition for this multi-layered data element can be interpreted narrowly, as in TIFF (see above), or broadly as in Cedars, which states: This element contains information about the operating environment of the original digital object at the time of ingest, including information on relevant hardware and operating systems, together with the software products that would have been required in order to use it.”
+
+		Use 3.3.1 OS and 3.3.2 OSVersion to record specifics about the operating system.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="OperatingSystem" type="typeOfStringType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Operating system in use at the time of image creation.
+		
+		Values (Examples):
+		Windows
+		Mac
+		Unix
+		Linux</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="OSVersion" type="typeOfStringType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Version of the operating system in use at the time of image creation.
+
+		Values (Examples):
+		2000 (e.g., Windows 2000)
+		NT
+		X  (e.g., Mac OS X)
+		V (e.g., Unix System V)</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	  </xsd:sequence>
+	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeviceSource" type="typeOfStringType" minOccurs="0">
+	<xsd:annotation>
+	  <xsd:documentation>Definition: Classification of device used to create the image data.
+	  
+	  Usage Notes: Recommended syntax: Local institutions should create a list of enumerated values for use with this data element in order to regularize information.  Doing so on a local level will allow for more rapid expansion of list to accommodate new technologies.	
+
+	  When image processing software is used to generate the image data from a digital source, see ImageProcessing (5.1).
+
+	  Values (Examples):
+	  transmission scanner
+	  reflection print scanner
+	  digital still camera
+	  still from video</xsd:documentation>
+	</xsd:annotation>
+      </xsd:element>
+      <xsd:element name="ScanningSystemCapture" minOccurs="0">
+	<xsd:complexType>
+	  <xsd:sequence>
+	    <xsd:element name="ScanningSystemHardware" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="ScannerManufacturer" type="typeOfStringType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: The manufacturer of the scanner used to create the image.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="ScannerModel" minOccurs="0">
+		    <xsd:complexType>
+		      <xsd:sequence>
+			<xsd:element name="ScannerModelName" type="typeOfStringType" minOccurs="0">
+			  <xsd:annotation>
+			    <xsd:documentation>Definition: The model name of the scanner used to create the image.</xsd:documentation>
+			  </xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ScannerModelNumber" type="typeOfStringType" minOccurs="0">
+			  <xsd:annotation>
+			    <xsd:documentation>Definition: The model number of the scanner used to create the image.</xsd:documentation>
+			  </xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ScannerModelSerialNo" type="typeOfStringType" minOccurs="0">
+			  <xsd:annotation>
+			    <xsd:documentation>Definition: The serial number of the scanner used to create the image.</xsd:documentation>
+			  </xsd:annotation>
+			</xsd:element>
+		      </xsd:sequence>
+		    </xsd:complexType>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	    <xsd:element name="ScanningSystemSoftware" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="ScanningSoftware" type="typeOfStringType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: The name of the capture software used to create the image.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="ScanningSoftwareVersionNo" type="typeOfStringType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: The version number of the capture software used to create the image.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	    <xsd:element name="ScannerCaptureSettings" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="PixelSize" type="typeOfNonNegativeRealType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: This specifies the pixel size, in meters, of the scanner.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="PhysScanResolution" minOccurs="0">
+		    <xsd:complexType>
+		      <xsd:sequence>
+			<xsd:element name="XphysScanResolution" type="typeOfNonNegativeRealType" minOccurs="0">
+			  <xsd:annotation>
+			    <xsd:documentation>Definition: This specifies the physical scanning resolution of the device, in meters, recording the x (width) direction.
+
+			    Usage Note: This is NOT the interpolated resolution of the final output data.</xsd:documentation>
+			  </xsd:annotation>
+			</xsd:element>
+			<xsd:element name="YphysScanResolution" type="typeOfNonNegativeRealType" minOccurs="0">
+			  <xsd:annotation>
+			    <xsd:documentation>Definition: This specifies the physical scanning resolution of the device, in meters, recording the Y (height) direction.
+
+			    Usage Note: This is NOT the interpolated resolution of the final output data</xsd:documentation>
+			  </xsd:annotation>
+			</xsd:element>
+		      </xsd:sequence>
+		    </xsd:complexType>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	  </xsd:sequence>
+	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DigitalCameraCapture" minOccurs="0">
+	<xsd:complexType>
+	  <xsd:sequence>
+	    <xsd:element name="DigitalCameraManufacturer" type="typeOfStringType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: The manufacturer of the digital camera used to create the image.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="DigitalCameraModel" type="typeOfStringType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: The model of the digital camera used to create the image.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	  </xsd:sequence>
+	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CameraCaptureSettings" minOccurs="0">
+	<xsd:complexType>
+	  <xsd:sequence>
+	    <xsd:element name="FNumber" type="typeOfNonNegativeRealType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies the lens f-number (ratio of lens aperture to focal length) used when the image was captured.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="ExposureTime" type="typeOfNonNegativeRealType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies the exposure time used when the image was captured.  The value is to be recorded in seconds.
+
+		Usage Note: Input may be given as a rational (e.g., 1/125), but systems should store the number as a non-negative real (e.g., 0.008).</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="Brightness" type="typeOfNonNegativeRealType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies the Brightness values measured when the image was captured, using APEX values.
+
+		Usage Note: This value represents the light level at the source (document).</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="ExposureBias" type="typeOfNonNegativeRealType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies the actual exposure bias (the amount of under or over-exposure relative to a normal exposure, as determined by the camera's exposure system) used when capturing the image, using APEX units.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="SubjectDistance" type="typeOfSubjectDistanceType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies the distance, in meters, between the frontal plane of the camera lens and the subject on which the camera was focused.
+
+		Usage Note: May specify a range of values, bounded by minimum and maximum</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="MeteringMode" type="typeOfMeteringModeType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies the metering mode (the camera's method of spatially weighting the scene luminance values to determine the sensor exposure) used when capturing the image.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="SceneIlluminant" type="typeOfSceneIlluminantType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies the light source that was present when the image was captured.
+
+		Usage Note: Values for this data element must be drawn from the list documented in the DIG35 standard.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="ColorTemp" type="typeOfNonNegativeRealType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies the actual color temperature value of the scene illuminant in units of Kelvin.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="FocalLength" type="typeOfNonNegativeRealType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies the lens focal length in meters used to capture the image.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="Flash" type="typeOfFlashType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies whether a flash was used in image capture.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="FlashEnergy" type="typeOfNonNegativeRealType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies the amount of flash energy that was used in Beam Candle Power Seconds (BCPS).</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="FlashReturn" type="typeOfFlashReturnType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies whether the camera judged that the flash was not effective at the time of exposure.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="BackLight" type="typeOfBackLightType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies the lighting conditions at the time of exposure.
+
+		Usage Note: Values for this data element must be drawn from the list documented in the DIG35 standard (DIG35 B3.2.5 &lt;Back_Light&gt;).</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="ExposureIndex" type="typeOfNonNegativeRealType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies the exposure index setting used.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="AutoFocus" type="typeOfAutoFocusType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies the status of the capture device’s focus at the time of capture.
+
+		Usage Note: Values for this data element must be drawn from the list documented in the DIG35 standard (DIG35 B3.2.5 &lt;Auto Focus Values&gt;).</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="PrintAspectRatio" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="XPrintAspectRatio" type="typeOfNonNegativeRealType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Unit of X ratio</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="YPrintAspectRatio" type="typeOfNonNegativeRealType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Unit of Y ratio</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	  </xsd:sequence>
+	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Sensor" type="typeOfSensorType" minOccurs="0">
+	<xsd:annotation>
+	  <xsd:documentation>Definition: Designates the type of image sensor used in the camera or image capture device.
+
+	  Notes: Enumerated values drawn from TIFF/EP 37399 (p25-26)</xsd:documentation>
+	</xsd:annotation>
+      </xsd:element>
+      <xsd:element name="DateTimeCreated" type="typeOfDateType" minOccurs="0">
+	<xsd:annotation>
+	  <xsd:documentation>Definition: Date or DateTime image was created.
+	  
+	  Usage Notes: See, DateTimeProcessed (5.1.1) for images created by processing image data   (i.e., digital-to-digital conversion).</xsd:documentation>
+	</xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Methodology" type="typeOfStringType" minOccurs="0">
+	<xsd:annotation>
+	  <xsd:documentation>Definition: Designates the methodology and rationale to digitize an object or collection.
+
+	  Notes: For an example, see Building Digital Collections” notes associated with the American Memory collections, Library of Congress, National Digital Library Program, http://lcweb2.loc.gov/ammem/techdocs/digcols.html</xsd:documentation>
+	</xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- end of ICT Section -->
+  <!-- beginning of IPAT Section -->
+  <xsd:complexType name="ImagingPerformanceAssessmentType">
+    <xsd:sequence>
+      <xsd:element name="SpatialMetrics" minOccurs="0">
+	<xsd:complexType>
+	  <xsd:sequence>
+	    <xsd:element name="SamplingFrequencyPlane" type="typeOfSamplingFrequencyPlaneType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: The reference plane location for which XSamplingFrequency and YsamplingFrequency are designated.
+
+		Notes: This element is meant to remove the ambiguity with respect to XSamplingFrequency and YSamplingFrequency for the scanning of film intermediates.  It can be used to deduce Source_Xdimension or Source_Ydimension in conjunction with ImageWidth or ImageLength.
+
+		Value = 1 is consistent with DIG35 (B.3.2.4) and TIFF/EP 5.2.9-5.2.10 and is an indication of the physical sensor sampling frequency.  It is of limited use without knowledge of the optical magnification between sensor and imaged object.
+
+		Value = 2 would be most common for direct scanning of source objects.  If object plane” is the same as source object plane,” (Fig. 3) this value is used.
+
+		Value = 3 commonly used for film intermediates such as microfilm where XSampling Frequency and YSamplingFrequency are often referred to at the source object plane rather than the object film plane (Fig. 2).</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="SamplingFrequencyUnit" type="typeOfSamplingFrequencyUnitType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: The unit of measurement for XSamplingFrequency and YSamplingFrequency.
+
+		Usage Notes:
+		From TIFF 296 (Baseline Required, p21-24, 38), TIFF/EP 296 (5.2.8):
+
+		Value 1” used for images that may have a non-square aspect ratio, but no meaningful absolute dimensions.  In copy work, should also be used when source measurements are unknown (e.g., when a photo-intermediate such as 35mm negative film is the source).
+
+		When SamplingFrequencyUnit = 2 and Source_Xdimension is given in inches, the XSamplingFrequency may be calculated as follows:
+
+		XSamplingFrequency = ImageLength/Source_Xdimension
+
+		When SamplingFrequencyUnit = 2 and Source_Ydimension is given in inches, the YSamplingFrequency may be calculated as follows:
+
+		YSamplingFrequency = ImageWidth/Source_Ydimension
+
+		The same formulas may be used when SamplingFrequencyUnit = 3 and source dimensions are given in centimeters.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="XSamplingFrequency" type="typeOfPositiveIntegerType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This field specifies the number of pixels per SamplingFrequencyUnit in the image width.
+
+		Notes:
+		With fields YSamplingFrequency (4.1.4) and SamplingFrequencyUnit (4.1.2), XSamplingFrequency specifies the dimensions (scale) of the printed image.
+
+		When SamplingFrequencyUnit=1, this value for this field shall be null.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="YSamplingFrequency" type="typeOfPositiveIntegerType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This field specifies the number of pixels per SamplingFrequencyUnit in the image length.
+
+		Notes: With fields YSamplingFrequency (4.1.4) and SamplingFrequencyUnit (4.1.5), YSamplingFrequency specifies the dimensions (scale) of the printed image.
+
+		Required when SamplingFrequencyUnit=2 or 3.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="ImageWidth" type="typeOfPositiveIntegerType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This specifies the width of the digital image, i.e. horizontal or X dimension, in pixels.
+
+		Notes:
+		The image width may be the shorter or longer dimension of the image, depending upon the orientation of the camera or scanner during image capture.  For multiple-resolution image file formats, value shall specify the highest resolution.
+
+		This value may be used to calculate XSamplingFrequency when Source_Xdimension is given in inches and SamplingFrequencyUnit = 2.
+
+		Formula to calculate XSamplingFrequency:
+		XSamplingFrequency = ImageWidth/Source_Xdimension</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="ImageLength" type="typeOfPositiveIntegerType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: specifies the length of the digital image, i.e. vertical or Y dimension, in pixels.
+
+		Notes: 
+		The image length may be the shorter or longer dimension of the image, depending upon
+		the orientation of the camera or scanner during image capture. For multiple-resolution
+		image file formats, value shall specify the highest resolution.
+
+		This field may be used to calculate YSamplingFrequency when Source_Ydimension is
+		given in inches and SamplingFrequencyUnit = 2.
+
+		Formula to calculate YSamplingFrequency:
+		YSamplingFrequency = ImageLength/Source_Ydimension</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="Source_X" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="Source_Xdimension" type="typeOfNonNegativeRealType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Specifies the width of the scanned object.
+		      
+		      Usage Notes:
+		      The unit of measure (inches, meters, etc.) used must be specified in 4.1.7.1 Source_XdimensionUnit.
+
+		      If unknown or impractical to record, the value of Source_Xdimension may be deduced.  See, SamplingFrequencyPlane (4.1.6).</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="Source_XdimensionUnit" type="typeOfStringType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Specifies the unit of measure used in 4.1.7 Source_Xdimension</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	    <xsd:element name="Source_Y" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="Source_Ydimension" type="typeOfNonNegativeRealType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Specifies the height (i.e., vertical dimension) of the scanned object.
+
+		      Usage Notes:
+		      The unit of measure (inches, meters, etc.) used must be specified in 4.1.8.1 Source_YdimensionUnit.
+
+		      If unknown or impractical to record, the value of Source_Ydimension may be deduced.  See, SamplingFrequencyPlane (4.1.6).</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="Source_YdimensionUnit" type="typeOfStringType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Specifies the unit of measure used in 4.1.8 Source_Ydimension</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	  </xsd:sequence>
+	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Energetics" minOccurs="0">
+	<xsd:complexType>
+	  <xsd:sequence>
+	    <xsd:element name="BitsPerSample" type="typeOfBitsPerSampleType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: The number of bits per component for each pixel.  This field provides N values depending upon SamplesPerPixel present.
+
+		Usage Notes:
+		Note that this field allows a different number of bits per component for each component corresponding to a pixel.  For example, RGB color data could use a different number of bits per component for each of the three color panes.  Most RGB files will have the same number of BitsPerSample for each component.  Even in this case, the writer must write all three values.” (TIFF, p29, emphasis added)</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="SamplesPerPixel" type="typeOfSamplesPerPixelType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Designates the number of color components per pixel.
+		
+		Usage Notes:
+		Values drawn from TIFF (p39, 69) and TIFF/EP (5.2.19).  
+		See also BitsPerSample, PhotometricInterpretation, ExtraSamples.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="ExtraSamples" type="typeOfExtraSamplesType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Specifies that each pixel has M extra components whose interpretation is defined by one of the values listed below. 
+
+		Notes:
+		See also: TIFF 338 (Baseline mandatory if applicable, p31).
+		This field must be present if there are extra samples in the image data.  When this field is used, SamplesPerPixel (3.2.2) has a value greater than PhotometricInterpretation (2.1.4) suggests.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="Colormap" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:choice>
+		  <xsd:element name="Reference" type="typeOfReferenceType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: provides the location of the file containing the color map. As noted in the TIFF definition, Colormap is synonymous with color lookup table (CLUT).
+
+		      When PhotometricInterpretation = 2, there is no Colormap; in other words, there is no Colormap in RGB images (TIFF, p.24). 
+
+		      The reference data type accommodates the practice of generating a colormap at the beginning of each session. If the color map exists in an external file, it must be referenced in this element, otherwise Colormap information must be encoded in 8.2.4.2 through 8.2.4.5.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="Wrap" minOccurs="0">
+		    <xsd:complexType>
+		      <xsd:sequence>
+			<xsd:element name="Color" minOccurs="0" maxOccurs="256">
+			  <xsd:complexType>
+			    <xsd:sequence>
+			      <xsd:element name="BitCodeValue" type="typeOfColormapType" minOccurs="0">
+				<xsd:annotation>
+				  <xsd:documentation>Definition: This field provides the BlueValue within a particular RGB triplet of the Colormap (often called a lookup table) for palette-color images.  Particular triplet is reference in 4.2.4.1 Colormap_BitCodeValue.
+
+				  Usage Notes:
+				  As noted in the TIFF definition, Colormap is synonymous with color lookup table (CLUT).  When PhotometricInterpretation = 2, there is no Colormap; in other words, there is no Colormap in RGB images (TIFF, p24). Possible values are 0-255.</xsd:documentation>
+				</xsd:annotation>
+			      </xsd:element>
+			      <xsd:element name="RedValue" type="typeOfColormapType" minOccurs="0">
+				<xsd:annotation>
+				  <xsd:documentation>Definition: This field provides the Red Value within a particular RGB triplet of the Colormap (often called a lookup table) for palette-color images.  Particular triplet is reference in 4.2.4.1 Colormap_BitCodeValue. Possible values are 0-255.
+
+				  Usage Notes:
+				  As noted in the TIFF definition, Colormap is synonymous with color lookup table (CLUT).  When PhotometricInterpretation = 2, there is no Colormap; in other words, there is no Colormap in RGB images (TIFF, p24).</xsd:documentation>
+				</xsd:annotation>
+			      </xsd:element>
+			      <xsd:element name="GreenValue" type="typeOfColormapType" minOccurs="0">
+				<xsd:annotation>
+				  <xsd:documentation>Definition: This field provides the GreenValue within a particular RGB triplet of the Colormap (often called a lookup table) for palette-color images.  Particular triplet is reference in 4.2.4.1 Colormap_BitCodeValue. Possible values are 0-255.
+
+				  Usage Notes:
+				  As noted in the TIFF definition, Colormap is synonymous with color lookup table (CLUT).  When PhotometricInterpretation = 2, there is no Colormap; in other words, there is no Colormap in RGB images (TIFF, p24).</xsd:documentation>
+				</xsd:annotation>
+			      </xsd:element>
+			      <xsd:element name="BlueValue" type="typeOfColormapType" minOccurs="0">
+				<xsd:annotation>
+				  <xsd:documentation/>
+				  <xsd:documentation>Definition: This field provides the BlueValue within a particular RGB triplet of the Colormap (often called a lookup table) for palette-color images.  Particular triplet is reference in 4.2.4.1 Colormap_BitCodeValue. Possible values are 0-255.
+
+				  Usage Notes:
+				  As noted in the TIFF definition, Colormap is synonymous with color lookup table (CLUT).  When PhotometricInterpretation = 2, there is no Colormap; in other words, there is no Colormap in RGB images (TIFF, p24).</xsd:documentation>
+				</xsd:annotation>
+			      </xsd:element>
+			    </xsd:sequence>
+			  </xsd:complexType>
+			</xsd:element>
+		      </xsd:sequence>
+		    </xsd:complexType>
+		  </xsd:element>
+		</xsd:choice>
+	      </xsd:complexType>
+	    </xsd:element>
+	    <xsd:element name="GrayResponse" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="GrayResponseCurve" type="typeOfGrayResponseCurveType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: For grayscale data, the optical density of each possible pixel value.
+
+		      Usage Note:
+		      See also:  TIFF 290 (Baseline optional, p33)
+
+		      Must be accompanied by GrayResponseUnit (4.2.6)(The reference data type accommodates the practice of generating a response curve at the beginning of each session.)</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="GrayResponseUnit" type="typeOfGrayResponseUnitType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: The precision of the information contained in the GrayResponseCurve.
+
+		      Usage Note:
+		      Modifies GrayResponseCurve (4.2.5)</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	    <xsd:element name="WhitePoint" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="WhitePoint_Xvalue" type="typeOfCIExyType" minOccurs="0" maxOccurs="unbounded">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: The X value for the white point chromaticity of the effective illumination source of the capture process.
+
+		      Usage Notes:
+		      These values specify the 1931 CIE xy chromaticities of the effective illumination (i.e., filter/light source combination) at capture. They do not have any relation to location or directional coordinates. For more information about the 1931 CIE standard colorimetric observer, see http://www.color.org/profile.html.
+
+		      The chromaticity of the white point of the image is encoded using the mediaWhitePointTag values within the InterColorProfile tag value.”  (TIFF/EP 4.5 Camera Color Space Information)</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="WhitePoint_Yvalue" type="typeOfCIExyType" minOccurs="0" maxOccurs="unbounded">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: The Y value for the white point chromaticity of the effective illumination source of the capture process.
+
+		      Usage Notes:
+		      These values specify the 1931 CIE xy chromaticities of the effective illumination (i.e., filter/light source combination) at capture. They do not have any relation to location or directional coordinates. For more information about the 1931 CIE standard colorimetric observer, see http://www.color.org/profile.html.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	    <xsd:element name="PrimaryChromaticities" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="PrimaryChromaticities_RedX" type="typeOfCIExyType" minOccurs="0" maxOccurs="unbounded">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: This specifies the Red [x} value for the chromaticities of the primary colors of the imaging process.
+
+		      Usage Note:
+		      These values specify the 1931 CIE xy chromaticities of the capture primaries. The ordering is red [x], red [y], green[x], green[y],blue[x],blue[y].
+
+		      Note: The chromaticities of the primaries of the image are encoded using the redColorantTag, greenColorTag, and blueColorantTag values within the InterColorProfile tag value.”  (TIFF/EP 4.5 Camera Color Space Information)</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="PrimaryChromaticities_RedY" type="typeOfCIExyType" minOccurs="0" maxOccurs="unbounded">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: This specifies the Red [y} value for the chromaticities of the primary colors of the imaging process.
+
+		      Usage Note:
+		      These values specify the 1931 CIE xy chromaticities of the capture primaries. The ordering is red [x], red [y], green[x], green[y],blue[x],blue[y].
+
+		      Note: The chromaticities of the primaries of the image are encoded using the redColorantTag, greenColorTag, and blueColorantTag values within the InterColorProfile tag value.”  (TIFF/EP 4.5 Camera Color Space Information)</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="PrimaryChromaticities_GreenX" type="typeOfCIExyType" minOccurs="0" maxOccurs="unbounded">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: This specifies the Green [x} value for the chromaticities of the primary colors of the imaging process.
+
+		      Usage Note:
+		      These values specify the 1931 CIE xy chromaticities of the capture primaries. The ordering is red [x], red [y], green[x], green[y],blue[x],blue[y].
+
+		      Note: The chromaticities of the primaries of the image are encoded using the redColorantTag, greenColorTag, and blueColorantTag values within the InterColorProfile tag value.”  (TIFF/EP 4.5 Camera Color Space Information)</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="PrimaryChromaticities_GreenY" type="typeOfCIExyType" minOccurs="0" maxOccurs="unbounded">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: This specifies the Green [y} value for the chromaticities of the primary colors of the imaging process.
+
+		      Usage Note:
+		      These values specify the 1931 CIE xy chromaticities of the capture primaries. The ordering is red [x], red [y], green[x], green[y],blue[x],blue[y].
+
+		      Note: The chromaticities of the primaries of the image are encoded using the redColorantTag, greenColorTag, and blueColorantTag values within the InterColorProfile tag value.”  (TIFF/EP 4.5 Camera Color Space Information)</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="PrimaryChromaticities_BlueX" type="typeOfCIExyType" minOccurs="0" maxOccurs="unbounded">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: This specifies the Blue [x} value for the chromaticities of the primary colors of the imaging process.
+
+		      Usage Note:
+		      These values specify the 1931 CIE xy chromaticities of the capture primaries. The ordering is red [x], red [y], green[x], green[y],blue[x],blue[y].
+
+		      Note: The chromaticities of the primaries of the image are encoded using the redColorantTag, greenColorTag, and blueColorantTag values within the InterColorProfile tag value.”  (TIFF/EP 4.5 Camera Color Space Information)</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="PrimaryChromaticities_BlueY" type="typeOfCIExyType" minOccurs="0" maxOccurs="unbounded">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: This specifies the Blue [y} value for the chromaticities of the primary colors of the imaging process.
+
+		      Usage Note:
+		      These values specify the 1931 CIE xy chromaticities of the capture primaries. The ordering is red [x], red [y], green[x], green[y],blue[x],blue[y].
+
+		      Note: The chromaticities of the primaries of the image are encoded using the redColorantTag, greenColorTag, and blueColorantTag values within the InterColorProfile tag value.”  (TIFF/EP 4.5 Camera Color Space Information)</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	  </xsd:sequence>
+	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TargetData" minOccurs="0">
+	<xsd:complexType>
+	  <xsd:sequence>
+	    <xsd:element name="TargetType" type="typeOfTargetTypeType" minOccurs="0" maxOccurs="unbounded">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This element identifies the targets as either internal or external.
+
+		Usage Notes:
+		Internal targets are targets which appear within the frame of the digitized item.  External targets do not appear within the frame with the digitized item and are separate files, usually full frame targets used for calibration purposes.
+
+		The Count for this field = 1.  Each target shall be represented by its own logical metadata block.  See diagram of proposed TargetData structure (4.3).
+
+		When value = 1, the ImageData field shall not be used.  See 4.3.3 ImageData.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="TargetID" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="TargetIDManufacturer" type="typeOfStringType" minOccurs="0" maxOccurs="unbounded">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Identifies the manufacturer or organization that created the target.
+
+		      Usage Notes:
+		      The Count for this multi-layered data element  = 1.  Each target shall be represented by its own logical metadata block.  See diagram of proposed TargetData structure (4.3).</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="TargetIDName" type="typeOfStringType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Identifies the name of the target.
+		      
+		      Usage Notes: The Count for this multi-layered data element  = 1.  Each target shall be represented by its own logical metadata block.  See diagram of proposed TargetData structure (4.3).</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="TargetIDNo" type="typeOfStringType" minOccurs="0" maxOccurs="unbounded">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Identifies the version or number of the target.
+		      
+		      Usage Notes:
+		      The Count for this multi-layered data element  = 1.  Each target shall be represented by its own logical metadata block.  See diagram of proposed TargetData structure (4.3).</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="TargetIDMedia" type="typeOfStringType" minOccurs="0" maxOccurs="unbounded">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: Identifies the media of the target.
+		      
+		      Usage Notes:
+		      The Count for this multi-layered data element  = 1.  Each target shall be represented by its own logical metadata block.  See diagram of proposed TargetData structure (4.3).</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	    <xsd:element name="ImageData" type="typeOfReferenceType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Identifies the path where the digital image of the reference target identified in 4.3.2 TargetID is located.
+
+		Values (Examples):
+		[filename]
+		[URL] 
+		[URN]
+		
+		Usage Notes:
+		The Count for this field = 1.  Each target shall be represented by its own logical metadata block.  See diagram of proposed TargetData structure (4.3).</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="PerformanceData" type="typeOfReferenceType" minOccurs="0" maxOccurs="unbounded">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Identifies the path of the file that contains the image performance data relative to the target identified in 4.3.2 TargetID.
+
+		Values (Examples):
+		[filename]
+		[URL] 
+		[URN]
+
+		Usage Notes:
+		PerformanceData refers to standards-based characterizations of system performance according to measurements of spatial resolution, OECF, noise, and other attributes important to image quality.
+
+		Standards: Electronic imaging standards through the International Imaging Industry Association (I3A) (http://www.i3a.org/it10.html) provide example uses and reporting formats for proposed ISO performance data characterization.  These include, for example, GrayResponseCurve (ISO 14524) and Spatial Resolution Measurement (ISO 16067).</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="Profiles" type="typeOfReferenceType" minOccurs="0" maxOccurs="unbounded">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Identifies the path of the file that contains the ICC color profile or other image management profiles.
+
+		Values (Examples):
+		[filename]
+		[URL] 
+		[URN]
+
+		Usage Notes:
+		The Count for this field = 1.  Each target shall be represented by its own logical metadata block.  See diagram of proposed TargetData structure (4.3).</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	  </xsd:sequence>
+	</xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- end of IPAT Section -->
+  <!-- beginning of CHT Section -->
+  <xsd:complexType name="ChangeHistoryType">
+    <xsd:sequence>
+      <xsd:element name="ImageProcessing" minOccurs="0">
+	<xsd:annotation>
+	  <xsd:documentation>This metadata block contains a summary of image processing operations (i.e., digital-to-digital conversion processes) that may be used for future quality assessment of the image data.
+
+	  Note: Fields 5.1.1-5.1.5 define a single metadata block to document a single processing action (e.g., image cropped) or a single set of processing actions (e.g., subsampling, application of ICC profile, image transformation).
+
+	  The logical structure of this metadata block presumes that image processing will occur multiple times (Fig. 5).  To document a full change history applied to an image, each metadata block should not be overwritten by subsequent processing actions.</xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType>
+	  <xsd:sequence>
+	    <xsd:element name="DateTimeProcessed" type="typeOfDateType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Date or DateTime image was processed.
+		
+		Values:
+		YYYY-MM-DD
+
+		Usage Notes:
+		Use ISO 8601 numeric representations of date and time.
+
+		If multiple processing steps are recorded together in 5.1.5, the DateTime shall refer to the final (i.e., most recent) ProcessingAction.
+
+		The value for this field shall be null for images that receive no processing following image conversion, as documented in 3.1 Image Creation.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="SourceData" type="typeOfReferenceType" minOccurs="0">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: This field specifies either a reference to the source image data (digital file), or a brief description of the file, from which the processed digital image file was created.
+
+		Values (Examples):
+		[local filename]
+		[URL] or [URN] or [Name Resolution Service name of file stored in repository]
+		[Photo CD image (location or identifier)]
+		
+		Usage Notes:
+		The value for this field shall be null for images that receive no processing following image conversion, as documented in 3.1 Image Creation.</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="ProcessingAgency" type="typeOfStringType" minOccurs="0" maxOccurs="unbounded">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: Identifies the organization-level producer(s) of the processed image.
+
+		Values (Examples):
+		Luna Imaging, Inc.
+		JJT, Inc.
+		University of Michigan Digital Library Production Services
+		Harvard College Library Digital Imaging Group</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	    <xsd:element name="ProcessingSoftware" minOccurs="0">
+	      <xsd:complexType>
+		<xsd:sequence>
+		  <xsd:element name="ProcessingSoftwareName" type="typeOfStringType" minOccurs="0">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: The name of the image processing software used to edit or transform the image data.
+
+		      Usage Notes:
+		      Record version number of software in 5.1.4.2 ProcessingSoftwareVersion.</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		  <xsd:element name="ProcessingSoftwareVersion" type="typeOfStringType" minOccurs="0" maxOccurs="unbounded">
+		    <xsd:annotation>
+		      <xsd:documentation>Definition: The version number of the image processing software used to edit or transform the image data.
+
+		      Usage Notes:
+		      For use with 5.1.4.1 ProcessingSoftwareName</xsd:documentation>
+		    </xsd:annotation>
+		  </xsd:element>
+		</xsd:sequence>
+	      </xsd:complexType>
+	    </xsd:element>
+	    <xsd:element name="ProcessingActions" type="typeOfStringType" minOccurs="0" maxOccurs="unbounded">
+	      <xsd:annotation>
+		<xsd:documentation>Definition: An ordinal listing of the image processing steps performed by way of ProcessingSoftware (5.1.4).
+
+		Values (Examples):
+		rotate 90 CW
+		transformation (new image generation)
+		ICC profile added</xsd:documentation>
+	      </xsd:annotation>
+	    </xsd:element>
+	  </xsd:sequence>
+	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="PreviousImageMetadata" type="typeOfPreviousImageMetadataType" minOccurs="0" maxOccurs="unbounded">
+	<xsd:annotation>
+	  <xsd:documentation>Definition: Documentation of change history and preservation of essential technical metadata to simulate return to original image data.
+
+	  Notes:
+	  The current information shall not be erased when adding new information to the image history.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- end of CHT Section -->
+  <!-- beginning of BIPT typeTypes -->
+  <!-- typeOfMIMETypeType -->
+  <xsd:complexType name="typeOfMIMETypeType">
+    <xsd:simpleContent>
+      <xsd:extension base="MIMEType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="MIMEType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="application/pdf"/>
+      <xsd:enumeration value="image/cgm"/>
+      <xsd:enumeration value="image/fif "/>
+      <xsd:enumeration value="image/g3fax"/>
+      <xsd:enumeration value="image/gif"/>
+      <xsd:enumeration value="image/ief"/>
+      <xsd:enumeration value="image/jpeg"/>
+      <xsd:enumeration value="image/naplps"/>
+      <xsd:enumeration value="image/png"/>
+      <xsd:enumeration value="image/prs.btif"/>
+      <xsd:enumeration value="image/prs.pti"/>
+      <xsd:enumeration value="image/rgb"/>
+      <xsd:enumeration value="image/t38"/>
+      <xsd:enumeration value="image/tiff"/>
+      <xsd:enumeration value="image/tiff-fx"/>
+      <xsd:enumeration value="image/vnd.cns.inf2"/>
+      <xsd:enumeration value="image/vnd.djvu"/>
+      <xsd:enumeration value="image/vnd.dwg"/>
+      <xsd:enumeration value="image/vnd.dxf"/>
+      <xsd:enumeration value="image/vnd.fastbidsheet"/>
+      <xsd:enumeration value="image/vnd.fpx"/>
+      <xsd:enumeration value="image/vnd.fst"/>
+      <xsd:enumeration value="image/vnd.fujixerox.edmics-mmr"/>
+      <xsd:enumeration value="image/vnd.fujixerox.edmics-rlc"/>
+      <xsd:enumeration value="image/vnd.globalgraphics.pgb"/>
+      <xsd:enumeration value="image/vnd.mix"/>
+      <xsd:enumeration value="image/vnd.net-fpx"/>
+      <xsd:enumeration value="image/vnd.svf"/>
+      <xsd:enumeration value="image/vnd.wap.wbmp"/>
+      <xsd:enumeration value="image/vnd.xiff"/>
+      <xsd:enumeration value="image/wavelet"/>
+      <xsd:enumeration value="image/x-cals"/>
+      <xsd:enumeration value="image/x-cmu-raster"/>
+      <xsd:enumeration value="image/x-cmx"/>
+      <xsd:enumeration value="image/x-dwg"/>
+      <xsd:enumeration value="image/x-dxf"/>
+      <xsd:enumeration value="image/x-eps"/>
+      <xsd:enumeration value="image/x-mgx-dsf"/>
+      <xsd:enumeration value="image/x-ms-bmp"/>
+      <xsd:enumeration value="image/x-pcd"/>
+      <xsd:enumeration value="image/x-photo-cd"/>
+      <xsd:enumeration value="image/x-pict"/>
+      <xsd:enumeration value="image/x-png"/>
+      <xsd:enumeration value="image/x-portable-anymap"/>
+      <xsd:enumeration value="image/x-portable-bitmap"/>
+      <xsd:enumeration value="image/x-portable-graymap "/>
+      <xsd:enumeration value="image/x-portable-pixmap"/>
+      <xsd:enumeration value="image/x-rgb "/>
+      <xsd:enumeration value="image/x-sgi-bw"/>
+      <xsd:enumeration value="image/x-sgi-rgba"/>
+      <xsd:enumeration value="image/x-xbitmap"/>
+      <xsd:enumeration value="image/x-xpixmap"/>
+      <xsd:enumeration value="image/x-xwindowdump"/>
+      <xsd:enumeration value="image/x-mrsid-image"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfMIMETypeType -->
+  <!-- typeOfByteOrderType -->
+  <xsd:complexType name="typeOfByteOrderType">
+    <xsd:simpleContent>
+      <xsd:extension base="ByteOrderType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="ByteOrderType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="big-endian"/>
+      <xsd:enumeration value="little-endian"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfByteOrderType -->
+  <!-- typeOfCompressionSchemeType -->
+  <xsd:complexType name="typeOfCompressionSchemeType">
+    <xsd:simpleContent>
+      <xsd:extension base="CompressionSchemeType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="CompressionSchemeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="1">
+	<xsd:annotation>
+	  <xsd:documentation>1 = Uncompressed</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="2">
+	<xsd:annotation>
+	  <xsd:documentation>2 = CCITT 1D</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="3">
+	<xsd:annotation>
+	  <xsd:documentation>3 = CCITT Group 3</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="4">
+	<xsd:annotation>
+	  <xsd:documentation>4 = CCITT Group 4</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="5">
+	<xsd:annotation>
+	  <xsd:documentation>5 = LZW</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="6">
+	<xsd:annotation>
+	  <xsd:documentation>6 = JPEG</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="32773">
+	<xsd:annotation>
+	  <xsd:documentation>7 = PackBits (simple byte-oriented run-length scheme)</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfCompressionSchemeType -->
+  <!-- typeOfCompressionLevelType -->
+  <xsd:complexType name="typeOfCompressionLevelType">
+    <xsd:simpleContent>
+      <xsd:extension base="CompressionLevelType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="CompressionLevelType">
+    <xsd:restriction base="xsd:integer"/>
+  </xsd:simpleType>
+  <!-- end of typeOfCompressionLevelType -->
+  <!-- typeOfColorSpaceType -->
+  <xsd:complexType name="typeOfColorSpaceType">
+    <xsd:simpleContent>
+      <xsd:extension base="ColorSpaceType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="ColorSpaceType">
+    <xsd:annotation>
+      <xsd:documentation>Use value of TIFF Tag 262 PhotometricInterpretation.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:integer">
+      <xsd:enumeration value="0">
+	<xsd:annotation>
+	  <xsd:documentation>0 = WhiteIsZero.  For bilevel and grayscale images: 0 is imaged as white.  2**BitsPerSample-1 is imaged as black.  This is the normal value for Compression=2.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="1">
+	<xsd:annotation>
+	  <xsd:documentation>1 = BlackIsZero.  For bilevel and grayscale images: 0 is imaged as black.  2**BitsPerSample-1 is imaged as white.  If this value is specified for Compression=2, the image should display and print reversed.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="2">
+	<xsd:annotation>
+	  <xsd:documentation>2 = RGB.  In the RGB model, a color is described as a combination of the three primary colors of light (red, green, and blue) in particular concentrations.  For each of the three components, 0 represents minimum intensity, and 2**BitsPerSample - 1 represents maximum intensity.  Thus an RGB value of (0,0,0) represents black, and (255,255,255) represents white, assuming 8-bit components.  For PlanarConfiguration = 1, the components are stored in the indicated order: first Red, then Green, then Blue.  For PlanarConfiguration = 2, the StripOffsets for the component planes are stored in the indicated order: first the Red component plane StripOffsets, then the Green plane StripOffsets, then the Blue plane StripOffsets.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="3">
+	<xsd:annotation>
+	  <xsd:documentation>3 = Palette color.  In this model, a color is described with a single component.  The value of the component is used as an index into the red, green and blue curves in the ColorMap field to retrieve an RGB triplet that defines the color.  When PhotometricInterpretation=3 is used, ColorMap must be present and SamplesPerPixel must be 1.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="4">
+	<xsd:annotation>
+	  <xsd:documentation>4 = Transparency Mask.  This means that the image is used to define an irregularly shaped region of another image in the same TIFF file.  SamplesPerPixel and BitsPerSample must be 1.  PackBits compression is recommended.  The 1-bits define the interior of the region; the 0-bits define the exterior of the region.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="5">
+	<xsd:annotation>
+	  <xsd:documentation>5 = CMYK</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="6">
+	<xsd:annotation>
+	  <xsd:documentation>6 = YCbCr.  Note: when PhotometricInterpretation = 6, TIFF/EP requires use of the following four tags (which are not covered in this specification):  530 YCbCrSubSampling, 531 YCbCrPositioning, 529, YCbCrCoefficients, 532 ReferenceBlackWhite .  Use 2.1.4.3 – 2.1.4.6 to record these values.See TIFF Section 21 YCbCr Images and ISO/TC42N 4378 TIFF/EP standard, Section 5 -  TIFF/EP Tag definitions for additional information regarding TIFF YCbCr (Class Y) images.</xsd:documentation>
+	  <xsd:documentation/>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8">
+	<xsd:annotation>
+	  <xsd:documentation>8 = CIELab</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfColorSpaceType -->
+  <!-- typeOfYCbCrSubSamplingType -->
+  <xsd:complexType name="typeOfYCbCrSubSamplingType">
+    <xsd:simpleContent>
+      <xsd:extension base="YCbCrSubSamplingType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="YCbCrSubSamplingType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="fromTiffSection21"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfYCbCrSubSamplingType -->
+  <!-- typeOfYCbCrPositioningType -->
+  <xsd:complexType name="typeOfYCbCrPositioningType">
+    <xsd:simpleContent>
+      <xsd:extension base="YCbCrPositioningType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="YCbCrPositioningType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="fromTiffSection21"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfYCbCrPositioningType -->
+  <!-- typeOfYCbCrCoefficientsType -->
+  <xsd:complexType name="typeOfYCbCrCoefficientsType">
+    <xsd:simpleContent>
+      <xsd:extension base="YCbCrCoefficientsType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="YCbCrCoefficientsType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="fromTiffSection21"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfYCbCrPositioningType -->
+  <!-- typeOfReferenceBlackWhiteType -->
+  <xsd:complexType name="typeOfReferenceBlackWhiteType">
+    <xsd:simpleContent>
+      <xsd:extension base="ReferenceBlackWhiteType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="ReferenceBlackWhiteType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="fromTiffSection21"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfSegmentTypeType -->
+  <xsd:complexType name="typeOfSegmentTypeType">
+    <xsd:simpleContent>
+      <xsd:extension base="SegmentTypeType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="SegmentTypeType">
+    <xsd:restriction base="xsd:integer">
+      <xsd:enumeration value="0">
+	<xsd:annotation>
+	  <xsd:documentation>0 = strips</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="1">
+	<xsd:annotation>
+	  <xsd:documentation>1 = tiles</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfSegmentTypeType -->
+  <!-- typeOfStripOffsetsType -->
+  <xsd:complexType name="typeOfStripOffsetsType">
+    <xsd:simpleContent>
+      <xsd:extension base="StripOffsetsType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="StripOffsetsType">
+    <xsd:restriction base="xsd:integer"/>
+  </xsd:simpleType>
+  <!-- end of typeOfStripOffsetsType -->
+  <!-- typeOfRowsPerStripType -->
+  <xsd:complexType name="typeOfRowsPerStripType">
+    <xsd:simpleContent>
+      <xsd:extension base="RowsPerStripType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="RowsPerStripType">
+    <xsd:restriction base="xsd:integer"/>
+  </xsd:simpleType>
+  <!-- end of typeOfRowsPerStripType -->
+  <!-- typeOfStripByteCountsType -->
+  <xsd:complexType name="typeOfStripByteCountsType">
+    <xsd:simpleContent>
+      <xsd:extension base="StripByteCountsType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="StripByteCountsType">
+    <xsd:restriction base="xsd:integer"/>
+  </xsd:simpleType>
+  <!-- end of typeOfStripByteCountsType -->
+  <!-- typeOfTileWidthType -->
+  <xsd:complexType name="typeOfTileWidthType">
+    <xsd:simpleContent>
+      <xsd:extension base="TileWidthType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="TileWidthType">
+    <xsd:restriction base="xsd:integer"/>
+  </xsd:simpleType>
+  <!-- end of typeOfTileWidthType -->
+  <!-- typeOfTileLengthType -->
+  <xsd:complexType name="typeOfTileLengthType">
+    <xsd:simpleContent>
+      <xsd:extension base="TileLengthType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="TileLengthType">
+    <xsd:restriction base="xsd:integer"/>
+  </xsd:simpleType>
+  <!-- end of typeOfTileLengthType -->
+  <!-- typeOfTileOffsetsType -->
+  <xsd:complexType name="typeOfTileOffsetsType">
+    <xsd:simpleContent>
+      <xsd:extension base="TileOffsetsType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="TileOffsetsType">
+    <xsd:restriction base="xsd:integer"/>
+  </xsd:simpleType>
+  <!-- end of typeOfTileOffsetsType -->
+  <!-- typeOfType -->
+  <xsd:complexType name="typeOfTileByteCountsType">
+    <xsd:simpleContent>
+      <xsd:extension base="TileByteCountsType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="TileByteCountsType">
+    <xsd:restriction base="xsd:integer"/>
+  </xsd:simpleType>
+  <!-- end of typeOfTileByteCountsType -->
+  <!-- typeOfPlanarConfigurationType -->
+  <xsd:complexType name="typeOfPlanarConfigurationType">
+    <xsd:simpleContent>
+      <xsd:extension base="PlanarConfigurationType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="PlanarConfigurationType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="1">
+	<xsd:annotation>
+	  <xsd:documentation>1 = chunky (pixel interleaved) format</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="2">
+	<xsd:annotation>
+	  <xsd:documentation>2 = planar format</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfPlanarConfigurationType -->
+  <!-- typeOfImageIdentifierType -->
+  <xsd:complexType name="typeOfImageIdentifierType">
+    <xsd:simpleContent>
+      <xsd:extension base="ImageIdentifierType">
+	<xsd:attribute name="use"/>
+	<xsd:attribute name="imageIdentifierLocation">
+	  <xsd:annotation>
+	    <xsd:documentation>Definition: A location qualifier to be used in conjunction with 2.2.1 ImageIdentifier.
+
+	    Persistent identifier required at prime object level, optional at all other levels.  This identifier must be unique within the local system.  To facilitate file sharing or interoperability with other systems, ImageIdentifierLocation may be added to designate the system or application within which the identifier is unique.</xsd:documentation>
+	  </xsd:annotation>
+	</xsd:attribute>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="ImageIdentifierType">
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+  <!-- end of typeOfImageIdentifierType -->
+  <!-- typeOfFileSizeType -->
+  <xsd:complexType name="typeOfFileSizeType">
+    <xsd:simpleContent>
+      <xsd:extension base="FileSizeType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="FileSizeType">
+    <xsd:restriction base="xsd:integer"/>
+  </xsd:simpleType>
+  <!-- endOf typeOfFileSizeType -->
+  <!-- typeOfChecksumMethodType -->
+  <xsd:complexType name="typeOfChecksumMethodType">
+    <xsd:simpleContent>
+      <xsd:extension base="ChecksumMethodType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="ChecksumMethodType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="checksum"/>
+      <xsd:enumeration value="CRC"/>
+      <xsd:enumeration value="MD5"/>
+      <xsd:enumeration value="MNP"/>
+      <xsd:enumeration value="SHA"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfChecksumMethodType -->
+  <!-- typeOfOrientationType -->
+  <xsd:complexType name="typeOfOrientationType">
+    <xsd:simpleContent>
+      <xsd:extension base="OrientationType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="OrientationType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="1">
+	<xsd:annotation>
+	  <xsd:documentation>1 = normal*</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="3">
+	<xsd:annotation>
+	  <xsd:documentation>3 = normal rotated 180°</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="6">
+	<xsd:annotation>
+	  <xsd:documentation>6 = normal rotated cw 90°</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8">
+	<xsd:annotation>
+	  <xsd:documentation>8 = normal rotated ccw 90°</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="9">
+	<xsd:annotation>
+	  <xsd:documentation>9 = unknown</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfOrientationType -->
+  <!-- typeOfDisplayOrientationType -->
+  <xsd:complexType name="typeOfDisplayOrientationType">
+    <xsd:simpleContent>
+      <xsd:extension base="DisplayOrientationType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="DisplayOrientationType">
+    <xsd:restriction base="xsd:integer">
+      <xsd:enumeration value="0">
+	<xsd:annotation>
+	  <xsd:documentation>0 = portrait</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="1">
+	<xsd:annotation>
+	  <xsd:documentation>1 = landscape</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfDisplayOrientationType -->
+  <!-- typeOfXTargetedDisplayARType -->
+  <xsd:complexType name="typeOfXTargetedDisplayARType">
+    <xsd:simpleContent>
+      <xsd:extension base="XTargetedDisplayARType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="XTargetedDisplayARType">
+    <xsd:restriction base="xsd:integer"/>
+  </xsd:simpleType>
+  <!-- end of typeOfXTargetedDisplayARType -->
+  <!-- typeOfYTargetedDisplayARType -->
+  <xsd:complexType name="typeOfYTargetedDisplayARType">
+    <xsd:simpleContent>
+      <xsd:extension base="YTargetedDisplayARType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="YTargetedDisplayARType">
+    <xsd:restriction base="xsd:integer"/>
+  </xsd:simpleType>
+  <!-- end of typeOfYTargetedDisplayARType -->
+  <!-- end of BIPT typeTypes -->
+  <!-- beginning of ICT typeTypes -->
+  <!-- typeOfSubjectDistanceType -->
+  <xsd:complexType name="typeOfSubjectDistanceType">
+    <xsd:simpleContent>
+      <xsd:extension base="SubjectDistanceType">
+	<xsd:attribute name="use"/>
+	<xsd:attribute name="min"/>
+	<xsd:attribute name="max"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="SubjectDistanceType">
+    <xsd:restriction base="xsd:float">
+      <xsd:minInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfSubjectDistance -->
+  <!-- typeOfMeteringModeType -->
+  <xsd:complexType name="typeOfMeteringModeType">
+    <xsd:simpleContent>
+      <xsd:extension base="MeteringModeType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="MeteringModeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Average"/>
+      <xsd:enumeration value="Center weighted Average"/>
+      <xsd:enumeration value="Spot"/>
+      <xsd:enumeration value="Multispot"/>
+      <xsd:enumeration value="Pattern"/>
+      <xsd:enumeration value="Partial"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfMeteringModeType -->
+  <!-- typeOfSceneIlluminantType -->
+  <xsd:complexType name="typeOfSceneIlluminantType">
+    <xsd:simpleContent>
+      <xsd:extension base="SceneIlluminantType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="SceneIlluminantType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Daylight"/>
+      <xsd:enumeration value="Fluorescent"/>
+      <xsd:enumeration value="Tungsten Lamp"/>
+      <xsd:enumeration value="Flash"/>
+      <xsd:enumeration value="Standard Illuminant A"/>
+      <xsd:enumeration value="Standard Illuminant B"/>
+      <xsd:enumeration value="Standard Illuminant C"/>
+      <xsd:enumeration value="D55 Illuminant"/>
+      <xsd:enumeration value="D65 Illuminant"/>
+      <xsd:enumeration value="D75 Illuminant"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfSceneIlluminantType -->
+  <!-- typeOfFlashType -->
+  <xsd:complexType name="typeOfFlashType">
+    <xsd:simpleContent>
+      <xsd:extension base="FlashType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="FlashType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Yes"/>
+      <xsd:enumeration value="No"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfFlashType -->
+  <!-- typeOfFlashReturnType -->
+  <xsd:complexType name="typeOfFlashReturnType">
+    <xsd:simpleContent>
+      <xsd:extension base="FlashReturnType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="FlashReturnType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Yes"/>
+      <xsd:enumeration value="No"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfFlashReturnType -->
+  <!-- typeOfBackLightType -->
+  <xsd:complexType name="typeOfBackLightType">
+    <xsd:simpleContent>
+      <xsd:extension base="BackLightType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="BackLightType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Front light">
+	<xsd:annotation>
+	  <xsd:documentation>Subject is illuminated from the front side.”</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Backlight_1">
+	<xsd:annotation>
+	  <xsd:documentation>The brightness value difference between the subject center and the surrounding area is greater than one full stop (APEX).  The frame is exposed for the subject center.”</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Backlight_2">
+	<xsd:annotation>
+	  <xsd:documentation>The brightness value difference between the subject center and the surrounding area is greater than one full stop (APEX).  The frame is exposed for the surrounding area.”</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfBackLightType -->
+  <!-- typeOfAutoFocusType -->
+  <xsd:complexType name="typeOfAutoFocusType">
+    <xsd:simpleContent>
+      <xsd:extension base="AutoFocusType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="AutoFocusType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Auto Focus Used">
+	<xsd:annotation>
+	  <xsd:documentation>The camera successfully focused on the subject.”</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Auto Focus Interrupted">
+	<xsd:annotation>
+	  <xsd:documentation>The image was captured before the camera had successfully focused on the subject.”</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Near Focused">
+	<xsd:annotation>
+	  <xsd:documentation>The camera deliberately focused at a distance closer than the subject to allow for the super-imposition of a focused foreground subject.”</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Soft Focused">
+	<xsd:annotation>
+	  <xsd:documentation>The camera deliberately did not focus exactly at the subject distance to create a softer image (commonly used in portraits).”</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Manual">
+	<xsd:annotation>
+	  <xsd:documentation>The camera was focused manually.”</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfAutoFocusType -->
+  <!-- typeOfSensorType -->
+  <xsd:complexType name="typeOfSensorType">
+    <xsd:simpleContent>
+      <xsd:extension base="SensorType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="SensorType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="undefined"/>
+      <xsd:enumeration value="MonochromeArea"/>
+      <xsd:enumeration value="OneChipColorArea"/>
+      <xsd:enumeration value="TwoChipColorArea"/>
+      <xsd:enumeration value="ThreeChipColorArea"/>
+      <xsd:enumeration value="ColorSequentialArea"/>
+      <xsd:enumeration value="MonochromeLinear"/>
+      <xsd:enumeration value="ColorTriLinear"/>
+      <xsd:enumeration value="ColorSequentialLinear"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfSensorType -->
+  <!-- end of ICT typeTypes -->
+  <!-- beginning of IPAT typeTypes -->
+  <!-- typeOfSamplingFrequencyPlaneType -->
+  <xsd:complexType name="typeOfSamplingFrequencyPlaneType">
+    <xsd:simpleContent>
+      <xsd:extension base="SamplingFrequencyPlaneType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="SamplingFrequencyPlaneType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="1">
+	<xsd:annotation>
+	  <xsd:documentation>1 = camera/scanner focal plane</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="2">
+	<xsd:annotation>
+	  <xsd:documentation>2 = object plane</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="3">
+	<xsd:annotation>
+	  <xsd:documentation>3 = source object plane</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfSamplingFrequencyPlaneType -->
+  <!-- typeOfSamplingFrequencyUnitType -->
+  <xsd:complexType name="typeOfSamplingFrequencyUnitType">
+    <xsd:simpleContent>
+      <xsd:extension base="SamplingFrequencyUnitType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="SamplingFrequencyUnitType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="1">
+	<xsd:annotation>
+	  <xsd:documentation>1 = no absolute unit of measurement.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="2">
+	<xsd:annotation>
+	  <xsd:documentation>2 = inch</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="3">
+	<xsd:annotation>
+	  <xsd:documentation>3 = centimeter</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfSamplingFrequencyUnitType -->
+  <!-- typeOfBitsPerSampleType -->
+  <xsd:complexType name="typeOfBitsPerSampleType">
+    <xsd:simpleContent>
+      <xsd:extension base="BitsPerSampleType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="BitsPerSampleType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="1">
+	<xsd:annotation>
+	  <xsd:documentation>1 = 1-bit (bitonal)</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="4">
+	<xsd:annotation>
+	  <xsd:documentation>4 = 4-bit grayscale</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8">
+	<xsd:annotation>
+	  <xsd:documentation>8 = 8-bit grayscale or palletizedcolor</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8,8,8">
+	<xsd:annotation>
+	  <xsd:documentation>8,8,8 = RGB</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="16,16,16">
+	<xsd:annotation>
+	  <xsd:documentation>16,16,16 = TIFF, HDR (high dynamic range)</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8,8,8,8">
+	<xsd:annotation>
+	  <xsd:documentation>8,8,8,8 = CMYK</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfBitsPerSampleType -->
+  <!-- typeOfSamplesPerPixelType -->
+  <xsd:complexType name="typeOfSamplesPerPixelType">
+    <xsd:simpleContent>
+      <xsd:extension base="SamplesPerPixelType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="SamplesPerPixelType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="1">
+	<xsd:annotation>
+	  <xsd:documentation>1 = when MIX ColorSpace (TIFF Tag 262 PhotometricInterpretation) = 0 or 1</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="3">
+	<xsd:annotation>
+	  <xsd:documentation>3 = when MIX ColorSpace (TIFF Tag 262 PhotometricInterpretation) = 2 (RGB), 6 (YCbCr)</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="4">
+	<xsd:annotation>
+	  <xsd:documentation>4 = when  MIX ColorSpace (TIFF Tag 262 PhotometricInterpretation) = 5 (CMYK)</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfSamplesPerPixelType -->
+  <!-- typeOfExtraSamplesType -->
+  <xsd:complexType name="typeOfExtraSamplesType">
+    <xsd:simpleContent>
+      <xsd:extension base="ExtraSamplesType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="ExtraSamplesType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="0">
+	<xsd:annotation>
+	  <xsd:documentation>0 = unspecified data</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="1">
+	<xsd:annotation>
+	  <xsd:documentation>1 = associated alpha data (with pre-multiplied color)</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="2">
+	<xsd:annotation>
+	  <xsd:documentation>2 = unassociated alpha data</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="3">
+	<xsd:annotation>
+	  <xsd:documentation>3 = range or depth data</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfExtraSamplesType -->
+  <!-- typeOfColormapType -->
+  <xsd:complexType name="typeOfColormapType">
+    <xsd:simpleContent>
+      <xsd:extension base="ColormapType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="ColormapType">
+    <xsd:restriction base="xsd:integer">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="65536"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfColormapType -->
+  <!-- typeOfGrayResponseCurveType -->
+  <xsd:complexType name="typeOfGrayResponseCurveType">
+    <xsd:simpleContent>
+      <xsd:extension base="GrayResponseCurveType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="GrayResponseCurveType">
+    <xsd:restriction base="xsd:integer"/>
+  </xsd:simpleType>
+  <!-- end of typeOfGrayResponseCurveType -->
+  <!-- typeOfGrayResponseUnitType -->
+  <xsd:complexType name="typeOfGrayResponseUnitType">
+    <xsd:simpleContent>
+      <xsd:extension base="GrayResponseUnitType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="GrayResponseUnitType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="1">
+	<xsd:annotation>
+	  <xsd:documentation>1 = Number represents tenths of a unit.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="2">
+	<xsd:annotation>
+	  <xsd:documentation>2 = Number represents hundredths of a unit.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="3">
+	<xsd:annotation>
+	  <xsd:documentation>3 = Number represents thousandths of a unit.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="4">
+	<xsd:annotation>
+	  <xsd:documentation>4 = Number represents ten-thousandths of a unit.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="5">
+	<xsd:annotation>
+	  <xsd:documentation>5 = Number represents hundred-thousandths of a unit.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfGrayResponseUnitType -->
+  <!-- typeOfCIExyType -->
+  <xsd:complexType name="typeOfCIExyType">
+    <xsd:simpleContent>
+      <xsd:extension base="CIExyType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="CIExyType">
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+  <!-- end of typeOfCIExyType -->
+  <!-- typeOfTargetTypeType -->
+  <xsd:complexType name="typeOfTargetTypeType">
+    <xsd:simpleContent>
+      <xsd:extension base="TargetTypeType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="TargetTypeType">
+    <xsd:restriction base="xsd:integer">
+      <xsd:enumeration value="0">
+	<xsd:annotation>
+	  <xsd:documentation>0 = external</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="1">
+	<xsd:annotation>
+	  <xsd:documentation>1 = internal</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfTargetTypeType -->
+  <!-- end of IPAT typeTypes -->
+  <!-- beginning of CHT typeTypes -->
+  <!-- typeOfPreviousImage MetadataType -->
+  <xsd:complexType name="typeOfPreviousImageMetadataType" mixed="false">
+    <xsd:sequence>
+      <xsd:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- end of typeOfPreviousImageMetadataType -->
+  <!-- end of CHT typeTypes -->
+  <!-- generic content models -->
+  <!-- StringType -->
+  <xsd:complexType name="typeOfStringType">
+    <xsd:simpleContent>
+      <xsd:extension base="StringType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="StringType">
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+  <!-- end of StringType -->
+  <!-- typeOfNonNegativeRealType -->
+  <xsd:complexType name="typeOfNonNegativeRealType">
+    <xsd:simpleContent>
+      <xsd:extension base="NonNegativeRealType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="NonNegativeRealType">
+    <xsd:restriction base="xsd:float">
+      <xsd:minInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- end of typeOfNonNegativeRealType -->
+  <!-- typeOfPositiveIntegerType -->
+  <xsd:complexType name="typeOfPositiveIntegerType">
+    <xsd:simpleContent>
+      <xsd:extension base="PositiveIntegerType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="PositiveIntegerType">
+    <xsd:restriction base="xsd:positiveInteger"/>
+  </xsd:simpleType>
+  <!-- end of typeOfPositiveIntegerType -->
+
+
+  <!-- typeOfDateType -->
+  <xsd:complexType name="typeOfDateType">
+    <xsd:simpleContent>
+      <xsd:extension base="DateType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <xsd:simpleType name="DateType">
+      <xsd:union memberTypes="xsd:date xsd:dateTime xsd:gYear xsd:gYearMonth"></xsd:union>
+  </xsd:simpleType>
+  <!-- end of typeOfDateType -->
+
+
+  <!-- typeOfReferenceType -->
+  <xsd:complexType name="typeOfReferenceType">
+    <xsd:simpleContent>
+      <xsd:extension base="ReferenceType">
+	<xsd:attribute name="use"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="ReferenceType">
+    <xsd:restriction base="xsd:anyURI"/>
+  </xsd:simpleType>
+  <!-- end of typeOfReferenceType -->
+  <!-- end of generic content models -->
+</xsd:schema>

@@ -1,0 +1,834 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- videoMD version 2.0 -->
+<!-- edited with XML Spy v4.0.1 (http://www.xmlspy.com) by D. Casey (User Technology Associates, Inc.) -->
+<!-- edited with oXygen by K. Bredenberg -->
+<xs:schema targetNamespace="http://www.loc.gov/videoMD/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.loc.gov/videoMD/" elementFormDefault="qualified">
+	<!--============================================================
+
+  VIDEOMD: Video Technical Metadata Extension Schema
+  Initial Version:  VMD_020322.xsd (obtained from Carl's webpage on 03/27/2002)
+  
+  Changes 03/27/2002:
+  DKC- Capitalized enumerated types for videodisc_type.
+     - Corrected the note element to use the noteType reference.
+     - Moved "frame_rate" into the frame element.
+     - Removed "datetime_*"
+  Changes 07/25/2002
+  DKC- Abstracted the root element in order to provide support for both analog 
+        and digital sources.
+     - Simplified the structure to eliminate the unecessary element references 
+        and complex types.
+  Changes 10/07/2003
+   RJT - Corrected the documentation for phys_format to say video instead of audio
+            Corrected the documentation for materialType to say video instead of audio
+            
+  Changes 02/08/2010
+    KB  -added EBU_Storage_Media_Codes element to element Physical_data
+        -added dimensions from video_infoType to Physical_data thus making it exist in both places
+    
+  Changes 02/22/2010
+  KB  -added note element to element Physical_data
+      -added method element to material in element Physical_data
+      -added used_sides element to material in element Physical_data
+      
+      Changes 06/29/2010
+      KB - harmonized with PREMIS 2.0 and removed _ in element names.
+      - renamed chcksum as messageDigest
+  
+  Changes 10/19/2010
+  KB - changed element name dataDate to dataRate
+  - added element dataRateUnit
+  - changed dataRate from int to decimal to be able to not have to round off value
+  - added 2 as value for byteOrder
+  - changed frameRate from int to decimal to be able to not have to round off value
+  - added signalFormat, timecode and tracking to fileDataType-element
+  - added formatLocation to fileDataType-element
+  - removed dimensions from video_infoType leaving it only in Physical_data 
+
+  Changes 12/01/2010
+  KB - added dimensions to videoInfoType again
+    - added PAR, DAR and rotation elements to frameType
+    - added minOcurrs="0" on all elements in frameType
+    - added timecodeInitialValue to timecodeType
+    - added minOccurs="0" on all elements in timecodeType
+    - added a mediaDataType as a base for media
+    - added mediaDataType as base in fileDataType and thus removing elements from fileDataType that now are in mediaDataType
+    - added languageType
+    - added variableRateType
+    - added formatType
+    - added codecType
+    - added string.version
+    - added trackDataType
+    - added track as element in fileDataType and made it a choice to use instead of compression. ('track' as similar semantic meaning as PBCore's essenceTrack)
+    - added type attribut on formatLocation
+    - added otherType attribut on formatLocation
+    - renamed formatLocation to location
+    - grouped all format information in one single element named format of the type formatType. By this removing elements FormatName, formatNote and formatVersion.
+    - added color, frame, frameRate and sampleRate in fileDataType
+    
+  Changes 03/21/2011
+  KB - updated documentation
+     - added missing attribute ID on calibrationInfoType
+     - renamed complexType trackingType to trackingInfoType to minimazie confusion with the element with the same name
+     - renamed complexType timecodeType to timecodeInfoType to minimazie confusion with the element with the same name
+     
+ Changes 03/23/2011
+ KB - renamed reflectiveLayer to activeLayer since it describes the active parts of the disk.
+    - added a new element reflectiveLayer which describes the reflective layer e.g. gold, silver, aluminium etc.
+    - removed fileData, physicalData, audioInfo and calibrationInfo as top elements and not referencing this elements in videoType.
+    - renamed CalibrationType calibrationInfoType
+    
+ Changes 04/15/2011
+ KB - Update of comments
+ 
+ Changes 04/26/2011
+ KB - updates in comments
+ 
+ Changes 04/29/2011
+ KB - updated name and namespace of the schema
+ 	- added value Other to the predefined list of element use
+ 	- added an element otherUse where a use not stated in the use element list can be described
+ 	- added an element otherColor where a color not stated in the color element list can be described
+ 	- updates in comments
+ 	
+Changes 05/02/2011
+KB	- updates in comments
+ 
+============================================================-->
+	<xs:element name="VIDEOMD" type="videoType"/>
+	<xs:element name="VIDEOSRC" type="videoType"/>
+	<xs:annotation>
+		<xs:documentation>VIDEOMD: LC-AV Video Metadata Extension Schema. VIDEOMD contains technical
+			metadata that describe a digital video object.
+			VIDEOMD contains 36 top-level elements. videoType has 2 attributes, ID: (XML ID)
+			ANALOGDIGITALFLAG: A major indicator of the type of video object i.e Analog,
+			PhysDigital, or FileDigital. </xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="videoType">
+		<xs:annotation>
+			<xs:documentation>A complexType for encapsulating and organizing within a
+				singleparent element the individual video metadata elements that describe an object
+				or portion of an object. The four individual elements that comprise an video object
+				are documented under their corresponding types.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="fileData" type="fileDataType" minOccurs="0"/>
+			<xs:element name="physicalData" type="physicalDataType" minOccurs="0"/>
+			<xs:element name="videoInfo" type="videoInfoType" minOccurs="0"/>
+			<xs:element name="calibrationInfo" type="calibrationInfoType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+		<xs:attribute name="ANALOGDIGITALFLAG" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Analog"/>
+					<xs:enumeration value="PhysDigital"/>
+					<xs:enumeration value="FileDigital"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="mediaDataType">
+		<xs:sequence>
+			<xs:element name="tracking" type="trackingInfoType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="duration" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Elapsed time of the entire file, expressed using ISO 8601 
+						syntax; see http://www.w3.org/TR/NOTE-datetime.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="security" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of security applied to a digital video file e.g. password, encryption, hidden, etc.... </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="size" type="xs:nonNegativeInteger" minOccurs="0"/>
+			<xs:element name="dataRate" type="variableRateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Data rate of the audio in an MPEG or other compressed file expressed in mbps, e.g., 8, 12, 15, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="timecode" type="timecodeInfoType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="use" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Use of the digital video file, e.g. Master, Service, Preview, etc..... Use Other if none of the preceding values pertains and clarify the use in the otherUse element</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Master"/>
+						<xs:enumeration value="Service"/>
+						<xs:enumeration value="Service_High"/>
+						<xs:enumeration value="Service_Low"/>
+						<xs:enumeration value="Preview"/>
+						<xs:enumeration value="Other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="otherUse" minOccurs="0" maxOccurs="unbounded" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Denotes a use not contained in the allowed values set if Other is indicated in the use element.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="fileDataType">
+		<xs:annotation>
+			<xs:documentation>A type for describing technical characteristics of a video file.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="mediaDataType">
+				<xs:sequence>
+					<xs:element name="bitsPerSample" type="xs:int" minOccurs="0"
+						maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>The number of bits of sample depth, e.g., 8, 24, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="byteOrder" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Order of bit significance in a byte from left to right i.e. 0-least-to-most, 1-most-to-least, 2-mixed-endianess.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:int">
+								<xs:enumeration value="0"/>
+								<xs:enumeration value="1"/>
+								<xs:enumeration value="2"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="color" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Presented color of the digital video file. Use Other if none of the preceding values pertains and clarify the color in the otherColor element</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="B&amp;W"/>
+								<xs:enumeration value="Color"/>
+								<xs:enumeration value="Grayscale"/>
+								<xs:enumeration value="B&amp;W with grayscale sequences"/>
+								<xs:enumeration value="B&amp;W with color sequences"/>
+								<xs:enumeration value="Grayscale with B&amp;W sequences"/>
+								<xs:enumeration value="Grayscale with color sequences"/>
+								<xs:enumeration value="Color with B&amp;W sequences"/>
+								<xs:enumeration value="Color with grayscale sequences"/>
+								<xs:enumeration value="Other"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="otherColor" type="xs:string" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Denotes a use not contained in the allowed values set if Other is indicated in the color element.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="messageDigest" type="messageDigestType" minOccurs="0"
+						maxOccurs="unbounded"/>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="compression" type="compressionType" minOccurs="0"
+							maxOccurs="unbounded"/>
+						<xs:element name="track" type="trackDataType" minOccurs="0"
+							maxOccurs="unbounded"/>
+					</xs:choice>
+					<xs:element name="dataRateUnit" type="xs:string" minOccurs="0"
+						maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Data rate unit of a digital video file.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="dataRateMode" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Mode of the data rate in a digital video file.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="Fixed"/>
+								<xs:enumeration value="Variable"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="frame" type="frameType" minOccurs="0"/>
+					<xs:element name="frameRate" type="variableRateType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The number of frames per second at which the video source item was digitized.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sampleRate" type="variableRateType" minOccurs="0"/>
+					<xs:element name="location" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Location of the referenced file</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:simpleContent>
+								<xs:extension base="xs:string">
+									<xs:attribute name="type" use="required">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="URN"/>
+												<xs:enumeration value="URL"/>
+												<xs:enumeration value="PURL"/>
+												<xs:enumeration value="HANDLE"/>
+												<xs:enumeration value="DOI"/>
+												<xs:enumeration value="OTHER"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="otherType" type="xs:string" use="optional"/>
+								</xs:extension>
+							</xs:simpleContent>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="format" type="formatType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="sampling" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>sThe video sampling format (in terms of luminance and 
+								chrominance), e.g., 4:2:0, 4:2:2, 2:4:4, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="signalFormat" type="xs:string" minOccurs="0"
+						maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>The signal format of a video source item e.g. NTSC, PAL, SECAM.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sound" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Indicator of the presence of sound in the video file. If 
+								the value "yes" is selected, then the video file will also be associated 
+								with an instance of audioMD (audio metadata).</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="Yes"/>
+								<xs:enumeration value="No"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="trackDataType">
+		<xs:complexContent>
+			<xs:extension base="mediaDataType">
+				<xs:sequence>
+					<xs:element name="bitsPerSample" type="xs:nonNegativeInteger" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The size of a digital video sample in bits.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="bitsPerPixelStored" type="xs:decimal" minOccurs="0"/>
+					<xs:element name="codec" type="codecType" minOccurs="0"/>
+					<xs:element name="compressionRatio" type="xs:decimal" minOccurs="0"/>
+					<xs:element name="quality" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="lossless"/>
+								<xs:enumeration value="lossy"/>
+								<xs:enumeration value="lossy_lossless"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="frame" type="frameType" minOccurs="0"/>
+					<xs:element name="frameRate" type="variableRateType" minOccurs="0"/>
+					<xs:element name="sampleRate" type="variableRateType" minOccurs="0"/>
+					<xs:element name="sampling" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>sThe video sampling format used in a digital video
+								file. (in terms of luminance and chrominance), e.g., 4:2:0, 4:2:2,
+								2:4:4, etc.)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sampleCount" type="xs:nonNegativeInteger" minOccurs="0"/>
+					<xs:element name="signalFormat" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The signal format of a video source item e.g. NTSC, PAL, SECAM.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:ID"/>
+				<xs:attribute name="num" type="xs:nonNegativeInteger"/>
+				<xs:attribute name="type" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="physicalDataType">
+		<xs:sequence>
+			<xs:element name="EBUStorageMediaCodes" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation> The EBU Storage Media Codes for the physical media. See http://www.ebu.ch/metadata/cs/ebu_StorageMediaTypeCodeCS.xml and http://www.ebu.ch/metadata/cs/web/ebu_StorageMediaTypeCodeCS_p.xml.htm</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="colorBurst" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Indicator of the presence or absence of color burst signal in a video source item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="condition" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The physical condition of a video item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dimensions" type="dimensionsType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="disposition" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The disposition of a video source item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dtv" type="dtvType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="generation" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The generation of a video source item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="material" type="materialType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="numberCarriers" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The number of containers holding a video source item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="physFormat" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The physical format of the video item. e.g. reel-to-reel tape, 1/4 inch cassette, etc...</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signalFormat" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The signal format of a video source item e.g. NTSC, PAL, SECAM.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="timecode" type="timecodeInfoType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="tracking" type="trackingInfoType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="videodiscType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The type of videodisc used for a video source item.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="CLV"/>
+						<xs:enumeration value="CAV"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="videotapeType" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The type of videotape used for a video source item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="note" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Additional information or comments about the video file.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="videoInfoType">
+		<xs:sequence>
+			<xs:element name="aspectRatio" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The desired aspect ratio of the image on screen, e.g., 4:3, etc. Some files produced for display on non-square-pixel monitors have a desired aspect ratio that differs from the ratio of horizontal to vertical pixels.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="closedCaptioningNote" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Notes about the closed captioning in a video source item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="closedCaptioningType" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The type of closed captioning in a video source item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dimensions" type="dimensionsType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="duration" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Elapsed time of the entire file, expressed using ISO 8601 syntax; see http://www.w3.org/TR/NOTE-datetime.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="frame" type="frameType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="note" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Miscellaneous information about the video file. e.g. digital alterations or enhancements to improve quality. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="calibrationInfoType">
+		<xs:annotation>
+			<xs:documentation>calibrationInfoType: Complex Type for recording the type of
+				calibration used for a digital video file. calibrationInfoType has 1 attribute ID (XML ID) and 3
+				elements imageData, targetId and targetType.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="imageData" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Location of the calibration target file if not contained within the image file (external) e.g. URN, URL, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="targetId" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Calibration target name, manufacturer, version, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="targetType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Identifies the calibration target image as internal or external to the image file itself.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="messageDigestType">
+		<xs:annotation>
+			<xs:documentation>messageDigestType: Complex Type for recording the type of
+				messageDigest used for a digital video file. messageDigestType has 1 attribute ID (XML ID) and 3
+				elements messageDigestDatetime, messageDigestAlgorithm and messageDigest.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="messageDigestDatetime" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The datetime when the messageDigest was calculated and applied</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="messageDigestAlgorithm" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Type of messageDigest used.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="messageDigest" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The messageDigest value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="variableRateType">
+		<xs:simpleContent>
+			<xs:extension base="xs:decimal">
+				<xs:attribute name="maximum" type="xs:decimal"/>
+				<xs:attribute name="minimum" type="xs:decimal"/>
+				<xs:attribute name="nominal" type="xs:decimal"/>
+				<xs:attribute name="mode">
+					<xs:annotation>
+						<xs:documentation>Indicator that the rate of the video is fixed or variable.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="Fixed"/>
+							<xs:enumeration value="Variable"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="unit" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="compressionType">
+		<xs:annotation>
+			<xs:documentation>compressionType: complexType for recording the type of compression
+				used for a digital video file. compressionType has 1 attribute ID (XML ID)and 4 elements codecCreatorApp, codecCreatorAppVersion, codecName and codecQuality.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="codecCreatorApp" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Name of the creator of the compression application e.g. Adobe Premiere, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="codecCreatorAppVersion" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Version of the compression application e.g. 6.0, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="codecName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Name of the compression algorithm used e.g. MPEG, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="codecQuality" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Impact of the compression on quality e.g. lossless or lossy.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="lossless"/>
+						<xs:enumeration value="lossy"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="dimensionsType">
+		<xs:annotation>
+			<xs:documentation>dimensionsType: Complex Type for recording the dimensions of an
+				object. dimensionsType has the following attributes: 
+				1. DEPTH: the depth as a floating point number; 
+				2. DIAMETER: The diameter of a circular item as a floating point number; 
+				3. GAUGE: The width of the medium unwound (e.g. tape); 
+				4. HEIGHT: The height as a floating point number; 
+				5. LENGTH: The length of the medium unwound (e.g. tape); 
+				6. NOTE: Miscellaneous information about the dimensions; 
+				7. THICKNESS: the thickness of the medium unwound (e.g. tape); 
+				8. UNITS: the unit of measurement; 
+				9. WIDTH: the width as a floating point number. 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="DEPTH" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>The depth of the object in the unit of measure indicated in dimensions_unit, e.g., 7, 12.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DIAMETER" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>The diameter of any circular object expressed in the unit of measure indicated in dimensions_unit, e.g., 3.5, 5, 7.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="GAUGE" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Gauge or width of source tape, including indication of unit of measure, e.g., 8 mm, 0.5 inch, 0.25 inch, etc..</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HEIGHT" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>Height of the object in the unit of measure indicated in dimensions_unit, e.g., 23.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="LENGTH" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Length of source open-reel tape recording, including indication of unit of measure, e.g., 700 feet, 1200 feet, etc..</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NOTE" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Desciption of odd-shaped objects that cannot be described using the standard dimensions fields.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="THICKNESS" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The thickness of the medium unwound (e.g. tape)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="UNITS" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Unit of measurement of the source object, e.g., inches.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="WIDTH" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>Width of any non-circular object expressed in the unit of measure indicated in dimensions_unit, e.g., 3.5, 5, 7.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="dtvType">
+		<xs:annotation>
+			<xs:documentation>dtvType: complexType for recording Information about a high definition
+				TV video source item. dtvType has 1 attribute ID (XML ID) and 4 elements dtvAspectRatio, dtvNote, dtvResolution and dtvScan.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="dtvAspectRatio" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Aspect ratio of high definition video source item expressed as ratio, e.g., 4:3, 16:9, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dtvNote" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Note about a high definition video source item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dtvResolution" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Resolution of high definition video source item expressed as horizontal lines.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dtvScan" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Indication whether high definition video source item is scanned in an interlaced or progressive mode.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="formatType">
+		<xs:sequence>
+			<xs:element name="annotation" type="xs:string" minOccurs="0"/>
+			<xs:element name="creatorApp" type="string.version" minOccurs="0"/>
+			<xs:element name="creatorLib" type="string.version" minOccurs="0"/>
+			<xs:element name="creatorLibDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="creatorLibSettings" type="xs:string" minOccurs="0"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="encodingDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="TaggedDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="commercialName" type="xs:string" minOccurs="0"/>
+			<xs:element name="mimetype" type="xs:string" minOccurs="0"/>
+			<xs:element name="profile" type="xs:string" minOccurs="0"/>
+			<xs:element name="settings" type="xs:string" minOccurs="0"/>
+			<xs:element name="version" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="codecType">
+		<xs:complexContent>
+			<xs:extension base="formatType">
+				<xs:sequence>
+					<xs:element name="codecID" type="xs:string" minOccurs="0"/>
+					<xs:element name="channelCount" type="xs:nonNegativeInteger" minOccurs="0"/>
+					<xs:element name="endianness" type="xs:string" minOccurs="0"/>
+					<xs:element name="scanType" type="xs:string" minOccurs="0"/>
+					<xs:element name="scanOrder" type="xs:string" minOccurs="0"/>
+					<xs:element name="sign" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="languageType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([a-z]{3})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="string.version">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="version"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="frameType">
+		<xs:annotation>
+			<xs:documentation>frameType: Complex Type for recording the size of a frame in a digital
+				video file. frameType has 1 attribute ID (XML ID)and 6 elements pixelsHorizontal, pixelsVertical, frameRate, PAR, DAR and rotation.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="pixelsHorizontal" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The horizontal dimension of a frame in pixels.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pixelsVertical" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The vertical dimension of a frame in pixels.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="frameRate" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The rate of frames displayed in one second (or average rate of frames per second in the case of variable frame-rate). Present as a ratio of time base over frame duration, such as 30000/1001 or as a decimal, such as 29.970 .</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PAR" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Pixel aspect ratio (present as a ratio or decimal).</xs:documentation></xs:annotation>
+			</xs:element>
+			<xs:element name="DAR" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Display aspect ratio (present as a ratio or decimal such as 4/3 or 6/9 or 1.33333).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rotation" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The rotation in a decimal value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="materialType">
+		<xs:annotation>
+			<xs:documentation>materialType: Complex Type for recording the physical characteristics
+				of the construction and material of an video source item. materialType has 1
+				attribute ID (XML ID)and 9 elements baseMaterial, binder, discSurface, oxide, activeLayer, reflectiveLayer, stockBrand, methodand usedSides.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="baseMaterial" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Base material used in the recording carrier e.g., plastic, glass, vinyl, mylar, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="binder" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of adhesive used to bind recording surface to the substrate</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="discSurface" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of recording surface aluminium, celluloid etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oxide" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of oxide used for the coating of a tape recording, e.g.cobalt, chromium dioxide, ferrous oxide.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="activeLayer" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of material used on the recording surface, e.g. dye, tellurium-selenium alloy, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reflectiveLayer" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of material used on the recordings reflective surface, e.g. gold, silver aluminium etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="stockBrand" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Name of the manufacturer of the recording medium, e.g. Scotch, Maxell, Sony, etc...</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="method" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Methods to press music records e.g. "Direct metal", "Lacquer Master", "Metal Master", "Metal mother", "Pressing", "Metal stamper" and "Test pressing".</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="usedSides" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Number of recorded sides of the material</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="timecodeInfoType">
+		<xs:annotation>
+			<xs:documentation>timecodeInfoType: Complex Type for recording tracking information
+				about a video source item. timecodeInfoType has 1 attribute ID (XML ID) and 3 elements timecodeRecordMethod, timecodeType and timecodeInitialValue.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="timecodeRecordMethod" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Method for recording timecode on the video source item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="timecodeType" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of timecode recorded on video source item, e.g., SMPTE dropframe, SMPTE nondropframe, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="timecodeInitialValue" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Starting value for timecode.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="trackingInfoType">
+		<xs:annotation>
+			<xs:documentation>trackingInfoType: complexType for recording tracking information about
+				a video source item. trackingInfoType has 1 attribute ID (XML ID) and 2 elements trackingType and trackingValue.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="trackingType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The type of tracking code, e.g., system number, actual shelf numbers, bar-code, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="trackingValue" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Shelf number or other identifier for source, e.g., system number, actual shelf numbers, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID"/>
+	</xs:complexType>
+</xs:schema>

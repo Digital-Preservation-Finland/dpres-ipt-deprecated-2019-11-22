@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2009 DDI Alliance, DDI 3.1, 2009-10-18
+
+This file is part of DDI 3.1 XML Schema.
+
+DDI 3.1 XML Schema is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+
+DDI 3.1 XML Schema is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with DDI 3.1 XML Schema. If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:dcelements:3_1" xmlns:dc="http://purl.org/dc/elements/1.1/" targetNamespace="ddi:dcelements:3_1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+   <xs:import namespace="http://purl.org/dc/elements/1.1/" schemaLocation="simpledc20021212.xsd"/>
+   <xs:element name="DCElements" type="DCElementsType"/>
+   <xs:complexType name="DCElementsType">
+      <xs:annotation>
+         <xs:documentation>The DCElementsType describes the contents of a Dublin Core reference, using the simple Dublin Core XML namespace.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="dc:title"/>
+            <xs:element ref="dc:creator"/>
+            <xs:element ref="dc:subject"/>
+            <xs:element ref="dc:description"/>
+            <xs:element ref="dc:publisher"/>
+            <xs:element ref="dc:contributor"/>
+            <xs:element ref="dc:date"/>
+            <xs:element ref="dc:type"/>
+            <xs:element ref="dc:format"/>
+            <xs:element ref="dc:identifier"/>
+            <xs:element ref="dc:source"/>
+            <xs:element ref="dc:language"/>
+            <xs:element ref="dc:relation"/>
+            <xs:element ref="dc:coverage"/>
+            <xs:element ref="dc:rights"/>
+         </xs:choice>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

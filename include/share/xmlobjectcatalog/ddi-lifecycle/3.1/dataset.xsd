@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2009 DDI Alliance, DDI 3.1, 2009-10-18
+
+This file is part of DDI 3.1 XML Schema.
+
+DDI 3.1 XML Schema is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+
+DDI 3.1 XML Schema is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with DDI 3.1 XML Schema. If not, see <http://www.gnu.org/licenses/>.
+
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:dataset:3_1" xmlns:r="ddi:reusable:3_1" xmlns:p="ddi:physicaldataproduct:3_1" targetNamespace="ddi:dataset:3_1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+   <xs:import namespace="ddi:reusable:3_1" schemaLocation="reusable.xsd"/>
+   <xs:import namespace="ddi:physicaldataproduct:3_1" schemaLocation="physicaldataproduct.xsd"/>
+   <xs:element name="DataSet" type="DataSetType" substitutionGroup="p:BaseRecordLayout"/>
+   <xs:complexType name="DataSetType">
+      <xs:complexContent>
+         <xs:extension base="p:BaseRecordLayoutType">
+            <xs:sequence>
+                   <xs:element name="ArrayBase" type="xs:integer" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Sets the array base for any arrays used in the definition (that is, whether the first value is in position 0 or 1, etc.). This may be the data array in a delimited data file or the measure array for measures that are bundled and stored in a single location. Array base is generally set to either 0 or 1. There is no override provided as systems processing a record would use a consistent array base.</xs:documentation>
+                  </xs:annotation>
+                   </xs:element> 
+               <xs:element ref="Name" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Name for data set </xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="IdentifyingVariableReference" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>References the variable which holds the primary key or index values.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="DefaultVariableSchemeReference" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>References the variable scheme from which identifying values may be inherited by the items contained in the data set. This allows for only the ID values to be specified at the item level, to avoid needless repetition.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:choice>
+                    <xs:element ref="RecordSet">
+                           <xs:annotation>
+                              <xs:documentation>Storage for the traditional rectangular form of data.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                    <xs:element ref="ItemSet">
+                           <xs:annotation>
+                              <xs:documentation>Storage form for random order item variables.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                    <xs:element ref="VariableSet">
+                           <xs:annotation>
+                              <xs:documentation>Storage form that captures all values of each variable together.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+               </xs:choice>              
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="RecordSetType">
+            <xs:annotation>
+               <xs:documentation>Storage for the traditional rectangular form of data.</xs:documentation>
+            </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="VariableOrder">
+            <xs:annotation>
+               <xs:documentation>Holds the sequence of variable references in storage order.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Record" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Holds the sequence of record values in storage order, as described in VariableOrder.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="RecordSet" type="RecordSetType"/>
+   <xs:complexType name="VariableOrderType">
+            <xs:annotation>
+               <xs:documentation>Holds the sequence of variable references in storage order.</xs:documentation>
+            </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="VariableReference" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>References variables in storage order. One reference per variable.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="VariableOrder" type="VariableOrderType"/>
+   <xs:complexType name="RecordType">
+            <xs:annotation>
+               <xs:documentation>Holds the sequence of record values in storage order, as described by VariableOrder.</xs:documentation>
+            </xs:annotation>
+      <xs:sequence>
+         <xs:element name="Value" type="xs:string" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Holds the value in the record.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="Record" type="RecordType"/>
+   <xs:complexType name="ItemSetType">
+   <xs:annotation>
+    <xs:documentation>Storage form for random item value order.</xs:documentation>
+   </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="ItemValue" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Identifies and holds the item value.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="ItemValueType">
+      <xs:sequence>
+         <xs:element ref="VariableReference">
+            <xs:annotation>
+               <xs:documentation>References the variable associated with the value given.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="RecordReference" type="xs:string">
+            <xs:annotation>
+               <xs:documentation>Holds the value of the records identifying field/key.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="Value" type="xs:string" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Holds the item value.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="Name" type="r:InternationalStringType"/>
+   <xs:element name="IdentifyingVariableReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Identifies the variable which holds the primary key or index values.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DefaultVariableSchemeReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Identifies the variable scheme from which identifying values may be inherited by the items contained in the data set. This allows for only the ID values to be specified at the item level, to avoid needless repetition.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ItemSet" type="ItemSetType"/>
+   <xs:element name="ItemValue" type="ItemValueType">
+      <xs:annotation>
+         <xs:documentation>Identifies the data set.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VariableReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>References the variable associated with the value given.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="VariableSetType">
+            <xs:annotation>
+               <xs:documentation>Storage form for capturing all values of each variable together</xs:documentation>
+            </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="VariableItem" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>The set of values associated with a single variable (values included in  a column in rectangular data sets).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="VariableSet" type="VariableSetType"/>
+   <xs:complexType name="VariableItemType">
+            <xs:annotation>
+               <xs:documentation>The set of values associated with a single variable (values included in a column in rectangular data sets).</xs:documentation>
+            </xs:annotation>
+      <xs:sequence>
+       <xs:element name="VariableReference" type="r:ReferenceType">
+          <xs:annotation>
+         <xs:documentation>References the variable associated with the values given.</xs:documentation>
+          </xs:annotation>
+       </xs:element>
+         <xs:element name="Value" type="xs:string" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Value associated with the referenced variable.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="VariableItem" type="VariableItemType"/>
+</xs:schema>
