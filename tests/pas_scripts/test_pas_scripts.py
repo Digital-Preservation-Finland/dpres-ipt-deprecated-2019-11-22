@@ -304,13 +304,17 @@ class TestCommandLineTools:
                                  'test-sips/CSC_test005/mets.xml')
         certificate_path = os.path.join(testcommon.settings.TESTDATADIR,
                                 'sip-signature/' + certificate)
+        signature_path = os.path.join(testcommon.settings.TESTDATADIR,
+                                 'test-sips/CSC_test005/varmiste.sig')
+        
+        
                                 
         sip_dir = tempfile.mkdtemp()
         os.chdir(sip_dir)
         shutil.copy(mets_path, sip_dir)
         
         command = pas_scripts.sign_xml_file.main
-        arguments = [certificate_path, mets_path]
+        arguments = [certificate_path, signature_path, mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command, arguments)
                                                          
@@ -333,26 +337,25 @@ class TestCommandLineTools:
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
                                'test-sips/' + sipname + '/mets.xml')
 
-
-
         certificate_dir = os.path.join(testcommon.settings.TESTDATADIR,
                                 'sip-signature/')
         certificate_path = certificate_dir + 'valid-certificate.pem'
-                                
+        
+        
         sip_dir = tempfile.mkdtemp()
         os.chdir(sip_dir)
         shutil.copy(mets_path, sip_dir)
-        mets_path = sip_dir + '/mets.xml'
+        mets_path = os.path.join(sip_dir, 'mets.xml')
         
         command = pas_scripts.sign_xml_file.main
-        arguments = [certificate_path, mets_path]
+        arguments = [certificate_path, sip_dir + '/varmiste.sig', mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command, arguments)
         print returncode, stdout, stderr                                               
         assert returncode == 0
         
         command = pas_scripts.check_sip_signature.main
-        arguments = ["-c" + certificate_dir, mets_path]
+        arguments = [sip_dir + '/varmiste.sig']
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command, arguments)
         print returncode, stdout, stderr                                                
@@ -450,7 +453,7 @@ class TestCommandLineTools:
         arguments = [
                 "-c%s" % configfile,
                 "%s" % filename,
-                "abc34ge" ]
+                "abc", "def" ]
         
         self.do(pas_scripts.check_sip_digital_objects.main, arguments,
                 expected_result)
