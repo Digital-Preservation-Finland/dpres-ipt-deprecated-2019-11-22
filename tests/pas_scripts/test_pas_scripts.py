@@ -19,9 +19,8 @@ import pas_scripts.sign_xml_file
 import pas_scripts.check_sip_signature
 import pas_scripts.check_sip_file_checksums
 import pas_scripts.check_sip_digital_objects
-import pas_scripts.check_mets_schema_features
-import pas_scripts.check_mets_required_features
-import pas_scripts.check_mets_optional_features
+import pas_scripts.check_xml_schema_features
+import pas_scripts.check_xml_schematron_features
 
 class TestCommandLineTools:
 
