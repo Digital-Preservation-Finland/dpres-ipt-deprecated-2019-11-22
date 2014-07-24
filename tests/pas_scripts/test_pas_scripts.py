@@ -157,7 +157,7 @@ class TestCommandLineTools:
                 "stderr": ""
             }
          }],
-                "test_check_mets_schema_features":
+                "test_check_xml_schema_features":
         [{
             "testcase": "Test valid mets.xml",
             "sipname": "CSC_test006",
@@ -181,7 +181,7 @@ class TestCommandLineTools:
             }
          }
          ],
-                "test_check_mets_required_features":
+                "test_check_xml_schematron_features":
         [{
             "testcase": "Test valid mets.xml",
             "sipname": "CSC_test006",
@@ -204,30 +204,30 @@ class TestCommandLineTools:
                 "in_stderr": []
             }
          }
-         ],
-                "test_check_mets_optional_features":
-        [{
-            "testcase": "Test valid mets.xml",
-            "sipname": "CSC_test006",
-            "expected_result": {
-                "returncode": 0,
-                "in_stdout": [],
-                "not_in_stdout": [],
-                "stderr": "\n", # There"s extra line wrap in stderr
-                "in_stderr": ""
-            }
-         },
-         {
-            "testcase": "Test invalid mets.xml",
-            "sipname": "CSC_test005",
-            "expected_result": {
-                "returncode": 1,
-                "in_stdout": [],
-                "not_in_stdout": [],
-                "stderr": "",
-                "in_stderr": []
-            }
-         }
+#         ],
+#                "test_check_mets_optional_features":
+#        [{
+#            "testcase": "Test valid mets.xml",
+#            "sipname": "CSC_test006",
+#            "expected_result": {
+#                "returncode": 0,
+#                "in_stdout": [],
+#                "not_in_stdout": [],
+#                "stderr": "\n", # There"s extra line wrap in stderr
+#                "in_stderr": ""
+#            }
+#         },
+#         {
+#            "testcase": "Test invalid mets.xml",
+#            "sipname": "CSC_test005",
+#            "expected_result": {
+#                "returncode": 1,
+#                "in_stdout": [],
+#                "not_in_stdout": [],
+#                "stderr": "",
+#                "in_stderr": []
+#            }
+#         }
          ]
     }
 
@@ -392,13 +392,13 @@ class TestCommandLineTools:
                 assert message not in stdout
 
 
-    def test_check_mets_schema_features(self, testcase, sipname,   expected_result):
+    def test_check_xml_schema_features(self, testcase, sipname,   expected_result):
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
                                'test-sips/' + sipname + '/mets.xml')
 
         
-        command = pas_scripts.check_mets_schema_features.main
+        command = pas_scripts.check_xml_schema_features.main
         arguments = [mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command, arguments)
@@ -415,27 +415,27 @@ class TestCommandLineTools:
             assert message in stderr
 
 
-    def test_check_mets_optional_features(self, testcase, sipname,   expected_result):
+#    def test_check_mets_optional_features(self, testcase, sipname,   expected_result):
 
-        mets_path = os.path.join(testcommon.settings.TESTDATADIR,
-                               'test-sips/' + sipname + '/mets.xml')
+#        mets_path = os.path.join(testcommon.settings.TESTDATADIR,
+#                               'test-sips/' + sipname + '/mets.xml')
 
         
-        command = pas_scripts.check_mets_optional_features.main
-        arguments = [mets_path]
-        (returncode, stdout, stderr) = testcommon.shell.run_main(
-                                                         command, arguments)
+#        command = pas_scripts.check_mets_optional_features.main
+#        arguments = [mets_path]
+#        (returncode, stdout, stderr) = testcommon.shell.run_main(
+#                                                         command, arguments)
 
-        assert returncode == expected_result['returncode']
+#        assert returncode == expected_result['returncode']
     
-        for message in expected_result['in_stdout']:
-            assert message in stdout
+#        for message in expected_result['in_stdout']:
+#            assert message in stdout
             
-        for message in expected_result['not_in_stdout']:
-            assert message not in stdout
+#        for message in expected_result['not_in_stdout']:
+#            assert message not in stdout
 
-        for message in expected_result['in_stderr']:
-            assert message in stderr
+#        for message in expected_result['in_stderr']:
+#            assert message in stderr
 
 
     def test_check_sip_digital_objects(self, testcase,
