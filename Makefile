@@ -1,7 +1,8 @@
 PREFIX=/usr
 ROOT=/
-ETC=${ROOT}/etc
+ETC=/etc
 SHAREDIR=${ROOT}${PREFIX}/share/information-package-tools
+XMLCATALOGDIR=${ETC}/xml
 PYTHONDIR=${ROOT}${PREFIX}/lib/python2.6/site-packages
 SHELLDIR=${ROOT}${PREFIX}/bin
 
@@ -30,10 +31,14 @@ install:
 	chmod -R 755 "${SHAREDIR}"
 	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
 
+	# Install XML Schema catalogs
+	#if [ -a "${XMLCATALOGDIR}/catalog" ]; then mv "${XMLCATALOGDIR}/catalog" "${XMLCATALOGDIR}/catalog."`date +%s`; fi; 
+	#install -m 644 include/etc/xml/catalog "${XMLCATALOGDIR}/"
+
 	# write version module
 	python scripts/print_version_module.py > "src/version.py"
 
-	# SIP_python package is using Python setuptools
+	# Use Python setuptools
 	python setup.py build ; python ./setup.py install -O1 --prefix="${PREFIX}" --root="${ROOT}" --record=INSTALLED_FILES
 	INSTALLED_FILES | sed 's/^/\//g' >> INSTALLED_FILES
 

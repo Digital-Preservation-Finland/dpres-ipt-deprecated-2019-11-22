@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE catalog PUBLIC "-//OASIS//DTD Entity Resolution XML Catalog V1.0//EN" "http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd">
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <delegatePublic publicIdStartString="-//OASIS//ENTITIES DocBook XML" catalog="file:///etc/sgml/docbook/xmlcatalog"/>
+  <delegatePublic publicIdStartString="-//OASIS//DTD DocBook XML" catalog="file:///etc/sgml/docbook/xmlcatalog"/>
+  <delegatePublic publicIdStartString="ISO 8879:1986" catalog="file:///etc/sgml/docbook/xmlcatalog"/>
+  <delegateSystem systemIdStartString="http://www.oasis-open.org/docbook/" catalog="file:///etc/sgml/docbook/xmlcatalog"/>
+  <delegateURI uriStartString="http://www.oasis-open.org/docbook/" catalog="file:///etc/sgml/docbook/xmlcatalog"/>
+
+  <!-- To use KDK METS and XML Catalogs add following lines to /etc/xml/catalog . It is also possible use XML_CATALOG_FILES 
+       environment variable: $ export XML_CATALOG_FILES=/usr/share/information-package-tools/schema/catalog-local.xml   -->  
+  <nextCatalog catalog="/usr/share/information-package-tools/xmlobjectcatalog/catalog-local.xml"/>
+  <nextCatalog catalog="/usr/share/information-package-tools/schema/catalog-local.xml"/>
+</catalog>
