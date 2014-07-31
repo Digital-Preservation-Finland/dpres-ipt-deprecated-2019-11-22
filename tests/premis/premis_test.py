@@ -94,7 +94,7 @@ class TestPremisClass:
             temp.flush()
         
             validator = Libxml('text/xml', '1.0', temp.name)
-            validator.addCatalog(CATALOGPATH)   
+            validator.set_catalog(CATALOGPATH)
         
             (returncode, stdout, stderr) = validator.validate()
             assert "XSD validation success" in stdout
