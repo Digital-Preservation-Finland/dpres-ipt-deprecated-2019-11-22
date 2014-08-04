@@ -186,10 +186,6 @@ Juha Lehtonen 2014-03-26 : Initial version
 
 	<!-- Ingestion event inspection -->
 	<sch:pattern name="EventIngestion">
-        <sch:rule context="premis:premis">
-            <sch:assert test ="premis:event[./premis:eventType='ingestion']">Ingestion event not found</sch:assert>
-        </sch:rule>
-        
         <sch:rule context="premis:event[./premis:eventType='ingestion']">
 			<sch:assert test="./premis:eventDetail=$eventdetail[11]">
 				Ingestion event '<sch:value-of select=".//premis:eventIdentifierValue"/>' must have an event detail: '<sch:value-of select="$eventdetail[11]"/>'
@@ -220,9 +216,6 @@ Juha Lehtonen 2014-03-26 : Initial version
 
 	<!-- Virus check event inspection -->
 	<sch:pattern name="EventVirusCheck">
-        <sch:rule context="premis:premis">
-            <sch:assert test ="premis:event[./premis:eventType='virus check']">Virus check event not found</sch:assert>
-        </sch:rule>
         <sch:rule context="premis:event[./premis:eventType='virus check']">
 			<sch:assert test="./premis:eventDetail=$eventdetail[2]">
 				Virus check event '<sch:value-of select=".//premis:eventIdentifierValue"/>' must have an event detail: '<sch:value-of select="$eventdetail[2]"/>'
@@ -323,7 +316,7 @@ Juha Lehtonen 2014-03-26 : Initial version
 			<sch:assert test="(.//premis:linkingObjectIdentifierType=$idtype[1]) and contains(.//premis:linkingObjectIdentifierValue,$idvalstart[8])">
 				Overall SIP validation event '<sch:value-of select=".//premis:eventIdentifierValue"/>' must link to a SIP object.
 			</sch:assert>
-		</sch:rule>        
+		</sch:rule>
 	</sch:pattern>
 
 	<!-- validation detail check -->
