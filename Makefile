@@ -43,10 +43,7 @@ install:
 	INSTALLED_FILES | sed 's/^/\//g' >> INSTALLED_FILES
 
 	# setup.py seems to be unable to create directories,
-	# we create them here
-	mkdir -p ${ROOT}/var/cache/schematron-validation
-	chmod 777 ${ROOT}/var/cache/schematron-validation
-	echo "/var/cache/schematron-validation" >> INSTALLED_FILES
+	# create them here if needed
 
 devinstall:
 	# quick and dirty installation...
