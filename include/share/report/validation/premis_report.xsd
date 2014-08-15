@@ -243,6 +243,7 @@ Juha Lehtonen 2014-03-26 : Initial version
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="transfer"/>
 			<xs:enumeration value="decompression"/>
+			<xs:enumeration value="update"/>            
 			<xs:enumeration value="virus check"/>
 			<xs:enumeration value="digital signature validation"/>
 			<xs:enumeration value="fixity check"/>
@@ -261,6 +262,7 @@ Juha Lehtonen 2014-03-26 : Initial version
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="Transfer of a container that includes one or several submission information packages"/>
 			<xs:enumeration value="Decompression of transfer container"/>
+            <xs:enumeration value="Update existing AIP"/>
 			<xs:enumeration value="Virus check of transferred files"/>
 			<xs:enumeration value="SIP digital signature validation"/>
 			<xs:enumeration value="Fixity check of digital objects in a SIP"/>

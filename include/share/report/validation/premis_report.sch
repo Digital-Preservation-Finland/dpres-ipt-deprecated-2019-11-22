@@ -21,7 +21,7 @@ Juha Lehtonen 2014-03-26 : Initial version
 	<sch:let name="idtype" value="exsl:node-set('pas-transfer-id') | exsl:node-set('pas-sip-id') | exsl:node-set('pas-sig-id') | exsl:node-set('pas-mets-id') | exsl:node-set('pas-object-id') | exsl:node-set('pas-aip-id')"/>
 	
 	<!-- All the node values here have been used as hard coded in content attribute -->
-	<sch:let name="eventtype" value="exsl:node-set('decompression') | exsl:node-set('virus check') | exsl:node-set('digital signature validation') | exsl:node-set('fixity check') | exsl:node-set('validation') | exsl:node-set('creation') | exsl:node-set('preservation responsibility change') | exsl:node-set('transfer')"/>
+	<sch:let name="eventtype" value="exsl:node-set('decompression') | exsl:node-set('virus check') | exsl:node-set('digital signature validation') | exsl:node-set('fixity check') | exsl:node-set('validation') | exsl:node-set('creation') | exsl:node-set('preservation responsibility change') | exsl:node-set('transfer') | exsl:node-set('update')"/>
 	
 	<!-- Some of the node values here (values of indexes [5], [6], [7] and [8]) have been used as hard coded in content attribute -->
 	<sch:let name="eventdetail" value="exsl:node-set('Decompression of transfer container')
@@ -35,7 +35,8 @@ Juha Lehtonen 2014-03-26 : Initial version
 		| exsl:node-set('Creation of AIP')
 		| exsl:node-set('Preservation responsibility change to the DP system')
 		| exsl:node-set('Transfer of a container that includes one or several submission information packages')
-		| exsl:node-set('Validation compilation of a Transfer')"/>
+		| exsl:node-set('Validation compilation of a Transfer')
+        | exsl:node-set('Update existing AIP')"/>
 
 	<!-- Constant values from PREMIS report. The values of these variables below are not used as hard coded anywhere. -->
 	<sch:let name="idvalstart" value="exsl:node-set('pas-transfer-') | exsl:node-set('pas-sip-') | exsl:node-set('pas-sig-') | exsl:node-set('pas-mets-') | exsl:node-set('pas-object-') | exsl:node-set('pas-aip-')"/>
@@ -48,7 +49,9 @@ Juha Lehtonen 2014-03-26 : Initial version
 		| exsl:node-set('pas-agent-verifyMetsRequiredFeatures')
 		| exsl:node-set('pas-agent-check_sip_digital_objects')
 		| exsl:node-set('pas-agent-createSIPInspectionReport')
-		| exsl:node-set('pas-user-')"/>
+		| exsl:node-set('pas-user-')
+        | exsl:node-set('pas-agent-check_update')
+        "/>
 	<sch:let name="filenames" value="exsl:node-set('varmiste.sig') | exsl:node-set('mets.xml')"/>
 	<sch:let name="agenttype" value="exsl:node-set('software') | exsl:node-set('organization')"/>
 	
