@@ -145,7 +145,7 @@
             "(0, '/var/archivematica/sharedDirectory/currentlyProcessing/csc_test_valid_sip_001-d08ee527-b365-4e15-b358-1705fbf66ebe/KDK_paatosseminaarin_ohjelma_10_12_2013.pdf: OK\n/var/archivematica/sharedDirectory/currentlyProcessing/csc_test_valid_sip_001-d08ee527-b365-4e15-b358-1705fbf66ebe/mets.xml: OK\n/var/archivematica/sharedDirectory/currentlyProcessing/csc_test_valid_sip_001-d08ee527-b365-4e15-b358-1705fbf66ebe/varmiste.sig: OK\n\n----------- SCAN SUMMARY -----------\nKnown viruses: 3070531\nEngine version: 0.98.1\nScanned directories: 0\nScanned files: 3\nInfected files: 0\nData scanned: 0.56 MB\nData read: 0.33 MB (ratio 1.70:1)\nTime: 8.512 sec (0 m 8 s)\n', 'LibClamAV Warning: **************************************************\nLibClamAV Warning: ***  The virus database is older than 7 days!  ***\nLibClamAV Warning: ***   Please update it as soon as possible.    ***\nLibClamAV Warning: **************************************************\n')</premis:eventOutcomeDetailNote></premis:eventOutcomeDetail></premis:eventOutcomeInformation>
         <premis:linkingAgentIdentifier>
             <premis:linkingAgentIdentifierType>pas-agent-id</premis:linkingAgentIdentifierType>
-            <premis:linkingAgentIdentifierValue>pas-agent-archivematicaClamscan.py-v0.2.post499-gcd9cb20</premis:linkingAgentIdentifierValue>
+            <premis:linkingAgentIdentifierValue>pas-agent-check_virus_clamscan.py-v0.2.post499-gcd9cb20</premis:linkingAgentIdentifierValue>
         </premis:linkingAgentIdentifier>
         <premis:linkingObjectIdentifier><premis:linkingObjectIdentifierType>pas-transfer-id</premis:linkingObjectIdentifierType><premis:linkingObjectIdentifierValue>pas-transfer-d08ee527-b365-4e15-b358-1705fbf66ebe</premis:linkingObjectIdentifierValue></premis:linkingObjectIdentifier>
     </premis:event>
@@ -1335,9 +1335,9 @@
     <premis:agent>
         <premis:agentIdentifier>
             <premis:agentIdentifierType>pas-agent-id</premis:agentIdentifierType>
-            <premis:agentIdentifierValue>pas-agent-archivematicaClamscan.py-v0.2.post499-gcd9cb20</premis:agentIdentifierValue>
+            <premis:agentIdentifierValue>pas-agent-check_virus_clamscan.py-v0.2.post499-gcd9cb20</premis:agentIdentifierValue>
         </premis:agentIdentifier>
-        <premis:agentName>archivematicaClamscan.py</premis:agentName>
+        <premis:agentName>check_virus_clamscan.py</premis:agentName>
         <premis:agentType>software</premis:agentType>
     </premis:agent>
     <premis:agent>

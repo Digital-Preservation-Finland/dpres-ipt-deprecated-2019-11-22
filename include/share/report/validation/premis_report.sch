@@ -42,7 +42,7 @@ Juha Lehtonen 2014-03-26 : Initial version
 	<sch:let name="idvalstart" value="exsl:node-set('pas-transfer-') | exsl:node-set('pas-sip-') | exsl:node-set('pas-sig-') | exsl:node-set('pas-mets-') | exsl:node-set('pas-object-') | exsl:node-set('pas-aip-')"/>
 	<sch:let name="relationship" value="exsl:node-set('structural') | exsl:node-set('derivation') | exsl:node-set('is included in') | exsl:node-set('has source')"/>
 	<sch:let name="agent" value="exsl:node-set('pas-agent-extractSIPTransfer')
-		| exsl:node-set('pas-agent-archivematicaClamscan')
+		| exsl:node-set('pas-agent-check_virus_clamscan')
 		| exsl:node-set('pas-agent-verifySIPSignature')
 		| exsl:node-set('pas-agent-verifySIPFileChecksums')
 		| exsl:node-set('pas-agent-verifyMetsSchemaFeatures')
