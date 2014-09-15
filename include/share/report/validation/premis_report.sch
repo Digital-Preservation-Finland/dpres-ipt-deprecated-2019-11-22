@@ -189,7 +189,7 @@ Juha Lehtonen 2014-03-26 : Initial version
 
 	<!-- Ingestion event inspection -->
 	<sch:pattern name="EventIngestion">
-        <sch:rule context="premis:event[./premis:eventType='ingestion']">
+        <sch:rule context="premis:event[./premis:eventType='transfer']">
 			<sch:assert test="./premis:eventDetail=$eventdetail[11]">
 				Ingestion event '<sch:value-of select=".//premis:eventIdentifierValue"/>' must have an event detail: '<sch:value-of select="$eventdetail[11]"/>'
 			</sch:assert>
