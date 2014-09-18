@@ -8,7 +8,7 @@
             { "formatVersion":"1.1" , "formatRegistryKey":"fmt/102" , "validator":"" }]
         },
         { "text/xml" : [
-            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/101" , "validator":"validator.plugin.libxml.Libxml" }]
+            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/101" , "validator":"validator.plugin.xmllint.Xmllint" }]
         },
         { "text/html" : [
             { "formatVersion":"4.01" , "formatRegistryKey":"fmt/100" , "validator":"" }]
