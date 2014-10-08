@@ -5,11 +5,7 @@ import sys
 import subprocess
 import cStringIO
 
-BINARY_PATH = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '../../bin'))
-
-PYTHON_PATH = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '../../src'))
+import testcommon.settings
 
 def run_command(command):
     """Run command using source code binaries and libraries
@@ -19,13 +15,7 @@ def run_command(command):
 
     """
 
-    cmd = ' ; '.join([
-        'PYTHONPATH="%s:PYTHONPATH"' % PYTHON_PATH,
-        'PATH="%s"' % BINARY_PATH, command])
-
-    print '\n', cmd
-
-    proc = subprocess.Popen([cmd], shell=True, stdout=subprocess.PIPE,
+    proc = subprocess.Popen([command], shell=True, stdout=subprocess.PIPE,
                      stderr=subprocess.PIPE)
 
     (stdout, stderr) = proc.communicate()
