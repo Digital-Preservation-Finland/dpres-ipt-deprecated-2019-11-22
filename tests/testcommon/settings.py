@@ -20,7 +20,7 @@ import sys
 
 PROJECTDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 
-SOURCEDIR = os.path.join(PROJECTDIR, 'src')
+SOURCEDIR = os.path.join(PROJECTDIR, 'information-package-tools')
 INCLUDEDIR = os.path.join(PROJECTDIR, 'include')
 SHAREDIR = os.path.join(PROJECTDIR, 'include/share')
 
