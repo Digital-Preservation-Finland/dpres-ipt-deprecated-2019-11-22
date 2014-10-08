@@ -16,12 +16,6 @@ TEST_SIP_NAME = "CSC_test001"
 TEST_SIP_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                             '../data/test-sips', TEST_SIP_NAME)
 
-BINARY_PATH = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '../../bin'))
-
-PYTHON_PATH = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '../../src'))
-
 TEMP_DIR = '/tmp/test-restructure-sip'
 
 SIP_DIR_INVALID = os.path.join(TEMP_DIR, "foo-sip")
