@@ -12,7 +12,7 @@ def test_import_modules():
     """Import all modules from project source directory"""
 
     source_dir = os.path.abspath(os.path.join(os.path.dirname(__file__),
-        '../src'))
+        '../information-package-tools'))
 
     sys.path.insert(0, source_dir)
 

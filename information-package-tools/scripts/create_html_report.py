@@ -1,0 +1,65 @@
+#!/usr/bin/python
+# vim:ft=python
+
+"""
+This commandline tool creates a html-report from premis-xml-report with xslt
+transform.
+
+Usage ::
+
+	create-xml-report /path/to/premis/report.xml [/path/to/html/report.html]
+
+	/path/to/html/report.html is optional, if it is left empty, report is created
+	to same directory as premis-xml-report is.
+	
+"""
+
+import optparse
+import sip.signature
+import os
+import subprocess
+
+XSLT_PATH = "/usr/share/pas/microservice/report/xslt/stylesheet.xml"
+
+
+def main(arguments=None):
+    usage = "usage: %prog /path/to/premis/report.xml [/path/to/html/report.html]"
+
+    parser = optparse.OptionParser(usage=usage)
+    parser.add_option("-p", "--premispath", dest="premispath",
+                default=None,
+                help="path to premis-xml-report",
+                metavar="PATH")
+
+    parser.add_option("-t", "--htmlpath", dest="htmlpath",
+                default=None,
+                help="path to html-report",
+                metavar="PATH")
+
+    (options, args) = parser.parse_args(arguments)
+
+    if len(args) < 1:
+        print "ERROR: atleast one argument needed"
+        return 1
+
+    if args[0] is None:
+    	return 1
+    if args[1] is not None:
+    	html_path = args[1]
+    else:
+    	report_name = os.path.basename(args[0])
+    	html_path = os.path.join(os.path.dirname(args[0]), report_name)
+
+    cmd = "xsltproc " + XSLT_PATH + " " + args[0] + " > " + html_path
+    print cmd
+    p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=
+                             subprocess.PIPE, stdout=subprocess.PIPE,
+                             close_fds=True, shell=True)
+    (stdout, stderr) = p.communicate()
+    print stderr, stdout
+    ret = p.returncode
+    return ret
+
+if __name__ == '__main__':
+    main()
+
