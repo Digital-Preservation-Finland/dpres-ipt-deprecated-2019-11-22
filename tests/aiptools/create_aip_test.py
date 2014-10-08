@@ -15,7 +15,7 @@ import aiptools.bagit
 import aiptools.RenameSIPtoAIP
 import aiptools.create_aip
 
-import pas_scripts.create_aip
+import scripts.create_aip
 
 import shutil
 
@@ -97,7 +97,7 @@ class Testcreate_aip:
         self.init_test_files()
 
         (returncode, stdout, stderr) = testcommon.shell.run_main(
-                pas_scripts.create_aip.main, ['%s' % sipdir])
+                scripts.create_aip.main, ['%s' % sipdir])
 
         print returncode, stdout, stderr
         return (returncode, stdout, stderr)

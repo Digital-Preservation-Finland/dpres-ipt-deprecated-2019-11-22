@@ -16,7 +16,7 @@ All modules have common interface::
     
 
 Command line tool modules are named with underscores:
-:file:`pas_scripts/command_with_long_name.py`
+:file:`scripts/command_with_long_name.py`
 
 Setuptools / setup.py will create according command line tool with name:
 :file:`/usr/bin/command-with-long-name`.
@@ -24,7 +24,7 @@ Setuptools / setup.py will create according command line tool with name:
 Automatically generated script will just call the main function from our
 module and returns it's return value::
 
-    retval = pas_scripts.command_with_long_name()
+    retval = scripts.command_with_long_name()
     exit retval
 
 This code layout makes unit testing easier and makes Linux / Windows
@@ -34,7 +34,7 @@ For testing we just inject optparse options/arguments as function
 parameters, and capture stdout/stderr with some Python magic::
 
     (returncode, stdout, stderr) = testcommon.shell.run_main(
-        pas_scripts.command_with_long_name.main,
+        scripts.command_with_long_name.main,
         {"named_option":"some option value"},
         ['some parameter', 'other parameter'])
 

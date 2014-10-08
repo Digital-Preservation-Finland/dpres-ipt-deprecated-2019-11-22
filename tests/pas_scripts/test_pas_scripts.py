@@ -12,15 +12,15 @@ import testcommon.settings
 from testcommon.casegenerator import pytest_generate_tests
 
 # Modules to test
-import pas_scripts.create_html_report
-import pas_scripts.restructure_sip
-import pas_scripts.create_aip
-import pas_scripts.sign_xml_file
-import pas_scripts.check_sip_signature
-import pas_scripts.check_sip_file_checksums
-import pas_scripts.check_sip_digital_objects
-import pas_scripts.check_xml_schema_features
-import pas_scripts.check_xml_schematron_features
+import scripts.create_html_report
+import scripts.restructure_sip
+import scripts.create_aip
+import scripts.sign_xml_file
+import scripts.check_sip_signature
+import scripts.check_sip_file_checksums
+import scripts.check_sip_digital_objects
+import scripts.check_xml_schema_features
+import scripts.check_xml_schematron_features
 
 class TestCommandLineTools:
 
@@ -233,7 +233,7 @@ class TestCommandLineTools:
 
     def test_create_html_report(self, testcase, expected_result):
 
-        command = pas_scripts.create_html_report.main
+        command = scripts.create_html_report.main
         report_dir = os.path.join(testcommon.settings.TESTDATADIR, 
                                   "reports", 
                                   "report-csc_test_invalid_digital_object_001-bb358d14-3092-458d-8b57-4a1c40206d8e-12345.xml")
@@ -253,7 +253,7 @@ class TestCommandLineTools:
         aip_dir = tempfile.mkdtemp() + '/aip '
         shutil.copytree(sip_dir, aip_dir)
         
-        command = pas_scripts.create_aip.main
+        command = scripts.create_aip.main
         arguments = [aip_dir]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command,
@@ -283,7 +283,7 @@ class TestCommandLineTools:
         restructure_dir = tempfile.mkdtemp() + '/restructure'
         shutil.copytree(sip_dir, restructure_dir)
         
-        command = pas_scripts.restructure_sip.main
+        command = scripts.restructure_sip.main
         arguments = [restructure_dir, 'CSC_test006']
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command, arguments)
@@ -312,7 +312,7 @@ class TestCommandLineTools:
         os.chdir(sip_dir)
         shutil.copy(mets_path, sip_dir)
         
-        command = pas_scripts.sign_xml_file.main
+        command = scripts.sign_xml_file.main
         arguments = [certificate_path, signature_path, mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command, arguments)
@@ -346,14 +346,14 @@ class TestCommandLineTools:
         shutil.copy(mets_path, sip_dir)
         mets_path = os.path.join(sip_dir, 'mets.xml')
         
-        command = pas_scripts.sign_xml_file.main
+        command = scripts.sign_xml_file.main
         arguments = [certificate_path, sip_dir + '/varmiste.sig', mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command, arguments)
         print returncode, stdout, stderr                                               
         assert returncode == 0
         
-        command = pas_scripts.check_sip_signature.main
+        command = scripts.check_sip_signature.main
         arguments = [sip_dir + '/varmiste.sig']
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command, arguments)
@@ -377,7 +377,7 @@ class TestCommandLineTools:
                                'test-sips/' + sipname + '/mets.xml')
 
         
-        command = pas_scripts.check_sip_file_checksums.main
+        command = scripts.check_sip_file_checksums.main
         arguments = [mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command, arguments)
@@ -398,7 +398,7 @@ class TestCommandLineTools:
                                'test-sips/' + sipname + '/mets.xml')
 
         
-        command = pas_scripts.check_xml_schema_features.main
+        command = scripts.check_xml_schema_features.main
         arguments = [mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
                                                          command, arguments)
@@ -454,7 +454,7 @@ class TestCommandLineTools:
                 "%s" % filename,
                 "abc", "def" ]
         
-        self.do(pas_scripts.check_sip_digital_objects.main, arguments,
+        self.do(scripts.check_sip_digital_objects.main, arguments,
                 expected_result)
 
     def do(self, command, arguments, expected):

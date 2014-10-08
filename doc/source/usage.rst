@@ -4,22 +4,22 @@ Command Line Usage Instructions
 Creating and Verifying Digital Signatures
 *****************************************
 
-.. automodule:: pas_scripts.sign_sip
-.. automodule:: pas_scripts.check_sip_signature
+.. automodule:: scripts.sign_sip
+.. automodule:: scripts.check_sip_signature
 
 Verifying and Validating METS XML Files
 ***************************************
 
-.. automodule:: pas_scripts.check_mets_optional_features
-.. automodule:: pas_scripts.check_mets_required_features
-.. automodule:: pas_scripts.check_mets_schema_features
+.. automodule:: scripts.check_mets_optional_features
+.. automodule:: scripts.check_mets_required_features
+.. automodule:: scripts.check_mets_schema_features
 
 Validating Digital Objects
 **************************
 
-.. automodule:: pas_scripts.check_sip_digital_objects
-.. automodule:: pas_scripts.check_sip_file_checksums
-.. automodule:: pas_scripts.jhove_pas
+.. automodule:: scripts.check_sip_digital_objects
+.. automodule:: scripts.check_sip_file_checksums
+.. automodule:: scripts.jhove_pas
 
 Creating Archival Information Packages (AIP)
 ********************************************
@@ -47,8 +47,8 @@ Structure of AIP is described in modules :mod:`sip.restructure`, :mod:`aiptools.
 
 Restructuring Submission Information Package
 --------------------------------------------
-.. automodule:: pas_scripts.restructure_sip
+.. automodule:: scripts.restructure_sip
 
 Creating Archival Information Package
 -------------------------------------
-.. automodule:: pas_scripts.create_aip
+.. automodule:: scripts.create_aip

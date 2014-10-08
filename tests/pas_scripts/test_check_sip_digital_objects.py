@@ -10,7 +10,7 @@ import testcommon.settings
 from testcommon.casegenerator import pytest_generate_tests
 
 # Module to test
-import pas_scripts.check_sip_digital_objects
+import scripts.check_sip_digital_objects
 
 class TestCommandLineTools:
 
@@ -79,7 +79,7 @@ class TestCommandLineTools:
                 "%s" % configfile,
                 "abc34ge" ]
         
-        self.do(pas_scripts.check_sip_digital_objects.main, arguments,
+        self.do(scripts.check_sip_digital_objects.main, arguments,
                 expected_result)
 
     def do(self, command, arguments, expected):
