@@ -26,20 +26,11 @@ def main(arguments=None):
     usage = "usage: %prog /path/to/premis/report.xml [/path/to/html/report.html]"
 
     parser = optparse.OptionParser(usage=usage)
-    parser.add_option("-p", "--premispath", dest="premispath",
-                default=None,
-                help="path to premis-xml-report",
-                metavar="PATH")
 
-    parser.add_option("-t", "--htmlpath", dest="htmlpath",
-                default=None,
-                help="path to html-report",
-                metavar="PATH")
-
-    (options, args) = parser.parse_args(arguments)
+    (_, args) = parser.parse_args(arguments)
 
     if len(args) < 1:
-        print "ERROR: atleast one argument needed"
+        print "ERROR: at least one argument needed"
         return 1
 
     if args[0] is None:
