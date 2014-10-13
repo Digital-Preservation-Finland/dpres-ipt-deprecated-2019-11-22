@@ -3,7 +3,6 @@
 
 import os
 import sys
-import subprocess
 import optparse
 import validator.filelist
 import mets.parser
@@ -43,9 +42,8 @@ def main(arguments=None):
     filelist = mets_parser.get_fileinfo_array()
 
     for fileinfo, status, report, error, _validator in \
-        zip(filelist, statuses, reports, errors, validators):
-        
-        
+            zip(filelist, statuses, reports, errors, validators):
+
         if status != 0:
             return_status = status
 
@@ -58,27 +56,27 @@ def main(arguments=None):
         related_object.identifierValue = linking_sip_id
 
         linking_object = premis.Object()
-        linking_object.fromvalidator(fileinfo = ff, relatedObject = related_object)
+        linking_object.fromvalidator(fileinfo=ff, relatedObject=related_object)
 
         linking_agent = premis.Agent()
-        linking_agent.name = str(os.path.basename(__file__)) + "-" + version.__version__
+        linking_agent.name = str(
+            os.path.basename(__file__)) + "-" + version.__version__
         linking_agent.identifier = ""
         linking_agent.identifierType = "pas-agent-id"
         linking_agent.identifierValue = "pas-agent-" + linking_agent.name
         linking_agent.type = "software"
-        
+
         linking_agent.note = str(_validator)
         prem.insert(linking_agent)
 
         validation_event = premis.Event()
         validation_event.fromvalidator(status, report, error,
-                                           linkingObject = linking_object,
-                                           linkingAgent = linking_agent)
+                                       linkingObject=linking_object,
+                                       linkingAgent=linking_agent)
 
         prem.insert(linking_object)
         prem.insert(validation_event)
 
-                
     return_message = prem.serialize()
     sys.stdout.write(return_message)
 
