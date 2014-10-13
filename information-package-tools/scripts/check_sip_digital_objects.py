@@ -83,14 +83,3 @@ def main(arguments=None):
     sys.stdout.write(return_message)
 
     return return_status
-
-def what_rpm_provides_this_file():
-    proc = subprocess.Popen('rpm -qf %s' % __file__,
-                               stdout=subprocess.PIPE,
-                               shell=True)
-    (stdout, stderr) = proc.communicate()
-    package_name = stdout.strip('\n').decode('utf-8')
-    
-    return package_name
-
-
