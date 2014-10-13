@@ -43,7 +43,7 @@ class ManifestSMIME:
 
     def new_signing_key(self):
         """Create a private/public key pair used to sign KDK-PAS SIPs
-      
+
            http://www.openssl.org/docs/apps/req.html
            http://www.madboa.com/geek/openssl/ """
 
@@ -70,8 +70,8 @@ class ManifestSMIME:
 
         cmd = ['openssl', 'x509', '-text', '-in', self.public_key]
 
-        p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=
-                             subprocess.PIPE, stdout=subprocess.PIPE,
+        p = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+                             stderr=subprocess.PIPE, stdout=subprocess.PIPE,
                              close_fds=False, shell=False)
 
         (stdout, stderr) = p.communicate()
@@ -113,9 +113,8 @@ class ManifestSMIME:
                 for filename in fnmatch.filter(filenames, '*.xml'):
                     matches.append(os.path.join(root, filename))
         else:
-            matches = self.target_path.split(',') 
+            matches = self.target_path.split(',')
         manifest_fh, manifest_filename = tempfile.mkstemp()
-
 
         algorithm = 'sha1'
         checksum = fileutils.checksum.BigFile(algorithm)
@@ -130,25 +129,24 @@ class ManifestSMIME:
 
             os.write(manifest_fh, file_checksum)
             print file_checksum
- 
+
         # Close temporary manifest just before reading it
         os.close(manifest_fh)
 
         cmd = ['openssl', 'smime', '-sign', '-signer', self.private_key, '-in',
                manifest_filename]
 
-        
         sign_path = os.path.join(self.manifest_base_path, self.signature_file)
         print "SIGN_PATH", sign_path
         signature_file = open(sign_path, 'w')
 
-        p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=
-                             subprocess.PIPE, stdout=signature_file,
+        p = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+                             stderr=subprocess.PIPE, stdout=signature_file,
                              close_fds=True, shell=False)
 
         (stdout, stderr) = p.communicate()
         print cmd, p.returncode, stdout, stderr
-        #p = subprocess.Popen("cat " + sign_path, stdin=subprocess.PIPE, stderr=
+        # p = subprocess.Popen("cat " + sign_path, stdin=subprocess.PIPE, stderr=
         #                     subprocess.PIPE, stdout=subprocess.PIPE,
         #                     close_fds=True, shell=True)
         signature_file.close()
@@ -163,8 +161,8 @@ class ManifestSMIME:
                os.path.join(self.manifest_base_path, self.signature_file),
                '-CApath', self.ca_path]
 
-        p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=
-                             subprocess.PIPE, stdout=subprocess.PIPE,
+        p = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+                             stderr=subprocess.PIPE, stdout=subprocess.PIPE,
                              close_fds=True, shell=False)
 
         (stdout, stderr) = p.communicate()
@@ -175,7 +173,6 @@ class ManifestSMIME:
         elif p.returncode != 0:
             raise Exception('Unknown error. Exitcode: %s\nStdout: %s\nStderr: %s' % (
                             p.returncode, stdout, stderr))
-
 
         # assert stderr.find('Verification successful')  == 0, "Invalid signature on certificate"
         # TODO: Manifest can also be refactored as separate class...
@@ -198,10 +195,9 @@ class ManifestSMIME:
         fields = line.rstrip().split(':')
 
         if len(fields) != 3:
-                return (None, None, None)
+            return (None, None, None)
         filename = fields[0]
         algorithm = fields[1]
         hexdigest = fields[2]
 
         return (algorithm, hexdigest, filename)
-
