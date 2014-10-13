@@ -53,24 +53,26 @@ class ManifestSMIME:
         if not os.path.exists(os.path.dirname(self.public_key)):
             os.makedirs(os.path.dirname(self.public_key))
 
-        cmd = ['openssl req -x509 -nodes -days 365 -newkey rsa:2048 ' +
-               '-subj "/C=%s/ST=%s/L=%s/CN=%s" ' % (self.country, self.state,
-                                                    self.location, self.common_name) +
-               '-keyout "%s" -out "%s"' % (self.private_key,
-                                           self.public_key)]
-        p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=
-                             subprocess.PIPE, stdout=subprocess.PIPE,
-                             close_fds=False, shell=True)
+        # Note, this may not be safe for UTF-8 strings in self.country etc.
+        cmd = ['openssl', 'req', '-x509', '-nodes', '-days', '365', '-newkey',
+               'rsa:2048', '-subj',
+               '/C=%s/ST=%s/L=%s/CN=%s' % (self.country, self.state,
+                                           self.location, self.common_name),
+               '-keyout', self.private_key, '-out', self.public_key]
+
+        p = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+                             stderr=subprocess.PIPE, stdout=subprocess.PIPE,
+                             close_fds=False, shell=False)
 
         (stdout, stderr) = p.communicate()
 
         print stdout, stderr
 
-        cmd = ['openssl x509 -text -in "%s"' % (self.public_key)]
+        cmd = ['openssl', 'x509', '-text', '-in', self.public_key]
 
         p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=
                              subprocess.PIPE, stdout=subprocess.PIPE,
-                             close_fds=False, shell=True)
+                             close_fds=False, shell=False)
 
         (stdout, stderr) = p.communicate()
 
@@ -132,8 +134,8 @@ class ManifestSMIME:
         # Close temporary manifest just before reading it
         os.close(manifest_fh)
 
-        cmd = ['openssl smime -sign -signer "%s" -in "%s"' % (
-               self.private_key, manifest_filename)]
+        cmd = ['openssl', 'smime', '-sign', '-signer', self.private_key, '-in',
+               manifest_filename]
 
         
         sign_path = os.path.join(self.manifest_base_path, self.signature_file)
@@ -142,7 +144,7 @@ class ManifestSMIME:
 
         p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=
                              subprocess.PIPE, stdout=signature_file,
-                             close_fds=True, shell=True)
+                             close_fds=True, shell=False)
 
         (stdout, stderr) = p.communicate()
         print cmd, p.returncode, stdout, stderr
@@ -157,12 +159,13 @@ class ManifestSMIME:
     def verify_signature_file(self):
         """ Verify SIP signature varmiste.sig file """
 
-        cmd = ['openssl smime -verify -in "%s" -CApath "%s"' % (
-               os.path.join(self.manifest_base_path, self.signature_file), self.ca_path)]
+        cmd = ['openssl', 'smime', '-verify', '-in',
+               os.path.join(self.manifest_base_path, self.signature_file),
+               '-CApath', self.ca_path]
 
         p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=
                              subprocess.PIPE, stdout=subprocess.PIPE,
-                             close_fds=True, shell=True)
+                             close_fds=True, shell=False)
 
         (stdout, stderr) = p.communicate()
         # http://www.openssl.org/docs/apps/verify.html
