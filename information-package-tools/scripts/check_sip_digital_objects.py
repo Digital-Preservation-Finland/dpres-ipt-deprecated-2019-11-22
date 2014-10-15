@@ -81,3 +81,7 @@ def main(arguments=None):
     sys.stdout.write(return_message)
 
     return return_status
+
+if __name__ == '__main__':
+    RETVAL = main()
+    sys.exit(RETVAL)
