@@ -16,7 +16,8 @@ class Pngcheck(BaseValidator):
     """
 
     def __init__(self, mimetype, fileversion, filename):
-        self.exec_cmd = 'pngcheck'
+        super(Pngcheck, self).__init__()
+        self.exec_cmd = ['pngcheck']
         self.filename = filename
         self.fileversion = fileversion
         self.mimetype = mimetype

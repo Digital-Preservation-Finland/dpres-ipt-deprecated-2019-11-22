@@ -31,24 +31,19 @@ class Xmllint(BaseValidator):
     .. seealso:: http://xmlsoft.org/xmllint.html
     """
 
-    filename = None
-    fileversion = None
-    mimetype = None
-    schema_path = None
-    used_version = None
-
-    has_constructed_schema = False
-
     def __init__(self, mimetype, fileversion, filename):
         super(Xmllint, self).__init__()
 
-        self.exec_cmd = 'xmllint'
+        self.exec_cmd = ['xmllint']
         self.filename = filename
         self.fileversion = fileversion
         self.mimetype = mimetype
+        self.schema_path = None
+        self.used_version = None
+        self.has_constructed_schema = False
 
         # Prevent network access
-        self.add_exec_options("--nonet")
+        self.add_exec_options(["--nonet"])
 
         if mimetype != "text/xml":
             raise ValidatorError("Unknown mimetype: %s" % mimetype)
@@ -71,7 +66,7 @@ class Xmllint(BaseValidator):
         .. seealso:: https://wiki.csc.fi/wiki/KDK/XMLTiedostomuotojenSkeemat
         """
 
-        self.add_exec_options(self.filename)
+        self.add_exec_options([self.filename])
 
         try:
             fd = open(self.filename)
@@ -89,7 +84,7 @@ class Xmllint(BaseValidator):
 
         # Try validate against DTD
         if tree.docinfo.doctype:
-            self.add_exec_options('--valid')
+            self.add_exec_options(['--valid'])
             self.exec_validator()
 
         # Try validate againts XSD
@@ -172,7 +167,7 @@ class Xmllint(BaseValidator):
 
     def set_catalog(self, catalogpath):
         """ Set XML Catalog for Xmllint """
-        self.add_exec_options('--catalogs')
+        self.add_exec_options(['--catalogs'])
         self.environment['SGML_CATALOG_FILES'] = catalogpath
 
     def add_schema(self, schemapath):
@@ -182,7 +177,7 @@ class Xmllint(BaseValidator):
         :returns: No returned values
         """
         self.schema_path = schemapath
-        self.add_exec_options('--schema %s' % schemapath)
+        self.add_exec_options(['--schema', schemapath])
 
     def check_validity(self):
         """Check validation result of this parser.

@@ -32,20 +32,21 @@ class Jhove(BaseValidator):
     """
     
     def __init__(self, mimetype, fileversion, filename):
-        self.exec_cmd = 'jhove -h XML'
+        super(Jhove, self).__init__()
+        self.exec_cmd = ['jhove', '-h', 'XML']
+        self.filename = filename
         # only names with whitespace are quoted. this might break the
         # filename otherwise ::
-        if filename.find(" ") == -1:
-            self.filename = filename
-        else:
-            self.filename =  "\'\"" + filename + "\"\'"
+        if filename.find(" ") != -1:
+            if not (filename[0] == '"' and filename[-1] == '"'):
+                self.filename = '%s%s%s' % ('"', filename, '"')
 
         self.fileversion = fileversion
         self.mimetype = mimetype
     
         if mimetype in JHOVE_MODULES.keys():
             validator_module = JHOVE_MODULES[mimetype]
-            command = "-m %s" % validator_module
+            command = ['-m', validator_module]
             self.add_exec_options(command)
         else:
             raise Exception("Unknown mimetype: %s" % mimetype)
@@ -61,7 +62,7 @@ class Jhove(BaseValidator):
         status = self.get_report_field("status")
         filename = self.get_report_field("repInfo")
         filename = os.path.basename(filename)
-    
+   
         if status != 'Well-Formed and valid':
             return "ERROR: File '%s' does not validate: %s" % (filename, status)
 

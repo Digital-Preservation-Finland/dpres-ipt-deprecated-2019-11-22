@@ -5,6 +5,13 @@ import subprocess
 
 from validator.basevalidator import BaseValidator
 
+# The VERSION_CHECK_CMD could be implemented in Python as follows.
+# Then it would be possible to use shell=False in Popen.
+# import gzip
+# fd = gzip.open(warc_filename)
+# warc_content = fd.read()
+# if "WARC_VERSION" in warc_content:
+#     print "ok"
 VERSION_CHECK_CMD = 'zcat -q "FILENAME" | head -n1 | grep -q WARC/VERSION || cat "FILENAME" | head -n1 | grep -q WARC/VERSION'
 
 class WarcTools(BaseValidator):
@@ -18,7 +25,8 @@ class WarcTools(BaseValidator):
     """
         
     def __init__(self, mimetype, fileversion, filename):
-        self.exec_cmd = 'warcvalid.py'
+        super(WarcTools, self).__init__()
+        self.exec_cmd = ['warcvalid.py']
         self.filename = filename
         self.fileversion = fileversion
         self.mimetype = mimetype

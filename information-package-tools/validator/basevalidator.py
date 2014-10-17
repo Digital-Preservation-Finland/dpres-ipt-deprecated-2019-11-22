@@ -35,25 +35,54 @@ class BaseValidator(object):
     def check_profile(self):
         pass
 
-    exec_cmd = None
-    exec_options = ''
-
-    filename = None
-    fileversion = None
-    mimetype = None
-    profile = None
-
-    environment = None
-    statuscode = None
-    stdout = ""
-    stderr = ""
-
     def __init__(self):
         """Init method for BaseValidator class which sets environment
         variables.
         """
 
+        self._exec_cmd = list()
+        self.exec_options = list()
         self.environment = os.environ.copy()
+        self.filename = None
+        self.fileversion = None
+        self.mimetype = None
+        self.profile = None
+
+        self.statuscode = None
+        self.stdout = ""
+        self.stderr = ""
+
+    @property
+    def exec_cmd(self):
+        """exec_cmd needs to be a list, which can be passed to
+        subprocess.Popen"""
+
+        return self._exec_cmd
+
+    @exec_cmd.setter
+    def exec_cmd(self, value):
+        """exec_cmd needs to be a list, which can be passed to
+        subprocess.Popen"""
+
+        if type(value) is not list:
+            raise TypeError("exec_cmd needs to be a list!")
+        self._exec_cmd = value
+
+    @property
+    def exec_options(self):
+        """exec_options needs to be a list, which can be passed to
+        subprocess.Popen"""
+
+        return self._exec_options
+
+    @exec_options.setter
+    def exec_options(self, value):
+        """exec_options needs to be a list, which can be passed to
+        subprocess.Popen"""
+
+        if type(value) is not list:
+            raise TypeError("exec_options needs to be a list!")
+        self._exec_options = value
 
     def validate(self):
         """Validate file with command given in variable self.exec_cmd and with
@@ -66,7 +95,8 @@ class BaseValidator(object):
             errors -- errors if encountered, else None
         """
 
-        self.add_exec_options(self.filename)
+        filename_in_list = [self.filename]
+        self.add_exec_options(filename_in_list)
         self.exec_validator()
 
         if self.statuscode != 0:
@@ -100,11 +130,14 @@ class BaseValidator(object):
         :returns: Tuple (statuscode, stdout, stderr)
         """
 
-        cmd = self.exec_cmd + self.exec_options
+        cmd = list()
+        cmd.extend(self.exec_cmd)
+        cmd.extend(self.exec_options)
+
         proc = subprocess.Popen(cmd,
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE,
-                                shell=True,
+                                shell=False,
                                 env=self.environment)
 
         (self.stdout, self.stderr) = proc.communicate()
@@ -118,5 +151,9 @@ class BaseValidator(object):
         :returns: List of updated options
         """
 
-        self.exec_options += " " + option
+        if type(option) is not list:
+            raise TypeError(
+                "Only lists of strings can be added as exec_options!")
+
+        self.exec_options.extend(option)
         return self.exec_options
