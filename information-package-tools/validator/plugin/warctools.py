@@ -5,6 +5,8 @@ import subprocess
 
 from validator.basevalidator import BaseValidator
 
+# See https://jira.csc.fi/browse/KDKPAS-662 for information on fixes needed for
+# this file.
 # The VERSION_CHECK_CMD could be implemented in Python as follows.
 # Then it would be possible to use shell=False in Popen.
 # import gzip
