@@ -1,17 +1,14 @@
 """Module for validating files with pngcheck validator"""
-import os
-import re
-import subprocess
-
 from validator.basevalidator import BaseValidator
+
 
 class Pngcheck(BaseValidator):
 
     """ Initializes pngcheck validator and set ups everything so that
         methods from base class (BaseValidator) can be called, such as
         validate() for file validation.
-    
-    
+
+
     .. seealso:: http://www.libpng.org/pub/png/apps/pngcheck.html
     """
 
@@ -31,8 +28,8 @@ class Pngcheck(BaseValidator):
         return ""
 
     def check_version(self, version):
-        """ pngcheck does not offer information about version but supports all of
-            them (via pnglib).
+        """ pngcheck does not offer information about version but supports al
+            of them (via pnglib).
             """
         return None
 
