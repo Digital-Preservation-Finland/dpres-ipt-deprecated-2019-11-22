@@ -1,7 +1,6 @@
 """ Class for XML file validation with Xmllint. """
 
 import os
-import subprocess
 import tempfile
 
 from lxml import etree
