@@ -161,12 +161,12 @@ class XSLT:
 
         xslt_template = os.path.join(schematron_xslt_path, xslt_template)
 
-        cmd = ['xsltproc -o "%s" "%s" "%s"' % (output_filename, xslt_template,
-                                               input_filename)]
+        cmd = ['xsltproc', '-o', output_filename, xslt_template,
+               input_filename]
 
         p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=
                              subprocess.PIPE, stdout=subprocess.PIPE,
-                             close_fds=False, shell=True)
+                             close_fds=False, shell=False)
 
         (stdout, stderr) = p.communicate()
 
