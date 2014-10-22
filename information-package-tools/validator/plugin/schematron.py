@@ -60,9 +60,9 @@ class ValidationResult:
             elem_line = failed_assert.find('%sline-number' % ns)
 
             message = ''
-            if elem_text != None:
+            if elem_text is not None:
                 message = 'Error: %s' % elem_text.text.strip()
-            if elem_line != None:
+            if elem_line is not None:
                 message = '%s [Line: %s]' % (message, elem_line.text.strip())
             messages.append(message)
 
@@ -87,8 +87,8 @@ class XSLT:
         self.cache = cache
         self.schematron_version = 1
         self.sharepath = '/usr/share/information-package-tools'
-        self.cachepath = os.path.expanduser('~/.information-package-tools/' \
-            'schematron-cache')
+        self.cachepath = os.path.expanduser('~/.information-package-tools/'
+                                            'schematron-cache')
 
     def validate_file(self, schematron_schema, xml_file):
 
@@ -123,6 +123,7 @@ class XSLT:
 
             if self.cache:
                 if os.path.isfile(xslt_filename):
+                    # FIXME KDKPAS-668 Returning an undefined variable!
                     return xslt_cached_filename
 
             # Step 1 - Add Schematron include rules ( schema.sch -> step1.xsl )
@@ -164,8 +165,8 @@ class XSLT:
         cmd = ['xsltproc', '-o', output_filename, xslt_template,
                input_filename]
 
-        p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=
-                             subprocess.PIPE, stdout=subprocess.PIPE,
+        p = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+                             stderr=subprocess.PIPE, stdout=subprocess.PIPE,
                              close_fds=False, shell=False)
 
         (stdout, stderr) = p.communicate()
