@@ -18,7 +18,6 @@ import optparse
 import sip.signature
 import os
 import subprocess
-import shlex
 
 XSLT_PATH = "/usr/share/pas/microservice/report/xslt/stylesheet.xml"
 
@@ -42,9 +41,8 @@ def main(arguments=None):
         report_name = os.path.basename(args[0])
         html_path = os.path.join(os.path.dirname(args[0]), report_name)
 
-    cmd = "xsltproc " + XSLT_PATH + " " + args[0]
+    cmd = ['xsltproc', XSLT_PATH, args[0]]
     print cmd
-    cmd = shlex.split(cmd)
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE, stdout=subprocess.PIPE,
                          close_fds=True, shell=False)
     (stdout, stderr) = p.communicate()
