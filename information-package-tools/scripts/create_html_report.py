@@ -42,17 +42,16 @@ def main(arguments=None):
 
     cmd = ['xsltproc', XSLT_PATH, args[0]]
     print cmd
-    p = subprocess.Popen(cmd, stdin=subprocess.PIPE,
-                         stderr=subprocess.PIPE, stdout=subprocess.PIPE,
-                         close_fds=True, shell=False)
-    (stdout, stderr) = p.communicate()
+
+    with open(html_path, "w") as html_file:
+        p = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+                             stderr=subprocess.PIPE, stdout=html_file,
+                             close_fds=True, shell=False)
+        (_, stderr) = p.communicate()
+
     if len(stderr) > 0:
         print "xsltproc had stderr output:"
         print stderr
-
-    if len(stdout) > 0:
-        with open(html_path, "w") as html_file:
-            html_file.write(stdout)
 
     ret = p.returncode
     return ret
