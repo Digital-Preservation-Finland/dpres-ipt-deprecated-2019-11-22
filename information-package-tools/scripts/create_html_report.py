@@ -15,7 +15,6 @@ Usage ::
 """
 
 import optparse
-import sip.signature
 import os
 import subprocess
 
@@ -43,7 +42,8 @@ def main(arguments=None):
 
     cmd = ['xsltproc', XSLT_PATH, args[0]]
     print cmd
-    p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE, stdout=subprocess.PIPE,
+    p = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+                         stderr=subprocess.PIPE, stdout=subprocess.PIPE,
                          close_fds=True, shell=False)
     (stdout, stderr) = p.communicate()
     if len(stderr) > 0:
