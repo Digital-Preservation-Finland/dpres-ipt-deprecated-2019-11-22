@@ -16,9 +16,8 @@ class Filecommand(BaseValidator):
     
     .. seealso:: http://linux.die.net/man/1/file
     """
-        
     def __init__(self, mimetype, fileversion, filename):
-        self.exec_cmd = 'file -e soft'
+        self.exec_cmd = ['file', '-e', 'soft']
         self.filename = filename
         self.fileversion = fileversion
         self.mimetype = mimetype

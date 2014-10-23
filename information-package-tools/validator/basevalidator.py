@@ -40,8 +40,7 @@ class BaseValidator(object):
         variables.
         """
 
-        self._exec_cmd = list()
-        self.exec_options = list()
+        self.exec_cmd = list()
         self.environment = os.environ.copy()
         self.filename = None
         self.fileversion = None
@@ -51,38 +50,6 @@ class BaseValidator(object):
         self.statuscode = None
         self.stdout = ""
         self.stderr = ""
-
-    @property
-    def exec_cmd(self):
-        """exec_cmd needs to be a list, which can be passed to
-        subprocess.Popen"""
-
-        return self._exec_cmd
-
-    @exec_cmd.setter
-    def exec_cmd(self, value):
-        """exec_cmd needs to be a list, which can be passed to
-        subprocess.Popen"""
-
-        if type(value) is not list:
-            raise TypeError("exec_cmd needs to be a list!")
-        self._exec_cmd = value
-
-    @property
-    def exec_options(self):
-        """exec_options needs to be a list, which can be passed to
-        subprocess.Popen"""
-
-        return self._exec_options
-
-    @exec_options.setter
-    def exec_options(self, value):
-        """exec_options needs to be a list, which can be passed to
-        subprocess.Popen"""
-
-        if type(value) is not list:
-            raise TypeError("exec_options needs to be a list!")
-        self._exec_options = value
 
     def validate(self):
         """Validate file with command given in variable self.exec_cmd and with
@@ -96,7 +63,7 @@ class BaseValidator(object):
         """
 
         filename_in_list = [self.filename]
-        self.add_exec_options(filename_in_list)
+        self.exec_cmd += filename_in_list
         self.exec_validator()
 
         if self.statuscode != 0:
@@ -130,11 +97,7 @@ class BaseValidator(object):
         :returns: Tuple (statuscode, stdout, stderr)
         """
 
-        cmd = list()
-        cmd.extend(self.exec_cmd)
-        cmd.extend(self.exec_options)
-
-        proc = subprocess.Popen(cmd,
+        proc = subprocess.Popen(self.exec_cmd,
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE,
                                 shell=False,
@@ -144,16 +107,3 @@ class BaseValidator(object):
         self.statuscode = proc.returncode
 
         return self.statuscode, self.stdout, self.stderr
-
-    def add_exec_options(self, option):
-        """Add execute options (commandline arguments) to the validator.
-
-        :returns: List of updated options
-        """
-
-        if type(option) is not list:
-            raise TypeError(
-                "Only lists of strings can be added as exec_options!")
-
-        self.exec_options.extend(option)
-        return self.exec_options

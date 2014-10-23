@@ -45,7 +45,7 @@ class Jhove(BaseValidator):
         if mimetype in JHOVE_MODULES.keys():
             validator_module = JHOVE_MODULES[mimetype]
             command = ['-m', validator_module]
-            self.add_exec_options(command)
+            self.exec_cmd += command
         else:
             raise Exception("Unknown mimetype: %s" % mimetype)
 

@@ -33,8 +33,7 @@ class Jhove2(BaseValidator):
         
         # Create temp dir for jhove
         tempdir = tempfile.mkdtemp()
-
-        self.exec_cmd = 'jhove2  --display XML --temp %s' % tempdir
+        self.exec_cmd = ['jhove2',  '--display', 'XML', '--temp', tempdir]
         self.environment['JAVA_OPTS'] = "-Djava.io.tmpdir=%s" % tempdir
         self.filename = filename
         self.fileversion = fileversion
