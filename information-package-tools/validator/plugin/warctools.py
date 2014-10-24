@@ -1,20 +1,7 @@
 """Module for validating files with warc-tools warc validator"""
-import os
-import re
-import subprocess
+import gzip
 
 from validator.basevalidator import BaseValidator
-
-# See https://jira.csc.fi/browse/KDKPAS-662 for information on fixes needed for
-# this file.
-# The VERSION_CHECK_CMD could be implemented in Python as follows.
-# Then it would be possible to use shell=False in Popen.
-# import gzip
-# fd = gzip.open(warc_filename)
-# warc_content = fd.read()
-# if "WARC_VERSION" in warc_content:
-#     print "ok"
-VERSION_CHECK_CMD = 'zcat -q "FILENAME" | head -n1 | grep -q WARC/VERSION || cat "FILENAME" | head -n1 | grep -q WARC/VERSION'
 
 class WarcTools(BaseValidator):
 
@@ -44,18 +31,22 @@ class WarcTools(BaseValidator):
             is stored at the first line of file so this methdos read the first
             line and check that it matches.
         """
-        cmd = VERSION_CHECK_CMD.replace('FILENAME', self.filename)
-        cmd = cmd.replace('VERSION', version)
-        
-        proc = subprocess.Popen(cmd, shell=True)
-        proc.communicate()
-        
-        if proc.returncode != 0:
-            return "ERROR: File version is '%s', expected '%s'" % (
-                report_version, version)
-        return None
-  
-    
+        warc_fd = gzip.open(self.filename)
+        try:
+            warc_content = warc_fd.read()
+        except IOError:
+            warc_fd.close()
+            warc_fd = open(self.filename)
+            warc_content = warc_fd.read()
+
+        split_list = warc_content.splitlines()
+        if split_list[0].find("WARC/%s" % version) != -1:
+            check_done = "File version checked"
+            print check_done
+            return None
+        else:
+            return "File version check error"
+
     def check_profile(self, profile):
         """ WARC file format does not have profiles """
         return None
