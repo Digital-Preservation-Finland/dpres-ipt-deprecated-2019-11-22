@@ -146,9 +146,6 @@ class ManifestSMIME:
 
         (stdout, stderr) = p.communicate()
         print cmd, p.returncode, stdout, stderr
-        # p = subprocess.Popen("cat " + sign_path, stdin=subprocess.PIPE, stderr=
-        #                     subprocess.PIPE, stdout=subprocess.PIPE,
-        #                     close_fds=True, shell=True)
         signature_file.close()
 
         # cleanup temporary manifest after everything ready
