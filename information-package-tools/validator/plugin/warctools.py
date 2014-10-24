@@ -3,23 +3,24 @@ import gzip
 
 from validator.basevalidator import BaseValidator
 
+
 class WarcTools(BaseValidator):
 
     """ Initializes warctools validator and set ups everything so that
         methods from base class (BaseValidator) can be called, such as
         validate() for file validation.
-    
-    
+
+
     .. seealso:: http://code.hanzoarchives.com/warc-tools
     """
-        
+
     def __init__(self, mimetype, fileversion, filename):
         super(WarcTools, self).__init__()
         self.exec_cmd = ['warcvalid.py']
         self.filename = filename
         self.fileversion = fileversion
         self.mimetype = mimetype
-        
+
         if mimetype != "application/warc":
             raise Exception("Unknown mimetype: %s" % mimetype)
 
