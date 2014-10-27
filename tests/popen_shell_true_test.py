@@ -20,7 +20,9 @@ def test_no_shell_true():
     sys.path.insert(0, source_dir)
 
     # Compile the regular expression
-    re_comp = re.compile('.*shell=True.*')
+    re_comp = re.compile(r'.*shell\s*=\s*True.*', re.DOTALL)
+
+    python_file_count = 0
 
     for root, _, files in os.walk(source_dir):
         for filename in files:
@@ -30,6 +32,12 @@ def test_no_shell_true():
                 continue
 
             if filename.endswith('.py'):
-                for line in open(absname).readlines():
-                    if re_comp.match(line):
-                        assert False, "Found shell=True: %s" % line
+                python_file_count = python_file_count + 1
+                file_descr = open(absname)
+                data = file_descr.read()
+                file_descr.close()
+                if re_comp.match(data):
+                    assert False, "Found shell=True somewhere in file %s" % (
+                        absname)
+
+    assert python_file_count > 0
