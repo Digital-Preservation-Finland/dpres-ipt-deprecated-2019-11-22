@@ -15,7 +15,7 @@ def test_no_shell_true():
     """Search for shell=True in code and fail if found."""
 
     source_dir = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                              '../information-package-tools'))
+                                              '../ipt'))
 
     sys.path.insert(0, source_dir)
 
