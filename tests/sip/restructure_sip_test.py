@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(
 
 import testcommon.settings
 
-import sip.restructure
+import ipt.sip.restructure
 
 TEST_SIP_NAME = "CSC_test001"
 TEST_SIP_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -60,7 +60,7 @@ class TestRestructureSIP:
 
         self.init_test_files()
 
-        sip.restructure.restructure_sip(SIP_DIR, TRANSFER_NAME)
+        ipt.sip.restructure.restructure_sip(SIP_DIR, TRANSFER_NAME)
 
         assert os.path.exists(os.path.join(SIP_DIR, 'transfers'))
 

@@ -6,7 +6,7 @@ import pytest
 import testcommon.settings
 
 # Module to test
-import fileutils.filefinder
+import ipt.fileutils.filefinder
 
 # Other imports
 import os
@@ -25,7 +25,7 @@ class TestGetFilesInTree:
             "varmiste.sig"])
         cwd = os.getcwd()
         os.chdir(os.path.join(SIPDIR, 'CSC_test001'))
-        gotset = set(fileutils.filefinder.get_files_in_tree())
+        gotset = set(ipt.fileutils.filefinder.get_files_in_tree())
         os.chdir(cwd)
         assert gotset == testset
 
@@ -38,4 +38,4 @@ class TestGetFilesInTree:
             "mets.xml",
             "varmiste.sig"])
         relpath = os.path.relpath(os.path.join(SIPDIR, 'CSC_test001'))
-        assert set(fileutils.filefinder.get_files_in_tree(relpath)) == testset
+        assert set(ipt.fileutils.filefinder.get_files_in_tree(relpath)) == testset

@@ -13,9 +13,9 @@ from testcommon.casegenerator import pytest_generate_tests
 import random
 import lxml.etree
 
-from premis import premis
-import validator.filelist
-from validator.plugin.libxml import Libxml
+from ipt.premis import premis
+import ipt.validator.filelist
+from ipt.validator.plugin.libxml import Libxml
 
 PREMIS_NS = "info:lc/xmlns/premis-v2"
 PREMIS = "{%s}" % PREMIS_NS
@@ -106,7 +106,7 @@ class TestPremisClass:
                            fileinfo):
         
 
-        fileinfo = validator.filelist.FileInfo(fileinfo)
+        fileinfo = ipt.validator.filelist.FileInfo(fileinfo)
         
         object = premis.Object()
         object.fromvalidator( fileinfo = fileinfo )
@@ -136,7 +136,7 @@ class TestPremisClass:
     def test_init_event_class(self, testcase, fileinfo, arguments,
                               expected_result):
 
-        fileinfo = validator.filelist.FileInfo(fileinfo)
+        fileinfo = ipt.validator.filelist.FileInfo(fileinfo)
         
         
         object = premis.Object()

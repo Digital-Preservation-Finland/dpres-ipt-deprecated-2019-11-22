@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import testcommon.settings
 import testcommon.test_utils
 # Module to test
-import sip.signature
+import ipt.sip.signature
 
 # Other imports
 import shutil
@@ -30,7 +30,7 @@ class TestVerifyManifestSMIME:
         testcommon.test_utils.run_command("echo 'report' >> " + report_path)
 
         # creating signaturefile for report
-        signature = sip.signature.ManifestSMIME(
+        signature = ipt.sip.signature.ManifestSMIME(
                         signature_filename=self.report_path)
 
         signature.new_signing_key()
@@ -55,7 +55,7 @@ class TestVerifyManifestSMIME:
 
         self.set_defaults()
 
-        self.signature = sip.signature.ManifestSMIME(
+        self.signature = ipt.sip.signature.ManifestSMIME(
             signature_filename=self.signature_file,
             private_key=self.private_key,
             public_key=self.public_key,

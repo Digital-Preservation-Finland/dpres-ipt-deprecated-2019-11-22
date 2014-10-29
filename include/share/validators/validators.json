@@ -8,7 +8,7 @@
             { "formatVersion":"1.1" , "formatRegistryKey":"fmt/102" , "validator":"" }]
         },
         { "text/xml" : [
-            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/101" , "validator":"validator.plugin.xmllint.Xmllint" }]
+            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/101" , "validator":"ipt.validator.plugin.xmllint.Xmllint" }]
         },
         { "text/html" : [
             { "formatVersion":"4.01" , "formatRegistryKey":"fmt/100" , "validator":"" }]
@@ -29,8 +29,8 @@
             { "formatVersion":"1.0" , "formatRegistryKey":"fmt/139" , "validator":"" }]
         }, 
         { "text/plain" : [
-            { "formatVersion":"ISO-8859-15" , "formatRegistryKey":"x-fmt/111" , "validator":"validator.plugin.filecommand.Filecommand" },
-            { "formatVersion":"UTF-8" , "formatRegistryKey":"x-fmt/111" , "validator":"validator.plugin.jhove2.Jhove2" },
+            { "formatVersion":"ISO-8859-15" , "formatRegistryKey":"x-fmt/111" , "validator":"ipt.validator.plugin.filecommand.Filecommand" },
+            { "formatVersion":"UTF-8" , "formatRegistryKey":"x-fmt/111" , "validator":"ipt.validator.plugin.jhove2.Jhove2" },
             { "formatVersion":"UTF-16" , "formatRegistryKey":"x-fmt/111" , "validator":"" },
             { "formatVersion":"UTF-32" , "formatRegistryKey":"x-fmt/111" , "validator":"" },
             { "formatVersion":"A-2u" , "formatRegistryKey":"fmt/478" , "validator":"" }]
@@ -57,23 +57,23 @@
             { "formatVersion":"" , "formatRegistryKey":"fmt/392" , "validator":"" }]
         }, 
         { "image/jpeg" : [
-            { "formatVersion":"" , "formatRegistryKey":"fmt/42" , "validator":"validator.plugin.jhove.Jhove" },
-            { "formatVersion":"1.00" , "formatRegistryKey":"fmt/42" , "validator":"validator.plugin.jhove.Jhove" },
-            { "formatVersion":"1.01" , "formatRegistryKey":"fmt/42" , "validator":"validator.plugin.jhove.Jhove" }
+            { "formatVersion":"" , "formatRegistryKey":"fmt/42" , "validator":"ipt.validator.plugin.jhove.Jhove" },
+            { "formatVersion":"1.00" , "formatRegistryKey":"fmt/42" , "validator":"ipt.validator.plugin.jhove.Jhove" },
+            { "formatVersion":"1.01" , "formatRegistryKey":"fmt/42" , "validator":"ipt.validator.plugin.jhove.Jhove" }
                           ]
         }, 
         { "image/jp2" : [
-            { "formatVersion":"" , "formatRegistryKey":"x-fmt/392" , "validator":"validator.plugin.jhove.Jhove" }]
+            { "formatVersion":"" , "formatRegistryKey":"x-fmt/392" , "validator":"ipt.validator.plugin.jhove.Jhove" }]
         },
         { "image/tiff" : [
-            { "formatVersion":"6.0" , "formatRegistryKey":"fmt/353" , "validator":"validator.plugin.jhove.Jhove" }]
+            { "formatVersion":"6.0" , "formatRegistryKey":"fmt/353" , "validator":"ipt.validator.plugin.jhove.Jhove" }]
         },
         { "application/warc" : [
-            { "formatVersion":"0.17" , "formatRegistryKey":"fmt/298" , "validator": "validator.plugin.warctools.WarcTools" },
-            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/298" , "validator":  "validator.plugin.jhove2.Jhove2" }]
+            { "formatVersion":"0.17" , "formatRegistryKey":"fmt/298" , "validator": "ipt.validator.plugin.warctools.WarcTools" },
+            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/298" , "validator":  "ipt.validator.plugin.jhove2.Jhove2" }]
         },
         { "application/x-internet-archive" : [
-            { "formatVersion":"1.1" , "formatRegistryKey":"x-fmt/219" , "validator": "validator.plugin.jhove2.Jhove2" }]
+            { "formatVersion":"1.1" , "formatRegistryKey":"x-fmt/219" , "validator": "ipt.validator.plugin.jhove2.Jhove2" }]
         },
         { "application/msword" : [
             { "formatVersion":"8.0" , "formatRegistryKey":"fmt/40" , "validator":"" },
@@ -102,13 +102,13 @@
         }, 
         { "application/pdf" : [
             { "formatVersion":"1.2" , "formatRegistryKey":"fmt/16" , "validator":"" },
-            { "formatVersion":"1.3" , "formatRegistryKey":"fmt/17" , "validator":"validator.plugin.jhove.Jhove"},
-            { "formatVersion":"1.4" , "formatRegistryKey":"fmt/18" , "validator":"validator.plugin.jhove.Jhove"},
+            { "formatVersion":"1.3" , "formatRegistryKey":"fmt/17" , "validator":"ipt.validator.plugin.jhove.Jhove"},
+            { "formatVersion":"1.4" , "formatRegistryKey":"fmt/18" , "validator":"ipt.validator.plugin.jhove.Jhove"},
             { "formatVersion":"1.5" , "formatRegistryKey":"fmt/19" , "validator":"" },
             { "formatVersion":"1.6" , "formatRegistryKey":"fmt/20" , "validator":"" },
             { "formatVersion":"1.7" , "formatRegistryKey":"fmt/276" , "validator":"" },
-            { "formatVersion":"A-1a" , "formatRegistryKey":"fmt/95" , "validator":"validator.plugin.jhove.Jhove" },
-            { "formatVersion":"A-1b" , "formatRegistryKey":"fmt/354" , "validator":"validator.plugin.jhove.Jhove" },
+            { "formatVersion":"A-1a" , "formatRegistryKey":"fmt/95" , "validator":"ipt.validator.plugin.jhove.Jhove" },
+            { "formatVersion":"A-1b" , "formatRegistryKey":"fmt/354" , "validator":"ipt.validator.plugin.jhove.Jhove" },
             { "formatVersion":"A-2a" , "formatRegistryKey":"fmt/476" , "validator":"" },
             { "formatVersion":"A-2b" , "formatRegistryKey":"fmt/477" , "validator":"" },
             { "formatVersion":"A-2u" , "formatRegistryKey":"fmt/478" , "validator":"" }]
@@ -140,11 +140,11 @@
             { "formatVersion":"3.0" , "formatRegistryKey":"fmt/124" , "validator":"" }]
         },
         { "image/gif" : [
-            { "formatVersion":"1987a" , "formatRegistryKey":"fmt/3" , "validator":"validator.plugin.jhove.Jhove" },
-            { "formatVersion":"1989a" , "formatRegistryKey":"fmt/4" , "validator":"validator.plugin.jhove.Jhove" }]
+            { "formatVersion":"1987a" , "formatRegistryKey":"fmt/3" , "validator":"ipt.validator.plugin.jhove.Jhove" },
+            { "formatVersion":"1989a" , "formatRegistryKey":"fmt/4" , "validator":"ipt.validator.plugin.jhove.Jhove" }]
         },
         { "image/png" : [
-            { "formatVersion": "" , "formatRegistryKey":"" , "validator":"validator.plugin.pngcheck.Pngcheck" }]
+            { "formatVersion": "" , "formatRegistryKey":"" , "validator":"ipt.validator.plugin.pngcheck.Pngcheck" }]
         }
 	]
 } 

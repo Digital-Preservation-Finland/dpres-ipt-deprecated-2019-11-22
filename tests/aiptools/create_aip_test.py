@@ -11,11 +11,11 @@ import testcommon.settings
 import testcommon.shell
 
 # Module to test
-import aiptools.bagit
-import aiptools.RenameSIPtoAIP
-import aiptools.create_aip
+import ipt.aiptools.bagit
+import ipt.aiptools.RenameSIPtoAIP
+import ipt.aiptools.create_aip
 
-import scripts.create_aip
+import ipt.scripts.create_aip
 
 import shutil
 
@@ -60,7 +60,7 @@ class Testcreate_aip:
 
         self.init_test_files()
 
-        aiptools.create_aip.create_aip_from_sip(SIP_DIR)
+        ipt.aiptools.create_aip.create_aip_from_sip(SIP_DIR)
 
         assert os.path.exists(os.path.join(SIP_DIR, 'data'))
 
@@ -83,7 +83,7 @@ class Testcreate_aip:
         self.init_test_files()
 
         try:
-            aiptools.create_aip.create_aip_from_sip(SIP_DIR_INVALID)
+            ipt.aiptools.create_aip.create_aip_from_sip(SIP_DIR_INVALID)
             result = False
         except IOError as exception:
             print exception
@@ -97,7 +97,7 @@ class Testcreate_aip:
         self.init_test_files()
 
         (returncode, stdout, stderr) = testcommon.shell.run_main(
-                scripts.create_aip.main, ['%s' % sipdir])
+                ipt.scripts.create_aip.main, ['%s' % sipdir])
 
         print returncode, stdout, stderr
         return (returncode, stdout, stderr)

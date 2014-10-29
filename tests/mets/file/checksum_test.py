@@ -8,7 +8,7 @@ import testcommon.settings
 from testcommon.casegenerator import pytest_generate_tests
 
 # Module to test
-import mets.file.checksum
+import ipt.mets.file.checksum
 
 # Other imports
 from hashlib import md5, sha1
@@ -72,7 +72,7 @@ class TestFindChecksumsAndFiles:
 
             filename = os.path.join(testcase["testpath"], 'mets.xml')
 
-            parser = mets.file.checksum.Checker(filename, testcase["testpath"])
+            parser = ipt.mets.file.checksum.Checker(filename, testcase["testpath"])
 
             # Get result from metsParser
             result = parser.extract_checksums_from_mets()
@@ -186,7 +186,7 @@ class TestFileExistenceAndChecksums:
         print "mets_files", mets_files
 
         # Run test
-        checksumtool = mets.file.checksum.Checker()
+        checksumtool = ipt.mets.file.checksum.Checker()
         checksumtool.sip_dir = sip_path
         checksumtool.ignore_filenames = []
         test_result = checksumtool.check_file_existence_and_checksums(
