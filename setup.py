@@ -19,8 +19,8 @@ def scripts_list():
 def main():
     """Install information-package-tools Python libraries"""
     setup(
-        name='information-package-tools',
-	packages=find_packages(),
+        name='ipt',
+	packages=find_packages(exclude=['tests', 'tests.*']),
         version=get_version(),
         entry_points = {'console_scripts': scripts_list()})
 
