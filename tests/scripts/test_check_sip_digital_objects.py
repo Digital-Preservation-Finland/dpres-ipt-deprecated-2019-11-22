@@ -72,10 +72,7 @@ class TestCommandLineTools:
                                                    'validators',
                                                    'validators.json'))
 
-        arguments = [
-                "%s" % filename,
-                "%s" % configfile,
-                "abc34ge" ]
+        arguments = ["%s" % filename, "-c%s" % configfile, "xyz", "abc"]
         
         self.do(ipt.scripts.check_sip_digital_objects.main, arguments,
                 expected_result)
