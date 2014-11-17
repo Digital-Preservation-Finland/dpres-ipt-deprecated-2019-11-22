@@ -5,8 +5,25 @@ import tempfile
 import ipt.fileutils.checksum
 
 
-class ManifestSMIME:
+class WrongSignatureError(Exception):
+    """Raised when signature is not valid."""
+    pass
 
+
+class WrongChecksumError(Exception):
+    """Raised when checksum is not valid."""
+    pass
+
+
+class UnexpectedSignatureError(Exception):
+    """Raised when signature commands cause an unexpected error."""
+    pass
+
+
+class ManifestSMIME(object):
+    """
+    Class for SMIME manifest
+    """
     manifest_base_path = ''
     target_path = None
     # These keys are for signing files with systems own keys. Not to be confused
@@ -165,10 +182,10 @@ class ManifestSMIME:
         (stdout, stderr) = p.communicate()
         # http://www.openssl.org/docs/apps/verify.html
         if p.returncode == 4:
-            raise Exception('Invalid signature on signature file. Exitcode: %s\n%s\n%s' % (
+            raise WrongSignatureError('Invalid signature on signature file. Exitcode: %s\n%s\n%s' % (
                             p.returncode, stdout, stderr))
         elif p.returncode != 0:
-            raise Exception('Unknown error. Exitcode: %s\nStdout: %s\nStderr: %s' % (
+            raise UnexpectedSignatureError('Unknown error. Exitcode: %s\nStdout: %s\nStderr: %s' % (
                             p.returncode, stdout, stderr))
 
         # assert stderr.find('Verification successful')  == 0, "Invalid signature on certificate"
