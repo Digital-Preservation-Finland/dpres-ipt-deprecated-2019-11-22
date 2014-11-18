@@ -16,7 +16,9 @@ class ValidationResult:
 
 
 class Checker:
-
+    """
+    Checker class.
+    """
     ignore_filenames = None
     sip_dir = None
     xmlroot = None
@@ -40,18 +42,19 @@ class Checker:
             ([filename, algorithm_name, hexdigest],
              [ ... list of errormessages ... ])
 
-        We are doing the searching with XPath, https://en.wikipedia.org/wiki/Xpath.
+        We are doing the searching with XPath,
+        https://en.wikipedia.org/wiki/Xpath.
         XPath is a query language for finding elements from XML documents, see
         full definition of it at http://www.w3.org/TR/xpath/.
 
         This searches for all <file> elements from the METS namespace. The
         namespace definition shorthand in the actual XML doesn't matter, only
-        that the full namespace URL is http://www.loc.gov/METS/. 
+        that the full namespace URL is http://www.loc.gov/METS/.
 
         The returned list of error contains tuples, where the first object
         is the error message, second object is the given line and the third one
         is the criticality.
-        
+
         The errors are:
 
         - "Invalid line" if the line does not match the syntax.
@@ -89,12 +92,13 @@ class Checker:
             if not fileurl:
 
                 if mets_file.attrib['ID']:
-                    errors.append(("File url not found in <file> element with \
-                                   ID attribute value", mets_file.attrib['ID'], 2))
+                    errors.append(
+                        ("File url not found in <file> element with \
+                        ID attribute value", mets_file.attrib['ID'], 2))
                 else:
-                    errors.append(("File url not found in <file> element. The \
-                                   <file> element does not have and ID either.",
-                                   '', 2))
+                    errors.append(
+                        ("File url not found in <file> element. The \
+                        <file> element does not have and ID either.", '', 2))
                 continue
 
             # and change it to normal filesystem path
@@ -147,7 +151,7 @@ class Checker:
 
     def verify_file(self, basepath, filename, algorithm, hexdigest):
         """Verify hash of a file with given algorithm and hexdigest.
-        
+
         Updates error message list in case of error.
         """
 
@@ -192,7 +196,7 @@ class Checker:
             filename = mets_fixity[0]
             algorithm = mets_fixity[1]
             digest = mets_fixity[2]
-            
+
             if filename.startswith('./'):
                 filename = filename[len('./'):]
 

@@ -16,6 +16,7 @@ import optparse
 
 import ipt.sip.restructure
 
+
 def main(arguments=None):
     """Main loop """
     usage = "usage: %prog <sippath> <transfer name>"

@@ -7,11 +7,11 @@ transform.
 
 Usage ::
 
-	create-xml-report /path/to/premis/report.xml [/path/to/html/report.html]
+    create-xml-report /path/to/premis/report.xml [/path/to/html/report.html]
 
-	/path/to/html/report.html is optional, if it is left empty, report is created
-	to same directory as premis-xml-report is.
-	
+    /path/to/html/report.html is optional, if it is left empty,
+    report is created to same directory as premis-xml-report is.
+
 """
 
 import optparse
@@ -22,7 +22,11 @@ XSLT_PATH = "/usr/share/pas/microservice/report/xslt/stylesheet.xml"
 
 
 def main(arguments=None):
-    usage = "usage: %prog /path/to/premis/report.xml [/path/to/html/report.html]"
+    """
+    Main.
+    """
+    usage = \
+        "usage: %prog /path/to/premis/report.xml [/path/to/html/report.html]"
 
     parser = optparse.OptionParser(usage=usage)
 
@@ -44,16 +48,17 @@ def main(arguments=None):
     print cmd
 
     with open(html_path, "w") as html_file:
-        p = subprocess.Popen(cmd, stdin=subprocess.PIPE,
-                             stderr=subprocess.PIPE, stdout=html_file,
-                             close_fds=True, shell=False)
-        (_, stderr) = p.communicate()
+        proc = subprocess.Popen(
+            cmd, stdin=subprocess.PIPE,
+            stderr=subprocess.PIPE, stdout=html_file,
+            close_fds=True, shell=False)
+        (_, stderr) = proc.communicate()
 
     if len(stderr) > 0:
         print "xsltproc had stderr output:"
         print stderr
 
-    ret = p.returncode
+    ret = proc.returncode
     return ret
 
 if __name__ == '__main__':

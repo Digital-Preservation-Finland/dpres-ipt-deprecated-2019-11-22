@@ -8,13 +8,13 @@ import lxml.etree
 
 import ipt.mets.file.checksum
 
+
 def main(arguments=None):
     """Main loop"""
 
     usage = "usage: %prog mets-file.xml"
 
     parser = optparse.OptionParser(usage=usage)
-
 
     (options, args) = parser.parse_args(arguments)
 
@@ -27,16 +27,17 @@ def main(arguments=None):
     parser = ipt.mets.file.checksum.Checker()
 
     print "Collecting list of files in '%s'" % mets_filename
-    files, errors = parser.get_files_and_checksums_from_mets_file(mets_filename)
-    
+    files, errors = parser.get_files_and_checksums_from_mets_file(
+        mets_filename)
+
     print "files", files
 
-    #print "Calculating checksums for files (ignoring: %s)" % (
+    # print "Calculating checksums for files (ignoring: %s)" % (
     #        ', '.join(parser.ignore_filenames))
 
     test_result = parser.check_file_existence_and_checksums(files)
 
-    #print test_result
+    # print test_result
 
     return_status = 0
     for result in test_result:
@@ -46,8 +47,3 @@ def main(arguments=None):
         print result[0], result[1]
 
     return return_status
-
-
-
-
-

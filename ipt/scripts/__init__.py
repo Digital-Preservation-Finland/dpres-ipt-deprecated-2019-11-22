@@ -7,13 +7,13 @@ All modules have common interface::
 
     def main(arguments=None):
 
-  
+
             ... parse arguments ..
 
         ... do the stuff, maybe print something ...
 
         return 0   # Note use return here, not exit()
-    
+
 
 Command line tool modules are named with underscores:
 :file:`scripts/command_with_long_name.py`

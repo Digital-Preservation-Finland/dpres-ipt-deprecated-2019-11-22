@@ -36,19 +36,19 @@ def main(arguments=None):
 
     parser = optparse.OptionParser(usage=usage)
     parser.add_option("-c", "--capath", dest="capath",
-                default="/etc/ssl/certs",
-                help="Path to OpenSSL certificates",
-                metavar="PATH")
+                      default="/etc/ssl/certs",
+                      help="Path to OpenSSL certificates",
+                      metavar="PATH")
 
     parser.add_option("-s", "--signaturepath", dest="signaturepath",
-                default=None,
-                help="Path to signature file",
-                metavar="PATH")
+                      default=None,
+                      help="Path to signature file",
+                      metavar="PATH")
 
     parser.add_option("-t", "--signaturetargets", dest="signaturetargets",
-                default=None,
-                help="List of file paths which need to be signed",
-                metavar="PATH")
+                      default=None,
+                      help="List of file paths which need to be signed",
+                      metavar="PATH")
 
     (options, args) = parser.parse_args(arguments)
 
@@ -60,12 +60,12 @@ def main(arguments=None):
     try:
 
         signature = ipt.sip.signature.ManifestSMIME(
-                        signature_filename = args[1],
-                        private_key = args[0],
-                        public_key = args[0],
-                        target_path = args[2]
-                    )
-        
+            signature_filename=args[1],
+            private_key=args[0],
+            public_key=args[0],
+            target_path=args[2]
+        )
+
         signature.write_signature_file()
 
     except BaseException as exception:
@@ -73,4 +73,3 @@ def main(arguments=None):
         return 1
 
     return 0
-

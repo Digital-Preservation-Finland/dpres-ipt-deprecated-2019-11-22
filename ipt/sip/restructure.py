@@ -38,6 +38,7 @@ import os
 import shutil
 import tempfile
 
+
 def restructure_sip(destination_directory, source_directory):
     """Restructure given source directory to a unified directory
     structure under destination directory.
@@ -63,7 +64,6 @@ def restructure_sip(destination_directory, source_directory):
         print "...create %s/%s" % (sip_name, directory)
         os.makedirs(os.path.join(tempdir, directory))
 
-    shutil.move(destination_directory, os.path.join(tempdir, 'transfers/',
-        source_directory))
+    shutil.move(destination_directory, os.path.join(
+        tempdir, 'transfers/', source_directory))
     shutil.move(tempdir, destination_directory)
-

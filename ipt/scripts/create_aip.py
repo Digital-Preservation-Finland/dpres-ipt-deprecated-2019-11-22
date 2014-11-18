@@ -26,6 +26,7 @@ import optparse
 
 import ipt.aiptools.create_aip
 
+
 def main(arguments=None):
     """Parse command line arguments and run application"""
 
@@ -44,5 +45,3 @@ def main(arguments=None):
     print result
 
     return 0
-
-
