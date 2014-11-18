@@ -16,10 +16,10 @@ OpenSSL certificated directory or specified :--capath: parameter.
 
 Command options:
 
-    \-c, --capath=dir    \- Use OpenSSL PEM certificates in this directory
+    -c, --capath=dir    - Use OpenSSL PEM certificates in this directory
 
 
-""" 
+"""
 
 __author__ = "Mikko Vatanen"
 __copyright__ = "Copyright 2013, CSC - IT Center for Science"
@@ -32,17 +32,18 @@ import optparse
 import ipt.sip.signature
 
 
-
 def main(arguments=None):
     """Main loop"""
 
     usage = "usage: %prog signature-file"
 
     parser = optparse.OptionParser(usage=usage)
-    parser.add_option("-c", "--capath", dest="capath",
-                default="/etc/ssl/certs",
-                help="Path to OpenSSL certificates",
-                metavar="PATH")
+    parser.add_option(
+        "-c", "--capath",
+        dest="capath",
+        default="/etc/ssl/certs",
+        help="Path to OpenSSL certificates",
+        metavar="PATH")
 
     (options, args) = parser.parse_args(arguments)
 
