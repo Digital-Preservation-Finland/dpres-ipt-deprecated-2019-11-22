@@ -1,3 +1,8 @@
+"""
+This is a module for creating and verifying SMIME certificates and
+signing keys.
+"""
+
 import subprocess
 import os
 import fnmatch
@@ -6,32 +11,44 @@ import ipt.fileutils.checksum
 
 
 class WrongSignatureError(Exception):
+
     """Raised when signature is not valid."""
     pass
 
+
 class UnexpectedError(Exception):
+
     """Raised when unexpected error occurs."""
     pass
 
+
 class WrongChecksumError(Exception):
+
     """Raised when checksum is not valid."""
     pass
 
+
 class ErrorReadingSMIMEError(Exception):
+
     """Raised when SMIME reading fails."""
     pass
 
+
 class ManifestSMIME(object):
+
     """
     Class for SMIME manifest
     """
     manifest_base_path = ''
     target_path = None
-    # These keys are for signing files with systems own keys. Not to be confused
+    # These keys are for signing files with systems own keys.
+    # Not to be confused
     # with users public key used in signature validation.
     ca_path = '/etc/ssl/certs'
-    private_key = '/usr/share/pas/microservice/ssl/keys/kdk-pas-sip-signing-key.pem'
-    public_key = '/usr/share/pas/microservice/ssl/keys/kdk-pas-sip-signing-key.pub'
+    private_key = \
+        '/usr/share/pas/microservice/ssl/keys/kdk-pas-sip-signing-key.pem'
+    public_key = \
+        '/usr/share/pas/microservice/ssl/keys/kdk-pas-sip-signing-key.pub'
     signature_file = 'varmiste.sig'
 
     country = 'FI'
@@ -78,21 +95,23 @@ class ManifestSMIME(object):
                                            self.location, self.common_name),
                '-keyout', self.private_key, '-out', self.public_key]
 
-        p = subprocess.Popen(cmd, stdin=subprocess.PIPE,
-                             stderr=subprocess.PIPE, stdout=subprocess.PIPE,
-                             close_fds=False, shell=False)
+        proc = subprocess.Popen(
+            cmd, stdin=subprocess.PIPE,
+            stderr=subprocess.PIPE, stdout=subprocess.PIPE,
+            close_fds=False, shell=False)
 
-        (stdout, stderr) = p.communicate()
+        (stdout, stderr) = proc.communicate()
 
         print stdout, stderr
 
         cmd = ['openssl', 'x509', '-text', '-in', self.public_key]
 
-        p = subprocess.Popen(cmd, stdin=subprocess.PIPE,
-                             stderr=subprocess.PIPE, stdout=subprocess.PIPE,
-                             close_fds=False, shell=False)
+        proc = subprocess.Popen(
+            cmd, stdin=subprocess.PIPE,
+            stderr=subprocess.PIPE, stdout=subprocess.PIPE,
+            close_fds=False, shell=False)
 
-        (stdout, stderr) = p.communicate()
+        (stdout, stderr) = proc.communicate()
 
         print stdout, stderr
 
@@ -122,7 +141,7 @@ class ManifestSMIME(object):
         < ... 30 lines more of digital signature ... >
         XzTLy+drurKzEpWP2Tszo3MCsPHjHIVqK9yGn/gdPbth+C9pOVF28Ygv93yp
 
-        ------39E2251AA194465CC9D401144063F2D3-- 
+        ------39E2251AA194465CC9D401144063F2D3--
         ### Signature file ends here with newline"""
 
         matches = []
@@ -158,12 +177,13 @@ class ManifestSMIME(object):
         print "SIGN_PATH", sign_path
         signature_file = open(sign_path, 'w')
 
-        p = subprocess.Popen(cmd, stdin=subprocess.PIPE,
-                             stderr=subprocess.PIPE, stdout=signature_file,
-                             close_fds=True, shell=False)
+        proc = subprocess.Popen(
+            cmd, stdin=subprocess.PIPE,
+            stderr=subprocess.PIPE, stdout=signature_file,
+            close_fds=True, shell=False)
 
-        (stdout, stderr) = p.communicate()
-        print cmd, p.returncode, stdout, stderr
+        (stdout, stderr) = proc.communicate()
+        print cmd, proc.returncode, stdout, stderr
         signature_file.close()
 
         # cleanup temporary manifest after everything ready
@@ -176,22 +196,26 @@ class ManifestSMIME(object):
                os.path.join(self.manifest_base_path, self.signature_file),
                '-CApath', self.ca_path]
 
-        p = subprocess.Popen(cmd, stdin=subprocess.PIPE,
-                             stderr=subprocess.PIPE, stdout=subprocess.PIPE,
-                             close_fds=True, shell=False)
+        proc = subprocess.Popen(
+            cmd, stdin=subprocess.PIPE,
+            stderr=subprocess.PIPE, stdout=subprocess.PIPE,
+            close_fds=True, shell=False)
 
-        (stdout, stderr) = p.communicate()
+        (stdout, stderr) = proc.communicate()
         # http://www.openssl.org/docs/apps/verify.html
-        if p.returncode == 4:
-            raise WrongSignatureError('Invalid signature on signature file. Exitcode: %s\n%s\n%s' % (
-                            p.returncode, stdout, stderr))
-        if p.returncode == 2:
-            raise ErrorReadingSMIMEError('Unknown error. Exitcode: %s\nStdout: %s\nStderr: %s' % (
-                            p.returncode, stdout, stderr))
-        if p.returncode != 0:
+        if proc.returncode == 4:
+            raise WrongSignatureError(
+                'Invalid signature on signature file. Exitcode: %s\n%s\n%s' % (
+                    proc.returncode, stdout, stderr))
+        if proc.returncode == 2:
+            raise ErrorReadingSMIMEError(
+                'Unknown error. Exitcode: %s\nStdout: %s\nStderr: %s' % (
+                    proc.returncode, stdout, stderr))
+        if proc.returncode != 0:
             raise UnexpectedError('Unexpected error')
 
-        # assert stderr.find('Verification successful')  == 0, "Invalid signature on certificate"
+        # assert stderr.find('Verification successful')  == 0,
+        # "Invalid signature on certificate"
         # TODO: Manifest can also be refactored as separate class...
         checksum = ipt.fileutils.checksum.BigFile('sha1')
         for line in stdout.splitlines():
@@ -208,7 +232,9 @@ class ManifestSMIME(object):
                     algorithm, hexdigest, filename))
 
     def parse_manifest_line(self, line):
-
+        """
+        Parsing a line from a manifest file.
+        """
         fields = line.rstrip().split(':')
 
         if len(fields) != 3:
