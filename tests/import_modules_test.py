@@ -29,7 +29,7 @@ def test_import_modules(package):
             if filename == '__init__.py':
 
                 module_name = os.path.relpath(
-                        os.path.join(root, filename), project_path)
+                    os.path.join(root, filename), project_path)
                 module_name = module_name.replace('/__init__.py', '')
                 module_name = module_name.replace('/', '.')
 
@@ -45,7 +45,7 @@ def test_import_modules(package):
             if filename.endswith('.py'):
 
                 module_name = os.path.relpath(
-                        os.path.join(root, filename), project_path)
+                    os.path.join(root, filename), project_path)
                 module_name = module_name.replace('.py', '')
                 module_name = module_name.replace('/', '.')
 

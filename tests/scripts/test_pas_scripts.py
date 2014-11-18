@@ -22,6 +22,7 @@ import ipt.scripts.check_sip_digital_objects
 import ipt.scripts.check_xml_schema_features
 import ipt.scripts.check_xml_schematron_features
 
+
 class TestCommandLineTools:
 
     testcases = {
@@ -38,11 +39,11 @@ class TestCommandLineTools:
         [{
             "testcase": "create failed report",
             "expected_result": {
-                    "returncode": 0,
-                    "stderr": ""
-                
+                "returncode": 0,
+                "stderr": ""
+
             }
-         }],
+        }],
             "test_sign_xml_file":
         [{
             "testcase": "Test valid signature",
@@ -54,20 +55,20 @@ class TestCommandLineTools:
                 "stderr": "",
                 "in_stderr": ""
             }
-         },
-         {
+        },
+            {
             "testcase": "Test invalid signature",
             "certificate": "invalid-certificate.pem",
             "expected_result": {
-                "returncode": 0, # sign_xml_file returns zero even in case of
-                                 # error and prints errors to stdout
+                "returncode": 0,  # sign_xml_file returns zero even in case of
+                # error and prints errors to stdout
                 "in_stdout": ["No such file or directory"],
                 "not_in_stdout": ["File does not exist", "Nonlisted file"],
                 "stderr": "",
                 "in_stderr": []
             }
-         }
-         ],
+        }
+        ],
                 "test_check_sip_signature":
         [{
             "testcase": "Test valid signature",
@@ -79,8 +80,8 @@ class TestCommandLineTools:
                 "stderr": "",
                 "in_stderr": ""
             }
-         }
-         ],
+        }
+        ],
             "test_create_aip":
         [{
             "testcase": "Test create aip",
@@ -89,7 +90,7 @@ class TestCommandLineTools:
                 "stdout": "",
                 "stderr": ""
             }
-         }],
+        }],
                 "test_check_sip_file_checksums":
         [{
             "testcase": "Test valid signature",
@@ -100,8 +101,8 @@ class TestCommandLineTools:
                 "not_in_stdout": ["File does not exist", "Nonlisted file"],
                 "stderr": ""
             }
-         },
-         {
+        },
+            {
             "testcase": "Test invalid signature",
             "sipname": "CSC_test005",
             "expected_result": {
@@ -110,8 +111,8 @@ class TestCommandLineTools:
                 "not_in_stdout": ["Checksum OK"],
                 "stderr": ""
             }
-         }
-         ],
+        }
+        ],
                 "test_check_sip_digital_objects":
         [{
             "testcase": "Test valid sip package #1",
@@ -121,7 +122,7 @@ class TestCommandLineTools:
                 "stdout": "",
                 "stderr": ""
             }
-         }, {
+        }, {
             "testcase": "Test valid sip package #2",
             "filename": "CSC_test002",
             "expected_result": {
@@ -129,7 +130,7 @@ class TestCommandLineTools:
                 "stdout": "",
                 "stderr": ""
             }
-         }, {
+        }, {
             "testcase": "Test sip with whitespace sip package #3",
             "filename": "CSC whitespace",
             "expected_result": {
@@ -137,8 +138,8 @@ class TestCommandLineTools:
                 "stdout": "",
                 "stderr": ""
             }
-         },
-         {
+        },
+            {
             "testcase": "Test valid sip package with non-existing validator (ALTO)",
             "filename": "CSC_test004",
             "expected_result": {
@@ -148,15 +149,15 @@ class TestCommandLineTools:
                            "schema Version 1.4"],
                 "stderr": ""
             }
-         }, {
-         "testcase": "Test valid sip package #6: csc-test-valid-kdkmets-1.3",
-         "filename": "CSC_test006",
-         "expected_result": {
+        }, {
+            "testcase": "Test valid sip package #6: csc-test-valid-kdkmets-1.3",
+            "filename": "CSC_test006",
+            "expected_result": {
                 "returncode": 0,
                 "stdout": "",
                 "stderr": ""
             }
-         }],
+        }],
                 "test_check_xml_schema_features":
         [{
             "testcase": "Test valid mets.xml",
@@ -165,11 +166,11 @@ class TestCommandLineTools:
                 "returncode": 0,
                 "in_stdout": [],
                 "not_in_stdout": [],
-                "stderr": "\n", # There"s extra line wrap in stderr
+                "stderr": "\n",  # There"s extra line wrap in stderr
                 "in_stderr": ""
             }
-         },
-         {
+        },
+            {
             "testcase": "Test invalid mets.xml",
             "sipname": "CSC_test005",
             "expected_result": {
@@ -179,8 +180,8 @@ class TestCommandLineTools:
                 "stderr": "",
                 "in_stderr": ["fails to validate"]
             }
-         }
-         ],
+        }
+        ],
                 "test_check_xml_schematron_features":
         [{
             "testcase": "Test valid mets.xml",
@@ -192,8 +193,8 @@ class TestCommandLineTools:
                 "stderr": "",
                 "in_stderr": ""
             }
-         },
-         {
+        },
+            {
             "testcase": "Test invalid mets.xml",
             "sipname": "CSC_test005",
             "expected_result": {
@@ -203,45 +204,45 @@ class TestCommandLineTools:
                 "stderr": "",
                 "in_stderr": []
             }
-         }
-#         ],
-#                "test_check_mets_optional_features":
-#        [{
-#            "testcase": "Test valid mets.xml",
-#            "sipname": "CSC_test006",
-#            "expected_result": {
-#                "returncode": 0,
-#                "in_stdout": [],
-#                "not_in_stdout": [],
-#                "stderr": "\n", # There"s extra line wrap in stderr
-#                "in_stderr": ""
-#            }
-#         },
-#         {
-#            "testcase": "Test invalid mets.xml",
-#            "sipname": "CSC_test005",
-#            "expected_result": {
-#                "returncode": 1,
-#                "in_stdout": [],
-#                "not_in_stdout": [],
-#                "stderr": "",
-#                "in_stderr": []
-#            }
-#         }
-         ]
+        }
+            #         ],
+            #                "test_check_mets_optional_features":
+            #        [{
+            #            "testcase": "Test valid mets.xml",
+            #            "sipname": "CSC_test006",
+            #            "expected_result": {
+            #                "returncode": 0,
+            #                "in_stdout": [],
+            #                "not_in_stdout": [],
+            # "stderr": "\n", # There"s extra line wrap in stderr
+            #                "in_stderr": ""
+            #            }
+            #         },
+            #         {
+            #            "testcase": "Test invalid mets.xml",
+            #            "sipname": "CSC_test005",
+            #            "expected_result": {
+            #                "returncode": 1,
+            #                "in_stdout": [],
+            #                "not_in_stdout": [],
+            #                "stderr": "",
+            #                "in_stderr": []
+            #            }
+            #         }
+        ]
     }
 
     def test_create_html_report(self, testcase, expected_result):
 
         command = ipt.scripts.create_html_report.main
-        report_dir = os.path.join(testcommon.settings.TESTDATADIR, 
-                                  "reports", 
+        report_dir = os.path.join(testcommon.settings.TESTDATADIR,
+                                  "reports",
                                   "report-csc_test_invalid_digital_object_001-bb358d14-3092-458d-8b57-4a1c40206d8e-12345.xml")
         test_dir = tempfile.mkdtemp()
         html_path = os.path.join(test_dir, 'report.html')
         arguments = [report_dir, html_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
-                                                         command, arguments)
+            command, arguments)
         shutil.rmtree(test_dir)
         print returncode, stdout, stderr
         assert returncode == expected_result['returncode']
@@ -249,45 +250,48 @@ class TestCommandLineTools:
 
     def test_create_aip(self, testcase, expected_result):
 
-        sip_dir = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips/CSC_test005')
+        sip_dir = os.path.join(
+            testcommon.settings.TESTDATADIR, 'test-sips/CSC_test005')
         aip_dir = tempfile.mkdtemp() + '/aip '
         shutil.copytree(sip_dir, aip_dir)
-        
+
         command = ipt.scripts.create_aip.main
         arguments = [aip_dir]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
-                                                         command,
-                                                         arguments)
-                                                        
+            command,
+            arguments)
+
         assert returncode == expected_result['returncode']
         assert stderr == expected_result['stderr']
 
         sip_files = os.listdir(sip_dir)
         aip_files = os.listdir(aip_dir)
         aip_data_files = os.listdir(aip_dir + '/data')
-        baggit_files = ['data', 'manifest-md5.txt', 'bag-info.txt', 'bagit.txt']
+        baggit_files = [
+            'data', 'manifest-md5.txt', 'bag-info.txt', 'bagit.txt']
 
         # Test that aip contains all files from sip
         assert len(set(sip_files) - set(aip_data_files)) == 0
-        
+
         # Test that aip contains all bagit files
         for file in baggit_files:
             assert file in baggit_files
-    
+
         # Test that aip doesn't contain anything more
         assert len(baggit_files) == len(aip_files)
 
     def test_restructure_sip(self, testcase, expected_result):
 
-        sip_dir = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips/CSC_test006')
+        sip_dir = os.path.join(
+            testcommon.settings.TESTDATADIR, 'test-sips/CSC_test006')
         restructure_dir = tempfile.mkdtemp() + '/restructure'
         shutil.copytree(sip_dir, restructure_dir)
-        
+
         command = ipt.scripts.restructure_sip.main
         arguments = [restructure_dir, 'CSC_test006']
         (returncode, stdout, stderr) = testcommon.shell.run_main(
-                                                         command, arguments)
-                                                         
+            command, arguments)
+
         assert returncode == expected_result['returncode']
         assert stderr == expected_result['stderr']
 
@@ -302,29 +306,27 @@ class TestCommandLineTools:
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
                                  'test-sips/CSC_test005/mets.xml')
         certificate_path = os.path.join(testcommon.settings.TESTDATADIR,
-                                'sip-signature/' + certificate)
+                                        'sip-signature/' + certificate)
         signature_path = os.path.join(testcommon.settings.TESTDATADIR,
-                                 'test-sips/CSC_test005/varmiste.sig')
-        
-        
-                                
+                                      'test-sips/CSC_test005/varmiste.sig')
+
         sip_dir = tempfile.mkdtemp()
         os.chdir(sip_dir)
         shutil.copy(mets_path, sip_dir)
-        
+
         command = ipt.scripts.sign_xml_file.main
         arguments = [certificate_path, signature_path, mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
-                                                         command, arguments)
-                                                         
+            command, arguments)
+
         print os.listdir(sip_dir)
         print returncode, stdout, stderr
         assert returncode == expected_result['returncode']
         assert stderr == expected_result['stderr']
-    
+
         for message in expected_result['in_stdout']:
             assert message in stdout
-            
+
         for message in expected_result['not_in_stdout']:
             assert message not in stdout
 
@@ -334,80 +336,75 @@ class TestCommandLineTools:
     def test_check_sip_signature(self, testcase, sipname, expected_result):
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
-                               'test-sips/' + sipname + '/mets.xml')
+                                 'test-sips/' + sipname + '/mets.xml')
 
         certificate_dir = os.path.join(testcommon.settings.TESTDATADIR,
-                                'sip-signature/')
+                                       'sip-signature/')
         certificate_path = certificate_dir + 'valid-certificate.pem'
-        
-        
+
         sip_dir = tempfile.mkdtemp()
         os.chdir(sip_dir)
         shutil.copy(mets_path, sip_dir)
         mets_path = os.path.join(sip_dir, 'mets.xml')
-        
+
         command = ipt.scripts.sign_xml_file.main
         arguments = [certificate_path, sip_dir + '/varmiste.sig', mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
-                                                         command, arguments)
-        print returncode, stdout, stderr                                               
+            command, arguments)
+        print returncode, stdout, stderr
         assert returncode == 0
-        
+
         command = ipt.scripts.check_sip_signature.main
         arguments = [sip_dir + '/varmiste.sig']
         (returncode, stdout, stderr) = testcommon.shell.run_main(
-                                                         command, arguments)
-        print returncode, stdout, stderr                                                
+            command, arguments)
+        print returncode, stdout, stderr
         assert returncode == expected_result['returncode']
         assert stderr == expected_result['stderr']
-    
+
         for message in expected_result['in_stdout']:
             assert message in stdout
-            
+
         for message in expected_result['not_in_stdout']:
             assert message not in stdout
 
         for message in expected_result['in_stderr']:
             assert message in stdout
 
-
     def test_check_sip_file_checksums(self, testcase, sipname, expected_result):
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
-                               'test-sips/' + sipname + '/mets.xml')
+                                 'test-sips/' + sipname + '/mets.xml')
 
-        
         command = ipt.scripts.check_sip_file_checksums.main
         arguments = [mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
-                                                         command, arguments)
+            command, arguments)
 
         assert returncode == expected_result['returncode']
         assert stderr == expected_result['stderr']
-        
+
         for message in expected_result['in_stdout']:
             assert message in stdout
 
         for message in expected_result['not_in_stdout']:
-                assert message not in stdout
-
+            assert message not in stdout
 
     def test_check_xml_schema_features(self, testcase, sipname,   expected_result):
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
-                               'test-sips/' + sipname + '/mets.xml')
+                                 'test-sips/' + sipname + '/mets.xml')
 
-        
         command = ipt.scripts.check_xml_schema_features.main
         arguments = [mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
-                                                         command, arguments)
+            command, arguments)
 
         assert returncode == expected_result['returncode'], stdout + stderr
-    
+
         for message in expected_result['in_stdout']:
             assert message in stdout
-            
+
         for message in expected_result['not_in_stdout']:
             assert message not in stdout
 
@@ -415,28 +412,28 @@ class TestCommandLineTools:
             assert message in stderr
 
 
-#    def test_check_mets_optional_features(self, testcase, sipname,   expected_result):
+# def test_check_mets_optional_features(self, testcase, sipname,
+# expected_result):
 
 #        mets_path = os.path.join(testcommon.settings.TESTDATADIR,
 #                               'test-sips/' + sipname + '/mets.xml')
 
-        
+
 #        command = pas_ipt.scripts.check_mets_optional_features.main
 #        arguments = [mets_path]
 #        (returncode, stdout, stderr) = testcommon.shell.run_main(
 #                                                         command, arguments)
 
 #        assert returncode == expected_result['returncode']
-    
+
 #        for message in expected_result['in_stdout']:
 #            assert message in stdout
-            
+
 #        for message in expected_result['not_in_stdout']:
 #            assert message not in stdout
 
 #        for message in expected_result['in_stderr']:
 #            assert message in stderr
-
 
     def test_check_sip_digital_objects(self, testcase,
                                        filename, expected_result):
@@ -444,24 +441,24 @@ class TestCommandLineTools:
         filename = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips',
                                 filename, 'mets.xml')
 
-        configfile =  os.path.abspath(os.path.join(testcommon.settings.PROJECTDIR,
-                                                   'include/share',
-                                                   'validators',
-                                                   'validators.json'))
+        configfile = os.path.abspath(os.path.join(testcommon.settings.PROJECTDIR,
+                                                  'include/share',
+                                                  'validators',
+                                                  'validators.json'))
 
         arguments = [
-                "-c%s" % configfile,
-                "%s" % filename,
-                "abc", "def" ]
-        
+            "-c%s" % configfile,
+            "%s" % filename,
+            "abc", "def"]
+
         self.do(ipt.scripts.check_sip_digital_objects.main, arguments,
                 expected_result)
 
     def do(self, command, arguments, expected):
-          
+
         (returncode, stdout, stderr) = testcommon.shell.run_main(
-                command, arguments)
-                
+            command, arguments)
+
         print >> sys.stderr, stderr
 
         function_name = "%s.%s" % (command.__module__, command.func_name)
@@ -472,6 +469,7 @@ class TestCommandLineTools:
             assert match_string in stderr
 
         message = "\n".join(["got:", str(returncode), "expected:",
-            str(expected["returncode"]), "stdout:", stdout, "stderr:",
-            stderr, "function:", function_name])
+                             str(expected["returncode"]
+                                 ), "stdout:", stdout, "stderr:",
+                             stderr, "function:", function_name])
         assert returncode == expected["returncode"], message

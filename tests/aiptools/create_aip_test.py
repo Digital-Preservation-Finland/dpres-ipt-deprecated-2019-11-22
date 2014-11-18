@@ -53,7 +53,7 @@ class Testcreate_aip:
         result = []
         for path, x,  filenames in os.walk(tree):
             for filename in filenames:
-                  result.append(os.path.abspath(os.path.join(path, filename)))
+                result.append(os.path.abspath(os.path.join(path, filename)))
         return result
 
     def test_create_aip_from_sip(self):
@@ -68,7 +68,7 @@ class Testcreate_aip:
         for filename in EXPECTED_FILES:
             filename_abs = os.path.join(SIP_DIR, filename)
             filename_abs = filename_abs.replace('%sipname%',
-                    os.path.basename(SIP_DIR))
+                                                os.path.basename(SIP_DIR))
             expected_files_abspath.append(os.path.join(SIP_DIR, filename_abs))
 
         result_files = self.get_files_in_tree(SIP_DIR, TEMP_DIR)
@@ -97,7 +97,7 @@ class Testcreate_aip:
         self.init_test_files()
 
         (returncode, stdout, stderr) = testcommon.shell.run_main(
-                ipt.scripts.create_aip.main, ['%s' % sipdir])
+            ipt.scripts.create_aip.main, ['%s' % sipdir])
 
         print returncode, stdout, stderr
         return (returncode, stdout, stderr)
@@ -117,5 +117,3 @@ class Testcreate_aip:
         assert returncode != 0
         assert stdout.find(SIP_DIR_INVALID) > 0
         assert len(stderr) > 0
-
-

@@ -72,7 +72,8 @@ class TestFindChecksumsAndFiles:
 
             filename = os.path.join(testcase["testpath"], 'mets.xml')
 
-            parser = ipt.mets.file.checksum.Checker(filename, testcase["testpath"])
+            parser = ipt.mets.file.checksum.Checker(
+                filename, testcase["testpath"])
 
             # Get result from metsParser
             result = parser.extract_checksums_from_mets()

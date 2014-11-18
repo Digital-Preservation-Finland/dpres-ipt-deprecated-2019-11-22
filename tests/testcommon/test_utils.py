@@ -15,7 +15,7 @@ def run_command(cmd, close_fds=False, print_=True):
                             close_fds=close_fds)
 
     (stdout, stderr) = proc.communicate()
-   
+
     return (proc.returncode, stdout, stderr)
 
 

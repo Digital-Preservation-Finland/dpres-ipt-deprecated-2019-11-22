@@ -23,21 +23,25 @@ class TestVerifyManifestSMIME:
 
         test_util = testcommon.test_utils.Utils()
         test_util.tempdir('reports')
-        self.report_path = os.path.join(test_util.tempdir('reports'), 'varmiste.sig')
+        self.report_path = os.path.join(
+            test_util.tempdir('reports'), 'varmiste.sig')
 
-        #creating a test xml-report
-        report_path = os.path.join(os.path.dirname(self.report_path), 'report.xml')
+        # creating a test xml-report
+        report_path = os.path.join(
+            os.path.dirname(self.report_path), 'report.xml')
         testcommon.test_utils.run_command("echo 'report' >> " + report_path)
 
         # creating signaturefile for report
         signature = ipt.sip.signature.ManifestSMIME(
-                        signature_filename=self.report_path)
+            signature_filename=self.report_path)
 
         signature.new_signing_key()
         signature.write_signature_file()
-        (ret, stdout, stderr) = testcommon.test_utils.run_command("cat " + self.report_path)
+        (ret, stdout, stderr) = testcommon.test_utils.run_command(
+            "cat " + self.report_path)
         print stdout, stderr
-        (ret, stdout, stderr) = testcommon.test_utils.run_command("ls -la " + self.report_path)
+        (ret, stdout, stderr) = testcommon.test_utils.run_command(
+            "ls -la " + self.report_path)
         print stdout, stderr
         assert ret == 0
 
@@ -82,8 +86,7 @@ class TestVerifyManifestSMIME:
 
             cmd = ['openssl x509 -text -in "%s"' % (self.public_key)]
 
-            p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=
-                                 subprocess.PIPE, stdout=subprocess.PIPE,
+            p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE, stdout=subprocess.PIPE,
                                  close_fds=False, shell=True)
 
             (stdout, stderr) = p.communicate()
@@ -113,49 +116,47 @@ class TestVerifyManifestSMIME:
         self.cleanup_test()
 
     def rehash_ca_path_symlinks(self):
-            """ Generate symlinks to public keys in ca_path so
+        """ Generate symlinks to public keys in ca_path so
 
-            that openssl command can find correct public keys
+        that openssl command can find correct public keys
 
-                openssl verify -CApath <ca_path>
+            openssl verify -CApath <ca_path>
 
-            Symlinks are in format <x509 hash for public key>.0 -> keyfile.pem
+        Symlinks are in format <x509 hash for public key>.0 -> keyfile.pem
 
-            http://www.openssl.org/docs/apps/verify.html
-            http://www.openssl.org/docs/apps/x509.html
-            
-            http://stackoverflow.com/questions/9879688/difference-between-cacert-and-capath-in-curl """
+        http://www.openssl.org/docs/apps/verify.html
+        http://www.openssl.org/docs/apps/x509.html
 
-            cmd = ['openssl x509 -hash -noout -in %s' %
-                   self.signature.public_key]
+        http://stackoverflow.com/questions/9879688/difference-between-cacert-and-capath-in-curl """
 
-            p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=
-                                 subprocess.PIPE, stdout=subprocess.PIPE,
-                                 close_fds=False, shell=True)
-            (stdout, stderr) = p.communicate()
+        cmd = ['openssl x509 -hash -noout -in %s' %
+               self.signature.public_key]
 
-            x509_hash_symlink = os.path.join(
-                self.ca_path, '%s.0' % stdout.rstrip())
-            os.symlink(self.signature.public_key, x509_hash_symlink)
+        p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE, stdout=subprocess.PIPE,
+                             close_fds=False, shell=True)
+        (stdout, stderr) = p.communicate()
 
-            self.print_dirs(self.ca_path)
+        x509_hash_symlink = os.path.join(
+            self.ca_path, '%s.0' % stdout.rstrip())
+        os.symlink(self.signature.public_key, x509_hash_symlink)
+
+        self.print_dirs(self.ca_path)
 
     def verify_signature_file_with_ca_path(self, signature_file):
 
-            cmd = ['openssl smime -verify -in %s -CApath "%s"' % (
-                self.signature_file, self.ca_path)]
+        cmd = ['openssl smime -verify -in %s -CApath "%s"' % (
+            self.signature_file, self.ca_path)]
 
-            p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=
-                                 subprocess.PIPE, stdout=subprocess.PIPE,
-                                 close_fds=False, shell=True)
-            (stdout, stderr) = p.communicate()
+        p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE, stdout=subprocess.PIPE,
+                             close_fds=False, shell=True)
+        (stdout, stderr) = p.communicate()
 
-            print "stdout", stdout
-            print "stderr", stderr
+        print "stdout", stdout
+        print "stderr", stderr
 
-            assert 'Verification successful' in stderr, "Verification successful"
-            assert 'sha1' in stdout, "Contains checksum algorithm"
-            assert 'mets.xml' in stdout, "Contains checksum file name"
+        assert 'Verification successful' in stderr, "Verification successful"
+        assert 'sha1' in stdout, "Contains checksum algorithm"
+        assert 'mets.xml' in stdout, "Contains checksum file name"
 
     def test_04_valid_certificate(self):
         try:
@@ -316,8 +317,7 @@ class TestVerifyManifestSMIME:
 
         print "\n-------------- START - %s --------------------" % path
         cmd = ['find "%s" -ls' % (path)]
-        p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=
-                             subprocess.PIPE, stdout=subprocess.PIPE,
+        p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE, stdout=subprocess.PIPE,
                              close_fds=False, shell=True)
 
         (stdout, stderr) = p.communicate()

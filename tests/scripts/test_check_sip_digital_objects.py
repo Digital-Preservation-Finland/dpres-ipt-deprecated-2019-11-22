@@ -10,6 +10,7 @@ from testcommon.casegenerator import pytest_generate_tests
 # Module to test
 import ipt.scripts.check_sip_digital_objects
 
+
 class TestCommandLineTools:
 
     testcases = {
@@ -22,7 +23,7 @@ class TestCommandLineTools:
                 "stdout": '',
                 "stderr": ''
             }
-         }, {
+        }, {
             "testcase": 'Test valid sip package #2',
             "filename": 'CSC_test002',
             "expected_result": {
@@ -30,7 +31,7 @@ class TestCommandLineTools:
                 "stdout": '',
                 "stderr": ''
             }
-         }, {
+        }, {
             "testcase": 'Test sip with whitespace sip package #3',
             "filename": 'CSC whitespace',
             "expected_result": {
@@ -38,8 +39,8 @@ class TestCommandLineTools:
                 "stdout": '',
                 "stderr": ''
             }
-         },
-         {
+        },
+            {
             "testcase": 'Test valid sip package with non-existing validator (ALTO)',
             "filename": 'CSC_test004',
             "expected_result": {
@@ -49,17 +50,16 @@ class TestCommandLineTools:
                            'schema Version 1.4'],
                 "stderr": ''
             }
-         }, {
-         "testcase": 'Test valid sip package #6: csc-test-valid-kdkmets-1.3',
-         "filename": 'CSC_test006',
-         "expected_result": {
+        }, {
+            "testcase": 'Test valid sip package #6: csc-test-valid-kdkmets-1.3',
+            "filename": 'CSC_test006',
+            "expected_result": {
                 "returncode": 0,
                 "stdout": '',
                 "stderr": ''
             }
-         }]
+        }]
     }
-
 
     def test_check_sip_digital_objects(self, testcase,
                                        filename, expected_result):
@@ -67,20 +67,20 @@ class TestCommandLineTools:
         filename = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips',
                                 filename, 'mets.xml')
 
-        configfile =  os.path.abspath(os.path.join(testcommon.settings.PROJECTDIR,
-                                                   'include/share',
-                                                   'validators',
-                                                   'validators.json'))
+        configfile = os.path.abspath(os.path.join(testcommon.settings.PROJECTDIR,
+                                                  'include/share',
+                                                  'validators',
+                                                  'validators.json'))
 
         arguments = ["%s" % filename, "-c%s" % configfile, "xyz", "abc"]
-        
+
         self.do(ipt.scripts.check_sip_digital_objects.main, arguments,
                 expected_result)
 
     def do(self, command, arguments, expected):
-          
+
         (returncode, stdout, stderr) = testcommon.shell.run_main(
-                command, arguments)
+            command, arguments)
 
         print stdout
         print >> sys.stderr, stderr
@@ -93,6 +93,7 @@ class TestCommandLineTools:
             assert match_string in stderr
 
         message = "\n".join(["got:", str(returncode), "expected:",
-            str(expected["returncode"]), "stdout:", stdout, "stderr:",
-            stderr, "function:", function_name])
+                             str(expected["returncode"]
+                                 ), "stdout:", stdout, "stderr:",
+                             stderr, "function:", function_name])
         assert returncode == expected["returncode"], message

@@ -7,20 +7,22 @@ import cStringIO
 
 import testcommon.settings
 
+
 def run_command(command):
     """Run command using source code binaries and libraries
-   
+
         Note: This should be deprecated. Better to use run_main() function
         below.
 
     """
 
     proc = subprocess.Popen([command], shell=True, stdout=subprocess.PIPE,
-                     stderr=subprocess.PIPE)
+                            stderr=subprocess.PIPE)
 
     (stdout, stderr) = proc.communicate()
 
     return (proc.returncode, stdout, stderr)
+
 
 def run_main(the_main_function, arguments):
     """Emulate exec call for command line tool main() functions.
@@ -60,4 +62,3 @@ def run_main(the_main_function, arguments):
         sys.stderr = stderr_original
 
     return (returnstatus, stdout, stderr)
-

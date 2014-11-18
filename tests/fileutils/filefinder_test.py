@@ -38,4 +38,5 @@ class TestGetFilesInTree:
             "mets.xml",
             "varmiste.sig"])
         relpath = os.path.relpath(os.path.join(SIPDIR, 'CSC_test001'))
-        assert set(ipt.fileutils.filefinder.get_files_in_tree(relpath)) == testset
+        assert set(
+            ipt.fileutils.filefinder.get_files_in_tree(relpath)) == testset
