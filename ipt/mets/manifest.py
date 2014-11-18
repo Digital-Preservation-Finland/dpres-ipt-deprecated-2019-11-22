@@ -4,7 +4,7 @@ import os
 class File:
 
     def __init__(self, manifest_filename=None):
-        if manifest_filename == None:
+        if manifest_filename is None:
             self.manifest_filename = 'MANIFEST'
         else:
             self.manifest_filename = manifest_filename

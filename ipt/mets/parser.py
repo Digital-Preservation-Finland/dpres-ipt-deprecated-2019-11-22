@@ -5,39 +5,39 @@ NAMESPACES = {'xlink': 'http://www.w3.org/1999/xlink',
               'p': 'info:lc/xmlns/premis-v2'}
 
 
-class LXML:
+class LXML(object):
     """
-        This class parses METS XML files and provides methdos for querying 
-        information from individual elements.
+    This class parses METS XML files and provides methdos for querying
+    information from individual elements.
     """
-    
+
     def __init__(self, filename, xmlroot=None):
         self.filename = filename
         self._xmlroot = xmlroot
 
     def xmlroot(self):
-        """ Get a root element of XML document given in initialization of this
-            class.
-        
-            Returns:
-                Root element of XML document as lxml.ElementTree object.
         """
-        
-        if self._xmlroot == None:
+        Get a root element of XML document given in initialization of this
+        class.
+
+        Returns:
+        Root element of XML document as lxml.ElementTree object.
+        """
+
+        if self._xmlroot is None:
             self._xmlroot = lxml.etree.parse(self.filename)
         return self._xmlroot
 
     def get_file_location(self, mets_file):
-        """ Get a file location url from METS XML document. For example
-
-            Get the file url eg.
-            
-            .. code-block:: xml
-                <mets:FLocat xlink:href="file://kuvat/PICT0081.JPG" LOCTYPE="URL"/>
-            
-    
         """
-        
+        Get a file location url from METS XML document. For example
+
+        Get the file url eg.
+
+            .. code-block:: xml
+        <mets:FLocat xlink:href="file://kuvat/PICT0081.JPG" LOCTYPE="URL"/>
+        """
+
         file_url = mets_file.xpath('m:FLocat/@xlink:href',
                                    namespaces=NAMESPACES)
         if len(file_url) > 0:
@@ -46,10 +46,15 @@ class LXML:
             return None
 
     def mets_files(self):
+        """
+        Mets files.
+        """
         return self.xmlroot().xpath('//m:file', namespaces=NAMESPACES)
 
     def get_fileinfo_iterator(self):
-
+        """
+        Get fileinfo iterator.
+        """
         for mets_file in self.mets_files():
             # Note: ADMID may contains several IDs separated with spaces
             admid = mets_file.attrib['ADMID']
@@ -58,7 +63,9 @@ class LXML:
             yield fileinfo
 
     def get_fileinfo_array(self):
-
+        """
+        Get fileinfo array.
+        """
         array = []
         for fileinfo in self.get_fileinfo_iterator():
             array.append(fileinfo)
@@ -66,15 +73,17 @@ class LXML:
         return array
 
     def get_fileinfo_with_admid(self, admid):
-        """ Return dict that contains information for mets:file.
+        """
+        Return dict that contains information for mets:file.
 
             fileinfo["filename"]
             fileinfo["digest_algorithm"]
             fileinfo["digest_hex"]
             fileinfo["format_version"]
             fileinfo["format_mimetype"]
-            fileinfo["format_registry_key"] 
-            fileinfo["object_id"] """
+            fileinfo["format_registry_key"]
+            fileinfo["object_id"]
+        """
 
         fixity = self.get_file_fixity_with_admid(admid)
         format = self.get_file_format_with_admid(admid)
@@ -82,13 +91,13 @@ class LXML:
         filename = filename.replace('file://', '')
         object_id = self.get_file_object_id_with_admid(admid)
 
-        if fixity == None:
+        if fixity is None:
             fixity = {
                 "algorithm": None,
                 "digest": None
             }
 
-        if format == None:
+        if format is None:
             format = {
                 "version": None,
                 "mimetype": None,
@@ -97,24 +106,24 @@ class LXML:
 
         # FIXME: There's a unit test case which bypasses mets.xml input and
         #        assumes that there's object_id
-        if object_id == None:
-            object_id = { 
+        if object_id is None:
+            object_id = {
                 "value": ""
-                }
+            }
 
         return {
-                'filename': filename,
-                'object_id': object_id,
-                'fixity': {
-                    'algorithm': fixity["algorithm"],
-                    'digest': fixity["digest"]
-                },
-                'format': {
-                    'mimetype': format["mimetype"],
-                    'version': format["version"],
-                    'registery_key': format["registry_key"]
-                }
-                }
+            'filename': filename,
+            'object_id': object_id,
+            'fixity': {
+                'algorithm': fixity["algorithm"],
+                'digest': fixity["digest"]
+            },
+            'format': {
+                'mimetype': format["mimetype"],
+                'version': format["version"],
+                'registery_key': format["registry_key"]
+            }
+        }
 
     def get_filename_with_admid(self, admid):
         """@todo: Docstring for get_filename_with_admid
@@ -122,24 +131,23 @@ class LXML:
         :admid: @todo
         :returns: @todo
 
+        <mets:file ID="img0001-master"
+                        CREATED="2013-08-07T13:36:37+03:00"
+                        ADMID="img0001-master-techmd agent_cryptopp_5.5.1
+                        agent_docworks_6.6.1.18 agent_dw-jk
+                        agent_freeimage_3.15.1 agent_jhove_1.5
+                        agent_unknown_unknown img0001-master-event00001
+                        img0001-master-event00002 img0001-master-event00003
+                        img0001-master-event00004 img0001-master-event00005"
+                        MIMETYPE="image/tiff" GROUPID="1"
+                        OWNERID="URN:NBN:fi-fd2009-00002919-img0001-master"
+                        CHECKSUM="2bef5516bf629def11e24b7671b89ec95f704504c ...
+                       CHECKSUMTYPE="SHA-512" SIZE="6593519">
+                                                       <mets:FLocat
+                                                        LOCTYPE="URL"
+                                                        xlink:href="file://..."
+        </mets:file>
         """
-        #<mets:file ID="img0001-master"
-        #                CREATED="2013-08-07T13:36:37+03:00"
-        #                ADMID="img0001-master-techmd agent_cryptopp_5.5.1
-        #                agent_docworks_6.6.1.18 agent_dw-jk
-        #                agent_freeimage_3.15.1 agent_jhove_1.5
-        #                agent_unknown_unknown img0001-master-event00001
-        #                img0001-master-event00002 img0001-master-event00003
-        #                img0001-master-event00004 img0001-master-event00005"
-        #                MIMETYPE="image/tiff" GROUPID="1"
-        #                OWNERID="URN:NBN:fi-fd2009-00002919-img0001-master"
-        #                CHECKSUM="2bef5516bf629def11e24b7671b89ec95f704504c ...
-        #                CHECKSUMTYPE="SHA-512" SIZE="6593519">
-        #                                                <mets:FLocat
-        #                                                LOCTYPE="URL"
-        #                                                xlink:href="file://..."
-        #</mets:file>
-
         attr_expr = ', '.join(["contains(concat(' '",
                                "normalize-space(@ADMID)",
                                "' ')",
@@ -147,18 +155,20 @@ class LXML:
 
         query = '//m:file[%s]' % attr_expr
 
-        file = self.xmlroot().xpath(query, namespaces=NAMESPACES)
+        file_ = self.xmlroot().xpath(query, namespaces=NAMESPACES)
 
         # print "query", query
         # print "admid", admid, "file", file
 
-        if not file:
+        if not file_:
             return None
 
-        return self.get_file_location(file[0])
+        return self.get_file_location(file_[0])
 
     def get_file_format_with_admid(self, admid):
-
+        """
+        Get file format with admid.
+        """
         admid = admid.replace('  ', ' ').split(' ')
         attr_expr = ' or '.join(map(lambda x: "@ID='%s'" % x, admid))
 
@@ -199,11 +209,12 @@ class LXML:
 
             //m:techMD[@ID='tech-1' or @ID='rights-1' or @ID='dp-1']
 
-        This query returns all techMD elements in METS namespace that have an ID
-        attribute with value 'tech-1', 'rights-1' or 'dp-1'.
+        This query returns all techMD elements in METS namespace that have an
+        ID attribute with value 'tech-1', 'rights-1' or 'dp-1'.
 
-        For the resulted techMD element we read first premis:fixity element that
-        contains premis:messageDigestAlgorithm and premis:messageDigest elements."""
+        For the resulted techMD element we read first premis:fixity element
+        that contains premis:messageDigestAlgorithm and premis:messageDigest
+        elements."""
 
         admid = admid.replace('  ', ' ').split(' ')
         attr_expr = ' or '.join(map(lambda x: "@ID='%s'" % x, admid))
@@ -236,14 +247,15 @@ class LXML:
         return {"algorithm": algorithm, "digest": digest}
 
     def get_file_object_id_with_admid(self, admid):
-
+        """
+        Get file object id with admid.
+        """
         admid = admid.replace('  ', ' ').split(' ')
         attr_expr = ' or '.join(map(lambda x: "@ID='%s'" % x, admid))
 
-       # Find the first (the only) objectIdentifier element in the file elements,        
-       # no matter how deep in the element hierarchy                           
+        # Find the first (the only) objectIdentifier element in the file
+        # elements, no matter how deep in the element hierarchy
 
-        
         query = '//m:techMD[%s]//p:objectIdentifier' % attr_expr
         object_id = self.xmlroot().xpath(query, namespaces=NAMESPACES)
 
@@ -251,10 +263,10 @@ class LXML:
             return None
 
         object_id = object_id[0]
-        
-        #algorithm = object_id.xpath('p:messageDigestAlgorithm',
+
+        # algorithm = object_id.xpath('p:messageDigestAlgorithm',
         #                         namespaces=NAMESPACES)[0].text
-        #digest = object_id.xpath('p:messageDigest',
+        # digest = object_id.xpath('p:messageDigest',
         #                      namespaces=NAMESPACES)[0].text
 
         id_type = object_id.xpath('p:objectIdentifierType',
@@ -267,5 +279,3 @@ class LXML:
             return None
 
         return {"value": id_value, "type": id_type}
-
-        

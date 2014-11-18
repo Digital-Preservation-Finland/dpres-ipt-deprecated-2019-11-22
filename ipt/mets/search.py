@@ -1,7 +1,9 @@
-"""Utilities to search METS files from directory tree"""
+"""
+Utilities to search METS files from directory tree
+"""
 
 import os
-import sys
+
 
 def search_mets(path):
     """Search METS file in path or return filename if mets exists.
@@ -22,11 +24,10 @@ def search_mets(path):
 
     for filename in os.listdir(sip_path):
         if (filename.lower().endswith(".xml") and
-            filename.lower().find('mets') >= 0):
+                filename.lower().find('mets') >= 0):
             mets_path = os.path.join(sip_path, filename)
 
-    if mets_path == None:
+    if mets_path is None:
         return None
 
     return os.path.abspath(os.path.join(sip_path, mets_path))
-
