@@ -31,7 +31,9 @@ import optparse
 
 import ipt.sip.signature
 
-def main(arguments=None): 
+
+
+def main(arguments=None):
     """Main loop"""
 
     usage = "usage: %prog signature-file"
@@ -42,22 +44,24 @@ def main(arguments=None):
                 help="Path to OpenSSL certificates",
                 metavar="PATH")
 
-
     (options, args) = parser.parse_args(arguments)
 
     if len(args) != 1:
         parser.error("Must give METS filename as argument")
-
     try:
         signature = ipt.sip.signature.ManifestSMIME(signature_filename=args[0],
                                                     ca_path=options.capath)
         signature.verify_signature_file()
-    except BaseException as exception:
+    except ipt.sip.signature.ErrorReadingSMIMEError as exception:
+        print str(exception)
+        return 117
+    except ipt.sip.signature.WrongSignatureError as exception:
+        print str(exception)
+        return 117
+    except ipt.sip.signature.WrongChecksumError as exception:
+        print str(exception)
+        return 117
+    except ipt.sip.signature.UnexpectedError as exception:
         print str(exception)
         return 1
-
     return 0
-
-
-
-

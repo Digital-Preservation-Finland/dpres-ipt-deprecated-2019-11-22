@@ -9,16 +9,17 @@ class WrongSignatureError(Exception):
     """Raised when signature is not valid."""
     pass
 
+class UnexpectedError(Exception):
+    """Raised when unexpected error occurs."""
+    pass
 
 class WrongChecksumError(Exception):
     """Raised when checksum is not valid."""
     pass
 
-
-class UnexpectedSignatureError(Exception):
-    """Raised when signature commands cause an unexpected error."""
+class ErrorReadingSMIMEError(Exception):
+    """Raised when SMIME reading fails."""
     pass
-
 
 class ManifestSMIME(object):
     """
@@ -184,9 +185,11 @@ class ManifestSMIME(object):
         if p.returncode == 4:
             raise WrongSignatureError('Invalid signature on signature file. Exitcode: %s\n%s\n%s' % (
                             p.returncode, stdout, stderr))
-        elif p.returncode != 0:
-            raise UnexpectedSignatureError('Unknown error. Exitcode: %s\nStdout: %s\nStderr: %s' % (
+        if p.returncode == 2:
+            raise ErrorReadingSMIMEError('Unknown error. Exitcode: %s\nStdout: %s\nStderr: %s' % (
                             p.returncode, stdout, stderr))
+        if p.returncode != 0:
+            raise UnexpectedError('Unexpected error')
 
         # assert stderr.find('Verification successful')  == 0, "Invalid signature on certificate"
         # TODO: Manifest can also be refactored as separate class...
@@ -201,7 +204,7 @@ class ManifestSMIME(object):
             if checksum_ok:
                 print "%s %s %s OK" % (filename, algorithm, hexdigest)
             else:
-                raise Exception("Checksum does not match %s %s %s" % (
+                raise WrongChecksumError("Checksum does not match %s %s %s" % (
                     algorithm, hexdigest, filename))
 
     def parse_manifest_line(self, line):
