@@ -10,7 +10,7 @@ import tempfile
 import ipt.fileutils.checksum
 
 
-class WrongSignatureError(Exception):
+class InvalidSignatureError(Exception):
 
     """Raised when signature is not valid."""
     pass
@@ -22,13 +22,13 @@ class UnexpectedError(Exception):
     pass
 
 
-class WrongChecksumError(Exception):
+class InvalidChecksumError(Exception):
 
     """Raised when checksum is not valid."""
     pass
 
 
-class ErrorReadingSMIMEError(Exception):
+class SMIMEReadError(Exception):
 
     """Raised when SMIME reading fails."""
     pass
@@ -204,11 +204,11 @@ class ManifestSMIME(object):
         (stdout, stderr) = proc.communicate()
         # http://www.openssl.org/docs/apps/verify.html
         if proc.returncode == 4:
-            raise WrongSignatureError(
+            raise InvalidSignatureError(
                 'Invalid signature on signature file. Exitcode: %s\n%s\n%s' % (
                     proc.returncode, stdout, stderr))
         if proc.returncode == 2:
-            raise ErrorReadingSMIMEError(
+            raise SMIMEReadError(
                 'Unknown error. Exitcode: %s\nStdout: %s\nStderr: %s' % (
                     proc.returncode, stdout, stderr))
         if proc.returncode != 0:
@@ -228,7 +228,7 @@ class ManifestSMIME(object):
             if checksum_ok:
                 print "%s %s %s OK" % (filename, algorithm, hexdigest)
             else:
-                raise WrongChecksumError("Checksum does not match %s %s %s" % (
+                raise InvalidChecksumError("Checksum does not match %s %s %s" % (
                     algorithm, hexdigest, filename))
 
     def parse_manifest_line(self, line):
