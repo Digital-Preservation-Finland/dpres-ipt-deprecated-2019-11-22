@@ -176,27 +176,10 @@ class TestVerifyManifestSMIME:
 
         self.print_dirs(self.ca_path)
 
-    def verify_signature_file_with_ca_path(self, signature_file):
-        """
-        
-        """
-        cmd = ['openssl smime -verify -in %s -CApath "%s"' % (
-            self.signature_file, self.ca_path)]
-
-        proc = subprocess.Popen(
-            cmd, stdin=subprocess.PIPE,
-            stderr=subprocess.PIPE, stdout=subprocess.PIPE,
-            close_fds=False, shell=True)
-        (stdout, stderr) = proc.communicate()
-
-        print "stdout", stdout
-        print "stderr", stderr
-
-        assert 'Verification successful' in stderr, "Verification successful"
-        assert 'sha1' in stdout, "Contains checksum algorithm"
-        assert 'mets.xml' in stdout, "Contains checksum file name"
-
     def test_04_valid_certificate(self):
+        """
+        Test valid certificate.
+        """
         try:
             self.init_sip_test()
             self.signature.new_signing_key()
@@ -220,6 +203,9 @@ class TestVerifyManifestSMIME:
             self.cleanup_sip_test()
 
     def test_04_no_certificate(self):
+        """
+        Test missing certificate.
+        """
         try:
             self.init_sip_test()
 
@@ -234,7 +220,9 @@ class TestVerifyManifestSMIME:
             self.cleanup_sip_test()
 
     def test_05_invalid_certificate(self):
-
+        """
+        Test invalid certificate.
+        """
         try:
             self.init_sip_test()
             self.signature.new_signing_key()
@@ -261,6 +249,9 @@ class TestVerifyManifestSMIME:
             self.cleanup_sip_test()
 
     def test_06_expired_certificate(self):
+        """
+        Test expired certificate.
+        """
         try:
             self.init_sip_test()
 
@@ -283,6 +274,9 @@ class TestVerifyManifestSMIME:
             self.cleanup_sip_test()
 
     def test_08_altered_mets_xml(self):
+        """
+        Test altered mets.xml.
+        """
         try:
             self.init_sip_test()
             self.signature.new_signing_key()
