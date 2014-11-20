@@ -53,13 +53,13 @@ def main(arguments=None):
         signature = ipt.sip.signature.ManifestSMIME(signature_filename=args[0],
                                                     ca_path=options.capath)
         signature.verify_signature_file()
-    except ipt.sip.signature.ErrorReadingSMIMEError as exception:
+    except ipt.sip.signature.SMIMEReadError as exception:
         print str(exception)
         return 117
-    except ipt.sip.signature.WrongSignatureError as exception:
+    except ipt.sip.signature.InvalidSignatureError as exception:
         print str(exception)
         return 117
-    except ipt.sip.signature.WrongChecksumError as exception:
+    except ipt.sip.signature.InvalidChecksumError as exception:
         print str(exception)
         return 117
     except ipt.sip.signature.UnexpectedError as exception:
