@@ -205,12 +205,12 @@ class ManifestSMIME(object):
         # http://www.openssl.org/docs/apps/verify.html
         if proc.returncode == 4:
             raise InvalidSignatureError(
-                'Invalid signature on signature file. Exitcode: %s\n%s\n%s' % (
-                    proc.returncode, stdout, stderr))
+                'Invalid signature on signature file. Exitcode: %s\n%s\n%s' %
+                (proc.returncode, stdout, stderr))
         if proc.returncode == 2:
             raise SMIMEReadError(
-                'Unknown error. Exitcode: %s\nStdout: %s\nStderr: %s' % (
-                    proc.returncode, stdout, stderr))
+                'Unable to read S/MIME. Exitcode: %s\nStdout: %s\nStderr: %s' %
+                (proc.returncode, stdout, stderr))
         if proc.returncode != 0:
             raise UnexpectedError(
                 'Unexpected error: Exitcode: %s\n Stdout: %s\n Stderr: %s' %
