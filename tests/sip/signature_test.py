@@ -263,7 +263,6 @@ class TestVerifyManifestSMIME:
                 self.signature.verify_signature_file()
         finally:
             self.cleanup_sip_test()
-        pass
 
     def test_08_altered_mets_xml(self):
         try:
