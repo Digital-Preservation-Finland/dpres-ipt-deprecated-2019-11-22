@@ -230,8 +230,9 @@ class ManifestSMIME(object):
             if checksum_ok:
                 print "%s %s %s OK" % (filename, algorithm, hexdigest)
             else:
-                raise InvalidChecksumError("Checksum does not match %s %s %s" % (
-                    algorithm, hexdigest, filename))
+                raise InvalidChecksumError(
+                    "Checksum does not match %s %s %s" %
+                    (algorithm, hexdigest, filename))
 
     def parse_manifest_line(self, line):
         """
