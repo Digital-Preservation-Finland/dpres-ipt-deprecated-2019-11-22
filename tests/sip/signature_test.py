@@ -169,18 +169,15 @@ class TestVerifyManifestSMIME:
             self.print_dirs(self.sip_path)
             self.print_file(self.signature_file)
 
-            assert os.path.isfile(
-                self.signature_file), "Signature file found %s" % self.signature_file
+            assert os.path.isfile(self.signature_file), \
+                "Signature file found %s" % self.signature_file
 
             self.rehash_ca_path_symlinks()
 
-            result = self.verify_signature_file_with_ca_path(
-                self.signature_file)
-
             try:
                 self.signature.verify_signature_file()
-            except Exception as e:
-                print "Test caught exception:\n", e
+            except Exception as error:
+                print "Test caught exception:\n", error
                 assert True, "Valid signature should not raise exception."
 
         finally:
@@ -208,13 +205,13 @@ class TestVerifyManifestSMIME:
             self.signature.write_signature_file()
 
             # Just add some trash to signature file
-            f = open(self.signature_file, 'r+b')
-            f.seek(600, 0)
-            f.write('foo')
-            f.close()
+            file_ = open(self.signature_file, 'r+b')
+            file_.seek(600, 0)
+            file_.write('foo')
+            file_.close()
 
-            assert os.path.isfile(
-                self.signature_file), "Signature file found %s" % self.signature_file
+            assert os.path.isfile(self.signature_file), \
+                "Signature file found %s" % self.signature_file
 
             self.rehash_ca_path_symlinks()
 
