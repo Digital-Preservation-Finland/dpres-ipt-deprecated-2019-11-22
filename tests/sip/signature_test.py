@@ -1,5 +1,6 @@
 import os
 import sys
+import pytest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import testcommon.settings
 import testcommon.test_utils
@@ -254,16 +255,14 @@ class TestVerifyManifestSMIME:
             assert os.path.isfile(
                 self.signature_file), "Signature file found %s" % self.signature_file
 
-            try:
-                result = self.signature.verify_signature_file()
-                assert False, "Verification with exporired signature file must raise exception"
-            except AssertionError as e:
-                raise e
-            except Exception as e:
-                print "Test caught exception:\n", e
-                assert e.args[0].find(
-                    'Verify error:certificate has expired') > 0, "Must get certificate has expired error"
+            assert os.path.isfile(
+                self.signature_file), \
+                "Signature file found %s" % self.signature_file
 
+            with pytest.raises(ipt.sip.signature.InvalidSignatureError):
+                print "SIGNATURE"
+                os.system("cat " + self.signature_file)
+                self.signature.verify_signature_file()
         finally:
             self.cleanup_sip_test()
         pass
