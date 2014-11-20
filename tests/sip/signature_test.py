@@ -260,8 +260,6 @@ class TestVerifyManifestSMIME:
                 "Signature file found %s" % self.signature_file
 
             with pytest.raises(ipt.sip.signature.InvalidSignatureError):
-                print "SIGNATURE"
-                os.system("cat " + self.signature_file)
                 self.signature.verify_signature_file()
         finally:
             self.cleanup_sip_test()
