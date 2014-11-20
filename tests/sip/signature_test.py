@@ -3,7 +3,7 @@ This is a test module for SMIME signature files verification.
 """
 import os
 import sys
-import pytest
+from pytest import raises
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import testcommon.settings
 import testcommon.test_utils
@@ -213,9 +213,9 @@ class TestVerifyManifestSMIME:
             assert not os.path.isfile(self.signature_file), \
                 "Signature file found %s" % self.signature_file
 
-            with pytest.raises(ipt.sip.signature.SMIMEReadError):
+            with raises(ipt.sip.signature.SMIMEReadError):
                 self.signature.verify_signature_file()
-            
+
         finally:
             self.cleanup_sip_test()
 
@@ -243,7 +243,7 @@ class TestVerifyManifestSMIME:
             self.print_dirs(self.ca_path)
             self.print_file(self.signature_file)
 
-            with pytest.raises(ipt.sip.signature.SMIMEReadError):
+            with raises(ipt.sip.signature.SMIMEReadError):
                 self.signature.verify_signature_file()
         finally:
             self.cleanup_sip_test()
@@ -268,7 +268,7 @@ class TestVerifyManifestSMIME:
                 self.signature_file), \
                 "Signature file found %s" % self.signature_file
 
-            with pytest.raises(ipt.sip.signature.InvalidSignatureError):
+            with raises(ipt.sip.signature.InvalidSignatureError):
                 self.signature.verify_signature_file()
         finally:
             self.cleanup_sip_test()
@@ -298,7 +298,7 @@ class TestVerifyManifestSMIME:
             self.print_dirs(self.ca_path)
             self.print_file(self.signature_file)
 
-            with pytest.raises(ipt.sip.signature.InvalidChecksumError):
+            with raises(ipt.sip.signature.InvalidChecksumError):
                 self.signature.verify_signature_file()
         finally:
             self.cleanup_sip_test()
@@ -323,4 +323,3 @@ class TestVerifyManifestSMIME:
             sys.stdout.write(line)
         file_.close()
         print "-------------- END - %s --------------------" % path
-
