@@ -115,7 +115,7 @@ class ManifestSMIME(object):
 
         print stdout, stderr
 
-    def write_signature_file(self, paths=None, file_checksum_type='MD5'):
+    def write_signature_file(self):
         """ Write SIP signature file varmiste.sig with checksums of all .xml
         files in manifest_base_path
 
@@ -146,7 +146,7 @@ class ManifestSMIME(object):
 
         matches = []
         if self.target_path is None:
-            for root, dirnames, filenames in os.walk(self.manifest_base_path):
+            for root, _, filenames in os.walk(self.manifest_base_path):
                 for filename in fnmatch.filter(filenames, '*.xml'):
                     matches.append(os.path.join(root, filename))
         else:
