@@ -193,14 +193,9 @@ class TestVerifyManifestSMIME:
             assert not os.path.isfile(
                 self.signature_file), "Signature file found %s" % self.signature_file
 
-            try:
-                result = self.signature.verify_signature_file()
-                assert False, "Verification without signature file must raise exception"
-            except AssertionError as e:
-                raise e
-            except Exception as e:
-                print "Test caught exception:\n", e
-
+            with pytest.raises(ipt.sip.signature.SMIMEReadError):
+                self.signature.verify_signature_file()
+            
         finally:
             self.cleanup_sip_test()
 
@@ -226,16 +221,8 @@ class TestVerifyManifestSMIME:
             self.print_dirs(self.ca_path)
             self.print_file(self.signature_file)
 
-            try:
+            with pytest.raises(ipt.sip.signature.SMIMEReadError):
                 self.signature.verify_signature_file()
-                assert False, "Verification with broken signature file must raise exception"
-            except AssertionError as e:
-                raise e
-            except Exception as e:
-                print "Test caught exception:\n", e
-                assert e.args[0].find(
-                    'Error reading S/MIME message') > 0, "Must get error reading certificate"
-
         finally:
             self.cleanup_sip_test()
 
@@ -251,9 +238,6 @@ class TestVerifyManifestSMIME:
             self.rehash_ca_path_symlinks()
 
             self.print_dirs(self.ca_path)
-
-            assert os.path.isfile(
-                self.signature_file), "Signature file found %s" % self.signature_file
 
             assert os.path.isfile(
                 self.signature_file), \
@@ -285,19 +269,8 @@ class TestVerifyManifestSMIME:
             self.print_dirs(self.ca_path)
             self.print_file(self.signature_file)
 
-            try:
+            with pytest.raises(ipt.sip.signature.InvalidChecksumError):
                 self.signature.verify_signature_file()
-                assert False, "Verification with broken signature file must raise exception"
-            except AssertionError as e:
-                raise e
-            except Exception as e:
-                print "Test caught exception:\n", e
-                find_str = 'Checksum does not match sha1'
-                error_str = "Must get checksum does not match error sha1"
-                assert e.args[0].find(find_str) == 0, error_str
-                find_str = ' mets.xml'
-                error_str = "Checksum does not match for mets.xml"
-                assert e.args[0].find(find_str) > 0, error_str
         finally:
             self.cleanup_sip_test()
 
