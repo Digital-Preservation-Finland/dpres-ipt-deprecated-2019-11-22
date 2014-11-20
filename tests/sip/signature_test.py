@@ -4,6 +4,7 @@ import pytest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import testcommon.settings
 import testcommon.test_utils
+
 # Module to test
 import ipt.sip.signature
 
@@ -255,13 +256,14 @@ class TestVerifyManifestSMIME:
             self.signature.write_signature_file()
 
             # Just add some trash to mets.xml
-            f = open(os.path.join(self.sip_path, 'sip', 'mets.xml'), 'r+b')
-            f.seek(600, 0)
-            f.write('foo')
-            f.close()
+            file_ = open(os.path.join(self.sip_path, 'sip', 'mets.xml'), 'r+b')
+            file_.seek(600, 0)
+            file_.write('foo')
+            file_.close()
 
             assert os.path.isfile(
-                self.signature_file), "Signature file found %s" % self.signature_file
+                self.signature_file), \
+                "Signature file found %s" % self.signature_file
 
             self.rehash_ca_path_symlinks()
 
@@ -274,39 +276,24 @@ class TestVerifyManifestSMIME:
         finally:
             self.cleanup_sip_test()
 
-    def run_single_test(self, line):
-        pass
-
-        #signaturefile = SIP.Signature('signature')
-        #child = subprocess.Popen(line, shell=True, bufsize=100000, stderr=subprocess.STDERR, stdout=subprocess.STDOUT, close_fds=False)
-        #assert retval == testCases[casename]["ret"]
-        #print(str(ret) + ' == ' + clearString(str(testCases[casename]["ret"])))
-
     def print_dirs(self, path):
 
         print "\n-------------- START - %s --------------------" % path
         cmd = ['find "%s" -ls' % (path)]
-        p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE, stdout=subprocess.PIPE,
-                             close_fds=False, shell=True)
+        proc = subprocess.Popen(
+            cmd, stdin=subprocess.PIPE,
+            stderr=subprocess.PIPE, stdout=subprocess.PIPE,
+            close_fds=False, shell=True)
 
-        (stdout, stderr) = p.communicate()
+        (stdout, stderr) = proc.communicate()
         print stdout, stderr
         print "-------------- END - %s --------------------" % path
 
     def print_file(self, path):
         print "\n-------------- START - %s --------------------" % path
-        f = open(path)
-        for line in f:
+        file_ = open(path)
+        for line in file_:
             sys.stdout.write(line)
-        f.close()
+        file_.close()
         print "-------------- END - %s --------------------" % path
 
-    def clearString(self, input):
-        pass
-        #inputx = ''.join(inputy)
-        #inputx = inputx.replace('\'', '')
-        #inputx = inputx.replace("\'", "")
-        #inputx = inputx.replace("[", "")
-        #inputx = inputx.replace("]", "")
-        #inputx = inputx.replace("'", "")
-        # return inputx
