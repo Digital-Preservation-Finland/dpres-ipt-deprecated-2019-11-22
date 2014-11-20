@@ -212,7 +212,9 @@ class ManifestSMIME(object):
                 'Unknown error. Exitcode: %s\nStdout: %s\nStderr: %s' % (
                     proc.returncode, stdout, stderr))
         if proc.returncode != 0:
-            raise UnexpectedError('Unexpected error')
+            raise UnexpectedError(
+                'Unexpected error: Exitcode: %s\n Stdout: %s\n Stderr: %s' %
+                (proc.returncode, stdout, stderr))
 
         # assert stderr.find('Verification successful')  == 0,
         # "Invalid signature on certificate"
