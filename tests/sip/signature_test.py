@@ -1,3 +1,6 @@
+"""
+This is a test module for SMIME signature files verification.
+"""
 import os
 import sys
 import pytest
@@ -20,9 +23,20 @@ DATAROOT = os.path.join(
 
 
 class TestVerifyManifestSMIME:
+    """
+    Test class for testing SMIME signature files verification.
+    """
+    sip_path = None
+    ca_path = None
+    report_path = None
+    private_key = None
+    public_key = None
+    signature_file = None
 
     def test_create_report_signature(self):
-
+        """
+        Test for creating report signature succesfully.
+        """
         test_util = testcommon.test_utils.Utils()
         test_util.tempdir('reports')
         self.report_path = os.path.join(
@@ -48,7 +62,9 @@ class TestVerifyManifestSMIME:
         assert ret == 0
 
     def set_defaults(self):
-
+        """
+        Set deafults.
+        """
         self.sip_path = tempfile.mkdtemp()
         self.ca_path = tempfile.mkdtemp()
 
@@ -58,7 +74,9 @@ class TestVerifyManifestSMIME:
             self.sip_path, 'sip', 'varmiste.sig')
 
     def init_test(self):
-
+        """
+        Init test.
+        """
         self.set_defaults()
 
         self.signature = ipt.sip.signature.ManifestSMIME(
@@ -69,14 +87,18 @@ class TestVerifyManifestSMIME:
         )
 
     def cleanup_test(self):
-
+        """
+        Cleanup test.
+        """
         shutil.rmtree(self.sip_path)
         shutil.rmtree(self.ca_path)
 
         self.signature = None
 
     def test_01_new_rsa_keypair(self):
-
+        """
+        Test new RSA keypair.
+        """
         try:
             self.init_test()
             self.signature.new_signing_key()
@@ -88,19 +110,23 @@ class TestVerifyManifestSMIME:
 
             cmd = ['openssl x509 -text -in "%s"' % (self.public_key)]
 
-            p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE, stdout=subprocess.PIPE,
-                                 close_fds=False, shell=True)
+            proc = subprocess.Popen(
+                cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+                stdout=subprocess.PIPE, close_fds=False, shell=True)
 
-            (stdout, stderr) = p.communicate()
+            (stdout, stderr) = proc.communicate()
 
             assert len(stderr) == 0, "No errors in certificate"
-            assert stdout.find("Subject: C=FI, ST=Uusimaa, L=Helsinki, " +
-                               "CN=ingest.local") > 0, "Subject found in certificate"
+            assert stdout.find(
+                "Subject: C=FI, ST=Uusimaa, L=Helsinki, " +
+                "CN=ingest.local") > 0, "Subject found in certificate"
         finally:
             self.cleanup_test()
 
     def init_sip_test(self):
-
+        """
+        Init sip.
+        """
         self.init_test()
 
         src = os.path.join(DATAROOT, "sip-signature/sip-expired-signature")
@@ -115,6 +141,9 @@ class TestVerifyManifestSMIME:
         self.print_dirs(self.sip_path)
 
     def cleanup_sip_test(self):
+        """
+        Cleanup sip test.
+        """
         self.cleanup_test()
 
     def rehash_ca_path_symlinks(self):
@@ -129,14 +158,17 @@ class TestVerifyManifestSMIME:
         http://www.openssl.org/docs/apps/verify.html
         http://www.openssl.org/docs/apps/x509.html
 
-        http://stackoverflow.com/questions/9879688/difference-between-cacert-and-capath-in-curl """
+        http://stackoverflow.com/questions/9879688/\
+        difference-between-cacert-and-capath-in-curl """
 
         cmd = ['openssl x509 -hash -noout -in %s' %
                self.signature.public_key]
 
-        p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE, stdout=subprocess.PIPE,
-                             close_fds=False, shell=True)
-        (stdout, stderr) = p.communicate()
+        proc = subprocess.Popen(
+            cmd, stdin=subprocess.PIPE,
+            stderr=subprocess.PIPE, stdout=subprocess.PIPE,
+            close_fds=False, shell=True)
+        (stdout, stderr) = proc.communicate()
 
         x509_hash_symlink = os.path.join(
             self.ca_path, '%s.0' % stdout.rstrip())
@@ -145,13 +177,17 @@ class TestVerifyManifestSMIME:
         self.print_dirs(self.ca_path)
 
     def verify_signature_file_with_ca_path(self, signature_file):
-
+        """
+        
+        """
         cmd = ['openssl smime -verify -in %s -CApath "%s"' % (
             self.signature_file, self.ca_path)]
 
-        p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE, stdout=subprocess.PIPE,
-                             close_fds=False, shell=True)
-        (stdout, stderr) = p.communicate()
+        proc = subprocess.Popen(
+            cmd, stdin=subprocess.PIPE,
+            stderr=subprocess.PIPE, stdout=subprocess.PIPE,
+            close_fds=False, shell=True)
+        (stdout, stderr) = proc.communicate()
 
         print "stdout", stdout
         print "stderr", stderr
@@ -188,8 +224,8 @@ class TestVerifyManifestSMIME:
             self.init_sip_test()
 
             os.remove(self.signature_file)
-            assert not os.path.isfile(
-                self.signature_file), "Signature file found %s" % self.signature_file
+            assert not os.path.isfile(self.signature_file), \
+                "Signature file found %s" % self.signature_file
 
             with pytest.raises(ipt.sip.signature.SMIMEReadError):
                 self.signature.verify_signature_file()
