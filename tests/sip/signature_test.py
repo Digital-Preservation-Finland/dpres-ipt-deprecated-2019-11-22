@@ -1,6 +1,9 @@
 """
 This is a test module for SMIME signature files verification.
 """
+# pytest does not work with __init__() so it is missing deliberately.
+# pylint warining is disable for the tests accordingly.
+# pylint: disable=W0232
 import os
 import sys
 from pytest import raises
@@ -26,6 +29,7 @@ class TestVerifyManifestSMIME:
     """
     Test class for testing SMIME signature files verification.
     """
+    signature = None
     sip_path = None
     ca_path = None
     report_path = None
@@ -38,7 +42,6 @@ class TestVerifyManifestSMIME:
         Test for creating report signature succesfully.
         """
         test_util = testcommon.test_utils.Utils()
-        test_util.tempdir('reports')
         self.report_path = os.path.join(
             test_util.tempdir('reports'), 'varmiste.sig')
 
@@ -55,6 +58,7 @@ class TestVerifyManifestSMIME:
         signature.write_signature_file()
         (ret, stdout, stderr) = testcommon.test_utils.run_command(
             "cat " + self.report_path)
+        assert ret == 0
         print stdout, stderr
         (ret, stdout, stderr) = testcommon.test_utils.run_command(
             "ls -la " + self.report_path)
@@ -103,10 +107,10 @@ class TestVerifyManifestSMIME:
             self.init_test()
             self.signature.new_signing_key()
 
-            assert os.path.isfile(self.private_key), "Private key found %s" % (
-                                                     self.private_key)
-            assert os.path.isfile(self.public_key), "Public key found %s" % (
-                                                    self.public_key)
+            assert os.path.isfile(self.private_key), \
+                "Private key not found %s" % (self.private_key)
+            assert os.path.isfile(self.public_key), \
+                "Public key not found %s" % (self.public_key)
 
             cmd = ['openssl x509 -text -in "%s"' % (self.public_key)]
 
@@ -168,7 +172,7 @@ class TestVerifyManifestSMIME:
             cmd, stdin=subprocess.PIPE,
             stderr=subprocess.PIPE, stdout=subprocess.PIPE,
             close_fds=False, shell=True)
-        (stdout, stderr) = proc.communicate()
+        (stdout, _) = proc.communicate()
 
         x509_hash_symlink = os.path.join(
             self.ca_path, '%s.0' % stdout.rstrip())
@@ -197,7 +201,7 @@ class TestVerifyManifestSMIME:
                 self.signature.verify_signature_file()
             except Exception as error:
                 print "Test caught exception:\n", error
-                assert True, "Valid signature should not raise exception."
+                assert False, "Valid signature should not raise exception."
 
         finally:
             self.cleanup_sip_test()
@@ -304,7 +308,9 @@ class TestVerifyManifestSMIME:
             self.cleanup_sip_test()
 
     def print_dirs(self, path):
-
+        """
+        Print print dirs.
+        """
         print "\n-------------- START - %s --------------------" % path
         cmd = ['find "%s" -ls' % (path)]
         proc = subprocess.Popen(
@@ -317,6 +323,9 @@ class TestVerifyManifestSMIME:
         print "-------------- END - %s --------------------" % path
 
     def print_file(self, path):
+        """
+        Print print dirs.
+        """
         print "\n-------------- START - %s --------------------" % path
         file_ = open(path)
         for line in file_:
