@@ -25,7 +25,7 @@ DATAROOT = os.path.join(
     os.path.abspath(os.path.dirname(__file__)), '..', 'data')
 
 
-class TestVerifyManifestSMIME:
+class TestVerifyManifestSMIME(object):
     """
     Test class for testing SMIME signature files verification.
     """
@@ -120,10 +120,11 @@ class TestVerifyManifestSMIME:
 
             (stdout, stderr) = proc.communicate()
 
-            assert len(stderr) == 0, "No errors in certificate"
+            assert len(stderr) == 0, "An error was found in the certificate"
             assert stdout.find(
                 "Subject: C=FI, ST=Uusimaa, L=Helsinki, " +
-                "CN=ingest.local") > 0, "Subject found in certificate"
+                "CN=ingest.local") > 0, "Subject was not found in the " +\
+                "certificate"
         finally:
             self.cleanup_test()
 
@@ -193,7 +194,7 @@ class TestVerifyManifestSMIME:
             self.print_file(self.signature_file)
 
             assert os.path.isfile(self.signature_file), \
-                "Signature file found %s" % self.signature_file
+                "Signature file not found %s" % self.signature_file
 
             self.rehash_ca_path_symlinks()
 
@@ -215,7 +216,7 @@ class TestVerifyManifestSMIME:
 
             os.remove(self.signature_file)
             assert not os.path.isfile(self.signature_file), \
-                "Signature file found %s" % self.signature_file
+                "Signature file not found %s" % self.signature_file
 
             with raises(ipt.sip.signature.SMIMEReadError):
                 self.signature.verify_signature_file()
@@ -239,7 +240,7 @@ class TestVerifyManifestSMIME:
             file_.close()
 
             assert os.path.isfile(self.signature_file), \
-                "Signature file found %s" % self.signature_file
+                "Signature file not found %s" % self.signature_file
 
             self.rehash_ca_path_symlinks()
 
@@ -270,7 +271,7 @@ class TestVerifyManifestSMIME:
 
             assert os.path.isfile(
                 self.signature_file), \
-                "Signature file found %s" % self.signature_file
+                "Signature file not found %s" % self.signature_file
 
             with raises(ipt.sip.signature.InvalidSignatureError):
                 self.signature.verify_signature_file()
@@ -294,7 +295,7 @@ class TestVerifyManifestSMIME:
 
             assert os.path.isfile(
                 self.signature_file), \
-                "Signature file found %s" % self.signature_file
+                "Signature file not found %s" % self.signature_file
 
             self.rehash_ca_path_symlinks()
 
