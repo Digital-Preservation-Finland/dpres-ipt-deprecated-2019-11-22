@@ -93,7 +93,7 @@ class TestCommandLineTools:
         }],
                 "test_check_sip_file_checksums":
         [{
-            "testcase": "Test valid signature",
+            "testcase": "Test valid checksum",
             "sipname": "CSC_test006",
             "expected_result": {
                 "returncode": 0,
@@ -103,10 +103,10 @@ class TestCommandLineTools:
             }
         },
             {
-            "testcase": "Test invalid signature",
+            "testcase": "Test invalid checksum",
             "sipname": "CSC_test005",
             "expected_result": {
-                "returncode": 1,
+                "returncode": 117,
                 "in_stdout": ["File does not exist", "Nonlisted file"],
                 "not_in_stdout": ["Checksum OK"],
                 "stderr": ""

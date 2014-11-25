@@ -42,7 +42,7 @@ def main(arguments=None):
     return_status = 0
     for result in test_result:
         if result[2] != 0:
-            return_status = 1
+            return_status = 117
 
         print result[0], result[1]
 
