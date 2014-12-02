@@ -44,8 +44,10 @@ def main(arguments=None):
     for fileinfo, status, report, error, _validator in \
             zip(filelist, statuses, reports, errors, validators):
 
-        if status != 0:
-            return_status = status
+        if _validator is "" and status is 1:
+            return_status = 1
+        elif status is not 0:
+            return_status = 117
 
         ff = ipt.validator.filelist.FileInfo(fileinfo)
         ff.from_dict(fileinfo)
