@@ -43,6 +43,6 @@ def main(arguments=None):
 
     if result.has_errors():
         print result
-        return 1
+        return 117
 
     return 0
