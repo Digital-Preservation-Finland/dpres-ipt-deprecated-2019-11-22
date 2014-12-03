@@ -44,7 +44,7 @@ def main(arguments=None):
     for fileinfo, status, report, error, _validator in \
             zip(filelist, statuses, reports, errors, validators):
 
-        if _validator is "" and status is 1:
+        if not _validator:
             return_status = 1
         elif status is not 0:
             return_status = 117
