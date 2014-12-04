@@ -46,7 +46,7 @@ def main(arguments=None):
 
         if not _validator:
             return_status = 1
-        elif status is not 0:
+        elif status != 0:
             return_status = 117
 
         ff = ipt.validator.filelist.FileInfo(fileinfo)
