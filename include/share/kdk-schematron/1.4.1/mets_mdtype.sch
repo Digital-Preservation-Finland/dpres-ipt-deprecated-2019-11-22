@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" schemaVersion="1.4">
+<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" schemaVersion="1.4.1">
     <sch:title>METS external metadata type check</sch:title>
 
 <!--
-Validates that the used metadata type inside mdWrap element is same as defined in MDTYPE or MDTYPEOTHER attribute.
+Validates that the used metadata type inside mdWrap element is same as defined in MDTYPE or OTHRERMDTYPE attribute.
 Juha Lehtonen 2013-07-08 : Initial version
 Juha Lehtonen 2013-07-17 : LIDO bugfix
 Juha Lehtonen 2014-04-15 : Technical metadata presence check added. Schema version added.
+Juha Lehtonen 2014-12-09 : Decriptive metadata standard portfolio format check moved from schema to here.
 -->
 
 	
@@ -121,10 +122,30 @@ Juha Lehtonen 2014-04-15 : Technical metadata presence check added. Schema versi
 		</sch:rule>
     </sch:pattern>
 
+	<!-- Check that Standard portfolio schema has been used for descriptive metadata -->
+	<sch:pattern name="CheckPortfolio">
+        <sch:rule context="mets:mets">
+			<sch:let name="lido_count" value="count(mets:dmdSec/mets:mdWrap[@MDTYPE='LIDO'])"/>
+			<sch:let name="eac_count" value="count(mets:dmdSec/mets:mdWrap[@MDTYPE='EAC-CPF'])"/>
+			<sch:let name="ead_count" value="count(mets:dmdSec/mets:mdWrap[@MDTYPE='EAD'])"/>
+			<sch:let name="vra_count" value="count(mets:dmdSec/mets:mdWrap[@MDTYPE='VRA'])"/>
+			<sch:let name="mods_count" value="count(mets:dmdSec/mets:mdWrap[@MDTYPE='MODS'])"/>
+			<sch:let name="marc_count" value="count(mets:dmdSec/mets:mdWrap[@MDTYPE='MARC'])"/>
+			<sch:let name="dc_count" value="count(mets:dmdSec/mets:mdWrap[@MDTYPE='DC'])"/>
+			<sch:let name="ddi_count" value="count(mets:dmdSec/mets:mdWrap[@MDTYPE='DDI'])"/>
+			<sch:let name="en15744_count" value="count(mets:dmdSec/mets:mdWrap[@OTHERMDTYPE='EN15744'])"/>
+			<sch:let name="en15907_count" value="count(mets:dmdSec/mets:mdWrap[@OTHERMDTYPE='EN15907'])"/>
+			<sch:assert test="($lido_count + $eac_count + $ead_count + $vra_count + $mods_count + $marc_count + $dc_count + $ddi_count + $en15744_count + $en15907_count) > 0">
+				Descriptive metadata with one of the formats listed in the Standard portfolio does not exist.
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+	
+	
 	<!-- Check the case LIDO -->
 	<sch:pattern name="CheckLido">
         <sch:rule context="mets:mdWrap[@MDTYPE='LIDO']">
-			<sch:assert test="mets:xmlData/lido:*">
+			<sch:assert test="(mets:xmlData/lido:lido) | (mets:xmlData/lido:lidoWrap)">
 				MDTYPE attribute is 'LIDO', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
@@ -133,7 +154,7 @@ Juha Lehtonen 2014-04-15 : Technical metadata presence check added. Schema versi
 	<!-- Check the case EAC-CPF -->
 	<sch:pattern name="CheckEAC">
         <sch:rule context="mets:mdWrap[@MDTYPE='EAC-CPF']">
-			<sch:assert test="mets:xmlData/eac:*">
+			<sch:assert test="mets:xmlData/eac:eac-cpf">
 				MDTYPE attribute is 'EAC-CPF', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
@@ -142,7 +163,7 @@ Juha Lehtonen 2014-04-15 : Technical metadata presence check added. Schema versi
 	<!-- Check the case EAD -->
 	<sch:pattern name="CheckEAD">
         <sch:rule context="mets:mdWrap[@MDTYPE='EAD']">
-			<sch:assert test="mets:xmlData/ead:*">
+			<sch:assert test="mets:xmlData/ead:ead">
 				MDTYPE attribute is 'EAD', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
@@ -151,7 +172,7 @@ Juha Lehtonen 2014-04-15 : Technical metadata presence check added. Schema versi
 	<!-- Check the case VRA -->
 	<sch:pattern name="CheckVraCore">
         <sch:rule context="mets:mdWrap[@MDTYPE='VRA']">
-			<sch:assert test="mets:xmlData/vra:*">
+			<sch:assert test="(mets:xmlData/vra:vra) | (mets:xmlData/vra:collection) | (mets:xmlData/vra:work) | (mets:xmlData/vra:image)">
 				MDTYPE attribute is 'VRA', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
@@ -160,7 +181,7 @@ Juha Lehtonen 2014-04-15 : Technical metadata presence check added. Schema versi
 	<!-- Check the case MODS -->
 	<sch:pattern name="CheckMods">
         <sch:rule context="mets:mdWrap[@MDTYPE='MODS']">
-			<sch:assert test="mets:xmlData/mods:*">
+			<sch:assert test="(mets:xmlData/mods:mods) | (mets:xmlData/mods:modsCollection)">
 				MDTYPE attribute is 'MODS', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
@@ -169,7 +190,7 @@ Juha Lehtonen 2014-04-15 : Technical metadata presence check added. Schema versi
 	<!-- Check the case MARC -->
 	<sch:pattern name="CheckMarc">
         <sch:rule context="mets:mdWrap[@MDTYPE='MARC']">
-			<sch:assert test="mets:xmlData/marc21:*">
+			<sch:assert test="(mets:xmlData/marc21:record) | (mets:xmlData/marc21:collection)">
 				MDTYPE attribute is 'MARC', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
@@ -187,7 +208,7 @@ Juha Lehtonen 2014-04-15 : Technical metadata presence check added. Schema versi
 	<!-- Check the case DDI -->
 	<sch:pattern name="CheckDDI">
         <sch:rule context="mets:mdWrap[@MDTYPE='DDI']">
-			<sch:assert test="(mets:xmlData/ddilc:*) | (mets:xmlData/ddicb:*)">
+			<sch:assert test="(mets:xmlData/ddilc:DDIInstance) | (mets:xmlData/ddilc:TranslationInformation) | (mets:xmlData/ddicb:*)">
 				MDTYPE attribute is 'DDI', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>

@@ -1,15 +1,30 @@
 KDK SCHEMA CATALOG
 
-Current catalog version is 1.4, and it includes the following files and directories.
+Current catalog version is 1.4.1, and it includes the following files and directories.
 
 NOTES:
-- XML Catalog version 1.3 has been removed.
+- Version 1.4.1 changelog compared to 1.4:
+  1) METS created with schema 1.4 complies with 1.4.1 schema, in exception of cases 4), 5) and 6).
+  2) The value in attribute CATALOG in METS can be either "1.4.1" or "1.4".
+     The value in attribute SPECIFICATION in METS remains the same "1.4".
+     Data created with schema 1.4 will be validated according to version 1.4.1 in NDL DP system.
+  3) PREMIS 2.3 schema updated, which complies with version 2.2.
+  4) Possibility to add organizational specific descriptive metadata formats added.
+  5) Sections RightsMD and SourceMD require that the metadata has an existing schema.
+  6) Bugfix: Use of OTHERMDTYPE attribute is disallowed, if the value of attribute MDTYPE is not "OTHER".
+
+- XML Catalog version 1.4 is included for historical purposes only.
+- XML Catalog version 1.3 is included for historical purposes only.
 
 CATALOGS:
 ./catalog-local.xml				Current XML Catalog for local purposes.
 ./catalog-web.xml				Current XML Catalog for web purposes.
+./catalog-local-1.4.1.xml		XML Catalog version 1.4.1 for local purposes.
+./catalog-web-1.4.1.xml			XML Catalog version 1.4.1 for web purposes.
 ./catalog-local-1.4.xml			XML Catalog version 1.4 for local purposes.
 ./catalog-web-1.4.xml			XML Catalog version 1.4 for web purposes.
+./catalog-local-1.3.xml			XML Catalog version 1.3 for local purposes.
+./catalog-web-1.3.xml			XML Catalog version 1.3 for web purposes.
 ./catalog.dtd					OASIS Catalog specification file
 
 KDK XSD FILES:
@@ -35,11 +50,12 @@ EXTERNAL DIRECTORIES:
 ./external/marc					MARC21 1.1 schema files (unchanged)
 ./external/metsrights			METSRights (2004) schema files (unchanged)
 ./external/mods					MODS 3.5 schema files (unchanged)
-./external/premis				PREMIS 2.2 schema files (unchanged)
+./external/premis				PREMIS 2.3 schema files (unchanged)
 ./external/vra					VRA Core 4.0 schema files (unchanged)
 ./external/w3					W3 schema files (various, unchanged)
 
 VERSION DIRECTORIES:
 ./								Current version
-./1.4							Catalog version 1.4
-
+./1.4.1							Catalog version 1.4.1
+./1.4							Catalog version 1.4 (for historical purposes only)
+./1.3							Catalog version 1.3 (for historical purposes only)

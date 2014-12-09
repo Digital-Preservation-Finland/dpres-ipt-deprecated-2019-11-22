@@ -4,7 +4,7 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public" xml:base="./">
 
 	<!-- KDK references as local -->
-	<rewriteURI uriStartString="http://kdk.fi/standards/1.4/" rewritePrefix="./"/>
+	<rewriteURI uriStartString="http://kdk.fi/standards/1.4.1/" rewritePrefix="./"/>
 	<rewriteURI uriStartString="http://kdk.fi/standards/" rewritePrefix="./"/>
 
 	<!-- W3C XML Related schema -->
@@ -58,6 +58,10 @@
 	<uri name="ddi:instance:3_2" uri="external/ddi-lifecycle/instance.xsd"/>
 	<uri name="ddi:codebook:2_5" uri="ddi-codebook/codebook.xsd"/>
 
+	<!-- Organizational specific descriptive metadata -->
+	<rewriteURI uriStartString="http://muisti.nba.fi/report/report.xsd" rewritePrefix="organizational/nbar/report.xsd"/>
+	<uri name="http://muisti.nba.fi/report/" uri="organizational/nbar/report.xsd"/>
+	
  	<!-- Technical metadata -->
 	<rewriteURI uriStartString="http://www.loc.gov/standards/mix/mix20/mix20.xsd" rewritePrefix="mix/mix.xsd"/>
 	<rewriteURI uriStartString="http://www.loc.gov/standards/mix/mix.xsd" rewritePrefix="mix/mix.xsd"/>

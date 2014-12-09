@@ -1,7 +1,7 @@
 <!DOCTYPE catalog PUBLIC "-//OASIS//DTD XML Catalogs V1.0//EN" "http://www.kdk.fi/standards/catalog.dtd">
 
 <!-- XML Catalog for web usage. -->
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public" xml:base="http://www.kdk.fi/standards/1.4/">
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public" xml:base="http://www.kdk.fi/standards/1.4.1/">
 
 	<!-- W3C XML Related schema -->
 	<rewriteURI uriStartString="http://www.w3.org/2001/xml.xsd" rewritePrefix="external/w3/xml.xsd"/>

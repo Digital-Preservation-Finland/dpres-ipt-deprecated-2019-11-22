@@ -7,6 +7,7 @@ Juha Lehtonen 2013-07-08 : Initial version
 Juha Lehtonen 2013-10-21 : CATALOG, SPECIFICATION, CREATED, PID, PIDTYPE attribute check added. FILEID check modified.
 Juha Lehtonen 2014-02-17 : ID/IDREF check added. Fixed to meet XPath 1.0 and EXSLT.
 Juha Lehtonen 2014-04-16 : Schema version added.
+Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 -->
 
     <sch:title>METS internal inspection</sch:title>
@@ -130,6 +131,15 @@ Juha Lehtonen 2014-04-16 : Schema version added.
         <sch:rule context="mets:mdWrap[@MDTYPE='OTHER']">
 			<sch:assert test="@OTHERMDTYPE">
 				If the value of a MDTYPE attribute is 'OTHER', then the OTHERMDTYPE attribute must be used
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+	
+	<!-- Check that OTHERMDTYPE is not used, if MDTYPE is not 'OTHER' -->
+    <sch:pattern name="WrapOtherType">
+        <sch:rule context="mets:mdWrap[@MDTYPE!='OTHER']">
+			<sch:assert test="not(@OTHERMDTYPE)">
+				If the value of a MDTYPE attribute is not 'OTHER', then the OTHERMDTYPE attribute must not be used
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
