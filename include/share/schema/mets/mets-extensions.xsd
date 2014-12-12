@@ -41,7 +41,8 @@ elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xsd:import namespace="http://www.lido-schema.org" schemaLocation="../external/lido/lido.xsd"/>
 	<xsd:import namespace="ddi:instance:3_2" schemaLocation="../external/ddi-lifecycle/instance.xsd"/>
 	<xsd:import namespace="ddi:codebook:2_5" schemaLocation="../ddi-codebook/codebook.xsd"/>
-
+	<xsd:include schemaLocation="../organizational/mets-organizational-extensions.xsd"/>
+	
 	<xsd:complexType name="kdk_dmdExtensionType">
 		<xsd:sequence>
 			<xsd:any namespace="##any" maxOccurs="unbounded" processContents="strict"/>

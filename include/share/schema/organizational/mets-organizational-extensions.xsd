@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+KDK METS Schema Organizational Extensions
+CSC, 2014-12-12
+Organizational extension schema used in KDK METS schema.
+-->
+
+<xsd:schema 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns:nbar="http://muisti.nba.fi/report/"
+elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:import namespace="http://muisti.nba.fi/report/" schemaLocation="../organizational/nbar/report.xsd"/>
+	
+</xsd:schema>
