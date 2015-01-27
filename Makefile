@@ -40,7 +40,7 @@ install:
 
 	# Use Python setuptools
 	python setup.py build ; python ./setup.py install -O1 --prefix="${PREFIX}" --root="${ROOT}" --record=INSTALLED_FILES
-	INSTALLED_FILES | sed 's/^/\//g' >> INSTALLED_FILES
+	cat INSTALLED_FILES | sed 's/^/\//g' >> INSTALLED_FILES
 
 	# setup.py seems to be unable to create directories,
 	# create them here if needed
