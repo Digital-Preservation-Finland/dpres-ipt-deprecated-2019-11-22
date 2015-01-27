@@ -373,11 +373,11 @@ class TestCommandLineTools:
 
     def test_check_sip_file_checksums(self, testcase, sipname, expected_result):
 
-        mets_path = os.path.join(testcommon.settings.TESTDATADIR,
-                                 'test-sips/' + sipname + '/mets.xml')
+        sip_path = os.path.join(testcommon.settings.TESTDATADIR,
+                                'test-sips/' + sipname)
 
         command = ipt.scripts.check_sip_file_checksums.main
-        arguments = [mets_path]
+        arguments = [sip_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
             command, arguments)
 
@@ -390,10 +390,10 @@ class TestCommandLineTools:
         for message in expected_result['not_in_stdout']:
             assert message not in stdout
 
-    def test_check_xml_schema_features(self, testcase, sipname,   expected_result):
+    def test_check_xml_schema_features(self, testcase, sipname, expected_result):
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
-                                 'test-sips/' + sipname + '/mets.xml')
+                                'test-sips/' + sipname + '/mets.xml')
 
         command = ipt.scripts.check_xml_schema_features.main
         arguments = [mets_path]

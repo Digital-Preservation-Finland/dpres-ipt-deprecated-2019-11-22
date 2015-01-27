@@ -8,19 +8,9 @@ import optparse
 import ipt.validator.plugin.xmllint
 
 
-def search_mets(path):
-    """"Search mets.xml in directory and return full path to filename"""
-
-    filename = None
-    for file in os.listdir(path):
-        if file.lower().endswith(".xml") and file.lower().startswith('mets'):
-            filename = os.path.join(path, file)
-    return filename
-
-
 def main(arguments=None):
     """Main loop"""
-    usage = "usage: %prog [options] <mets filename|sip path>"
+    usage = "usage: %prog [options] xml-file-name"
     sharepath = "/usr/share/information-package-tools/"
 
     parser = optparse.OptionParser(usage=usage)
@@ -39,15 +29,9 @@ def main(arguments=None):
     (options, args) = parser.parse_args(arguments)
 
     if len(args) != 1:
-        parser.error("Must give METS filename or SIP directory as argument")
+        parser.error("Must give XML filename as argument")
+
     filename = args[0]
-
-    if os.path.isdir(filename):
-        filename = search_mets(filename)
-
-    if filename is None:
-        print >> sys.stderr, "ERROR: mets.xml not found"
-        return 1
 
     validate = ipt.validator.plugin.xmllint.Xmllint(
         "text/xml", "1.0", filename)
@@ -59,3 +43,8 @@ def main(arguments=None):
     print >> sys.stderr, errors
 
     return returncode
+
+if __name__ == '__main__':
+    # If run from the command line, take out the program name from sys.argv
+    RETVAL = main(sys.argv[1:])
+    sys.exit(RETVAL)

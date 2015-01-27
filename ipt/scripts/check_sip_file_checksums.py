@@ -12,17 +12,16 @@ import ipt.mets.file.checksum
 def main(arguments=None):
     """Main loop"""
 
-    usage = "usage: %prog mets-file.xml"
+    usage = "usage: %prog sip-directory"
 
     parser = optparse.OptionParser(usage=usage)
 
     (options, args) = parser.parse_args(arguments)
 
     if len(args) != 1:
-        parser.error("Must give METS filename as argument")
+        parser.error("Must give SIP directory as argument")
 
-    mets_filename = os.path.abspath(args[0])
-    sip_path = os.path.dirname(mets_filename)
+    mets_filename = os.path.abspath(os.path.join(args[0], 'mets.xml'))
 
     parser = ipt.mets.file.checksum.Checker()
 
@@ -47,3 +46,8 @@ def main(arguments=None):
         print result[0], result[1]
 
     return return_status
+
+if __name__ == '__main__':
+    # If run from the command line, take out the program name from sys.argv
+    RETVAL = main(sys.argv[1:])
+    sys.exit(RETVAL)
