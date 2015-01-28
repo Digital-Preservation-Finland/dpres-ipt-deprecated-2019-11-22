@@ -6,31 +6,27 @@ import sys
 import optparse
 
 import ipt.validator.plugin.schematron
-import ipt.mets.search
 
 
 def main(arguments=None):
     """Main loop"""
-    usage = "usage: %prog [options] <mets filename|sip path>"
-    sharepath = "/usr/share/information-package-tools/"
+    usage = "usage: %prog [options] xml-file-path"
 
     parser = optparse.OptionParser(usage=usage)
 
     parser.add_option("-s", "--schemapath", dest="schemapath",
-                      default=os.path.join(sharepath, "kdk-schematron"),
                       help="Path to KDK-PAS schematron schemas",
                       metavar="PATH")
 
     (options, args) = parser.parse_args(arguments)
 
     if len(args) != 1:
-        parser.error("Must give XML filename or SIP directory as argument")
+        parser.error("Must give SIP directory as argument")
 
-    filename = ipt.mets.search.search_mets(args[0])
+    if options.schemapath is None:
+        parser.error("The -s switch is required")
 
-    if filename is None:
-        print >> sys.stderr, "ERROR: mets.xml not found"
-        return 1
+    filename = args[0]
 
     validate = ipt.validator.plugin.schematron.XSLT()
 
@@ -46,3 +42,8 @@ def main(arguments=None):
         return 117
 
     return 0
+
+if __name__ == '__main__':
+    # If run from the command line, take out the program name from sys.argv
+    RETVAL = main(sys.argv[1:])
+    sys.exit(RETVAL)
