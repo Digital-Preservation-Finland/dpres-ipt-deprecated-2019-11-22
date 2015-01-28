@@ -12,7 +12,7 @@ from ipt.premis import premis
 
 def main(arguments=None):
 
-    usage = "usage: %prog <mets-filename> <linking-sip-object-id>"
+    usage = "usage: %prog <sip-path> <linking-sip-object-id>"
     parser = optparse.OptionParser(usage=usage)
     parser.add_option("-c", "--configfile", dest="config_filename",
                       default=None,
@@ -22,7 +22,8 @@ def main(arguments=None):
     if(len(args) != 3):
         parser.print_help()
         return 1
-    mets_filename = args[0]
+    sip_path = args[0]
+    mets_filename = os.path.abspath(os.path.join(sip_path, 'mets.xml'))
     basepath = os.path.abspath(os.path.dirname(mets_filename))
     linking_sip_id = args[2]
     linking_sip_type = args[1]

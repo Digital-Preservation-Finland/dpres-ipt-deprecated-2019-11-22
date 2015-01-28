@@ -393,7 +393,7 @@ class TestCommandLineTools:
     def test_check_xml_schema_features(self, testcase, sipname, expected_result):
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
-                                'test-sips/' + sipname + '/mets.xml')
+                                 'test-sips/' + sipname + '/mets.xml')
 
         command = ipt.scripts.check_xml_schema_features.main
         arguments = [mets_path]
@@ -439,7 +439,7 @@ class TestCommandLineTools:
                                        filename, expected_result):
 
         filename = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips',
-                                filename, 'mets.xml')
+                                filename)
 
         configfile = os.path.abspath(os.path.join(testcommon.settings.PROJECTDIR,
                                                   'include/share',

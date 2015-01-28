@@ -65,7 +65,7 @@ class TestCommandLineTools:
                                        filename, expected_result):
 
         filename = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips',
-                                filename, 'mets.xml')
+                                filename)
 
         configfile = os.path.abspath(os.path.join(testcommon.settings.PROJECTDIR,
                                                   'include/share',
