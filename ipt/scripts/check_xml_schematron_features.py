@@ -21,7 +21,7 @@ def main(arguments=None):
     (options, args) = parser.parse_args(arguments)
 
     if len(args) != 1:
-        parser.error("Must give SIP directory as argument")
+        parser.error("Must give a path to an XML file as argument")
 
     if options.schemapath is None:
         parser.error("The -s switch is required")
