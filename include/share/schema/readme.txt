@@ -4,14 +4,12 @@ Current catalog version is 1.4.1, and it includes the following files and direct
 
 NOTES:
 - Version 1.4.1 changelog compared to 1.4:
-  1) METS created with schema 1.4 complies with 1.4.1 schema, in exception of cases 4), 5) and 6).
+  1) METS created with schema 1.4 complies with 1.4.1 schema.
   2) The value in attribute CATALOG in METS can be either "1.4.1" or "1.4".
      The value in attribute SPECIFICATION in METS remains the same "1.4".
      Data created with schema 1.4 will be validated according to version 1.4.1 in NDL DP system.
   3) PREMIS 2.3 schema updated, which complies with version 2.2.
-  4) Possibility to add organizational specific descriptive metadata formats added.
-  5) Sections RightsMD and SourceMD require that the metadata has an existing schema.
-  6) Bugfix: Use of OTHERMDTYPE attribute is disallowed, if the value of attribute MDTYPE is not "OTHER".
+  4) Added a possibility to include organizational metadata formats in dmdSec, rightsMD and sourceMD.
 
 - XML Catalog version 1.4 is included for historical purposes only.
 - XML Catalog version 1.3 is included for historical purposes only.

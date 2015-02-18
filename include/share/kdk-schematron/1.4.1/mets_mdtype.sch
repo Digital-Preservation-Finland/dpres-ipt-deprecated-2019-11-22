@@ -3,11 +3,12 @@
     <sch:title>METS external metadata type check</sch:title>
 
 <!--
-Validates that the used metadata type inside mdWrap element is same as defined in MDTYPE or OTHRERMDTYPE attribute.
+Validates that the used metadata type inside mdWrap element is same as defined in MDTYPE or OTHERMDTYPE attribute.
 Juha Lehtonen 2013-07-08 : Initial version
 Juha Lehtonen 2013-07-17 : LIDO bugfix
 Juha Lehtonen 2014-04-15 : Technical metadata presence check added. Schema version added.
-Juha Lehtonen 2014-12-09 : Decriptive metadata standard portfolio format check moved from schema to here.
+Juha Lehtonen 2014-12-09 : Descriptive metadata standard portfolio format check moved from schema to here.
+Juha Lehtonen 2015-02-17 : Matched to conform organizational specific schema requirements.
 -->
 
 	
@@ -41,11 +42,16 @@ Juha Lehtonen 2014-12-09 : Decriptive metadata standard portfolio format check m
 	<sch:let name="videomd_types" value="string('video/jpeg2000 video/mj2 video/dv video/mpeg video/x-ms-wmv')"/>
 	<sch:let name="mix_types" value="string('image/tiff image/jpeg image/jp2 image/png image/gif')"/>
 	
-    <!-- Check the case PREMIS:OBJECT -->
+	<!-- Check the case PREMIS:OBJECT -->
     <sch:pattern name="CheckPremisObject">
         <sch:rule context="mets:mdWrap[@MDTYPE='PREMIS:OBJECT']">
 			<sch:assert test="mets:xmlData/premis:object">
 				MDTYPE attribute is 'PREMIS:OBJECT', but the contained XML data is something else.
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="mets:xmlData/premis:object">
+			<sch:assert test="../../@MDTYPE='PREMIS:OBJECT'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'PREMIS:OBJECT'.
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
@@ -57,6 +63,11 @@ Juha Lehtonen 2014-12-09 : Decriptive metadata standard portfolio format check m
 				MDTYPE attribute is 'PREMIS:EVENT', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
+		<sch:rule context="mets:xmlData/premis:event">
+			<sch:assert test="../../@MDTYPE='PREMIS:EVENT'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'PREMIS:EVENT'.
+			</sch:assert>
+		</sch:rule>
 	</sch:pattern>
 
 	<!-- Check the case PREMIS:AGENT -->
@@ -66,13 +77,24 @@ Juha Lehtonen 2014-12-09 : Decriptive metadata standard portfolio format check m
 				MDTYPE attribute is 'PREMIS:AGENT', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
+		<sch:rule context="mets:xmlData/premis:agent">
+			<sch:assert test="../../@MDTYPE='PREMIS:AGENT'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'PREMIS:AGENT'.
+			</sch:assert>
+		</sch:rule>
 	</sch:pattern>
 
 	<!-- Check the case METSRIGHTS -->
 	<sch:pattern name="CheckMetsrights">
 		<sch:rule context="mets:mdWrap[@MDTYPE='METSRIGHTS']">
-			<sch:assert test="mets:xmlData/metsrights:*">
+			<sch:let name="metsrights_count" value="count(mets:xmlData/metsrights:RightsDeclarationMD)"/>
+			<sch:assert test="$metsrights_count = 1">
 				MDTYPE attribute is 'METSRIGHTS', but the contained XML data is something else.
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="mets:xmlData/metsrights:*">
+			<sch:assert test="../../@MDTYPE='METSRIGHTS'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'METSRIGHTS'.
 			</sch:assert>
 		</sch:rule>
 	</sch:pattern>
@@ -80,48 +102,218 @@ Juha Lehtonen 2014-12-09 : Decriptive metadata standard portfolio format check m
 	<!-- Check the case PREMIS:RIGHTS -->
 	<sch:pattern name="CheckPremisRights">
 		<sch:rule context="mets:mdWrap[@MDTYPE='PREMIS:RIGHTS']">
-			<sch:assert test="mets:xmlData/premis:rights">
+			<sch:let name="premisrights_count" value="count(mets:xmlData/premis:rights)"/>
+			<sch:assert test="$premisrights_count = 1">
 				MDTYPE attribute is 'PREMIS:RIGHTS', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
+		<sch:rule context="mets:xmlData/premis:rights">
+			<sch:assert test="../../@MDTYPE='PREMIS:RIGHTS'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'PREMIS:RIGHTS'.
+			</sch:assert>
+		</sch:rule>		
 	</sch:pattern>
 	
 	<!-- Check the case NISOIMG (MIX) -->
 	<sch:pattern name="CheckMix">
         <sch:rule context="mets:mdWrap[@MDTYPE='NISOIMG']">
-			<sch:assert test="mets:xmlData/mix:*">
+			<sch:assert test="mets:xmlData/mix:mix">
 				MDTYPE attribute is 'NISOIMG', but the contained XML data is something else.
 			</sch:assert>
 		</sch:rule>
-    </sch:pattern>
+ 		<sch:rule context="mets:xmlData/mix:*">
+			<sch:assert test="../../@MDTYPE='NISOIMG'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'NISOIMG'.
+			</sch:assert>
+		</sch:rule>
+   </sch:pattern>
 
 	<!-- Check the case TEXTMD -->
 	<sch:pattern name="CheckTextMD">
         <sch:rule context="mets:mdWrap[@MDTYPE='TEXTMD']">
-			<sch:assert test="mets:xmlData/textmd:*">
+			<sch:assert test="mets:xmlData/textmd:textMD">
 				MDTYPE attribute is 'TEXTMD', but the contained XML data is something else.
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="mets:xmlData/textmd:*">
+			<sch:assert test="../../@MDTYPE='TEXTMD'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'TEXTMD'.
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
 
 	<!-- Check the case AudioMD -->
 	<sch:pattern name="CheckAudioMD">
-        <sch:rule context="mets:mdWrap[@MDTYPE='OTHER' and @MDTYPEOTHER='AudioMD']">
-			<sch:assert test="mets:xmlData/audiomd:*">
-				MDTYPEOTHER attribute is 'AudioMD', but the contained XML data is something else.
+        <sch:rule context="mets:mdWrap[@MDTYPE='OTHER' and @OTHERMDTYPE='AudioMD']">
+			<sch:assert test="(mets:xmlData/audiomd:AUDIOMD) or (mets:xmlData/audiomd:AUDIOSRC)">
+				OTHERMDTYPE attribute is 'AudioMD', but the contained XML data is something else.
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="mets:xmlData/audiomd:*">
+			<sch:assert test="../../@MDTYPE='OTHER' and ../../@OTHERMDTYPE='AudioMD'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'OTHER' and OTHERMDTYPE attribute value '<sch:value-of select="../../@OTHERMDTYPE"/>' must be 'AudioMD'.
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
 
 	<!-- Check the case VideoMD -->
 	<sch:pattern name="CheckVideoMD">
-        <sch:rule context="mets:mdWrap[@MDTYPE='OTHER' and @MDTYPEOTHER='VideoMD']">
-			<sch:assert test="mets:xmlData/videomd:*">
-				MDTYPEOTHER attribute is 'VideoMD', but the contained XML data is something else.
+        <sch:rule context="mets:mdWrap[@MDTYPE='OTHER' and @OTHERMDTYPE='VideoMD']">
+			<sch:assert test="(mets:xmlData/videomd:VIDEOMD) or (mets:xmlData/videomd:VIDEOSRC)">
+				OTHERMDTYPE attribute is 'VideoMD', but the contained XML data is something else.
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="mets:xmlData/videomd:*">
+			<sch:assert test="../../@MDTYPE='OTHER' and ../../@OTHERMDTYPE='VideoMD'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'OTHER' and OTHERMDTYPE attribute value '<sch:value-of select="../../@OTHERMDTYPE"/>' must be 'AudioMD'.
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
 
+	<!-- Check the case LIDO -->
+	<sch:pattern name="CheckLido">
+        <sch:rule context="mets:mdWrap[@MDTYPE='LIDO']">
+			<sch:let name="lido_count" value="count(mets:xmlData/lido:lido) + count(mets:xmlData/lido:lidoWrap)"/>
+			<sch:assert test="$lido_count = 1">
+				MDTYPE attribute is 'LIDO', but the contained XML data is something else.
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="mets:xmlData/lido:*">
+			<sch:assert test="../../@MDTYPE='LIDO'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'LIDO'.
+			</sch:assert>
+		</sch:rule>
+	</sch:pattern>
+
+	<!-- Check the case EAC-CPF -->
+	<sch:pattern name="CheckEAC">
+        <sch:rule context="mets:mdWrap[@MDTYPE='EAC-CPF']">
+			<sch:let name="eac_count" value="count(mets:xmlData/eac:eac-cpf)"/>
+			<sch:assert test="$eac_count = 1">
+				MDTYPE attribute is 'EAC-CPF', but the contained XML data is something else.
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="mets:xmlData/eac:*">
+			<sch:assert test="../../@MDTYPE='EAC-CPF'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'EAC-CPF'.
+			</sch:assert>
+		</sch:rule>
+	</sch:pattern>
+
+	<!-- Check the case EAD -->
+	<sch:pattern name="CheckEAD">
+        <sch:rule context="mets:mdWrap[@MDTYPE='EAD']">
+			<sch:let name="ead_count" value="count(mets:xmlData/ead:ead)"/>
+			<sch:assert test="$ead_count = 1">
+				MDTYPE attribute is 'EAD', but the contained XML data is something else.
+			</sch:assert>
+		</sch:rule>
+ 		<sch:rule context="mets:xmlData/ead:*">
+			<sch:assert test="../../@MDTYPE='EAD'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'EAD'.
+			</sch:assert>
+		</sch:rule>
+	</sch:pattern>
+
+	<!-- Check the case VRA -->
+	<sch:pattern name="CheckVraCore">
+        <sch:rule context="mets:mdWrap[@MDTYPE='VRA']">
+			<sch:let name="vra_count" value="count(mets:xmlData/vra:vra) + count(mets:xmlData/vra:collection) + count(mets:xmlData/vra:work) + count(mets:xmlData/vra:image)"/>
+			<sch:assert test="$vra_count = 1">
+				MDTYPE attribute is 'VRA', but the contained XML data is something else.
+			</sch:assert>
+		</sch:rule>
+  		<sch:rule context="mets:xmlData/vra:*">
+			<sch:assert test="../../@MDTYPE='VRA'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'VRA'.
+			</sch:assert>
+		</sch:rule>
+	</sch:pattern>
+
+	<!-- Check the case MODS -->
+	<sch:pattern name="CheckMods">
+        <sch:rule context="mets:mdWrap[@MDTYPE='MODS']">
+			<sch:let name="mods_count" value="count(mets:xmlData/mods:mods) + count(mets:xmlData/mods:modsCollection)"/>
+			<sch:assert test="$mods_count = 1">
+				MDTYPE attribute is 'MODS', but the contained XML data is something else.
+			</sch:assert>
+		</sch:rule>
+   		<sch:rule context="mets:xmlData/mods:*">
+			<sch:assert test="../../@MDTYPE='MODS'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'MODS'.
+			</sch:assert>
+		</sch:rule>
+	</sch:pattern>
+
+	<!-- Check the case MARC -->
+	<sch:pattern name="CheckMarc">
+        <sch:rule context="mets:mdWrap[@MDTYPE='MARC']">
+			<sch:let name="marc_count" value="count(mets:xmlData/marc21:record) + count(mets:xmlData/marc21:collection)"/>
+			<sch:assert test="$marc_count = 1">
+				MDTYPE attribute is 'MARC', but the contained XML data is something else.
+			</sch:assert>
+		</sch:rule>
+  		<sch:rule context="mets:xmlData/marc21:*">
+			<sch:assert test="../../@MDTYPE='MARC'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'MARC'.
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+
+	<!-- Check the case DC -->
+	<sch:pattern name="CheckDC">
+        <sch:rule context="mets:mdWrap[@MDTYPE='DC']">
+			<sch:let name="dc_count" value="count(mets:xmlData/dc:contributor) + count(mets:xmlData/dc:coverage) + count(mets:xmlData/dc:creator) + count(mets:xmlData/dc:date) + count(mets:xmlData/dc:description) + count(mets:xmlData/dc:format) + count(mets:xmlData/dc:identifier) + count(mets:xmlData/dc:language) + count(mets:xmlData/dc:publisher) + count(mets:xmlData/dc:relation) + count(mets:xmlData/dc:rights) + count(mets:xmlData/dc:source) + count(mets:xmlData/dc:subject) + count(mets:xmlData/dc:title) + count(mets:xmlData/dc:type)"/>
+			<sch:let name="real_count" value="count(mets:xmlData/*)"/>
+			<sch:assert test="$real_count = $dc_count">
+				MDTYPE attribute is 'DC', but the contained XML data is something else.
+			</sch:assert>
+		</sch:rule>
+  		<sch:rule context="mets:xmlData/dc:*">
+			<sch:assert test="../../@MDTYPE='DC'">
+				The MDTYPE attribute value '<sch:value-of select="../../@MDTYPE"/>' must be 'DC'.
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+
+	<!-- Check the case DDI -->
+	<sch:pattern name="CheckDDI">
+        <sch:rule context="mets:mdWrap[@MDTYPE='DDI']">
+			<sch:assert test="(mets:xmlData/ddilc:DDIInstance) or (mets:xmlData/ddilc:TranslationInformation) or (mets:xmlData/ddicb:codeBook)">
+				MDTYPE attribute is 'DDI', but the contained XML data is something else.
+			</sch:assert>
+		</sch:rule>
+   		<sch:rule context="mets:xmlData[./ddilc:* or ./ddicb:*]">
+			<sch:assert test="../mets:mdWrap[@MDTYPE='DDI']">
+				The MDTYPE attribute value must be 'DDI'.
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+	
+	<!-- Check for organizational specific metadata formats. -->
+	<sch:pattern name="CheckOther">
+        <sch:rule context="mets:mdWrap[@MDTYPE='OTHER']">
+			<!-- Check that allowed MDTYPE attribute values are not used in OTHERMDTYPE attribute. -->
+			<sch:assert test="not(@OTHERMDTYPE='LIDO' or @OTHERMDTYPE='EAC-CPF' or @OTHERMDTYPE='EAD' or @OTHERMDTYPE='VRA' or @OTHERMDTYPE='MODS' or @OTHERMDTYPE='MARC' or @OTHERMDTYPE='DC' or @OTHERMDTYPE='PREMIS' or @OTHERMDTYPE='PREMIS:OBJECT' or @OTHERMDTYPE='PREMIS:RIGHTS' or @OTHERMDTYPE='PREMIS:EVENT' or @OTHERMDTYPE='PREMIS:AGENT' or @OTHERMDTYPE='METSRIGHTS' or @OTHERMDTYPE='TEXTMD' or @OTHERMDTYPE='NISOIMG')">
+				OTHERMDTYPE attribute value '<sch:value-of select="@OTHERMDTYPE"/>' must be in MDTYPE attribute.
+			</sch:assert>
+			<!-- Check for organizational specific metadata formats. Prints out notification, but won't fail validation. -->
+			<sch:report test="@OTHERMDTYPE!='AudioMD' and @OTHERMDTYPE!='VideoMD' and @OTHERMDTYPE!='EN15744' and @OTHERMDTYPE!='EN15907' and @OTHERMDTYPE!='FINMARC' and not(@OTHERMDTYPE='LIDO' or @OTHERMDTYPE='EAC-CPF' or @OTHERMDTYPE='EAD' or @OTHERMDTYPE='VRA' or @OTHERMDTYPE='MODS' or @OTHERMDTYPE='MARC' or @OTHERMDTYPE='DC' or @OTHERMDTYPE='PREMIS' or @OTHERMDTYPE='PREMIS:OBJECT' or @OTHERMDTYPE='PREMIS:RIGHTS' or @OTHERMDTYPE='PREMIS:EVENT' or @OTHERMDTYPE='PREMIS:AGENT' or @OTHERMDTYPE='METSRIGHTS' or @OTHERMDTYPE='TEXTMD' or @OTHERMDTYPE='NISOIMG')">
+				Unsupported but allowed metadata format '<sch:value-of select="@OTHERMDTYPE"/>' found. Validation omitted by using basic XML syntax check.
+			</sch:report>
+		</sch:rule>
+    </sch:pattern>
+
+	<!-- Check for organizational specific metadata formats (sourceMD). Prints out notification, but won't fail validation. -->
+	<sch:pattern name="CheckSourceOther">
+        <sch:rule context="mets:sourceMD/mets:mdWrap">
+			<sch:report test="@MDTYPE='LC-AV' or @MDTYPE='TEIHDR' or @MDTYPE='FGDC' or @MDTYPE='LOM' or @MDTYPE='ISO 19115:2003 NAP'">
+				Unsupported but allowed metadata format '<sch:value-of select="@MDTYPE"/>' found. Validation omitted by using basic XML syntax check.
+			</sch:report>
+		</sch:rule>
+    </sch:pattern>
+	
+	
 	<!-- Check that Standard portfolio schema has been used for descriptive metadata -->
 	<sch:pattern name="CheckPortfolio">
         <sch:rule context="mets:mets">
@@ -135,85 +327,43 @@ Juha Lehtonen 2014-12-09 : Decriptive metadata standard portfolio format check m
 			<sch:let name="ddi_count" value="count(mets:dmdSec/mets:mdWrap[@MDTYPE='DDI'])"/>
 			<sch:let name="en15744_count" value="count(mets:dmdSec/mets:mdWrap[@OTHERMDTYPE='EN15744'])"/>
 			<sch:let name="en15907_count" value="count(mets:dmdSec/mets:mdWrap[@OTHERMDTYPE='EN15907'])"/>
-			<sch:assert test="($lido_count + $eac_count + $ead_count + $vra_count + $mods_count + $marc_count + $dc_count + $ddi_count + $en15744_count + $en15907_count) > 0">
+			<sch:let name="finmarc_count" value="count(mets:dmdSec/mets:mdWrap[@OTHERMDTYPE='FINMARC'])"/>
+			<sch:assert test="($lido_count + $eac_count + $ead_count + $vra_count + $mods_count + $marc_count + $dc_count + $ddi_count + $en15744_count + $en15907_count + $finmarc_count) > 0">
 				Descriptive metadata with one of the formats listed in the Standard portfolio does not exist.
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
+
+	<!-- Check that known rights, technical or provenance metadata is not used inside descriptive metadata section -->
+	<sch:pattern name="CheckDMD">
+        <sch:rule context="mets:dmdSec">
+			<sch:assert test="not((./mets:mdWrap/mets:xmlData/premis:rights) or (./mets:mdWrap/mets:xmlData/metsrights:*))">
+				Rights metadata format can not be used inside descriptive metadata section.
+			</sch:assert>
+			<sch:assert test="not((./mets:mdWrap/mets:xmlData/premis:object) or (./mets:mdWrap/mets:xmlData/textmd:*) or (./mets:mdWrap/mets:xmlData/audiomd:*) or (./mets:mdWrap/mets:xmlData/videomd:*))">
+				Technical metadata format can not be used inside descriptive metadata section.
+			</sch:assert>
+			<sch:assert test="not((./mets:mdWrap/mets:xmlData/premis:agent) or (./mets:mdWrap/mets:xmlData/premis:event))">
+				Provenance metadata format can not be used inside descriptive metadata section.
+			</sch:assert>			
+		</sch:rule>
+    </sch:pattern>
 	
+	<!-- Check that known descriptive, technical or provenance metadata is not used inside rights metadata section -->
+	<sch:pattern name="CheckRights">
+        <sch:rule context="mets:rightsMD">
+			<sch:assert test="not((./mets:mdWrap/mets:xmlData/lido:*) or (./mets:mdWrap/mets:xmlData/ead:*) or (./mets:mdWrap/mets:xmlData/eac:*) or (./mets:mdWrap/mets:xmlData/vra:*) or (./mets:mdWrap/mets:xmlData/mods:*) or (./mets:mdWrap/mets:xmlData/marc21:*) or (./mets:mdWrap/mets:xmlData/dc:*) or (./mets:mdWrap/mets:xmlData/ddilc:*) or (./mets:mdWrap/mets:xmlData/ddicb:*))">
+				Descriptive metadata format can not be used inside rights metadata section.
+			</sch:assert>
+			<sch:assert test="not((./mets:mdWrap/mets:xmlData/premis:object) or (./mets:mdWrap/mets:xmlData/textmd:*) or (./mets:mdWrap/mets:xmlData/audiomd:*) or (./mets:mdWrap/mets:xmlData/videomd:*))">
+				Technical metadata format can not be used inside rights metadata section.
+			</sch:assert>			
+			<sch:assert test="not((./mets:mdWrap/mets:xmlData/premis:agent) or (./mets:mdWrap/mets:xmlData/premis:event))">
+				Provenance metadata format can not be used inside rights metadata section.
+			</sch:assert>			
+		</sch:rule>
+    </sch:pattern>
 	
-	<!-- Check the case LIDO -->
-	<sch:pattern name="CheckLido">
-        <sch:rule context="mets:mdWrap[@MDTYPE='LIDO']">
-			<sch:assert test="(mets:xmlData/lido:lido) | (mets:xmlData/lido:lidoWrap)">
-				MDTYPE attribute is 'LIDO', but the contained XML data is something else.
-			</sch:assert>
-		</sch:rule>
-    </sch:pattern>
-
-	<!-- Check the case EAC-CPF -->
-	<sch:pattern name="CheckEAC">
-        <sch:rule context="mets:mdWrap[@MDTYPE='EAC-CPF']">
-			<sch:assert test="mets:xmlData/eac:eac-cpf">
-				MDTYPE attribute is 'EAC-CPF', but the contained XML data is something else.
-			</sch:assert>
-		</sch:rule>
-    </sch:pattern>
-
-	<!-- Check the case EAD -->
-	<sch:pattern name="CheckEAD">
-        <sch:rule context="mets:mdWrap[@MDTYPE='EAD']">
-			<sch:assert test="mets:xmlData/ead:ead">
-				MDTYPE attribute is 'EAD', but the contained XML data is something else.
-			</sch:assert>
-		</sch:rule>
-    </sch:pattern>
-
-	<!-- Check the case VRA -->
-	<sch:pattern name="CheckVraCore">
-        <sch:rule context="mets:mdWrap[@MDTYPE='VRA']">
-			<sch:assert test="(mets:xmlData/vra:vra) | (mets:xmlData/vra:collection) | (mets:xmlData/vra:work) | (mets:xmlData/vra:image)">
-				MDTYPE attribute is 'VRA', but the contained XML data is something else.
-			</sch:assert>
-		</sch:rule>
-    </sch:pattern>
-
-	<!-- Check the case MODS -->
-	<sch:pattern name="CheckMods">
-        <sch:rule context="mets:mdWrap[@MDTYPE='MODS']">
-			<sch:assert test="(mets:xmlData/mods:mods) | (mets:xmlData/mods:modsCollection)">
-				MDTYPE attribute is 'MODS', but the contained XML data is something else.
-			</sch:assert>
-		</sch:rule>
-    </sch:pattern>
-
-	<!-- Check the case MARC -->
-	<sch:pattern name="CheckMarc">
-        <sch:rule context="mets:mdWrap[@MDTYPE='MARC']">
-			<sch:assert test="(mets:xmlData/marc21:record) | (mets:xmlData/marc21:collection)">
-				MDTYPE attribute is 'MARC', but the contained XML data is something else.
-			</sch:assert>
-		</sch:rule>
-    </sch:pattern>
-
-	<!-- Check the case DC -->
-	<sch:pattern name="CheckDC">
-        <sch:rule context="mets:mdWrap[@MDTYPE='DC']">
-			<sch:assert test="mets:xmlData/dc:*">
-				MDTYPE attribute is 'DC', but the contained XML data is something else.
-			</sch:assert>
-		</sch:rule>
-    </sch:pattern>
-
-	<!-- Check the case DDI -->
-	<sch:pattern name="CheckDDI">
-        <sch:rule context="mets:mdWrap[@MDTYPE='DDI']">
-			<sch:assert test="(mets:xmlData/ddilc:DDIInstance) | (mets:xmlData/ddilc:TranslationInformation) | (mets:xmlData/ddicb:*)">
-				MDTYPE attribute is 'DDI', but the contained XML data is something else.
-			</sch:assert>
-		</sch:rule>
-    </sch:pattern>
-
 	<!-- Check the case textMD requirement -->
 	<sch:let name="textmd_fileid" value=".//mets:techMD[contains(concat(' ', $textmd_types, ' '), concat(' ', .//premis:formatName, ' '))]/@ID"/>
 	<sch:let name="textmd_mdids" value=".//mets:techMD[.//textmd:*]/@ID"/>
@@ -281,6 +431,5 @@ Juha Lehtonen 2014-12-09 : Decriptive metadata standard portfolio format check m
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
-
 	
 </sch:schema>

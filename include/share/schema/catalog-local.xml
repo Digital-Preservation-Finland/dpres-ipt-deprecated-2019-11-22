@@ -57,10 +57,6 @@
 	<uri name="http://www.lido-schema.org" uri="external/lido/lido.xsd"/>
 	<uri name="ddi:instance:3_2" uri="external/ddi-lifecycle/instance.xsd"/>
 	<uri name="ddi:codebook:2_5" uri="ddi-codebook/codebook.xsd"/>
-
-	<!-- Organizational specific descriptive metadata -->
-	<rewriteURI uriStartString="http://muisti.nba.fi/report/report.xsd" rewritePrefix="organizational/nbar/report.xsd"/>
-	<uri name="http://muisti.nba.fi/report/" uri="organizational/nbar/report.xsd"/>
 	
  	<!-- Technical metadata -->
 	<rewriteURI uriStartString="http://www.loc.gov/standards/mix/mix20/mix20.xsd" rewritePrefix="mix/mix.xsd"/>
