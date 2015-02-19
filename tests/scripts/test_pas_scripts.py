@@ -12,9 +12,9 @@ import testcommon.settings
 from testcommon.casegenerator import pytest_generate_tests
 
 # Modules to test
-import ipt.scripts.create_html_report
+import ipt.scripts.premis2html
 import ipt.scripts.restructure_sip
-import ipt.scripts.create_aip
+import ipt.scripts.sip2aip
 import ipt.scripts.sign_xml_file
 import ipt.scripts.check_sip_signature
 import ipt.scripts.check_sip_file_checksums
@@ -35,7 +35,7 @@ class TestCommandLineTools:
                 "stderr": ""
             }
         }],
-        "test_create_html_report":
+        "test_premis2html":
         [{
             "testcase": "create failed report",
             "expected_result": {
@@ -82,7 +82,7 @@ class TestCommandLineTools:
             }
         }
         ],
-            "test_create_aip":
+            "test_sip2aip":
         [{
             "testcase": "Test create aip",
             "expected_result": {
@@ -232,9 +232,9 @@ class TestCommandLineTools:
         ]
     }
 
-    def test_create_html_report(self, testcase, expected_result):
+    def test_premis2html(self, testcase, expected_result):
 
-        command = ipt.scripts.create_html_report.main
+        command = ipt.scripts.premis2html.main
         report_dir = os.path.join(testcommon.settings.TESTDATADIR,
                                   "reports",
                                   "report-csc_test_invalid_digital_object_001-bb358d14-3092-458d-8b57-4a1c40206d8e-12345.xml")
@@ -248,14 +248,14 @@ class TestCommandLineTools:
         assert returncode == expected_result['returncode']
         assert stderr == expected_result['stderr']
 
-    def test_create_aip(self, testcase, expected_result):
+    def test_sip2aip(self, testcase, expected_result):
 
         sip_dir = os.path.join(
             testcommon.settings.TESTDATADIR, 'test-sips/CSC_test005')
         aip_dir = tempfile.mkdtemp() + '/aip '
         shutil.copytree(sip_dir, aip_dir)
 
-        command = ipt.scripts.create_aip.main
+        command = ipt.scripts.sip2aip.main
         arguments = [aip_dir]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
             command,

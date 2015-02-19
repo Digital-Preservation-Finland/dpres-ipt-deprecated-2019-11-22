@@ -1,11 +1,9 @@
-"""Unit tests for create_aip library and integration test for according command line utility"""
+"""Unit tests for sip2aip library and integration test for according command line utility"""
 
 import os.path
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, os.path.abspath(os.path.join(
-    os.path.dirname(__file__), '../../src')))
 
 import testcommon.settings
 import testcommon.shell
@@ -15,7 +13,7 @@ import ipt.aiptools.bagit
 import ipt.aiptools.RenameSIPtoAIP
 import ipt.aiptools.create_aip
 
-import ipt.scripts.create_aip
+import ipt.scripts.sip2aip
 
 import shutil
 
@@ -97,7 +95,7 @@ class Testcreate_aip:
         self.init_test_files()
 
         (returncode, stdout, stderr) = testcommon.shell.run_main(
-            ipt.scripts.create_aip.main, ['%s' % sipdir])
+            ipt.scripts.sip2aip.main, ['%s' % sipdir])
 
         print returncode, stdout, stderr
         return (returncode, stdout, stderr)
