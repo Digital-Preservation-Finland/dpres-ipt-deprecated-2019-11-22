@@ -1,4 +1,5 @@
 import lxml.etree
+import urllib
 
 NAMESPACES = {'xlink': 'http://www.w3.org/1999/xlink',
               'm': 'http://www.loc.gov/METS/',
@@ -41,7 +42,7 @@ class LXML(object):
         file_url = mets_file.xpath('m:FLocat/@xlink:href',
                                    namespaces=NAMESPACES)
         if len(file_url) > 0:
-            return file_url[0]
+            return urllib.unquote(file_url[0])
         else:
             return None
 
