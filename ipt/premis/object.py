@@ -309,9 +309,9 @@ class Object(lxml.etree._ElementTree):
 
         self.root = Element(PREMIS + 'object', nsmap=NAMESPACES)
 
-    def fromvalidator(
-            self, type="representation", identifierType="pas-object-id",
-            fileinfo=None, relatedObject=None):
+    def fromvalidator(self, type="representation",
+                      identifierType="preservation-object-id", fileinfo=None,
+                      relatedObject=None):
         """
         From validator.
         """
@@ -322,7 +322,7 @@ class Object(lxml.etree._ElementTree):
 
         self.identifier = ""
         self.identifierType = identifierType
-        self.identifierValue = "pas-object-" + str(uuid.uuid4())
+        self.identifierValue = str(uuid.uuid4())
 
         if fileinfo:
             self.dependencyIdentifierType = fileinfo.object_id['type']

@@ -65,8 +65,8 @@ def main(arguments=None):
         linking_agent.name = str(
             os.path.basename(__file__)) + "-" + ipt.version.__version__
         linking_agent.identifier = ""
-        linking_agent.identifierType = "pas-agent-id"
-        linking_agent.identifierValue = "pas-agent-" + linking_agent.name
+        linking_agent.identifierType = "preservation-agent-id"
+        linking_agent.identifierValue = linking_agent.name
         linking_agent.type = "software"
 
         linking_agent.note = str(_validator)

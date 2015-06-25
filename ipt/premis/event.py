@@ -343,8 +343,8 @@ class Event(lxml.etree._ElementTree):
         From valdiator.
         """
         self.eventIdentifier = ""
-        self.eventIdentifierType = "pas-event-id"
-        self.eventIdentifierValue = "pas-event-" + str(uuid.uuid4())
+        self.eventIdentifierType = "preservation-event-id"
+        self.eventIdentifierValue = str(uuid.uuid4())
         self.eventType = "validation"
         self.eventDateTime = self.get_edtf_time()
         self.eventDetail = "Digital object validation"
