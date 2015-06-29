@@ -89,7 +89,7 @@ class Event(lxml.etree._ElementTree):
         try:
             return self.xpath(
                 "//premis:eventIdentifier/premis:eventIdentifierValue/text()",
-            namespaces=NAMESPACES)[0]
+            namespaces=NAMESPACES)[0].encode("utf-8")
         except IndexError:
             return ""
 
@@ -103,7 +103,7 @@ class Event(lxml.etree._ElementTree):
     def eventIdentifierType(self):
         return self.xpath(
             "//premis:eventIdentifier/premis:eventIdentifierType/text()",
-                          namespaces=NAMESPACES)[0]
+                          namespaces=NAMESPACES)[0].encode("utf-8")
 
     @eventIdentifierType.setter
     def eventIdentifierType(self, value):
@@ -116,7 +116,7 @@ class Event(lxml.etree._ElementTree):
     def eventType(self):
         try:
             return self.xpath("//premis:eventType/text()",
-                              namespaces=NAMESPACES)[0]
+                              namespaces=NAMESPACES)[0].encode("utf-8")
         except IndexError:
             return ""
 
@@ -139,7 +139,7 @@ class Event(lxml.etree._ElementTree):
     def eventDetail(self):
         try:
             return self.xpath("//premis:eventDetail/text()",
-                              namespaces=NAMESPACES)[0]
+                              namespaces=NAMESPACES)[0].encode("utf-8")
         except IndexError:
             return ""
 
@@ -169,7 +169,7 @@ class Event(lxml.etree._ElementTree):
     def eventOutcome(self):
         return self.xpath(
             "//premis:eventOutcomeInformation/premis:eventOutcome/text()",
-                          namespaces=NAMESPACES)[0]
+                          namespaces=NAMESPACES)[0].encode("utf-8")
 
     @eventOutcome.setter
     def eventOutcome(self, value):
@@ -266,7 +266,7 @@ class Event(lxml.etree._ElementTree):
 
         return self.xpath(
             "//premis:linkingObjectIdentifier/premis:linkingObjectIdentifierType/text()",
-                          namespaces=NAMESPACES)[0]
+                          namespaces=NAMESPACES)[0].encode("utf-8")
 
     @linkingObjectIdentifierType.setter
     def linkingObjectIdentifierType(self, value):
@@ -281,7 +281,7 @@ class Event(lxml.etree._ElementTree):
         try:
             return self.xpath(
                 "//premis:linkingObjectIdentifier/premis:linkingObjectIdentifierValue/text()",
-                              namespaces=NAMESPACES)[0]
+                              namespaces=NAMESPACES)[0].encode("utf-8")
         except IndexError:
             return ""
 
@@ -309,7 +309,7 @@ class Event(lxml.etree._ElementTree):
     def linkingAgentIdentifierType(self):
         return self.xpath(
             "//premis:linkingAgentIdentifier/premis:linkingAgentIdentifierType/text()",
-                          namespaces=NAMESPACES)[0]
+                          namespaces=NAMESPACES)[0].encode("utf-8")
 
     @linkingAgentIdentifierType.setter
     def linkingAgentIdentifierType(self, value):
@@ -322,7 +322,7 @@ class Event(lxml.etree._ElementTree):
         try:
             return self.xpath(
                 "//premis:linkingAgentIdentifier/premis:linkingAgentIdentifierValue/text()",
-                              namespaces=NAMESPACES)[0]
+                              namespaces=NAMESPACES)[0].encode("utf-8")
         except IndexError:
             return ""
 

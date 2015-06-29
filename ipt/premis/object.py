@@ -40,7 +40,7 @@ class Object(lxml.etree._ElementTree):
     @property
     def originalName(self):
         return self.xpath("//premis:originalName/text()",
-                          namespaces=NAMESPACES)[0]
+                          namespaces=NAMESPACES)[0].encode("utf-8")
 
     @originalName.setter
     def originalName(self, value):
@@ -52,7 +52,7 @@ class Object(lxml.etree._ElementTree):
     def identifierValue(self):
         return self.xpath(
             "//premis:objectIdentifier/premis:objectIdentifierValue/text()",
-            namespaces=NAMESPACES)[0]
+            namespaces=NAMESPACES)[0].encode("utf-8")
 
     @identifierValue.setter
     def identifierValue(self, value):
@@ -63,7 +63,7 @@ class Object(lxml.etree._ElementTree):
     def identifierType(self):
         return self.xpath(
             "//premis:objectIdentifier/premis:objectIdentifierType/text()",
-            namespaces=NAMESPACES)[0]
+            namespaces=NAMESPACES)[0].encode("utf-8")
 
     @identifierType.setter
     def identifierType(self, value):
@@ -139,7 +139,7 @@ class Object(lxml.etree._ElementTree):
     def dependencyIdentifierType(self):
         return self.xpath(
             "//premis:environment/premis:dependency/premis:dependencyIdentifier/premis:dependencyIdentifierType/text()",
-            namespaces=NAMESPACES)[0]
+            namespaces=NAMESPACES)[0].encode("utf-8")
 
     @dependencyIdentifierType.setter
     def dependencyIdentifierType(self, value):
@@ -168,7 +168,7 @@ class Object(lxml.etree._ElementTree):
     def relationshipType(self):
         return self.xpath(
             "//premis:relationship/premis:relationshipType/text()",
-            namespaces=NAMESPACES)[0]
+            namespaces=NAMESPACES)[0].encode("utf-8")
 
     @relationshipType.setter
     def relationshipType(self, value):
@@ -184,7 +184,7 @@ class Object(lxml.etree._ElementTree):
     def relationshipSubType(self):
         return self.xpath(
             "//premis:relationship/premis:relationshipSubType/text()",
-            namespaces=NAMESPACES)[0]
+            namespaces=NAMESPACES)[0].encode("utf-8")
 
     @relationshipSubType.setter
     def relationshipSubType(self, value):
@@ -216,7 +216,7 @@ class Object(lxml.etree._ElementTree):
     def relatedObjectIdentifierValue(self):
         return self.xpath(
             "//premis:relationship/premis:relatedObjectIdentification/premis:relatedObjectIdentifierValue/text()",
-            namespaces=NAMESPACES)[0]
+            namespaces=NAMESPACES)[0].encode("utf-8")
 
     @relatedObjectIdentifierValue.setter
     def relatedObjectIdentifierValue(self, value):
@@ -232,7 +232,7 @@ class Object(lxml.etree._ElementTree):
     def relatedObjectIdentifierType(self):
         return self.xpath(
             "//premis:relationship/premis:relatedObjectIdentification/premis:relatedObjectIdentifierType/text()",
-            namespaces=NAMESPACES)[0]
+            namespaces=NAMESPACES)[0].encode("utf-8")
 
     @relatedObjectIdentifierType.setter
     def relatedObjectIdentifierType(self, value):
@@ -264,7 +264,7 @@ class Object(lxml.etree._ElementTree):
         try:
             return self.xpath(
                 "//premis:linkingIntellectualEntityIdentifier/premis:linkingIntellectualEntityIdentifierType/text()",
-                namespaces=NAMESPACES)[0]
+                namespaces=NAMESPACES)[0].encode("utf-8")
         except IndexError:
             return ""
 
@@ -283,7 +283,7 @@ class Object(lxml.etree._ElementTree):
         try:
             return self.xpath(
                 "//premis:linkingIntellectualEntityIdentifier/premis:linkingIntellectualEntityIdentifierValue/text()",
-                namespaces=NAMESPACES)[0]
+                namespaces=NAMESPACES)[0].encode("utf-8")
         except IndexError:
             return ""
 

@@ -41,7 +41,7 @@ class Agent(lxml.etree._ElementTree):
     def identifierValue(self):
         return self.xpath(
             "//premis:agentIdentifier/premis:agentIdentifierValue/text()",
-            namespaces=NAMESPACES)[0]
+            namespaces=NAMESPACES)[0].encode("utf-8")
 
     @identifierValue.setter
     def identifierValue(self, value):
@@ -52,7 +52,7 @@ class Agent(lxml.etree._ElementTree):
     def identifierType(self):
         return self.xpath(
             "//premis:agentIdentifier/premis:agentIdentifierType/text()",
-            namespaces=NAMESPACES)[0]
+            namespaces=NAMESPACES)[0].encode("utf-8")
 
     @identifierType.setter
     def identifierType(self, value):
@@ -62,7 +62,7 @@ class Agent(lxml.etree._ElementTree):
     @property
     def name(self):
         return self.xpath("//premis:agentName/text()",
-                          namespaces=NAMESPACES)[0]
+                          namespaces=NAMESPACES)[0].encode("utf-8")
 
     @name.setter
     def name(self, value):
@@ -72,7 +72,7 @@ class Agent(lxml.etree._ElementTree):
     @property
     def type(self):
         return self.xpath("//premis:agentType/text()",
-                          namespaces=NAMESPACES)[0]
+                          namespaces=NAMESPACES)[0].encode("utf-8")
 
     @type.setter
     def type(self, value):
@@ -82,7 +82,7 @@ class Agent(lxml.etree._ElementTree):
     @property
     def note(self):
         return self.xpath("//premis:agentNote/text()",
-                          namespaces=NAMESPACES)[0]
+                          namespaces=NAMESPACES)[0].encode("utf-8")
 
     @note.setter
     def note(self, value):
