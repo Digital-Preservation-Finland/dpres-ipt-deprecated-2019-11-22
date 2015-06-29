@@ -261,7 +261,7 @@ class Event(lxml.etree._ElementTree):
 
     @property
     def linkingObjectIdentifierType(self):
-        if not self.linkingObjectIdentifier:
+        if self.linkingObjectIdentifier is None:
             self.linkingObjectIdentifier = ""
 
         return self.xpath(
