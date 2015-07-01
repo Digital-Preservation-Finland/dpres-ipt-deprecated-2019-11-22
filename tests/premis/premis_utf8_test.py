@@ -2,10 +2,6 @@
 # vim: set fileencoding=utf-8 :
 """Test that ipt.premis.premis returns utf-8 strings and not unicode."""
 import os
-import sys
-
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..'))
 
 import testcommon.settings
 from ipt.premis import premis
