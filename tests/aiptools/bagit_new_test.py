@@ -3,18 +3,20 @@ This is a test module for bagit.py
 """
 
 import os
+import tempfile
 
-from preservation.workflow.bagit import make_manifest
+from ipt.aiptools.bagit_new import make_manifest
 
 
-def test_make_manifest(testpath):
+def test_make_manifest():
     """
     Test manifest file creation. this function only creates the text
     on the lines and returns them as a list. file operations are created
     elsewhere.
     """
+    tmpdir = tempfile.mkdtemp(prefix="tests.testpath.")
     test_sip_path = os.path.join(
-        testpath, 'sip-61ad056e-41aa-11e5-9113-0800275056a0')
+        tmpdir, 'sip-61ad056e-41aa-11e5-9113-0800275056a0')
     data_path = os.path.join(test_sip_path, 'data')
     image_path = os.path.join(data_path, 'kuvat')
     os.makedirs(data_path)
