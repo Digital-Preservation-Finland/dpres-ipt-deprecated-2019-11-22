@@ -5,7 +5,8 @@ This is a test module for bagit.py
 import os
 import tempfile
 
-from ipt.aiptools.bagit_new import make_manifest
+
+from ipt.aiptools.bagit_new import make_manifest, calculate_md5
 
 
 def test_make_manifest():
@@ -30,4 +31,8 @@ def test_make_manifest():
         infile.write('abcdef')
     manifest = make_manifest(test_sip_path)
 
-    assert manifest
+    assert calculate_md5(file_1_path) == 'e2fc714c4727ee9395f324cd2e7f331f'
+
+    assert manifest == [
+        ['e2fc714c4727ee9395f324cd2e7f331f', 'data/file_1.txt'],
+        ['e80b5017098950fc58aad83c8c14978e', 'data/kuvat/image1.jpg']]
