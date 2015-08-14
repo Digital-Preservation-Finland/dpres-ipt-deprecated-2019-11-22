@@ -51,22 +51,10 @@ from optparse import OptionParser
 import os
 from hashlib import md5
 
+
 class BagitError(Exception):
     """Raised when plugin encounters unrecoverable error"""
     pass
-
-
-def get_option_parser():
-    """Return optionparser configuraed with script options.
-
-    :returns: OptionParser instance
-
-    """
-
-    parser = OptionParser(
-        usage="usage: %prog <command> <directory>")
-
-    return parser
 
 
 def main(argv=None):
@@ -77,8 +65,15 @@ def main(argv=None):
     :returns: exitcode
 
     """
-
-    pass
+    parser = OptionParser(usage="usage: %prog make_bag <directory>")
+    if len(argv) != 3:
+        parser.print_help()
+        raise BagitError('Wrong number of arguments')
+    if argv[1] != 'make_bag':
+        parser.print_help()
+        raise BagitError('Wrong number of arguments')
+    manifest = make_manifest(argv[2])
+    write_manifest(manifest, argv[2])
 
 
 def make_manifest(bagit_dir):
