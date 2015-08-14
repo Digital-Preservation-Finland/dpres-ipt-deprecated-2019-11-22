@@ -49,7 +49,7 @@ creates a manifest file manifest-md5.txt with lines:
 
 from optparse import OptionParser
 import os
-
+from hashlib import md5
 
 class BagitError(Exception):
     """Raised when plugin encounters unrecoverable error"""
@@ -83,7 +83,25 @@ def main(argv=None):
 
 def make_manifest(bagit_dir):
     """This function creates bagit manifest."""
+    manifest = []
     for dir_name, dir_list, file_list in os.walk(bagit_dir):
         for file_name in file_list:
             path = os.path.join(dir_name, file_name)
-            print path.split(bagit_dir + '/')[1]
+            digest = calculate_md5(path)
+            file_path_in_manifest = path.split(bagit_dir + '/')[1]
+            manifest.append([digest, file_path_in_manifest])
+    return manifest
+
+
+def calculate_md5(file_path):
+    """
+    This function calculates md5sum for a file.
+    """
+    md5sum = md5()
+    with open(file_path, 'r') as infile:
+        while True:
+            data = infile.read(2048)
+            if data == '':
+                break
+            md5sum.update(data)
+    return md5sum.hexdigest()
