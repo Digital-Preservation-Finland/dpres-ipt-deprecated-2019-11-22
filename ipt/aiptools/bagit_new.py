@@ -95,8 +95,19 @@ def calculate_md5(file_path):
     md5sum = md5()
     with open(file_path, 'r') as infile:
         while True:
+            # Read data in 2048 byte chunks, since larger files might
+            # be to slow otherwise.
             data = infile.read(2048)
             if data == '':
                 break
             md5sum.update(data)
     return md5sum.hexdigest()
+
+
+def write_manifest(manifest, dir_path):
+    """Write mainfest data list to file."""
+    print "manifest", manifest
+    with open(os.path.join(dir_path, 'manifest-md5.txt'), 'w') as infile:
+        for line in manifest:
+            print line[0], line[1]
+            infile.write("%s %s\n" % (line[0], line[1]))
