@@ -75,6 +75,7 @@ def main(argv=None):
         raise BagitError('Wrong argument')
     manifest = make_manifest(argv[2])
     write_manifest(manifest, argv[2])
+    write_bagit_txt(argv[2])
 
 
 def make_manifest(bagit_dir):
@@ -107,11 +108,17 @@ def calculate_md5(file_path):
 
 def write_manifest(manifest, dir_path):
     """Write mainfest data list to file."""
-    print "manifest", manifest
     with open(os.path.join(dir_path, 'manifest-md5.txt'), 'w') as infile:
         for line in manifest:
             print line[0], line[1]
             infile.write("%s %s\n" % (line[0], line[1]))
+
+
+def write_bagit_txt(dir_path):
+    """Write bagit.txt"""
+    with open(os.path.join(dir_path, 'bagit.txt'), 'w') as infile:
+        infile.write(
+            'BagIt-Version: 0.97\nTag-File-Character-Encoding: UTF-8\n')
 
 
 if __name__ == '__main__':
