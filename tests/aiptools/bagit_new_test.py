@@ -9,7 +9,7 @@ import pytest
 
 from ipt.aiptools import bagit_new
 from ipt.aiptools.bagit_new import make_manifest, calculate_md5, main, \
-    write_manifest, BagitError
+    write_manifest, write_bagit_txt, BagitError
 
 
 def test_make_manifest(testpath):
@@ -45,6 +45,8 @@ def test_main(monkeypatch):
     monkeypatch.setattr(bagit_new, 'make_manifest', lambda manifest: True)
     monkeypatch.setattr(
         bagit_new, 'write_manifest', lambda manifest, path: True)
+    monkeypatch.setattr(
+        bagit_new, 'write_bagit_txt', lambda sip_path: True)
     main(argv=['bagit.py', 'make_bag', 'foo'])
 
     with pytest.raises(BagitError):
@@ -66,3 +68,12 @@ def test_write_manifest(testpath):
         lines = infile.readlines()
         assert lines[0] == 'ab123 ' + os.path.join(sip_dir, 'file.txt') + '\n'
         assert lines[1] == 'ab232 ' + os.path.join(sip_dir, 'file2.txt') + '\n'
+
+
+def test_write_bagit_txt(testpath):
+    """Test for writing bagit.txt"""
+    write_bagit_txt(testpath)
+    with open(os.path.join(testpath, 'bagit.txt'), 'r') as infile:
+        lines = infile.readlines()
+        assert lines[0] == 'BagIt-Version: 0.97\n'
+        assert lines[1] == 'Tag-File-Character-Encoding: UTF-8\n'
