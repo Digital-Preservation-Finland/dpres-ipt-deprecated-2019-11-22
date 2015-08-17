@@ -73,9 +73,10 @@ def main(argv=None):
     if argv[1] != 'make_bag':
         parser.print_help()
         raise BagitError('Wrong argument')
-    manifest = make_manifest(argv[2])
-    write_manifest(manifest, argv[2])
-    write_bagit_txt(argv[2])
+    sip_path = argv[2]
+    manifest = make_manifest(sip_path)
+    write_manifest(manifest, sip_path)
+    write_bagit_txt(sip_path)
 
 
 def make_manifest(bagit_dir):
