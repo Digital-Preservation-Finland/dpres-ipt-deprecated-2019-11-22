@@ -71,7 +71,7 @@ def main(argv=None):
         raise BagitError('Wrong number of arguments')
     if argv[1] != 'make_bag':
         parser.print_help()
-        raise BagitError('Wrong number of arguments')
+        raise BagitError('Wrong argument')
     manifest = make_manifest(argv[2])
     write_manifest(manifest, argv[2])
 
