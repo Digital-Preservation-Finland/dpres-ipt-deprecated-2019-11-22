@@ -12,15 +12,14 @@ from ipt.aiptools.bagit_new import make_manifest, calculate_md5, main, \
     write_manifest, BagitError
 
 
-def test_make_manifest():
+def test_make_manifest(testpath):
     """
     Test manifest file creation. this function only creates the text
     on the lines and returns them as a list. file operations are created
     elsewhere.
     """
-    tmpdir = tempfile.mkdtemp(prefix="tests.testpath.")
     test_sip_path = os.path.join(
-        tmpdir, 'sip-61ad056e-41aa-11e5-9113-0800275056a0')
+        testpath, 'sip-61ad056e-41aa-11e5-9113-0800275056a0')
     data_path = os.path.join(test_sip_path, 'data')
     image_path = os.path.join(data_path, 'kuvat')
     os.makedirs(data_path)
@@ -55,9 +54,9 @@ def test_main(monkeypatch):
         main(argv=['bagit.py', 'foo', 'bar'])
 
 
-def test_write_manifest():
-    tmpdir = tempfile.mkdtemp(prefix="tests.testpath.")
-    sip_dir = os.path.join(tmpdir, 'sip')
+def test_write_manifest(testpath):
+    """Test for writing manifest file"""
+    sip_dir = os.path.join(testpath, 'sip')
     os.makedirs(sip_dir)
     manifest = [
         ['ab123', os.path.join(sip_dir, 'file.txt')],
