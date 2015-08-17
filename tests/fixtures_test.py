@@ -3,16 +3,6 @@
 import os
 
 
-def test_zipfile(zipfile):
-    """Test the archive fixture
-
-    :zipfile: Archive fixture
-    :returns: None
-
-    """
-    assert len(zipfile["filenames"]) > 0
-
-
 def test_testpath(testpath):
     """TODO: Docstring for test_directory.
 
