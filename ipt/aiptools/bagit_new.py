@@ -84,9 +84,11 @@ def make_manifest(bagit_dir):
     for dir_name, dir_list, file_list in os.walk(bagit_dir):
         for file_name in file_list:
             path = os.path.join(dir_name, file_name)
-            digest = calculate_md5(path)
-            file_path_in_manifest = path.split(bagit_dir + '/')[1]
-            manifest.append([digest, file_path_in_manifest])
+            # Manifest should be updated, not re-icluded in new manifest
+            if file_name != 'manifest-md5.txt' and file_name != 'bagit.txt':
+                digest = calculate_md5(path)
+                file_path_in_manifest = path.split(bagit_dir + '/')[1]
+                manifest.append([digest, file_path_in_manifest])
     return manifest
 
 
