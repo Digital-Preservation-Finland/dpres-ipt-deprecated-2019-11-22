@@ -65,6 +65,5 @@ def test_write_manifest():
     write_manifest(manifest, sip_dir)
     with open(os.path.join(sip_dir, 'manifest-md5.txt'), 'r') as infile:
         lines = infile.readlines()
-        print "lines", lines
         assert lines[0] == 'ab123 ' + os.path.join(sip_dir, 'file.txt') + '\n'
         assert lines[1] == 'ab232 ' + os.path.join(sip_dir, 'file2.txt') + '\n'
