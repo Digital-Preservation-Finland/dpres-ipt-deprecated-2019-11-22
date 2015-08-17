@@ -19,9 +19,11 @@ def main(arguments=None):
                       help="JSON configuration file",
                       metavar="PATH")
     (options, args) = parser.parse_args(arguments)
+
     if(len(args) != 3):
         parser.print_help()
         return 1
+
     sip_path = args[0]
     mets_filename = os.path.abspath(os.path.join(sip_path, 'mets.xml'))
     basepath = os.path.abspath(os.path.dirname(mets_filename))
@@ -58,19 +60,18 @@ def main(arguments=None):
         related_object.identifierType = linking_sip_type
         related_object.identifierValue = linking_sip_id
 
-        linking_object = premis.Object()
-        linking_object.fromvalidator(fileinfo=ff, relatedObject=related_object)
+        agent_name = str(
+            os.path.basename(__file__)) + "-" + ipt.version.__version__
 
         linking_agent = premis.Agent()
-        linking_agent.name = str(
-            os.path.basename(__file__)) + "-" + ipt.version.__version__
-        linking_agent.identifier = ""
-        linking_agent.identifierType = "preservation-agent-id"
-        linking_agent.identifierValue = linking_agent.name
+        linking_agent.fromvalidator(agentIdentifierType="preservation-agent-id",
+                                    agentIdentifierValue=agent_name,
+                                    agentName=agent_name)
         linking_agent.type = "software"
-
-        linking_agent.note = str(_validator)
         prem.insert(linking_agent)
+
+        linking_object = premis.Object()
+        linking_object.fromvalidator(fileinfo=ff, relatedObject=related_object)
 
         validation_event = premis.Event()
         validation_event.fromvalidator(status, report, error,

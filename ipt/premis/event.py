@@ -374,14 +374,14 @@ class Event(lxml.etree._ElementTree):
             else:
                 self.eventOutcomeDetailNote = messages
 
+        if linkingAgent:
+            self.linkingAgentIdentifierType = linkingAgent.identifierType
+            self.linkingAgentIdentifierValue = linkingAgent.identifierValue
+
         if linkingObject:
             self.linkingObjectIdentifier = ""
             self.linkingObjectIdentifierType = linkingObject.identifierType
             self.linkingObjectIdentifierValue = linkingObject.identifierValue
-
-        if linkingAgent:
-            self.linkingAgentIdentifierType = linkingAgent.identifierType
-            self.linkingAgentIdentifierValue = linkingAgent.identifierValue
 
     def serialize(self):
         """

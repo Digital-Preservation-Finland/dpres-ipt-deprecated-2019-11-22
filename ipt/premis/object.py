@@ -317,14 +317,13 @@ class Object(lxml.etree._ElementTree):
         """
         self.root.set(XSI + 'type', lxml.etree.QName(PREMIS + type))
 
-        if fileinfo:
-            self.originalName = fileinfo.filename
-
         self.identifier = ""
         self.identifierType = identifierType
         self.identifierValue = str(uuid.uuid4())
 
+
         if fileinfo:
+            self.originalName = fileinfo.filename
             self.dependencyIdentifierType = fileinfo.object_id['type']
             self.dependencyIdentifierValue = fileinfo.object_id['value']
 
