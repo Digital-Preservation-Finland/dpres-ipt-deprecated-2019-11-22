@@ -3,7 +3,6 @@ This is a test module for bagit.py
 """
 
 import os
-import tempfile
 
 import pytest
 
