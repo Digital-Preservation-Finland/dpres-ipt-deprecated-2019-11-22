@@ -1,9 +1,7 @@
 import os
 import sys
-import re
 import pytest
 import uuid
-import subprocess
 
 import testcommon.shell
 import testcommon.settings
@@ -47,7 +45,8 @@ class TestCommandLineTools:
             }
         },
             {
-            "testcase": 'Test valid sip package with non-existing validator (ALTO)',
+            "testcase": 'Test valid sip package with non-existing '
+                'validator (ALTO)',
             "filename": 'CSC_test004',
             "expected_result": {
                 "returncode": 1,
@@ -67,7 +66,6 @@ class TestCommandLineTools:
         }]
     }
 
-
     # NOTE: This code was originally taken from preservation repository
     # tests/asserts.py file and was refactored to use direct main() call
     # instead of popen().
@@ -80,7 +78,6 @@ class TestCommandLineTools:
 
         """
         # Validate report againts XSD schema
-
         # TODO: replace these after schemas have been refactored into
         # information-package-tools
 
@@ -89,13 +86,10 @@ class TestCommandLineTools:
 
         arguments = ['-s%s' % xsd_path, filename]
 
-        (returncode, stdout, r) = testcommon.shell.run_main(
+        (returncode, _, _) = testcommon.shell.run_main(
             ipt.scripts.check_xml_schema_features.main, arguments)
 
-        print r
         return returncode == 0
-
-
 
     def test_check_sip_digital_objects(self, testcase,
                                        filename, expected_result):
@@ -107,8 +101,8 @@ class TestCommandLineTools:
             testcommon.settings.PROJECTDIR,
             'include/share/validators/validators.json'))
 
-        arguments = ["%s" % filename, "-c%s" % configfile, "preservation-sip-id"
-                     , str(uuid.uuid4())]
+        arguments = ["%s" % filename, "-c%s" % configfile,
+                     "preservation-sip-id", str(uuid.uuid4())]
 
         (returncode, stdout, stderr) = testcommon.shell.run_main(
             ipt.scripts.check_sip_digital_objects.main, arguments)
