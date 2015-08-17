@@ -61,10 +61,10 @@ def test_write_manifest():
     os.makedirs(sip_dir)
     manifest = [
         ['ab123', os.path.join(sip_dir, 'file.txt')],
-        ['ab1232', os.path.join(sip_dir, 'file2.txt')]]
+        ['ab232', os.path.join(sip_dir, 'file2.txt')]]
     write_manifest(manifest, sip_dir)
     with open(os.path.join(sip_dir, 'manifest-md5.txt'), 'r') as infile:
         lines = infile.readlines()
         print "lines", lines
         assert lines[0] == 'ab123 ' + os.path.join(sip_dir, 'file.txt') + '\n'
-        assert lines[1] == 'ab1232 ' + os.path.join(sip_dir, 'file2.txt') + '\n'
+        assert lines[1] == 'ab232 ' + os.path.join(sip_dir, 'file2.txt') + '\n'
