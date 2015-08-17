@@ -49,6 +49,7 @@ creates a manifest file manifest-md5.txt with lines:
 
 from optparse import OptionParser
 import os
+import sys
 from hashlib import md5
 
 
@@ -111,3 +112,8 @@ def write_manifest(manifest, dir_path):
         for line in manifest:
             print line[0], line[1]
             infile.write("%s %s\n" % (line[0], line[1]))
+
+
+if __name__ == '__main__':
+    ret = main(sys.argv)
+    sys.exit(ret)
