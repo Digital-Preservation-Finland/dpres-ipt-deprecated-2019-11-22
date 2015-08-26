@@ -67,13 +67,13 @@ def main(argv=None):
 
     """
     parser = OptionParser(usage="usage: %prog make_bag <directory>")
-    if len(argv) != 3:
+    if len(argv) != 2:
         parser.print_help()
         raise BagitError('Wrong number of arguments')
-    if argv[1] != 'make_bag':
+    if argv[0] != 'make_bag':
         parser.print_help()
         raise BagitError('Wrong argument')
-    sip_path = argv[2]
+    sip_path = argv[1]
     manifest = make_manifest(sip_path)
     write_manifest(manifest, sip_path)
     write_bagit_txt(sip_path)
