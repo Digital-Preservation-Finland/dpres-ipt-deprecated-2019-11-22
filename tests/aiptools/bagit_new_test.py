@@ -46,13 +46,13 @@ def test_main(monkeypatch):
         bagit_new, 'write_manifest', lambda manifest, path: True)
     monkeypatch.setattr(
         bagit_new, 'write_bagit_txt', lambda sip_path: True)
-    main(argv=['bagit.py', 'make_bag', 'foo'])
+    main(argv=['make_bag', 'foo'])
 
     with pytest.raises(BagitError):
-        main(argv=['bagit.py', 'make_bag'])
+        main(argv=['make_bag'])
 
     with pytest.raises(BagitError):
-        main(argv=['bagit.py', 'foo', 'bar'])
+        main(argv=['foo', 'bar'])
 
 
 def test_write_manifest(testpath):
