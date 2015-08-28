@@ -1,9 +1,9 @@
 """
-This module implements a simplified version of bagit manifest file creation. 
+This module implements a simplified version of bagit manifest file creation.
 Bagit itself is acontainer directory structure developed by
 Congress Library. For exact documentation of bagit, please see
 
-	https://github.com/LibraryOfCongress/bagit-python
+    https://github.com/LibraryOfCongress/bagit-python
 
 Here is a brief specification of bagit relevant to this implementation:
 
@@ -69,14 +69,15 @@ def main(argv=None):
     parser = OptionParser(usage="usage: %prog make_bag <directory>")
     if len(argv) != 2:
         parser.print_help()
-        raise BagitError('Wrong number of arguments')
+        raise BagitError('Wrong number of arguments, exactly 2 are needed')
     if argv[0] != 'make_bag':
         parser.print_help()
-        raise BagitError('Wrong argument')
+        raise BagitError('Wrong argument, first argument should be "make_bag"')
     sip_path = argv[1]
     manifest = make_manifest(sip_path)
     write_manifest(manifest, sip_path)
     write_bagit_txt(sip_path)
+    return 0
 
 
 def make_manifest(bagit_dir):
@@ -101,7 +102,7 @@ def calculate_md5(file_path):
     with open(file_path, 'r') as infile:
         while True:
             # Read data in 2048 byte chunks, since larger files might
-            # be to slow otherwise.
+            # be too slow otherwise.
             data = infile.read(2048)
             if data == '':
                 break
@@ -124,5 +125,5 @@ def write_bagit_txt(dir_path):
 
 
 if __name__ == '__main__':
-    ret = main(sys.argv)
-    sys.exit(ret)
+    RET = main(sys.argv)
+    sys.exit(RET)
