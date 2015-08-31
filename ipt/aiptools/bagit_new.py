@@ -58,27 +58,6 @@ class BagitError(Exception):
     pass
 
 
-def main(argv=None):
-    """ Main function of bagit.py. This interprets commandline arguments and
-    calls specific functionalities.
-
-    :argv: List of command line arguments
-    :returns: exitcode
-
-    """
-    parser = OptionParser(usage="usage: %prog make_bag <directory>")
-    if len(argv) != 2:
-        parser.print_help()
-        raise BagitError('Wrong number of arguments')
-    if argv[0] != 'make_bag':
-        parser.print_help()
-        raise BagitError('Wrong argument')
-    sip_path = argv[1]
-    manifest = make_manifest(sip_path)
-    write_manifest(manifest, sip_path)
-    write_bagit_txt(sip_path)
-
-
 def make_manifest(bagit_dir):
     """This function creates bagit manifest."""
     manifest = []

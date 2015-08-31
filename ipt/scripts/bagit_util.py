@@ -21,7 +21,8 @@ For more information see the :mod:`aiptools.bagit_new` module.
 import sys
 import optparse
 
-import ipt.aiptools.bagit_new
+from ipt.aiptools.bagit_new import make_manifest, write_manifest, \
+    write_bagit_txt
 
 
 def main(arguments=None):
@@ -39,13 +40,14 @@ def main(arguments=None):
         return 1
 
     if args[0] != 'make_bag':
-        sys.stderr.write('Wrong arguments, make_bag must be first argument')
+        sys.stderr.write('Wrong arguments, make_bag must be first argument\n')
         parser.print_help()
         return 1
 
-    print "Creating bagit manifest: ", args
-    result = ipt.aiptools.bagit_new.main(args)
-    print result
+    sip_path = args[1]
+    manifest = make_manifest(sip_path)
+    write_manifest(manifest, sip_path)
+    write_bagit_txt(sip_path)
 
     return 0
 
