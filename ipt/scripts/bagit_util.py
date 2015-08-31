@@ -22,7 +22,7 @@ import sys
 import optparse
 
 from ipt.aiptools.bagit_new import make_manifest, write_manifest, \
-    write_bagit_txt
+    write_bagit_txt, check_directory_is_bagit, check_bagit_mandatory_files
 
 
 def main(arguments=None):
@@ -45,9 +45,12 @@ def main(arguments=None):
         return 1
 
     sip_path = args[1]
+
+    check_directory_is_bagit(sip_path)
     manifest = make_manifest(sip_path)
     write_manifest(manifest, sip_path)
     write_bagit_txt(sip_path)
+    check_bagit_mandatory_files(sip_path)
 
     return 0
 

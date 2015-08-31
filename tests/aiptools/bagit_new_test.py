@@ -7,8 +7,9 @@ import os
 import pytest
 
 from ipt.aiptools import bagit_new
-from ipt.aiptools.bagit_new import make_manifest, calculate_md5, main, \
-    write_manifest, write_bagit_txt, BagitError
+from ipt.aiptools.bagit_new import make_manifest, calculate_md5, \
+    write_manifest, write_bagit_txt, BagitError, check_directory_is_bagit,\
+    check_bagit_mandatory_files
 
 
 def test_make_manifest(testpath):
@@ -106,3 +107,22 @@ def create_test_bagit(bagit_path):
     with open(os.path.join(bagit_path, 'bagit.txt'), 'w') as outfile:
         outfile.write('foo\n')
 
+
+def test_bagit_structure(testpath):
+    """Test bagit structure."""
+    bagit_path = os.path.join(testpath, 'sippi-uuid')
+    create_test_bagit(bagit_path)
+    ret = check_directory_is_bagit(bagit_path)
+    assert ret == 0
+    ret = check_bagit_mandatory_files(bagit_path)
+    assert ret == 0
+    assert os.path.isdir(os.path.join(bagit_path, 'data'))
+
+    # Test mandatory bagit files missing errors
+    os.remove(os.path.join(bagit_path, 'manifest-md5.txt'))
+    with pytest.raises(BagitError):
+        check_bagit_mandatory_files(bagit_path),
+
+    os.remove(os.path.join(bagit_path, 'bagit.txt'))
+    with pytest.raises(BagitError):
+        check_bagit_mandatory_files(bagit_path)

@@ -100,3 +100,21 @@ def write_bagit_txt(dir_path):
     with open(os.path.join(dir_path, 'bagit.txt'), 'w') as infile:
         infile.write(
             'BagIt-Version: 0.97\nTag-File-Character-Encoding: UTF-8\n')
+
+
+def check_directory_is_bagit(bagit_dir):
+    """Verify that directory is bagit complilant(has data directory)."""
+    if not os.path.isdir(bagit_dir):
+        raise BagitError('bagit directory is not directory.')
+    return 0
+
+
+def check_bagit_mandatory_files(bagit_dir):
+    """Verify that mandatory bagit files exist."""
+    dirs_list = os.listdir(bagit_dir)
+    if not set(['manifest-md5.txt', 'bagit.txt']).issubset(set(dirs_list)):
+        print dirs_list
+        raise BagitError("Directory %s is not bagit format compilant. "
+                         "manifest-md5.txt and bagit.txt should exist." %
+                         bagit_dir)
+    return 0
