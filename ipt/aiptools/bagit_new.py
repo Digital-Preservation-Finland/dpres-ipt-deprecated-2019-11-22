@@ -121,8 +121,3 @@ def write_bagit_txt(dir_path):
     with open(os.path.join(dir_path, 'bagit.txt'), 'w') as infile:
         infile.write(
             'BagIt-Version: 0.97\nTag-File-Character-Encoding: UTF-8\n')
-
-
-if __name__ == '__main__':
-    ret = main(sys.argv)
-    sys.exit(ret)

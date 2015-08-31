@@ -43,3 +43,8 @@ def main(arguments=None):
     print result
 
     return 0
+
+
+if __name__ == '__main__':
+    RETVAL = main()
+    sys.exit(RETVAL)
