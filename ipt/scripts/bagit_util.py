@@ -38,6 +38,11 @@ def main(arguments=None):
         parser.print_help()
         return 1
 
+    if args[0] != 'make_bag':
+        sys.stderr.write('Wrong arguments, make_bag must be first argument')
+        parser.print_help()
+        return 1
+
     print "Creating bagit manifest: ", args
     result = ipt.aiptools.bagit_new.main(args)
     print result
