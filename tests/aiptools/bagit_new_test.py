@@ -40,22 +40,6 @@ def test_make_manifest(testpath):
         ['e80b5017098950fc58aad83c8c14978e', 'data/kuvat/image1.jpg']]
 
 
-def test_main(monkeypatch):
-    """Testing main function."""
-    monkeypatch.setattr(bagit_new, 'make_manifest', lambda manifest: True)
-    monkeypatch.setattr(
-        bagit_new, 'write_manifest', lambda manifest, path: True)
-    monkeypatch.setattr(
-        bagit_new, 'write_bagit_txt', lambda sip_path: True)
-    main(argv=['make_bag', 'foo'])
-
-    with pytest.raises(BagitError):
-        main(argv=['make_bag'])
-
-    with pytest.raises(BagitError):
-        main(argv=['foo', 'bar'])
-
-
 def test_write_manifest(testpath):
     """Test for writing manifest file"""
     sip_dir = os.path.join(testpath, 'sip')
