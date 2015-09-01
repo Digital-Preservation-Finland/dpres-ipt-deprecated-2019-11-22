@@ -2,6 +2,7 @@
 
 import os
 
+from tests.testcommon.test_utils import create_test_bagit
 import ipt.aiptools.bagit_new
 from ipt.scripts.bagit_util import main
 

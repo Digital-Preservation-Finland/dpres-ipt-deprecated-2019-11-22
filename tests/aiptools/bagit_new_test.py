@@ -5,6 +5,7 @@ This is a test module for bagit.py
 import os
 
 import pytest
+from tests.testcommon.test_utils import create_test_bagit
 
 from ipt.aiptools import bagit_new
 from ipt.aiptools.bagit_new import make_manifest, calculate_md5, \
@@ -61,35 +62,6 @@ def test_write_bagit_txt(testpath):
         lines = infile.readlines()
         assert lines[0] == 'BagIt-Version: 0.97\n'
         assert lines[1] == 'Tag-File-Character-Encoding: UTF-8\n'
-
-
-def create_test_bagit(bagit_path):
-    """Create test bagit."""
-    sip_path = os.path.join(bagit_path, 'data', 'transfers', 'sippi')
-
-    os.makedirs(sip_path)
-
-    mets_path = os.path.join(sip_path, 'mets.xml')
-    with open(mets_path, 'w') as mets:
-        mets.write('asfasdfasdfsda')
-
-    image_path = os.path.join(sip_path, 'kuvat')
-    os.makedirs(image_path)
-
-    file_1_path = os.path.join(sip_path, 'file_1.txt')
-    file_2_path = os.path.join(image_path, 'image1.jpg')
-    with open(file_1_path, 'w') as infile:
-        infile.write('abcd')
-    with open(file_2_path, 'w') as infile:
-        infile.write('abcdef')
-
-    with open(os.path.join(bagit_path, 'manifest-md5.txt'), 'w') as outfile:
-        outfile.write('e2fc714c4727ee9395f324cd2e7f331f ' + os.path.join(
-            'data', 'file.txt') + '\n')
-        outfile.write('e80b5017098950fc58aad83c8c14978e ' + os.path.join(
-            'data', 'kuvat', 'file2.txt') + '\n')
-    with open(os.path.join(bagit_path, 'bagit.txt'), 'w') as outfile:
-        outfile.write('foo\n')
 
 
 def test_bagit_structure(testpath):
