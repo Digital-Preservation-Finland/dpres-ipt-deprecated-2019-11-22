@@ -106,6 +106,8 @@ def check_directory_is_bagit(bagit_dir):
     """Verify that directory is bagit complilant(has data directory)."""
     if not os.path.isdir(bagit_dir):
         raise BagitError('bagit directory is not directory.')
+    if not os.path.isdir(os.path.join(bagit_dir, 'data')):
+        raise BagitError('bagit directory is missing data directory.')
     return 0
 
 

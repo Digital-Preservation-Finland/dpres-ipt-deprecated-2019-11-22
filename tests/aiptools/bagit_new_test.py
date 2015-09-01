@@ -110,3 +110,9 @@ def test_bagit_structure(testpath):
     os.remove(os.path.join(bagit_path, 'bagit.txt'))
     with pytest.raises(BagitError):
         check_bagit_mandatory_files(bagit_path)
+
+    # data directory missing
+    no_bagit_dir = os.path.join(testpath, 'foo')
+    os.makedirs(no_bagit_dir)
+    with pytest.raises(BagitError):
+        check_bagit_mandatory_files(no_bagit_dir)
