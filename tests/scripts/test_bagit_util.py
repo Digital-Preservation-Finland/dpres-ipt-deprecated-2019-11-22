@@ -1,9 +1,10 @@
 """tests for bagit_util-commandline interface."""
 
 import os
+import pytest
 
 from tests.testcommon.test_utils import create_test_bagit
-import ipt.aiptools.bagit_new
+from ipt.aiptools.bagit_new import BagitError
 from ipt.scripts.bagit_util import main
 
 
