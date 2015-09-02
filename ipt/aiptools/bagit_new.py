@@ -47,9 +47,7 @@ creates a manifest file manifest-md5.txt with lines:
     348a671d663cef32d44a49ed8485efa7 data/my_packge/images/other.txt
 """
 
-from optparse import OptionParser
 import os
-import sys
 from hashlib import md5
 
 
