@@ -32,22 +32,23 @@ def main(arguments=None):
 
     usage = "usage: %prog make_manifest <sip_path>"
     parser = optparse.OptionParser(usage=usage)
-
+    if not arguments:
+        arguments = sys.argv
     (options, args) = parser.parse_args(arguments)
 
-    if len(args) != 2:
+    if len(args) != 3:
         sys.stderr.write("Must provide make_manifest command and SIP directory"
                          " name as parameter\n")
         parser.print_help()
         return 1
 
-    if args[0] != 'make_manifest':
+    if args[1] != 'make_manifest':
         sys.stderr.write('Wrong arguments, make_manifest must be first '
                          'argument\n')
         parser.print_help()
         return 1
 
-    sip_path = args[1]
+    sip_path = args[2]
 
     check_directory_is_bagit(sip_path)
     manifest = make_manifest(sip_path)
