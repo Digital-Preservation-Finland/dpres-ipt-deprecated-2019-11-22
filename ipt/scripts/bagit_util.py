@@ -30,19 +30,20 @@ def main(arguments=None):
     :arguments: Commandline parameters.
     :returns: 0 if all ok, otherwise BagitError(or other exception) is risen"""
 
-    usage = "usage: %prog make_bag <sip_path>"
+    usage = "usage: %prog make_manifest <sip_path>"
     parser = optparse.OptionParser(usage=usage)
 
     (options, args) = parser.parse_args(arguments)
 
     if len(args) != 2:
-        sys.stderr.write("Must provide make_bag command and SIP directory name"
-                         " as parameter\n")
+        sys.stderr.write("Must provide make_manifest command and SIP directory"
+                         " name as parameter\n")
         parser.print_help()
         return 1
 
-    if args[0] != 'make_bag':
-        sys.stderr.write('Wrong arguments, make_bag must be first argument\n')
+    if args[0] != 'make_manifest':
+        sys.stderr.write('Wrong arguments, make_manifest must be first '
+                         'argument\n')
         parser.print_help()
         return 1
 

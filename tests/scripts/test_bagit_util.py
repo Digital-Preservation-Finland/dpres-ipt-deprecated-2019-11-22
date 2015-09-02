@@ -14,10 +14,10 @@ def test_main(testpath, monkeypatch):
     # OK case
     bagit_path = os.path.join(testpath, 'sippi-uuid')
     create_test_bagit(bagit_path)
-    assert main(['prog', 'make_bag', bagit_path]) == 0
+    assert main(['prog', 'make_manifest', bagit_path]) == 0
 
     # data directory missing
     no_bagit_dir = os.path.join(testpath, 'foo')
     os.makedirs(no_bagit_dir)
     with pytest.raises(BagitError):
-        main(['prog', 'make_bag', no_bagit_dir])
+        main(['prog', 'make_manifest', no_bagit_dir])
