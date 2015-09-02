@@ -94,7 +94,8 @@ def write_manifest(manifest, path):
     :manifest: list of lists which each contain line in manifest as string.
     :path: bagit path where manifest file should be written.
     :returns: None"""
-    with open(os.path.join(path, 'manifest-md5.txt'), 'w') as outfile:
+    manifest_path = os.path.join(path, 'manifest-md5.txt')
+    with open(manifest_path, 'w') as outfile:
         for line in manifest:
             outfile.write("%s %s\n" % (line[0], line[1]))
 
@@ -104,7 +105,8 @@ def write_bagit_txt(path):
     :path: bagit path where bagit.txt file should be written.
     :returns: None
     """
-    with open(os.path.join(path, 'bagit.txt'), 'w') as outfile:
+    bagit_path = os.path.join(path, 'bagit.txt')
+    with open(bagit_path, 'w') as outfile:
         outfile.write(
             'BagIt-Version: 0.97\nTag-File-Character-Encoding: UTF-8\n')
 
@@ -113,10 +115,10 @@ def check_directory_is_bagit(bagit_dir):
     """Verify that directory is bagit complilant(has data directory).
     :bagit_dir: Directory of bagit.
     :returns: 0 if ok, raise BagitError otherwise."""
-    print "bagit", os.listdir(bagit_dir)
     if not os.path.isdir(bagit_dir):
         raise BagitError('bagit directory is not directory.')
-    if not os.path.isdir(os.path.join(bagit_dir, 'data')):
+    data_dir = os.path.join(bagit_dir, 'data')
+    if not os.path.isdir(data_dir):
         raise BagitError('bagit directory is missing data directory.')
     return 0
 
