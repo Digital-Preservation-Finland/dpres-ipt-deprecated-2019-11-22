@@ -89,22 +89,22 @@ def calculate_md5(file_path):
     return md5sum.hexdigest()
 
 
-def write_manifest(manifest, dir_path):
+def write_manifest(manifest, path):
     """Write mainfest data list to file.
     :manifest: list of lists which each contain line in manifest as string.
-    :dir_path: bagit path where manifest file should be written.
+    :path: bagit path where manifest file should be written.
     :returns: None"""
-    with open(os.path.join(dir_path, 'manifest-md5.txt'), 'w') as infile:
+    with open(os.path.join(path, 'manifest-md5.txt'), 'w') as infile:
         for line in manifest:
             infile.write("%s %s\n" % (line[0], line[1]))
 
 
-def write_bagit_txt(dir_path):
+def write_bagit_txt(path):
     """Write bagit.txt
-    :dir_path: bagit path where bagit.txt file should be written.
+    :path: bagit path where bagit.txt file should be written.
     :returns: None
     """
-    with open(os.path.join(dir_path, 'bagit.txt'), 'w') as infile:
+    with open(os.path.join(path, 'bagit.txt'), 'w') as infile:
         infile.write(
             'BagIt-Version: 0.97\nTag-File-Character-Encoding: UTF-8\n')
 
