@@ -94,9 +94,9 @@ def write_manifest(manifest, path):
     :manifest: list of lists which each contain line in manifest as string.
     :path: bagit path where manifest file should be written.
     :returns: None"""
-    with open(os.path.join(path, 'manifest-md5.txt'), 'w') as infile:
+    with open(os.path.join(path, 'manifest-md5.txt'), 'w') as outfile:
         for line in manifest:
-            infile.write("%s %s\n" % (line[0], line[1]))
+            outfile.write("%s %s\n" % (line[0], line[1]))
 
 
 def write_bagit_txt(path):
@@ -104,8 +104,8 @@ def write_bagit_txt(path):
     :path: bagit path where bagit.txt file should be written.
     :returns: None
     """
-    with open(os.path.join(path, 'bagit.txt'), 'w') as infile:
-        infile.write(
+    with open(os.path.join(path, 'bagit.txt'), 'w') as outfile:
+        outfile.write(
             'BagIt-Version: 0.97\nTag-File-Character-Encoding: UTF-8\n')
 
 
