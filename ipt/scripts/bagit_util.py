@@ -26,7 +26,9 @@ from ipt.aiptools.bagit_new import make_manifest, write_manifest, \
 
 
 def main(arguments=None):
-    """Parse command line arguments and run application"""
+    """Parse command line arguments and run application.
+    :arguments: Commandline parameters.
+    :returns: 0 if all ok, otherwise BagitError(or other exception) is risen"""
 
     usage = "usage: %prog make_bag <sip_path>"
     parser = optparse.OptionParser(usage=usage)

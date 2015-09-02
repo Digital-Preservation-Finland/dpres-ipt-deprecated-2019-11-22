@@ -59,7 +59,8 @@ class BagitError(Exception):
 
 
 def make_manifest(bagit_dir):
-    """This function creates bagit manifest."""
+    """This function creates bagit manifest.
+    :bagit_dir: base directory of bagit."""
     manifest = []
     for dir_name, dir_list, file_list in os.walk(bagit_dir):
         for file_name in file_list:
@@ -75,6 +76,8 @@ def make_manifest(bagit_dir):
 def calculate_md5(file_path):
     """
     This function calculates md5sum for a file.
+    :file_path: path of file from which the md5sum is calculated.
+    :returns: a string with md5-hexdigest.
     """
     md5sum = md5()
     with open(file_path, 'r') as infile:
@@ -89,21 +92,30 @@ def calculate_md5(file_path):
 
 
 def write_manifest(manifest, dir_path):
-    """Write mainfest data list to file."""
+    """Write mainfest data list to file.
+    :manifest: list of lists which each contain line in manifest as string.
+    :dir_path: bagit path where manifest file should be written.
+    :returns: None"""
     with open(os.path.join(dir_path, 'manifest-md5.txt'), 'w') as infile:
         for line in manifest:
             infile.write("%s %s\n" % (line[0], line[1]))
 
 
 def write_bagit_txt(dir_path):
-    """Write bagit.txt"""
+    """Write bagit.txt
+    :dir_path: bagit path where bagit.txt file should be written.
+    :returns: None
+    """
     with open(os.path.join(dir_path, 'bagit.txt'), 'w') as infile:
         infile.write(
             'BagIt-Version: 0.97\nTag-File-Character-Encoding: UTF-8\n')
 
 
 def check_directory_is_bagit(bagit_dir):
-    """Verify that directory is bagit complilant(has data directory)."""
+    """Verify that directory is bagit complilant(has data directory).
+    :bagit_dir: Directory of bagit.
+    :returns: 0 if ok, raise BagitError otherwise."""
+    print "bagit", os.listdir(bagit_dir)
     if not os.path.isdir(bagit_dir):
         raise BagitError('bagit directory is not directory.')
     if not os.path.isdir(os.path.join(bagit_dir, 'data')):
@@ -112,7 +124,9 @@ def check_directory_is_bagit(bagit_dir):
 
 
 def check_bagit_mandatory_files(bagit_dir):
-    """Verify that mandatory bagit files exist."""
+    """Verify that mandatory bagit files exist.
+    :bagit_dir: Directory of bagit.
+    :returns: 0 if ok, raise BagitError otherwise."""
     dirs_list = os.listdir(bagit_dir)
     if not set(['manifest-md5.txt', 'bagit.txt']).issubset(set(dirs_list)):
         print dirs_list
