@@ -1,9 +1,9 @@
 """
-This module implements a simplified version of bagit manifest file creation. 
+This module implements a simplified version of bagit manifest file creation.
 Bagit itself is acontainer directory structure developed by
 Congress Library. For exact documentation of bagit, please see
 
-	https://github.com/LibraryOfCongress/bagit-python
+    https://github.com/LibraryOfCongress/bagit-python
 
 Here is a brief specification of bagit relevant to this implementation:
 
@@ -81,7 +81,7 @@ def calculate_md5(file_path):
     with open(file_path, 'r') as infile:
         while True:
             # Read data in 2048 byte chunks, since larger files might
-            # be to slow otherwise.
+            # be too slow otherwise.
             data = infile.read(2048)
             if data == '':
                 break
