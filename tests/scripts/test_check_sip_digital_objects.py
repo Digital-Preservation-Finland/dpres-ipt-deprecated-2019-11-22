@@ -66,31 +66,6 @@ class TestCommandLineTools:
         }]
     }
 
-    # NOTE: This code was originally taken from preservation repository
-    # tests/asserts.py file and was refactored to use direct main() call
-    # instead of popen().
-    def premis_schema_validates(self, filename):
-        """Test that the given task-report or ingestion-report validates against
-        XML schema.
-
-        :filename: Report filename
-        :returns: True when report validates, else False
-
-        """
-        # Validate report againts XSD schema
-        # TODO: replace these after schemas have been refactored into
-        # information-package-tools
-
-        xsd_path = '/usr/share/pas/microservice/report/' \
-            'validation/premis_report.xsd'
-
-        arguments = ['-s%s' % xsd_path, filename]
-
-        (returncode, _, _) = testcommon.shell.run_main(
-            ipt.scripts.check_xml_schema_features.main, arguments)
-
-        return returncode == 0
-
     def test_check_sip_digital_objects(self, testcase,
                                        filename, expected_result):
 
