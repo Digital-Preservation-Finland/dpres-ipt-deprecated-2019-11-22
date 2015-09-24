@@ -18,7 +18,7 @@ import optparse
 import os
 import subprocess
 
-XSLT_PATH = "/usr/share/pas/microservice/report/xslt/stylesheet.xml"
+XSLT_PATH = "/usr/share/preservation-schemas/stylesheet.xml"
 
 
 def main(arguments=None):
