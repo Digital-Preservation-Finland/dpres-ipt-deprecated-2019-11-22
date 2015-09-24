@@ -33,9 +33,11 @@ class TestVerifyManifestSMIME(object):
     sip_path = None
     ca_path = None
     report_path = None
-    private_key = None
-    public_key = None
     signature_file = None
+    private_key = \
+        '/tmp/test.ipt.signature/kdk-pas-sip-signing-key.pem'
+    public_key = \
+        '/tmp/test.ipt.signaturefile/kdk-pas-sip-signing-key.pub'
 
     def test_create_report_signature(self):
         """
@@ -52,7 +54,9 @@ class TestVerifyManifestSMIME(object):
 
         # creating signaturefile for report
         signature = ipt.sip.signature.ManifestSMIME(
-            signature_filename=self.report_path)
+            signature_filename=self.report_path,
+            private_key=self.private_key,
+            public_key=self.public_key)
 
         signature.new_signing_key()
         signature.write_signature_file()
