@@ -46,9 +46,9 @@ class ManifestSMIME(object):
     # with users public key used in signature validation.
     ca_path = '/etc/ssl/certs'
     private_key = \
-        '/usr/share/pas/microservice/ssl/keys/kdk-pas-sip-signing-key.pem'
+        '/usr/share/information-package-tools/ssl/keys/kdk-pas-sip-signing-key.pem'
     public_key = \
-        '/usr/share/pas/microservice/ssl/keys/kdk-pas-sip-signing-key.pub'
+        '/usr/share/information-package-tools/ssl/keys/kdk-pas-sip-signing-key.pub'
     signature_file = 'varmiste.sig'
 
     country = 'FI'
