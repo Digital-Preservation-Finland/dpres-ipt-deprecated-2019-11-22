@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" schemaVersion="1.4.1">
-    <sch:title>METS external metadata type check</sch:title>
+    <sch:title>METS external metadata type validation</sch:title>
 
 <!--
 Validates that the used metadata type inside mdWrap element is same as defined in MDTYPE or OTHERMDTYPE attribute.
-Juha Lehtonen 2013-07-08 : Initial version
-Juha Lehtonen 2013-07-17 : LIDO bugfix
-Juha Lehtonen 2014-04-15 : Technical metadata presence check added. Schema version added.
-Juha Lehtonen 2014-12-09 : Descriptive metadata standard portfolio format check moved from schema to here.
-Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema requirements.
 -->
 
-	
 	<sch:ns prefix="mets" uri="http://www.loc.gov/METS/"/>
 	<sch:ns prefix="premis" uri="info:lc/xmlns/premis-v2"/>
 	<sch:ns prefix="mix" uri="http://www.loc.gov/mix/v20"/>
@@ -46,7 +40,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
     <sch:pattern name="CheckPremisObject">
         <sch:rule context="mets:mdWrap[@MDTYPE='PREMIS:OBJECT']">
 			<sch:assert test="mets:xmlData/premis:object">
-				MDTYPE attribute is 'PREMIS:OBJECT'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				MDTYPE attribute is 'PREMIS:OBJECT'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="mets:xmlData/premis:object">
@@ -60,7 +54,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 	<sch:pattern name="CheckPremisEvent">
 		<sch:rule context="mets:mdWrap[@MDTYPE='PREMIS:EVENT']">
 			<sch:assert test="mets:xmlData/premis:event">
-				MDTYPE attribute is 'PREMIS:EVENT'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				MDTYPE attribute is 'PREMIS:EVENT'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="mets:xmlData/premis:event">
@@ -74,7 +68,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 	<sch:pattern name="CheckPremisAgent">
 		<sch:rule context="mets:mdWrap[@MDTYPE='PREMIS:AGENT']">
 			<sch:assert test="mets:xmlData/premis:agent">
-				MDTYPE attribute is 'PREMIS:AGENT'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				MDTYPE attribute is 'PREMIS:AGENT'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="mets:xmlData/premis:agent">
@@ -90,7 +84,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 			<sch:let name="metsrights_count" value="count(mets:xmlData/metsrights:RightsDeclarationMD)"/>
 			<sch:let name="real_count" value="count(mets:xmlData/*)"/>
 			<sch:assert test="$metsrights_count = 1 and $real_count = 1">
-				MDTYPE attribute is 'METSRIGHTS'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				MDTYPE attribute is 'METSRIGHTS'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="mets:xmlData/metsrights:*">
@@ -106,7 +100,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 			<sch:let name="premisrights_count" value="count(mets:xmlData/premis:rights)"/>
 			<sch:let name="real_count" value="count(mets:xmlData/*)"/>
 			<sch:assert test="$premisrights_count = 1 and $real_count = 1">
-				MDTYPE attribute is 'PREMIS:RIGHTS'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				MDTYPE attribute is 'PREMIS:RIGHTS'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="mets:xmlData/premis:rights">
@@ -120,7 +114,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 	<sch:pattern name="CheckMix">
         <sch:rule context="mets:mdWrap[@MDTYPE='NISOIMG']">
 			<sch:assert test="mets:xmlData/mix:mix">
-				MDTYPE attribute is 'NISOIMG'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				MDTYPE attribute is 'NISOIMG'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
  		<sch:rule context="mets:xmlData/mix:*">
@@ -134,7 +128,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 	<sch:pattern name="CheckTextMD">
         <sch:rule context="mets:mdWrap[@MDTYPE='TEXTMD']">
 			<sch:assert test="mets:xmlData/textmd:textMD">
-				MDTYPE attribute is 'TEXTMD'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				MDTYPE attribute is 'TEXTMD'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="mets:xmlData/textmd:*">
@@ -148,7 +142,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 	<sch:pattern name="CheckAudioMD">
         <sch:rule context="mets:mdWrap[@MDTYPE='OTHER' and @OTHERMDTYPE='AudioMD']">
 			<sch:assert test="(mets:xmlData/audiomd:AUDIOMD) or (mets:xmlData/audiomd:AUDIOSRC)">
-				OTHERMDTYPE attribute is 'AudioMD'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				OTHERMDTYPE attribute is 'AudioMD'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="mets:xmlData/audiomd:*">
@@ -162,7 +156,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 	<sch:pattern name="CheckVideoMD">
         <sch:rule context="mets:mdWrap[@MDTYPE='OTHER' and @OTHERMDTYPE='VideoMD']">
 			<sch:assert test="(mets:xmlData/videomd:VIDEOMD) or (mets:xmlData/videomd:VIDEOSRC)">
-				OTHERMDTYPE attribute is 'VideoMD'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				OTHERMDTYPE attribute is 'VideoMD'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="mets:xmlData/videomd:*">
@@ -178,7 +172,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 			<sch:let name="lido_count" value="count(mets:xmlData/lido:lido) + count(mets:xmlData/lido:lidoWrap)"/>
 			<sch:let name="real_count" value="count(mets:xmlData/*)"/>
 			<sch:assert test="$lido_count = 1 and $real_count = 1">
-				MDTYPE attribute is 'LIDO'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				MDTYPE attribute is 'LIDO'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="mets:xmlData/lido:*">
@@ -194,7 +188,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 			<sch:let name="eac_count" value="count(mets:xmlData/eac:eac-cpf)"/>
 			<sch:let name="real_count" value="count(mets:xmlData/*)"/>
 			<sch:assert test="$eac_count = 1 and $real_count = 1">
-				MDTYPE attribute is 'EAC-CPF'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				MDTYPE attribute is 'EAC-CPF'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="mets:xmlData/eac:*">
@@ -210,7 +204,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 			<sch:let name="ead_count" value="count(mets:xmlData/ead:ead)"/>
 			<sch:let name="real_count" value="count(mets:xmlData/*)"/>
 			<sch:assert test="$ead_count = 1 and $real_count = 1">
-				MDTYPE attribute is 'EAD'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				MDTYPE attribute is 'EAD'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
  		<sch:rule context="mets:xmlData/ead:*">
@@ -226,7 +220,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 			<sch:let name="vra_count" value="count(mets:xmlData/vra:vra) + count(mets:xmlData/vra:collection) + count(mets:xmlData/vra:work) + count(mets:xmlData/vra:image)"/>
 			<sch:let name="real_count" value="count(mets:xmlData/*)"/>
 			<sch:assert test="$vra_count = 1 and $real_count = 1">
-				MDTYPE attribute is 'VRA'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				MDTYPE attribute is 'VRA'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
   		<sch:rule context="mets:xmlData/vra:*">
@@ -242,7 +236,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 			<sch:let name="mods_count" value="count(mets:xmlData/mods:mods) + count(mets:xmlData/mods:modsCollection)"/>
 			<sch:let name="real_count" value="count(mets:xmlData/*)"/>
 			<sch:assert test="$mods_count = 1 and $real_count = 1">
-				MDTYPE attribute is 'MODS'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				MDTYPE attribute is 'MODS'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
    		<sch:rule context="mets:xmlData/mods:*">
@@ -258,7 +252,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 			<sch:let name="marc_count" value="count(mets:xmlData/marc21:record) + count(mets:xmlData/marc21:collection)"/>
 			<sch:let name="real_count" value="count(mets:xmlData/*)"/>
 			<sch:assert test="$marc_count = 1 and $real_count = 1">
-				MDTYPE attribute is 'MARC'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				MDTYPE attribute is 'MARC'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
   		<sch:rule context="mets:xmlData/marc21:*">
@@ -291,7 +285,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 			<sch:let name="ddicb_count" value="count(mets:xmlData/ddicb:codeBook)"/>
 			<sch:let name="real_count" value="count(mets:xmlData/*)"/>
 			<sch:assert test="($ddilc_count = $real_count) or (($ddicb_count = 1) and ($real_count = 1))">
-				MDTYPE attribute is 'DDI'. The contained XML data must match to the given type, and the top level element can be used only once in the section.
+				MDTYPE attribute is 'DDI'. The contained XML data must match to the given type, and it must have only one root element.
 			</sch:assert>
 		</sch:rule>
    		<sch:rule context="mets:xmlData/ddilc:*">
@@ -345,7 +339,7 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 			<sch:let name="en15907_count" value="count(mets:dmdSec/mets:mdWrap[@OTHERMDTYPE='EN15907'])"/>
 			<sch:let name="finmarc_count" value="count(mets:dmdSec/mets:mdWrap[@OTHERMDTYPE='FINMARC'])"/>
 			<sch:assert test="($lido_count + $eac_count + $ead_count + $vra_count + $mods_count + $marc_count + $dc_count + $ddi_count + $en15744_count + $en15907_count + $finmarc_count) > 0">
-				Descriptive metadata with one of the formats listed in the Standard portfolio does not exist.
+				Descriptive metadata with atleast one of the formats listed in the Standard portfolio does not exist.
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
@@ -354,13 +348,13 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 	<sch:pattern name="CheckDMD">
         <sch:rule context="mets:dmdSec">
 			<sch:assert test="not((./mets:mdWrap/mets:xmlData/premis:rights) or (./mets:mdWrap/mets:xmlData/metsrights:*))">
-				Rights metadata format can not be used inside descriptive metadata section.
+				Rights metadata format must not be used inside descriptive metadata section.
 			</sch:assert>
 			<sch:assert test="not((./mets:mdWrap/mets:xmlData/premis:object) or (./mets:mdWrap/mets:xmlData/textmd:*) or (./mets:mdWrap/mets:xmlData/audiomd:*) or (./mets:mdWrap/mets:xmlData/videomd:*))">
-				Technical metadata format can not be used inside descriptive metadata section.
+				Technical metadata format must not be used inside descriptive metadata section.
 			</sch:assert>
 			<sch:assert test="not((./mets:mdWrap/mets:xmlData/premis:agent) or (./mets:mdWrap/mets:xmlData/premis:event))">
-				Provenance metadata format can not be used inside descriptive metadata section.
+				Provenance metadata format must not be used inside descriptive metadata section.
 			</sch:assert>			
 		</sch:rule>
     </sch:pattern>
@@ -369,13 +363,13 @@ Juha Lehtonen 2015-02-20 : Matched to conform organizational specific schema req
 	<sch:pattern name="CheckRights">
         <sch:rule context="mets:rightsMD">
 			<sch:assert test="not((./mets:mdWrap/mets:xmlData/lido:*) or (./mets:mdWrap/mets:xmlData/ead:*) or (./mets:mdWrap/mets:xmlData/eac:*) or (./mets:mdWrap/mets:xmlData/vra:*) or (./mets:mdWrap/mets:xmlData/mods:*) or (./mets:mdWrap/mets:xmlData/marc21:*) or (./mets:mdWrap/mets:xmlData/dc:*) or (./mets:mdWrap/mets:xmlData/ddilc:*) or (./mets:mdWrap/mets:xmlData/ddicb:*))">
-				Descriptive metadata format can not be used inside rights metadata section.
+				Descriptive metadata format must not be used inside rights metadata section.
 			</sch:assert>
 			<sch:assert test="not((./mets:mdWrap/mets:xmlData/premis:object) or (./mets:mdWrap/mets:xmlData/textmd:*) or (./mets:mdWrap/mets:xmlData/audiomd:*) or (./mets:mdWrap/mets:xmlData/videomd:*))">
-				Technical metadata format can not be used inside rights metadata section.
+				Technical metadata format must not be used inside rights metadata section.
 			</sch:assert>			
 			<sch:assert test="not((./mets:mdWrap/mets:xmlData/premis:agent) or (./mets:mdWrap/mets:xmlData/premis:event))">
-				Provenance metadata format can not be used inside rights metadata section.
+				Provenance metadata format must not be used inside rights metadata section.
 			</sch:assert>			
 		</sch:rule>
     </sch:pattern>

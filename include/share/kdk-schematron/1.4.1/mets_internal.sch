@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" schemaVersion="1.4">
+<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" schemaVersion="1.4.1">
+    <sch:title>METS internal validation</sch:title>
 
 <!--
 Validates various internal issues in METS metadata.
-Juha Lehtonen 2013-07-08 : Initial version
-Juha Lehtonen 2013-10-21 : CATALOG, SPECIFICATION, CREATED, PID, PIDTYPE attribute check added. FILEID check modified.
-Juha Lehtonen 2014-02-17 : ID/IDREF check added. Fixed to meet XPath 1.0 and EXSLT.
-Juha Lehtonen 2014-04-16 : Schema version added.
-Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 -->
-
-    <sch:title>METS internal inspection</sch:title>
 	
 	<sch:ns prefix="mets" uri="http://www.loc.gov/METS/"/>
 	<sch:ns prefix="kdk" uri="http://www.kdk.fi/standards/mets/kdk-extensions"/>
@@ -22,7 +16,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
     <sch:pattern name="MetsCatalog">
         <sch:rule context="mets:mets">
 			<sch:assert test="@kdk:CATALOG or @kdk:SPECIFICATION">
-				METS root requires attribute kdk:CATALOG or kdk:SPECIFICATION (or both) where the used KDK catalog or KDK METS specification version is defined, respectively.
+				Attribute kdk:CATALOG or kdk:SPECIFICATION (or both) is required in METS root.
 			</sch:assert>
 		</sch:rule>	
 	</sch:pattern>
@@ -31,7 +25,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
     <sch:pattern name="MetsCreator">
         <sch:rule context="mets:metsHdr">
 			<sch:assert test="mets:agent[@ROLE='CREATOR' and @TYPE='ORGANIZATION']">
-				METS header requires atleast one agent where ROLE attribute is 'CREATOR' and TYPE attribute is 'ORGANIZATION'.
+				Atleast one agent, where ROLE attribute is 'CREATOR' and TYPE attribute is 'ORGANIZATION', is required in METS header.
 			</sch:assert>
 		</sch:rule>	
 	</sch:pattern>
@@ -40,50 +34,50 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
     <sch:pattern name="MetsCreatedDmd">
         <sch:rule context="mets:dmdSec">
 			<sch:assert test="@CREATED or @kdk:CREATED">
-				Use of CREATED or kdk:CREATED attribute is required.
+				Use of CREATED or kdk:CREATED attribute is required in &lt;dmdSec&gt;.
 			</sch:assert>
 			<sch:assert test="not(@CREATED and @kdk:CREATED)">
-				Both attributes CREATED and kdk:CREATED can not be used.
+				Both attributes CREATED and kdk:CREATED must not be used in &lt;dmdSec&gt;.
 			</sch:assert>			
 		</sch:rule>		
 	</sch:pattern>
     <sch:pattern name="MetsCreatedTech">
         <sch:rule context="mets:techMD">
 			<sch:assert test="@CREATED or @kdk:CREATED">
-				Use of CREATED or kdk:CREATED attribute is required.
+				Use of CREATED or kdk:CREATED attribute is required in &lt;techMD&gt;.
 			</sch:assert>
 			<sch:assert test="not(@CREATED and @kdk:CREATED)">
-				Both attributes CREATED and kdk:CREATED can not be used.
+				Both attributes CREATED and kdk:CREATED must not be used in &lt;techMD&gt;.
 			</sch:assert>			
 		</sch:rule>	
 	</sch:pattern>
     <sch:pattern name="MetsCreatedRights">
         <sch:rule context="mets:rightsMD">
 			<sch:assert test="@CREATED or @kdk:CREATED">
-				Use of CREATED or kdk:CREATED attribute is required.
+				Use of CREATED or kdk:CREATED attribute is required in &lt;rightsMD&gt;.
 			</sch:assert>
 			<sch:assert test="not(@CREATED and @kdk:CREATED)">
-				Both attributes CREATED and kdk:CREATED can not be used.
+				Both attributes CREATED and kdk:CREATED must not be used in &lt;rightsMD&gt;.
 			</sch:assert>			
 		</sch:rule>	
 	</sch:pattern>
     <sch:pattern name="MetsCreatedSource">
         <sch:rule context="mets:sourceMD">
 			<sch:assert test="@CREATED or @kdk:CREATED">
-				Use of CREATED or kdk:CREATED attribute is required.
+				Use of CREATED or kdk:CREATED attribute is required in &lt;sourceMD&gt;.
 			</sch:assert>
 			<sch:assert test="not(@CREATED and @kdk:CREATED)">
-				Both attributes CREATED and kdk:CREATED can not be used.
+				Both attributes CREATED and kdk:CREATED must not be used in &lt;sourceMD&gt;.
 			</sch:assert>			
 		</sch:rule>	
 	</sch:pattern>
     <sch:pattern name="MetsCreatedDigiprov">
         <sch:rule context="mets:digiprovMD">
 			<sch:assert test="@CREATED or @kdk:CREATED">
-				Use of CREATED or kdk:CREATED attribute is required.
+				Use of CREATED or kdk:CREATED attribute is required in &lt;digiprovMD&gt;.
 			</sch:assert>
 			<sch:assert test="not(@CREATED and @kdk:CREATED)">
-				Both attributes CREATED and kdk:CREATED can not be used.
+				Both attributes CREATED and kdk:CREATED must not be used in &lt;digiprovMD&gt;.
 			</sch:assert>			
 		</sch:rule>	
 	</sch:pattern>
@@ -92,35 +86,35 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
     <sch:pattern name="MetsPidDmd">
         <sch:rule context="mets:dmdSec">
 			<sch:assert test="count(@kdk:PID) = count(@kdk:PIDTYPE)">
-				PID attribute requires the use of PIDTYPE attribute (and vice versa).
+				Use of PID attribute requires the use of PIDTYPE attribute (and vice versa) in &lt;dmdSec&gt;.
 			</sch:assert>
 		</sch:rule>		
 	</sch:pattern>
     <sch:pattern name="MetsPidTech">
         <sch:rule context="mets:techMD">
 			<sch:assert test="count(@kdk:PID) = count(@kdk:PIDTYPE)">
-				PID attribute requires the use of PIDTYPE attribute (and vice versa).
+				Use of PID attribute requires the use of PIDTYPE attribute (and vice versa) in &lt;techMD&gt;.
 			</sch:assert>
 		</sch:rule>	
 	</sch:pattern>
     <sch:pattern name="MetsPidRights">
         <sch:rule context="mets:rightsMD">
 			<sch:assert test="count(@kdk:PID) = count(@kdk:PIDTYPE)">
-				PID attribute requires the use of PIDTYPE attribute (and vice versa).
+				Use of PID attribute requires the use of PIDTYPE attribute (and vice versa) in &lt;rightsMD&gt;.
 			</sch:assert>
 		</sch:rule>	
 	</sch:pattern>
     <sch:pattern name="MetsPidSource">
         <sch:rule context="mets:sourceMD">
 			<sch:assert test="count(@kdk:PID) = count(@kdk:PIDTYPE)">
-				PID attribute requires the use of PIDTYPE attribute (and vice versa).
+				Use of PID attribute requires the use of PIDTYPE attribute (and vice versa) in &lt;sourceMD&gt;.
 			</sch:assert>
 		</sch:rule>	
 	</sch:pattern>
     <sch:pattern name="MetsPidDigiprov">
         <sch:rule context="mets:digiprovMD">
 			<sch:assert test="count(@kdk:PID) = count(@kdk:PIDTYPE)">
-				PID attribute requires the use of PIDTYPE attribute (and vice versa).
+				Use of PID attribute requires the use of PIDTYPE attribute (and vice versa) in &lt;digiprovMD&gt;.
 			</sch:assert>
 		</sch:rule>	
 	</sch:pattern>
@@ -130,7 +124,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
     <sch:pattern name="WrapOtherType">
         <sch:rule context="mets:mdWrap[@MDTYPE='OTHER']">
 			<sch:assert test="@OTHERMDTYPE">
-				If the value of a MDTYPE attribute is 'OTHER', then the OTHERMDTYPE attribute must be used
+				If the value of a MDTYPE attribute is 'OTHER', then the OTHERMDTYPE attribute is required in &lt;mdWrap&gt; element.
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
@@ -139,7 +133,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
     <sch:pattern name="WrapOtherType">
         <sch:rule context="mets:mdWrap[@MDTYPE!='OTHER']">
 			<sch:assert test="not(@OTHERMDTYPE)">
-				If the value of a MDTYPE attribute is not 'OTHER', then the OTHERMDTYPE attribute must not be used
+				If the value of a MDTYPE attribute is not 'OTHER', then the OTHERMDTYPE attribute must not be used in &lt;mdWrap&gt; element.
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
@@ -148,7 +142,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 	<sch:pattern name="WrapChecksum">
         <sch:rule context="mets:mdWrap">
             <sch:assert test="count(@CHECKSUM) = count(@CHECKSUMTYPE)">
-                CHECKSUM attribute requires the use of CHECKSUMTYPE attribute (and vice versa) in &lt;mdWrap&gt; element. The other of these attributes is missing.
+                Use of CHECKSUM attribute requires the use of CHECKSUMTYPE attribute (and vice versa) in &lt;mdWrap&gt; element. One of these attributes is missing.
             </sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -157,7 +151,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 	<sch:pattern name="FileChecksum">
         <sch:rule context="mets:file">
             <sch:assert test="count(@CHECKSUM) = count(@CHECKSUMTYPE)">
-                CHECKSUM attribute requires the use of CHECKSUMTYPE attribute (and vice versa) in &lt;file&gt; element. The other of these attributes is missing.
+                Use of CHECKSUM attribute requires the use of CHECKSUMTYPE attribute (and vice versa) in &lt;file&gt; element. One of these attributes is missing.
             </sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -171,7 +165,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 			<sch:let name="idcount" value="count(sets:distinct(exsl:node-set($ids)))"/>
 			<sch:let name="allcount" value="count(sets:distinct(exsl:node-set($refs) | exsl:node-set($ids)))"/>
             <sch:assert test="$allcount = $idcount">
-				The DMDID attribute '<sch:value-of select="$refstr"/>' in element &lt;div&gt; contains a reference to missing element.
+				DMDID attribute '<sch:value-of select="$refstr"/>' in element &lt;div&gt; contains a reference to a missing element.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -185,7 +179,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 			<sch:let name="idcount" value="count(sets:distinct(exsl:node-set($ids)))"/>
 			<sch:let name="allcount" value="count(sets:distinct(exsl:node-set($refs) | exsl:node-set($ids)))"/>
             <sch:assert test="$allcount = $idcount">
-				The DMDID attribute '<sch:value-of select="$refstr"/>' in element &lt;file&gt; contains a reference to missing element.
+				DMDID attribute '<sch:value-of select="$refstr"/>' in element &lt;file&gt; contains a reference to a missing element.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -199,7 +193,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 			<sch:let name="idcount" value="count(sets:distinct(exsl:node-set($ids)))"/>
 			<sch:let name="allcount" value="count(sets:distinct(exsl:node-set($refs) | exsl:node-set($ids)))"/>
             <sch:assert test="$allcount = $idcount">
-				The ADMID attribute '<sch:value-of select="$refstr"/>' in element &lt;file&gt; contains a reference to missing element.
+				ADMID attribute '<sch:value-of select="$refstr"/>' in element &lt;file&gt; contains a reference to a missing element.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -213,7 +207,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 			<sch:let name="idcount" value="count(sets:distinct(exsl:node-set($ids)))"/>
 			<sch:let name="allcount" value="count(sets:distinct(exsl:node-set($refs) | exsl:node-set($ids)))"/>
             <sch:assert test="$allcount = $idcount">
-				The ADMID attribute '<sch:value-of select="$refstr"/>' in element &lt;div&gt; contains a reference to missing element.
+				ADMID attribute '<sch:value-of select="$refstr"/>' in element &lt;div&gt; contains a reference to a missing element.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -227,7 +221,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 			<sch:let name="idcount" value="count(sets:distinct(exsl:node-set($ids)))"/>
 			<sch:let name="allcount" value="count(sets:distinct(exsl:node-set($refs) | exsl:node-set($ids)))"/>
             <sch:assert test="$allcount = $idcount">
-				The FILEID attribute '<sch:value-of select="$refstr"/>' in element &lt;fptr&gt; contains a reference to missing element.
+				FILEID attribute '<sch:value-of select="$refstr"/>' in element &lt;fptr&gt; contains a reference to a missing element.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -241,7 +235,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 			<sch:let name="idcount" value="count(sets:distinct(exsl:node-set($ids)))"/>
 			<sch:let name="allcount" value="count(sets:distinct(exsl:node-set($refs) | exsl:node-set($ids)))"/>
             <sch:assert test="$allcount = $idcount">
-				The FILEID attribute '<sch:value-of select="$refstr"/>' in element &lt;area&gt; contains a reference to missing element.
+				FILEID attribute '<sch:value-of select="$refstr"/>' in element &lt;area&gt; contains a reference to a missing element.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -250,8 +244,8 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 	<sch:pattern name="IDReferencesDesc">
 		<sch:rule context="mets:dmdSec">
 			<sch:let name="id" value="normalize-space(@ID)"/>
-            <sch:assert test="count(ancestor::mets:mets//mets:div/@DMDID[contains(concat(' ', normalize-space(), ' '), concat(' ', $id, ' '))]) &gt; 0">
-				The ID attribute '<sch:value-of select="$id"/>' in element &lt;dmdSec&gt; must be referenced from DMDID attribute.
+            <sch:assert test="count(ancestor::mets:mets//mets:div[contains(concat(' ', normalize-space(@DMDID), ' '), concat(' ', $id, ' '))]) &gt; 0">
+				ID attribute '<sch:value-of select="$id"/>' in element &lt;dmdSec&gt; must be referenced from DMDID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -262,7 +256,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 			<sch:let name="id" value="normalize-space(@ID)"/>
 			<sch:assert test="count((ancestor::mets:mets//mets:file[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))]) | 
 							(ancestor::mets:mets//mets:div[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))])) &gt; 0">
-				The ID attribute '<sch:value-of select="$id"/>' in element &lt;techMD&gt; must be referenced from ADMID attribute.
+				ID attribute '<sch:value-of select="$id"/>' in element &lt;techMD&gt; must be referenced from ADMID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -273,7 +267,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 			<sch:let name="id" value="normalize-space(@ID)"/>
             <sch:assert test="count((ancestor::mets:mets//mets:file[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))]) | 
 							(ancestor::mets:mets//mets:div[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))])) &gt; 0">
-				The ID attribute '<sch:value-of select="$id"/>' in element &lt;rightsMD&gt; must be referenced from ADMID attribute.
+				ID attribute '<sch:value-of select="$id"/>' in element &lt;rightsMD&gt; must be referenced from ADMID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -284,7 +278,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 			<sch:let name="id" value="normalize-space(@ID)"/>
             <sch:assert test="count((ancestor::mets:mets//mets:file[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))]) |
 							(ancestor::mets:mets//mets:div[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))])) &gt; 0">
-				The ID attribute '<sch:value-of select="$id"/>' in element &lt;sourceMD&gt; must be referenced from ADMID attribute.
+				ID attribute '<sch:value-of select="$id"/>' in element &lt;sourceMD&gt; must be referenced from ADMID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -295,7 +289,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 			<sch:let name="id" value="normalize-space(@ID)"/>
 			<sch:assert test="count((ancestor::mets:mets//mets:file[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))]) |
 							(ancestor::mets:mets//mets:div[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))])) > 0">
-				The ID attribute '<sch:value-of select="$id"/>' in element &lt;digiprovMD&gt; must be referenced from ADMID attribute.
+				ID attribute '<sch:value-of select="$id"/>' in element &lt;digiprovMD&gt; must be referenced from ADMID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -306,7 +300,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 			<sch:let name="id" value="normalize-space(@ID)"/>
             <sch:assert test="count((ancestor::mets:mets//mets:fptr[contains(concat(' ', normalize-space(@FILEID), ' '), concat(' ', $id, ' '))]) | 
 								(ancestor::mets:mets//mets:area[contains(concat(' ', normalize-space(@FILEID), ' '), concat(' ', $id, ' '))])) &gt; 0">
-				The ID attribute '<sch:value-of select="$id"/>' in element &lt;file&gt; must be referenced from FILEID attribute.
+				ID attribute '<sch:value-of select="$id"/>' in element &lt;file&gt; must be referenced from FILEID attribute.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -325,7 +319,7 @@ Juha Lehtonen 2014-12-09 : Rules for OTHERMDTYPE attribute refined.
 	<sch:pattern name="IDReferencesFptrArea">
         <sch:rule context="mets:fptr">
 			<sch:assert test=".//mets:area or @FILEID">
-				Either FILEID attribute or &lt;area&gt; element should be used inside &lt;fprt&gt; element.
+				FILEID attribute or &lt;area&gt; element must be used inside &lt;fptr&gt; element.
 			</sch:assert>
         </sch:rule>		
 	</sch:pattern>		

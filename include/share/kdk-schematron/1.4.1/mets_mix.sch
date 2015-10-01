@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" schemaVersion="1.4">
-    <sch:title>NISOIMG (MIX) metadata issues</sch:title>
+<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" schemaVersion="1.4.1">
+    <sch:title>NISOIMG (MIX) metadata validation</sch:title>
 
 <!--
 Validates various issues in NISOIMG (MIX) metadata.
-Juha Lehtonen 2013-07-08 : Initial version
-Juha Lehtonen 2014-02-14 : False messages related to PreviousImageMetadata element fixed. Checks for JPEG2000 and bitsPerSampleValue elements added.
-Juha Lehtonen 2014-02-17 : Fixed to meet XPath 1.0 and EXSLT. A single integer for bitsPerSampleValue element accepted.
-Juha Lehtonen 2014-04-16 : JPEG2000 specific check fixed. TIFF specific check added. Schema version added.
 -->
 	
 	<sch:ns prefix="mets" uri="http://www.loc.gov/METS/"/>
@@ -85,7 +81,7 @@ Juha Lehtonen 2014-04-16 : JPEG2000 specific check fixed. TIFF specific check ad
     <sch:pattern name="PixelSamplesInColorSpace">
 	    <sch:rule context="mix:ImageColorEncoding[../../mix:BasicImageInformation/mix:BasicImageCharacteristics/mix:PhotometricInterpretation/mix:colorSpace='PaletteColor']">
 			<sch:assert test="number(mix:samplesPerPixel)=1">
-				Palette color image can contain only one sample per pixel, and &lt;mix:samplesPerPixel&gt; must be set as '1'.
+				Palette color image must contain only one sample per pixel, and &lt;mix:samplesPerPixel&gt; must be set as '1'.
 			</sch:assert>
 		</sch:rule>
         <sch:rule context="mix:ImageColorEncoding[../../mix:BasicImageInformation/mix:BasicImageCharacteristics/mix:PhotometricInterpretation/mix:colorSpace='WhiteIsZero']">
@@ -179,10 +175,10 @@ Juha Lehtonen 2014-04-16 : JPEG2000 specific check fixed. TIFF specific check ad
     <sch:pattern name="ColorMap">
         <sch:rule context="mix:PhotometricInterpretation[mix:colorSpace='PaletteColor']">
 			<sch:assert test="../../../mix:ImageAssessmentMetadata/mix:ImageColorEncoding/mix:Colormap">
-				The &lt;mix:Colormap&gt; element is obligatory for palette images.
+				The &lt;mix:Colormap&gt; element must be used for palette images.
 			</sch:assert>
 			<sch:assert test="../../../mix:ImageAssessmentMetadata/mix:ImageColorEncoding/mix:Colormap/mix:colormapReference">
-				The &lt;mix:colormapReference&gt; element is obligatory for palette images.
+				The &lt;mix:colormapReference&gt; element must be used for palette images.
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
@@ -191,7 +187,7 @@ Juha Lehtonen 2014-04-16 : JPEG2000 specific check fixed. TIFF specific check ad
     <sch:pattern name="GrayResponseUnit">
         <sch:rule context="mix:grayResponse[mix:grayResponseCurve]">
 			<sch:assert test="mix:grayResponseUnit">
-				Element &lt;mix:grayResponseUnit&gt; is obligatory, if element &lt;mix:grayResponseCurve&gt; is used.
+				Element &lt;mix:grayResponseUnit&gt; must be used, if element &lt;mix:grayResponseCurve&gt; is used.
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
@@ -203,7 +199,7 @@ Juha Lehtonen 2014-04-16 : JPEG2000 specific check fixed. TIFF specific check ad
 				&lt;mix:IccProfile&gt; must be used, since the used color space is ICC-based.
 			</sch:assert>
 			<sch:assert test="not(mix:IccProfile and mix:LocalProfile)">
-				Both &lt;mix:IccProfile&gt; or &lt;mix:LocalProfile&gt; defined. The other one should be removed.
+				Both &lt;mix:IccProfile&gt; or &lt;mix:LocalProfile&gt; defined. One of these elements must be removed.
 			</sch:assert>
 		</sch:rule>
         <sch:rule context="mix:ColorProfile">
@@ -211,7 +207,7 @@ Juha Lehtonen 2014-04-16 : JPEG2000 specific check fixed. TIFF specific check ad
 				Either &lt;mix:IccProfile&gt; or &lt;mix:LocalProfile&gt; element missing in &lt;mix:ColorProfile&gt; element.
 			</sch:assert>
 			<sch:assert test="not(mix:IccProfile and mix:LocalProfile)">
-				Both &lt;mix:IccProfile&gt; or &lt;mix:LocalProfile&gt; defined. The other one should be removed.
+				Both &lt;mix:IccProfile&gt; or &lt;mix:LocalProfile&gt; defined. One of these elements must be removed.
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
@@ -220,12 +216,12 @@ Juha Lehtonen 2014-04-16 : JPEG2000 specific check fixed. TIFF specific check ad
     <sch:pattern name="ColorProfileDeeper">		
         <sch:rule context="mix:IccProfile">
 			<sch:assert test="mix:iccProfileName or mix:iccProfileURI">
-				Either &lt;mix:iccProfileName&gt; or &lt;mix:iccProfileURI&gt; element missing in &lt;mix:IccProfile&gt; element.
+				One of the elements &lt;mix:iccProfileName&gt; or &lt;mix:iccProfileURI&gt; is missing in &lt;mix:IccProfile&gt; element.
 			</sch:assert>
 		</sch:rule>
         <sch:rule context="mix:LocalProfile">
 			<sch:assert test="mix:localProfileName">
-				Either &lt;mix:localProfileName&gt; element missing in &lt;mix:LocalProfile&gt; element.
+				Elements &lt;mix:localProfileName&gt; is missing in &lt;mix:LocalProfile&gt; element.
 			</sch:assert>
 		</sch:rule>
 	</sch:pattern>
@@ -338,10 +334,10 @@ Juha Lehtonen 2014-04-16 : JPEG2000 specific check fixed. TIFF specific check ad
 			<sch:let name="countmixsfccomb" value="count(sets:distinct(exsl:node-set($jp2_mixsfcids) | str:tokenize($admids, ' ')))"/>
 			<sch:let name="countmixjp2comb" value="count(sets:distinct(exsl:node-set($jp2_mixjp2ids) | str:tokenize($admids, ' ')))"/>
 			<sch:assert test="(($jp2_countfiles+$countadm)=$countfilescomb) or not(($jp2_countmixsfc+$countadm)=$countmixsfccomb)">
-				Metadata element &lt;mix:SpecialFormatCharacteristics&gt; missing for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
+				Metadata element &lt;mix:SpecialFormatCharacteristics&gt; must be used for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
 			</sch:assert>
 			<sch:assert test="(($jp2_countfiles+$countadm)=$countfilescomb) or not(($jp2_countmixjp2+$countadm)=$countmixjp2comb)">
-				Metadata element &lt;mix:JPEG2000&gt; missing for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
+				Metadata element &lt;mix:JPEG2000&gt; must be used for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
@@ -373,7 +369,7 @@ Juha Lehtonen 2014-04-16 : JPEG2000 specific check fixed. TIFF specific check ad
 			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($not_jp2_fileid) | str:tokenize($admids, ' ')))"/>
 			<sch:let name="countmixjp2comb" value="count(sets:distinct(exsl:node-set($jp2_mixjp2ids) | str:tokenize($admids, ' ')))"/>
 			<sch:assert test="(($not_jp2_countfiles+$countadm)=$countfilescomb) or (($jp2_countmixjp2+$countadm)=$countmixjp2comb)">
-				Metadata element &lt;mix:JPEG2000&gt; is denied for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
+				Metadata element &lt;mix:JPEG2000&gt; must not be used for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
 			</sch:assert>
 		</sch:rule>
 	</sch:pattern>
@@ -390,7 +386,7 @@ Juha Lehtonen 2014-04-16 : JPEG2000 specific check fixed. TIFF specific check ad
 			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($tiff_fileid) | str:tokenize($admids, ' ')))"/>
 			<sch:let name="countmixcomb" value="count(sets:distinct(exsl:node-set($tiff_mixids) | str:tokenize($admids, ' ')))"/>
 			<sch:assert test="(($tiff_countfiles+$countadm)=$countfilescomb) or not(($tiff_countmix+$countadm)=$countmixcomb)">
-				Metadata element &lt;mix:byteOrder&gt; missing for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
+				Metadata element &lt;mix:byteOrder&gt; must be used for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>

@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" schemaVersion="1.4">
-    <sch:title>PREMIS metadata check</sch:title>
+<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" schemaVersion="1.4.1">
+    <sch:title>PREMIS metadata validation</sch:title>
 
 <!--
 Validates various PREMIS issues.
-Juha Lehtonen 2013-10-21 : Initial version
-Juha Lehtonen 2014-02-07 : MIME type added for ARC files. Filetype versions and Pronom keys added.
-Jukka Kervinen 2014-02-12 : Added <sch:value-of select="."/> to identifier test outputs.
-Jukka Kervinen 2014-02-13 : Fixed premis:rightsIdentifierValue -> premis:rightsStatementIdentifierValue.
-Juha Lehtonen 2014-02-14 : MIME type related check restricted only in mets:techMD section
-Juha Lehtonen 2014-02-18 : Fixed to meet XPath 1.0 and EXSLT.
-Juha Lehtonen 2014-03-12 : Fixed to meet the KDK technical metadata specification.
-Juha Lehtonen 2014-04-16 : Identifier character set check added.
 -->
 
 	<sch:ns prefix="mets" uri="http://www.loc.gov/METS/"/>
@@ -57,7 +49,7 @@ Juha Lehtonen 2014-04-16 : Identifier character set check added.
     <sch:pattern name="CheckFormat">
 	    <sch:rule context="mets:techMD//premis:format">
             <sch:assert test=".//premis:formatDesignation">
-           		Missing MIME type inside the element &lt;premis:format&gt;.
+           		Format must be designated inside the element &lt;premis:format&gt;.
 			</sch:assert>
             <sch:assert test="contains(concat(' ', $mime, ' '), concat(' ', normalize-space(.//premis:formatName), ' '))">
            		Invalid MIME type '<sch:value-of select=".//premis:formatName"/>' in element &lt;premis:formatName&gt;.
@@ -68,7 +60,7 @@ Juha Lehtonen 2014-04-16 : Identifier character set check added.
            		Invalid version '<sch:value-of select=".//premis:formatVersion"/>' in element &lt;premis:formatVersion&gt;, when format name is '<sch:value-of select=".//premis:formatName"/>'. Valid values are: <sch:value-of select="normalize-space($mimeVersion[$verIndex])"/>.
 			</sch:assert>
             <sch:assert test="not(.//premis:formatRegistryKey) or contains(concat(' ', normalize-space($pronom[$verIndex]), ' '), concat(' ', normalize-space(.//premis:formatRegistryKey), ' ')) or normalize-space(.//premis:formatRegistryKey)='' or $pronom[$verIndex]=''">
-           		Invalid registry key '<sch:value-of select=".//premis:formatRegistryKey"/>' in element &lt;premis:formatRegistryKey&gt;, when format name is '<sch:value-of select=".//premis:formatName"/>'. . Valid values are: <sch:value-of select="normalize-space($pronom[$verIndex])"/>.
+           		Invalid registry key '<sch:value-of select=".//premis:formatRegistryKey"/>' in element &lt;premis:formatRegistryKey&gt;, when format name is '<sch:value-of select=".//premis:formatName"/>'. Valid values are: <sch:value-of select="normalize-space($pronom[$verIndex])"/>.
 			</sch:assert>
 		</sch:rule>
 	</sch:pattern>
@@ -106,7 +98,7 @@ Juha Lehtonen 2014-04-16 : Identifier character set check added.
             	The PREMIS object identifiers must be unique. Another agent identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
         	<sch:assert test="count(ancestor::mets:mets//premis:rightsStatementIdentifierValue[normalize-space(.) = $id]) = 0">
-            	The PREMIS object identifiers must be unique. Another rights identifier with the same value '<sch:value-of select="."/>' exists in Premis.
+            	The PREMIS object identifiers must be unique. Another rights statement identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
         </sch:rule>		
         <sch:rule context="premis:linkingObjectIdentifierValue">
@@ -131,7 +123,7 @@ Juha Lehtonen 2014-04-16 : Identifier character set check added.
             	The PREMIS event identifiers must be unique. Another agent identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
         	<sch:assert test="count(ancestor::mets:mets//premis:rightsStatementIdentifierValue[normalize-space(.) = $id]) = 0">
-            	The PREMIS event identifiers must be unique. Another rights identifier with the same value '<sch:value-of select="."/>' exists in Premis.
+            	The PREMIS event identifiers must be unique. Another rights statement identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
         </sch:rule>		
         <sch:rule context="premis:linkingEventIdentifierValue">
@@ -156,7 +148,7 @@ Juha Lehtonen 2014-04-16 : Identifier character set check added.
             	The PREMIS agent identifiers must be unique. Another agent identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
         	<sch:assert test="count(ancestor::mets:mets//premis:rightsStatementIdentifierValue[normalize-space(.) = $id]) = 0">
-            	The PREMIS agent identifiers must be unique. Another rights identifier with the same value '<sch:value-of select="."/>' exists in Premis.
+            	The PREMIS agent identifiers must be unique. Another rights statement identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
         </sch:rule>		
         <sch:rule context="premis:linkingAgentIdentifierValue">
@@ -172,22 +164,22 @@ Juha Lehtonen 2014-04-16 : Identifier character set check added.
 		<sch:rule context="premis:rightsStatementIdentifierValue">
 			<sch:let name="id" value="normalize-space(.)"/>
             <sch:assert test="count(ancestor::mets:mets//premis:objectIdentifierValue[normalize-space(.) = $id]) = 0">
-            	The PREMIS rights identifiers must be unique. Another object identifier with the same value '<sch:value-of select="."/>' exists in Premis.
+            	The PREMIS rights statement identifiers must be unique. Another object identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
             <sch:assert test="count(ancestor::mets:mets//premis:eventIdentifierValue[normalize-space(.) = $id]) = 0">
-            	The PREMIS rights identifiers must be unique. Another event identifier with the same value '<sch:value-of select="."/>' exists in Premis.
+            	The PREMIS rights statement identifiers must be unique. Another event identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
             <sch:assert test="count(ancestor::mets:mets//premis:agentIdentifierValue[normalize-space(.) = $id]) = 0">
-            	The PREMIS rights identifiers must be unique. Another agent identifier with the same value '<sch:value-of select="."/>' exists in Premis.
+            	The PREMIS rights statement identifiers must be unique. Another agent identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
             <sch:assert test="count(ancestor::mets:mets//premis:rightsStatementIdentifierValue[normalize-space(.) = $id]) = 1">
-            	The PREMIS rights identifiers must be unique. Another rights identifier with the same value '<sch:value-of select="."/>' exists in Premis.
+            	The PREMIS rights statement identifiers must be unique. Another rights identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
         </sch:rule>		
         <sch:rule context="premis:linkingRightsIdentifierValue">
 			<sch:let name="id" value="normalize-space(.)"/>
         	<sch:assert test="count(ancestor::mets:mets//premis:rightsStatementIdentifierValue[normalize-space(.) = $id]) = 1">
-            	Missing target '<sch:value-of select="."/>' with the linking rights identifier.
+            	Missing target '<sch:value-of select="."/>' with the linking rights statement identifier.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -202,49 +194,49 @@ Juha Lehtonen 2014-04-16 : Identifier character set check added.
 		<sch:rule context="premis:objectIdentifierType">
 		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens"> -->
-				Invalid characters found in premis:objectIdentifierType element value: '<sch:value-of select="."/>'
+				Invalid characters found in &lt;premis:objectIdentifierType&gt; element value: '<sch:value-of select="."/>'
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:objectIdentifierValue">
 		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens">
-				Invalid characters found in premis:objectIdentifierValue element value: '<sch:value-of select="."/>'
+				Invalid characters found in &lt;premis:objectIdentifierValue&gt; element value: '<sch:value-of select="."/>'
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:eventIdentifierType">
 		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens">
-				Invalid characters found in premis:eventIdentifierType element value: '<sch:value-of select="."/>'
+				Invalid characters found in &lt;premis:eventIdentifierType&gt; element value: '<sch:value-of select="."/>'
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:eventIdentifierValue">
 		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens">
-				Invalid characters found in premis:eventIdentifierValue element value: '<sch:value-of select="."/>'
+				Invalid characters found in &lt;premis:eventIdentifierValue&gt; element value: '<sch:value-of select="."/>'
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:agentIdentifierType">
 		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens">
-				Invalid characters found in premis:agentIdentifierType element value: '<sch:value-of select="."/>'
+				Invalid characters found in &lt;premis:agentIdentifierType&gt; element value: '<sch:value-of select="."/>'
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:agentIdentifierValue">
 		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens">
-				Invalid characters found in premis:agentIdentifierValue element value: '<sch:value-of select="."/>'
+				Invalid characters found in &lt;premis:agentIdentifierValue&gt; element value: '<sch:value-of select="."/>'
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:rightsStatementIdentifierType">
 		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens">
-				Invalid characters found in premis:rightsStatementIdentifierType element value: '<sch:value-of select="."/>'
+				Invalid characters found in &lt;premis:rightsStatementIdentifierType&gt; element value: '<sch:value-of select="."/>'
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:rightsStatementIdentifierValue">
 		   <sch:let name="countcomb" value="count(sets:distinct(str:tokenize(normalize-space(.), '') | $tokens))"/>
 		   <sch:assert test="$countcomb=$counttokens">
-				Invalid characters found in premis:rightsStatementIdentifierValue element value: '<sch:value-of select="."/>'
+				Invalid characters found in &lt;premis:rightsStatementIdentifierValue&gt; element value: '<sch:value-of select="."/>'
 			</sch:assert>
 		</sch:rule>
     </sch:pattern>
