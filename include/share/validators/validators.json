@@ -73,7 +73,8 @@
             { "formatVersion":"1.0" , "formatRegistryKey":"fmt/298" , "validator":  "ipt.validator.plugin.jhove2.Jhove2" }]
         },
         { "application/x-internet-archive" : [
-            { "formatVersion":"1.1" , "formatRegistryKey":"x-fmt/219" , "validator": "ipt.validator.plugin.jhove2.Jhove2" }]
+            { "formatVersion":"1.0" , "formatRegistryKey":"x-fmt/219" , "validator": "ipt.validator.plugin.jhove2.Jhove2" },
+            { "formatVersion":"1.1" , "formatRegistryKey":"x-fmt/410" , "validator": "ipt.validator.plugin.jhove2.Jhove2" }]
         },
         { "application/msword" : [
             { "formatVersion":"8.0" , "formatRegistryKey":"fmt/40" , "validator":"" },
