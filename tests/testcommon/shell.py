@@ -5,7 +5,7 @@ import sys
 import subprocess
 import cStringIO
 
-import testcommon.settings
+import tests.testcommon.settings
 
 
 def run_command(command):

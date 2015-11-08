@@ -3,9 +3,10 @@ import sys
 import pytest
 import uuid
 
-import testcommon.shell
-import testcommon.settings
-from testcommon.casegenerator import pytest_generate_tests
+from tests import testcommon
+from tests.testcommon import settings
+from tests.testcommon import shell
+from tests.testcommon.casegenerator import pytest_generate_tests
 
 from tempfile import NamedTemporaryFile
 import ipt.validator.plugin.xmllint
@@ -93,7 +94,7 @@ class TestCommandLineTools:
 
         message = "\n".join(["got:", str(returncode), "expected:",
                              str(expected_result["returncode"]
-                                 ), "stdout:", stdout, "stderr:"])
+                                 ), "stdout:", stdout, "stderr:", stderr])
 
         assert returncode == expected_result["returncode"], message
 
