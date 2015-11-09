@@ -122,7 +122,7 @@ class LXML(object):
             'format': {
                 'mimetype': format["mimetype"],
                 'version': format["version"],
-                'registery_key': format["registry_key"]
+                'registry_key': format["registry_key"]
             }
         }
 
