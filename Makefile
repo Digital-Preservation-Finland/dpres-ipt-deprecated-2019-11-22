@@ -72,6 +72,12 @@ coverage:
 	coverage -r -m
 	coverage -b -d coverage-html
 
-clean:
+clean: clean-rpm
 	find . -iname '*.pyc' -type f -delete
 	find . -iname '__pycache__' -exec rm -rf '{}' \; | true
+
+clean-rpm:
+	rm -rf rpmbuild
+
+rpm: clean-rpm
+	build-rpm.sh include/rhel6
