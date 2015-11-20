@@ -70,7 +70,7 @@
         },
         { "application/warc" : [
             { "formatVersion":"0.17" , "formatRegistryKey":"fmt/298" , "validator": "ipt.validator.plugin.warctools.WarcTools" },
-            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/298" , "validator":  "ipt.validator.plugin.jhove2.Jhove2" }]
+            { "formatVersion":"1.0" , "formatRegistryKey":"fmt/298" , "validator":  "ipt.validator.plugin.warctools.WarcTools" }]
         },
         { "application/x-internet-archive" : [
             { "formatVersion":"1.0" , "formatRegistryKey":"x-fmt/219" , "validator": "ipt.validator.plugin.jhove2.Jhove2" },
