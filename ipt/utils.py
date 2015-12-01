@@ -4,7 +4,8 @@ import subprocess
 
 
 def run_command(cmd, stdout=subprocess.PIPE):
-    """Execute command.
+    """Execute command. Validator specific error handling is supported
+    by forwarding exceptions.
 
     :returns: Tuple (statuscode, stdout, stderr)
     """
@@ -15,5 +16,9 @@ def run_command(cmd, stdout=subprocess.PIPE):
 
     (stdout, stderr) = proc.communicate()
     statuscode = proc.returncode
+
+    if statuscode == 1:
+        if 'IOError' in stderr:
+            raise IOError(stderr)
 
     return statuscode, stdout, stderr
