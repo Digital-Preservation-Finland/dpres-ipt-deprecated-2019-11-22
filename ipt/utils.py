@@ -17,8 +17,10 @@ def run_command(cmd, stdout=subprocess.PIPE):
     (stdout, stderr) = proc.communicate()
     statuscode = proc.returncode
 
-    if statuscode == 1:
+    if statuscode != 0:
         if 'IOError' in stderr:
             raise IOError(stderr)
+        if 'Exception' in stderr:
+            raise Exception(stderr)
 
     return statuscode, stdout, stderr
