@@ -1,0 +1,9 @@
+Release 0.35
+
+NEW:
+Implemented arc/warc validation with Warctools. Jhove2 is no more used for this.
+
+validators.json has to be updated.
+
+warctools rpm has to be updated, since this release is using version 4.8.3
+
