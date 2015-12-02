@@ -2,6 +2,9 @@
 
 import subprocess
 
+class UnknownException(Exception):
+    """Unknown error."""
+    pass
 
 def run_command(cmd, stdout=subprocess.PIPE):
     """Execute command. Validator specific error handling is supported
@@ -21,6 +24,6 @@ def run_command(cmd, stdout=subprocess.PIPE):
         if 'IOError' in stderr:
             raise IOError(stderr)
         if 'Exception' in stderr:
-            raise Exception(stderr)
+            raise UnknownException(stderr)
 
     return statuscode, stdout, stderr
