@@ -6,6 +6,12 @@ class UnknownException(Exception):
     """Unknown error."""
     pass
 
+
+class ValidationException(Exception):
+    """Validator error."""
+    pass
+
+
 def run_command(cmd, stdout=subprocess.PIPE):
     """Execute command. Validator specific error handling is supported
     by forwarding exceptions.
