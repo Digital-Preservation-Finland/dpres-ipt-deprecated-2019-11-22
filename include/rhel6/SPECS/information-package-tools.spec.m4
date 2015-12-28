@@ -1,5 +1,5 @@
 # vim:ft=spec
- 
+
 %define file_prefix M4_FILE_PREFIX
 %define file_ext M4_FILE_EXT
 
@@ -24,6 +24,7 @@ Requires: python python-mimeparse python-dateutil xml-common pymongo
 Requires: libxslt unzip jhove jhove2 python-setuptools python-lxml
 # ClamAV installation requires these to work
 Requires: clamav clamav-db libtool-ltdl
+Requires: warc-tools >= 4.8.3
 BuildRequires:	pytest
 
 %description
