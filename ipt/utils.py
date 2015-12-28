@@ -15,7 +15,8 @@ class ValidationException(Exception):
 def run_command(cmd, stdout=subprocess.PIPE):
     """Execute command. Validator specific error handling is supported
     by forwarding exceptions.
-
+    :cmd: commandline command.
+    :stdout: a file handle can be given, for directing stdout to file.
     :returns: Tuple (statuscode, stdout, stderr)
     """
     proc = subprocess.Popen(cmd,
