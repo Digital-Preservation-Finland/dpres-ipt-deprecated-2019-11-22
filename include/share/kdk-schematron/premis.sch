@@ -87,13 +87,14 @@ Validates various PREMIS issues.
 	<!-- Check that Premis object identifiers are unique and linkingObjects have a target -->
 	<sch:pattern name="ObjectID">
         <sch:rule context="premis:objectIdentifierValue">
-			<sch:let name="id" value="normalize-space(.)"/>
-            <sch:assert test="count(ancestor::mets:mets//premis:objectIdentifierValue[normalize-space(.) = $id]) = 1">
+		 <sch:let name="id" value="normalize-space(.)"/>
+            <!-- These checks are disabled due KDKPAS-1138  
+	    <sch:assert test="count(ancestor::mets:mets//premis:objectIdentifierValue[normalize-space(.) = $id]) = 1">
             	The PREMIS object identifiers must be unique. Another object identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
             <sch:assert test="count(ancestor::mets:mets//premis:eventIdentifierValue[normalize-space(.) = $id]) = 0">
             	The PREMIS object identifiers must be unique. Another event identifier with the same value '<sch:value-of select="."/>' exists in Premis.
-			</sch:assert>
+	    </sch:assert> -->
             <sch:assert test="count(ancestor::mets:mets//premis:agentIdentifierValue[normalize-space(.) = $id]) = 0">
             	The PREMIS object identifiers must be unique. Another agent identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
@@ -112,19 +113,22 @@ Validates various PREMIS issues.
 	<!-- Check that Premis event identifiers are unique and linkingObjects have a target -->
 	<sch:pattern name="EventID">
         <sch:rule context="premis:eventIdentifierValue">
-			<sch:let name="id" value="normalize-space(.)"/>
+		<sch:let name="id" value="normalize-space(.)"/>
+	    <!-- These checks are disabled due KDKPAS-1138
             <sch:assert test="count(ancestor::mets:mets//premis:objectIdentifierValue[normalize-space(.) = $id]) = 0">
             	The PREMIS event identifiers must be unique. Another object identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
+	    
             <sch:assert test="count(ancestor::mets:mets//premis:eventIdentifierValue[normalize-space(.) = $id]) = 1">
             	The PREMIS event identifiers must be unique. Another event identifier with the same value '<sch:value-of select="."/>' exists in Premis.
-			</sch:assert>
+	    </sch:assert> -->
             <sch:assert test="count(ancestor::mets:mets//premis:agentIdentifierValue[normalize-space(.) = $id]) = 0">
             	The PREMIS event identifiers must be unique. Another agent identifier with the same value '<sch:value-of select="."/>' exists in Premis.
 			</sch:assert>
-        	<sch:assert test="count(ancestor::mets:mets//premis:rightsStatementIdentifierValue[normalize-space(.) = $id]) = 0">
+            <sch:assert test="count(ancestor::mets:mets//premis:rightsStatementIdentifierValue[normalize-space(.) = $id]) = 0">
             	The PREMIS event identifiers must be unique. Another rights statement identifier with the same value '<sch:value-of select="."/>' exists in Premis.
-			</sch:assert>
+	    </sch:assert>
+	
         </sch:rule>		
         <sch:rule context="premis:linkingEventIdentifierValue">
 			<sch:let name="id" value="normalize-space(.)"/>
