@@ -28,6 +28,9 @@ def main(arguments=None):
 
     filename = args[0]
 
+    if os.path.isdir(filename):
+        filename = os.path.join(filename, 'mets.xml')
+
     validate = ipt.validator.plugin.schematron.XSLT()
 
     result = validate.validate_file(options.schemapath, filename)
