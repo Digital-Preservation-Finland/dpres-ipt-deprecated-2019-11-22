@@ -7,3 +7,7 @@ validators.json has to be updated.
 
 warctools rpm has to be updated, since this release is using version 4.8.3
 
+FIX:
+xmlint huge-parameter added to make large file validation work.
+
+
