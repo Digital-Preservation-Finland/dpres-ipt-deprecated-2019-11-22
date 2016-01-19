@@ -3,11 +3,16 @@ Release 0.35
 NEW:
 Implemented arc/warc validation with Warctools. Jhove2 is no more used for this.
 
-validators.json has to be updated.
+Configuration changes: validators.json has to be updated.
 
-warctools rpm has to be updated, since this release is using version 4.8.3
+warctools rpm has to be updated, since this release is using version 4.8.3.
+Warctools update also fixes the incorrect trailing newline bug with some
+warcs.
+
+NEW:
+HTML valdiation implemented with jhove.
 
 FIX:
-xmlint huge-parameter added to make large file validation work.
+xmllint huge-parameter added to make large file validation work.
 
 
