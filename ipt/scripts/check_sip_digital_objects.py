@@ -3,7 +3,7 @@
 
 import os
 import sys
-import optparse
+import argparse
 import ipt.validator.filelist
 import ipt.mets.parser
 import ipt.version
@@ -12,27 +12,22 @@ from ipt.premis import premis as p
 
 def main(arguments=None):
 
-    usage = "usage: %prog <sip-path> <linking-sip-object-type> " \
-        "<linking-sip-object-id>"
-    parser = optparse.OptionParser(usage=usage)
-    parser.add_option("-c", "--configfile", dest="config_filename",
-                      default=None, help="JSON configuration file",
-                      metavar="PATH")
-    (options, args) = parser.parse_args(arguments)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", "--configfile", help="JSON configuration file")
+    parser.add_argument('sip_path')
+    parser.add_argument('linking_sip_type')
+    parser.add_argument('linking_sip_id')
+    args = parser.parse_args(arguments)
 
-    if(len(args) != 3):
-        parser.print_help()
-        return 1
-
-    sip_path = args[0]
-    linking_sip_type = args[1]
-    linking_sip_id = args[2]
+    sip_path = args.sip_path
+    linking_sip_type = args.linking_sip_type
+    linking_sip_id = args.linking_sip_id
 
     mets_filename = os.path.abspath(os.path.join(sip_path, 'mets.xml'))
     basepath = os.path.abspath(os.path.dirname(mets_filename))
 
     validator = ipt.validator.filelist.Validator(basepath)
-    validator.load_config(options.config_filename)
+    validator.load_config(args.configfile)
     mets_parser = ipt.mets.parser.LXML(mets_filename)
     filelist = mets_parser.get_fileinfo_iterator()
 
