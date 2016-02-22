@@ -1,5 +1,6 @@
 import lxml.etree
 import urllib
+from email.message import Message
 
 NAMESPACES = {'xlink': 'http://www.w3.org/1999/xlink',
               'm': 'http://www.loc.gov/METS/',
@@ -60,7 +61,7 @@ class LXML(object):
             # Note: ADMID may contains several IDs separated with spaces
             admid = mets_file.attrib['ADMID']
             fileinfo = self.get_fileinfo_with_admid(admid)
-            # print "yield fileinfo", fileinfo
+
             yield fileinfo
 
     def get_fileinfo_array(self):
@@ -92,26 +93,6 @@ class LXML(object):
         filename = filename.replace('file://', '')
         object_id = self.get_file_object_id_with_admid(admid)
 
-        if fixity is None:
-            fixity = {
-                "algorithm": None,
-                "digest": None
-            }
-
-        if format is None:
-            format = {
-                "version": None,
-                "mimetype": None,
-                "registry_key": None
-            }
-
-        # FIXME: There's a unit test case which bypasses mets.xml input and
-        #        assumes that there's object_id
-        if object_id is None:
-            object_id = {
-                "value": ""
-            }
-
         return {
             'filename': filename,
             'object_id': object_id,
@@ -119,11 +100,26 @@ class LXML(object):
                 'algorithm': fixity["algorithm"],
                 'digest': fixity["digest"]
             },
-            'format': {
-                'mimetype': format["mimetype"],
-                'version': format["version"],
-                'registry_key': format["registry_key"]
-            }
+            'format': format
+        }
+
+
+    def parse_mimetype(self, mimetype):
+        """Parse mimetype information from Content-type string.
+
+        ..seealso:: https://www.ietf.org/rfc/rfc2045.txt
+        """
+        msg = Message()
+        msg.add_header('Content-type', mimetype)
+
+        mimetype = msg.get_content_type()
+        charset = msg.get_param('charset')
+        alt_format = msg.get_param('alt-format')
+
+        return {
+            'mimetype': mimetype,
+            'charset': charset,
+            'alt-format': alt_format
         }
 
     def get_filename_with_admid(self, admid):
@@ -176,18 +172,15 @@ class LXML(object):
         query = '//m:techMD[%s]//p:format' % attr_expr
         format = self.xmlroot().xpath(query, namespaces=NAMESPACES)
 
-        # print "query", "admid", query, admid
-        # print "format", format
-
         if not format:
             return None
 
         format = format[0]
 
-        # print lxml.etree.tostring(format)
 
         name = format.xpath('.//p:formatName', namespaces=NAMESPACES)
         name = ' '.join(map(lambda x: x.text, name))
+        name = self.parse_mimetype(name)
 
         version = format.xpath('.//p:formatVersion', namespaces=NAMESPACES)
         version = ' '.join(map(lambda x: x.text, version))
@@ -196,9 +189,13 @@ class LXML(object):
             './/p:formatRegistryKey', namespaces=NAMESPACES)
         registry_key = ' '.join(map(lambda x: x.text, registry_key))
 
-        return {"mimetype": name,
-                "version": version,
-                "registry_key": registry_key}
+        return {
+            'mimetype': name['mimetype'],
+            'charset': name['charset'],
+            'alt-format': name['alt-format'],
+            'version': version,
+            'registry_key': registry_key
+        }
 
     def get_file_fixity_with_admid(self, admid):
         """ Return dict that contains fixity digest and algorithm
