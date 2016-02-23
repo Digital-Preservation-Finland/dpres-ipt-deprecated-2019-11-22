@@ -30,8 +30,6 @@ class Checker:
 
         self.ignore_filenames = ['mets.xml', 'varmiste.sig']
 
-        # Debugging output
-        # print self.mets.xmlroot()
 
     def extract_checksums_from_mets(self):
         """Find all filenames with checksums from the given ElementTree.
