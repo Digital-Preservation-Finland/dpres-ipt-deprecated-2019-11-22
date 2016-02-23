@@ -164,14 +164,15 @@ class TestFileExistenceAndChecksums:
                 "mets_file": 'mets.xml',
                 "checksums": [
                     "kuvat/P1020137.JPG:md5:aaaaaaaaaaaaaaaaa",
-                    "kuvat/PICT0081.JPG:md5:762108c2ca8680fdb55fb67170a55e70",
+                    "kuvat/PICT0081.JPG:md5:762108c2ca8680fdb55fb67170a55e71",
                     "kuvat/PICT0102.JPG:md5:11c128030f203b76f2e30eeb7454c42b"],
                 "expected_result":
-                [('Checksum does not match. expected: 3880512309cbf38fe46ff8cb0e73935e got: 8be50ba15a2cd28c59b8d6248ef3da58', 'mets.xml', 2),
-                 ('File does not exist', 'kuvat/P1020137.JPG', 2),
-                 ('Checksum OK md5', 'kuvat/PICT0081.JPG', 0),
+                [('File does not exist', 'kuvat/P1020137.JPG', 2),
+                 ('Checksum does not match. expected: 762108c2ca8680fdb' \
+                  '55fb67170a55e71 got: 762108c2ca8680fdb55fb67170a55e70',
+                  'kuvat/PICT0081.JPG', 2),
                  ('Checksum OK md5', 'kuvat/PICT0102.JPG', 0),
-                 ('Nonlisted file', 'varmiste.sig', 2)]
+                 ('Nonlisted file', 'extra.txt', 2)]
             }
         ],
     }
