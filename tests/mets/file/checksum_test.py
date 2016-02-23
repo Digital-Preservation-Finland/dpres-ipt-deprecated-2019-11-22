@@ -1,19 +1,19 @@
+"""Test module for checksum.py"""
 # Common test imports / boilerplate
 import os
 import sys
+import shutil
+import tempfile
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..'))
-import pytest
+
 import testcommon.settings
 from testcommon.casegenerator import pytest_generate_tests
 
 # Module to test
 import ipt.mets.file.checksum
 
-# Other imports
-from hashlib import md5, sha1
-import shutil
-import tempfile
 
 DATAROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '../../', 'data'))
