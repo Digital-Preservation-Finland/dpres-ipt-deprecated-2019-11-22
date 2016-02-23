@@ -19,7 +19,7 @@ import shutil
 
 TEMP_DIR = '/tmp/test-create-aip'
 
-TEST_SIP_NAME = "CSC_test001"
+TEST_SIP_NAME = "CSC_test001_signature"
 TEST_SIP_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                             '../data/test-sips', TEST_SIP_NAME)
 
@@ -32,7 +32,7 @@ EXPECTED_FILES = [
     "data/kuvat/PICT0081.JPG",
     "data/kuvat/PICT0102.JPG",
     "data/mets.xml",
-    "data/varmiste.sig",
+    "data/signature.sig",
     "bag-info.txt",
     "bagit.txt",
     "manifest-md5.txt"]
