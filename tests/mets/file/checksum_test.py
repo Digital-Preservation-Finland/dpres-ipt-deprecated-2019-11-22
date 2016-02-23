@@ -138,24 +138,19 @@ class TestFileExistenceAndChecksums:
                 "testcase": 'Test succesful validation',
                 "sip_name": 'CSC_test001',
                 "mets_file": 'mets.xml',
-                "checksums": ["mets.xml:md5:3880512309cbf38fe46ff8cb0e73935e",
-                              "kuvat/P1020137.JPG:md5:c29f1b25b22318d11bc7f60cdb48029d",
+                "checksums": ["kuvat/P1020137.JPG:md5:c29f1b25b22318d11bc7f60cdb48029d",
                               "kuvat/PICT0081.JPG:md5:762108c2ca8680fdb55fb67170a55e70",
-                              "kuvat/PICT0102.JPG:md5:11c128030f203b76f2e30eeb7454c42b",
-                              "varmiste.sig:md5:638b00faf5b39816eded1ede9fe43eec"],
+                              "kuvat/PICT0102.JPG:md5:11c128030f203b76f2e30eeb7454c42b"],
                 "expected_result":
-                [('Checksum OK md5', 'mets.xml', 0),
-                 ('Checksum OK md5', 'kuvat/P1020137.JPG', 0),
+                [('Checksum OK md5', 'kuvat/P1020137.JPG', 0),
                  ('Checksum OK md5', 'kuvat/PICT0081.JPG', 0),
-                 ('Checksum OK md5', 'kuvat/PICT0102.JPG', 0),
-                 ('Checksum OK md5', 'varmiste.sig', 0)]
+                 ('Checksum OK md5', 'kuvat/PICT0102.JPG', 0)]
             },
             {
                 "testcase": 'Test extra files files',
                 "sip_name": 'CSC_test002',
                 "mets_file": 'mets.xml',
                 "checksums": [
-                    "mets.xml:md5:3880512309cbf38fe46ff8cb0e73935e",
                     "kuvat/P1020137.JPG:md5:aaaaaaaaaaaaaaaaa",
                     "kuvat/PICT0081.JPG:md5:762108c2ca8680fdb55fb67170a55e70",
                     "kuvat/PICT0102.JPG:md5:11c128030f203b76f2e30eeb7454c42b"],
