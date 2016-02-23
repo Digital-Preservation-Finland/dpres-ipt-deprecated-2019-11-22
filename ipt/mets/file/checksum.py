@@ -15,7 +15,7 @@ class ValidationResult:
         return "foo"
 
 
-class Checker:
+class Checker(object):
     """
     Checker class.
     """
