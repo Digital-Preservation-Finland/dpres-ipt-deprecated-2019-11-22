@@ -49,7 +49,7 @@ class ManifestSMIME(object):
         '/usr/share/information-package-tools/ssl/keys/kdk-pas-sip-signing-key.pem'
     public_key = \
         '/usr/share/information-package-tools/ssl/keys/kdk-pas-sip-signing-key.pub'
-    signature_file = 'varmiste.sig'
+    signature_file = 'signature.sig'
 
     country = 'FI'
     state = 'Uusimaa'
