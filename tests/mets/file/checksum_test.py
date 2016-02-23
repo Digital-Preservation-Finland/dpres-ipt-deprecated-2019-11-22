@@ -95,43 +95,6 @@ class TestFindChecksumsAndFiles:
 
 class TestFileExistenceAndChecksums:
 
-    #
-    # TODO: Implement these tests with parametrized test below
-    #
-
-    #    def test_ok_list(self):
-    #        checksums =
-    #        StringIO("""./mets.xml:md5:ce8e844458963506e0bf790ec1a9546e
-    #./kuvat/P1020137.JPG:md5:c29f1b25b22318d11bc7f60cdb48029d
-    #./kuvat/PICT0081.JPG:md5:762108c2ca8680fdb55fb67170a55e70
-    #./kuvat/PICT0102.JPG:md5:11c128030f203b76f2e30eeb7454c42b""")
-    #        assert mets.file.checksum.check_file_existence_and_checksums(
-    #            checksums, os.path.join(SIPDIR, 'CSC_test001')) == [
-    #                ('varmiste.sig', u'Nonlisted file')]
-    #
-    #    def test_missing_files(self):
-    #        checksums =
-    #        StringIO("""./mets.xml:md5:ce8e844458963506e0bf790ec1a9546e
-    # missing_file:md5:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-    #./kuvat/P1020137.JPG:md5:c29f1b25b22318d11bc7f60cdb48029d
-    #./kuvat/PICT0081.JPG:md5:762108c2ca8680fdb55fb67170a55e70
-    #./kuvat/PICT0102.JPG:md5:11c128030f203b76f2e30eeb7454c42b""")
-    #        assert set(mets.file.checksum.check_file_existence_and_checksums(
-    #            checksums, os.path.join(SIPDIR, 'CSC_test001'))) == set([
-    #                ('missing_file:md5:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-    #                'File does not exist'),
-    #                ('varmiste.sig', u'Nonlisted file')])
-    #
-    #    def test_extra_files(self):
-    #        checksums =
-    #        StringIO("""./mets.xml:md5:ce8e844458963506e0bf790ec1a9546e
-    #./kuvat/PICT0081.JPG:md5:762108c2ca8680fdb55fb67170a55e70
-    #./kuvat/PICT0102.JPG:md5:11c128030f203b76f2e30eeb7454c42b""")
-    #        assert set(mets.file.checksum.check_file_existence_and_checksums(
-    #            checksums, os.path.join(SIPDIR, 'CSC_test001'))) == set([
-    #                ('kuvat/P1020137.JPG', 'Nonlisted file'),
-    #                ('varmiste.sig', u'Nonlisted file')])
-
     testcases = {
         "test_check_file_existence_and_checksums": [
             {
