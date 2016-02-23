@@ -27,9 +27,7 @@ class Checker(object):
 
         self.mets = ipt.mets.parser.LXML(mets_filename)
         self.sip_dir = sip_dir
-
-        self.ignore_filenames = ['mets.xml', 'varmiste.sig']
-
+        self.ignore_filenames = ['mets.xml', 'varmiste.sig', 'signature.sig']
 
     def extract_checksums_from_mets(self):
         """Find all filenames with checksums from the given ElementTree.
