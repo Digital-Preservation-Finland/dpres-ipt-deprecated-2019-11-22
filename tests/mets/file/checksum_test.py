@@ -147,6 +147,18 @@ class TestFileExistenceAndChecksums:
                  ('Checksum OK md5', 'kuvat/PICT0102.JPG', 0)]
             },
             {
+                "testcase": 'Test succesful validation of signature.sig',
+                "sip_name": 'CSC_test001_signature',
+                "mets_file": 'mets.xml',
+                "checksums": ["kuvat/P1020137.JPG:md5:c29f1b25b22318d11bc7f60cdb48029d",
+                              "kuvat/PICT0081.JPG:md5:762108c2ca8680fdb55fb67170a55e70",
+                              "kuvat/PICT0102.JPG:md5:11c128030f203b76f2e30eeb7454c42b"],
+                "expected_result":
+                [('Checksum OK md5', 'kuvat/P1020137.JPG', 0),
+                 ('Checksum OK md5', 'kuvat/PICT0081.JPG', 0),
+                 ('Checksum OK md5', 'kuvat/PICT0102.JPG', 0)]
+            },
+            {
                 "testcase": 'Test extra files files',
                 "sip_name": 'CSC_test002',
                 "mets_file": 'mets.xml',
