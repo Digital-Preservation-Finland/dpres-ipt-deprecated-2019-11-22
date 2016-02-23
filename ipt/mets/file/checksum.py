@@ -1,3 +1,5 @@
+"""Module for checking files in mets and sip. File existence and checksums
+are verified."""
 import os
 
 import ipt.mets.parser
@@ -6,25 +8,13 @@ import ipt.fileutils.checksum
 import ipt.fileutils.filefinder
 
 
-class ValidationResult:
-
-    def __init__(self):
-        pass
-
-    def __str__(self):
-        return "foo"
-
-
 class Checker(object):
     """
     Checker class.
     """
-    ignore_filenames = None
-    sip_dir = None
-    xmlroot = None
 
     def __init__(self, mets_filename=None, sip_dir=None):
-
+        """init."""
         self.mets = ipt.mets.parser.LXML(mets_filename)
         self.sip_dir = sip_dir
         self.ignore_filenames = ['mets.xml', 'varmiste.sig', 'signature.sig']
@@ -60,14 +50,15 @@ class Checker(object):
         - "Checksum invalid" if the checksum does not match the algorithm
           (too long, too short, or nonvalid characters).
 
-        - "Checksum mismatch" if the calculated checksum differs from the given.
+        - "Checksum mismatch" if the calculated checksum differs from the
+          given.
 
         - "File does not exist" if a file path given in checksum file is not
           found in the filesystem.
 
         - "Nonlisted file" if there is a file in the working folder, that no
-          checksum is given for. In this case the first part of the tuple is the
-          filename."""
+          checksum is given for. In this case the first part of the tuple is
+          the filename."""
 
         results = []
         errors = []
@@ -122,13 +113,6 @@ class Checker(object):
 
         return results, errors
 
-    def checkFileExistence(results, files):
-        """Check wether files mentioned in mets exist."""
-
-    # TODO: These functions are refactored and fixed from old passi-sources
-    #
-    # Just brought up to working point and fixed tests. Major code cleanup
-    # still needed.
     def get_files_and_checksums_from_mets_file(self, filename):
         """Calls checksum validation between mets file and files
 
@@ -167,6 +151,7 @@ class Checker(object):
         return errors
 
     def remove_ignored_files(self, files):
+        """ remove ignored files."""
         for filename in self.ignore_filenames:
             if filename in files:
                 files.remove(filename)
