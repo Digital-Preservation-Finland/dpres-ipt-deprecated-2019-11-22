@@ -197,7 +197,6 @@ class TestFileExistenceAndChecksums:
         # Run test
         checksumtool = ipt.mets.file.checksum.Checker()
         checksumtool.sip_dir = sip_path
-        checksumtool.ignore_filenames = []
         test_result = checksumtool.check_file_existence_and_checksums(
             mets_files)
 
