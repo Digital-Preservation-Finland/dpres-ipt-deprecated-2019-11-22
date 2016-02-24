@@ -16,6 +16,8 @@ Digital signature for xml-file(or any file) is a manifest file
 checksums in the directory of varmiste.sig given in arguments. To authenticate
 creator of manifest it is signed with OpenSSL / SMIME digital signature.
 
+Note: varmiste.sig is interchangeable with name signature.sig
+
 For more information about OpenSSL/SMIME signatures and RSA public/private
 keypairs see:
 

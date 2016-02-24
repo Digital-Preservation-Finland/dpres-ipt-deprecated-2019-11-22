@@ -116,7 +116,7 @@ class ManifestSMIME(object):
         print stdout, stderr
 
     def write_signature_file(self):
-        """ Write SIP signature file varmiste.sig with checksums of all .xml
+        """ Write SIP signature file varmiste.sig/signature.sig with checksums of all .xml
         files in manifest_base_path
 
         Signature file is formatted as following:
@@ -190,7 +190,7 @@ class ManifestSMIME(object):
         os.remove(manifest_filename)
 
     def verify_signature_file(self):
-        """ Verify SIP signature varmiste.sig file """
+        """ Verify SIP signature varmiste.sig/signature.sig file """
 
         cmd = ['openssl', 'smime', '-verify', '-in',
                os.path.join(self.manifest_base_path, self.signature_file),
