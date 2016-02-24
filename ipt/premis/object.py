@@ -323,9 +323,9 @@ class Object(lxml.etree._ElementTree):
 
 
         if fileinfo:
-            self.originalName = fileinfo.filename
-            self.dependencyIdentifierType = fileinfo.object_id['type']
-            self.dependencyIdentifierValue = fileinfo.object_id['value']
+            self.originalName = fileinfo['filename']
+            self.dependencyIdentifierType = fileinfo['object_id']['type']
+            self.dependencyIdentifierValue = fileinfo['object_id']['value']
 
         if relatedObject:
             self.relationshipType = "structural"

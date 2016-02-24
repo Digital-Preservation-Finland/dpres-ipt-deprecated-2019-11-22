@@ -45,9 +45,6 @@ def main(arguments=None):
     for fileinfo, statuscode, stdout, stderror, _validator in \
             zip(mets_filelist, *validation_results):
 
-        validated_file = ipt.validator.filelist.FileInfo(fileinfo)
-        validated_file.from_dict(fileinfo)
-
         related_object = p.Object()
         related_object.identifier = ""
         related_object.identifierType = linking_sip_type
@@ -64,7 +61,7 @@ def main(arguments=None):
 
         linking_object = p.Object()
         linking_object.fromvalidator(
-            fileinfo=validated_file,
+            fileinfo=fileinfo,
             relatedObject=related_object)
 
         validation_event = p.Event()

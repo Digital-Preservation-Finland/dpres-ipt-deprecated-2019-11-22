@@ -28,24 +28,18 @@ CATALOGPATH = os.path.join(
 
 class TestPremisClass:
 
-    # Generate random fileinfo array: seven random strings in a array
-    fileinfo = ['%030x' % random.randrange(16 ** 30) for _ in range(0, 8)]
-
     testcases = {
         "test_premis_insert":
         [{
             "testcase": 'Test premis class insert method',
-            "fileinfo": fileinfo
         }],
         "test_premis_xsd_validation":
         [{
             "testcase": 'Test XSD validation of Premis report',
-            "fileinfo": fileinfo
         }],
         "test_init_event_class":
         [{
             "testcase": 'Test generation for successful validation',
-            "fileinfo": fileinfo,
             "arguments": {
                 "return_value": 0,
                 "stdout": "stdout message",
@@ -61,7 +55,6 @@ class TestPremisClass:
         },
             {
             "testcase": 'Test event generation for unsuccessful validation',
-            "fileinfo": fileinfo,
             "arguments": {
                 "return_value": 1,
                 "stdout": "stdout message",
@@ -77,7 +70,7 @@ class TestPremisClass:
         }]
     }
 
-    def test_premis_xsd_validation(self, testcase, fileinfo):
+    def test_premis_xsd_validation(self, testcase):
 
         premis_document = premis.Premis()
         object = premis.Object()
@@ -101,12 +94,9 @@ class TestPremisClass:
 
         print premis_document.serialize()
 
-    def test_premis_insert(self,
-                           testcase,
-                           fileinfo):
+    def test_premis_insert(self, testcase):
 
-        fileinfo = ipt.validator.filelist.FileInfo(fileinfo)
-
+        fileinfo = {}
         object = premis.Object()
         object.fromvalidator(fileinfo=fileinfo)
         event = premis.Event()
@@ -129,11 +119,10 @@ class TestPremisClass:
         prem2.fromstring(prem.serialize())
         print prem2.serialize()
 
-    def test_init_event_class(self, testcase, fileinfo, arguments,
+    def test_init_event_class(self, testcase, arguments,
                               expected_result):
 
-        fileinfo = ipt.validator.filelist.FileInfo(fileinfo)
-
+        fileinfo = {}
         object = premis.Object()
         object.fromvalidator(fileinfo=fileinfo)
 
