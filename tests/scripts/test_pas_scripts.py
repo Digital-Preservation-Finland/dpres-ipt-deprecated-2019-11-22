@@ -46,8 +46,23 @@ class TestCommandLineTools:
         }],
             "test_sign_xml_file":
         [{
+            "testcase": "Test valid varmiste",
+            "certificate": "valid-certificate.pem",
+            "sipname": "CSC_test005",
+            "signature_name": "varmiste.sig",
+            "expected_result": {
+                "returncode": 0,
+                "in_stdout": [],
+                "not_in_stdout": ["File does not exist", "Nonlisted file"],
+                "stderr": "",
+                "in_stderr": ""
+            }
+        },
+        {
             "testcase": "Test valid signature",
             "certificate": "valid-certificate.pem",
+            "sipname": "CSC_test001_signature",
+            "signature_name": "signature.sig",
             "expected_result": {
                 "returncode": 0,
                 "in_stdout": [],
@@ -59,6 +74,8 @@ class TestCommandLineTools:
             {
             "testcase": "Test invalid signature",
             "certificate": "invalid-certificate.pem",
+            "sipname": "CSC_test005",
+            "signature_name": "varmiste.sig",
             "expected_result": {
                 "returncode": 0,  # sign_xml_file returns zero even in case of
                 # error and prints errors to stdout
@@ -67,12 +84,12 @@ class TestCommandLineTools:
                 "stderr": "",
                 "in_stderr": []
             }
-        }
-        ],
+        }],
                 "test_check_sip_signature":
         [{
-            "testcase": "Test valid signature",
+            "testcase": "Test valid signature varmiste.sig",
             "sipname": "CSC_test006",
+            "signature_name": "varmiste.sig",
             "expected_result": {
                 "returncode": 0,
                 "in_stdout": ["OK"],
@@ -80,8 +97,19 @@ class TestCommandLineTools:
                 "stderr": "",
                 "in_stderr": ""
             }
-        }
-        ],
+        },
+            {
+            "testcase": "Test valid signature signature.sig",
+            "sipname": "CSC_test001_signature",
+            "signature_name": "signature.sig",
+            "expected_result": {
+                "returncode": 0,
+                "in_stdout": ["OK"],
+                "not_in_stdout": ["File does not exist", "Nonlisted file"],
+                "stderr": "",
+                "in_stderr": ""
+            }
+        }],
             "test_sip2aip":
         [{
             "testcase": "Test create aip",
@@ -301,14 +329,15 @@ class TestCommandLineTools:
         for file in restructure_files:
             assert file in restructure_files
 
-    def test_sign_xml_file(self, testcase, certificate, expected_result):
+    def test_sign_xml_file(self, testcase, certificate, expected_result,
+            signature_name, sipname):
 
-        mets_path = os.path.join(testcommon.settings.TESTDATADIR,
-                                 'test-sips/CSC_test005/mets.xml')
+        mets_path = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips',
+            sipname, 'mets.xml')
         certificate_path = os.path.join(testcommon.settings.TESTDATADIR,
                                         'sip-signature/' + certificate)
         signature_path = os.path.join(testcommon.settings.TESTDATADIR,
-                                      'test-sips/CSC_test005/varmiste.sig')
+            'test-sips', sipname, signature_name)
 
         sip_dir = tempfile.mkdtemp()
         os.chdir(sip_dir)
@@ -333,7 +362,8 @@ class TestCommandLineTools:
         for message in expected_result['in_stderr']:
             assert message in stderr
 
-    def test_check_sip_signature(self, testcase, sipname, expected_result):
+    def test_check_sip_signature(
+            self, testcase, sipname, signature_name, expected_result):
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
                                  'test-sips/' + sipname + '/mets.xml')
@@ -348,14 +378,15 @@ class TestCommandLineTools:
         mets_path = os.path.join(sip_dir, 'mets.xml')
 
         command = ipt.scripts.sign_xml_file.main
-        arguments = [certificate_path, sip_dir + '/varmiste.sig', mets_path]
+        signature_file = os.path.join(sip_dir, signature_name)
+        arguments = [certificate_path, signature_file, mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
             command, arguments)
         print returncode, stdout, stderr
         assert returncode == 0
 
         command = ipt.scripts.check_sip_signature.main
-        arguments = [sip_dir + '/varmiste.sig']
+        arguments = [signature_file]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
             command, arguments)
         print returncode, stdout, stderr
