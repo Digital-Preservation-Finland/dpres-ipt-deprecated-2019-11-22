@@ -31,10 +31,14 @@ def main(arguments=None):
     if len(args) != 1:
         parser.error("Must give XML filename as argument")
 
-    filename = args[0]
-
-    validate = ipt.validator.plugin.xmllint.Xmllint(
-        "text/xml", "1.0", filename)
+    fileinfo = {
+        "filename": args[0],
+        "format": {
+            "mimetype": "text/xml",
+            "version": "1.0"
+        }
+    }
+    validate = ipt.validator.plugin.xmllint.Xmllint(fileinfo)
     validate.set_catalog(options.catalogpath)
     validate.add_schema(options.schemapath)
 

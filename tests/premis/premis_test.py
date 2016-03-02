@@ -86,7 +86,14 @@ class TestPremisClass:
             temp.write(premis_document.serialize())
             temp.flush()
 
-            validator = Libxml('text/xml', '1.0', temp.name)
+            fileinfo = {
+                "filename": temp.name,
+                "format": {
+                    "mimetype": "text/xml",
+                    "version": "1.0"
+                }
+            }
+            validator = Libxml(fileinfo)
             validator.set_catalog(CATALOGPATH)
 
             (returncode, stdout, stderr) = validator.validate()
