@@ -67,6 +67,7 @@ class TestCommandLineTools:
         }]
     }
 
+    @pytest.mark.usefixtures("monkeypatch_Popen")
     def test_check_sip_digital_objects(self, testcase,
                                        filename, expected_result):
 

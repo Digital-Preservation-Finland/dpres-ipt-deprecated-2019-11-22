@@ -308,6 +308,7 @@ class TestCommandLineTools:
         # Test that aip doesn't contain anything more
         assert len(baggit_files) == len(aip_files)
 
+    @pytest.mark.usefixtures("monkeypatch_Popen")
     def test_restructure_sip(self, testcase, expected_result):
 
         sip_dir = os.path.join(
@@ -329,6 +330,7 @@ class TestCommandLineTools:
         for file in restructure_files:
             assert file in restructure_files
 
+    @pytest.mark.usefixtures("monkeypatch_Popen")
     def test_sign_xml_file(self, testcase, certificate, expected_result,
             signature_name, sipname):
 
@@ -402,6 +404,7 @@ class TestCommandLineTools:
         for message in expected_result['in_stderr']:
             assert message in stdout
 
+    @pytest.mark.usefixtures("monkeypatch_Popen")
     def test_check_sip_file_checksums(self, testcase, sipname, expected_result):
 
         sip_path = os.path.join(testcommon.settings.TESTDATADIR,
@@ -466,6 +469,7 @@ class TestCommandLineTools:
 #        for message in expected_result['in_stderr']:
 #            assert message in stderr
 
+    @pytest.mark.usefixtures("monkeypatch_Popen")
     def test_check_sip_digital_objects(self, testcase,
                                        filename, expected_result):
 
