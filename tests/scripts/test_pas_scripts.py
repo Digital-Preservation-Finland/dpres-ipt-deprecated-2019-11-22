@@ -342,7 +342,6 @@ class TestCommandLineTools:
             'test-sips', sipname, signature_name)
 
         sip_dir = tempfile.mkdtemp()
-        os.chdir(sip_dir)
         shutil.copy(mets_path, sip_dir)
 
         command = ipt.scripts.sign_xml_file.main
@@ -375,7 +374,6 @@ class TestCommandLineTools:
         certificate_path = certificate_dir + 'valid-certificate.pem'
 
         sip_dir = tempfile.mkdtemp()
-        os.chdir(sip_dir)
         shutil.copy(mets_path, sip_dir)
         mets_path = os.path.join(sip_dir, 'mets.xml')
 
