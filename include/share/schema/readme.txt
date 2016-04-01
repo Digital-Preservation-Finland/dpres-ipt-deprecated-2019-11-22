@@ -1,59 +1,38 @@
 KDK SCHEMA CATALOG
 
-Current catalog version is 1.4.1, and it includes the following files and directories.
-
-NOTES:
-- Version 1.4.1 changelog compared to 1.4:
-  1) METS created with schema 1.4 complies with 1.4.1 schema.
-  2) The value in attribute CATALOG in METS can be either "1.4.1" or "1.4".
-     The value in attribute SPECIFICATION in METS remains the same "1.4".
-     Data created with schema 1.4 will be validated according to version 1.4.1 in NDL DP system.
-  3) PREMIS 2.3 schema updated, which complies with version 2.2.
-  4) Added a possibility to include organizational metadata formats in dmdSec, rightsMD and sourceMD.
-
-- XML Catalog version 1.4 is included for historical purposes only.
-- XML Catalog version 1.3 is included for historical purposes only.
+Current catalog version is 1.5.0, and it includes the following files and directories.
+The catalog can be used with KDK specifications 1.5.0 and 1.4.
 
 CATALOGS:
-./catalog-local.xml				Current XML Catalog for local purposes.
-./catalog-web.xml				Current XML Catalog for web purposes.
-./catalog-local-1.4.1.xml		XML Catalog version 1.4.1 for local purposes.
-./catalog-web-1.4.1.xml			XML Catalog version 1.4.1 for web purposes.
-./catalog-local-1.4.xml			XML Catalog version 1.4 for local purposes.
-./catalog-web-1.4.xml			XML Catalog version 1.4 for web purposes.
-./catalog-local-1.3.xml			XML Catalog version 1.3 for local purposes.
-./catalog-web-1.3.xml			XML Catalog version 1.3 for web purposes.
-./catalog.dtd					OASIS Catalog specification file
+./catalog-local.xml				KDK Schema Catalog for local purposes.
+./catalog-web.xml				KDK Schema Catalog for web purposes.
+./catalog.dtd					OASIS Catalog specification file (unchanged)
 
 KDK XSD FILES:
-./avmd/audiomd.xsd				KDK audioMD schema, based on version 2.0
-./avmd/videomd.xsd				KDK videoMD schema, based on version 2.0
-./ddi-codebook/codebook.xsd		Patch for DDI-Codebook 2.5.1, since this has it's own Dublin Core Terms specification
-./ddi-codebook/dcterms.xsd		Dublin Core Terms file with KDK namespace for DDI-Codebook
-./mets/kdk-mets-extensions.xsd	KDK extension for KDK METS schema
-./mets/mets-extensions.xsd		METS extension for KDK METS schema
-./mets/mets.xsd					KDK METS schema, based on version 1.10
-./mix/mix.xsd					KDK MIX schema, based on version 2.0
-./textmd/textmd.xsd				KDK textMD schema, based on version 2.2
-./w3/xlink.xsd					Xlink patch for KDK METS, includes ./external/w3/xlink.xsd
+./mets/mets.xsd					KDK METS schema file (main schema)
+./mets/kdk-mets-extensions.xsd	KDK extension file for KDK METS schema
+./w3/xlink.xsd					Xlink patch file for KDK Schema Catalog
+./mods/mods.xsd					MODS patch file for KDK Schema Catalog
+./textmd/textmd_kdk.xsd			For historical purposes related to KDK specification 1.4
 
-EXTERNAL DIRECTORIES:
-./external/dc					Dublin Core 1.1 schema files (unchanged)
-./external/ddi-codebook			DDI Codebook 2.5.1 schema files (unchanged)
-./external/ddi-lifecycle		DDI Lifecycle 3.2 schema files (unchanged)
-./external/eac					EAC-CPF 2010 schema files (unchanged)
-./external/ead					EAD 2002 schema files (unchanged)
-./external/gml					Opengis GML 3.1.1 schema files (unchanged, used by LIDO)
-./external/lido					LIDO 1.0 schema files (unchanged)
-./external/marc					MARC21 1.1 schema files (unchanged)
-./external/metsrights			METSRights (2004) schema files (unchanged)
-./external/mods					MODS 3.5 schema files (unchanged)
-./external/premis				PREMIS 2.3 schema files (unchanged)
-./external/vra					VRA Core 4.0 schema files (unchanged)
-./external/w3					W3 schema files (various, unchanged)
-
-VERSION DIRECTORIES:
-./								Current version
-./1.4.1							Catalog version 1.4.1
-./1.4							Catalog version 1.4 (for historical purposes only)
-./1.3							Catalog version 1.3 (for historical purposes only)
+DIRECTORIES:
+./addml							ADDML 8.3 schema files (unchanged)
+./avmd							AudioMD 2.0 and VideoMD 2.0 schema files (unchanged)
+./dc							Dublin Core 1.1 schema files (unchanged)
+./ddi-codebook/2.5				DDI Codebook 2.5.1/2.5 schema files (unchanged)
+./ddi-codebook/2.1				DDI Codebook 2.1 schema files (unchanged)
+./ddi-lifecycle/3.2				DDI Lifecycle 3.2 schema files (unchanged)
+./ddi-lifecycle/3.1				DDI Lifecycle 3.1 schema files (unchanged)
+./eac							EAC-CPF 2010 schema files (unchanged)
+./ead							EAD 2002 schema files (unchanged)
+./ead3							EAD3 1.0.0 schema files (changed, see ./ead3/readme.txt)
+./gml							OpenGIS GML 3.1.1 schema files (changed, see ./gml/readme.txt)
+./lido							LIDO 1.0 schema files (unchanged)
+./marc							MARC21 1.2 schema files (unchanged)
+./mets							METS 1.11 schema files (extended with separate files)
+./mix							MIX 2.0 (NISOIMG) schema files (unchanged)
+./mods							MODS 3.6 schema files (extended with separate file)
+./premis						PREMIS 2.3 schema files (unchanged)
+./textmd						TextMD 3.01a schema files (unchanged)
+./vra							VRA Core 4.0 schema files (unchanged)
+./w3							W3 schema files (extended with separate file)

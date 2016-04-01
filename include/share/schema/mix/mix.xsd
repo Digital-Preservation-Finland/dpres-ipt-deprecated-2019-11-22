@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-KDK MIX Schema
-CSC, 2014-03-12
-Based on MIX schema version 2.0.
--->
-<xsd:schema targetNamespace="http://www.loc.gov/mix/v20" 
-	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	    xmlns="http://www.loc.gov/mix/v20"
-	    elementFormDefault="qualified"
-	    attributeFormDefault="unqualified">
+<!-- MIX Version 2.0 -->
+<!-- created by Morgan Cundiff -->
+<!-- Library of Congress -->
+<!-- Network Development and MARC Standards Office -->
+<!-- May 12, 2008 -->
+<!-- Change History Version 1.0 to Version 2.0 -->
+<!-- changed abbreviation of millemetre from "mm." to "mm" and centimetre from "cm." to "cm"  -->
+<!-- Fixed typo: SHA512 to SHA-512  (5-5-08) -->
+<!-- Fixed typo: removed trailing space from LightSourceType value "Standard light A" (5-5-08) -->
+<!-- Changed cardinality requirements so all elements (except for <mix>) are optional -->
+<!-- added "unknown" to list of permitted values for messageDigestAlgorithm element -->
+<!-- Changed  yCbCrCoefficients a container element, YCbCrCoefficients, with three sub-elements, lumaRed, lumaGreen, lumaBlue, each of type rational.  -->
+<!-- referenceBlackWhite a container element, ReferenceBlackWhite, with a repeatable container sub-element, Component, each with three sub-elements, componentPhotometricInterpretation, of a restricted enumerated type with values "R", "G", "B", "Y", "Cb", "Cr", and footroom and headroom, both of type rational.   -->
+<!--  Added MonochromeArea, OneChipColourArea, TwoChipColorArea, ThreeChipColorArea, and ColorSequentialArea to list of allowable values for scannerSensor element (8.3.4) -->
+<!-- exifVersion (8.4.4.1.7) element allowable value "0220" changed to xs:string datatype  -->
+<!-- subjectDistance (8.4.4.1.13) element has been changed to a container element, SubjectDistance, that contains distance, MinMaxDistance, or both as follows:
+
+	  <SubjectDistance>
+	    <distance>5</distance>
+	    <MinMaxDistance>
+	      <minDistance>4.9</minDistance>
+	      <maxDistance>5.3</maxDistance>
+	    </MinMaxDistance>
+	  </SubjectDistance>
+   -->
+<!-- gpsLatitude (8.4.4.2.3), gpsLongitude (8.4.4.2.5), gpsDestLatitude (8.4.4.2.21) and gpsDestLongitude (8.4.4.2.23) elements have been changed to container elements (GpsLatitude, GpsLongitude, GpsDestLatitude, and GpsDestLongitude respectively) , with three sub-elements, degrees, minutes, seconds, each of type rational.  -->
+<!-- added wrapper element GrayResponse to contain GrayResponseCurve and grayResponseUnit -->
+<!-- The grayResponseCurve (9.2.5) element has been made repeatable and the datatype for value has been changed to nonNegativeInteger. -->
+<!-- whitePointXValue (9.2.7.1),  whitePointYValue (9.2.7.2), primaryChromaticitiesRedX (9.2.8.1) , primaryChromaticitiesRedY (9.2.8.2) , primaryChromaticitiesGreenX (9.2.8.3) , primaryChromaticitiesGreenY (9.2.8.4) , primaryChromaticitiesBlueX (9.2.8.5) , and primaryChromaticitiesBlueY (9.2.8.6) elements have been changed to rationalType. -->
+<!-- targetType (9.3.1) element allowable enumerated type values changed to 0 and 1. -->
+<!-- fileSize (6.2) element has been changed to nonNegativeIntegertype -->
+<!-- byteOrder (6.5) element allowable values have been changed to "big endian" and "little endian". -->
+<!-- compressionRatio (6.6.4) element has been changed to rationalType -->
+<!-- tiles (7.2.1.2.1) element has been made a container element, Tiles, with two sub-elements, tileWidth and tileHeight, each of type positiveIntegerType -->
+<!-- ·	sourceDimensionUnit (8.1.3.1.2) element allowable values changed to "in." and "mm" -->
+<!-- ·	maximumOpticalResolution (8.3.3) changed to container element, MaximumOpticalResolution, with three sub-elements, xOpticalResolution and yOpticalResolution, both of type positiveInteger, and opticalResolutionUnit, a restricted enumerated type with values 1 (no absolute unit), 2 (in.), 3 (cm),   -->
+<!-- exposureProgram (8.4.4.1.3) is defined in the DD with integral enumeration values.  The schema has been changed to use the equivalent text values  -->
+<!-- sensingMethod (8.4.4.1.21) is defined in the DD with integral enumeration values.  The schema has been changed to use the equivalent text values  -->
+<!-- gpsAltitudeRef (8.4.4.2.6) is defined in the DD with integral enumeration values.  The schema has been changed to use the equivalent text values  -->
+<!-- gpsMeasureMode (8.4.4.2.11) is defined in the DD with integral enumeration values.  The schema has been changed to use the equivalent text values  -->
+<!-- gpsDifferential (8.4.4.2.31) is defined in the DD with integral enumeration values.  The schema has been changed to use the equivalent text values  -->
+<!-- orientation (8.5) is defined in the DD with integral enumeration values.  The schema has been changed to use the equivalent text values  -->
+<!-- samplingFrequencyPlane (9.1.1) is defined in the DD with integral enumeration values.  The schema has been changed to use the equivalent text values  -->
+<!-- samplingFrequencyUnit (9.1.2) is defined in the DD with integral enumeration values.  The schema has been changed to use the equivalent text values  -->
+<!-- extraSamples (9.2.3) is defined in the DD with integral enumeration values.  The schema has been changed to use the equivalent text values  -->
+<!-- grayResponseUnit (9.2.6) is defined in the DD with integral enumeration values.  The schema has been changed to use the equivalent text values  -->
+<!-- targetType (9.3.1) is defined in the DD with integral enumeration values.  The schema has been changed to use the equivalent text values  -->
+<!-- is defined in the DD with integral enumeration values.  The schema has been changed to use the equivalent text values  -->
+<!-- flash (8.4.4.1.16) is defined in the DD with trailing periods after the first four enumerated values, e.g. "Flash did not fire.".  These periods have been removed in the schema.  -->
+<!-- backLight (8.4.4.1.19) is defined in the DD with the first enumerated value without an underscore, i.e. "Front light", but with the second and third values with underscores, e.g. "Backlight_1". The underscore characters have been removed from "Backlight 1" and "Backlight 2").  -->
+<!-- exposureIndex (8.4.4.1.20) value has been changed to type positiveReal  -->
+<!-- gpsDateStamp (8.4.4.2.30) value has been changed to xsd:date -->
+<!-- bitsPerSample (9.2.1.1) has been changed to a container element, BitsPerSample, with a repeatable sub-element, bitsPerSampleValue of type positiveInteger.  -->
+<!-- extraSamples (9.2.3) element has been made repeatable  -->
+<!-- referenceType has been changed to URIType. It is assumed that the reference type defined by the DD is always intended to indicate a URI  -->
+<!-- iccProfileURL (7.1.3.2.1.3) element name changed to iccProfileURI  -->
+<!-- localProfileURL (7.1.3.2.2.2) element name changed to localProfileURI  -->
+<!-- end of Change History Version 1.0 to Version 2.0 -->
+<xsd:schema targetNamespace="http://www.loc.gov/mix/v20" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.loc.gov/mix/v20" elementFormDefault="qualified" attributeFormDefault="unqualified">
 
   <xsd:element name="mix">
     <xsd:annotation>
@@ -24,11 +73,11 @@ Based on MIX schema version 2.0.
 
   <xsd:complexType name="mixType">
     <xsd:sequence>
-      <xsd:element name="BasicDigitalObjectInformation" type="BasicDigitalObjectInformationType" minOccurs="1" maxOccurs="1">
+      <xsd:element name="BasicDigitalObjectInformation" type="BasicDigitalObjectInformationType" minOccurs="0" maxOccurs="1">
 	<xsd:annotation>
 	  <xsd:documentation>NDD id="6"</xsd:documentation> 
       </xsd:annotation></xsd:element>
-      <xsd:element name="BasicImageInformation" type="BasicImageInformationType" minOccurs="1" maxOccurs="1">
+      <xsd:element name="BasicImageInformation" type="BasicImageInformationType" minOccurs="0" maxOccurs="1">
 	<xsd:annotation>
 	  <xsd:documentation>NDD id="7"</xsd:documentation> 
       </xsd:annotation></xsd:element>
@@ -40,7 +89,7 @@ Based on MIX schema version 2.0.
 	<xsd:annotation>
 	  <xsd:documentation>NDD id="9"</xsd:documentation> 
       </xsd:annotation></xsd:element>
-      <xsd:element name="ChangeHistory" type="ChangeHistoryType" minOccurs="1" maxOccurs="1">
+      <xsd:element name="ChangeHistory" type="ChangeHistoryType" minOccurs="0" maxOccurs="1">
 	<xsd:annotation>
 	  <xsd:documentation>NDD id="10"</xsd:documentation> 
       </xsd:annotation></xsd:element>
@@ -61,12 +110,12 @@ Based on MIX schema version 2.0.
 	</xsd:annotation>
 	<xsd:complexType>
 	  <xsd:sequence>
-	    <xsd:element name="objectIdentifierType" type="stringType" minOccurs="1" maxOccurs="1">
+	    <xsd:element name="objectIdentifierType" type="stringType" minOccurs="0" maxOccurs="1">
 	      <xsd:annotation>
 		<xsd:documentation>NDD id="6.1.1"</xsd:documentation> 
 	      </xsd:annotation>
 	    </xsd:element>
-	    <xsd:element name="objectIdentifierValue" type="stringType" minOccurs="1" maxOccurs="1">
+	    <xsd:element name="objectIdentifierValue" type="stringType" minOccurs="0" maxOccurs="1">
 	      <xsd:annotation>
 		<xsd:documentation>NDD id="6.1.2"</xsd:documentation> 
 	      </xsd:annotation>
@@ -86,7 +135,7 @@ Based on MIX schema version 2.0.
 	</xsd:annotation>
 	<xsd:complexType>
 	  <xsd:sequence>
-	    <xsd:element name="formatName" type="stringType" minOccurs="1" maxOccurs="1">
+	    <xsd:element name="formatName" type="stringType" minOccurs="0" maxOccurs="1">
 	      <xsd:annotation>
 		<xsd:documentation>NDD id="6.3.1"</xsd:documentation> 
 	      </xsd:annotation>
@@ -124,13 +173,13 @@ Based on MIX schema version 2.0.
 	  <xsd:documentation>NDD id="6.5"</xsd:documentation> 
 	</xsd:annotation>
       </xsd:element>
-      <xsd:element name="Compression" minOccurs="1" maxOccurs="unbounded">
+      <xsd:element name="Compression" minOccurs="0" maxOccurs="unbounded">
 	<xsd:annotation>
 	  <xsd:documentation>NDD id="6.6"</xsd:documentation> 
 	</xsd:annotation>
 	<xsd:complexType>
 	  <xsd:sequence>
-	    <xsd:element name="compressionScheme" type="stringType" minOccurs="1" maxOccurs="1">
+	    <xsd:element name="compressionScheme" type="stringType" minOccurs="0" maxOccurs="1">
 	      <xsd:annotation>
 		<xsd:documentation>NDD id="6.6.1"</xsd:documentation> 
 	      </xsd:annotation>
@@ -159,12 +208,12 @@ Based on MIX schema version 2.0.
 	</xsd:annotation>
 	<xsd:complexType>
 	  <xsd:sequence>
-	    <xsd:element name="messageDigestAlgorithm" type="typeOfMessageDigestAlgorithmType" minOccurs="1" maxOccurs="1">
+	    <xsd:element name="messageDigestAlgorithm" type="typeOfMessageDigestAlgorithmType" minOccurs="0" maxOccurs="1">
 	      <xsd:annotation>
 		<xsd:documentation>NDD id="6.7.1"</xsd:documentation> 
 	      </xsd:annotation>
 	    </xsd:element>
-	    <xsd:element name="messageDigest" type="stringType" minOccurs="1" maxOccurs="1">
+	    <xsd:element name="messageDigest" type="stringType" minOccurs="0" maxOccurs="1">
 	      <xsd:annotation>
 		<xsd:documentation>NDD id="6.7.2"</xsd:documentation> 
 	      </xsd:annotation>
@@ -184,29 +233,29 @@ Based on MIX schema version 2.0.
   <!-- BasicImageInformationType -->
   <xsd:complexType name="BasicImageInformationType">
     <xsd:sequence>
-      <xsd:element name="BasicImageCharacteristics" minOccurs="1" maxOccurs="1">
+      <xsd:element name="BasicImageCharacteristics" minOccurs="0" maxOccurs="1">
 	<xsd:annotation>
 	  <xsd:documentation>NDD id="7.1"</xsd:documentation> 
 	</xsd:annotation>
 	<xsd:complexType>
 	  <xsd:sequence>
-	    <xsd:element name="imageWidth" type="positiveIntegerType" minOccurs="1" maxOccurs="1">
+	    <xsd:element name="imageWidth" type="positiveIntegerType" minOccurs="0" maxOccurs="1">
 	      <xsd:annotation>
 		<xsd:documentation>NDD id="7.1.1"</xsd:documentation> 
 	      </xsd:annotation>
 	    </xsd:element>
-	    <xsd:element name="imageHeight" type="positiveIntegerType" minOccurs="1" maxOccurs="1">
+	    <xsd:element name="imageHeight" type="positiveIntegerType" minOccurs="0" maxOccurs="1">
 	      <xsd:annotation>
 		<xsd:documentation>NDD id="7.1.2"</xsd:documentation> 
 	      </xsd:annotation>
 	    </xsd:element>
-	    <xsd:element name="PhotometricInterpretation" minOccurs="1" maxOccurs="1">
+	    <xsd:element name="PhotometricInterpretation" minOccurs="0" maxOccurs="1">
 	      <xsd:annotation>
 		<xsd:documentation>NDD id="7.1.3"</xsd:documentation> 
 	      </xsd:annotation>
 	      <xsd:complexType>
 		<xsd:sequence>
-		  <xsd:element name="colorSpace" type="stringType" minOccurs="1" maxOccurs="1">
+		  <xsd:element name="colorSpace" type="stringType" minOccurs="0" maxOccurs="1">
 		    <xsd:annotation>
 		      <xsd:documentation>NDD id="7.1.3.1"</xsd:documentation> 
 		    </xsd:annotation>
@@ -333,7 +382,7 @@ Based on MIX schema version 2.0.
 		    </xsd:annotation>
 		    <xsd:complexType>
 		      <xsd:sequence>
-			<xsd:element name="Component"  minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="Component" minOccurs="0" maxOccurs="unbounded">
 			  <xsd:complexType>
 			    <xsd:sequence>
 			      <xsd:element name="componentPhotometricInterpretation" type="typeOfComponentPhotometricInterpretationType">
@@ -1153,24 +1202,24 @@ Based on MIX schema version 2.0.
 	  </xsd:sequence>
 	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="ImageColorEncoding" minOccurs="1" maxOccurs="1">
+      <xsd:element name="ImageColorEncoding" minOccurs="0" maxOccurs="1">
 	<xsd:annotation>
 	  <xsd:documentation>NDD id="9.2"</xsd:documentation> 
 	</xsd:annotation>
 	<xsd:complexType>
 	  <xsd:sequence>
-	    <xsd:element name="BitsPerSample" minOccurs="1" maxOccurs="1">
+	    <xsd:element name="BitsPerSample" minOccurs="0" maxOccurs="1">
 	      <xsd:annotation>
 		<xsd:documentation>NDD id="9.2.1"</xsd:documentation> 
 	      </xsd:annotation>
 	      <xsd:complexType>
 		<xsd:sequence>
-		  <xsd:element name="bitsPerSampleValue" type="kdkNumberListType" minOccurs="1" maxOccurs="unbounded">
+		  <xsd:element name="bitsPerSampleValue" type="positiveIntegerType" minOccurs="0" maxOccurs="unbounded">
 		    <xsd:annotation>
 		      <xsd:documentation>NDD id="9.2.1.1"</xsd:documentation> 
 		    </xsd:annotation>
 		  </xsd:element>
-		  <xsd:element name="bitsPerSampleUnit" type="typeOfBitsPerSampleUnitType" minOccurs="1" maxOccurs="1">
+		  <xsd:element name="bitsPerSampleUnit" type="typeOfBitsPerSampleUnitType" minOccurs="0" maxOccurs="1">
 		    <xsd:annotation>
 		      <xsd:documentation>NDD id="9.2.1.2"</xsd:documentation> 
 		    </xsd:annotation>
@@ -1178,7 +1227,7 @@ Based on MIX schema version 2.0.
 		</xsd:sequence>
 	      </xsd:complexType>
 	    </xsd:element>
-	    <xsd:element name="samplesPerPixel" type="positiveIntegerType" minOccurs="1" maxOccurs="1">
+	    <xsd:element name="samplesPerPixel" type="positiveIntegerType" minOccurs="0" maxOccurs="1">
 	      <xsd:annotation>
 		<xsd:documentation>NDD id="9.2.2"</xsd:documentation> 
 	      </xsd:annotation>
@@ -1414,7 +1463,7 @@ Based on MIX schema version 2.0.
 	  </xsd:sequence>
 	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="PreviousImageMetadata"  type="typeOfPreviousImageMetadataType" minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="PreviousImageMetadata" type="typeOfPreviousImageMetadataType" minOccurs="0" maxOccurs="unbounded">
 	<xsd:annotation>
 	  <xsd:documentation>NDD id="10.2"</xsd:documentation> 
 	</xsd:annotation>
@@ -1441,7 +1490,7 @@ Based on MIX schema version 2.0.
   <!-- end of typeOfStringType -->
 
   <!-- integerType -->
-  <xsd:complexType  name="integerType">
+  <xsd:complexType name="integerType">
     <xsd:simpleContent>
       <xsd:extension base="xsd:integer">
 	<xsd:attribute name="use" type="xsd:string"/>
@@ -1451,7 +1500,7 @@ Based on MIX schema version 2.0.
   <!-- end of integerType -->
 
   <!-- positiveIntegerType -->
-  <xsd:complexType  name="positiveIntegerType">
+  <xsd:complexType name="positiveIntegerType">
     <xsd:simpleContent>
       <xsd:extension base="xsd:positiveInteger">
 	<xsd:attribute name="use" type="xsd:string"/>
@@ -1460,21 +1509,6 @@ Based on MIX schema version 2.0.
   </xsd:complexType>
   <!-- end of positiveIntegerType -->
 
-
-  <!-- kdkNumberListType -->
-  <xsd:complexType  name="kdkNumberListType">
-    <xsd:simpleContent>
-	  <xsd:extension base="kdkNumberListSimpleType">
-		<xsd:attribute name="use" type="xsd:string"/>
-      </xsd:extension>
-    </xsd:simpleContent>
-  </xsd:complexType>
-  <xsd:simpleType name="kdkNumberListSimpleType">
-    <xsd:restriction base="xsd:string">
-        <xsd:pattern value="[0-9]+([\s]*[,][\s]*[0-9]+)*"/>
-    </xsd:restriction>
-  </xsd:simpleType>
-  <!-- end of kdkNumberListType -->
 
   <!-- URIType -->
   <xsd:complexType name="URIType">
@@ -1580,7 +1614,7 @@ Based on MIX schema version 2.0.
   </xsd:complexType>
 
   <xsd:simpleType name="DateType">
-    <xsd:union memberTypes="xsd:date xsd:dateTime xsd:gYear xsd:gYearMonth"></xsd:union>
+    <xsd:union memberTypes="xsd:date xsd:dateTime xsd:gYear xsd:gYearMonth"/>
   </xsd:simpleType>
   <!-- end of typeOfDateType -->
 
@@ -2018,19 +2052,19 @@ Based on MIX schema version 2.0.
   <xsd:complexType name="typeOfSensingMethodType">
     <xsd:simpleContent>
       <xsd:extension base="sensingMethodType">
-	<xsd:attribute name="use" type="xsd:string" /> 
+	<xsd:attribute name="use" type="xsd:string"/> 
       </xsd:extension>
     </xsd:simpleContent>
   </xsd:complexType>
   <xsd:simpleType name="sensingMethodType">
     <xsd:restriction base="xsd:string">
-      <xsd:enumeration value="Not defined" /> 
-      <xsd:enumeration value="One-chip color area sensor" /> 
-      <xsd:enumeration value="Two-chip color area sensor" /> 
-      <xsd:enumeration value="Three-chip color area sensor" /> 
-      <xsd:enumeration value="Color sequential area sensor" /> 
-      <xsd:enumeration value="Trilinear sensor" /> 
-      <xsd:enumeration value="Color sequential linear sensor" /> 
+      <xsd:enumeration value="Not defined"/> 
+      <xsd:enumeration value="One-chip color area sensor"/> 
+      <xsd:enumeration value="Two-chip color area sensor"/> 
+      <xsd:enumeration value="Three-chip color area sensor"/> 
+      <xsd:enumeration value="Color sequential area sensor"/> 
+      <xsd:enumeration value="Trilinear sensor"/> 
+      <xsd:enumeration value="Color sequential linear sensor"/> 
     </xsd:restriction>
   </xsd:simpleType>
   <!--  end of typeOfSensingMethodType --> 
@@ -2397,7 +2431,6 @@ Based on MIX schema version 2.0.
     <xsd:restriction base="xsd:string">
       <xsd:enumeration value="0220"/>
       <xsd:enumeration value="0221"/>
-      <xsd:enumeration value="0230"/>
     </xsd:restriction>
   </xsd:simpleType>
   <!-- end of typeOfExifVersionType   -->
@@ -2462,7 +2495,7 @@ Based on MIX schema version 2.0.
   <!-- typeOfPreviousImageMetadataType --> 
   <xsd:complexType name="typeOfPreviousImageMetadataType" mixed="false">
     <xsd:sequence>
-      <xsd:any processContents="skip" minOccurs="0" maxOccurs="unbounded" /> 
+      <xsd:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/> 
     </xsd:sequence>
   </xsd:complexType>
   <!--  end of typeOfPreviousImageMetadataType   --> 
@@ -2489,10 +2522,15 @@ Based on MIX schema version 2.0.
   <!-- end of typeOfComponentPhotometricInterpretationType   -->
 
 
+
+
+
+
+
   <!-- extensionType -->
   <xsd:complexType name="extensionType" mixed="true">
     <xsd:sequence>
-      <xsd:any processContents="skip" maxOccurs="unbounded" /> 
+      <xsd:any processContents="skip" maxOccurs="unbounded"/> 
     </xsd:sequence>
   </xsd:complexType>
   <!-- end of extensionType -->

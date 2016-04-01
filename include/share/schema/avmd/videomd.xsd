@@ -1,11 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-KDK VIDEOMD Schema
-CSC, 2013-05-23
-Based on videoMD schema version 2.0
--->
-<xs:schema targetNamespace="http://www.loc.gov/videoMD/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns="http://www.loc.gov/videoMD/" elementFormDefault="qualified">
+<!-- videoMD version 2.0 -->
+<!-- edited with XML Spy v4.0.1 (http://www.xmlspy.com) by D. Casey (User Technology Associates, Inc.) -->
+<!-- edited with oXygen by K. Bredenberg -->
+<xs:schema targetNamespace="http://www.loc.gov/videoMD/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.loc.gov/videoMD/" elementFormDefault="qualified">
+	<!--============================================================
+
+  VIDEOMD: Video Technical Metadata Extension Schema
+  Initial Version:  VMD_020322.xsd (obtained from Carl's webpage on 03/27/2002)
+  
+  Changes 03/27/2002:
+  DKC- Capitalized enumerated types for videodisc_type.
+     - Corrected the note element to use the noteType reference.
+     - Moved "frame_rate" into the frame element.
+     - Removed "datetime_*"
+  Changes 07/25/2002
+  DKC- Abstracted the root element in order to provide support for both analog 
+        and digital sources.
+     - Simplified the structure to eliminate the unecessary element references 
+        and complex types.
+  Changes 10/07/2003
+   RJT - Corrected the documentation for phys_format to say video instead of audio
+            Corrected the documentation for materialType to say video instead of audio
+            
+  Changes 02/08/2010
+    KB  -added EBU_Storage_Media_Codes element to element Physical_data
+        -added dimensions from video_infoType to Physical_data thus making it exist in both places
+    
+  Changes 02/22/2010
+  KB  -added note element to element Physical_data
+      -added method element to material in element Physical_data
+      -added used_sides element to material in element Physical_data
+      
+      Changes 06/29/2010
+      KB - harmonized with PREMIS 2.0 and removed _ in element names.
+      - renamed chcksum as messageDigest
+  
+  Changes 10/19/2010
+  KB - changed element name dataDate to dataRate
+  - added element dataRateUnit
+  - changed dataRate from int to decimal to be able to not have to round off value
+  - added 2 as value for byteOrder
+  - changed frameRate from int to decimal to be able to not have to round off value
+  - added signalFormat, timecode and tracking to fileDataType-element
+  - added formatLocation to fileDataType-element
+  - removed dimensions from video_infoType leaving it only in Physical_data 
+
+  Changes 12/01/2010
+  KB - added dimensions to videoInfoType again
+    - added PAR, DAR and rotation elements to frameType
+    - added minOcurrs="0" on all elements in frameType
+    - added timecodeInitialValue to timecodeType
+    - added minOccurs="0" on all elements in timecodeType
+    - added a mediaDataType as a base for media
+    - added mediaDataType as base in fileDataType and thus removing elements from fileDataType that now are in mediaDataType
+    - added languageType
+    - added variableRateType
+    - added formatType
+    - added codecType
+    - added string.version
+    - added trackDataType
+    - added track as element in fileDataType and made it a choice to use instead of compression. ('track' as similar semantic meaning as PBCore's essenceTrack)
+    - added type attribut on formatLocation
+    - added otherType attribut on formatLocation
+    - renamed formatLocation to location
+    - grouped all format information in one single element named format of the type formatType. By this removing elements FormatName, formatNote and formatVersion.
+    - added color, frame, frameRate and sampleRate in fileDataType
+    
+  Changes 03/21/2011
+  KB - updated documentation
+     - added missing attribute ID on calibrationInfoType
+     - renamed complexType trackingType to trackingInfoType to minimazie confusion with the element with the same name
+     - renamed complexType timecodeType to timecodeInfoType to minimazie confusion with the element with the same name
+     
+ Changes 03/23/2011
+ KB - renamed reflectiveLayer to activeLayer since it describes the active parts of the disk.
+    - added a new element reflectiveLayer which describes the reflective layer e.g. gold, silver, aluminium etc.
+    - removed fileData, physicalData, audioInfo and calibrationInfo as top elements and not referencing this elements in videoType.
+    - renamed CalibrationType calibrationInfoType
+    
+ Changes 04/15/2011
+ KB - Update of comments
+ 
+ Changes 04/26/2011
+ KB - updates in comments
+ 
+ Changes 04/29/2011
+ KB - updated name and namespace of the schema
+ 	- added value Other to the predefined list of element use
+ 	- added an element otherUse where a use not stated in the use element list can be described
+ 	- added an element otherColor where a color not stated in the color element list can be described
+ 	- updates in comments
+ 	
+Changes 05/02/2011
+KB	- updates in comments
+ 
+============================================================-->
 	<xs:element name="VIDEOMD" type="videoType"/>
 	<xs:element name="VIDEOSRC" type="videoType"/>
 	<xs:annotation>
@@ -23,9 +112,9 @@ Based on videoMD schema version 2.0
 				are documented under their corresponding types.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="fileData" type="fileDataType" minOccurs="1"/>
+			<xs:element name="fileData" type="fileDataType" minOccurs="0"/>
 			<xs:element name="physicalData" type="physicalDataType" minOccurs="0"/>
-			<xs:element name="videoInfo" type="videoInfoType" minOccurs="1"/>
+			<xs:element name="videoInfo" type="videoInfoType" minOccurs="0"/>
 			<xs:element name="calibrationInfo" type="calibrationInfoType" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="ID" type="xs:ID"/>
@@ -42,7 +131,7 @@ Based on videoMD schema version 2.0
 	<xs:complexType name="mediaDataType">
 		<xs:sequence>
 			<xs:element name="tracking" type="trackingInfoType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="duration" type="xs:string" minOccurs="1">
+			<xs:element name="duration" type="xs:string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Elapsed time of the entire file, expressed using ISO 8601 
 						syntax; see http://www.w3.org/TR/NOTE-datetime.</xs:documentation>
@@ -55,7 +144,7 @@ Based on videoMD schema version 2.0
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="size" type="xs:nonNegativeInteger" minOccurs="0"/>
-			<xs:element name="dataRate" type="variableRateType" minOccurs="1">
+			<xs:element name="dataRate" type="variableRateType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Data rate of the audio in an MPEG or other compressed file expressed in mbps, e.g., 8, 12, 15, etc.</xs:documentation>
 				</xs:annotation>
@@ -90,8 +179,7 @@ Based on videoMD schema version 2.0
 		<xs:complexContent>
 			<xs:extension base="mediaDataType">
 				<xs:sequence>
-					<xs:element name="bitsPerSample" type="xs:int" minOccurs="1"
-						maxOccurs="unbounded">
+					<xs:element name="bitsPerSample" type="xs:int" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>The number of bits of sample depth, e.g., 8, 24, etc.</xs:documentation>
 						</xs:annotation>
@@ -108,7 +196,7 @@ Based on videoMD schema version 2.0
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="color" minOccurs="1">
+					<xs:element name="color" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Presented color of the digital video file. Use Other if none of the preceding values pertains and clarify the color in the otherColor element</xs:documentation>
 						</xs:annotation>
@@ -132,21 +220,17 @@ Based on videoMD schema version 2.0
 							<xs:documentation>Denotes a use not contained in the allowed values set if Other is indicated in the color element.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="messageDigest" type="messageDigestType" minOccurs="0"
-						maxOccurs="unbounded"/>
+					<xs:element name="messageDigest" type="messageDigestType" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:choice minOccurs="0" maxOccurs="unbounded">
-						<xs:element name="compression" type="compressionType" minOccurs="1"
-							maxOccurs="unbounded"/>
-						<xs:element name="track" type="trackDataType" minOccurs="0"
-							maxOccurs="unbounded"/>
+						<xs:element name="compression" type="compressionType" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="track" type="trackDataType" minOccurs="0" maxOccurs="unbounded"/>
 					</xs:choice>
-					<xs:element name="dataRateUnit" type="xs:string" minOccurs="0"
-						maxOccurs="unbounded">
+					<xs:element name="dataRateUnit" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>Data rate unit of a digital video file.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="dataRateMode" minOccurs="1" maxOccurs="unbounded">
+					<xs:element name="dataRateMode" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>Mode of the data rate in a digital video file.</xs:documentation>
 						</xs:annotation>
@@ -157,7 +241,7 @@ Based on videoMD schema version 2.0
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="frame" type="frameType" minOccurs="1"/>
+					<xs:element name="frame" type="frameType" minOccurs="0"/>
 					<xs:element name="frameRate" type="variableRateType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>The number of frames per second at which the video source item was digitized.</xs:documentation>
@@ -189,19 +273,18 @@ Based on videoMD schema version 2.0
 						</xs:complexType>
 					</xs:element>
 					<xs:element name="format" type="formatType" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element name="sampling" type="xs:string" minOccurs="1" maxOccurs="unbounded">
+					<xs:element name="sampling" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>sThe video sampling format (in terms of luminance and 
 								chrominance), e.g., 4:2:0, 4:2:2, 2:4:4, etc.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="signalFormat" type="xs:string" minOccurs="1"
-						maxOccurs="unbounded">
+					<xs:element name="signalFormat" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>The signal format of a video source item e.g. NTSC, PAL, SECAM.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="sound" minOccurs="1" maxOccurs="unbounded">
+					<xs:element name="sound" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>Indicator of the presence of sound in the video file. If 
 								the value "yes" is selected, then the video file will also be associated 
@@ -240,7 +323,7 @@ Based on videoMD schema version 2.0
 						</xs:simpleType>
 					</xs:element>
 					<xs:element name="frame" type="frameType" minOccurs="0"/>
-					<xs:element name="frameRate" type="variableRateType" minOccurs="1"/>
+					<xs:element name="frameRate" type="variableRateType" minOccurs="0"/>
 					<xs:element name="sampleRate" type="variableRateType" minOccurs="0"/>
 					<xs:element name="sampling" type="xs:string" minOccurs="0">
 						<xs:annotation>
@@ -264,8 +347,7 @@ Based on videoMD schema version 2.0
 	</xs:complexType>
 	<xs:complexType name="physicalDataType">
 		<xs:sequence>
-			<xs:element name="EBUStorageMediaCodes" type="xs:string" minOccurs="0"
-				maxOccurs="unbounded">
+			<xs:element name="EBUStorageMediaCodes" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation> The EBU Storage Media Codes for the physical media. See http://www.ebu.ch/metadata/cs/ebu_StorageMediaTypeCodeCS.xml and http://www.ebu.ch/metadata/cs/web/ebu_StorageMediaTypeCodeCS_p.xml.htm</xs:documentation>
 				</xs:annotation>
@@ -340,14 +422,12 @@ Based on videoMD schema version 2.0
 					<xs:documentation>The desired aspect ratio of the image on screen, e.g., 4:3, etc. Some files produced for display on non-square-pixel monitors have a desired aspect ratio that differs from the ratio of horizontal to vertical pixels.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="closedCaptioningNote" type="xs:string" minOccurs="0"
-				maxOccurs="unbounded">
+			<xs:element name="closedCaptioningNote" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Notes about the closed captioning in a video source item.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="closedCaptioningType" type="xs:string" minOccurs="0"
-				maxOccurs="unbounded">
+			<xs:element name="closedCaptioningType" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>The type of closed captioning in a video source item.</xs:documentation>
 				</xs:annotation>
@@ -443,22 +523,22 @@ Based on videoMD schema version 2.0
 				used for a digital video file. compressionType has 1 attribute ID (XML ID)and 4 elements codecCreatorApp, codecCreatorAppVersion, codecName and codecQuality.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="codecCreatorApp" type="xs:string" minOccurs="1">
+			<xs:element name="codecCreatorApp" type="xs:string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Name of the creator of the compression application e.g. Adobe Premiere, etc..</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="codecCreatorAppVersion" type="xs:string" minOccurs="1">
+			<xs:element name="codecCreatorAppVersion" type="xs:string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Version of the compression application e.g. 6.0, etc..</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="codecName" type="xs:string" minOccurs="1">
+			<xs:element name="codecName" type="xs:string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Name of the compression algorithm used e.g. MPEG, etc..</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="codecQuality" minOccurs="1">
+			<xs:element name="codecQuality" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Impact of the compression on quality e.g. lossless or lossy.</xs:documentation>
 				</xs:annotation>
@@ -611,12 +691,12 @@ Based on videoMD schema version 2.0
 				video file. frameType has 1 attribute ID (XML ID)and 6 elements pixelsHorizontal, pixelsVertical, frameRate, PAR, DAR and rotation.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="pixelsHorizontal" type="xs:integer" minOccurs="1">
+			<xs:element name="pixelsHorizontal" type="xs:integer" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The horizontal dimension of a frame in pixels.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pixelsVertical" type="xs:integer" minOccurs="1">
+			<xs:element name="pixelsVertical" type="xs:integer" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The vertical dimension of a frame in pixels.</xs:documentation>
 				</xs:annotation>
@@ -626,11 +706,11 @@ Based on videoMD schema version 2.0
 					<xs:documentation>The rate of frames displayed in one second (or average rate of frames per second in the case of variable frame-rate). Present as a ratio of time base over frame duration, such as 30000/1001 or as a decimal, such as 29.970 .</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="PAR" type="xs:decimal" minOccurs="1">
+			<xs:element name="PAR" type="xs:decimal" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Pixel aspect ratio (present as a ratio or decimal).</xs:documentation></xs:annotation>
 			</xs:element>
-			<xs:element name="DAR" type="xs:string" minOccurs="1">
+			<xs:element name="DAR" type="xs:string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Display aspect ratio (present as a ratio or decimal such as 4/3 or 6/9 or 1.33333).</xs:documentation>
 				</xs:annotation>

@@ -46,13 +46,15 @@ elementFormDefault="qualified" attributeFormDefault="unqualified">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="1.4"/>
 			<xsd:enumeration value="1.4.1"/>
+			<xsd:enumeration value="1.5.0"/>
 		</xsd:restriction>
 	</xsd:simpleType>
 
 	<!-- KDK METS specification version type -->
 	<xsd:simpleType name="kdkSpecVersionType">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="1.4"/>			
+			<xsd:enumeration value="1.4"/>
+			<xsd:enumeration value="1.5.0"/>			
 		</xsd:restriction>
 	</xsd:simpleType>
 	

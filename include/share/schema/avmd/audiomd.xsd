@@ -1,13 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-KDK AUDIOMD Schema
-CSC, 2013-05-23
-Based on audioMD schema version 2.0
--->
+<!-- AudioMD version 2.0 -->
+<!-- edited with XML Spy v4.0.1 (http://www.xmlspy.com) by D. Casey (User Technology Associates, Inc.) -->
+<!-- edited with oXygen by K. Bredenberg -->
+<xs:schema targetNamespace="http://www.loc.gov/audioMD/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.loc.gov/audioMD/" elementFormDefault="qualified">
+	<!--============================================================
 
-<xs:schema targetNamespace="http://www.loc.gov/audioMD/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns="http://www.loc.gov/audioMD/" elementFormDefault="qualified">
+  AUDIOMD: Audio Technical Metadata Extension Schema  
+  Initial Version:  AMD_020322.xsd (obtained from Carl's webpage on 03/27/2002)
 
+  Changes 03/27/2002:
+  DKC- Removed duplicate elements "note" and "num_channels" from the 
+        complexType node "physical_dataType".
+     - Removed "calibration" from "file_data" due to its inclusion in 
+        "calibration_info".
+     - Removed "duration" from "physical_data" due to its inclusion in 
+        "time_info".
+  Changes 04/03/2002:
+  DKC- Duplicated the AUDIOMD node to create the AUDIOSRC node.  Removed 
+        "physical_data" from AUDIOMD and "file_data" from AUDIOSRC.
+     - Created a "audio_info" node and moved the following nodes into it: note, 
+        num_channels, sound_field, sound_channel_map, duration
+  Changes 07/25/2002
+  DKC- Abstracted the root element in order to provide support for both analog 
+        and digital sources.
+     - Simplified the structure to eliminate the unecessary element references 
+        and complex types.
+  Changes 08/22/2002
+  DKC- Cleaned up much of the documentation and definitions.  This should 
+        continue.
+  
+  Changes 02/08/2010
+  	KB -added method element to material in element Physical_data
+  	   -added note element to element Physical_data 
+  	   -added used_sides element to material in element Physical_data
+  	   -added EBU_Storage_Media_Codes element to element Physical_data
+  	   
+Changes 06/29/2010
+KB - harmonized with PREMIS 2.0 and removed _ in element names.
+      - renamed chcksum as messageDigest
+      
+Changes 10/19/2010
+KB - added formatLocation to fileDataType-element
+
+Changes 03/23/2011
+KB - renamed reflectiveLayer to activeLayer since it describes the active parts of the disk.
+	- added a new element reflectiveLayer which describes the reflective layer e.g. gold, silver, aluminium etc.
+	- removed fileData, physicalData, audioInfo and calibrationInfo as top elements.
+	- renamed calibrationType calibrationInfoType
+	- renamed complexType trackingType to trackingInfoType to minimazie confusion with the element with the same name
+	
+Changes 04/15/2011
+KB - updates in comments	
+
+Changes 04/26/2011
+KB - updates in comments
+
+Changes 04/29/2011
+KB 	- updated name and namespace of the schema
+	- added value Other to the predefined list of element use
+	- added an element otherUse where a use not stated in the use element list can be described
+	- added value 2 to the byteOrder enumerated list
+	- added an element otherColor where a color not stated in the color element list can be described
+	- updates in comments
+	
+Changes 05/02/2011
+KB	- updates in comments
+============================================================ -->
 	<xs:element name="AUDIOMD" type="audioType"/>
 	<xs:element name="AUDIOSRC" type="audioType"/>
 	<xs:annotation>
@@ -27,9 +85,9 @@ Based on audioMD schema version 2.0
 				are documented under their corresponding types.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="fileData" type="fileDataType" minOccurs="1"/>
+			<xs:element name="fileData" type="fileDataType" minOccurs="0"/>
 			<xs:element name="physicalData" type="physicalDataType" minOccurs="0"/>
-			<xs:element name="audioInfo" type="audioInfoType" minOccurs="1"/>
+			<xs:element name="audioInfo" type="audioInfoType" minOccurs="0"/>
 			<xs:element name="calibrationInfo" type="calibrationInfoType" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="ID" type="xs:ID"/>
@@ -53,13 +111,12 @@ Based on audioMD schema version 2.0
 					<xs:documentation>Size of an audio block (frame or sample) in bytes.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="audioDataEncoding" type="xs:string" minOccurs="1"
-				maxOccurs="unbounded">
+			<xs:element name="audioDataEncoding" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Structure for audio data; current known types are pulse code modulation (PCM) and SONY's DSD structure.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="bitsPerSample" type="xs:int" minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="bitsPerSample" type="xs:int" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Number of bits per audio sample, e.g., 16, 20, 24, etc.</xs:documentation>
 				</xs:annotation>
@@ -76,16 +133,14 @@ Based on audioMD schema version 2.0
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="messageDigest" type="messageDigestType" minOccurs="0"
-				maxOccurs="unbounded"/>
-			<xs:element name="compression" type="compressionType" minOccurs="1"
-				maxOccurs="unbounded"/>
-			<xs:element name="dataRate" type="xs:int" minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="messageDigest" type="messageDigestType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="compression" type="compressionType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="dataRate" type="xs:int" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Data rate of the audio in an MP3 or other compressed file, expressed in kbps, e.g., 64, 128, 256, etc.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="dataRateMode" minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="dataRateMode" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Indicator whether the data rate is fixed or variable.</xs:documentation>
 				</xs:annotation>
@@ -136,12 +191,12 @@ Based on audioMD schema version 2.0
 					<xs:documentation>The number of frames within an audio file.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="samplingFrequency" type="xs:float" minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="samplingFrequency" type="xs:float" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Rate at which the audio was sampled, expressed in kHz, e.g., 22, 44.1, 48, 96, etc.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="security" type="xs:string" minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="security" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>The type of security precautions applied to the file e.g. password, encryption, hidden, etc.</xs:documentation>
 				</xs:annotation>
@@ -182,8 +237,7 @@ Based on audioMD schema version 2.0
 				reel digital, DAT, ADAT tape, CD-R, etc....</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="EBUStorageMediaCodes" type="xs:string" minOccurs="0"
-				maxOccurs="unbounded">
+			<xs:element name="EBUStorageMediaCodes" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>The EBU Storage Media Code for the physical media. See http://www.ebu.ch/metadata/cs/ebu_StorageMediaTypeCodeCS.xml and http://www.ebu.ch/metadata/cs/web/ebu_StorageMediaTypeCodeCS_p.xml.htm </xs:documentation>
 				</xs:annotation>
@@ -261,7 +315,7 @@ Based on audioMD schema version 2.0
 				digital representation.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="duration" type="xs:string" minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="duration" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Elapsed time of the entire file, expressed using ISO 8601 syntax; see http://www.w3.org/TR/NOTE-datetime.</xs:documentation>
 				</xs:annotation>
@@ -271,13 +325,12 @@ Based on audioMD schema version 2.0
 					<xs:documentation>Miscellaneous information about the audio item. e.g. digital alterations or enhancements to improve quality.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="numChannels" type="xs:string" minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="numChannels" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Number of audio channels, e.g., 1, 2, 4, 5, etc. See also soundChannelMap.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="soundChannelMap" type="soundChannelMapType" minOccurs="0"
-				maxOccurs="unbounded">
+			<xs:element name="soundChannelMap" type="soundChannelMapType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Information about the channel configuration, e.g., mapping the audio channel to their intended aural position/loudspeakers. The values represent parseable compound metadata using commas as separators, e.g., 1=left_front, 2=right_front, 3=center, 4=left_</xs:documentation>
 				</xs:annotation>
@@ -352,22 +405,22 @@ Based on audioMD schema version 2.0
 				used for a digital audio file. compressionType has 1 attribute ID XML ID) and 4 elements codecCreatorApp, codecCreatorAppVersion, codecName and codecQuality.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="codecCreatorApp" type="xs:string" minOccurs="1">
+			<xs:element name="codecCreatorApp" type="xs:string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Name of the creator of the compression application e.g. SoundForge, etc...</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="codecCreatorAppVersion" type="xs:string" minOccurs="1">
+			<xs:element name="codecCreatorAppVersion" type="xs:string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Version of the compression application e.g. 5.0, etc...</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="codecName" type="xs:string" minOccurs="1">
+			<xs:element name="codecName" type="xs:string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Name and version (or subtype) of the compression algorithm used, e.g., Frauenhofer xyz ["xyz"] is a placeholder for versioning information]</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="codecQuality" minOccurs="1">
+			<xs:element name="codecQuality" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Impact of the compression on quality e.g. lossless or lossy.</xs:documentation>
 				</xs:annotation>
