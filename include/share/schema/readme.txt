@@ -27,7 +27,7 @@ DIRECTORIES:
 ./ead							EAD 2002 schema files (unchanged)
 ./ead3							EAD3 1.0.0 schema files (changed, see ./ead3/readme.txt)
 ./gml							OpenGIS GML 3.1.1 schema files (changed, see ./gml/readme.txt)
-./lido							LIDO 1.0 schema files (unchanged)
+./lido							LIDO 1.0 schema files (changed, see ./lido/readme.txt)
 ./marc							MARC21 1.2 schema files (unchanged)
 ./mets							METS 1.11 schema files (extended with separate files)
 ./mix							MIX 2.0 (NISOIMG) schema files (unchanged)

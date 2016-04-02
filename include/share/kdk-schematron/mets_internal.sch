@@ -127,10 +127,10 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="disallowed_element" value="mets:structLink"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
-	<sch:pattern id="mets_behaviourSec" is-a="disallowed_element_pattern">
+	<sch:pattern id="mets_behaviorSec" is-a="disallowed_element_pattern">
 		<sch:param name="context_element" value="mets:mets"/>
 		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="disallowed_element" value="mets:behaviourSec"/>
+		<sch:param name="disallowed_element" value="mets:behaviorSec"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
 
@@ -169,10 +169,10 @@ Validates METS metadata elements and attributes, their values, and METS internal
 	</sch:pattern>
 
 	<!-- METS Header elements -->	
-	<sch:pattern id="mets_metsHdr_altrecordID" is-a="disallowed_element_pattern">
+	<sch:pattern id="mets_metsHdr_altRecordID" is-a="disallowed_element_pattern">
 		<sch:param name="context_element" value="mets:metsHdr"/>
 		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="disallowed_element" value="mets:altrecordID"/>
+		<sch:param name="disallowed_element" value="mets:altRecordID"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
 

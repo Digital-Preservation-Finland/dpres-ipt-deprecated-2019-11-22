@@ -146,10 +146,10 @@ Validates NISOIMG (MIX) metadata.
 		<sch:param name="required_element" value="mix:bitsPerSampleUnit"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
-	<sch:pattern id="mix_yCbCrSubSampling" is-a="required_element_pattern">
+	<sch:pattern id="mix_YCbCrSubSampling" is-a="required_element_pattern">
 		<sch:param name="context_element" value="mets:techMD/mets:mdWrap/mets:xmlData/mix:mix//mix:YCbCr"/>
 		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="required_element" value="mix:yCbCrSubSampling"/>
+		<sch:param name="required_element" value="mix:YCbCrSubSampling"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
 	<sch:pattern id="mix_yCbCrPositioning" is-a="required_element_pattern">
