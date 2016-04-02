@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+	Require certain values in PREMIS element formatName, and if exists, in formatVersion and formatRegistryKey.
+	mime_types - Allowed mime types for element formatName, with space+semicolon delimiter.
+	format_versions - Allowed format versions for element formatVersion, with space+semicolon delimiter.
+	pronom_codes - Allowed pronom codes for element formatRegistryKey, with space+semicolon delimiter.
+	context_condition - Rule launched only, if this condition is true.
+	specifications - Catalog/specification versions for which the rule is launched.
+		List the affected versions with space+semicolon delimiter.
+		If begins with "not:", rule is launched with other but given versions.  
+		If empty, launch rule by default.
+	-->
+	<sch:pattern id="required_value_premis_formatname_pattern" abstract="true" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/" xmlns:fi="http://www.kdk.fi/standards/mets/kdk-extensions" xmlns:str="http://exslt.org/strings">
+		<sch:rule context="mets:techMD//premis:format[.//premis:formatName and ($context_condition)]">
+			<sch:let name="section_context" value="ancestor-or-self::*[self::mets:dmdSec or self::mets:techMD or self::mets:rightsMD or self::mets:sourceMD or self::mets:digiprovMD]"/>
+			<sch:let name="section_string" value="concat('(ID of the metadata section ', name($section_context), ' is ', $section_context/@ID, ')')"/>
+			<sch:let name="formattoken" value="str:split(.//premis:formatName, ';')"/>
+			<sch:assert test="(contains(concat(' ', $mime_types, '; '), concat(' ', normalize-space($formattoken[1]), '; '))) or not(normalize-space($specifications)=''
+			or ((normalize-space(substring($specifications,1,4))='not:') and ((not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; ')))) and not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; ')))))
+			or ((normalize-space(substring($specifications,1,4))!='not:') and ((contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; '))) or (contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; '))))))">
+		   		Value '<sch:value-of select="$formattoken[1]"/>' is not allowed in element 'premis:formatName'. <sch:value-of select="substring($section_string,1,number($section_context)*string-length($section_string))"/>
+			</sch:assert>
+			<sch:assert test="(not(contains(concat(' ', $mime_types, '; '), concat(' ', normalize-space($formattoken[1]), '; '))) or
+			not(.//premis:formatVersion) or contains(concat(' ', normalize-space($format_versions[count(str:split(substring-before(concat(' ', $mime_types, '; '), concat(' ', normalize-space($formattoken[1]), '; ')),';'))+1]), ' '), concat(' ', normalize-space(.//premis:formatVersion), ' ')) or normalize-space(.//premis:formatVersion)='' or $format_versions[count(str:split(substring-before(concat(' ', $mime_types, '; '), concat(' ', normalize-space($formattoken[1]), '; ')),';'))+1]='') or not(normalize-space($specifications)=''
+			or ((normalize-space(substring($specifications,1,4))='not:') and ((not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; ')))) and not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; ')))))
+			or ((normalize-space(substring($specifications,1,4))!='not:') and ((contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; '))) or (contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; '))))))">
+		   		Value '<sch:value-of select=".//premis:formatVersion"/>' is not allowed in element 'premis:formatVersion', when format name is '<sch:value-of select="$formattoken[1]"/>'. <sch:value-of select="substring($section_string,1,number($section_context)*string-length($section_string))"/>. Valid values are: <sch:value-of select="normalize-space($format_versions[count(str:split(substring-before(concat(' ', $mime_types, '; '), concat(' ', normalize-space($formattoken[1]), '; ')),';'))+1])"/>
+			</sch:assert>
+			<sch:assert test="(not(contains(concat(' ', $mime_types, '; '), concat(' ', normalize-space($formattoken[1]), '; '))) or
+			not(.//premis:formatRegistryKey) or contains(concat(' ', normalize-space($pronom_codes[count(str:split(substring-before(concat(' ', $mime_types, '; '), concat(' ', normalize-space($formattoken[1]), '; ')),';'))+1]), ' '), concat(' ', normalize-space(.//premis:formatRegistryKey), ' ')) or normalize-space(.//premis:formatRegistryKey)='' or $pronom_codes[count(str:split(substring-before(concat(' ', $mime_types, '; '), concat(' ', normalize-space($formattoken[1]), '; ')),';'))+1]='') or not(normalize-space($specifications)=''
+			or ((normalize-space(substring($specifications,1,4))='not:') and ((not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; ')))) and not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; ')))))
+			or ((normalize-space(substring($specifications,1,4))!='not:') and ((contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; '))) or (contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; '))))))">
+		   		Value '<sch:value-of select=".//premis:formatRegistryKey"/>' is not allowed in element 'premis:formatRegistryKey', when format name is '<sch:value-of select="$formattoken[1]"/>'. <sch:value-of select="substring($section_string,1,number($section_context)*string-length($section_string))"/>. Valid values are: <sch:value-of select="normalize-space($pronom_codes[count(str:split(substring-before(concat(' ', $mime_types, '; '), concat(' ', normalize-space($formattoken[1]), '; ')),';'))+1])"/>
+			</sch:assert>
+		</sch:rule>
+	</sch:pattern>

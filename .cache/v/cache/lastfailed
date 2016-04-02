@@ -1,0 +1,13 @@
+{
+  "tests/validator/plugin/ffmpeg_test.py::test_mark_ffmpeg[mp4.mp4-4---0]": true, 
+  "tests/validator/plugin/ffmpeg_test.py::test_mark_ffmpeg[mp4_error.mp4-4--Invalid data found-117]": true, 
+  "tests/validator/plugin/ffmpeg_test.py::test_mark_ffmpeg[mpg1.mpg-1---0]": true, 
+  "tests/validator/plugin/ffmpeg_test.py::test_mark_ffmpeg[mpg1.mpg-4--Wrong format version-117]": true, 
+  "tests/validator/plugin/ffmpeg_test.py::test_mark_ffmpeg[mpg1_error.mpg-1--Missing picture start code-117]": true, 
+  "tests/validator/plugin/ffmpeg_test.py::test_mark_ffmpeg[mpg1_error2.mpg-1---117]": true, 
+  "tests/validator/plugin/ffmpeg_test.py::test_mark_ffmpeg[mpg2.mpg-2---0]": true, 
+  "tests/validator/plugin/ffmpeg_test.py::test_mark_ffmpeg[mpg2_error.mpg-2---117]": true, 
+  "tests/validator/plugin/ffmpeg_test.py::test_mark_ffmpeg[no_video.wav-1--No version information could be found-117]": true, 
+  "tests/validator/plugin/ffmpeg_test.py::test_mark_ffmpeg[system_error-1---1]": true, 
+  "tests/validator/plugin/ffmpeg_test.py::test_mark_ffmpeg[unknown_mimetype.3gp-2--Unknown mimetype or version-117]": true
+}

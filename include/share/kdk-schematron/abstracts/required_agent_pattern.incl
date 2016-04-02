@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+	Require agent in METS header with given role and type.
+	role - Role of the agent (METS vocabulary required)
+	type - type of the agent (METS vocabulary required)
+	context_condition - Rule launched only, if this condition is true.
+	specifications - Catalog/specification versions for which the rule is launched.
+		List the affected versions with space+semicolon delimiter.
+		If begins with "not:", rule is launched with other but given versions.  
+		If empty, launch rule by default.
+	-->
+	<sch:pattern id="required_agent_pattern" abstract="true" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/" xmlns:fi="http://www.kdk.fi/standards/mets/kdk-extensions">
+		<sch:rule context="mets:metsHdr[($context_condition)]">
+			<sch:assert test="(mets:agent[normalize-space(@ROLE)=$role and normalize-space(@TYPE)=$type]) or not(normalize-space($specifications)=''
+			or ((normalize-space(substring($specifications,1,4))='not:') and ((not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; ')))) and not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; ')))))
+			or ((normalize-space(substring($specifications,1,4))!='not:') and ((contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; '))) or (contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; '))))))">
+				Element 'mets:agent' is required in '<sch:name/>', where attributes '<sch:value-of select="@ROLE"/>' and '<sch:value-of select="@TYPE"/>' include values '<sch:value-of select="$role"/>' and '<sch:value-of select="$type"/>', respectively.
+			</sch:assert>
+		</sch:rule> 
+	</sch:pattern>

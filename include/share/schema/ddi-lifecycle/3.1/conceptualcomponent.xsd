@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2009 DDI Alliance, DDI 3.1, 2009-10-18
+
+This file is part of DDI 3.1 XML Schema.
+
+DDI 3.1 XML Schema is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+
+DDI 3.1 XML Schema is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with DDI 3.1 XML Schema. If not, see <http://www.gnu.org/licenses/>.
+
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:conceptualcomponent:3_1" xmlns:r="ddi:reusable:3_1" targetNamespace="ddi:conceptualcomponent:3_1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+   <xs:import namespace="ddi:reusable:3_1" schemaLocation="reusable.xsd"/>
+   <xs:element name="ConceptualComponent" type="ConceptualComponentType">
+      <xs:annotation>
+         <xs:documentation>Concept, Universe, and Geography schemes used by the data being documented, or references to those schemes.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="ConceptualComponentType">
+      <xs:annotation>
+         <xs:documentation>Concept, Universe, and Geography schemes used by the data being documented, or references to those schemes.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+               <xs:element ref="ConceptualComponentModuleName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded"/> 
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded"/>           
+               <xs:element ref="r:Coverage" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Provides information about the topical, spatial, and temporal coverage of the conceptual components included in this module.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:OtherMaterial" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Provides information about external resources related to the conceptual components described in this module.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Note" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Footnote, or annotation, associated with the conceptual components des cribed in this module.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:choice minOccurs="0" maxOccurs="unbounded">
+                  <xs:element ref="ConceptScheme">
+                     <xs:annotation>
+                        <xs:documentation>Includes a comprehensive list of the concepts measured by the data that are being documented.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="ConceptSchemeReference">
+                     <xs:annotation>
+                        <xs:documentation>Allows for inclusion by reference of an external concept scheme.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+               <xs:choice minOccurs="0" maxOccurs="unbounded">
+                  <xs:element ref="UniverseScheme">
+                     <xs:annotation>
+                        <xs:documentation>Includes a comprehensive list of the Universes and sub-universes of the data that are being documented.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="UniverseSchemeReference">
+                     <xs:annotation>
+                        <xs:documentation>Allows for inclusion by reference of an external universe scheme.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+                  <xs:element ref="GeographicStructureScheme">
+                     <xs:annotation>
+                        <xs:documentation>Contains a collection of geographic structures.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="GeographicStructureSchemeReference">
+                     <xs:annotation>
+                        <xs:documentation>Allows for inclusion by reference of a previously defined geographic structure scheme, either internal to, or external to the DDI instance.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+               <xs:choice maxOccurs="unbounded" minOccurs="0">
+                  <xs:element ref="GeographicLocationScheme">
+                     <xs:annotation>
+                        <xs:documentation>Contains a collection of geographic locations.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="GeographicLocationSchemeReference">
+                     <xs:annotation>
+                        <xs:documentation>Allows for inclusion by reference of a previously defined geographic location scheme, either internal to or external to the DDI instance.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="ConceptualComponentModuleName" type="r:NameType"/>
+   <xs:complexType name="ConceptSchemeType">
+      <xs:annotation>
+         <xs:documentation>Includes a comprehensive list of the concepts measured by the data that are being documented.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+               <xs:element ref="ConceptSchemeName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the concept scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A description of the use of the concept scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ConceptSchemeReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Provides for inclusion by reference of other concept schemes.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Vocabulary" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Provides information about the vocabulary used to create the concept scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:choice minOccurs="0" maxOccurs="unbounded">
+                  <xs:element ref="Concept">
+                     <xs:annotation>
+                        <xs:documentation>Container for an individual concept included in the concept scheme.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="DataElementConcept">
+                     <xs:annotation>
+                        <xs:documentation>Documents an individual data element concept (per ISO/IEC 11179) included in the concept scheme.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+               <xs:element ref="ConceptGroup" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Allows for grouping of concepts; groups may have a hierarchical structure.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="ConceptSchemeName" type="r:NameType"/>
+   <xs:complexType name="UniverseSchemeType">
+      <xs:annotation>
+         <xs:documentation>Includes a comprehensive list of the universes and sub-universes of the data that are being documented.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+               <xs:element ref="UniverseSchemeName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the universe scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A description of the use of the universe scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="UniverseSchemeReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Provides for inclusion by reference of other universe schemes.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Universe" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Documents the highest-level (most inclusive) universe, as well as any sub-universes used in the data.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="UniverseSchemeName" type="r:NameType"/>
+   <xs:complexType name="ConceptGroupType">
+      <xs:annotation>
+         <xs:documentation>Allows for grouping of concepts; groups may have a hierarchical structure.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:VersionableType">
+            <xs:sequence>
+               <xs:element ref="ConceptGroupName" minOccurs="0" maxOccurs="unbounded"/> 
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the concept group.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A description of the use of the concept group.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ConceptReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Reference to a concept included in the concept group. A concept can be referenced internally, from the concept scheme included in the same conceptual components module, or externally, from another scheme. This element is recursive to allow for the description of hierarchical relationships within the concept group.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ConceptGroupReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Reference to a subordinate concept group included in the concept group. A concept group can be referenced internally, from the concept scheme included in the same conceptual components module, or externally, from another scheme. This element is recursive to allow for the description of hierarchical relationships within the concept group.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>  
+               <xs:choice minOccurs="0" maxOccurs="1">
+               		<xs:element ref="AdministrativePurpose"/> 
+               		<xs:element ref="DefiningConceptReference"/>                		
+               </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="isOrdered" type="xs:boolean" use="optional" default="false">
+               <xs:annotation>
+                  <xs:documentation>Indicates whether the concept scheme is ordered or unordered.  A value of "true" indicates ordered.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="isStructured" type="xs:boolean" use="optional" default="false">
+               <xs:annotation>
+                  <xs:documentation>Indicates the structure of the relationships in the concept scheme. A value of "true" indicates a hierarchical structure, while a value of "false" indicates an unstructured scheme.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="purpose" type="PurposeType" use="required">
+               <xs:annotation>
+                  <xs:documentation>Indicates the purpose of a concept group.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="isConcept" type="xs:boolean" use="optional" default="false">
+               <xs:annotation>
+                  <xs:documentation>A value of true indicates that there is a concept which defines the group, and which is comprised of the concepts contained in the group. A group can be conceptual in purpose (that is, have a value of "concept" for the purpose attribute), but not itself have a defining concept.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>            
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="ConceptGroupName" type="r:NameType"/>
+   <xs:element name="ConceptGroupReference" type="r:ReferenceType"/>  
+   <xs:element name="AdministrativePurpose" type="r:CodeValueType">
+       <xs:annotation>
+	  <xs:documentation>The administrative reason a group was formed, expressed as a value from a controlled vocabulary or similar list.</xs:documentation>
+       </xs:annotation>   
+   </xs:element>
+   <xs:element name="DefiningConceptReference" type="r:ReferenceType">
+       <xs:annotation>
+	  <xs:documentation>Reference to the concept that defines the group.</xs:documentation>
+       </xs:annotation>      
+   </xs:element>
+   <xs:simpleType name="PurposeType">
+    <xs:restriction base="xs:NMTOKEN">
+         <xs:enumeration value="Administrative">
+           <xs:annotation>
+             <xs:documentation>A concept group created for administrative purposes.</xs:documentation>
+           </xs:annotation>
+      </xs:enumeration>
+         <xs:enumeration value="Conceptual">
+           <xs:annotation>
+             <xs:documentation>A concept group created for conceptual purposes.</xs:documentation>
+           </xs:annotation>
+      </xs:enumeration>      
+    </xs:restriction>
+   </xs:simpleType>
+   <xs:complexType name="ConceptReferenceType">
+      <xs:annotation>
+         <xs:documentation>References concepts to be included in concept groups.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:ReferenceType">
+            <xs:sequence>
+               <xs:element ref="ConceptReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A reference to a concept included in a concept group.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="VocabularyType">
+      <xs:annotation>
+         <xs:documentation>Provides information about the vocabulary used to create a concept scheme.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="Title" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Full title of vocabulary.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Abbreviation" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Abbreviation of vocabulary title.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Keyword" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Keywords that describe the vocabulary.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Textual description of the vocabulary.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="URI" type="xs:anyURI" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>URI to external resource providing information about the vocabulary (general description, main web page).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="XML-URI" type="xs:anyURI" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>URI to the vocabulary represented as an XML document.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="Scheme" type="xs:string" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Textual description of the XML scheme in which the classification is written.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="SchemeURI" type="xs:anyURI" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>URI to the XML scheme used in the vocabulary (DTD or XML Schema for the XML document above; schemes like DDI, Claset, Neuchatel, and DocBook). Typically, this will be an XML namespace.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Comments" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Human-readable comments on the usage of the vocabulary.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="Concept" type="ConceptType">
+      <xs:annotation>
+         <xs:documentation>Container for an individual concept included in the concept scheme.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="ConceptType">
+      <xs:annotation>
+         <xs:documentation>Container for an individual concept included in the concept scheme.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:VersionableType">
+            <xs:sequence>
+               <xs:element ref="ConceptName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the concept.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Includes the definition of the concept itself. This element can be repeated to provide translations of the same concept in various languages.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="SimilarConcept" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Reference to another concept that is similar to the one included in the Description element above.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+            <xs:attribute name="isCharacteristic" type="xs:boolean" default="false">
+               <xs:annotation>
+                  <xs:documentation>A true value indicates that the concept is a characteristic, as defined in ISO/IEC 11179.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="ConceptName" type="r:NameType"/>
+   <xs:complexType name="DataElementConceptType">
+      <xs:annotation>
+         <xs:documentation>Container for a data element concept (per ISO/IEC 11179) included in the concept scheme.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:VersionableType">
+            <xs:sequence>
+               <xs:element ref="DataElementConceptName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the concept.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Includes the definition of the concept itself. This element can be repeated to provide translations of the same concept in various languages.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="SimilarConcept" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Reference to another concept that is similar to the one included in the Description element above.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="CharacteristicReference">
+                  <xs:annotation>
+                     <xs:documentation>Reference to a Concept that has its isCharacteristic attribute set to true, and is used for qualifying this data element concept.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:UniverseReference" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Reference to a universe associated with this concept.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="DataElementConceptName" type="r:NameType"/>
+   <xs:element name="CharacteristicReference" type="ConceptReferenceType">
+      <xs:annotation>
+         <xs:documentation>References a concept which has its isCharacteristic attribute set to true.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DataElementConcept" type="DataElementConceptType">
+      <xs:annotation>
+         <xs:documentation>Container for a data element concept (per ISO/IEC 11179) included in the concept scheme.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="SimilarConceptType">
+      <xs:annotation>
+         <xs:documentation>Reference to another concept that is similar to the one included in the Description element above.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="SimilarConceptReference">
+            <xs:annotation>
+               <xs:documentation>Reference to another concept that is similar to the one included in the related Description element.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Difference" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes the difference between the concept referenced in ConceptReference and the concept included in the concept's Description element.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="SimilarConceptReference" type="r:ReferenceType"/>
+   <xs:complexType name="UniverseType">
+      <xs:annotation>
+         <xs:documentation>Universe statement associated with the data.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:VersionableType">
+            <xs:sequence>
+               <xs:element ref="UniverseName" minOccurs="0" maxOccurs="unbounded"/>   
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded"/>               
+               <xs:element ref="HumanReadable" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A human-readable description of the Universe.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="MachineReadable" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A machine-readable statement of the universe, expressed as a Coding.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="SubUniverse" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A subset of the parent universe, for example the universe "females" is a subset of the universe "all persons".</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+            <xs:attribute name="isInclusive" type="xs:boolean" default="true">
+               <xs:annotation>
+                  <xs:documentation>When set to true (default), the universe statement describes what is in the universe. When set to false, it is a statement of what is excluded from the universe.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="UniverseName" type="r:NameType"/>
+    <!-- GEOGRAPHY -->
+   <xs:complexType name="GeographicStructureSchemeType">
+      <xs:annotation>
+         <xs:documentation>This scheme contains a set of geographic structure types and their relationship to each other. For example, the structure types in the U.S. Census geographic hierarchy used in summary files.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+               <xs:element ref="GeographicStructureSchemeName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the geographic structure scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A description of the use of the geographic structure scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="GeographicStructureSchemeReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+            <xs:documentation>Allows for inclusion by reference of another geographic structure scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+             <xs:choice minOccurs="0" maxOccurs="unbounded">
+                  <xs:element ref="r:GeographicStructure">
+                     <xs:annotation>
+                        <xs:documentation>Describes a geographic structure contained in the scheme.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="r:GeographicStructureReference">
+                     <xs:annotation>
+                        <xs:documentation>References a geographic structure, for inclusion in the scheme.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="GeographicStructureSchemeName" type="r:NameType"/>
+ <xs:complexType name="GeographicLocationSchemeType">
+    <xs:annotation>
+        <xs:documentation>This scheme contains a set of geographic locations, each for a single Geography type, e.g., States OR Counties, OR Countries, etc. The geographic location element has to be repeated for each geography structure type described.</xs:documentation>
+    </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+               <xs:element ref="GeographicLocationSchemeName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the geography location scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A description of the use of the geography location scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="GeographicLocationSchemeReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+            <xs:documentation>Allows for inclusion by reference of another geographic location scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+             <xs:choice minOccurs="0" maxOccurs="unbounded">
+                  <xs:element ref="r:GeographicLocation">
+                     <xs:annotation>
+                        <xs:documentation>Describes a geographic location contained in the scheme.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="r:GeographicLocationReference">
+                     <xs:annotation>
+                        <xs:documentation>References a geographic location for inclusion in this scheme.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="GeographicLocationSchemeName" type="r:NameType"/>
+   <xs:element name="Title" type="r:InternationalStringType">
+      <xs:annotation>
+         <xs:documentation>Full title of vocabulary.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Abbreviation" type="r:InternationalStringType">
+      <xs:annotation>
+         <xs:documentation>Abbreviation of vocabulary title.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Keyword" type="r:InternationalStringType">
+      <xs:annotation>
+         <xs:documentation>Keywords that describe the vocabulary.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ConceptScheme" type="ConceptSchemeType">
+      <xs:annotation>
+         <xs:documentation>Includes a comprehensive list of the concepts describing the data that are being documented.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ConceptSchemeReference" type="r:SchemeReferenceType">
+      <xs:annotation>
+         <xs:documentation>References a concept scheme external to this module, for inclusion in the module.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="UniverseScheme" type="UniverseSchemeType">
+      <xs:annotation>
+         <xs:documentation>Includes a comprehensive list of the universes and sub-universes for the data that are being documented.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="UniverseSchemeReference" type="r:SchemeReferenceType">
+      <xs:annotation>
+         <xs:documentation>References a universe scheme external to this module, for inclusion in the module.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Universe" type="UniverseType">
+      <xs:annotation>
+         <xs:documentation>Describes a universe for inclusion in the module.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SubUniverse" type="UniverseType">
+      <xs:annotation>
+         <xs:documentation>A subset of the parent universe for example the universe Females is a subset of the universe Population.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="HumanReadable" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>A human-readable statement of the Universe of the question item.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="MachineReadable" type="r:CodeType">
+      <xs:annotation>
+         <xs:documentation>A machine-readable statement of the universe, expressed as a Coding.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Vocabulary" type="VocabularyType">
+      <xs:annotation>
+         <xs:documentation>Provides information about the vocabulary used to create the concept scheme.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ConceptGroup" type="ConceptGroupType">
+      <xs:annotation>
+         <xs:documentation>Allows for grouping of concepts; groups may have a hierarchical structure.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ConceptReference" type="ConceptReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to a concept included in the concept group. A concept can be referenced internally, from the concept scheme included in the same conceptual components module, or externally, from another scheme. This element is recursive to allow for the description of hierarchical relationships within the concept group.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Comments" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Human-readable comments on the usage of the vocabulary.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SimilarConcept" type="SimilarConceptType">
+      <xs:annotation>
+         <xs:documentation>Reference to another concept that is similar to the one included in the Description element above.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Difference" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Describes the difference between the concept referenced in ConceptReference and the concept included in the concept's Description element.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="GeographicStructureScheme" type="GeographicStructureSchemeType">
+      <xs:annotation>
+         <xs:documentation>Contains a collection of geographic structures.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="GeographicStructureSchemeReference" type="r:SchemeReferenceType">
+      <xs:annotation>
+         <xs:documentation>A reference to an internal or external geographic structure scheme in DDI 3.0 XML.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="GeographicLocationScheme" type="GeographicLocationSchemeType">
+      <xs:annotation>
+         <xs:documentation>Contains a collection of geographic locations.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="GeographicLocationSchemeReference" type="r:SchemeReferenceType">
+      <xs:annotation>
+         <xs:documentation>A reference to an internal or external geographic location scheme coded in DDI 3.0 XML.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+</xs:schema>

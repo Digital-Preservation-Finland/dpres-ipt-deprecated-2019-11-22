@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+	Disallow metadata in mdWrap.
+	unsupported_mdname - OTHERMDTYPE value of disallowed metadata
+	context_condition - Rule launched only, if this condition is true
+	specifications - Catalog/specification versions for which the rule is launched.
+		List the affected versions with space+semicolon delimiter.
+		If begins with "not:", rule is launched with other but given versions.  
+		If empty, launch rule by default.
+	-->
+	<sch:pattern id="disallowed_unsupported_metadata_pattern" abstract="true" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/" xmlns:fi="http://www.kdk.fi/standards/mets/kdk-extensions">
+		<sch:rule context="mets:mdWrap[@OTHERMDTYPE and ($context_condition)]">
+			<sch:assert test="(@OTHERMDTYPE!=$unsupported_mdname) or not(normalize-space($specifications)=''
+			or ((normalize-space(substring($specifications,1,4))='not:') and ((not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; ')))) and not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; ')))))
+			or ((normalize-space(substring($specifications,1,4))!='not:') and ((contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; '))) or (contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; '))))))">
+				Metadata type '<sch:value-of select="@OTHERMDTYPE"/>' is currently unsupported. (ID of the metadata section '<sch:value-of select="name(..)"/>' is '<sch:value-of select="../@ID"/>')
+			</sch:assert>
+		</sch:rule> 
+	</sch:pattern>

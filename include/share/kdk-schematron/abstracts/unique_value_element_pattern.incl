@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+	Require that values between two elements differ.
+	context_element - Element to be checked
+	another_context_element - Another element anywhere in the METS document
+	context_condition - Rule launched only, if this condition is true.
+	specifications - Catalog/specification versions for which the rule is launched.
+		List the affected versions with space+semicolon delimiter.
+		If begins with "not:", rule is launched with other but given versions.  
+		If empty, launch rule by default.
+	-->
+	<sch:pattern id="unique_value_element_pattern" abstract="true" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/" xmlns:fi="http://www.kdk.fi/standards/mets/kdk-extensions">
+		<sch:rule context="$context_element[ancestor::mets:mets//$another_context_element and ($context_condition)]">
+			<sch:let name="id_value" value="normalize-space(.)"/>
+			<sch:assert test="((name(.)=name(ancestor::mets:mets//$another_context_element) and count(ancestor::mets:mets//$another_context_element[normalize-space(.) = $id_value]) = 1)
+			or (name(.)!=name(ancestor::mets:mets//$another_context_element) and count(ancestor::mets:mets//$another_context_element[normalize-space(.) = $id_value]) = 0)) or not(normalize-space($specifications)=''
+			or ((normalize-space(substring($specifications,1,4))='not:') and ((not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; ')))) and not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; ')))))
+			or ((normalize-space(substring($specifications,1,4))!='not:') and ((contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; '))) or (contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; '))))))">
+				Value '<sch:value-of select="."/>' in element '<sch:name/>' is required to be unique. Another element '<sch:value-of select="name(ancestor::mets:mets//$another_context_element[normalize-space(.) = $id_value])"/>' with the same value exists.
+			</sch:assert>
+		</sch:rule>
+	</sch:pattern>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+	Require attribute.
+	context_element - Element where required attribute should be
+	required_attribute - Required attribute
+	context_condition - Rule launched only, if this condition is true
+	specifications - Catalog/specification versions for which the rule is launched.
+		List the affected versions with space+semicolon delimiter.
+		If begins with "not:", rule is launched with other but given versions.  
+		If empty, launch rule by default.
+	-->
+	<sch:pattern id="required_attribute_pattern" abstract="true" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/" xmlns:fi="http://www.kdk.fi/standards/mets/kdk-extensions">
+		<sch:rule context="$context_element[($context_condition)]">
+			<sch:let name="section_context" value="ancestor-or-self::*[self::mets:dmdSec or self::mets:techMD or self::mets:rightsMD or self::mets:sourceMD or self::mets:digiprovMD]"/>
+			<sch:let name="section_string" value="concat('(ID of the metadata section ', name($section_context), ' is ', $section_context/@ID, ')')"/>
+			<sch:assert test="($required_attribute) or not(normalize-space($specifications)=''
+			or ((normalize-space(substring($specifications,1,4))='not:') and ((not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; ')))) and not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; ')))))
+			or ((normalize-space(substring($specifications,1,4))!='not:') and ((contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; '))) or (contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; '))))))">
+				Attribute '<sch:value-of select="string('$required_attribute')"/>' is required in element '<sch:name/>'. <sch:value-of select="substring($section_string,1,number($section_context)*string-length($section_string))"/>
+			</sch:assert>
+		</sch:rule>
+	</sch:pattern>

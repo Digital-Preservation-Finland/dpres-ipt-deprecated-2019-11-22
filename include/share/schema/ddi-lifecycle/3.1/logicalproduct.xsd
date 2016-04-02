@@ -1,0 +1,1979 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Copyright (c) 2009 DDI Alliance, DDI 3.1, 2009-10-18
+
+This file is part of DDI 3.1 XML Schema.
+
+DDI 3.1 XML Schema is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+
+DDI 3.1 XML Schema is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with DDI 3.1 XML Schema. If not, see <http://www.gnu.org/licenses/>.
+
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="ddi:logicalproduct:3_1" xmlns:r="ddi:reusable:3_1" targetNamespace="ddi:logicalproduct:3_1" elementFormDefault="qualified">
+   <xs:import namespace="ddi:reusable:3_1" schemaLocation="reusable.xsd"/>
+   <!-- BASE LOGICAL PRODUCT -->
+   <xs:element name="BaseLogicalProduct" type="BaseLogicalProductType" abstract="true"/>
+   <xs:complexType name="BaseLogicalProductType" abstract="true">
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+               <xs:element ref="LogicalProductName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded"/> 
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded"/>           
+               <xs:element ref="r:Coverage" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>The Coverage statement at this level may be used to restrict the coverage described in the studyunit module. For example if this specific logical product from a population and housing census only covers housing questions or only provides State and County level data these should be noted here. If there are no changes in the coverage from the coverage of the studyunit module, no entry is needed here.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="DataRelationship" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Contains a written description of how the logical contents of the file relate to each other for programming purposes. For example, noting that there are household, family and person items where the household is identified by variableH, the unique family by the concatenation of variableH and variableF, and the unique person within a household by the concatenation of variableH and variableP.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:OtherMaterial" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Describes Other Materials not noted in the studyunit module or datacollection module that have a specific relation to the logical product. For example the printed data dictionary or printed output for the logical product.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Note" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Notes for the logical product.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:choice maxOccurs="unbounded" minOccurs="0">
+                  <xs:element ref="CategoryScheme">
+                     <xs:annotation>
+                        <xs:documentation>Contains descriptions of particular categories used as question responses and in the logical product. Their relationships and code values are described in the code scheme.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="CategorySchemeReference">
+                     <xs:annotation>
+                        <xs:documentation>Reference to a previously defined category scheme either internal to or external to the xml instance.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+               <xs:choice maxOccurs="unbounded" minOccurs="0">
+                  <xs:element ref="CodeScheme">
+                     <xs:annotation>
+                        <xs:documentation>Lists the code values used to represent categories for a variable or question. Also describes hierarchical relationships between categories used in the code scheme.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="CodeSchemeReference">
+                     <xs:annotation>
+                        <xs:documentation>Reference to a previously defined code scheme either internal to or external to the DDI instance.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+               <xs:choice maxOccurs="unbounded" minOccurs="0">
+                  <xs:element ref="VariableScheme">
+                     <xs:annotation>
+                        <xs:documentation>Contains a collection of variables and variable groups.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="VariableSchemeReference">
+                     <xs:annotation>
+                        <xs:documentation>A reference to a previously defined variable scheme either internal to or external to the DDI instance.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+     
+   </xs:complexType>
+      <xs:element name="LogicalProductName" type="r:NameType"/> 
+   <!-- LOGICAL PRODUCT -->
+   <xs:element name="LogicalProduct" type="LogicalProductType" substitutionGroup="BaseLogicalProduct"/>
+   <xs:complexType name="LogicalProductType">
+      <xs:annotation>
+         <xs:documentation>Describes the logical content of standard variables.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="BaseLogicalProductType">
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType><!-- CATEGORIES -->
+   <xs:complexType name="CategorySchemeType">
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+               <xs:element ref="CategorySchemeName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the category scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A further human-readable description of the category scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="CategorySchemeReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Allows for inclusion by reference of other category schemes.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="CategoryGroup" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Provides grouping for categories.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Category" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A value label and its definition</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="CategorySchemeName" type="r:NameType"/>
+   <xs:complexType name="CategoryGroupType">
+      <xs:annotation>
+         <xs:documentation>Allows for grouping of categories.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+      <xs:extension base="r:VersionableType">
+      <xs:sequence>
+       <xs:element ref="CategoryGroupName" minOccurs="0" maxOccurs="unbounded"/>
+       <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+	  <xs:annotation>
+	     <xs:documentation>A display label for the category group.</xs:documentation>
+	  </xs:annotation>
+       </xs:element>             
+       <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded"/>                 
+         <xs:element ref="Category" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Allows for grouping of categories.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="CategoryGroupName" type="r:NameType"/>
+   <xs:complexType name="CategoryType">
+      <xs:annotation>
+         <xs:documentation>A description of a particular category or response. OECD Glossary of Statistical Terms: Generic term for items at any level within a classification, typically tabulation categories, sections, subsections, divisions, subdivisions, groups, subgroups, classes and subclasses.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:VersionableType">
+            <xs:sequence>
+               <xs:element ref="CategoryName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the category.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>               
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Description/definition of the category. Note that comparison of categories is determined by the Definition rather than the Label. For example, while the Definition of a Chemist in London and a Pharmacist in New York is the same and comparable, the definitions of Chemist in each location differ significantly and are NOT comparable</xs:documentation>
+                  </xs:annotation>
+               </xs:element>              
+               <xs:element ref="Generation" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Generation/derivation details of the category.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+            <xs:attribute name="missing" type="xs:boolean" use="optional">
+               <xs:annotation>
+                  <xs:documentation>Indicates if the category contains missing data or not.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="CategoryName" type="r:NameType"/>
+   <xs:complexType name="CodeSchemeType">
+      <xs:annotation>
+         <xs:documentation>Describes the structure of a Code Scheme.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+               <xs:element ref="CodeSchemeName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the code scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A further human-readable description of the code scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="CodeSchemeReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Allows for inclusion by reference of another code scheme </xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="CategorySchemeReference" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Reference to a default category scheme, with the assumption that all categories referenced by the subsequent codes are part of it, unless overwritten by the scheme reference in the CategoryReference field of the code.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="HierarchyType" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Identifies the type of hierarchy used in the nesting of categories. Possible values are Regular and Irregular. A regular nesting indicates that the category hierarchy is consistent at all lower levels of the hierarchy, i.e., the lowest levels of the hierarchy are at the same level for every branch on the hierarchy.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Level" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation> to describe the levels of the code hierarchy. The level describes the nesting structure of a hierarchical coding structure. Note that the attribute levelNumber is used for referencing specific codes to their level identifier.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Code" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Includes a code value, references  the category label, and describes the code's position in a hierarchy.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="CodeSchemeName" type="r:NameType"/>
+   <xs:complexType name="LevelType">
+      <xs:annotation>
+         <xs:documentation>Used to describe the levels of the code scheme hierarchy. The level describes the nesting structure of a hierarchical coding structure. A level could have data attached to it (summary of its children) or no data attached to it (the equivalent of creating a category group in 2.0 and earlier versions Note that the attribute levelNumber is used for referencing specific codes to their level identifier.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="Name" type="xs:string">
+            <xs:annotation>
+               <xs:documentation>Name of a level in a code scheme. This should be short and explicit, such as Major Industrial Groups (2 digit SIC Codes) or NUTS 1.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Description of a code level.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="RelationshipType" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Describes the relationships among categories at that respective level. Possible values are either Nominal, Ordinal, or Interval. Note that different levels may have different types of relationships within the same hierarchy. For example, Level 1 items may be ordinal and Level 2 (the children of Level 1 items) may be nominal.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Interval" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Identifies the interval between each value of the codes for this code scheme. Used only for codes with interval relationship.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="levelNumber" type="xs:integer" use="required">
+         <xs:annotation>
+            <xs:documentation>Designated identifier for the level; generally increases as the level of indention for nesting increases</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:complexType name="CodeType">
+      <xs:sequence>
+         <xs:element name="CategoryReference" type="r:ReferenceType">
+            <xs:annotation>
+               <xs:documentation>Reference to a category documenting the value label.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="Value" type="xs:string">
+            <xs:annotation>
+               <xs:documentation>For microdata an explicit value found in data file. For variables describing the dimensions of NCubes it provides the coordinate value of the category label along within the dimension. All values within a CodeScheme must be unique.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Code" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Allows for nesting of codes.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="isDiscrete" type="xs:boolean" default="true">
+         <xs:annotation>
+            <xs:documentation>Indicates whether the code is discrete (that is, placed at the lowest level in a hierarchy and has no children).</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="levelNumber" type="xs:integer" use="optional">
+         <xs:annotation>
+            <xs:documentation>Level number of the code.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="isComprehensive" type="IsComprehensiveType" default="Unknown">
+         <xs:annotation>
+            <xs:documentation>Used in hierarchical structures at upper level values to indicate whether or not the subelements of the code are comprehensive in coverage. Not applicable if attribute isDiscrete is set to "true".</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="isTotal" type="xs:boolean" default="false">
+         <xs:annotation>
+            <xs:documentation>This expresses a total whether or not isComprehensive is true. If isComprehensive = "true" then if addition is supported by the measure type, the contained categories can be aggregated to calculate the total. If isComprehensive = "false" or "unknown" the content of this field must be present in the data file.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>      
+   </xs:complexType>
+   <xs:complexType name="IntervalType">
+      <xs:annotation>
+         <xs:documentation>Describes the structure, starting point and increment step of an interval.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="Anchor" type="xs:string">
+            <xs:annotation>
+               <xs:documentation>Identifies the start value for this interval.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="Increment" type="xs:string">
+            <xs:annotation>
+               <xs:documentation>Value specifying the increment between categories.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <!-- VARIABLES -->
+   <xs:complexType name="VariableSchemeType">
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+            <xs:element ref="VariableSchemeName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the variable scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A description of the use of the variable scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="VariableSchemeReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Allows for inclusion by reference of another Variable Scheme.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:choice minOccurs="0" maxOccurs="unbounded">
+                  <xs:element ref="Variable">
+                     <xs:annotation>
+                        <xs:documentation>Describes a variable contained in the variable scheme.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="VariableReference">
+                     <xs:annotation>
+                        <xs:documentation>References a variable contained in the variable scheme.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+               <xs:choice minOccurs="0" maxOccurs="unbounded">
+                  <xs:element ref="VariableGroup">
+                     <xs:annotation>
+                        <xs:documentation>Describes a variable group contained in the variable scheme.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element ref="VariableGroupReference">
+                     <xs:annotation>
+                        <xs:documentation>Allows for inclusion by reference of a variable group.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="VariableSchemeName" type="r:NameType"/>
+   <xs:complexType name="VariableType">
+      <xs:annotation>
+         <xs:documentation>Describes the structure of a Variable.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:VersionableType">
+            <xs:sequence>
+               <xs:element ref="VariableName" minOccurs="0" maxOccurs="unbounded"/>
+       	    <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+	       <xs:annotation>
+		  <xs:documentation>A display label for the variable.</xs:documentation>
+	       </xs:annotation>
+             </xs:element>
+             <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">            
+                  <xs:annotation>
+                     <xs:documentation>Additional textual descriptions of the variable.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:UniverseReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the universe statement containing a description of the persons or other elements that this variable refers to, and to which any analytic results refer.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ConceptReference" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the concept measured by this variable.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="QuestionReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Reference to question(s) used to collect data for this variable. The quesion is found in the datacollection module.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="EmbargoReference" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Reference to embargo information pertaining to this variable.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ResponseUnit" type="xs:string" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Provides information regarding who provided the information contained within the variable, e.g., respondent, proxy, interviewer.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:AnalysisUnit" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>The entity to which the data refer, for example, individuals, families or households, groups, institutions/organizations, administrative units, etc. </xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Representation" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Describes the representation of the variable in the dataset, including allowed content, data typing, and computation information.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+            <xs:attribute name="isTemporal" type="xs:boolean" default="false">
+               <xs:annotation>
+                  <xs:documentation>Indicates whether the variable relays time-related information.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="isGeographic" type="xs:boolean" default="false">
+               <xs:annotation>
+                  <xs:documentation>Indicates whether the variable relays geographic information.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="isWeight" type="xs:boolean" default="false">
+               <xs:annotation>
+                  <xs:documentation>Indicates whether the variable is a weight.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="VariableName" type="r:NameType"/>
+   <xs:complexType name="RepresentationType">
+      <xs:annotation>
+         <xs:documentation>Type to describe the representation of a variable</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="Role" type="xs:string" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Describes a specific function of the variable, such as identity, weight, geographic variable, time, date, currency, etc.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="WeightVariableReference" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Reference to weight variable(s) to be used with this variable.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="StandardWeightReference" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Reference to the Weighting element, as described in the DataCollection module, which is relevant for analyzing this variable.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="ImputationReference" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Reference to the imputation process described as a General Instruction in the Data Processing section in Data Collection.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="ConcatenatedValue" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Provides a reference to another variable and describes the method for deriving the value of this variable by concatenating a collection of other variables. This is useful in creating concatenated keys.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="CodingInstructionsReference" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>A reference to either a general or generation instruction that was provided to those who converted information from one form to another to create a particular variable. This might include the reordering of numeric information into another form or the conversion of textual information into numeric information. The specifics of this process are provided in the data collection module element Coding, which is referenced here.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="ValueRepresentation">
+            <xs:annotation>
+               <xs:documentation>Describes the actual representation of the variables' values.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="measurementUnit" type="xs:string" use="optional">
+         <xs:annotation>
+            <xs:documentation>Records the measurement unit, for example, 'km', 'miles', etc.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="aggregationMethod" type="AggregationMethodCodeType" use="optional">
+         <xs:annotation>
+            <xs:documentation>Indicates the type of aggregation method used.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="additivity" type="AdditivityCodeType" use="optional">
+         <xs:annotation>
+            <xs:documentation>Records type of additivity, such as 'stock', 'flow', 'non-additive'.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:element name="ValueRepresentation" type="r:RepresentationType" abstract="true">
+      <xs:annotation>
+         <xs:documentation>Substitution group head for describing the representation value of the variable.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="TextRepresentation" type="r:TextRepresentationType" substitutionGroup="ValueRepresentation">
+      <xs:annotation>
+         <xs:documentation>Defines the representation of a varaible as a text field. This field can be restricted to a length.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DateTimeRepresentation" type="r:DateTimeRepresentationType" substitutionGroup="ValueRepresentation">
+      <xs:annotation>
+         <xs:documentation>Defines the representation of a varaible as a date or time value.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="NumericRepresentation" type="r:NumericRepresentationType" substitutionGroup="ValueRepresentation">
+      <xs:annotation>
+         <xs:documentation>Defines the representation of a varaible as a number, number range, or sequence, or set interval of numbers.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ExternalCategoryRepresentation" type="r:ExternalCategoryRepresentationType" substitutionGroup="ValueRepresentation">
+      <xs:annotation>
+         <xs:documentation>Structures a response domain based on a categorization that is external to DDI, for example, a category list for occupations or geography.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CodeRepresentation" type="CodeRepresentationType" substitutionGroup="ValueRepresentation">
+      <xs:annotation>
+         <xs:documentation>Defines the representation of a variable as a set or subset of codes from a code scheme.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="CodeRepresentationType">
+      <xs:annotation>
+         <xs:documentation>Describes a coded representation.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:CodeRepresentationType">
+            <xs:sequence>
+               <xs:group ref="CodeSubsetInfo"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="CodeSchemeReference" type="CodeSchemeReferenceType">
+      <xs:annotation>
+         <xs:documentation>References a code scheme, or part of a code scheme.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="CodeSchemeReferenceType">
+      <xs:annotation>
+         <xs:documentation>Describes a coded representation.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:ReferenceType">
+            <xs:sequence>
+               <xs:group ref="CodeSubsetInfo"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:group name="CodeSubsetInfo">
+      <xs:sequence>
+         <xs:element name="IncludedLevel" type="xs:integer" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Identifies specific levels to include.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="IncludedCodeReference" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Allows selection of code schemes to use not based on levels.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="DataExistence" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Allows for inclusion of upper level categories that will not have associated data. In this case they act as the DDI version 2 form of category group.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="VariableConcatenation" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Describes the concatenation of other variables, based on a category value of this variable that can be used to identify or locate a specific record of this type. Used to identify unique identification string for a record of a specific category type. For example: A summary level indicating a state record may only require a STATE code to identify it in addition to its summary level category value, while a COUNTY would require a specific summary level value plus a STATE code and a COUNTY code.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:group>
+   <xs:complexType name="VariableConcatenationType">
+      <xs:annotation>
+         <xs:documentation>Describes the structure of the concatenated variable.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="VariableReference" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Reference to the variable in which the concatenated value is stored.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="ConcatenatedValue" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes the variables whose concatenated values make up the current variable, referenced above.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="ConcatenatedValueType">
+      <xs:annotation>
+         <xs:documentation>Describes the variables whose concatenated values make up the existing concatenated variable.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="VariableReference" minOccurs="2" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Identifies the variables whose values are concatenated to form the concatenated variable. Note that the order of these variables determines the order of concatenation.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="DataExistenceType">
+      <xs:annotation>
+         <xs:documentation>Allows for inclusion of upper level categories that will not have associated data. In this case they act as the DDI version 2 form of category group.</xs:documentation>
+      </xs:annotation>
+      <xs:choice>
+         <xs:element name="Level" type="xs:integer" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Indicates the levels that will have data, if only certain levels will do so.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="DiscreteCategory" type="xs:boolean" fixed="true">
+            <xs:annotation>
+               <xs:documentation>This element is to be used if only the most discrete data elements will have data. It has a fixed value, so it  will indicate which categories have data based on their description.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:choice>
+   </xs:complexType>
+   <xs:complexType name="IncludedCodeReferenceType">
+      <xs:annotation>
+         <xs:documentation>Allows selection of specific codes not based on levels.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string">
+            <xs:attribute name="coordinateValue" type="xs:integer" use="optional"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="GenerationType">
+      <xs:annotation>
+         <xs:documentation>Generation/derivation details of the category.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="ComponentReference" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Reference to a category used for the generation.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Description of the generation.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+            <xs:element ref="r:Command" minOccurs="0" maxOccurs="unbounded">
+               <xs:annotation>
+                  <xs:documentation>Command for creating the generation. This part is intended to be machine-actionable.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+           <xs:element ref="r:OtherMaterial" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>External documentation required for creating the generation - for example, a chart or table for defining poverty.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="isDerived" type="xs:boolean" default="true"/>
+      <xs:attribute name="qualification" type="xs:string" default="optional"/>
+      <xs:attribute name="formalLanguage" type="xs:string" use="optional">
+         <xs:annotation>
+            <xs:documentation>Indicates the formal language of the command files in the Generation element. This entry may be overridden by a formalLanguage attribute at the command file level, if present.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+      <xs:complexType name="VariableGroupType">
+      <xs:annotation>
+         <xs:documentation>Contains a group of variables, which may be hierarchical.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:VersionableType">
+            <xs:sequence>
+               <xs:element ref="GroupType">
+                  <xs:annotation>
+                     <xs:documentation>A generic element for specifying a reason for a variable group. Note that this element can contain either a term from a controlled vocabulary list or a textual description.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="VariableGroupName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the variable group.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>               
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Additional textual descriptions of the variable group.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>               
+               <xs:element ref="r:UniverseReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the universe statement describing the persons or other elements that the data refer to, and to which any analytic results refer.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ConceptReference" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the concept measured by the variables in this group.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="VariableReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Reference to constituent variable.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="VariableGroupReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Reference to constituent variable group. This allows for nesting of variable groups.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="VariableGroupName" type="r:NameType"/>
+   <!-- nCUBES -->
+   <xs:element name="NCubeLogicalProduct" type="NCubeLogicalProductType" substitutionGroup="BaseLogicalProduct"/>
+   <xs:complexType name="NCubeLogicalProductType">
+      <xs:annotation>
+         <xs:documentation>Describes the logical structure of NCubes.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="BaseLogicalProductType">
+            <xs:sequence>
+               <xs:element ref="NCubeScheme" minOccurs="1" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Contains a collection of NCube or NCube groups.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="NCubeSchemeType">
+      <xs:complexContent>
+         <xs:extension base="r:MaintainableType">
+            <xs:sequence>
+               <xs:element ref="NCubeSchemeName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="NCube" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Describes the logical structure of an NCube.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="NCubeGroup" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Describes a group of NCubes.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="NCubeSchemeReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Allows for inclusion of other NCube schemes by reference..</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="NCubeSchemeName" type="r:NameType"/> 
+   <xs:element name="NCubeSchemeReference" type="r:SchemeReferenceType"/>
+   <xs:complexType name="AttributeType">
+      <xs:annotation>
+         <xs:documentation>Defines a variable that describes an attribute of all or coordinate sections of the NCube.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:IdentifiableType">
+            <xs:sequence>
+                <xs:choice>
+               <xs:element ref="VariableReference">
+              <xs:annotation>
+                 <xs:documentation>A reference to a variable that describes the attribute.</xs:documentation>
+              </xs:annotation>
+               </xs:element>
+               <xs:element name="AttachmentValue" type="xs:string">
+              <xs:annotation>
+                 <xs:documentation>The value of the attachment, if not a variable.</xs:documentation>
+              </xs:annotation>
+               </xs:element>
+               </xs:choice>
+               <xs:element ref="AttachmentLevel">
+                  <xs:annotation>
+                     <xs:documentation>Describes the level of attachment of the attribute.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="AttachmentGroupReference" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>References the coordinate group to which the attribute attaches.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="NCubeType">
+      <xs:annotation>
+         <xs:documentation>Describes the structure of the NCube.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:VersionableType">
+            <xs:sequence>
+		<xs:element ref="NCubeName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the NCube.</xs:documentation>
+                  </xs:annotation>
+               </xs:element> 
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Additional textual descriptions of the variable.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>              
+               <xs:element ref="r:UniverseReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the description of the persons or other elements that are the object of the research and to which any analytic results refer.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ImputationReference" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the imputation process described in the Data Processing section</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ResponseUnit" type="xs:string" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Provides information regarding who provided the information contained within the nCube, e.g., respondent, proxy, interviewer.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:AnalysisUnit" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Provides information regarding whom or what the nCube describes.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Purpose" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Purpose for which the nCube was created.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Dimension" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Defines a variable as a dimension of the nCube, and should be repeated to describe each of the nCube's dimensions.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="CoordinateGroup" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Defines groups of dimensions (given particular values) to which attributes can be attached.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Measure" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>The measurement features of the cell content (repeatable only for regularly bundled arrays of cell content).</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Attribute" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Defines a variable that describes an attribute of all or coordinate sections of the NCube.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+            <xs:attribute name="dimensionCount" type="xs:integer" use="required">
+               <xs:annotation>
+                  <xs:documentation>The number of dimensions found in the nCube.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="cellCount" type="xs:integer" use="optional">
+               <xs:annotation>
+                  <xs:documentation>The number of cells (measures) found in the nCube.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="isClean" type="xs:boolean" default="true">
+               <xs:annotation>
+                  <xs:documentation>A true value indicates that all values present in the cube have the same dimensionality, and that each dimension has been given a value (even if it is a "Not Applicable" value or similar.)</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="NCubeName" type="r:NameType"/>
+   <xs:complexType name="DataRelationshipType">
+      <xs:annotation>
+         <xs:documentation>Describes the relationships among logical records in the dataset. Date Relationship is needed to create the appropriate link between the logical record and the physical storage description. Data Relationship is optional because a logical product can contain only a category scheme and/or code scheme.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+      <xs:extension base="r:VersionableType">
+      <xs:sequence>
+      	 <xs:element ref="DataRelationshipName" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>A human-readable description explaining how to identify different record types, a unique case within a record type, and how to relate one record type to another record type.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="LogicalRecord" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Describes a  logical record, such as a household, family, or person record. Required to link a description of a physical record structure to its logical record.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="RecordRelationship" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>All relationships are pairwise. Multiple pairwise relationships maybe needed to clarify all record relationships within a logical product.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="DataRelationshipName" type="r:NameType"/>
+   <xs:complexType name="LogicalRecordType">
+      <xs:annotation>
+         <xs:documentation>Describes the logical record in terms of identification of its type, case identification, its relationship with other records, and support for multiple storage segments. Required to link a description of a physical record structure to its logical record.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:IdentifiableType">
+            <xs:sequence>
+               <xs:element ref="LogicalRecordName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Description of the logical record.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="VariableValueReference" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the variable containing the record type locator.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="SupportForMultipleSegments" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Information concerning support for breaking the logical record into segments for storage purposes. Some files may be broken into record segments for storage but lack variables to support identification of specific segments. In this case segments are identified by their physical order within the storage file.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="CaseIdentification" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>There may be more than one means of identifying a record. For example a US Census Summary File has a LogicalRecordIdentifer that is unique to the original file within which it was published. A specific geography has a set of fields that identify it uniquely.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:choice>
+               <xs:element ref="VariablesInRecord">
+              <xs:annotation>
+                 <xs:documentation>List of all variables used in the record, either directly or as found in a defined VariableGroup; note that a variable can be used in multiple records. The variables in the logical record can be noted by inclusion or exclusion to facilitate listing. The attribute allVariablesInLogicalProduct, when set to 'true', includes all variables in the LogicalProduct. VariableSchemeReference can then be used to exclude individual Variables schemes or include schemes from other logical products. In the same way VariableReference can be used to exclude specific variables from the previously defined variable set or include variables not already included. The  simplest LogicalProduct descriptions with a single LogicalRecord can be described using only the attribute allVariablesInLogicalProduct with a value of true.</xs:documentation>
+              </xs:annotation>
+               </xs:element>
+               <xs:element ref="NCubesInRecord">
+              <xs:annotation>
+                 <xs:documentation>List of all NCubes used in the record, either directly or as found in a defined NCubeGroup; note that an NCube can be used in multiple records. The NCubes in the logical record can be noted by inclusion or exclusion to facilitate listing. The attribute allNCubesInLogicalProduct, when set to 'true', includes all NCubes in the LogicalProduct. NCubeSchemeReference can then be used to exclude individual NCubes schemes or include schemes from other logical products. In the same way NCubeReference can be used to exclude specific variables from the previously defined variable set or include variables not already included. The  simplest LogicalProduct descriptions with a single LogicalRecord can be described using only the attribute allNCubesInLogicalProduct with a value of true.</xs:documentation>
+              </xs:annotation>
+               </xs:element>
+               </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="hasLocator" type="xs:boolean" use="required">
+               <xs:annotation>
+                  <xs:documentation>Indicates if the record type has a field which identifies its record type. In logical structures with a single record type there is generally no identifier. Most multi-record files will have a variable that identifies the record type.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="variableQuantity" type="xs:integer" use="optional">
+               <xs:annotation>
+                  <xs:documentation>Number of variables in the logical record.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="LogicalRecordName" type="r:NameType"/>
+   
+   <xs:complexType name="NCubesInRecordType">
+      <xs:annotation>
+         <xs:documentation>Lists the NCubes contained in the record.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="VariablesInRecord" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Use VariablesInRecord to describe any variables in the record that are external to the NCube such as case identifiers.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="NCubeSchemeReference" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Reference to an NCube scheme to be included in its entirety in the logical record type.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="NCubeReference" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Reference to each NCube included in the record, if only part of an NcubeScheme is used.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="allNCubesInLogicalProduct" type="xs:boolean" use="required">
+         <xs:annotation>
+            <xs:documentation>When the value is set to "true" the logical record contains all of the NCubes listed in the logical product module.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:complexType name="VariableValueReferenceType">
+      <xs:annotation>
+         <xs:documentation>Describes the variable containing the record type locator  and the value being used.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="VariableReference">
+            <xs:annotation>
+               <xs:documentation>Reference to the variable containing the record type locator.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Value" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Value of variable indicating this record type, multiple entries allow for multiple valid values or ranges.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="VariablesInRecordType">
+      <xs:annotation>
+         <xs:documentation>Identifies the variables in the record type.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="VariableSchemeReference" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Reference to a variable scheme to be included in its entirety in the logical record type.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="VariableUsedReference" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Reference to each variable in the record type.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="allVariablesInLogicalProduct" type="xs:boolean" use="required">
+         <xs:annotation>
+            <xs:documentation>When the value is true, then the logical record contains all listed variables in the logical product module.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:complexType name="VariableUsedReferenceType">
+      <xs:complexContent>
+    <xs:extension base="r:ReferenceType">
+         <xs:annotation>
+            <xs:documentation>When the value of the isExcluded attribute is true, then the referenced variable is excluded from the referenced scheme. Otherwise, it is included.</xs:documentation>
+         </xs:annotation>
+        <xs:attribute name="isExcluded" type="xs:boolean" default="false"/>
+    </xs:extension>
+       </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CaseIdentificationType">
+      <xs:annotation>
+         <xs:documentation>Describes the information needed to identify an individual case within a record type.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="VariableSpecificationReference" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Repetition allows multi-variable specifications of unique value.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="VariableSpecificationReferenceType">
+      <xs:annotation>
+         <xs:documentation>Describes the information needed to identify a type of record. Repeating the field will allow referencing multiple variables.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="VariableReference">
+            <xs:annotation>
+               <xs:documentation>Reference to the variable containing the record type locator.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="CaseSpecification" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Value of variable indicating this record type, multiple entries allow for multiple valid values or ranges.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="CaseSpecificationType">
+      <xs:annotation>
+         <xs:documentation>Value of variable indicating this record type, multiple entries allow for multiple valid values or ranges.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="Value" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Value of variable indicating this record type, multiple entries allow for multiple valid values or ranges.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="VariableReference" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Reference to the variable containing the record type locator.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+  <xs:complexType name="RecordRelationshipType">
+      <xs:annotation>
+         <xs:documentation>All relationships are described pairwise. Multiple pairwise relationships may be needed to clarify all relationships within a logical product.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:IdentifiableType">
+            <xs:sequence>
+            	<xs:element ref="RecordRelationshipName" minOccurs="0" maxOccurs="unbounded"/>
+	        <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded"/>
+	        <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="RecordReferenceSource">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the Source Record.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="RecordReferenceTarget">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the Target Record.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+            <xs:attribute name="type" type="ValueTypeCodeType" default="Equal">
+               <xs:annotation>
+                  <xs:documentation>Indicates type of relationship.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="RecordRelationshipName" type="r:NameType"/>
+   <xs:complexType name="RecordReferenceSourceType">
+      <xs:annotation>
+         <xs:documentation>Reference to the Source Record.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="VariableValueReferenceType">
+            <xs:attribute name="relation" type="RelationCodeType" use="required">
+               <xs:annotation>
+                  <xs:documentation>Indicates the relationship of the source to the target.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ValueType">
+      <xs:annotation>
+         <xs:documentation>Type for indicating value of variable</xs:documentation>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string">
+            <xs:attribute name="type" type="ValueTypeCodeType" default="Equal">
+               <xs:annotation>
+                  <xs:documentation>Indicates value type.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:simpleType name="IsComprehensiveType">
+    <xs:annotation>
+         <xs:documentation>Indicates values of the isComprehensive attribute.</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:NMTOKEN">
+         <xs:enumeration value="True">
+            <xs:annotation>
+               <xs:documentation>True</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="False">
+            <xs:annotation>
+               <xs:documentation>False</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Unknown">
+            <xs:annotation>
+               <xs:documentation>Unknown</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+   </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="ValueTypeCodeType">
+      <xs:annotation>
+         <xs:documentation>Indicates value type.</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:NMTOKEN">
+         <xs:enumeration value="GreaterThan">
+            <xs:annotation>
+               <xs:documentation>Greater Than</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="LessThan">
+            <xs:annotation>
+               <xs:documentation>Less Than</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Equal">
+            <xs:annotation>
+               <xs:documentation>Equal</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="GreaterThanOrEqual">
+            <xs:annotation>
+               <xs:documentation>Greater Than or Equal</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="LessThanOrEqual">
+            <xs:annotation>
+               <xs:documentation>Less Than or Equal</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="NotEqual">
+            <xs:annotation>
+               <xs:documentation>Not Equal</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="RelationCodeType">
+      <xs:annotation>
+         <xs:documentation>Indicates relation.</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:NMTOKEN">
+         <xs:enumeration value="Parent">
+            <xs:annotation>
+               <xs:documentation>Parent</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Child">
+            <xs:annotation>
+               <xs:documentation>Child</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Sibling">
+            <xs:annotation>
+               <xs:documentation>Sibling</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:complexType name="NCubeGroupType">
+      <xs:annotation>
+         <xs:documentation>Describes a group of NCubes.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:VersionableType">
+            <xs:sequence>
+               <xs:element ref="GroupType">
+                  <xs:annotation>
+                     <xs:documentation>A generic element for specifying a reason for a variable or nCube group. Note that this element can contain either a term from a controlled vocabulary list or a textual description.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+	       <xs:element ref="NCubeGroupName" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the NCube group.</xs:documentation>
+                  </xs:annotation>
+               </xs:element> 
+               <xs:element ref="r:Description" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Additional textual descriptions of the NCube group.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>              
+               <xs:element ref="r:UniverseReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the universe statement describing the persons or other elements that are covered by the data, and to which any analytic results refer.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="ConceptReference" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the concept measured by the NCubes in this group.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="NCubeReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Reference to a constituent NCube.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="NCubeGroupReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Reference to a constituent NCube group. This allows for nesting of NCube groups.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="NCubeGroupName" type="r:NameType"/>
+   <xs:complexType name="CoordinateGroupType">
+      <xs:annotation>
+         <xs:documentation>Defines groups of dimensions (given particular values) to which attributes can be attached.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:IdentifiableType">
+            <xs:sequence>
+               <xs:element ref="r:Label" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>A display label for the coordinate group.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="r:UniverseReference" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Reference to the universe statement describing the persons or other elements that make the object of the data, and to which any analytic results refer.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="Definition" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Additional textual descriptions of the coordinate group.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="DimensionValue" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>Defines a variable as a dimension of the coordinate group.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CohortType">
+      <xs:annotation>
+         <xs:documentation>Defines a dimension and its value.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="CategoryReference" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Provides the specific category of the variable included.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="CodeValue" type="xs:string" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>The value attached to that category in a code scheme.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="Range" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Indicates that the Cube contains only a limited number of categories from the code scheme.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="rank" type="xs:integer" use="required">
+         <xs:annotation>
+            <xs:documentation>Provides coordinate order (1,2,n).</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:complexType name="DimensionType">
+      <xs:annotation>
+         <xs:documentation/>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="VariableReference">
+            <xs:annotation>
+               <xs:documentation>Identifies the variable describing this dimension.  This is a special case where the set of values given in CodeType provides the field content and the category label provides the label.  In this case, there is a physical record for each value of the variable for those values reported (e.g. County Business Patterns uses the 'variable' Industry Code).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="rank" type="xs:integer" use="required">
+         <xs:annotation>
+            <xs:documentation>Provides coordinate order (1,2,n).</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:complexType name="MeasureType">
+      <xs:annotation>
+         <xs:documentation/>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="r:IdentifiableType">
+            <xs:sequence>
+               <xs:element ref="VariableReference">
+                  <xs:annotation>
+                     <xs:documentation>This is used in the case where the content of the cell is defined by a variable description, e.g., FLAG where the content is a single character flag and its definition is provided by the category label.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="AggregationDefinition" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Identifies the independent (denominator) and dependent (numerator) dimensions for calculating aggregate measures such as percent. When two or more independent or dependent dimensions are listed here, the value is defined as the intersection of the listed dimensions.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="AggregationDefinition" type="AggregationDefinitionType"/>
+ <xs:complexType name="AggregationDefinitionType">
+      <xs:annotation>
+         <xs:documentation>Identifies the independent (denominator) and dependent (numerator) dimensions for calculating aggregate measures such as percent. When two or more independent or dependent dimensions are listed here, the value is defined as the intersection of the listed dimensions.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element name="IndependentDimension" type="xs:integer" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>The rank of a dimension that acts as the denominator (independent variable).</xs:documentation>
+                  </xs:annotation>
+        </xs:element>
+        <xs:element name="DependentDimension" type="xs:integer" minOccurs="0" maxOccurs="unbounded">
+                  <xs:annotation>
+                     <xs:documentation>The rank of a dimension that acts as the numerator (dependent variable).</xs:documentation>
+                  </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="isNCubeUniverse" type="xs:boolean" default="true">
+                  <xs:annotation>
+                     <xs:documentation>When true indicates that total count of the NCube as described by the universe acts as the independent variable (denominator) and that all dimensions are used to define the dependent variable (numerator). When false, use the IndependentDimension and DependentDimension elements to assign each rank to its appropriate role.</xs:documentation>
+                  </xs:annotation>
+      </xs:attribute>
+ </xs:complexType>
+   <xs:complexType name="RangeType">
+      <xs:annotation>
+         <xs:documentation/>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="RangeUnit" type="xs:string" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Units in the range.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="r:MinimumValue" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Min value in the range.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element ref="r:MaximumValue" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Max value in the range.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <!-- code schemes -->
+   <xs:simpleType name="AggregationMethodCodeType">
+      <xs:annotation>
+         <xs:documentation>A list for describing aggregation methods.</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:NMTOKEN">
+         <xs:enumeration value="Sum">
+            <xs:annotation>
+               <xs:documentation>Sum</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Average">
+            <xs:annotation>
+               <xs:documentation>Average</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Count">
+            <xs:annotation>
+               <xs:documentation>Count</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Mode">
+            <xs:annotation>
+               <xs:documentation>Mode</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Median">
+            <xs:annotation>
+               <xs:documentation>Median</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Maximum">
+            <xs:annotation>
+               <xs:documentation>Maximum</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Minimum">
+            <xs:annotation>
+               <xs:documentation>Minimum</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Percent">
+            <xs:annotation>
+               <xs:documentation>Percent (Percentages are used to express how large one quantity is relative to another quantity)</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="CumulativePercent">
+            <xs:annotation>
+               <xs:documentation>Cumulative percent (percentage of items in its frequency distribution which are equal to or lower than the current item [maximum value is 100%])</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="PercentileRank">
+            <xs:annotation>
+               <xs:documentation>Percentile rank (The percentile rank of a item is the percentage of items in its frequency distribution which are lower [cannot reach 100%])</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="AdditivityCodeType">
+      <xs:annotation>
+         <xs:documentation/>
+      </xs:annotation>
+      <xs:restriction base="xs:NMTOKEN">
+         <xs:enumeration value="Stock">
+            <xs:annotation>
+               <xs:documentation/>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Flow">
+            <xs:annotation>
+               <xs:documentation/>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="NonAdditive">
+            <xs:annotation>
+               <xs:documentation/>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+
+   <xs:simpleType name="HierarchyCodeType">
+      <xs:annotation>
+         <xs:documentation/>
+      </xs:annotation>
+      <xs:restriction base="xs:NMTOKEN">
+         <xs:enumeration value="Regular">
+            <xs:annotation>
+               <xs:documentation/>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Irregular">
+            <xs:annotation>
+               <xs:documentation/>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="AttachmentLevelCodeType">
+      <xs:annotation>
+         <xs:documentation/>
+      </xs:annotation>
+      <xs:restriction base="xs:NMTOKEN">
+         <xs:enumeration value="Cube">
+            <xs:annotation>
+               <xs:documentation>Attaches to the whole NCube.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="CoordinateGroup">
+            <xs:annotation>
+               <xs:documentation>Attaches to a group of dimensions (given particular values) described by a coordinate group.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Dimension">
+            <xs:annotation>
+               <xs:documentation>Attaches to a dimension only.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Measurement">
+            <xs:annotation>
+               <xs:documentation>Attaches to a specific measurement.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="MeasurementValue">
+            <xs:annotation>
+               <xs:documentation>Attaches to a specific measurement value.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:complexType name="GroupTypeCodedType">
+      <xs:annotation>
+         <xs:documentation>A suggested enumeration of group types. Indicates reasons for grouping. </xs:documentation>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:restriction base="r:CodeValueType">
+            <xs:enumeration value="Section">
+               <xs:annotation>
+                  <xs:documentation>Section</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MultipleResponse">
+               <xs:annotation>
+                  <xs:documentation>Multiple response</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Grid">
+               <xs:annotation>
+                  <xs:documentation>Grid</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Display">
+               <xs:annotation>
+                  <xs:documentation>Display</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Repetition">
+               <xs:annotation>
+                  <xs:documentation>Repetition</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Subject">
+               <xs:annotation>
+                  <xs:documentation>Subject</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Version">
+               <xs:annotation>
+                  <xs:documentation>Version</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Iteration">
+               <xs:annotation>
+                  <xs:documentation>Iteration</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Analysis">
+               <xs:annotation>
+                  <xs:documentation>Analysis</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Pragmatic">
+               <xs:annotation>
+                  <xs:documentation>Pragmatic</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Record">
+               <xs:annotation>
+                  <xs:documentation>Record</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="File">
+               <xs:annotation>
+                  <xs:documentation>File</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Randomized">
+               <xs:annotation>
+                  <xs:documentation>Randomized</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="UseOther">
+               <xs:annotation>
+                  <xs:documentation>See otherValue attribute Other</xs:documentation>
+               </xs:annotation>
+            </xs:enumeration>
+            <xs:attribute name="codeListID" type="xs:string" fixed="Group Type" use="required">
+               <xs:annotation>
+                  <xs:documentation>Identification of the code list that this value is taken from.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="codeListAgencyName" type="xs:string" fixed="DDI" use="required">
+               <xs:annotation>
+                  <xs:documentation>Agency maintaining the code list.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="codeListVersionID" type="xs:string" fixed="1.0">
+               <xs:annotation>
+                  <xs:documentation>Version of the code list.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="otherValue" type="xs:string" use="optional">
+               <xs:annotation>
+                  <xs:documentation>Other Value.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:restriction>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:element name="GroupType" type="r:CodeValueType">
+      <xs:annotation>
+         <xs:documentation>A generic element for specifying a reason for a variable or nCube group. Note that this element can contain either a term from a controlled vocabulary list or a textual description.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="GroupTypeCoded" type="GroupTypeCodedType" substitutionGroup="GroupType">
+      <xs:annotation>
+         <xs:documentation>A suggested controlled vocabulary of group types.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CategoryScheme" type="CategorySchemeType">
+      <xs:annotation>
+         <xs:documentation>Contains descriptions of particular categories used as question responses and in the logical product. Their relationships and code values are described in the code scheme. </xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CategorySchemeReference" type="r:SchemeReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to a previously defined category scheme either internal to or external to the xml instance.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CodeScheme" type="CodeSchemeType">
+      <xs:annotation>
+         <xs:documentation>Provides a description of a set of categories that have a specific relationship, such as the categories Male and Female that can be grouped together as Gender. Categories (e.g., Male and Female) can belong to multiple code schemes. The code scheme also provides the unique code values for each of the categories in the code scheme.  </xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="NCubeScheme" type="NCubeSchemeType">
+      <xs:annotation>
+         <xs:documentation>Contains a collection of NCubes and NCube groups.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VariableScheme" type="VariableSchemeType">
+      <xs:annotation>
+         <xs:documentation>Contains a collection of variables and variable groups.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DataRelationship" type="DataRelationshipType">
+      <xs:annotation>
+         <xs:documentation>Contains a written description of how the logical contents of the file relate to each other for programming purposes. For example, noting that there are household, family and person items where the household is identified by variableH the unique family by the concatenation of variableH and variableF and the unique person within a household by the concatenation of variableH and variableP.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Category" type="CategoryType">
+      <xs:annotation>
+         <xs:documentation>A description of a particular category or response. OECD Glossary of Statistical Terms: Generic term for items at any level within a classification, typically tabulation categories, sections, subsections, divisions, subdivisions, groups, subgroups, classes and subclasses.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CategoryGroup" type="CategoryGroupType">
+      <xs:annotation>
+         <xs:documentation>Allows for grouping of categories.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Generation" type="GenerationType">
+      <xs:annotation>
+         <xs:documentation>Generation/derivation details of the category.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Definition" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Definition of the category. Note that comparison of categories is determined by the Definition rather than the Label. For example, while the Definition of a Chemist in London and a Pharmacist in New York is the same and comparable, the definitions of Chemist in each location differ significantly and are NOT comparable</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="HierarchyType" type="HierarchyCodeType">
+      <xs:annotation>
+         <xs:documentation>Identifies the type of hierarchy used in the nesting of categories within the code scheme. Possible values are Regular and Irregular. A regular nesting indicates that the category hierarchy is consistent to the lowest levels of the hierarchy, i.e. the lowest levels of the hierarchy are at the same level for every branch on the hierarchy.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Level" type="LevelType">
+      <xs:annotation>
+         <xs:documentation>Used to describe the levels of the code scheme hierarchy. The level describes the nesting structure of a hierarchical coding structure. The use of Level relates back to the inclusion of descriptions for nested categories in version 2.1. Levels take the place of category groups as they were used in DDI versions through 2.1. Category groups in version 2.1 became upper category levels in hierarchical descriptions in version 3. A level could have data attached to it (summary of its children) or no data attached to it (the equivalent of creating a category group in 2.0 and earlier versions Note that the attribute levelNumber is used for referencing specific codes to their level identifier.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Code" type="CodeType">
+      <xs:annotation>
+         <xs:documentation>Reference to included category is found in the ReferenceType. This standard type is extended by the CodeType which allows for additional information regarding the category as well as nesting of codes.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="RelationshipType" type="r:CategoryRelationCodeType">
+      <xs:annotation>
+         <xs:documentation>Code describing the relationship between categories of the level.  Possible values are either Nominal, Ordinal, or Interval. Note that different levels may have different values within the same hierarchy. For example Level 1 items may be ordinal and Level 2 (the children of Level 1 items) may be nominal.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Interval" type="IntervalType">
+      <xs:annotation>
+         <xs:documentation>Identifies the interval between each value of the categories for this variable. Used only for categories with interval relationship</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Variable" type="VariableType">
+      <xs:annotation>
+         <xs:documentation>Describes a variable contained in the variable scheme.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VariableReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>References a variable contained in the variable scheme.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VariableGroup" type="VariableGroupType">
+      <xs:annotation>
+         <xs:documentation>Describes a variable group contained in the variable scheme.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VariableGroupReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>References a variable group contained in the variable scheme.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VariableDefinition" type="r:StructuredStringType">
+      <xs:annotation>
+         <xs:documentation>Additional textual descriptions of the variable.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ConceptReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>General concept to which this variable belongs. The concept itself is found in the studyunit module. Reference to a concept may either be made directly through this element or via a reference to a question that is linked to a concept.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="QuestionReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to question(s) used to collect data for this variable. The question is found in the datacollection module.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="EmbargoReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to embargo information pertaining to this variable.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Representation" type="RepresentationType">
+      <xs:annotation>
+         <xs:documentation>Describes the representation of the variable, including categories, data typing, and computation information.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="WeightVariableReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to weight variable(s) to be used with this variable.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="StandardWeightReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to a standard weight, as described in the DataCollection module.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ImputationReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to the imputation process described in the Data Processing section</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ConcatenatedValue" type="ConcatenatedValueType">
+      <xs:annotation>
+         <xs:documentation>Provides a reference to another variable and describes the method for deriving the value of this variable by concatenating a collection of other variables. This is useful in creating concatenated keys.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CodingInstructionsReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Any special instructions that were provided to those who converted information from one form to another to derive a particular variable. This might include the reordering of numeric information into another form or the conversion of textual information into numeric information. The specifics of this process are provided in the data collection module element Coding, which is referenced here.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="IncludedCodeReference" type="IncludedCodeReferenceType">
+      <xs:annotation>
+         <xs:documentation>Allows selection of code schemes to use not based on levels.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DataExistence" type="DataExistenceType">
+      <xs:annotation>
+         <xs:documentation>Allows for inclusion of upper level categories that will not have associated data. In this case they act as the DDI version 2 form of category group.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VariableConcatenation" type="VariableConcatenationType">
+      <xs:annotation>
+         <xs:documentation>Describes the concatenation of other variables, based on a category value of this variable that can be used to identify or locate a specific record of this type. Used to identify unique identification string for a record of a specific category type. For example: A summary level indicating a state record may only require a STATE code to identify it in addition to its summary level category value, while a COUNTY would require a specific summary level value plus a STATE code and a COUNTY code.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ComponentReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to variable or category used for the derivation.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="NCube" type="NCubeType">
+      <xs:annotation>
+         <xs:documentation>Describes and NCube.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="NCubeGroup" type="NCubeGroupType">
+      <xs:annotation>
+         <xs:documentation>Describes a group of NCubes.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="AttachmentLevel" type="AttachmentLevelCodeType">
+      <xs:annotation>
+         <xs:documentation>Identifies attachment level of attribute</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="AttachmentGroupReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>References the coordinate group to which the attribute attaches.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Purpose" type="r:InternationalStringType">
+      <xs:annotation>
+         <xs:documentation>Purpose for which the nCube was created.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CoordinateGroup" type="CoordinateGroupType">
+      <xs:annotation>
+         <xs:documentation>Defines groups of dimensions (given particular values) to which attributes can be attached.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Dimension" type="DimensionType">
+      <xs:annotation>
+         <xs:documentation>Defines a variable as a dimension of the nCube, and should be repeated to describe each of the nCube's dimensions.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Measure" type="MeasureType">
+      <xs:annotation>
+         <xs:documentation>The measurement features of the cell content (repeatable only for regularly bundled arrays of cell content).</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Attribute" type="AttributeType">
+      <xs:annotation>
+         <xs:documentation>Defines a variable that describes an attribute of all or coordinate sections of the NCube.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="NCubeReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Constituent variable.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="NCubeGroupReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Constituent variable group. This allows for nesting of variable groups.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DimensionValue" type="CohortType">
+      <xs:annotation>
+         <xs:documentation>Defines a variable as a dimension of the coordinate group.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VariableSchemeReference" type="r:SchemeReferenceType">
+      <xs:annotation>
+         <xs:documentation>References a variable scheme for inclusion.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CategoryReference" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Provides the specific category of the variable included.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Range" type="RangeType">
+      <xs:annotation>
+         <xs:documentation>Indicates that the Cube contains only a limited number of categories from the code scheme.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LogicalRecord" type="LogicalRecordType">
+      <xs:annotation>
+         <xs:documentation>A logical record such as a household, family, or person record.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="RecordRelationship" type="RecordRelationshipType">
+      <xs:annotation>
+         <xs:documentation>All relationships are pairwise. Multiple pairwise relationships maybe needed to clarify all relationships within a logical product.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Value" type="ValueType">
+      <xs:annotation>
+         <xs:documentation>Value of variable indicating this record type.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VariableValueReference" type="VariableValueReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to the variable containing the record type locator.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VariableUsedReference" type="VariableUsedReferenceType">
+      <xs:annotation>
+         <xs:documentation>A variable reference which can indicate either inclusion or exclusion from the referenced scheme for each variable.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SupportForMultipleSegments" type="VariableValueReferenceType">
+      <xs:annotation>
+         <xs:documentation>Information concerning support for breaking the logical record into segments for storage purposes. Some files may be broken into record segments for storage but lack variables to support identification of specific segments. In this case segments are identified by their physical order within the storage file.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CaseIdentification" type="CaseIdentificationType">
+      <xs:annotation>
+         <xs:documentation>There may be more than one means of identifying a record. For example a US Census Summary File has a LogicalRecordIdentifer that is unique to the original file within which it was published. A specific geography has a set of fields that identify it uniquely.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VariablesInRecord" type="VariablesInRecordType">
+      <xs:annotation>
+         <xs:documentation>List of all variables used in record either directly or as found in a defined VariableGroup; note that a variable can be used in multiple records.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VariableSpecificationReference" type="VariableSpecificationReferenceType">
+      <xs:annotation>
+         <xs:documentation>Repetition allows multi-variable specifications of unique value.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CaseSpecification" type="CaseSpecificationType">
+      <xs:annotation>
+         <xs:documentation>Value of variable indicating this record type, multiple entries allow for multiple valid values or ranges.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="RecordReferenceSource" type="RecordReferenceSourceType">
+      <xs:annotation>
+         <xs:documentation>Reference to the Source Record.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="RecordReferenceTarget" type="r:ReferenceType">
+      <xs:annotation>
+         <xs:documentation>Reference to the Target Record.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="NCubesInRecord" type="NCubesInRecordType">
+      <xs:annotation>
+         <xs:documentation>Lists the NCubes contained in the record.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+</xs:schema>

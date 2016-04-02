@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+	Require link for given target.
+	Works other direction than links_attribute_multiple_pattern.
+	context_element - Element containing the target attribute
+	context_attribute - Target attribute
+	linking_element - Element containing attribute of link(s)
+	linking_attribute - Attribute of link(s)
+	context_condition - Rule launched only, if this condition is true
+	specifications - Catalog/specification versions for which the rule is launched.
+		List the affected versions with space+semicolon delimiter.
+		If begins with "not:", rule is launched with other but given versions.  
+		If empty, launch rule by default.
+	-->
+	<sch:pattern id="reference_attribute_multiple_pattern" abstract="true" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/" xmlns:fi="http://www.kdk.fi/standards/mets/kdk-extensions">
+		<sch:rule context="$context_element/$context_attribute[($context_condition)]">
+			<sch:let name="id_value" value="normalize-space(.)"/>
+			<sch:assert test="(count(ancestor::mets:mets//$linking_element[contains(concat(' ', normalize-space($linking_attribute), ' '), concat(' ', $id_value, ' '))]) &gt; 0) or not(normalize-space($specifications)=''
+			or ((normalize-space(substring($specifications,1,4))='not:') and ((not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; ')))) and not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; ')))))
+			or ((normalize-space(substring($specifications,1,4))!='not:') and ((contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; '))) or (contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; '))))))">
+				Section containing value '<sch:value-of select="."/>' in attribute '<sch:value-of select="name(.)"/>' in element '<sch:value-of select="name(..)"/>' requires a reference from attribute '<sch:value-of select="string('$linking_attribute')"/>'.
+			</sch:assert>
+		</sch:rule>
+	</sch:pattern>

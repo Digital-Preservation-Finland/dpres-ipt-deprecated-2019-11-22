@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+	Require linking attribute to contain link to an existing target element.
+	Works other direction than reference_attribute_multiple_pattern.
+	linking_element - Element, where link attribute exists
+	linking_attribute - Attribute of link(s)
+	target_attribute - Target attribute of the linking attribute
+	context_condition - Rule launched only, if this condition is true
+	specifications - Catalog/specification versions for which the rule is launched.
+		List the affected versions with space+semicolon delimiter.
+		If begins with "not:", rule is launched with other but given versions.  
+		If empty, launch rule by default.
+	-->
+	<sch:pattern id="links_attribute_multiple_pattern" abstract="true" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/" xmlns:fi="http://www.kdk.fi/standards/mets/kdk-extensions"
+	xmlns:exsl="http://exslt.org/common" xmlns:str="http://exslt.org/strings" xmlns:sets="http://exslt.org/sets">
+		<sch:rule context="$linking_element[$linking_attribute and ($context_condition)]">
+            <sch:assert test="(count(sets:distinct(exsl:node-set(str:tokenize(normalize-space($linking_attribute),' ')) | exsl:node-set($target_attribute))) = count(sets:distinct(exsl:node-set($target_attribute)))) or not(normalize-space($specifications)=''
+			or ((normalize-space(substring($specifications,1,4))='not:') and ((not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; ')))) and not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; ')))))
+			or ((normalize-space(substring($specifications,1,4))!='not:') and ((contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; '))) or (contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; '))))))">
+				Value '<sch:value-of select="$linking_attribute"/>' in attribute '<sch:value-of select="name($linking_attribute)"/>' in element '<sch:name/>' contains a link to nowhere. The corresponding target attribute '<sch:value-of select="string('$target_attribute')"/>' with the same value was not found.
+			</sch:assert>
+		</sch:rule>
+	</sch:pattern>

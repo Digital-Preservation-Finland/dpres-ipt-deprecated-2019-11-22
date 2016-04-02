@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+	Disallow value in attribute for metadata schema version smaller than given one.
+	context_element - Context element, where the given attribute exists
+	context_attribute - Attribute in context element, which value is checked
+	disallowed_value - Disallowed value of the attribute
+	context_condition - Rule launched only, if this condition is true.
+	mdattribute - @MDTYPE or @OTHERMDTYPE
+	mdtype_name - Name of the metadata type
+	mdtype_version - Version number of metadata schema. Works only for X and X.Y numbering.
+		The rule is lanched, if MDTYPEVERSION is smaller than given one.
+	-->
+	<sch:pattern id="disallowed_value_attribute_smaller_version_pattern" abstract="true" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/">
+		<sch:rule context="$context_element[$context_attribute and ($context_condition) and normalize-space(ancestor::mets:mdWrap/$mdattribute)=$mdtype_name and number(normalize-space(ancestor::mets:mdWrap/@MDTYPEVERSION)) &lt; number($mdtype_version)]">
+			<sch:assert test="normalize-space($context_attribute)!=$disallowed_value">
+				Value '<sch:value-of select="$context_attribute"/>' is not allowed in attribute '<sch:value-of select="name($context_attribute)"/>' in element '<sch:name/>' in <sch:value-of select="$mdtype_name"/> version older than <sch:value-of select="$mdtype_version"/>. (ID of the METS metadata section '<sch:value-of select="name(ancestor::mets:mdWrap/..)"/>' is '<sch:value-of select="ancestor::mets:mdWrap/../@ID"/>').
+			</sch:assert>
+		</sch:rule>
+	</sch:pattern> 

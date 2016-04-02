@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+	MIX specific: Require certain number of samples in a pixel for given color space.
+	color_space - Given color space
+	samples_pixel - Element containing the number of samples as a value
+	num - Required number of samples
+	oper - '=' = exact number of samples '&gt;=' = samples atsleast required
+	context_condition - Rule launched only, if this condition is true.
+	specifications - Catalog/specification versions for which the rule is launched.
+		List the affected versions with space+semicolon delimiter.
+		If begins with "not:", rule is launched with other but given versions.  
+		If empty, launch rule by default.
+	-->
+	<sch:pattern name="mix_required_number_color_samples_pattern" abstract="true" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/" xmlns:mix="http://www.loc.gov/mix/v20">
+		<sch:rule context="mets:techMD/mets:mdWrap/mets:xmlData/mix:mix//mix:ImageColorEncoding[(../../mix:BasicImageInformation/mix:BasicImageCharacteristics/mix:PhotometricInterpretation/mix:colorSpace=$color_space)]">
+			<sch:let name="section_context" value="ancestor-or-self::*[self::mets:dmdSec or self::mets:techMD or self::mets:rightsMD or self::mets:sourceMD or self::mets:digiprovMD]"/>
+			<sch:let name="section_string" value="concat('(ID of the metadata section ', name($section_context), ' is ', $section_context/@ID, ')')"/>
+			<sch:assert test="(normalize-space($oper)='=' and number($samples_pixel) = number($num)) or not(normalize-space($specifications)=''
+			or ((normalize-space(substring($specifications,1,4))='not:') and ((not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; ')))) and not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; ')))))
+			or ((normalize-space(substring($specifications,1,4))!='not:') and ((contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; '))) or (contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; '))))))">
+				The number in element '<sch:value-of select="name($samples_pixel)"/>' is different than expected in the color space '<sch:value-of select="$color_space"/>'.  <sch:value-of select="substring($section_string,1,number($section_context)*string-length($section_string))"/>
+			</sch:assert>
+			<sch:assert test="(normalize-space($oper)='$gt;=' and number($samples_pixel) &gt;= number($num)) or not(normalize-space($specifications)=''
+			or ((normalize-space(substring($specifications,1,4))='not:') and ((not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; ')))) and not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; ')))))
+			or ((normalize-space(substring($specifications,1,4))!='not:') and ((contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; '))) or (contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; '))))))">
+				The number in element '<sch:value-of select="name($samples_pixel)"/>' is smaller than expected in the color space '<sch:value-of select="$color_space"/>'.  <sch:value-of select="substring($section_string,1,number($section_context)*string-length($section_string))"/>
+			</sch:assert>
+		</sch:rule>
+	</sch:pattern>
