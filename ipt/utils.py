@@ -24,13 +24,10 @@ def run_command(cmd, stdout=subprocess.PIPE):
                             stderr=subprocess.PIPE,
                             shell=False)
 
-    (stdout, stderr) = proc.communicate()
+    (stdout_result, stderr_result) = proc.communicate()
+    if not stdout_result:
+        stdout_result = ""
+    if not stderr_result:
+        stderr_result = ""
     statuscode = proc.returncode
-
-    if statuscode != 0:
-        if 'IOError' in stderr:
-            raise IOError(stderr)
-        if 'Exception' in stderr:
-            raise UnknownException(stderr)
-
-    return statuscode, stdout, stderr
+    return statuscode, stdout_result, stderr_result
