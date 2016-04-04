@@ -25,11 +25,14 @@ Validates METS metadata elements and attributes, their values, and METS internal
 	<sch:include href="./abstracts/required_element_or_element_pattern.incl"/>
 	<sch:include href="./abstracts/required_element_pattern.incl"/>
 	<sch:include href="./abstracts/required_max_elements_pattern.incl"/>
-	<sch:include href="./abstracts/required_min_elements_pattern.incl"/>
 	<sch:include href="./abstracts/required_specification_pattern.incl"/>
 	<sch:include href="./abstracts/required_values_attribute_pattern.incl"/>
 	<sch:include href="./abstracts/unique_value_attribute_pattern.incl"/>
 	<sch:include href="./abstracts/required_agent_pattern.incl"/>
+
+<!-- Should be added when preservation plans are required
+	<sch:include href="./abstracts/required_min_elements_pattern.incl"/>
+-->
 
 	<!-- Specification attributes -->
 	<sch:pattern id="mets_CATALOG_SPECIFICATION" is-a="required_attribute_or_attribute_pattern">
@@ -176,13 +179,22 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
 
-	<!-- METS amdSec elements -->	
+	<!-- METS amdSec elements -->
 	<sch:pattern id="mets_amdSec_techMD" is-a="required_element_pattern">
 		<sch:param name="context_element" value="mets:amdSec"/>
 		<sch:param name="context_condition" value="true()"/>
 		<sch:param name="required_element" value="mets:techMD"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
+	<sch:pattern id="mets_amdSec_techMD" is-a="required_element_pattern">
+		<sch:param name="context_element" value="mets:amdSec"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="required_element" value="mets:digiprovMD"/>
+		<sch:param name="specifications" value="string('')"/>
+	</sch:pattern>
+	
+<!--
+	This should be used instead, when preservation plans are required
 	<sch:pattern id="mets_amdSec_digiprovMD" is-a="required_min_elements_pattern">
 		<sch:param name="context_element" value="mets:amdSec"/>
 		<sch:param name="context_condition" value="true()"/>
@@ -190,7 +202,7 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="num" value="2"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
-
+-->
 	<!-- mdWrap and mdRef elements -->
 	<sch:pattern id="mets_dmdSec_mdWrap" is-a="required_element_pattern">
 		<sch:param name="context_element" value="mets:dmdSec"/>
