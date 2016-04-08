@@ -4,7 +4,6 @@
 import os
 import sys
 import optparse
-import lxml.etree
 
 import ipt.mets.file.checksum
 
@@ -23,7 +22,7 @@ def main(arguments=None):
 
     mets_filename = os.path.abspath(os.path.join(args[0], 'mets.xml'))
 
-    parser = ipt.mets.file.checksum.Checker()
+    parser = ipt.mets.file.checksum.Checker(mets_filename=mets_filename)
 
     print "Collecting list of files in '%s'" % mets_filename
     files, errors = parser.get_files_and_checksums_from_mets_file(

@@ -50,11 +50,10 @@ class TestCommandLineTools:
                 'validator (ALTO)',
             "filename": 'CSC_test004',
             "expected_result": {
-                "returncode": 1,
-                "stdout": ['Well-Formed and valid',
-                           'No validator for mimetype:text/xml version:ALTO ' +
-                           'schema Version 1.4'],
-                "stderr": ''
+                "returncode": -1,
+                "stdout": [],
+                "stderr": ['No validator for mimetype: text/xml version: ALTO' +
+                           ' schema Version 1.4']
             }
         }, {
             "testcase": 'Test valid sip package #6: csc-test-valid-kdkmets-1.3',
@@ -74,12 +73,7 @@ class TestCommandLineTools:
         filename = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips',
                                 filename)
 
-        configfile = os.path.abspath(os.path.join(
-            testcommon.settings.PROJECTDIR,
-            'include/share/validators/validators.json'))
-
-        arguments = ["%s" % filename, "-c%s" % configfile,
-                     "preservation-sip-id", str(uuid.uuid4())]
+        arguments = [filename, "preservation-sip-id", str(uuid.uuid4())]
 
         (returncode, stdout, stderr) = testcommon.shell.run_main(
             ipt.scripts.check_sip_digital_objects.main, arguments)

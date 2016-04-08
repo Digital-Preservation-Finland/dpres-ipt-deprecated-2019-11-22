@@ -11,35 +11,38 @@ from ipt.premis import premis as p
 
 
 def main(arguments=None):
+    """ The main method for check-sip-digital-objects script"""
 
+    args = parse_arguments(arguments)
+    mets_parser = ipt.mets.parser.LXML(args.sip_path)
+
+    results = []
+    for fileinfo in mets_parser.get_fileinfo_array():
+        validator = ipt.validator.filelist.Validator(fileinfo)
+        results += [{
+            'fileinfo': fileinfo,
+            'result': [validator.validate()]
+        }]
+
+    print format_results(results, args.linking_sip_type, args.linking_sip_id)
+
+    return 0
+
+def parse_arguments(arguments):
+    """ Create arguments parser and return parsed command line argumets"""
     parser = argparse.ArgumentParser()
-    parser.add_argument("-c", "--configfile", help="JSON configuration file")
     parser.add_argument('sip_path')
     parser.add_argument('linking_sip_type')
     parser.add_argument('linking_sip_id')
-    args = parser.parse_args(arguments)
 
-    sip_path = args.sip_path
-    linking_sip_type = args.linking_sip_type
-    linking_sip_id = args.linking_sip_id
+    return parser.parse_args(arguments)
 
-    mets_filename = os.path.abspath(os.path.join(sip_path, 'mets.xml'))
-    basepath = os.path.abspath(os.path.dirname(mets_filename))
 
-    validator = ipt.validator.filelist.Validator(basepath)
-    validator.load_config(args.configfile)
-    mets_parser = ipt.mets.parser.LXML(mets_filename)
-    filelist = mets_parser.get_fileinfo_iterator()
-
-    validation_results = validator.validate_files(filelist)
-    mets_filelist = mets_parser.get_fileinfo_array()
-
-    return_status = 0
+def format_results(results, linking_sip_type, linking_sip_id):
+    """ Format validation results to Premis report"""
     report = p.Premis()
 
-    for fileinfo, statuscode, stdout, stderror, _validator in \
-            zip(mets_filelist, *validation_results):
-
+    for result in results:
         related_object = p.Object()
         related_object.identifier = ""
         related_object.identifierType = linking_sip_type
@@ -56,25 +59,20 @@ def main(arguments=None):
 
         linking_object = p.Object()
         linking_object.fromvalidator(
-            fileinfo=fileinfo,
+            fileinfo=result['fileinfo'],
             relatedObject=related_object)
 
         validation_event = p.Event()
         validation_event.fromvalidator(
-            statuscode, stdout, stderror,
+            result['result'],
             linkingObject=linking_object,
             linkingAgent=linking_agent)
 
         report.insert(linking_object)
         report.insert(validation_event)
 
-        if not _validator:
-            return_status = 1
-        elif statuscode != 0:
-            return_status = 117
+    return report.serialize()
 
-    sys.stdout.write(report.serialize())
-    return return_status
 
 if __name__ == '__main__':
     RETVAL = main()

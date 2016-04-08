@@ -178,7 +178,7 @@ class TestFileExistenceAndChecksums(object):
         print "mets_files", mets_files
 
         # Run test
-        checksumtool = ipt.mets.file.checksum.Checker()
+        checksumtool = ipt.mets.file.checksum.Checker(sip_path)
         checksumtool.sip_dir = sip_path
         test_result = checksumtool.check_file_existence_and_checksums(
             mets_files)

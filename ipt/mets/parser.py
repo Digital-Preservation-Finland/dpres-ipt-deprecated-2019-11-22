@@ -1,3 +1,4 @@
+import os
 import lxml.etree
 import urllib
 from email.message import Message
@@ -14,6 +15,9 @@ class LXML(object):
     """
 
     def __init__(self, filename, xmlroot=None):
+        if os.path.isdir(filename):
+            filename = os.path.join(filename, 'mets.xml')
+
         self.filename = filename
         self._xmlroot = xmlroot
 

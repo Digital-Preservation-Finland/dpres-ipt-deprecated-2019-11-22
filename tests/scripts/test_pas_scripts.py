@@ -171,11 +171,10 @@ class TestCommandLineTools:
             "testcase": "Test valid sip package with non-existing validator (ALTO)",
             "filename": "CSC_test004",
             "expected_result": {
-                "returncode": 1,
-                "stdout": ["Well-Formed and valid",
-                           "No validator for mimetype:text/xml version:ALTO " +
-                           "schema Version 1.4"],
-                "stderr": ""
+                "returncode": -1,
+                "stdout": [],
+                "stderr": ["No validator for mimetype: text/xml version: ALTO " +
+                           "schema Version 1.4"]
             }
         }, {
             "testcase": "Test valid sip package #6: csc-test-valid-kdkmets-1.3",
@@ -473,16 +472,7 @@ class TestCommandLineTools:
 
         filename = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips',
                                 filename)
-
-        configfile = os.path.abspath(os.path.join(testcommon.settings.PROJECTDIR,
-                                                  'include/share',
-                                                  'validators',
-                                                  'validators.json'))
-
-        arguments = [
-            "-c%s" % configfile,
-            "%s" % filename,
-            "abc", "def"]
+        arguments = ["%s" % filename, "abc", "def"]
 
         self.do(ipt.scripts.check_sip_digital_objects.main, arguments,
                 expected_result)
