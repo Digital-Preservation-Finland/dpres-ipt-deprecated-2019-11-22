@@ -5,7 +5,7 @@ import os
 import sys
 import optparse
 
-import ipt.validator.plugin.schematron
+import ipt.validator.schematron
 
 
 def main(arguments=None):
@@ -31,7 +31,7 @@ def main(arguments=None):
     if os.path.isdir(filename):
         filename = os.path.join(filename, 'mets.xml')
 
-    validate = ipt.validator.plugin.schematron.XSLT()
+    validate = ipt.validator.schematron.XSLT()
 
     result = validate.validate_file(options.schemapath, filename)
 

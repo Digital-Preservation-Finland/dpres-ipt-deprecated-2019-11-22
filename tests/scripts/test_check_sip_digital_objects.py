@@ -2,16 +2,13 @@ import os
 import sys
 import pytest
 import uuid
+from tempfile import NamedTemporaryFile
 
 from tests import testcommon
 from tests.testcommon import settings
 from tests.testcommon import shell
 from tests.testcommon.casegenerator import pytest_generate_tests
 
-from tempfile import NamedTemporaryFile
-import ipt.validator.plugin.xmllint
-
-import ipt.scripts.check_xml_schema_features
 # Module to test
 import ipt.scripts.check_sip_digital_objects
 

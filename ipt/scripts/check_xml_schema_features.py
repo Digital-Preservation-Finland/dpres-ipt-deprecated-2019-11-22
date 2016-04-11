@@ -5,7 +5,7 @@ import os
 import sys
 import optparse
 
-import ipt.validator.plugin.xmllint
+import ipt.validator.xmllint
 
 
 def main(arguments=None):
@@ -38,7 +38,7 @@ def main(arguments=None):
             "version": "1.0"
         }
     }
-    validate = ipt.validator.plugin.xmllint.Xmllint(fileinfo)
+    validate = ipt.validator.xmllint.Xmllint(fileinfo)
     validate.set_catalog(options.catalogpath)
     validate.add_schema(options.schemapath)
 

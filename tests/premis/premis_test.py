@@ -14,8 +14,7 @@ import random
 import lxml.etree
 
 from ipt.premis import premis
-import ipt.validator.filelist
-from ipt.validator.plugin.libxml import Libxml
+from ipt.validator.libxml import Libxml
 
 PREMIS_NS = "info:lc/xmlns/premis-v2"
 PREMIS = "{%s}" % PREMIS_NS

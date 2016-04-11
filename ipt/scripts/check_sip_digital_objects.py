@@ -4,9 +4,9 @@
 import os
 import sys
 import argparse
-import ipt.validator.filelist
 import ipt.mets.parser
 import ipt.version
+from ipt.validator import Validator
 from ipt.premis import premis as p
 
 
@@ -18,7 +18,7 @@ def main(arguments=None):
 
     results = []
     for fileinfo in mets_parser.get_fileinfo_array():
-        validator = ipt.validator.filelist.Validator(fileinfo)
+        validator = Validator(fileinfo)
         results += [{
             'fileinfo': fileinfo,
             'result': [validator.validate()]
