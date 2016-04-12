@@ -450,6 +450,7 @@ TODO: Native file format handling.
 		<sch:param name="pronom_codes" value="$supported_pronom_codes"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
+
 	<sch:pattern id="premis_formatName_parameters" is-a="required_parameters_premis_formatname_pattern">
 		<sch:param name="context_condition" value="true()"/>
 		<sch:param name="charset_mimes" value="$mimes_require_charset"/>
