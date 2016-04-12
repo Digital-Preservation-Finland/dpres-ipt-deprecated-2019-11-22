@@ -301,7 +301,14 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="context_condition" value="true()"/>
 		<sch:param name="context_attribute" value="@MDTYPE"/>
 		<sch:param name="valid_values" value="string('PREMIS:RIGHTS; OTHER')"/>
-		<sch:param name="specifications" value="string('')"/>
+		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
+	</sch:pattern>
+	<sch:pattern id="mets_rightsMD_MDTYPE" is-a="required_values_attribute_pattern">
+		<sch:param name="context_element" value="mets:rightsMD/mets:mdWrap"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="context_attribute" value="@MDTYPE"/>
+		<sch:param name="valid_values" value="string('METSRIGHTS; PREMIS:RIGHTS; OTHER')"/>
+		<sch:param name="specifications" value="string('1.4.1; 1.4')"/>
 	</sch:pattern>
 	<sch:pattern id="mets_digiprovMD_MDTYPE" is-a="required_values_attribute_pattern">
 		<sch:param name="context_element" value="mets:digiprovMD/mets:mdWrap"/>
@@ -721,7 +728,7 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="context_element" value="mets:fptr"/>
 		<sch:param name="context_condition" value="true()"/>
 		<sch:param name="required_attribute" value="@FILEID"/>
-		<sch:param name="required_element" value="mets:area"/>
+		<sch:param name="required_element" value=".//mets:area"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>	
 	<sch:pattern id="mets_mptr_href" is-a="required_attribute_pattern">

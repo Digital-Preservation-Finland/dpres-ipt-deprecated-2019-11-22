@@ -14,6 +14,7 @@ Validates that the used metadata type inside mdWrap element is same as defined i
 	<sch:ns prefix="addml" uri="http://www.arkivverket.no/standarder/addml"/>
 	<sch:ns prefix="audiomd" uri="http://www.loc.gov/audioMD/"/>
 	<sch:ns prefix="videomd" uri="http://www.loc.gov/videoMD/"/>
+	<sch:ns prefix="metsrights" uri="http://cosimo.stanford.edu/sdr/metsrights/"/>
 	<sch:ns prefix="marc21" uri="http://www.loc.gov/MARC21/slim"/>
 	<sch:ns prefix="mods" uri="http://www.loc.gov/mods/v3"/>
 	<sch:ns prefix="dc" uri="http://purl.org/dc/elements/1.1/"/>
@@ -39,6 +40,7 @@ Validates that the used metadata type inside mdWrap element is same as defined i
 	<sch:include href="./abstracts/required_metadata_format_specific_pattern.incl"/>
 	<sch:include href="./abstracts/required_metadata_match_pattern.incl"/>
 	<sch:include href="./abstracts/required_metadata_pattern.incl"/>
+	<sch:include href="./abstracts/required_metadata_format_specific_pattern_old.incl"/>
 
 	<!-- Check metadata content in mdWrap -->
 	<sch:pattern id="mets_mdtype_content" is-a="required_metadata_match_pattern">
@@ -70,6 +72,7 @@ Validates that the used metadata type inside mdWrap element is same as defined i
 			  + number(normalize-space(@MDTYPE)='PREMIS:RIGHTS')*count(mets:xmlData/premis:rightsStatement)*count(mets:xmlData/*)
 			  + number(normalize-space(@MDTYPE)='PREMIS:EVENT')*count(mets:xmlData/premis:event)*count(mets:xmlData/*)
 			  + number(normalize-space(@MDTYPE)='PREMIS:AGENT')*count(mets:xmlData/premis:agent)*count(mets:xmlData/*)
+			  + number(normalize-space(@MDTYPE)='METSRIGHTS')*number(boolean(mets:xmlData/metsrights:*))*count(mets:xmlData/*)
 			  + number(normalize-space(@MDTYPE)='NISOIMG')*number(boolean(mets:xmlData/mix:*))*count(mets:xmlData/*)
 			  + number(normalize-space(@MDTYPE)='MARC')*number(boolean(mets:xmlData/marc21:*))*count(mets:xmlData/*)
 			  + number(normalize-space(@MDTYPE)='DC')*number(boolean(mets:xmlData/dc:* or mets:xmlData/dcterms:* or mets:xmlData/dcmitype:*))
@@ -205,14 +208,6 @@ Validates that the used metadata type inside mdWrap element is same as defined i
 	</sch:pattern> 
 
 	<!-- File format specific technical metadata requirements -->
-	<sch:pattern id="TextMD_file" is-a="required_metadata_format_specific_pattern">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="file_format" value="string('application/xhtml+xml text/html text/xml text/plain')"/>
-		<sch:param name="required_element" value="textmd_kdk:*"/>
-		<sch:param name="mdtype_name" value="string('TextMD')"/>
-		<sch:param name="specifications" value="string('1.4.1; 1.4')"/>	
-	</sch:pattern>
 	<sch:pattern id="ADDML_file" is-a="required_metadata_format_specific_pattern">
 		<sch:param name="context_element" value="mets:file"/>
 		<sch:param name="context_condition" value="true()"/>
@@ -227,7 +222,7 @@ Validates that the used metadata type inside mdWrap element is same as defined i
 		<sch:param name="file_format" value="string('audio/x-aiff audio/x-wav audio/flac audio/mp4 audio/mpeg audio/x-ms-wma')"/>
 		<sch:param name="required_element" value="audiomd:*"/>
 		<sch:param name="mdtype_name" value="string('AudioMD')"/>		
-		<sch:param name="specifications" value="string('')"/>
+		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
 	</sch:pattern>
 	<sch:pattern id="VideoMD_file" is-a="required_metadata_format_specific_pattern">
 		<sch:param name="context_element" value="mets:file"/>
@@ -235,7 +230,7 @@ Validates that the used metadata type inside mdWrap element is same as defined i
 		<sch:param name="file_format" value="string('video/jpeg2000 video/mp4 video/dv video/mpeg video/x-ms-wmv')"/>
 		<sch:param name="required_element" value="videomd:*"/>
 		<sch:param name="mdtype_name" value="string('VideoMD')"/>		
-		<sch:param name="specifications" value="string('')"/>
+		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
 	</sch:pattern>
 	<sch:pattern id="NISOIMG_file" is-a="required_metadata_format_specific_pattern">
 		<sch:param name="context_element" value="mets:file"/>
@@ -243,7 +238,39 @@ Validates that the used metadata type inside mdWrap element is same as defined i
 		<sch:param name="file_format" value="string('image/tiff image/jpeg image/jp2 image/png image/gif')"/>
 		<sch:param name="required_element" value="mix:*"/>
 		<sch:param name="mdtype_name" value="string('NISOIMG (MIX)')"/>		
-		<sch:param name="specifications" value="string('')"/>
+		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
+	</sch:pattern>
+	<sch:pattern id="TextMD_file" is-a="required_metadata_format_specific_pattern_old">
+		<sch:param name="context_element" value="mets:file"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="file_format" value="string('application/xhtml+xml text/html text/xml text/plain')"/>
+		<sch:param name="required_element" value="textmd_kdk:*"/>
+		<sch:param name="mdtype_name" value="string('TextMD')"/>
+		<sch:param name="specifications" value="string('1.4.1; 1.4')"/>	
+	</sch:pattern>
+	<sch:pattern id="AudioMD_file" is-a="required_metadata_format_specific_pattern_old">
+		<sch:param name="context_element" value="mets:file"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="file_format" value="string('audio/x-aiff audio/x-wav audio/flac audio/mp4 audio/mpeg audio/x-ms-wma')"/>
+		<sch:param name="required_element" value="audiomd:*"/>
+		<sch:param name="mdtype_name" value="string('AudioMD')"/>		
+		<sch:param name="specifications" value="string('1.4.1; 1.4')"/>
+	</sch:pattern>
+	<sch:pattern id="VideoMD_file" is-a="required_metadata_format_specific_pattern_old">
+		<sch:param name="context_element" value="mets:file"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="file_format" value="string('video/jpeg2000 video/mp4 video/dv video/mpeg video/x-ms-wmv')"/>
+		<sch:param name="required_element" value="videomd:*"/>
+		<sch:param name="mdtype_name" value="string('VideoMD')"/>		
+		<sch:param name="specifications" value="string('1.4.1; 1.4')"/>
+	</sch:pattern>
+	<sch:pattern id="NISOIMG_file" is-a="required_metadata_format_specific_pattern_old">
+		<sch:param name="context_element" value="mets:file"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="file_format" value="string('image/tiff image/jpeg image/jp2 image/png image/gif')"/>
+		<sch:param name="required_element" value="mix:*"/>
+		<sch:param name="mdtype_name" value="string('NISOIMG (MIX)')"/>		
+		<sch:param name="specifications" value="string('1.4.1; 1.4')"/>
 	</sch:pattern>
 	
 </sch:schema>
