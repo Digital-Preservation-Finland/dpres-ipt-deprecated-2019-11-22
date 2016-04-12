@@ -1,12 +1,3 @@
-import os
-import shutil
-import tempfile
-import subprocess
-
-import ipt.fileutils.checksum
-
-import xml.etree.ElementTree
-
 """
 
 Schematron validation using iso-schematron-xslt1 reference implementation.
@@ -33,6 +24,14 @@ This reduces need to sequentially compile Schematron schemas into XSLT
 templates.
 
 """
+
+import os
+import shutil
+import tempfile
+import subprocess
+import xml.etree.ElementTree
+
+import ipt.fileutils.checksum
 
 
 class ValidationResult:
@@ -83,7 +82,7 @@ class ValidationResult:
 
 class XSLT:
 
-    def __init__(self, cache=False):
+    def __init__(self, cache=True):
         self.cache = cache
         self.schematron_version = 1
         self.sharepath = '/usr/share/information-package-tools'
@@ -123,24 +122,23 @@ class XSLT:
 
             if self.cache:
                 if os.path.isfile(xslt_filename):
-                    # FIXME KDKPAS-668 Returning an undefined variable!
-                    return xslt_cached_filename
+                    return xslt_filename
 
             # Step 1 - Add Schematron include rules ( schema.sch -> step1.xsl )
-            result = self.xslt_convert(
+            self.xslt_convert(
                 'iso_dsdl_include.xsl',
                 schematron_schema,
                 os.path.join(tempdir, 'step1.xsl'))
 
             # Step 2 - Expand arguments ( step1.xsl -> step2.xsl )
-            result = self.xslt_convert(
+            self.xslt_convert(
                 'iso_abstract_expand.xsl',
                 os.path.join(tempdir, 'step1.xsl'),
                 os.path.join(tempdir, 'step2.xsl'))
 
             # Step 3 - Generage xsl file for validating XML ( step3.xsl ->
             # schema.sch.<sha digest>.xsl )
-            result = self.xslt_convert(
+            self.xslt_convert(
                 'iso_svrl_for_xslt%s.xsl' % self.schematron_version,
                 os.path.join(tempdir, 'step2.xsl'),
                 os.path.join(tempdir, 'validator.xsl'))
@@ -192,6 +190,3 @@ class XSLT:
 
         return os.path.join(self.cachepath, '%s.%s.validator.xsl' % (
                             schema_basename, schema_digest))
-
-    def clear_xslt_cache(self):
-        shutil.rmtree(os.path.join(self.cachepath, '*'))
