@@ -47,10 +47,10 @@ class TestCommandLineTools:
                 'validator (ALTO)',
             "filename": 'CSC_test004',
             "expected_result": {
-                "returncode": -1,
-                "stdout": [],
-                "stderr": ['No validator for mimetype: text/xml version: ALTO' +
-                           ' schema Version 1.4']
+                "returncode": 117,
+                "stdout": ['No validator for mimetype: text/xml version: ALTO' +
+                           ' schema Version 1.4'],
+                "stderr": []
             }
         }, {
             "testcase": 'Test valid sip package #6: csc-test-valid-kdkmets-1.3',

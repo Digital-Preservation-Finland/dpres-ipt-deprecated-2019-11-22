@@ -71,6 +71,14 @@ class Premis:
 
             self.agents.append(object)
 
+
+    def contains_errors(self):
+        for event in self.events:
+            if event.eventOutcome == 'failure':
+                return True
+        return False
+
+
     def fromstring(self, string):
 
         if (string is None):

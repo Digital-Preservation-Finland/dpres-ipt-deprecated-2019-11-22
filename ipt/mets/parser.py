@@ -19,6 +19,7 @@ class LXML(object):
             filename = os.path.join(filename, 'mets.xml')
 
         self.filename = filename
+        self.sip_dir = os.path.dirname(filename)
         self._xmlroot = xmlroot
 
     def xmlroot(self):
@@ -93,7 +94,9 @@ class LXML(object):
 
         fixity = self.get_file_fixity_with_admid(admid)
         format = self.get_file_format_with_admid(admid)
-        filename = self.get_filename_with_admid(admid)
+        filename = os.path.join(
+            self.sip_dir,
+            self.get_filename_with_admid(admid))
         filename = filename.replace('file://', '')
         object_id = self.get_file_object_id_with_admid(admid)
 

@@ -6,7 +6,7 @@ import sys
 import argparse
 import ipt.mets.parser
 import ipt.version
-from ipt.validator import Validator
+from ipt.validator import validate
 from ipt.premis import premis as p
 
 
@@ -16,17 +16,18 @@ def main(arguments=None):
     args = parse_arguments(arguments)
     mets_parser = ipt.mets.parser.LXML(args.sip_path)
 
-    results = []
-    for fileinfo in mets_parser.get_fileinfo_array():
-        validator = Validator(fileinfo)
-        results += [{
-            'fileinfo': fileinfo,
-            'result': [validator.validate()]
-        }]
+    report = validation_report(
+        validation(mets_parser),
+        args.linking_sip_type,
+        args.linking_sip_id)
 
-    print format_results(results, args.linking_sip_type, args.linking_sip_id)
+    print report.serialize()
+
+    if report.contains_errors():
+        return 117
 
     return 0
+
 
 def parse_arguments(arguments):
     """ Create arguments parser and return parsed command line argumets"""
@@ -38,7 +39,22 @@ def parse_arguments(arguments):
     return parser.parse_args(arguments)
 
 
-def format_results(results, linking_sip_type, linking_sip_id):
+def validation(mets_parser):
+    for fileinfo in mets_parser.get_fileinfo_iterator():
+        validation_results = validate(fileinfo)
+        for validation_result in validation_results:
+            yield {
+                'fileinfo': fileinfo,
+                'result': validation_result
+            }
+
+
+def report_contains_errors(report):
+    return False
+
+
+
+def validation_report(results, linking_sip_type, linking_sip_id):
     """ Format validation results to Premis report"""
     report = p.Premis()
 
@@ -64,14 +80,14 @@ def format_results(results, linking_sip_type, linking_sip_id):
 
         validation_event = p.Event()
         validation_event.fromvalidator(
-            result['result'],
+            *result['result'],
             linkingObject=linking_object,
             linkingAgent=linking_agent)
 
         report.insert(linking_object)
         report.insert(validation_event)
 
-    return report.serialize()
+    return report
 
 
 if __name__ == '__main__':
