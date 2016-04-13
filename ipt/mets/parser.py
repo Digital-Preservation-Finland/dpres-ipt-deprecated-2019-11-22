@@ -61,6 +61,9 @@ class LXML(object):
     def get_fileinfo_iterator(self, filter=None):
         """
         Get fileinfo iterator.
+        
+        :filter: Filter for the iterator, controlled vocabulary:
+            'file-format-validation': Skip file if USE='no-file-format-validation' in METS
         """
         for mets_file in self.mets_files():
             # Files marked with USE='no-file-format-validation' omitted with
