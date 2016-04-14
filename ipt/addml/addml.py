@@ -1,7 +1,5 @@
 """ addml.xml library module."""
 
-import lxml.etree
-
 ADDML_URI = "http://www.arkivverket.no/standarder/addml"
 NAMESPACES = {"addml": ADDML_URI}
 
