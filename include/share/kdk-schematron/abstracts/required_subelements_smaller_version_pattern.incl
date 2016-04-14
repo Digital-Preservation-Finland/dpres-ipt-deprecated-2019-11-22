@@ -12,6 +12,7 @@
 	<sch:pattern id="required_subelements_smaller_version_pattern" abstract="true" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/">
 		<sch:rule context="$context_element[($context_condition) and normalize-space(ancestor::mets:mdWrap/$mdattribute)=$mdtype_name and number(normalize-space(ancestor::mets:mdWrap/@MDTYPEVERSION)) &lt; number($mdtype_version)]">
 			<sch:assert test="./*">
-				Element '<sch:name/>' requires sub-elements in <sch:value-of select="$mdtype_name"/> version older than <sch:value-of select="$mdtype_version"/>. (ID of the METS metadata section '<sch:value-of select="name(ancestor::mets:mdWrap/..)"/>' is '<sch:value-of select="ancestor::mets:mdWrap/../@ID"/>').</sch:assert>
+				Element '<sch:name/>' requires sub-elements in <sch:value-of select="$mdtype_name"/> version older than <sch:value-of select="$mdtype_version"/>. (ID of the METS metadata section '<sch:value-of select="name(ancestor::mets:mdWrap/..)"/>' is '<sch:value-of select="ancestor::mets:mdWrap/../@ID"/>').
+			</sch:assert>
 		</sch:rule>
 	</sch:pattern> 

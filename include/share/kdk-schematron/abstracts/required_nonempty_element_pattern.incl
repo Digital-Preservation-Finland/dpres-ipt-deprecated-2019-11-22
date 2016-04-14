@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 	<!--
-	Require that values between two attributes differ.
-	context_element - Element containing the attribute
-	context_attribute - Attribute in the context element
-	another_context_attribute - Another attribute anywhere in the METS document
+	Require element to be nonempty.
+	context_element - Element containing attribute
 	context_condition - Rule launched only, if this condition is true.
 	specifications - Catalog/specification versions for which the rule is launched.
 		List the affected versions with space+semicolon delimiter.
 		If begins with "not:", rule is launched with other but given versions.  
 		If empty, launch rule by default.
 	-->
-	<sch:pattern id="unique_value_attribute_pattern" abstract="true" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/" xmlns:fi="http://www.kdk.fi/standards/mets/kdk-extensions">
-		<sch:rule context="$context_element[($context_condition) and $context_attribute and ancestor-or-self::mets:mets//$another_context_attribute]">
-			<sch:assert test="(not(normalize-space(ancestor-or-self::mets:mets//$another_context_attribute) = normalize-space($context_attribute))) or not(normalize-space($specifications)=''
+	<sch:pattern id="required_nonempty_element_pattern" abstract="true" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/" xmlns:fi="http://www.kdk.fi/standards/mets/kdk-extensions">
+		<sch:rule context="$context_element[($context_condition)]">
+			<sch:let name="section_context" value="ancestor-or-self::*[self::mets:dmdSec or self::mets:techMD or self::mets:rightsMD or self::mets:sourceMD or self::mets:digiprovMD]"/>
+			<sch:let name="section_string" value="concat('(ID of the metadata section ', name($section_context), ' is ', $section_context/@ID, ')')"/>
+			<sch:assert test="(string-length(normalize-space(.)) &gt; 0) or not(normalize-space($specifications)=''
 			or ((normalize-space(substring($specifications,1,4))='not:') and ((not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; ')))) and not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; ')))))
 			or ((normalize-space(substring($specifications,1,4))!='not:') and ((contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; '))) or (contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; '))))))">
-				Value '<sch:value-of select="$context_attribute"/>' in attribute '<sch:value-of select="name($context_attribute)"/>' in element '<sch:name/>' is required to be unique. Another attribute '<sch:value-of select="name($another_context_attribute)"/>' with the same value exists.
+				Element '<sch:name/>' is not allowed to be empty. <sch:value-of select="substring($section_string,1,number($section_context)*string-length($section_string))"/>
 			</sch:assert>
 		</sch:rule>
 	</sch:pattern>

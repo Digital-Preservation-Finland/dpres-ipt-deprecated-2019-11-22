@@ -56,49 +56,6 @@ TODO: Native file format handling.
 		'application/vnd.openxmlformatsofficedocument.presentationml.presentation')"/>
 
 	<!--
-	Supported MIME type versions, grouped by file format, versions in a group divided with a space character.
-	The number and ordering of the groups must be same as formats in MIME type list.
-	-->
-	<sch:let name="supported_format_versions" value="
-		exsl:node-set('')
-		| exsl:node-set('2.0.1 3.0.0 3.0.1')
-		| exsl:node-set('1.0 1.1')
-		| exsl:node-set('1.0') 
-		| exsl:node-set('4.01') 
-		| exsl:node-set('1.0') 
-		| exsl:node-set('1.0') 
-		| exsl:node-set('1.0') 
-		| exsl:node-set('1.0')  
-		| exsl:node-set('1.0') 
-		| exsl:node-set('A-1a A-1b A-2a A-2b A-2u 1.2 1.3 1.4 1.5 1.6 1.7') 
-		| exsl:node-set('') 
-		| exsl:node-set('1.3') 
-		| exsl:node-set('2 ') 
-		| exsl:node-set('1.2.1') 
-		| exsl:node-set('') 
-		| exsl:node-set('') 
-		| exsl:node-set('') 
-		| exsl:node-set('1.00 1.01 1.02') 
-		| exsl:node-set('') 
-		| exsl:node-set('6.0 1.3') 
-		| exsl:node-set('1.2') 
-		| exsl:node-set('0.17 1.0') 
-		| exsl:node-set('8.0 8.5 9.0 10.0 11.0') 
-		| exsl:node-set('8.0 9.0 10.0 11.0') 
-		| exsl:node-set('8.0 9.0 10.0 11.0') 
-		| exsl:node-set('') 
-		| exsl:node-set('9') 
-		| exsl:node-set('') 
-		| exsl:node-set('1 2') 
-		| exsl:node-set('9') 
-		| exsl:node-set('3.0') 
-		| exsl:node-set('1987a 1989a') 
-		| exsl:node-set('1.0 1.1') 
-		| exsl:node-set('12.0 14.0 15.0') 
-		| exsl:node-set('12.0 14.0 15.0') 
-		| exsl:node-set('12.0 14.0 15.0')"/>
-
-	<!--
 	Supported PRONOM registry key versions, grouped by file format, keys in a group divided with a space character.
 	The number and ordering of the groups must be same as formats in MIME type list.
 	-->
@@ -158,6 +115,8 @@ TODO: Native file format handling.
 	<sch:include href="./abstracts/unique_value_element_pattern.incl"/>
 	<sch:include href="./abstracts/required_value_premis_formatname_pattern.incl"/>
 	<sch:include href="./abstracts/required_parameters_premis_formatname_pattern.incl"/>
+	<sch:include href="./abstracts/required_nonempty_element_pattern.incl"/>
+	<sch:include href="./abstracts/required_features_native_pattern.incl"/>
 
 	<!-- Version specific checks until smaller than 2.3 -->
 	<sch:pattern id="premis23_object_authority" is-a="disallowed_attribute_smaller_version_pattern">
@@ -446,7 +405,6 @@ TODO: Native file format handling.
 	<sch:pattern id="premis_formatName_values" is-a="required_value_premis_formatname_pattern">
 		<sch:param name="context_condition" value="true()"/>
 		<sch:param name="mime_types" value="$supported_mime_types"/>
-		<sch:param name="format_versions" value="$supported_format_versions"/>
 		<sch:param name="pronom_codes" value="$supported_pronom_codes"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
@@ -463,6 +421,54 @@ TODO: Native file format handling.
 		<sch:param name="context_element" value="mets:techMD//premis:messageDigestAlgorithm"/>
 		<sch:param name="context_condition" value="true()"/>
 		<sch:param name="valid_values" value="$supported_checksum_algorithms"/>
+		<sch:param name="specifications" value="string('')"/>
+	</sch:pattern>
+	
+	<!-- Case 'no-file-format-validation' check -->
+	<sch:pattern id="premis_mets_case_native" is-a="required_features_native_pattern">
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="specifications" value="string('')"/>
+	</sch:pattern>
+
+	<!-- Identifier value not empty -->
+	<sch:pattern id="premis_objectIdentifierType_value" is-a="required_nonempty_element_pattern">
+		<sch:param name="context_element" value="premis:objectIdentifierType"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="specifications" value="string('')"/>
+	</sch:pattern>
+	<sch:pattern id="premis_objectIdentifierValue_value" is-a="required_nonempty_element_pattern">
+		<sch:param name="context_element" value="premis:objectIdentifierValue"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="specifications" value="string('')"/>
+	</sch:pattern>
+	<sch:pattern id="premis_rightsStatementIdentifierType_value" is-a="required_nonempty_element_pattern">
+		<sch:param name="context_element" value="premis:rightsStatementIdentifierType"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="specifications" value="string('')"/>
+	</sch:pattern>
+	<sch:pattern id="premis_rightsStatementIdentifierValue_value" is-a="required_nonempty_element_pattern">
+		<sch:param name="context_element" value="premis:rightsStatementIdentifierValue"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="specifications" value="string('')"/>
+	</sch:pattern>
+	<sch:pattern id="premis_eventIdentifierType_value" is-a="required_nonempty_element_pattern">
+		<sch:param name="context_element" value="premis:eventIdentifierType"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="specifications" value="string('')"/>
+	</sch:pattern>
+	<sch:pattern id="premis_eventIdentifierValue_value" is-a="required_nonempty_element_pattern">
+		<sch:param name="context_element" value="premis:eventIdentifierValue"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="specifications" value="string('')"/>
+	</sch:pattern>
+	<sch:pattern id="premis_agentIdentifierType_value" is-a="required_nonempty_element_pattern">
+		<sch:param name="context_element" value="premis:agentIdentifierType"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="specifications" value="string('')"/>
+	</sch:pattern>
+	<sch:pattern id="premis_agentIdentifierValue_value" is-a="required_nonempty_element_pattern">
+		<sch:param name="context_element" value="premis:agentIdentifierValue"/>
+		<sch:param name="context_condition" value="true()"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
 

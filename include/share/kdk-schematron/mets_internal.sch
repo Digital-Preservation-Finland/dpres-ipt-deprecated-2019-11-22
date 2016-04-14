@@ -29,6 +29,7 @@ Validates METS metadata elements and attributes, their values, and METS internal
 	<sch:include href="./abstracts/required_values_attribute_pattern.incl"/>
 	<sch:include href="./abstracts/unique_value_attribute_pattern.incl"/>
 	<sch:include href="./abstracts/required_agent_pattern.incl"/>
+	<sch:include href="./abstracts/required_nonempty_attribute_pattern.incl"/>
 
 <!-- Should be added when preservation plans are required
 	<sch:include href="./abstracts/required_min_elements_pattern.incl"/>
@@ -78,6 +79,13 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="required_attribute" value="@OBJID"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
+	<sch:pattern id="mets_OBJID_value" is-a="required_nonempty_attribute_pattern">
+		<sch:param name="context_element" value="mets:mets"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="context_attribute" value="@OBJID"/>
+		<sch:param name="specifications" value="string('')"/>
+	</sch:pattern>
+
 	<sch:pattern id="mets_PROFILE" is-a="required_attribute_pattern">
 		<sch:param name="context_element" value="mets:mets"/>
 		<sch:param name="context_condition" value="true()"/>
@@ -142,6 +150,13 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="context_element" value="mets:metsHdr"/>
 		<sch:param name="context_condition" value="true()"/>
 		<sch:param name="required_attribute" value="@CREATEDATE"/>
+		<sch:param name="specifications" value="string('')"/>
+	</sch:pattern>
+	<sch:pattern id="mets_RECORDSTATUS_values" is-a="required_values_attribute_pattern">
+		<sch:param name="context_element" value="mets:metsHdr"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="context_attribute" value="@RECORDSTATUS"/>
+		<sch:param name="valid_values" value="string('submission')"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
 
