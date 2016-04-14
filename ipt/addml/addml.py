@@ -11,18 +11,15 @@ def to_dict(addml_xml):
     :addml_xml: addml etree
     :returns: a dict of addml data."""
 
-    query = ".//mets:xmlData"
-    data_tree = addml_xml.xpath(query, namespaces=NAMESPACES)[0]
-
     addml = {}
-    addml["charset"] = data_tree.xpath(
+    addml["charset"] = addml_xml.xpath(
         ".//addml:charset", namespaces=NAMESPACES)[0].text
-    addml["separator"] = data_tree.xpath(
+    addml["separator"] = addml_xml.xpath(
         ".//addml:recordSeparator", namespaces=NAMESPACES)[0].text
-    addml["delimiter"] = data_tree.xpath(
+    addml["delimiter"] = addml_xml.xpath(
         ".//addml:fieldSeparatingChar",
         namespaces=NAMESPACES)[0].text
-    headers = data_tree.xpath(
+    headers = addml_xml.xpath(
         ".//addml:description", namespaces=NAMESPACES)
     header_list = []
     for header in headers:
