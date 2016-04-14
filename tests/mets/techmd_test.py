@@ -2,7 +2,7 @@ import os
 import lxml.etree
 
 from tests.testcommon.settings import PROJECTDIR
-from ipt.addml import to_dict
+from ipt.addml.addml import to_dict
 
 TESTDATADIR = os.path.join(PROJECTDIR, 'tests', 'data', 'mets', 'techmd')
 
