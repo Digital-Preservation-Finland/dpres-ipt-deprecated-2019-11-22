@@ -74,7 +74,6 @@ def _parse_techmd_to_dict(techmds):
     for techmd in techmds:
         query = ".//mets:xmlData"
         data_tree = techmd.xpath(query, namespaces=NAMESPACES)[0]
-        if is_addml(data_tree):
             data_dict["addml"]["charset"] = data_tree.xpath(
                 ".//addml:charset", namespaces=NAMESPACES)[0].text
             data_dict["addml"]["separator"] = data_tree.xpath(
@@ -91,10 +90,3 @@ def _parse_techmd_to_dict(techmds):
     return data_dict
 
 
-def is_addml(data_tree):
-    """find out if input is addml tree.
-    :data_tree: input tree.
-    :returns: Boolean"""
-    if len(data_tree.xpath("addml:addml", namespaces=NAMESPACES)) > 0:
-        return True
-    return False
