@@ -2,14 +2,7 @@ import os
 import lxml.etree
 
 ADDML_URI = "http://www.arkivverket.no/standarder/addml"
-METS_URI = "http://www.loc.gov/METS/"
-PREMIS_URI = "info:lc/xmlns/premis-v2"
-XLINK_URI = "http://www.w3.org/1999/xlink"
-NAMESPACES = {
-    "premis": PREMIS_URI,
-    "mets": METS_URI,
-    "addml": ADDML_URI,
-    "xlink": XLINK_URI}
+NAMESPACES = {"addml": ADDML_URI}
 
 
 def get_tech_md_list_for_file(file_path, mets_path):
@@ -66,27 +59,26 @@ def _get_adm_id_for_file(mets_tree, filename):
     return adm_id
 
 
-def _parse_techmd_to_dict(techmds):
+def to_dict(addml_xml):
     """parse a list of techmd etrees into a dict.
-    :techmds: a list of etrees
-    :returns: a dict of relevant data."""
-    data_dict = {"addml": {}}
-    for techmd in techmds:
-        query = ".//mets:xmlData"
-        data_tree = techmd.xpath(query, namespaces=NAMESPACES)[0]
-            data_dict["addml"]["charset"] = data_tree.xpath(
-                ".//addml:charset", namespaces=NAMESPACES)[0].text
-            data_dict["addml"]["separator"] = data_tree.xpath(
-                ".//addml:recordSeparator", namespaces=NAMESPACES)[0].text
-            data_dict["addml"]["delimiter"] = data_tree.xpath(
-                ".//addml:fieldSeparatingChar",
-                namespaces=NAMESPACES)[0].text
-            headers = data_tree.xpath(
-                ".//addml:description", namespaces=NAMESPACES)
-            header_list = []
-            for header in headers:
-                header_list.append(header.text)
-            data_dict["addml"]["headers"] = header_list
-    return data_dict
+    :addml_xml: addml etree
+    :returns: a dict of addml data."""
 
+    query = ".//mets:xmlData"
+    data_tree = addml_xml.xpath(query, namespaces=NAMESPACES)[0]
 
+    addml = {}
+    addml["charset"] = data_tree.xpath(
+        ".//addml:charset", namespaces=NAMESPACES)[0].text
+    addml["separator"] = data_tree.xpath(
+        ".//addml:recordSeparator", namespaces=NAMESPACES)[0].text
+    addml["delimiter"] = data_tree.xpath(
+        ".//addml:fieldSeparatingChar",
+        namespaces=NAMESPACES)[0].text
+    headers = data_tree.xpath(
+        ".//addml:description", namespaces=NAMESPACES)
+    header_list = []
+    for header in headers:
+        header_list.append(header.text)
+    addml["headers"] = header_list
+    return addml
