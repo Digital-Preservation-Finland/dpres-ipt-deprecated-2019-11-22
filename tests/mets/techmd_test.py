@@ -1,3 +1,4 @@
+""" test for addml.py. """
 import os
 import lxml.etree
 
