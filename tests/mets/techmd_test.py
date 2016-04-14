@@ -2,8 +2,7 @@ import os
 import lxml.etree
 
 from tests.testcommon.settings import PROJECTDIR
-from ipt.mets.techmd import get_tech_md_list_for_file, \
-    _get_adm_id_for_file, _get_adm_id_attribute_string, to_dict
+from ipt.addml import to_dict
 
 TESTDATADIR = os.path.join(PROJECTDIR, 'tests', 'data', 'mets', 'techmd')
 
