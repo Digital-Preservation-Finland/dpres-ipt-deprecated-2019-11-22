@@ -49,11 +49,6 @@ def validation(mets_parser):
             }
 
 
-def report_contains_errors(report):
-    return False
-
-
-
 def validation_report(results, linking_sip_type, linking_sip_id):
     """ Format validation results to Premis report"""
     report = p.Premis()
