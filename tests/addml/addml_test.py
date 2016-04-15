@@ -9,7 +9,7 @@ TESTDATADIR = os.path.join(PROJECTDIR, 'tests', 'data', 'mets', 'techmd')
 
 
 def test_to_dict():
-    """test for get_addml_dict()."""
+    """test for addml.to_dict()."""
     addml_path = os.path.join(TESTDATADIR, 'addml.xml')
     addml_tree = lxml.etree.parse(addml_path)
     expected = {
