@@ -15,7 +15,10 @@ import lxml.etree
 
 from ipt.premis import premis
 from ipt.validator.libxml import Libxml
+from tests.testcommon.settings import PROJECTDIR
 
+
+TESTDATADIR = os.path.join(PROJECTDIR, 'tests', 'data', 'premis')
 PREMIS_NS = "info:lc/xmlns/premis-v2"
 PREMIS = "{%s}" % PREMIS_NS
 NAMESPACES = {'p': PREMIS_NS}
@@ -28,6 +31,9 @@ CATALOGPATH = os.path.join(
 class TestPremisClass:
 
     testcases = {
+        "test_to_dict": [{
+            "testcase": "premis etree to dict"
+        }],
         "test_premis_insert":
         [{
             "testcase": 'Test premis class insert method',
@@ -185,3 +191,16 @@ class TestPremisClass:
                 assert result is expected_result[query]
 
         print event.serialize()
+
+
+    def test_to_dict(self, testcase):
+        """test for premis.to_dict()."""
+        premis_path = os.path.join(TESTDATADIR, 'premis.xml')
+        premis_tree = lxml.etree.parse(premis_path)
+        expected = {
+            "algorithm": "MD5",
+            "digest": "aa4bddaacf5ed1ca92b30826af257a1b",
+            "format_name": "text/csv;charset=UTF-8"
+            }
+
+        assert premis.to_dict(premis_tree) == expected

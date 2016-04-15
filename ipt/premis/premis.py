@@ -127,3 +127,24 @@ class Premis:
 
         return tostring(el_root, pretty_print=True, xml_declaration=True,
                         encoding='UTF-8')
+
+
+def to_dict(premis_xml):
+    """Get premis information about digital object and turn it into a
+    dictionary.
+    :premis_xml: lxml.etree object containing premis oject of the digital
+    object.
+    :returns: dictionary containing basic information of digital object.
+    """
+    premis = {}
+    premis["algorithm"] = premis_xml.xpath(
+        ".//premis:messageDigestAlgorithm",
+        namespaces=NAMESPACES)[0].text
+    premis["digest"] = premis_xml.xpath(
+        ".//premis:messageDigest",
+        namespaces=NAMESPACES)[0].text
+    premis["format_name"] = premis_xml.xpath(
+        ".//premis:formatName",
+        namespaces=NAMESPACES)[0].text
+
+    return premis
