@@ -12,8 +12,13 @@ import testcommon.settings
 # Module to test
 import ipt.mets.parser
 
+<<<<<<< HEAD
 METSDIR = os.path.abspath(
     os.path.join(testcommon.settings.TESTDATADIR, "mets"))
+=======
+METSDIR = os.path.abspath(os.path.join(testcommon.settings.TESTDATADIR,
+                                       "mets_parser_test"))
+>>>>>>> origin/develop
 
 def test_get_file_location():
     """Test the get_file_location method by getting both a URL with
