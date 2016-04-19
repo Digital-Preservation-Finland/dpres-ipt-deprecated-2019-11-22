@@ -192,7 +192,7 @@ class LXML(object):
         if not file_:
             return None
         filename = self.get_file_location(file_[0])
-        filename = filename.replace('file://', '')
+        filename = filename.replace('file://', '').replace('./', '')
         return filename
 
     def get_file_format_with_admid(self, admid):

@@ -95,12 +95,23 @@ def test_get_fileinfo_with_admid():
         'charset': 'UTF-8',
         'object_id': 'object-001',
         'filename': '/home/spock/scratch/information-package-tools/tests'
-                    '/data/mets/./file.csv',
+                    '/data/mets/file.csv',
         'headers': [
             'Person name', 'Person email'],
         'delimiter': ';',
         'separator': 'CR+LF',
         'digest': 'aa4bddaacf5ed1ca92b30826af257a1b'}
+
+
+def test_get_filename_with_admid():
+    """Test for get_filename_with_admid."""
+    mets_file = os.path.join(METSDIR, "mets_addml.xml")
+    mets_parser = LXML(mets_file)
+    mets_parser.xmlroot()
+    admid = "techmd-001 techmd-002 event-001 agent-001"
+    filename = mets_parser.get_filename_with_admid(admid)
+    assert filename == 'file.csv'
+
 
 def test_get_file_object_id_with_admid():
     mets_file = os.path.join(METSDIR, "mets_addml.xml")
