@@ -132,7 +132,12 @@ class LXML(object):
             result.update(dictionary)
         return result
 
-    def get_addml():
+    def get_addml(self):
+        """find addml field from mets."""
+        results = self._xmlroot.xpath(".//addml:addml", namespaces=NAMESPACES)
+        if not results:
+            return None
+        return results[0]
 
     def parse_mimetype(self, mimetype):
         """Parse mimetype information from Content-type string.
