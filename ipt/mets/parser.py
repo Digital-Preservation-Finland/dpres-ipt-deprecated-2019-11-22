@@ -3,6 +3,10 @@ import lxml.etree
 import urllib
 from email.message import Message
 
+from ipt.premis import premis
+from ipt.addml import addml
+
+
 NAMESPACES = {'xlink': 'http://www.w3.org/1999/xlink',
               'm': 'http://www.loc.gov/METS/',
               'p': 'info:lc/xmlns/premis-v2'}
@@ -99,25 +103,44 @@ class LXML(object):
             fileinfo["format_registry_key"]
             fileinfo["object_id"]
         """
-
-        fixity = self.get_file_fixity_with_admid(admid)
-        format = self.get_file_format_with_admid(admid)
         filename = os.path.join(
             self.sip_dir,
             self.get_filename_with_admid(admid))
-        filename = filename.replace('file://', '')
-        object_id = self.get_file_object_id_with_admid(admid)
 
-        return {
+        filename_dict = {"filename": filename}
+
+        addml_etree = self.get_addml()
+        premis_object_etree = self.get_premis_object()
+        premis_object_data_dict = premis.to_dict(premis_object_etree)
+        addml_data_dict = addml.to_dict(addml_etree)
+        result_dict = self.merge_dicts(
+            filename_dict,
+            premis_object_data_dict,
+            addml_data_dict)
+        print result_dict
+        return result_dict
+        """result = {
             'filename': filename,
             'object_id': object_id,
             'fixity': {
                 'algorithm': fixity["algorithm"],
                 'digest': fixity["digest"]
             },
-            'format': format
-        }
+            'format': file_format
+        }"""
 
+    def merge_dicts(self, *dicts):
+        """
+        Merge N dicts.
+        :dicts: a list of dicts.
+        :returns: one merged dict
+        """
+        result = {}
+        for dictionary in dicts:
+            result.update(dictionary)
+        return result
+
+    def get_addml():
 
     def parse_mimetype(self, mimetype):
         """Parse mimetype information from Content-type string.
@@ -174,8 +197,9 @@ class LXML(object):
 
         if not file_:
             return None
-
-        return self.get_file_location(file_[0])
+        filename = self.get_file_location(file_[0])
+        filename = filename.replace('file://', '')
+        return filename
 
     def get_file_format_with_admid(self, admid):
         """
@@ -211,6 +235,35 @@ class LXML(object):
             'version': version,
             'registry_key': registry_key
         }
+
+    def get_tech_md_list_for_file(self, file_path, mets_path):
+        """Get a list of techmd sections from mets.xml for a certain file described
+        in the fileSec.
+        :file_path: a full path of digital object.
+        :mets_path: a full path of mets.xml
+        :returns: a dict of all relevant techmd data for validation purposes."""
+        mets_tree = lxml.etree.parse(mets_path)
+        filename = os.path.relpath(file_path, os.path.dirname(mets_path))
+        if filename.startswith('../'):
+            filename = filename.replace('../', '')
+
+        adm_ids = self._get_adm_id_for_file(mets_tree, filename)
+        adm_id_string = self. _get_adm_id_attribute_string(adm_ids)
+        query = ".//mets:techMD%s" % adm_id_string
+        techmds = mets_tree.xpath(query, namespaces=NAMESPACES)
+
+        return techmds
+
+    def _get_adm_id_attribute_string(self, adm_ids):
+        """Make an attribute string for xpath query.
+        :adm_ids: a list of mets admids.
+        :returns: a string with format: [ID=abc|ID=123|...]"""
+        adm_id_string = "["
+        for adm_id in adm_ids:
+            adm_id_string = "%s@ID='%s' or " % (adm_id_string, adm_id)
+        adm_id_string = adm_id_string[:-4]
+        adm_id_string = "%s]" % adm_id_string
+        return adm_id_string
 
     def get_file_fixity_with_admid(self, admid):
         """ Return dict that contains fixity digest and algorithm
