@@ -119,17 +119,7 @@ class LXML(object):
             filename_dict,
             premis_object_data_dict,
             addml_data_dict)
-        print result_dict
         return result_dict
-        """result = {
-            'filename': filename,
-            'object_id': object_id,
-            'fixity': {
-                'algorithm': fixity["algorithm"],
-                'digest': fixity["digest"]
-            },
-            'format': file_format
-        }"""
 
     def merge_dicts(self, *dicts):
         """
@@ -194,9 +184,6 @@ class LXML(object):
 
         file_ = self.xmlroot().xpath(query, namespaces=NAMESPACES)
 
-        # print "query", query
-        # print "admid", admid, "file", file
-
         if not file_:
             return None
         filename = self.get_file_location(file_[0])
@@ -238,34 +225,6 @@ class LXML(object):
             'registry_key': registry_key
         }
 
-    def get_tech_md_list_for_file(self, file_path, mets_path):
-        """Get a list of techmd sections from mets.xml for a certain file described
-        in the fileSec.
-        :file_path: a full path of digital object.
-        :mets_path: a full path of mets.xml
-        :returns: a dict of all relevant techmd data for validation purposes."""
-        mets_tree = lxml.etree.parse(mets_path)
-        filename = os.path.relpath(file_path, os.path.dirname(mets_path))
-        if filename.startswith('../'):
-            filename = filename.replace('../', '')
-
-        adm_ids = self._get_adm_id_for_file(mets_tree, filename)
-        adm_id_string = self. _get_adm_id_attribute_string(adm_ids)
-        query = ".//mets:techMD%s" % adm_id_string
-        techmds = mets_tree.xpath(query, namespaces=NAMESPACES)
-
-        return techmds
-
-    def _get_adm_id_attribute_string(self, adm_ids):
-        """Make an attribute string for xpath query.
-        :adm_ids: a list of mets admids.
-        :returns: a string with format: [ID=abc|ID=123|...]"""
-        adm_id_string = "["
-        for adm_id in adm_ids:
-            adm_id_string = "%s@ID='%s' or " % (adm_id_string, adm_id)
-        adm_id_string = adm_id_string[:-4]
-        adm_id_string = "%s]" % adm_id_string
-        return adm_id_string
 
     def get_file_fixity_with_admid(self, admid):
         """ Return dict that contains fixity digest and algorithm
@@ -292,9 +251,6 @@ class LXML(object):
 
         query = '//mets:techMD[%s]//premis:fixity' % attr_expr
         fixity = self.xmlroot().xpath(query, namespaces=NAMESPACES)
-
-        # print "query", "admid", query, admid
-        # print "fixity", fixity
 
         if not fixity:
             return None
@@ -329,20 +285,4 @@ class LXML(object):
         if not object_id:
             return None
 
-        object_id = object_id[0]
-
-        # algorithm = object_id.xpath('p:messageDigestAlgorithm',
-        #                         namespaces=NAMESPACES)[0].text
-        # digest = object_id.xpath('p:messageDigest',
-        #                      namespaces=NAMESPACES)[0].text
-
-        id_type = object_id.xpath('p:objectIdentifierType',
-                                  namespaces=NAMESPACES)[0].text
-
-        id_value = object_id.xpath('p:objectIdentifierValue',
-                                   namespaces=NAMESPACES)[0].text
-
-        if not (id_type or id_value):
-            return None
-
-        return {"value": id_value, "type": id_type}
+        return object_id
