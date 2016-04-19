@@ -15,6 +15,12 @@ from ipt.mets.parser import LXML
 
 METSDIR = os.path.abspath(
     os.path.join(testcommon.settings.TESTDATADIR, "mets"))
+
+NAMESPACES = {'xlink': 'http://www.w3.org/1999/xlink',
+              'mets': 'http://www.loc.gov/METS/',
+              'premis': 'info:lc/xmlns/premis-v2',
+              'addml': 'http://www.arkivverket.no/standarder/addml',
+              'xsi': 'http://www.w3.org/2001/XMLSchema-instance'}
 =======
 METSDIR = os.path.abspath(os.path.join(testcommon.settings.TESTDATADIR,
                                        "mets_parser_test"))
