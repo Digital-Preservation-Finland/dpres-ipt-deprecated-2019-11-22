@@ -8,8 +8,10 @@ from ipt.addml import addml
 
 
 NAMESPACES = {'xlink': 'http://www.w3.org/1999/xlink',
-              'm': 'http://www.loc.gov/METS/',
-              'p': 'info:lc/xmlns/premis-v2'}
+              'mets': 'http://www.loc.gov/METS/',
+              'premis': 'info:lc/xmlns/premis-v2',
+              'addml': 'http://www.arkivverket.no/standarder/addml',
+              'xsi': 'http://www.w3.org/2001/XMLSchema-instance'}
 
 
 class LXML(object):
@@ -60,7 +62,7 @@ class LXML(object):
         """
         Mets files.
         """
-        return self.xmlroot().xpath('//m:file', namespaces=NAMESPACES)
+        return self.xmlroot().xpath('//mets:file', namespaces=NAMESPACES)
 
     def get_fileinfo_iterator(self, filter=None):
         """
@@ -188,7 +190,7 @@ class LXML(object):
                                "' ')",
                                "normalize-space(' %s '))"]) % admid
 
-        query = '//m:file[%s]' % attr_expr
+        query = '//mets:file[%s]' % attr_expr
 
         file_ = self.xmlroot().xpath(query, namespaces=NAMESPACES)
 
@@ -208,7 +210,7 @@ class LXML(object):
         admid = admid.replace('  ', ' ').split(' ')
         attr_expr = ' or '.join(map(lambda x: "@ID='%s'" % x, admid))
 
-        query = '//m:techMD[%s]//p:format' % attr_expr
+        query = '//mets:techMD[%s]//premis:format' % attr_expr
         format = self.xmlroot().xpath(query, namespaces=NAMESPACES)
 
         if not format:
@@ -217,15 +219,15 @@ class LXML(object):
         format = format[0]
 
 
-        name = format.xpath('.//p:formatName', namespaces=NAMESPACES)
+        name = format.xpath('.//premis:formatName', namespaces=NAMESPACES)
         name = ' '.join(map(lambda x: x.text, name))
         name = self.parse_mimetype(name)
 
-        version = format.xpath('.//p:formatVersion', namespaces=NAMESPACES)
+        version = format.xpath('.//premis:formatVersion', namespaces=NAMESPACES)
         version = ' '.join(map(lambda x: x.text, version))
 
         registry_key = format.xpath(
-            './/p:formatRegistryKey', namespaces=NAMESPACES)
+            './/premis:formatRegistryKey', namespaces=NAMESPACES)
         registry_key = ' '.join(map(lambda x: x.text, registry_key))
 
         return {
@@ -288,7 +290,7 @@ class LXML(object):
         # Find the first (the only) fixity element in the file elements,
         # no matter how deep in the element hierarchy
 
-        query = '//m:techMD[%s]//p:fixity' % attr_expr
+        query = '//mets:techMD[%s]//premis:fixity' % attr_expr
         fixity = self.xmlroot().xpath(query, namespaces=NAMESPACES)
 
         # print "query", "admid", query, admid
@@ -299,9 +301,9 @@ class LXML(object):
 
         fixity = fixity[0]
 
-        algorithm = fixity.xpath('p:messageDigestAlgorithm',
+        algorithm = fixity.xpath('premis:messageDigestAlgorithm',
                                  namespaces=NAMESPACES)[0].text
-        digest = fixity.xpath('p:messageDigest',
+        digest = fixity.xpath('premis:messageDigest',
                               namespaces=NAMESPACES)[0].text
 
         if not (algorithm and digest):
@@ -322,9 +324,8 @@ class LXML(object):
         # Find the first (the only) objectIdentifier element in the file
         # elements, no matter how deep in the element hierarchy
 
-        query = '//m:techMD[%s]//p:objectIdentifier' % attr_expr
-        object_id = self.xmlroot().xpath(query, namespaces=NAMESPACES)
-
+        query = '//mets:techMD[%s]//premis:object' % attr_expr
+        object_id = self.xmlroot().xpath(query, namespaces=NAMESPACES)[0]
         if not object_id:
             return None
 
