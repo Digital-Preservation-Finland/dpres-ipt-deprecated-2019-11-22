@@ -51,7 +51,7 @@ class LXML(object):
         <mets:FLocat xlink:href="file://kuvat/PICT0081.JPG" LOCTYPE="URL"/>
         """
 
-        file_url = mets_file.xpath('m:FLocat/@xlink:href',
+        file_url = mets_file.xpath('mets:FLocat/@xlink:href',
                                    namespaces=NAMESPACES)
         if len(file_url) > 0:
             return urllib.unquote(file_url[0])
