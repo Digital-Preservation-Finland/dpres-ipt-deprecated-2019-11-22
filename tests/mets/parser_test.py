@@ -80,3 +80,12 @@ def test_get_fileinfo_with_admid():
     """
     mets_file = os.path.join(METSDIR, "mets.xml")
     get_fileinfo_with_admid()
+def test_get_file_object_id_with_admid():
+    mets_file = os.path.join(METSDIR, "mets_addml.xml")
+    mets_parser = LXML(mets_file)
+    mets_parser.xmlroot()
+    admid = "techmd-001 techmd-002 event-001 agent-001"
+    file_object = mets_parser.get_file_object_id_with_admid(admid)
+    query = '//premis:objectIdentifier/premis:objectIdentifierValue'
+    object_id = file_object.xpath(query, namespaces=NAMESPACES)[0].text
+    assert object_id == 'object-001'
