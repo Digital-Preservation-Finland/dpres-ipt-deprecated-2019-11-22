@@ -200,7 +200,8 @@ class TestPremisClass:
         expected = {
             "algorithm": "MD5",
             "digest": "aa4bddaacf5ed1ca92b30826af257a1b",
-            "format_name": "text/csv;charset=UTF-8"
+            "format_name": "text/csv;charset=UTF-8",
+            "object_id": "object-001"
             }
 
         assert premis.to_dict(premis_tree) == expected

@@ -146,5 +146,8 @@ def to_dict(premis_xml):
     premis["format_name"] = premis_xml.xpath(
         ".//premis:formatName",
         namespaces=NAMESPACES)[0].text
+    premis["object_id"] = premis_xml.xpath(
+        ".//premis:objectIdentifierValue",
+        namespaces=NAMESPACES)[0].text
 
     return premis
