@@ -64,7 +64,7 @@ class LXML(object):
         """
         return self.xmlroot().xpath('//mets:file', namespaces=NAMESPACES)
 
-    def get_fileinfo_iterator(self, filter=None):
+    def get_fileinfo_iterator(self, filter_=None):
         """
         Get fileinfo iterator.
         
@@ -75,7 +75,7 @@ class LXML(object):
             # Files marked with USE='no-file-format-validation' omitted with
             # filter 'file-format-validation'
             file_use = mets_file.attrib.get('USE', '').strip()
-            if filter == 'file-format-validation' and file_use == 'no-file-format-validation':
+            if filter_ == 'file-format-validation' and file_use == 'no-file-format-validation':
                 continue
             # Note: ADMID may contain several IDs separated with spaces
             admid = mets_file.attrib['ADMID']
