@@ -55,24 +55,23 @@ def test_parse_mimetype():
     assert not result['charset']
 
 
-def test_get_fileinfo_array():
+def test_get_fileinfo_iterator():
     """Test the get_fileinfo_array method by METS including file with arbitrary
     native file format"""
     # Omitting the arbitrary native file in METS
     mets_file = os.path.join(METSDIR, 'mets_native_marked.xml')
     mets_parser = LXML(mets_file)
-    fileinfos = lxml.get_fileinfo_array('file-format-validation')
-    assert len(fileinfos) == 1
-    assert fileinfos[0]['format']['mimetype'] == 'application/pdf'
+    fileinfo = [info for info in mets_parser.get_fileinfo_iterator('file-format-validation')]
+    assert len(fileinfo) == 1
+    assert fileinfo[0]['mimetype'] == 'application/pdf'
 
     # Returned all files in METS, where arbitrary file not marked as native
     mets_file = os.path.join(METSDIR, 'mets_native_unmarked.xml')
     lxml = LXML(filename=mets_file)
-    lxml = ipt.mets.parser.LXML(filename=mets_file)
-    fileinfos = lxml.get_fileinfo_array('file-format-validation')
-    assert len(fileinfos) == 2
-    assert fileinfos[0]['format']['mimetype'] == 'application/cdr'
-    assert fileinfos[1]['format']['mimetype'] == 'application/pdf'
+    fileinfo = lxml.get_fileinfo_array('file-format-validation')
+    assert len(fileinfo) == 2
+    assert fileinfo[0]['mimetype'] == 'application/cdr'
+    assert fileinfo[1]['mimetype'] == 'application/pdf'
 
 
 def test_get_fileinfo_with_admid():
