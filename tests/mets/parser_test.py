@@ -3,6 +3,7 @@
 """Tests for the ipt.mets.parser module"""
 import os
 import sys
+import lxml.etree
 
 # Needed for testcommon.settings
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
