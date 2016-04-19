@@ -12,8 +12,8 @@ import testcommon.settings
 # Module to test
 import ipt.mets.parser
 
-METSDIR = os.path.abspath(os.path.join(testcommon.settings.TESTDATADIR,
-                                       "mets_parser_test"))
+METSDIR = os.path.abspath(
+    os.path.join(testcommon.settings.TESTDATADIR, "mets"))
 
 def test_get_file_location():
     """Test the get_file_location method by getting both a URL with
@@ -68,3 +68,10 @@ def test_get_fileinfo_array():
     assert len(fileinfos) == 2
     assert fileinfos[0]['format']['mimetype'] == 'application/cdr'
     assert fileinfos[1]['format']['mimetype'] == 'application/pdf'
+
+
+def test_get_fileinfo_with_admid():
+    """ tests for get_fileinfo_with_admid.
+    """
+    mets_file = os.path.join(METSDIR, "mets.xml")
+    get_fileinfo_with_admid()
