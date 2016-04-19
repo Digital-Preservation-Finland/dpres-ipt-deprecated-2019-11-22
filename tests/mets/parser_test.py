@@ -10,9 +10,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import testcommon.settings
 
 # Module to test
-import ipt.mets.parser
+from ipt.mets.parser import LXML
 
-<<<<<<< HEAD
 METSDIR = os.path.abspath(
     os.path.join(testcommon.settings.TESTDATADIR, "mets"))
 =======
@@ -24,7 +23,7 @@ def test_get_file_location():
     """Test the get_file_location method by getting both a URL with
     international characters and a URL without them"""
     mets_file = os.path.join(METSDIR, "mets.xml")
-    lxml = ipt.mets.parser.LXML(filename=mets_file)
+    lxml = LXML(filename=mets_file)
     mets_files = lxml.mets_files()
     first_file = mets_files[0]
     second_file = mets_files[1]
@@ -42,7 +41,7 @@ def test_parse_mimetype():
     format_name = \
         "text/xml; charset=UTF-8; alt-format=application/mets+xml"
 
-    mets_parser = ipt.mets.parser.LXML('filename')
+    mets_parser = LXML('filename')
     result = mets_parser.parse_mimetype(format_name)
 
     assert result['mimetype'] == 'text/xml'
@@ -61,13 +60,14 @@ def test_get_fileinfo_array():
     native file format"""
     # Omitting the arbitrary native file in METS
     mets_file = os.path.join(METSDIR, 'mets_native_marked.xml')
-    lxml = ipt.mets.parser.LXML(filename=mets_file)
+    mets_parser = LXML(mets_file)
     fileinfos = lxml.get_fileinfo_array('file-format-validation')
     assert len(fileinfos) == 1
     assert fileinfos[0]['format']['mimetype'] == 'application/pdf'
 
     # Returned all files in METS, where arbitrary file not marked as native
     mets_file = os.path.join(METSDIR, 'mets_native_unmarked.xml')
+    lxml = LXML(filename=mets_file)
     lxml = ipt.mets.parser.LXML(filename=mets_file)
     fileinfos = lxml.get_fileinfo_array('file-format-validation')
     assert len(fileinfos) == 2
