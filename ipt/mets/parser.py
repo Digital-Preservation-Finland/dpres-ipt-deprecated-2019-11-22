@@ -112,7 +112,7 @@ class LXML(object):
         filename_dict = {"filename": filename}
 
         addml_etree = self.get_addml()
-        premis_object_etree = self.get_premis_object()
+        premis_object_etree = self.get_file_object_id_with_admid(admid)
         premis_object_data_dict = premis.to_dict(premis_object_etree)
         addml_data_dict = addml.to_dict(addml_etree)
         result_dict = self.merge_dicts(
