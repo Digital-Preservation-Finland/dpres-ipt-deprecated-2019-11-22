@@ -137,6 +137,8 @@ def to_dict(premis_xml):
     :returns: dictionary containing basic information of digital object.
     """
     premis = {}
+    if not premis_xml:
+        return premis
     premis["algorithm"] = premis_xml.xpath(
         ".//premis:messageDigestAlgorithm",
         namespaces=NAMESPACES)[0].text

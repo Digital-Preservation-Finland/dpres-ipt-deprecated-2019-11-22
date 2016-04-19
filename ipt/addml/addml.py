@@ -10,6 +10,8 @@ def to_dict(addml_xml):
     :returns: a dict of addml data."""
 
     addml = {}
+    if not addml_xml:
+        return addml
     addml["charset"] = addml_xml.xpath(
         ".//addml:charset", namespaces=NAMESPACES)[0].text
     addml["separator"] = addml_xml.xpath(
