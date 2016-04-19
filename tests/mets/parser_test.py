@@ -21,10 +21,7 @@ NAMESPACES = {'xlink': 'http://www.w3.org/1999/xlink',
               'premis': 'info:lc/xmlns/premis-v2',
               'addml': 'http://www.arkivverket.no/standarder/addml',
               'xsi': 'http://www.w3.org/2001/XMLSchema-instance'}
-=======
-METSDIR = os.path.abspath(os.path.join(testcommon.settings.TESTDATADIR,
-                                       "mets_parser_test"))
->>>>>>> origin/develop
+
 
 def test_get_file_location():
     """Test the get_file_location method by getting both a URL with
