@@ -77,8 +77,24 @@ def test_get_fileinfo_iterator():
 def test_get_fileinfo_with_admid():
     """ tests for get_fileinfo_with_admid.
     """
-    mets_file = os.path.join(METSDIR, "mets.xml")
-    get_fileinfo_with_admid()
+    mets_file = os.path.join(METSDIR, "mets_addml.xml")
+    mets_parser = LXML(mets_file)
+    mets_parser.xmlroot()
+    results = mets_parser.get_fileinfo_with_admid('techmd-001')
+
+    assert results == {
+        'mimetype': 'text/csv;charset=UTF-8',
+        'algorithm': 'MD5',
+        'charset': 'UTF-8',
+        'object_id': 'object-001',
+        'filename': '/home/spock/scratch/information-package-tools/tests'
+                    '/data/mets/./file.csv',
+        'headers': [
+            'Person name', 'Person email'],
+        'delimiter': ';',
+        'separator': 'CR+LF',
+        'digest': 'aa4bddaacf5ed1ca92b30826af257a1b'}
+
 def test_get_file_object_id_with_admid():
     mets_file = os.path.join(METSDIR, "mets_addml.xml")
     mets_parser = LXML(mets_file)
