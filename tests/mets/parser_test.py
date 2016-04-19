@@ -65,14 +65,18 @@ def test_get_fileinfo_iterator():
     # Omitting the arbitrary native file in METS
     mets_file = os.path.join(METSDIR, 'mets_native_marked.xml')
     mets_parser = LXML(mets_file)
-    fileinfo = [info for info in mets_parser.get_fileinfo_iterator('file-format-validation')]
+    mets_parser.xmlroot()
+    fileinfo = [info for info in mets_parser.get_fileinfo_iterator(
+        'file-format-validation')]
     assert len(fileinfo) == 1
     assert fileinfo[0]['mimetype'] == 'application/pdf'
 
     # Returned all files in METS, where arbitrary file not marked as native
     mets_file = os.path.join(METSDIR, 'mets_native_unmarked.xml')
-    lxml = LXML(filename=mets_file)
-    fileinfo = lxml.get_fileinfo_array('file-format-validation')
+    mets_parser = LXML(filename=mets_file)
+    mets_parser.xmlroot()
+    fileinfo = [info for info in mets_parser.get_fileinfo_iterator(
+        'file-format-validation')]
     assert len(fileinfo) == 2
     assert fileinfo[0]['mimetype'] == 'application/cdr'
     assert fileinfo[1]['mimetype'] == 'application/pdf'
