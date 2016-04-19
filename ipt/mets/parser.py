@@ -67,7 +67,7 @@ class LXML(object):
     def get_fileinfo_iterator(self, filter_=None):
         """
         Get fileinfo iterator.
-        
+
         :filter: Filter for the iterator, controlled vocabulary:
             'file-format-validation': Skip file if USE='no-file-format-validation' in METS
         """
@@ -83,15 +83,6 @@ class LXML(object):
 
             yield fileinfo
 
-    def get_fileinfo_array(self, filter=None):
-        """
-        Get fileinfo array.
-        """
-        array = []
-        for fileinfo in self.get_fileinfo_iterator(filter):
-            array.append(fileinfo)
-
-        return array
 
     def get_fileinfo_with_admid(self, admid):
         """
@@ -195,22 +186,6 @@ class LXML(object):
         filename = filename.replace('file://', '').replace('./', '')
         return filename
 
-    def get_file_format_with_admid(self, admid):
-        """
-        Get file format with admid.
-        """
-        admid = admid.replace('  ', ' ').split(' ')
-        attr_expr = ' or '.join(map(lambda x: "@ID='%s'" % x, admid))
-
-        query = '//mets:techMD[%s]//premis:format' % attr_expr
-        format = self.xmlroot().xpath(query, namespaces=NAMESPACES)
-
-        if not format:
-            return None
-
-        format = format[0]
-
-
         name = format.xpath('.//premis:formatName', namespaces=NAMESPACES)
         name = ' '.join(map(lambda x: x.text, name))
         name = self.parse_mimetype(name)
@@ -229,51 +204,6 @@ class LXML(object):
             'version': version,
             'registry_key': registry_key
         }
-
-
-    def get_file_fixity_with_admid(self, admid):
-        """ Return dict that contains fixity digest and algorithm
-
-            { "algorithm":"md5", "digest":"11c128030f203b76f2e30eeb7454c42b" }
-
-        If ADMID is 'tech-1 rights-1 dp-1, this will construct a XPath query
-        like:
-
-            //m:techMD[@ID='tech-1' or @ID='rights-1' or @ID='dp-1']
-
-        This query returns all techMD elements in METS namespace that have an
-        ID attribute with value 'tech-1', 'rights-1' or 'dp-1'.
-
-        For the resulted techMD element we read first premis:fixity element
-        that contains premis:messageDigestAlgorithm and premis:messageDigest
-        elements."""
-
-        admid = admid.replace('  ', ' ').split(' ')
-        attr_expr = ' or '.join(map(lambda x: "@ID='%s'" % x, admid))
-
-        # Find the first (the only) fixity element in the file elements,
-        # no matter how deep in the element hierarchy
-
-        query = '//mets:techMD[%s]//premis:fixity' % attr_expr
-        fixity = self.xmlroot().xpath(query, namespaces=NAMESPACES)
-
-        if not fixity:
-            return None
-
-        fixity = fixity[0]
-
-        algorithm = fixity.xpath('premis:messageDigestAlgorithm',
-                                 namespaces=NAMESPACES)[0].text
-        digest = fixity.xpath('premis:messageDigest',
-                              namespaces=NAMESPACES)[0].text
-
-        if not (algorithm and digest):
-            return None
-
-        algorithm = algorithm.lower().replace('-', '').strip()
-        digest = digest.lower().strip()
-
-        return {"algorithm": algorithm, "digest": digest}
 
     def get_file_object_id_with_admid(self, admid):
         """
