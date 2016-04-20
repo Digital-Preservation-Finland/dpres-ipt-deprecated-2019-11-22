@@ -41,24 +41,6 @@ def test_get_file_location():
         "It seems there was a problem with URL unquoting a file name"
 
 
-def test_parse_mimetype():
-    format_name = \
-        "text/xml; charset=UTF-8; alt-format=application/mets+xml"
-
-    mets_parser = LXML('filename')
-    result = mets_parser.parse_mimetype(format_name)
-
-    assert result['mimetype'] == 'text/xml'
-    assert result['charset'] == 'UTF-8'
-    assert result['alt-format'] == 'application/mets+xml'
-
-    format_name = "application/x-internet-archive"
-    result = mets_parser.parse_mimetype(format_name)
-
-    assert result['mimetype'] == 'application/x-internet-archive'
-    assert not result['charset']
-
-
 def test_get_fileinfo_iterator():
     """Test the get_fileinfo_array method by METS including file with arbitrary
     native file format"""
@@ -91,7 +73,7 @@ def test_get_fileinfo_with_admid():
     results = mets_parser.get_fileinfo_with_admid('techmd-001')
 
     assert results == {
-        'mimetype': 'text/csv;charset=UTF-8',
+        'mimetype': 'text/csv',
         'algorithm': 'MD5',
         'charset': 'UTF-8',
         'object_id': 'object-001',

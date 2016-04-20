@@ -146,13 +146,13 @@ def to_dict(premis_xml):
     premis["digest"] = premis_xml.xpath(
         ".//premis:messageDigest",
         namespaces=NAMESPACES)[0].text
-    premis["mimetype"] = premis_xml.xpath(
+    format_name = premis_xml.xpath(
         ".//premis:formatName",
         namespaces=NAMESPACES)[0].text
     premis["object_id"] = premis_xml.xpath(
         ".//premis:objectIdentifierValue",
         namespaces=NAMESPACES)[0].text
-
+    premis.update(parse_mimetype(format_name))
     return premis
 
 
@@ -167,9 +167,12 @@ def parse_mimetype(mimetype):
     mimetype = msg.get_content_type()
     charset = msg.get_param('charset')
     alt_format = msg.get_param('alt-format')
+    result = {}
+    if mimetype:
+        result["mimetype"] = mimetype
+    if charset:
+        result["charset"] = charset
+    if alt_format:
+        result["alt-format"] = alt_format
 
-    return {
-        'mimetype': mimetype,
-        'charset': charset,
-        'alt-format': alt_format
-    }
+    return result

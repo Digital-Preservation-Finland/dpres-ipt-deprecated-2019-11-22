@@ -34,6 +34,9 @@ class TestPremisClass:
         "test_to_dict": [{
             "testcase": "premis etree to dict"
         }],
+        "test_parse_mimetype": [{
+            "testcase": "parse formatname"
+        }],
         "test_premis_insert":
         [{
             "testcase": 'Test premis class insert method',
@@ -146,10 +149,6 @@ class TestPremisClass:
 
         premis_el = event.root
 
-        #assert event.ttype != None
-        #assert event.linking_object_identifier != None
-        #assert event.identifier != None
-
         # Is root element?
         assert premis_el is premis_el[0].getparent()
 
@@ -192,7 +191,6 @@ class TestPremisClass:
 
         print event.serialize()
 
-
     def test_to_dict(self, testcase):
         """test for premis.to_dict()."""
         premis_path = os.path.join(TESTDATADIR, 'premis.xml')
@@ -200,8 +198,26 @@ class TestPremisClass:
         expected = {
             "algorithm": "MD5",
             "digest": "aa4bddaacf5ed1ca92b30826af257a1b",
-            "format_name": "text/csv;charset=UTF-8",
+            "mimetype": "text/csv",
+            "charset": "UTF-8",
             "object_id": "object-001"
             }
 
         assert premis.to_dict(premis_tree) == expected
+
+    def test_parse_mimetype(self, testcase):
+        format_name = \
+            "text/xml; charset=UTF-8; alt-format=application/mets+xml"
+
+        result = premis.parse_mimetype(format_name)
+
+        assert result['mimetype'] == 'text/xml'
+        assert result['charset'] == 'UTF-8'
+        assert result['alt-format'] == 'application/mets+xml'
+
+        format_name = "application/x-internet-archive"
+        result = premis.parse_mimetype(format_name)
+
+        assert result['mimetype'] == 'application/x-internet-archive'
+        print result
+        assert 'charset' not in result
