@@ -167,25 +167,6 @@ class LXML(object):
         filename = filename.replace('file://', '').replace('./', '')
         return filename
 
-        name = format.xpath('.//premis:formatName', namespaces=NAMESPACES)
-        name = ' '.join(map(lambda x: x.text, name))
-        name = self.parse_mimetype(name)
-
-        version = format.xpath('.//premis:formatVersion', namespaces=NAMESPACES)
-        version = ' '.join(map(lambda x: x.text, version))
-
-        registry_key = format.xpath(
-            './/premis:formatRegistryKey', namespaces=NAMESPACES)
-        registry_key = ' '.join(map(lambda x: x.text, registry_key))
-
-        return {
-            'mimetype': name['mimetype'],
-            'charset': name['charset'],
-            'alt-format': name['alt-format'],
-            'version': version,
-            'registry_key': registry_key
-        }
-
     def get_file_object_id_with_admid(self, admid):
         """
         Get file object id with admid.
