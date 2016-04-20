@@ -156,20 +156,20 @@ def to_dict(premis_xml):
     return premis
 
 
-def parse_mimetype(self, mimetype):
-        """Parse mimetype information from Content-type string.
+def parse_mimetype(mimetype):
+    """Parse mimetype information from Content-type string.
 
-        ..seealso:: https://www.ietf.org/rfc/rfc2045.txt
-        """
-        msg = Message()
-        msg.add_header('Content-type', mimetype)
+    ..seealso:: https://www.ietf.org/rfc/rfc2045.txt
+    """
+    msg = Message()
+    msg.add_header('Content-type', mimetype)
 
-        mimetype = msg.get_content_type()
-        charset = msg.get_param('charset')
-        alt_format = msg.get_param('alt-format')
+    mimetype = msg.get_content_type()
+    charset = msg.get_param('charset')
+    alt_format = msg.get_param('alt-format')
 
-        return {
-            'mimetype': mimetype,
-            'charset': charset,
-            'alt-format': alt_format
-        }
+    return {
+        'mimetype': mimetype,
+        'charset': charset,
+        'alt-format': alt_format
+    }
