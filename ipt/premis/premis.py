@@ -1,5 +1,6 @@
 import lxml.etree
 from lxml.etree import Element, SubElement, tostring
+from email.message import Message
 
 from object import Object
 from event import Event
@@ -153,3 +154,22 @@ def to_dict(premis_xml):
         namespaces=NAMESPACES)[0].text
 
     return premis
+
+
+def parse_mimetype(self, mimetype):
+        """Parse mimetype information from Content-type string.
+
+        ..seealso:: https://www.ietf.org/rfc/rfc2045.txt
+        """
+        msg = Message()
+        msg.add_header('Content-type', mimetype)
+
+        mimetype = msg.get_content_type()
+        charset = msg.get_param('charset')
+        alt_format = msg.get_param('alt-format')
+
+        return {
+            'mimetype': mimetype,
+            'charset': charset,
+            'alt-format': alt_format
+        }

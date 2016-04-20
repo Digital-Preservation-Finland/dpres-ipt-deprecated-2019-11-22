@@ -1,7 +1,6 @@
 import os
 import lxml.etree
 import urllib
-from email.message import Message
 
 from ipt.premis import premis
 from ipt.addml import addml
@@ -83,7 +82,6 @@ class LXML(object):
 
             yield fileinfo
 
-
     def get_fileinfo_with_admid(self, admid):
         """
         Return dict that contains information for mets:file.
@@ -130,23 +128,6 @@ class LXML(object):
             return None
         return results[0]
 
-    def parse_mimetype(self, mimetype):
-        """Parse mimetype information from Content-type string.
-
-        ..seealso:: https://www.ietf.org/rfc/rfc2045.txt
-        """
-        msg = Message()
-        msg.add_header('Content-type', mimetype)
-
-        mimetype = msg.get_content_type()
-        charset = msg.get_param('charset')
-        alt_format = msg.get_param('alt-format')
-
-        return {
-            'mimetype': mimetype,
-            'charset': charset,
-            'alt-format': alt_format
-        }
 
     def get_filename_with_admid(self, admid):
         """@todo: Docstring for get_filename_with_admid
