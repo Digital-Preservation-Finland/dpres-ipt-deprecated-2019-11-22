@@ -182,6 +182,47 @@ class LXML(object):
         if object_id is None:
             return None
         return object_id[0]
+
+    def get_file_fixity_with_admid(self, admid):
+        """ Return dict that contains fixity digest and algorithm
+
+            { "algorithm":"md5", "digest":"11c128030f203b76f2e30eeb7454c42b" }
+
+        If ADMID is 'tech-1 rights-1 dp-1, this will construct a XPath query
+        like:
+
+            //m:techMD[@ID='tech-1' or @ID='rights-1' or @ID='dp-1']
+
+        This query returns all techMD elements in METS namespace that have an
+        ID attribute with value 'tech-1', 'rights-1' or 'dp-1'.
+
+        For the resulted techMD element we read first premis:fixity element
+        that contains premis:messageDigestAlgorithm and premis:messageDigest
+        elements."""
+
+        admid = admid.replace('  ', ' ').split(' ')
+        attr_expr = ' or '.join(map(lambda x: "@ID='%s'" % x, admid))
+
+        # Find the first (the only) fixity element in the file elements,
+        # no matter how deep in the element hierarchy
+
+        query = '//mets:techMD[%s]//premis:fixity' % attr_expr
+        fixity = self.xmlroot().xpath(query, namespaces=NAMESPACES)
+
+        if not fixity:
             return None
 
-        return object_id
+        fixity = fixity[0]
+
+        algorithm = fixity.xpath('premis:messageDigestAlgorithm',
+                                 namespaces=NAMESPACES)[0].text
+        digest = fixity.xpath('premis:messageDigest',
+                              namespaces=NAMESPACES)[0].text
+
+        if not (algorithm and digest):
+            return None
+
+        algorithm = algorithm.lower().replace('-', '').strip()
+        digest = digest.lower().strip()
+
+        return {"algorithm": algorithm, "digest": digest}
