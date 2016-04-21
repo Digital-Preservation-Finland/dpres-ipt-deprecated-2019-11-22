@@ -124,7 +124,7 @@ class LXML(object):
     def get_addml(self):
         """find addml field from mets."""
         results = self._xmlroot.xpath(".//addml:addml", namespaces=NAMESPACES)
-        if not results:
+        if len(results) == 0:
             return None
         return results[0]
 
@@ -178,8 +178,10 @@ class LXML(object):
         # elements, no matter how deep in the element hierarchy
 
         query = '//mets:techMD[%s]//premis:object' % attr_expr
-        object_id = self.xmlroot().xpath(query, namespaces=NAMESPACES)[0]
-        if not object_id:
+        object_id = self.xmlroot().xpath(query, namespaces=NAMESPACES)
+        if object_id is None:
+            return None
+        return object_id[0]
             return None
 
         return object_id

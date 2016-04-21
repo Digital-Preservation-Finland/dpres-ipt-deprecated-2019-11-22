@@ -9,14 +9,14 @@ def to_dict(addml_xml):
     :addml_xml: addml etree
     :returns: a dict of addml data."""
 
-    addml = {}
+    addml = {"addml": {}}
     if not addml_xml:
-        return addml
-    addml["charset"] = addml_xml.xpath(
+        return {}
+    addml["addml"]["charset"] = addml_xml.xpath(
         ".//addml:charset", namespaces=NAMESPACES)[0].text
-    addml["separator"] = addml_xml.xpath(
+    addml["addml"]["separator"] = addml_xml.xpath(
         ".//addml:recordSeparator", namespaces=NAMESPACES)[0].text
-    addml["delimiter"] = addml_xml.xpath(
+    addml["addml"]["delimiter"] = addml_xml.xpath(
         ".//addml:fieldSeparatingChar",
         namespaces=NAMESPACES)[0].text
     headers = addml_xml.xpath(
@@ -24,5 +24,5 @@ def to_dict(addml_xml):
     header_list = []
     for header in headers:
         header_list.append(header.text)
-    addml["headers"] = header_list
+    addml["addml"]["headers"] = header_list
     return addml

@@ -138,7 +138,7 @@ def to_dict(premis_xml):
     :returns: dictionary containing basic information of digital object.
     """
     premis = {}
-    if not premis_xml:
+    if premis_xml is None:
         return premis
     premis["algorithm"] = premis_xml.xpath(
         ".//premis:messageDigestAlgorithm",
@@ -153,6 +153,11 @@ def to_dict(premis_xml):
         ".//premis:objectIdentifierValue",
         namespaces=NAMESPACES)[0].text
     premis.update(parse_mimetype(format_name))
+    format_version = premis_xml.xpath(
+        ".//premis:formatVersion",
+        namespaces=NAMESPACES)
+    if format_version:
+        premis["format"]["version"] = format_version[0].text
     return premis
 
 
@@ -167,12 +172,12 @@ def parse_mimetype(mimetype):
     mimetype = msg.get_content_type()
     charset = msg.get_param('charset')
     alt_format = msg.get_param('alt-format')
-    result = {}
+    result = {"format": {}}
     if mimetype:
-        result["mimetype"] = mimetype
+        result["format"]["mimetype"] = mimetype
     if charset:
-        result["charset"] = charset
+        result["format"]["charset"] = charset
     if alt_format:
-        result["alt-format"] = alt_format
+        result["format"]["alt-format"] = alt_format
 
     return result

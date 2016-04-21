@@ -51,7 +51,7 @@ def test_get_fileinfo_iterator():
     fileinfo = [info for info in mets_parser.get_fileinfo_iterator(
         'file-format-validation')]
     assert len(fileinfo) == 1
-    assert fileinfo[0]['mimetype'] == 'application/pdf'
+    assert fileinfo[0]['format']['mimetype'] == 'application/pdf'
 
     # Returned all files in METS, where arbitrary file not marked as native
     mets_file = os.path.join(METSDIR, 'mets_native_unmarked.xml')
@@ -60,8 +60,8 @@ def test_get_fileinfo_iterator():
     fileinfo = [info for info in mets_parser.get_fileinfo_iterator(
         'file-format-validation')]
     assert len(fileinfo) == 2
-    assert fileinfo[0]['mimetype'] == 'application/cdr'
-    assert fileinfo[1]['mimetype'] == 'application/pdf'
+    assert fileinfo[0]['format']['mimetype'] == 'application/cdr'
+    assert fileinfo[1]['format']['mimetype'] == 'application/pdf'
 
 
 def test_get_fileinfo_with_admid():
@@ -73,16 +73,19 @@ def test_get_fileinfo_with_admid():
     results = mets_parser.get_fileinfo_with_admid('techmd-001')
 
     assert results == {
-        'mimetype': 'text/csv',
+        'format': {'mimetype': 'text/csv', 'charset': 'UTF-8'},
+        'addml': {
+            'headers': [
+                'Person name', 'Person email'],
+            'charset': 'UTF-8',
+            'delimiter': ';',
+            'separator': 'CR+LF'
+            },
         'algorithm': 'MD5',
-        'charset': 'UTF-8',
         'object_id': 'object-001',
         'filename': '/home/spock/scratch/information-package-tools/tests'
                     '/data/mets/file.csv',
-        'headers': [
-            'Person name', 'Person email'],
-        'delimiter': ';',
-        'separator': 'CR+LF',
+
         'digest': 'aa4bddaacf5ed1ca92b30826af257a1b'}
 
 
