@@ -13,10 +13,12 @@ def test_to_dict():
     addml_path = os.path.join(TESTDATADIR, 'addml.xml')
     addml_tree = lxml.etree.parse(addml_path)
     expected = {
-        "charset": "UTF-8",
-        "separator": "CR+LF",
-        "delimiter": ";",
-        "headers": ["Person name", "Person email"]
+        "addml": {
+            "charset": "UTF-8",
+            "separator": "CR+LF",
+            "delimiter": ";",
+            "headers": ["Person name", "Person email"]
         }
+    }
 
     assert to_dict(addml_tree) == expected
