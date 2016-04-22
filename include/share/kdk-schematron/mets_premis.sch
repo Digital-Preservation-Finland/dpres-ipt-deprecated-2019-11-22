@@ -116,7 +116,6 @@ TODO: Native file format handling.
 	<sch:include href="./abstracts/required_value_premis_formatname_pattern.incl"/>
 	<sch:include href="./abstracts/required_parameters_premis_formatname_pattern.incl"/>
 	<sch:include href="./abstracts/required_nonempty_element_pattern.incl"/>
-	<sch:include href="./abstracts/required_features_native_pattern.incl"/>
 
 	<!-- Version specific checks until smaller than 2.3 -->
 	<sch:pattern id="premis23_object_authority" is-a="disallowed_attribute_smaller_version_pattern">
@@ -401,7 +400,7 @@ TODO: Native file format handling.
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
 	
-	<!-- Mime type, version and registy key check. Version and registry key not obligatory. -->
+	<!-- Registy key check. -->
 	<sch:pattern id="premis_formatName_values" is-a="required_value_premis_formatname_pattern">
 		<sch:param name="context_condition" value="true()"/>
 		<sch:param name="mime_types" value="$supported_mime_types"/>
@@ -421,12 +420,6 @@ TODO: Native file format handling.
 		<sch:param name="context_element" value="mets:techMD//premis:messageDigestAlgorithm"/>
 		<sch:param name="context_condition" value="true()"/>
 		<sch:param name="valid_values" value="$supported_checksum_algorithms"/>
-		<sch:param name="specifications" value="string('')"/>
-	</sch:pattern>
-	
-	<!-- Case 'no-file-format-validation' check -->
-	<sch:pattern id="premis_mets_case_native" is-a="required_features_native_pattern">
-		<sch:param name="context_condition" value="true()"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
 
@@ -473,125 +466,63 @@ TODO: Native file format handling.
 	</sch:pattern>
 
 	<!-- Check that identifiers of PREMIS sections are unique between the sections -->
-	<sch:pattern id="premis_objectIdentifierValue_objectIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:objectIdentifierValue"/>
+	<sch:pattern id="premis_identifierValue_unique" is-a="unique_value_element_pattern">
+		<sch:param name="unique_elements" value=".//premis:objectIdentifierValue | .//premis:eventIdentifierValue | .//premis:agentIdentifierValue | .//premis:rightsStatementIdentifierValue"/>
+		<sch:param name="name_elements" value="string('premis:objectIdentifierValue; premis:eventIdentifierValue; premis:agentIdentifierValue; premis:rightsStatementIdentifierValue')"/>
 		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:objectIdentifierValue"/>
 		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
 	</sch:pattern>
-	<sch:pattern id="premis_objectIdentifierValue_eventIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:objectIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:eventIdentifierValue"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
+	<sch:let name="objectid" value="//premis:objectIdentifierValue"/>
+	<sch:let name="eventid" value="//premis:eventIdentifierValue"/>
+	<sch:let name="agentid" value="//premis:agentIdentifierValue"/>
+	<sch:let name="rightsid" value="//premis:rightsIdentifierValue"/>
+	<sch:pattern id="link_premis_element">
+		<sch:rule context="premis:linkingObjectIdentifierValue">
+			<sch:let name="id_value" value="normalize-space(.)"/>
+			<sch:assert test="(count($objectid[normalize-space(.) = $id_value]) = 1)">
+				Value '<sch:value-of select="."/>' in element '<sch:name/>' is a link to nowhere. The corresponding target element '<sch:value-of select="string('$target_element')"/>' with the same value was not found.
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="premis:linkingEventIdentifierValue">
+			<sch:let name="id_value" value="normalize-space(.)"/>
+			<sch:assert test="(count($eventid[normalize-space(.) = $id_value]) = 1)">
+				Value '<sch:value-of select="."/>' in element '<sch:name/>' is a link to nowhere. The corresponding target element '<sch:value-of select="string('$target_element')"/>' with the same value was not found.
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="premis:linkingAgentIdentifierValue">
+			<sch:let name="id_value" value="normalize-space(.)"/>
+			<sch:assert test="(count($agentid[normalize-space(.) = $id_value]) = 1)">
+				Value '<sch:value-of select="."/>' in element '<sch:name/>' is a link to nowhere. The corresponding target element '<sch:value-of select="string('$target_element')"/>' with the same value was not found.
+			</sch:assert>
+		</sch:rule>
+		<sch:rule context="premis:linkingRightsStatementIdentifierValue">
+			<sch:let name="id_value" value="normalize-space(.)"/>
+			<sch:assert test="(count($rightsid[normalize-space(.) = $id_value]) = 1)">
+				Value '<sch:value-of select="."/>' in element '<sch:name/>' is a link to nowhere. The corresponding target element '<sch:value-of select="string('$target_element')"/>' with the same value was not found.
+			</sch:assert>
+		</sch:rule>
 	</sch:pattern>
-	<sch:pattern id="premis_objectIdentifierValue_agentIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:objectIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:agentIdentifierValue"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_objectIdentifierValue_rightsStatementIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:objectIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:rightsStatementIdentifierValue"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_objectIdentifierValue_link" is-a="link_element_pattern">
-		<sch:param name="linking_element" value="premis:linkingObjectIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="target_element" value="premis:objectIdentifierValue"/>
-		<sch:param name="specifications" value="string('')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_eventIdentifierValue_objectIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:eventIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:objectIdentifierValue"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_eventIdentifierValue_eventIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:eventIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:eventIdentifierValue"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_eventIdentifierValue_agentIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:eventIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:agentIdentifierValue"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_eventIdentifierValue_rightsStatementIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:eventIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:rightsStatementIdentifierValue"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_eventIdentifierValue_link" is-a="link_element_pattern">
-		<sch:param name="linking_element" value="premis:linkingEventIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="target_element" value="premis:eventIdentifierValue"/>
-		<sch:param name="specifications" value="string('')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_agentIdentifierValue_objectIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:agentIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:objectIdentifierValue"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_agentIdentifierValue_eventIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:agentIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:eventIdentifierValue"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_agentIdentifierValue_agentIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:agentIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:agentIdentifierValue"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_agentIdentifierValue_rightsStatementIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:agentIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:rightsStatementIdentifierValue"/>
-		<sch:param name="specifications" value="string('1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_agentIdentifierValue_link" is-a="link_element_pattern">
-		<sch:param name="linking_element" value="premis:linkingAgentIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="target_element" value="premis:agentIdentifierValue"/>
-		<sch:param name="specifications" value="string('')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_rightsStatementIdentifierValue_objectIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:rightsStatementIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:objectIdentifierValue"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_rightsStatementIdentifierValue_eventIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:rightsStatementIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:eventIdentifierValue"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_rightsStatementIdentifierValue_agentIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:rightsStatementIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:agentIdentifierValue"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_rightsStatementIdentifierValue_rightsStatementIdentifierValue_unique" is-a="unique_value_element_pattern">
-		<sch:param name="context_element" value="premis:rightsStatementIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="another_context_element" value="premis:rightsStatementIdentifierValue"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="premis_rightsStatementIdentifierValue_link" is-a="link_element_pattern">
-		<sch:param name="linking_element" value="premis:linkingRightsStatementIdentifierValue"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="target_element" value="premis:rightsStatementIdentifierValue"/>
-		<sch:param name="specifications" value="string('')"/>
+
+	<sch:let name="techmd" value="exsl:node-set(//mets:techMD)"/>
+	<sch:let name="digiprovmd_migration" value="exsl:node-set(//mets:digiprovMD[normalize-space(.//premis:event/premis:eventType)='migration' and normalize-space(.//premis:event//premis:eventOutcome)='success'])"/>
+	<sch:pattern id="required_features_native">
+		<sch:rule context="mets:file[(normalize-space(@USE)='no-file-format-validation')]">
+			<sch:let name="admid" value="normalize-space(@ADMID)"/> 
+			<sch:let name="source_techmd_id" value="normalize-space($techmd/@ID[contains(concat(' ', $admid, ' '), concat(' ', normalize-space(.), ' ')) and ..//premis:object//premis:formatName])"/> 
+			<sch:let name="source_object_id" value="normalize-space($techmd[normalize-space(@ID) = $source_techmd_id]//premis:objectIdentifierValue)"/> 
+			<sch:let name="event_source_link" value="exsl:node-set($digiprovmd_migration//premis:linkingObjectIdentifier[normalize-space(./premis:linkingObjectRole)='source' and normalize-space(./premis:linkingObjectIdentifierValue)=$source_object_id]/..)"/>
+			<sch:let name="event_not_outcome_link" value="exsl:node-set($digiprovmd_migration//premis:linkingObjectIdentifier[normalize-space(./premis:linkingObjectRole)='outcome' and not(normalize-space(./premis:linkingObjectIdentifierValue)=$source_object_id)]/..)"/>
+			<sch:let name="event_links_source_ok" value="sets:intersection($event_source_link, $event_not_outcome_link)"/>
+
+			<sch:assert test="count($digiprovmd_migration) &gt; 0
+			or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' '))">
+				Value '<sch:value-of select="@USE"/>' in attribute '<sch:value-of select="name(@USE)"/>' found for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'. Succeeded PREMIS event for migration is required.
+			</sch:assert>
+			<sch:assert test="count($digiprovmd_migration) = 0 or count($event_links_source_ok) &gt; 0
+			or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' '))">
+				Value '<sch:value-of select="@USE"/>' in attribute '<sch:value-of select="name(@USE)"/>' found for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'. PREMIS event for migration contains ambiguous links to object identifiers.
+			</sch:assert>
+		</sch:rule>
 	</sch:pattern>
 
 </sch:schema>

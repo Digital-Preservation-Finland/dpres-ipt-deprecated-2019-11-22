@@ -16,8 +16,6 @@ Validates METS metadata elements and attributes, their values, and METS internal
 	<sch:include href="./abstracts/deprecated_value_attribute_pattern.incl"/>
 	<sch:include href="./abstracts/disallowed_attribute_pattern.incl"/>
 	<sch:include href="./abstracts/disallowed_element_pattern.incl"/>
-	<sch:include href="./abstracts/links_attribute_multiple_pattern.incl"/>
-	<sch:include href="./abstracts/reference_attribute_multiple_pattern.incl"/>
 	<sch:include href="./abstracts/required_attribute_or_attribute_pattern.incl"/>
 	<sch:include href="./abstracts/required_attribute_xor_attribute_pattern.incl"/>
 	<sch:include href="./abstracts/required_attribute_or_element_pattern.incl"/>
@@ -30,10 +28,6 @@ Validates METS metadata elements and attributes, their values, and METS internal
 	<sch:include href="./abstracts/unique_value_attribute_pattern.incl"/>
 	<sch:include href="./abstracts/required_agent_pattern.incl"/>
 	<sch:include href="./abstracts/required_nonempty_attribute_pattern.incl"/>
-
-<!-- Should be added when preservation plans are required
-	<sch:include href="./abstracts/required_min_elements_pattern.incl"/>
--->
 
 	<!-- Specification attributes -->
 	<sch:pattern id="mets_CATALOG_SPECIFICATION" is-a="required_attribute_or_attribute_pattern">
@@ -207,17 +201,7 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="required_element" value="mets:digiprovMD"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
-	
-<!--
-	This should be used instead, when preservation plans are required
-	<sch:pattern id="mets_amdSec_digiprovMD" is-a="required_min_elements_pattern">
-		<sch:param name="context_element" value="mets:amdSec"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="required_element" value="mets:digiprovMD"/>
-		<sch:param name="num" value="2"/>
-		<sch:param name="specifications" value="string('')"/>
-	</sch:pattern>
--->
+
 	<!-- mdWrap and mdRef elements -->
 	<sch:pattern id="mets_dmdSec_mdWrap" is-a="required_element_pattern">
 		<sch:param name="context_element" value="mets:dmdSec"/>
@@ -780,90 +764,76 @@ Validates METS metadata elements and attributes, their values, and METS internal
 	</sch:pattern>
 
 	<!-- METS internal linking, cross-check part 1: From link to target -->
-	<sch:pattern id="link_div_dmdid" is-a="links_attribute_multiple_pattern">
-		<sch:param name="linking_element" value="mets:div"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="linking_attribute" value="@DMDID"/>
-		<sch:param name="target_attribute" value="ancestor::mets:mets//mets:dmdSec/@ID"/>
-		<sch:param name="specifications" value="string('')"/>
+	<sch:let name="dmdids" value="exsl:node-set(//mets:dmdSec/@ID)"/>
+	<sch:let name="admids" value="exsl:node-set(//mets:amdSec/*[self::mets:techMD or self::mets:rightsMD or self::mets:sourceMD or self::mets:digiprovMD]/@ID)"/>
+	<sch:let name="fileids" value="exsl:node-set(//mets:file/@ID)"/>
+	<sch:pattern id="link_div_dmdid">
+		<sch:rule context="mets:div[@DMDID]">
+            <sch:assert test="(count(sets:distinct(exsl:node-set(str:tokenize(normalize-space(@DMDID),' ')) | $dmdids)) = count(sets:distinct(exsl:node-set($dmdids))))">
+				Value '<sch:value-of select="@DMDID"/>' in attribute '<sch:value-of select="name(@DMDID)"/>' in element '<sch:name/>' contains a link to nowhere. The corresponding target attribute '@ID' with the same value was not found.
+			</sch:assert>
+		</sch:rule>
 	</sch:pattern>
-	<sch:pattern id="link_file_admid" is-a="links_attribute_multiple_pattern">
-		<sch:param name="linking_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="linking_attribute" value="@ADMID"/>
-		<sch:param name="target_attribute" value="ancestor::mets:mets//mets:amdSec/*[self::mets:techMD or self::mets:rightsMD or self::mets:sourceMD or self::mets:digiprovMD]/@ID"/>
-		<sch:param name="specifications" value="string('')"/>
+	<sch:pattern id="link_file_admid">
+		<sch:rule context="mets:file[@ADMID]">
+            <sch:assert test="(count(sets:distinct(exsl:node-set(str:tokenize(normalize-space(@ADMID),' ')) | $admids)) = count(sets:distinct(exsl:node-set($admids))))">
+				Value '<sch:value-of select="@ADMID"/>' in attribute '<sch:value-of select="name(@ADMID)"/>' in element '<sch:name/>' contains a link to nowhere. The corresponding target attribute '@ID' with the same value was not found.
+			</sch:assert>
+		</sch:rule>
 	</sch:pattern>
-	<sch:pattern id="link_div_admid" is-a="links_attribute_multiple_pattern">
-		<sch:param name="linking_element" value="mets:div"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="linking_attribute" value="@ADMID"/>
-		<sch:param name="target_attribute" value="ancestor::mets:mets//mets:amdSec/*[self::mets:techMD or self::mets:rightsMD or self::mets:sourceMD or self::mets:digiprovMD]/@ID"/>
-		<sch:param name="specifications" value="string('')"/>
+	<sch:pattern id="link_div_admid">
+		<sch:rule context="mets:div[@ADMID]">
+            <sch:assert test="(count(sets:distinct(exsl:node-set(str:tokenize(normalize-space(@ADMID),' ')) | $admids)) = count(sets:distinct(exsl:node-set($admids))))">
+				Value '<sch:value-of select="@ADMID"/>' in attribute '<sch:value-of select="name(@ADMID)"/>' in element '<sch:name/>' contains a link to nowhere. The corresponding target attribute '@ID' with the same value was not found.
+			</sch:assert>
+		</sch:rule>
 	</sch:pattern>
-	<sch:pattern id="link_file_fileid" is-a="links_attribute_multiple_pattern">
-		<sch:param name="linking_element" value="mets:fptr"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="linking_attribute" value="@FILEID"/>
-		<sch:param name="target_attribute" value="ancestor::mets:mets//mets:file/@ID"/>
-		<sch:param name="specifications" value="string('')"/>
+	<sch:pattern id="link_fptr_fileid">
+		<sch:rule context="mets:fptr[@FILEID]">
+            <sch:assert test="(count(sets:distinct(exsl:node-set(str:tokenize(normalize-space(@FILEID),' ')) | $fileids)) = count(sets:distinct(exsl:node-set($fileids))))">
+				Value '<sch:value-of select="@FILEID"/>' in attribute '<sch:value-of select="name(@FILEID)"/>' in element '<sch:name/>' contains a link to nowhere. The corresponding target attribute '@ID' with the same value was not found.
+			</sch:assert>
+		</sch:rule>
 	</sch:pattern>
-	<sch:pattern id="link_area_fileid" is-a="links_attribute_multiple_pattern">
-		<sch:param name="linking_element" value="mets:area"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="linking_attribute" value="@FILEID"/>
-		<sch:param name="target_attribute" value="ancestor::mets:mets//mets:file/@ID"/>
-		<sch:param name="specifications" value="string('')"/>
+	<sch:pattern id="link_area_fileid">
+		<sch:rule context="mets:area[@FILEID]">
+            <sch:assert test="(count(sets:distinct(exsl:node-set(str:tokenize(normalize-space(@FILEID),' ')) | $fileids)) = count(sets:distinct(exsl:node-set($fileids))))">
+				Value '<sch:value-of select="@FILEID"/>' in attribute '<sch:value-of select="name(@FILEID)"/>' in element '<sch:name/>' contains a link to nowhere. The corresponding target attribute '@ID' with the same value was not found.
+			</sch:assert>
+		</sch:rule>
 	</sch:pattern>
 
 	<!-- METS internal linking, cross-check part 2: From target to link -->
-	<sch:pattern id="linked_dmdsec" is-a="reference_attribute_multiple_pattern">
-		<sch:param name="context_element" value="mets:dmdSec"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="context_attribute" value="@ID"/>
-		<sch:param name="linking_element" value="mets:div"/>
-		<sch:param name="linking_attribute" value="@DMDID"/>
-		<sch:param name="specifications" value="string('')"/>
+	<sch:let name="dmdidlinks" value="//mets:div"/>
+	<sch:let name="admidfilelinks" value="//mets:file"/>
+	<sch:let name="admiddivlinks" value="//mets:div"/>
+	<sch:let name="fileidfptrlinks" value="//mets:fptr"/>
+	<sch:let name="fileidarealinks" value="//mets:area"/>
+	<sch:pattern name="IDReferencesDesc">
+		<sch:rule context="mets:dmdSec">
+			<sch:let name="id" value="normalize-space(@ID)"/>
+            <sch:assert test="count($dmdidlinks[contains(concat(' ', normalize-space(@DMDID), ' '), concat(' ', $id, ' '))]) &gt; 0">
+				Section containing value '<sch:value-of select="@DMDID"/>' in attribute '<sch:value-of select="name(@DMDID)"/>' in element '<sch:value-of select="name(..)"/>' requires a reference from attribute '@DMDID'.
+			</sch:assert>
+        </sch:rule>
 	</sch:pattern>
-	<sch:pattern id="linked_techMD" is-a="reference_attribute_multiple_pattern">
-		<sch:param name="context_element" value="mets:techMD"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="context_attribute" value="@ID"/>
-		<sch:param name="linking_element" value="*[self::mets:file or self::mets:div]"/>
-		<sch:param name="linking_attribute" value="@ADMID"/>
-		<sch:param name="specifications" value="string('')"/>
+	<sch:pattern name="IDReferencesAdm">
+        <sch:rule context="mets:techMD | mets:rightsMD | mets:sourceMD | mets:digiprovMD">
+			<sch:let name="id" value="normalize-space(@ID)"/>
+			<sch:assert test="count($admidfilelinks[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))]) &gt; 0
+			or count($admiddivlinks[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))]) &gt; 0">
+				Section containing value '<sch:value-of select="@ADMID"/>' in attribute '<sch:value-of select="name(@ADMID)"/>' in element '<sch:value-of select="name(..)"/>' requires a reference from attribute '@ADMID'.
+			</sch:assert>
+        </sch:rule>
 	</sch:pattern>
-	<sch:pattern id="linked_rightsMD" is-a="reference_attribute_multiple_pattern">
-		<sch:param name="context_element" value="mets:rightsMD"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="context_attribute" value="@ID"/>
-		<sch:param name="linking_element" value="*[self::mets:file or self::mets:div]"/>
-		<sch:param name="linking_attribute" value="@ADMID"/>
-		<sch:param name="specifications" value="string('')"/>
-	</sch:pattern>
-	<sch:pattern id="linked_sourceMD" is-a="reference_attribute_multiple_pattern">
-		<sch:param name="context_element" value="mets:sourceMD"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="context_attribute" value="@ID"/>
-		<sch:param name="linking_element" value="*[self::mets:file or self::mets:div]"/>
-		<sch:param name="linking_attribute" value="@ADMID"/>
-		<sch:param name="specifications" value="string('')"/>
-	</sch:pattern>
-	<sch:pattern id="linked_digiprovMD" is-a="reference_attribute_multiple_pattern">
-		<sch:param name="context_element" value="mets:digiprovMD"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="context_attribute" value="@ID"/>
-		<sch:param name="linking_element" value="*[self::mets:file or self::mets:div]"/>
-		<sch:param name="linking_attribute" value="@ADMID"/>
-		<sch:param name="specifications" value="string('')"/>
-	</sch:pattern>
-	<sch:pattern id="linked_file" is-a="reference_attribute_multiple_pattern">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="context_attribute" value="@ID"/>
-		<sch:param name="linking_element" value="*[self::mets:fptr or self::mets:area]"/>
-		<sch:param name="linking_attribute" value="@FILEID"/>
-		<sch:param name="specifications" value="string('')"/>
+	<sch:pattern name="IDReferencesFile">
+        <sch:rule context="mets:file">
+			<sch:let name="id" value="normalize-space(@ID)"/>
+			<sch:assert test="count($fileidfptrlinks[contains(concat(' ', normalize-space(@FILEID), ' '), concat(' ', $id, ' '))]) &gt; 0
+			or count($fileidarealinks[contains(concat(' ', normalize-space(@FILEID), ' '), concat(' ', $id, ' '))]) &gt; 0">
+				Section containing value '<sch:value-of select="@FILEID"/>' in attribute '<sch:value-of select="name(@FILEID)"/>' in element '<sch:value-of select="name(..)"/>' requires a reference from attribute '@FILEID'.
+			</sch:assert>
+        </sch:rule>
 	</sch:pattern>
 
 	<!-- Check that OBJID attribute is unique with METS internal IDs -->
