@@ -83,9 +83,7 @@ def test_get_fileinfo_with_admid():
         },
         'algorithm': 'MD5',
         'object_id': {'value': 'object-001', 'type': 'local'},
-        'filename': '/home/spock/scratch/information-package-tools/tests'
-                    '/data/mets/file.csv',
-
+        'filename': os.path.join(METSDIR, 'file.csv'),
         'digest': 'aa4bddaacf5ed1ca92b30826af257a1b'}
 
 
