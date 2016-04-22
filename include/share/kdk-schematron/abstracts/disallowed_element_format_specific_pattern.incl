@@ -14,8 +14,8 @@
 	-->
 	<sch:pattern id="disallowed_element_format_specific_pattern" abstract="true" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/" xmlns:fi="http://www.kdk.fi/standards/mets/kdk-extensions" xmlns:xlink="http://www.w3.org/1999/xlink"
 	xmlns:premis="info:lc/xmlns/premis-v2" xmlns:exsl="http://exslt.org/common" xmlns:str="http://exslt.org/strings" xmlns:sets="http://exslt.org/sets">
-		<sch:rule context="$context_element[($context_condition)]">
-			<sch:assert test="(((count(sets:distinct(exsl:node-set(ancestor::mets:mets//mets:techMD[(str:split(.//premis:formatName,';')[1])!=$file_format]/@ID)))+count(sets:distinct(str:tokenize(normalize-space(@ADMID), ' '))))
+		<sch:rule context="$context_element[($context_condition) and ancestor::mets:mets//mets:techMD//$disallowed_element]">
+			<sch:assert test="(((count(exsl:node-set(ancestor::mets:mets//mets:techMD[(str:split(.//premis:formatName,';')[1])!=$file_format]/@ID))+count(sets:distinct(str:tokenize(normalize-space(@ADMID), ' '))))
 			=count(sets:distinct(exsl:node-set(ancestor::mets:mets//mets:techMD[(str:split(.//premis:formatName,';')[1])!=$file_format]/@ID) | str:tokenize(normalize-space(@ADMID), ' ')))) 
 			or ((count(sets:distinct(exsl:node-set(ancestor::mets:mets//mets:techMD[.//$disallowed_element]/@ID)))+count(sets:distinct(str:tokenize(normalize-space(@ADMID), ' '))))
 			=count(sets:distinct(exsl:node-set(ancestor::mets:mets//mets:techMD[.//$disallowed_element]/@ID) | str:tokenize(normalize-space(@ADMID), ' '))))) or not(normalize-space($specifications)=''

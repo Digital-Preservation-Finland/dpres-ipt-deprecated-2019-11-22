@@ -37,10 +37,14 @@ Validates that the used metadata type inside mdWrap element is same as defined i
 	<sch:include href="./abstracts/allowed_unsupported_metadata_pattern.incl"/>
 	<sch:include href="./abstracts/disallowed_element_pattern.incl"/>
 	<sch:include href="./abstracts/disallowed_unsupported_metadata_pattern.incl"/>
-	<sch:include href="./abstracts/required_metadata_format_specific_pattern.incl"/>
 	<sch:include href="./abstracts/required_metadata_match_pattern.incl"/>
 	<sch:include href="./abstracts/required_metadata_pattern.incl"/>
-	<sch:include href="./abstracts/required_metadata_format_specific_pattern_old.incl"/>
+
+	<sch:let name="addml_types" value="string('text/csv')"/>
+	<sch:let name="textmd_types" value="string('application/xhtml+xml text/xml text/plain')"/>
+	<sch:let name="audiomd_types" value="string('audio/x-aiff audio/x-wave audio/flac audio/aac audio/x-wav audio/mpeg audio/x-ms-wma')"/>
+	<sch:let name="videomd_types" value="string('video/jpeg2000 video/mj2 video/dv video/mpeg video/x-ms-wmv')"/>
+	<sch:let name="mix_types" value="string('image/tiff image/jpeg image/jp2 image/png image/gif')"/>
 
 	<!-- Check metadata content in mdWrap -->
 	<sch:pattern id="mets_mdtype_content" is-a="required_metadata_match_pattern">
@@ -60,9 +64,7 @@ Validates that the used metadata type inside mdWrap element is same as defined i
 			  + number(normalize-space(@MDTYPE)='DDI' and normalize-space(@MDTYPEVERSION)='3.2')*number(boolean(mets:xmlData/ddilc32:*))*count(mets:xmlData/*)
 			  + number(normalize-space(@MDTYPE)='DDI' and normalize-space(@MDTYPEVERSION)='3.1')*number(boolean(mets:xmlData/ddilc31:*))*count(mets:xmlData/*)
 			  + number(normalize-space(@MDTYPE)='DDI' and normalize-space(@MDTYPEVERSION)='2.5')*number(boolean(mets:xmlData/ddicb25:*))*count(mets:xmlData/*)
-			  + number(normalize-space(@MDTYPE)='DDI' and normalize-space(@MDTYPEVERSION)='2.1')*number(boolean(mets:xmlData/ddicb21:*))*count(mets:xmlData/*)
-			  + number(normalize-space(@MDTYPE)='TEXTMD' and (normalize-space(ancestor::mets:mets/@fi:CATALOG)='1.4.1' or normalize-space(ancestor::mets:mets/@fi:CATALOG)='1.4'
-				or normalize-space(ancestor::mets:mets/@fi:SPECIFICATION)='1.4'))*number(boolean(mets:xmlData/textmd_kdk:*))*count(mets:xmlData/*)) = 1"/>
+			  + number(normalize-space(@MDTYPE)='DDI' and normalize-space(@MDTYPEVERSION)='2.1')*number(boolean(mets:xmlData/ddicb21:*))*count(mets:xmlData/*)) = 1"/>
 		<sch:param name="used_attribute" value="@MDTYPE"/>
 		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
 	</sch:pattern>
@@ -208,69 +210,127 @@ Validates that the used metadata type inside mdWrap element is same as defined i
 	</sch:pattern> 
 
 	<!-- File format specific technical metadata requirements -->
-	<sch:pattern id="ADDML_file" is-a="required_metadata_format_specific_pattern">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="file_format" value="string('text/csv')"/>
-		<sch:param name="required_element" value="addml:*"/>
-		<sch:param name="mdtype_name" value="string('ADDML')"/>		
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="AudioMD_file" is-a="required_metadata_format_specific_pattern">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="file_format" value="string('audio/x-aiff audio/x-wav audio/flac audio/mp4 audio/mpeg audio/x-ms-wma')"/>
-		<sch:param name="required_element" value="audiomd:*"/>
-		<sch:param name="mdtype_name" value="string('AudioMD')"/>		
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="VideoMD_file" is-a="required_metadata_format_specific_pattern">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="file_format" value="string('video/jpeg2000 video/mp4 video/dv video/mpeg video/x-ms-wmv')"/>
-		<sch:param name="required_element" value="videomd:*"/>
-		<sch:param name="mdtype_name" value="string('VideoMD')"/>		
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="NISOIMG_file" is-a="required_metadata_format_specific_pattern">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="file_format" value="string('image/tiff image/jpeg image/jp2 image/png image/gif')"/>
-		<sch:param name="required_element" value="mix:*"/>
-		<sch:param name="mdtype_name" value="string('NISOIMG (MIX)')"/>		
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="TextMD_file" is-a="required_metadata_format_specific_pattern_old">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="file_format" value="string('application/xhtml+xml text/html text/xml text/plain')"/>
-		<sch:param name="required_element" value="textmd_kdk:*"/>
-		<sch:param name="mdtype_name" value="string('TextMD')"/>
-		<sch:param name="specifications" value="string('1.4.1; 1.4')"/>	
-	</sch:pattern>
-	<sch:pattern id="AudioMD_file" is-a="required_metadata_format_specific_pattern_old">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="file_format" value="string('audio/x-aiff audio/x-wav audio/flac audio/mp4 audio/mpeg audio/x-ms-wma')"/>
-		<sch:param name="required_element" value="audiomd:*"/>
-		<sch:param name="mdtype_name" value="string('AudioMD')"/>		
-		<sch:param name="specifications" value="string('1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="VideoMD_file" is-a="required_metadata_format_specific_pattern_old">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="file_format" value="string('video/jpeg2000 video/mp4 video/dv video/mpeg video/x-ms-wmv')"/>
-		<sch:param name="required_element" value="videomd:*"/>
-		<sch:param name="mdtype_name" value="string('VideoMD')"/>		
-		<sch:param name="specifications" value="string('1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="NISOIMG_file" is-a="required_metadata_format_specific_pattern_old">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="file_format" value="string('image/tiff image/jpeg image/jp2 image/png image/gif')"/>
-		<sch:param name="required_element" value="mix:*"/>
-		<sch:param name="mdtype_name" value="string('NISOIMG (MIX)')"/>		
-		<sch:param name="specifications" value="string('1.4.1; 1.4')"/>
-	</sch:pattern>
-	
+	<sch:let name="addml_fileid" value="//mets:techMD[contains(concat(' ', $addml_types, ' '), concat(' ', .//premis:formatName, ' '))]/@ID"/>
+	<sch:let name="addml_mdids" value="//mets:techMD[./mets:mdWrap/mets:xmlData/addml:*]/@ID"/>
+	<sch:let name="addml_countfiles" value="count(sets:distinct(exsl:node-set($addml_fileid)))"/>
+	<sch:let name="addml_countmd" value="count(sets:distinct(exsl:node-set($addml_mdids)))"/>
+	<sch:pattern name="addml_requirement">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($addml_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmdcomb" value="count(sets:distinct(exsl:node-set($addml_mdids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($addml_countfiles+$countadm)=$countfilescomb) or not(($addml_countmd+$countadm)=$countmdcomb)
+			or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' '))">
+				Linking between ADDML metadata and file '<sch:value-of select="./mets:FLocat/@xlink:href"/>' is required.
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+	<sch:let name="audiomd_fileid" value="//mets:techMD[contains(concat(' ', $audiomd_types, ' '), concat(' ', .//premis:formatName, ' '))]/@ID"/>
+	<sch:let name="audiomd_mdids" value="//mets:techMD[./mets:mdWrap/mets:xmlData/audiomd:*]/@ID"/>
+	<sch:let name="audiomd_countfiles" value="count(sets:distinct(exsl:node-set($audiomd_fileid)))"/>
+	<sch:let name="audiomd_countmd" value="count(sets:distinct(exsl:node-set($audiomd_mdids)))"/>
+	<sch:pattern name="audiomd_requirement">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($audiomd_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmdcomb" value="count(sets:distinct(exsl:node-set($audiomd_mdids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($audiomd_countfiles+$countadm)=$countfilescomb) or not(($audiomd_countmd+$countadm)=$countmdcomb)
+			or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' '))">
+				Linking between AudioMD metadata and file '<sch:value-of select="./mets:FLocat/@xlink:href"/>' is required.
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+	<sch:let name="videomd_fileid" value="//mets:techMD[contains(concat(' ', $videomd_types, ' '), concat(' ', .//premis:formatName, ' '))]/@ID"/>
+	<sch:let name="videomd_mdids" value="//mets:techMD[./mets:mdWrap/mets:xmlData/videomd:*]/@ID"/>
+	<sch:let name="videomd_countfiles" value="count(sets:distinct(exsl:node-set($videomd_fileid)))"/>
+	<sch:let name="videomd_countmd" value="count(sets:distinct(exsl:node-set($videomd_mdids)))"/>
+	<sch:pattern name="videomd_requirement">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($videomd_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmdcomb" value="count(sets:distinct(exsl:node-set($videomd_mdids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($videomd_countfiles+$countadm)=$countfilescomb) or not(($videomd_countmd+$countadm)=$countmdcomb)
+			or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' '))">
+				Linking between VideoMD metadata and file '<sch:value-of select="./mets:FLocat/@xlink:href"/>' is required.
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+	<sch:let name="mix_fileid" value="//mets:techMD[contains(concat(' ', $mix_types, ' '), concat(' ', .//premis:formatName, ' '))]/@ID"/>
+	<sch:let name="mix_mdids" value="//mets:techMD[./mets:mdWrap/mets:xmlData/mix:*]/@ID"/>
+	<sch:let name="mix_countfiles" value="count(sets:distinct(exsl:node-set($mix_fileid)))"/>
+	<sch:let name="mix_countmd" value="count(sets:distinct(exsl:node-set($mix_mdids)))"/>
+	<sch:pattern name="mix_requirement">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($mix_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmdcomb" value="count(sets:distinct(exsl:node-set($mix_mdids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($mix_countfiles+$countadm)=$countfilescomb) or not(($mix_countmd+$countadm)=$countmdcomb)
+			or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' '))">
+				Linking between NISOIMG (MIX) metadata and file '<sch:value-of select="./mets:FLocat/@xlink:href"/>' is required.
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+	<sch:let name="textmd_fileid" value="//mets:techMD[contains(concat(' ', $textmd_types, ' '), concat(' ', .//premis:formatName, ' '))]/@ID"/>
+	<sch:let name="textmd14_mdids" value="//mets:techMD[.//textmd_kdk:*]/@ID"/>
+	<sch:let name="textmd_countfiles" value="count(sets:distinct(exsl:node-set($textmd_fileid)))"/>
+	<sch:let name="textmd14_countmd" value="count(sets:distinct(exsl:node-set($textmd14_mdids)))"/>
+	<sch:pattern name="textmd_requirement14">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($textmd_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmdcomb" value="count(sets:distinct(exsl:node-set($textmd14_mdids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($textmd_countfiles+$countadm)=$countfilescomb) or not(($textmd14_countmd+$countadm)=$countmdcomb)
+			or not(contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' ')))">
+				Linking between TextMD metadata and file '<sch:value-of select="./mets:FLocat/@xlink:href"/>' is required.
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+	<sch:let name="audiomd14_mdids" value="//mets:techMD[.//audiomd:*]/@ID"/>
+	<sch:let name="audiomd14_countmd" value="count(sets:distinct(exsl:node-set($audiomd14_mdids)))"/>
+	<sch:pattern name="audiomd_requirement14">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($audiomd_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmdcomb" value="count(sets:distinct(exsl:node-set($audiomd14_mdids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($audiomd_countfiles+$countadm)=$countfilescomb) or not(($audiomd14_countmd+$countadm)=$countmdcomb)
+			or not(contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' ')))">
+				Linking between AudioMD metadata and file '<sch:value-of select="./mets:FLocat/@xlink:href"/>' is required.
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+	<sch:let name="videomd14_mdids" value="//mets:techMD[.//videomd:*]/@ID"/>
+	<sch:let name="videomd14_countmd" value="count(sets:distinct(exsl:node-set($videomd14_mdids)))"/>
+	<sch:pattern name="videomd_requirement14">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($videomd_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmdcomb" value="count(sets:distinct(exsl:node-set($videomd14_mdids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($videomd_countfiles+$countadm)=$countfilescomb) or not(($videomd14_countmd+$countadm)=$countmdcomb)
+			or not(contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' ')))">
+				Linking between VideoMD metadata and file '<sch:value-of select="./mets:FLocat/@xlink:href"/>' is required.
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+	<sch:let name="mix14_mdids" value="//mets:techMD[.//mix:*]/@ID"/>
+	<sch:let name="mix14_countmd" value="count(sets:distinct(exsl:node-set($mix14_mdids)))"/>
+	<sch:pattern name="mix_requirement14">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($mix_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmdcomb" value="count(sets:distinct(exsl:node-set($mix14_mdids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($mix_countfiles+$countadm)=$countfilescomb) or not(($mix14_countmd+$countadm)=$countmdcomb)
+			or not(contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' ')))">
+				Linking between NISOIMG (MIX) metadata and file '<sch:value-of select="./mets:FLocat/@xlink:href"/>' is required.
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+
 </sch:schema>

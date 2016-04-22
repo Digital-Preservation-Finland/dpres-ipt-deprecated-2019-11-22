@@ -17,7 +17,6 @@ Validates ADDML metadata.
 	
 	<sch:include href="./abstracts/required_element_smaller_version_pattern.incl"/>
 	<sch:include href="./abstracts/disallowed_element_smaller_version_pattern.incl"/>
-	<sch:include href="./abstracts/required_element_format_specific_pattern.incl"/>
 
 	<!-- Version differences check -->
 	<sch:pattern id="addml_reference" is-a="required_element_smaller_version_pattern">
@@ -37,22 +36,28 @@ Validates ADDML metadata.
 		<sch:param name="mdtype_version" value="string('8.3')"/>
 	</sch:pattern>
 
-	<!-- Mandatory elements --> 
-	<sch:pattern id="addml_recordSeparator" is-a="required_element_format_specific_pattern">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="file_format" value="string('text/csv')"/>
-		<sch:param name="required_element" value="addml:recordSeparator"/>
-		<sch:param name="mdtype_name" value="string('ADDML')"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="addml_fieldSeparatingChar" is-a="required_element_format_specific_pattern">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="file_format" value="string('text/csv')"/>
-		<sch:param name="required_element" value="addml:fieldSeparatingChar"/>
-		<sch:param name="mdtype_name" value="string('ADDML')"/>		
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
+	<sch:let name="csv_fileid" value="//mets:techMD[.//premis:formatName='text/csv']/@ID"/>
+	<sch:let name="csv_addmlrsids" value="//mets:techMD[.//addml:addml//addml:recordSeparator]/@ID"/>
+	<sch:let name="csv_addmlfscids" value="//mets:techMD[.//addml:addml//addml:fieldSeparatingChar]/@ID"/>
+	<sch:let name="csv_countfiles" value="count(sets:distinct(exsl:node-set($csv_fileid)))"/>
+	<sch:let name="csv_countaddmlrs" value="count(sets:distinct(exsl:node-set($csv_addmlrsids)))"/>
+	<sch:let name="csv_countaddmlfsc" value="count(sets:distinct(exsl:node-set($csv_addmlfscids)))"/>
+	<sch:pattern name="CsvAddmlRequirements">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($csv_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countaddmlrscomb" value="count(sets:distinct(exsl:node-set($csv_addmlrsids) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countaddmlfsccomb" value="count(sets:distinct(exsl:node-set($csv_addmlfscids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($csv_countfiles+$countadm)=$countfilescomb) or not(($csv_countaddmlrs+$countadm)=$countaddmlrscomb)
+			or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' '))">
+				Element 'recordSeparator' is required in ADDML metadata for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'.
+			</sch:assert>
+			<sch:assert test="(($csv_countfiles+$countadm)=$countfilescomb) or not(($csv_countaddmlfsc+$countadm)=$countaddmlfsccomb)
+			or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' '))">
+				Element 'fieldSeparatingChar' is required in ADDML metadata for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'.
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
 
 </sch:schema>

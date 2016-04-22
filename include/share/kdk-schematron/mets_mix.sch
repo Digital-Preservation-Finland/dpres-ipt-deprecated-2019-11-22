@@ -15,8 +15,6 @@ Validates NISOIMG (MIX) metadata.
 	<sch:ns prefix="sets" uri="http://exslt.org/sets"/>
 	<sch:ns prefix="str" uri="http://exslt.org/strings"/>
 
-	<sch:include href="./abstracts/disallowed_element_format_specific_pattern.incl"/>
-	<sch:include href="./abstracts/required_element_format_specific_pattern.incl"/>
 	<sch:include href="./abstracts/required_element_pattern.incl"/>
 	<sch:include href="./abstracts/required_element_other_pattern.incl"/>
 	<sch:include href="./abstracts/required_element_xor_element_pattern.incl"/>
@@ -426,23 +424,28 @@ Validates NISOIMG (MIX) metadata.
 	</sch:pattern>
 
 	<!-- JPEG2000 specific check -->
-	<sch:pattern id="mix_SpecialFormatCharacteristics" is-a="required_element_format_specific_pattern">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="file_format" value="string('image/jp2')"/>
-		<sch:param name="required_element" value="mets:techMD/mets:mdWrap/mets:xmlData/mix:mix/mix:BasicImageInformation/mix:SpecialFormatCharacteristics"/>
-		<sch:param name="mdtype_name" value="string('NISOIMG (MIX)')"/>		
-		<sch:param name="specifications" value="string('')"/>
-	</sch:pattern>
-	<sch:pattern id="mix_JPEG2000" is-a="required_element_format_specific_pattern">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="file_format" value="string('image/jp2')"/>
-		<sch:param name="required_element" value="mets:techMD/mets:mdWrap/mets:xmlData/mix:mix/mix:BasicImageInformation/mix:SpecialFormatCharacteristics/mix:JPEG2000"/>
-		<sch:param name="mdtype_name" value="string('NISOIMG (MIX)')"/>		
-		<sch:param name="specifications" value="string('')"/>
-	</sch:pattern>
-	<sch:pattern id="mix_EncodingOptions" is-a="required_element_pattern">
+	<sch:let name="jp2_fileid" value="//mets:techMD[.//premis:formatName='image/jp2']/@ID"/>
+	<sch:let name="jp2_mixsfcids" value="//mets:techMD[.//mix:mix/mix:BasicImageInformation/mix:SpecialFormatCharacteristics]/@ID"/>
+	<sch:let name="jp2_mixjp2ids" value="//mets:techMD[.//mix:mix/mix:BasicImageInformation/mix:SpecialFormatCharacteristics/mix:JPEG2000]/@ID"/>
+	<sch:let name="jp2_countfiles" value="count(sets:distinct(exsl:node-set($jp2_fileid)))"/>
+	<sch:let name="jp2_countmixsfc" value="count(sets:distinct(exsl:node-set($jp2_mixsfcids)))"/>
+	<sch:let name="jp2_countmixjp2" value="count(sets:distinct(exsl:node-set($jp2_mixjp2ids)))"/>
+	<sch:pattern name="jpeg2000_requuirements">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($jp2_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmixsfccomb" value="count(sets:distinct(exsl:node-set($jp2_mixsfcids) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmixjp2comb" value="count(sets:distinct(exsl:node-set($jp2_mixjp2ids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($jp2_countfiles+$countadm)=$countfilescomb) or not(($jp2_countmixsfc+$countadm)=$countmixsfccomb)">
+				Element 'SpecialFormatCharacteristics' is required in NISOIMG (MIX) metadata for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'.
+			</sch:assert>
+			<sch:assert test="(($jp2_countfiles+$countadm)=$countfilescomb) or not(($jp2_countmixjp2+$countadm)=$countmixjp2comb)">
+				Element 'JPEG2000' is required in NISOIMG (MIX) metadata for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'.
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
+    <sch:pattern id="mix_EncodingOptions" is-a="required_element_pattern">
 		<sch:param name="context_element" value="mets:techMD/mets:mdWrap/mets:xmlData/mix:mix//mix:JPEG2000"/>
 		<sch:param name="context_condition" value="true()"/>
 		<sch:param name="required_element" value="mix:EncodingOptions"/>
@@ -460,26 +463,38 @@ Validates NISOIMG (MIX) metadata.
 		<sch:param name="required_element" value="mix:resolutionLevels"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>	
-	
+
+
 	<!-- Not JPEG2000 file - specific check -->
-	<sch:pattern id="mix_no_JPEG2000" is-a="disallowed_element_format_specific_pattern">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="file_format" value="string('image/jp2')"/>
-		<sch:param name="disallowed_element" value="mets:techMD/mets:mdWrap/mets:xmlData/mix:mix/mix:BasicImageInformation/mix:SpecialFormatCharacteristics/mix:JPEG2000"/>
-		<sch:param name="mdtype_name" value="string('NISOIMG (MIX)')"/>		
-		<sch:param name="specifications" value="string('')"/>
+	<sch:let name="not_jp2_fileid" value=".//mets:techMD[.//premis:formatName!='image/jp2']/@ID"/>
+	<sch:let name="not_jp2_countfiles" value="count(sets:distinct(exsl:node-set($not_jp2_fileid)))"/>
+	<sch:pattern name="jpeg2000_disallowed">
+        <sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($not_jp2_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmixjp2comb" value="count(sets:distinct(exsl:node-set($jp2_mixjp2ids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($not_jp2_countfiles+$countadm)=$countfilescomb) or (($jp2_countmixjp2+$countadm)=$countmixjp2comb)">
+				Element 'JPEG2000' is not allowed in NISOIMG (MIX) metadata for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'.
+			</sch:assert>
+		</sch:rule>
 	</sch:pattern>
 		
 	<!-- TIFF specific check -->
-	<sch:pattern id="mix_byteOrder" is-a="required_element_format_specific_pattern">
-		<sch:param name="context_element" value="mets:file"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="file_format" value="string('image/tiff')"/>
-		<sch:param name="required_element" value="mets:techMD/mets:mdWrap/mets:xmlData/mix:mix/mix:BasicDigitalObjectInformation/mix:byteOrder"/>
-		<sch:param name="mdtype_name" value="string('NISOIMG (MIX)')"/>		
-		<sch:param name="specifications" value="string('')"/>
-	</sch:pattern>
-
+	<sch:let name="tiff_fileid" value="//mets:techMD[.//premis:formatName='image/tiff']/@ID"/>
+	<sch:let name="tiff_mixids" value="//mets:techMD[.//mix:mix/mix:BasicDigitalObjectInformation/mix:byteOrder]/@ID"/>
+	<sch:let name="tiff_countfiles" value="count(sets:distinct(exsl:node-set($tiff_fileid)))"/>
+	<sch:let name="tiff_countmix" value="count(sets:distinct(exsl:node-set($tiff_mixids)))"/>
+	<sch:pattern name="tiff_byteorder">
+		<sch:rule context="mets:file">
+			<sch:let name="admids" value="normalize-space(@ADMID)"/>
+			<sch:let name="countadm" value="count(sets:distinct(str:tokenize($admids, ' ')))"/>
+			<sch:let name="countfilescomb" value="count(sets:distinct(exsl:node-set($tiff_fileid) | str:tokenize($admids, ' ')))"/>
+			<sch:let name="countmixcomb" value="count(sets:distinct(exsl:node-set($tiff_mixids) | str:tokenize($admids, ' ')))"/>
+			<sch:assert test="(($tiff_countfiles+$countadm)=$countfilescomb) or not(($tiff_countmix+$countadm)=$countmixcomb)">
+				Element 'byteOrder' is required in NISOIMG (MIX) metadata for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'.
+			</sch:assert>
+		</sch:rule>
+    </sch:pattern>
 
 </sch:schema>
