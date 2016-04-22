@@ -73,16 +73,16 @@ def test_get_fileinfo_with_admid():
     results = mets_parser.get_fileinfo_with_admid('techmd-001')
 
     assert results == {
-        'format': {'mimetype': 'text/csv', 'charset': 'UTF-8'},
+        'format': {'mimetype': 'text/csv', 'charset': 'UTF-8', 'version': ''},
         'addml': {
             'headers': [
                 'Person name', 'Person email'],
             'charset': 'UTF-8',
             'delimiter': ';',
             'separator': 'CR+LF'
-            },
+        },
         'algorithm': 'MD5',
-        'object_id': 'object-001',
+        'object_id': {'value': 'object-001', 'type': 'local'},
         'filename': '/home/spock/scratch/information-package-tools/tests'
                     '/data/mets/file.csv',
 

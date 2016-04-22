@@ -149,8 +149,11 @@ def to_dict(premis_xml):
     format_name = premis_xml.xpath(
         ".//premis:formatName",
         namespaces=NAMESPACES)[0].text
-    premis["object_id"] = premis_xml.xpath(
+    premis["object_id"]["value"] = premis_xml.xpath(
         ".//premis:objectIdentifierValue",
+        namespaces=NAMESPACES)[0].text
+    premis["object_id"]["type"] = premis_xml.xpath(
+        ".//premis:objectIdentifierType",
         namespaces=NAMESPACES)[0].text
     premis.update(parse_mimetype(format_name))
     format_version = premis_xml.xpath(

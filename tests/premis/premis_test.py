@@ -198,10 +198,12 @@ class TestPremisClass:
         expected = {
             "algorithm": "MD5",
             "digest": "aa4bddaacf5ed1ca92b30826af257a1b",
-            "mimetype": "text/csv",
-            "charset": "UTF-8",
-            "object_id": "object-001"
-            }
+            "format": {
+                "mimetype": "text/csv",
+                "charset": "UTF-8",
+                "version": ""},
+            "object_id": {"value": "object-001", "type": "local"}
+        }
 
         assert premis.to_dict(premis_tree) == expected
 
@@ -211,13 +213,13 @@ class TestPremisClass:
 
         result = premis.parse_mimetype(format_name)
 
-        assert result['mimetype'] == 'text/xml'
-        assert result['charset'] == 'UTF-8'
-        assert result['alt-format'] == 'application/mets+xml'
+        assert result['format']['mimetype'] == 'text/xml'
+        assert result['format']['charset'] == 'UTF-8'
+        assert result['format']['alt-format'] == 'application/mets+xml'
 
         format_name = "application/x-internet-archive"
         result = premis.parse_mimetype(format_name)
 
-        assert result['mimetype'] == 'application/x-internet-archive'
+        assert result['format']['mimetype'] == 'application/x-internet-archive'
         print result
         assert 'charset' not in result
