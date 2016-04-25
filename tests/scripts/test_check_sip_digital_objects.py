@@ -60,6 +60,36 @@ class TestCommandLineTools:
                 "stdout": '',
                 "stderr": ''
             }
+        }, {
+
+            "testcase": 'Unsupported file version',
+            "filename": 'CSC_test_unsupported_version',
+            "expected_result": {
+                "returncode": 117,
+                "stdout": [
+                    'No validator for mimetype: application/warc version: 2.0'],
+                "stderr": ''
+            }
+        }, {
+
+            "testcase": 'Unsupported file mimetype, without version',
+            "filename": 'CSC_test_unsupported_mimetype_no_version',
+            "expected_result": {
+                "returncode": 117,
+                "stdout": [
+                    'No validator for mimetype: application/kissa version: '],
+                "stderr": ''
+            }
+        }, {
+
+            "testcase": 'Unsupported file mimetype',
+            "filename": 'CSC_test_unsupported_mimetype',
+            "expected_result": {
+                "returncode": 117,
+                "stdout": [
+                    'No validator for mimetype: application/kissa version: 1.0'],
+                "stderr": ''
+            }
         }]
     }
 
