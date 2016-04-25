@@ -15,4 +15,10 @@ HTML valdiation implemented with jhove.
 FIX:
 xmllint huge-parameter added to make large file validation work.
 
+Release 0.39
 
+FIX: Unsupported mimetype error fixed
+
+NEW: Add support for warc 0.18
+
+NEW: Refactored validator code and mets parsing.
