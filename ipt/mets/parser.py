@@ -1,3 +1,7 @@
+"""
+Implements mets.xml parsing for file validation purposes. Premis.xml and
+addml.cml paring are impolemented in separate modules, but used here.
+"""
 import os
 import lxml.etree
 import urllib
@@ -40,7 +44,8 @@ class LXML(object):
             self._xmlroot = lxml.etree.parse(self.filename)
         return self._xmlroot
 
-    def get_file_location(self, mets_file):
+    @staticmethod
+    def get_file_location(mets_file):
         """
         Get a file location url from METS XML document. For example
 
@@ -68,13 +73,15 @@ class LXML(object):
         Get fileinfo iterator.
 
         :filter: Filter for the iterator, controlled vocabulary:
-            'file-format-validation': Skip file if USE='no-file-format-validation' in METS
+            'file-format-validation': Skip file if
+            USE='no-file-format-validation' in METS
         """
         for mets_file in self.mets_files():
             # Files marked with USE='no-file-format-validation' omitted with
             # filter 'file-format-validation'
             file_use = mets_file.attrib.get('USE', '').strip()
-            if filter_ == 'file-format-validation' and file_use == 'no-file-format-validation':
+            if filter_ == 'file-format-validation' and \
+                    file_use == 'no-file-format-validation':
                 continue
             # Note: ADMID may contain several IDs separated with spaces
             admid = mets_file.attrib['ADMID']
@@ -87,12 +94,13 @@ class LXML(object):
         Return dict that contains information for mets:file.
 
             fileinfo["filename"]
-            fileinfo["digest_algorithm"]
-            fileinfo["digest_hex"]
-            fileinfo["format_version"]
-            fileinfo["format_mimetype"]
-            fileinfo["format_registry_key"]
-            fileinfo["object_id"]
+            fileinfo["algorithm"]
+            fileinfo["digest"]
+            fileinfo["format"]["version"]
+            fileinfo["format"]["mimetype"]
+            fileinfo["format"]["format_registry_key"]
+            fileinfo["object_id"]["type"]
+            fileinfo["object_id"]["value"]
         """
         filename = os.path.join(
             self.sip_dir,
@@ -110,7 +118,8 @@ class LXML(object):
             addml_data_dict)
         return result_dict
 
-    def merge_dicts(self, *dicts):
+    @staticmethod
+    def merge_dicts(*dicts):
         """
         Merge N dicts.
         :dicts: a list of dicts.
@@ -127,7 +136,6 @@ class LXML(object):
         if len(results) == 0:
             return None
         return results[0]
-
 
     def get_filename_with_admid(self, admid):
         """@todo: Docstring for get_filename_with_admid
