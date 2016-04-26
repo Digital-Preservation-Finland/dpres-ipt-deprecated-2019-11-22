@@ -58,7 +58,8 @@ class LXML(object):
         file_url = mets_file.xpath('mets:FLocat/@xlink:href',
                                    namespaces=NAMESPACES)
         if len(file_url) > 0:
-            return urllib.unquote(file_url[0])
+            return urllib.unquote(
+                file_url[0]).replace('file://', '').replace('./', '')
         else:
             return None
 
@@ -172,7 +173,6 @@ class LXML(object):
         if not file_:
             return None
         filename = self.get_file_location(file_[0])
-        filename = filename.replace('file://', '').replace('./', '')
         return filename
 
     def get_file_object_id_with_admid(self, admid):

@@ -34,10 +34,10 @@ def test_get_file_location():
     first_file_location = lxml.get_file_location(first_file)
     second_file_location = lxml.get_file_location(second_file)
     assert first_file_location == \
-        "file://asettamiset/122390_OPM_päätös_20.05.2008_12-02-42.pdf", \
+        "asettamiset/122390_OPM_päätös_20.05.2008_12-02-42.pdf", \
         "It seems there was a problem with URL unquoting a file name"
     assert second_file_location == \
-        "file://asettamiset/128343_Vihanta.pdf", \
+        "asettamiset/128343_Vihanta.pdf", \
         "It seems there was a problem with URL unquoting a file name"
 
 
