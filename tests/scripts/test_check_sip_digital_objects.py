@@ -117,3 +117,68 @@ def test_check_sip_digital_objects():
 
         assert returncode == case["expected_result"]["returncode"], message
 
+
+def test_validation(monkeypatch):
+    """Test the get_fileinfo_array method by METS including file with arbitrary
+    native file format"""
+    monkeypatch.setattr(Jhove, "validate", lambda fileinfo: (0, "", ""))
+    # Omitting the arbitrary native file in METS
+    mets_file = os.path.join(METSDIR, 'mets_native_marked.xml')
+    mets_parser = LXML(mets_file)
+    mets_parser.xmlroot()
+    results = [result for result in validation(mets_parser)][0]
+    assert results["fileinfo"] == {
+        'object_id': {
+            'type': 'local',
+            'value': 'object-002'},
+        'format': {
+            'mimetype': 'application/pdf',
+            'version': 'A-1b'},
+        'algorithm': 'MD5',
+        'digest': '7fc2103950f2bb374c277ed4eb43bdc6',
+        'filename': '/home/spock/scratch/information-package-tools'
+                     '/tests/data/mets/file.pdf'}
+    assert results["result"] == (0, "", "")
+
+    # Returned all files in METS, where arbitrary file not marked as native
+    mets_file = os.path.join(METSDIR, 'mets_native_unmarked.xml')
+    mets_parser = LXML(filename=mets_file)
+    mets_parser.xmlroot()
+
+    expected = [
+        {"fileinfo": {
+            'object_id': {
+                'type': 'local',
+                'value': 'object-001'},
+            'format': {
+                'mimetype': 'application/cdr',
+                'version': ''
+            },
+            'algorithm': 'MD5',
+            'digest': '2a2e5816c93ee7c21ae1c84ddcf8c80a',
+            'filename': '/home/spock/scratch/information-package-tools'
+                         '/tests/data/mets/file.cdr'},
+        "result": (
+            117, '', 'No validator for mimetype: application/cdr version: ')
+         },
+        {"fileinfo": {
+            'object_id': {
+                'type': 'local',
+                'value': 'object-002'},
+            'format': {
+                'mimetype': 'application/pdf',
+                'version': 'A-1b'},
+            'algorithm': 'MD5',
+            'digest': '7fc2103950f2bb374c277ed4eb43bdc6',
+            'filename': '/home/spock/scratch/information-package-tools'
+                         '/tests/data/mets/file.pdf'},
+         "result": (0, "", "")
+         }
+    ]
+    files = [file_ for file_ in validation(mets_parser)]
+    for file_iterator in range(0, 2):
+        print "GOT", files[file_iterator]
+        print
+        print "EXPECTED", expected[file_iterator]
+        print
+        assert files[file_iterator] == expected[file_iterator]
