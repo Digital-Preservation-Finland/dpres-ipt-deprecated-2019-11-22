@@ -40,7 +40,6 @@ def parse_arguments(arguments):
 
 
 def validation(mets_parser):
-    for fileinfo in mets_parser.get_fileinfo_iterator():
     """
     Call validation for all files enumerated in mets.xml files.
     :mets_parser: LXML class for mets parsing
@@ -49,6 +48,7 @@ def validation(mets_parser):
                 'result': validation_result
             }
     """
+    for fileinfo in mets_parser.get_fileinfo_iterator('file-format-validation'):
         validation_results = validate(fileinfo)
         for validation_result in validation_results:
             yield {
