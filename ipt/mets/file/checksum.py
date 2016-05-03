@@ -170,10 +170,6 @@ class Checker(object):
 
         for mets_fixity in mets_file_checksums:
 
-            print self.sip_dir
-            print mets_fixity[0]
-            print "files: ", files
-
             filename = mets_fixity[0]
             algorithm = mets_fixity[1]
             digest = mets_fixity[2]
