@@ -1,3 +1,4 @@
+MOCK_CONFIG=stable-6-x86_64
 PREFIX=/usr
 ROOT=/
 ETC=/etc
@@ -80,4 +81,6 @@ clean-rpm:
 	rm -rf rpmbuild
 
 rpm: clean-rpm
-	build-rpm.sh include/rhel6
+	create-archive.sh
+	preprocess-spec-m4-macros.sh include/rhel6
+	build-rpm.sh ${MOCK_CONFIG}
