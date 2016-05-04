@@ -180,7 +180,7 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
 
-	<!-- METS Header elements -->	
+	<!-- METS Header elements -->
 	<sch:pattern id="mets_metsHdr_altRecordID" is-a="disallowed_element_pattern">
 		<sch:param name="context_element" value="mets:metsHdr"/>
 		<sch:param name="context_condition" value="true()"/>
@@ -195,7 +195,7 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="required_element" value="mets:techMD"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
-	<sch:pattern id="mets_amdSec_techMD" is-a="required_element_pattern">
+	<sch:pattern id="mets_amdSec_digiprovMD" is-a="required_element_pattern">
 		<sch:param name="context_element" value="mets:amdSec"/>
 		<sch:param name="context_condition" value="true()"/>
 		<sch:param name="required_element" value="mets:digiprovMD"/>
@@ -505,7 +505,7 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="valid_values" value="string('1.0.0')"/>
 		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
 	</sch:pattern>
-	
+
 	<!-- mdRef attributes -->
 	<sch:pattern id="mets_mdRef_MDTYPE" is-a="required_attribute_pattern">
 		<sch:param name="context_element" value="mets:mdRef"/>
@@ -689,7 +689,7 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="valid_values" value="string('simple')"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
-	
+
 	<!-- StructMap attributes -->
 	<sch:pattern id="mets14_structMap_PID" is-a="disallowed_attribute_pattern">
 		<sch:param name="context_element" value="mets:structMap"/>
@@ -721,7 +721,7 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="required_attribute" value="@TYPE"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
-	
+
 	<!-- fptr and mptr attributes -->
 	<sch:pattern id="mets_fptr_FILEID" is-a="required_attribute_or_element_pattern">
 		<sch:param name="context_element" value="mets:fptr"/>
@@ -764,40 +764,40 @@ Validates METS metadata elements and attributes, their values, and METS internal
 	</sch:pattern>
 
 	<!-- METS internal linking, cross-check part 1: From link to target -->
-	<sch:let name="dmdids" value="exsl:node-set(//mets:dmdSec/@ID)"/>
-	<sch:let name="admids" value="exsl:node-set(//mets:amdSec/*[self::mets:techMD or self::mets:rightsMD or self::mets:sourceMD or self::mets:digiprovMD]/@ID)"/>
-	<sch:let name="fileids" value="exsl:node-set(//mets:file/@ID)"/>
+	<sch:let name="dmdids" value="//mets:dmdSec/@ID"/>
+	<sch:let name="admids" value="//mets:amdSec/*[self::mets:techMD or self::mets:rightsMD or self::mets:sourceMD or self::mets:digiprovMD]/@ID"/>
+	<sch:let name="fileids" value="//mets:file/@ID"/>
 	<sch:pattern id="link_div_dmdid">
 		<sch:rule context="mets:div[@DMDID]">
-            <sch:assert test="(count(sets:distinct(exsl:node-set(str:tokenize(normalize-space(@DMDID),' ')) | $dmdids)) = count(sets:distinct(exsl:node-set($dmdids))))">
+            <sch:assert test="(count(sets:distinct(str:tokenize(normalize-space(@DMDID),' ') | exsl:node-set($dmdids))) = count(sets:distinct(exsl:node-set($dmdids))))">
 				Value '<sch:value-of select="@DMDID"/>' in attribute '<sch:value-of select="name(@DMDID)"/>' in element '<sch:name/>' contains a link to nowhere. The corresponding target attribute '@ID' with the same value was not found.
 			</sch:assert>
 		</sch:rule>
 	</sch:pattern>
 	<sch:pattern id="link_file_admid">
 		<sch:rule context="mets:file[@ADMID]">
-            <sch:assert test="(count(sets:distinct(exsl:node-set(str:tokenize(normalize-space(@ADMID),' ')) | $admids)) = count(sets:distinct(exsl:node-set($admids))))">
+            <sch:assert test="(count(sets:distinct(str:tokenize(normalize-space(@ADMID),' ') | exsl:node-set($admids))) = count(sets:distinct(exsl:node-set($admids))))">
 				Value '<sch:value-of select="@ADMID"/>' in attribute '<sch:value-of select="name(@ADMID)"/>' in element '<sch:name/>' contains a link to nowhere. The corresponding target attribute '@ID' with the same value was not found.
 			</sch:assert>
 		</sch:rule>
 	</sch:pattern>
 	<sch:pattern id="link_div_admid">
 		<sch:rule context="mets:div[@ADMID]">
-            <sch:assert test="(count(sets:distinct(exsl:node-set(str:tokenize(normalize-space(@ADMID),' ')) | $admids)) = count(sets:distinct(exsl:node-set($admids))))">
+            <sch:assert test="(count(sets:distinct(str:tokenize(normalize-space(@ADMID),' ') | exsl:node-set($admids))) = count(sets:distinct(exsl:node-set($admids))))">
 				Value '<sch:value-of select="@ADMID"/>' in attribute '<sch:value-of select="name(@ADMID)"/>' in element '<sch:name/>' contains a link to nowhere. The corresponding target attribute '@ID' with the same value was not found.
 			</sch:assert>
 		</sch:rule>
 	</sch:pattern>
 	<sch:pattern id="link_fptr_fileid">
 		<sch:rule context="mets:fptr[@FILEID]">
-            <sch:assert test="(count(sets:distinct(exsl:node-set(str:tokenize(normalize-space(@FILEID),' ')) | $fileids)) = count(sets:distinct(exsl:node-set($fileids))))">
+            <sch:assert test="(count(sets:distinct(str:tokenize(normalize-space(@FILEID),' ') | exsl:node-set($fileids))) = count(sets:distinct(exsl:node-set($fileids))))">
 				Value '<sch:value-of select="@FILEID"/>' in attribute '<sch:value-of select="name(@FILEID)"/>' in element '<sch:name/>' contains a link to nowhere. The corresponding target attribute '@ID' with the same value was not found.
 			</sch:assert>
 		</sch:rule>
 	</sch:pattern>
 	<sch:pattern id="link_area_fileid">
 		<sch:rule context="mets:area[@FILEID]">
-            <sch:assert test="(count(sets:distinct(exsl:node-set(str:tokenize(normalize-space(@FILEID),' ')) | $fileids)) = count(sets:distinct(exsl:node-set($fileids))))">
+            <sch:assert test="(count(sets:distinct(str:tokenize(normalize-space(@FILEID),' ') | exsl:node-set($fileids))) = count(sets:distinct(exsl:node-set($fileids))))">
 				Value '<sch:value-of select="@FILEID"/>' in attribute '<sch:value-of select="name(@FILEID)"/>' in element '<sch:name/>' contains a link to nowhere. The corresponding target attribute '@ID' with the same value was not found.
 			</sch:assert>
 		</sch:rule>
@@ -813,7 +813,7 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:rule context="mets:dmdSec">
 			<sch:let name="id" value="normalize-space(@ID)"/>
             <sch:assert test="count($dmdidlinks[contains(concat(' ', normalize-space(@DMDID), ' '), concat(' ', $id, ' '))]) &gt; 0">
-				Section containing value '<sch:value-of select="@DMDID"/>' in attribute '<sch:value-of select="name(@DMDID)"/>' in element '<sch:value-of select="name(..)"/>' requires a reference from attribute '@DMDID'.
+				Section containing value '<sch:value-of select="@ID"/>' in attribute '<sch:value-of select="name(@ID)"/>' in element '<sch:value-of select="name(.)"/>' requires a reference from attribute '@DMDID'.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -822,7 +822,7 @@ Validates METS metadata elements and attributes, their values, and METS internal
 			<sch:let name="id" value="normalize-space(@ID)"/>
 			<sch:assert test="count($admidfilelinks[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))]) &gt; 0
 			or count($admiddivlinks[contains(concat(' ', normalize-space(@ADMID), ' '), concat(' ', $id, ' '))]) &gt; 0">
-				Section containing value '<sch:value-of select="@ADMID"/>' in attribute '<sch:value-of select="name(@ADMID)"/>' in element '<sch:value-of select="name(..)"/>' requires a reference from attribute '@ADMID'.
+				Section containing value '<sch:value-of select="@ID"/>' in attribute '<sch:value-of select="name(@ID)"/>' in element '<sch:value-of select="name(.)"/>' requires a reference from attribute '@ADMID'.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>
@@ -831,7 +831,7 @@ Validates METS metadata elements and attributes, their values, and METS internal
 			<sch:let name="id" value="normalize-space(@ID)"/>
 			<sch:assert test="count($fileidfptrlinks[contains(concat(' ', normalize-space(@FILEID), ' '), concat(' ', $id, ' '))]) &gt; 0
 			or count($fileidarealinks[contains(concat(' ', normalize-space(@FILEID), ' '), concat(' ', $id, ' '))]) &gt; 0">
-				Section containing value '<sch:value-of select="@FILEID"/>' in attribute '<sch:value-of select="name(@FILEID)"/>' in element '<sch:value-of select="name(..)"/>' requires a reference from attribute '@FILEID'.
+				Section containing value '<sch:value-of select="@ID"/>' in attribute '<sch:value-of select="name(@ID)"/>' in element '<sch:value-of select="name(.)"/>' requires a reference from attribute '@FILEID'.
 			</sch:assert>
         </sch:rule>
 	</sch:pattern>

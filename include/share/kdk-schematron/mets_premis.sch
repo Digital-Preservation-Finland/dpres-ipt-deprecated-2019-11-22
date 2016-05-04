@@ -4,7 +4,6 @@
 
 <!--
 Validates PREMIS metadata.
-TODO: Native file format handling.
 -->
 
 	<sch:ns prefix="mets" uri="http://www.loc.gov/METS/"/>
@@ -475,34 +474,34 @@ TODO: Native file format handling.
 	<sch:let name="objectid" value="//premis:objectIdentifierValue"/>
 	<sch:let name="eventid" value="//premis:eventIdentifierValue"/>
 	<sch:let name="agentid" value="//premis:agentIdentifierValue"/>
-	<sch:let name="rightsid" value="//premis:rightsIdentifierValue"/>
+	<sch:let name="rightsid" value="//premis:rightsStatementIdentifierValue"/>
 	<sch:pattern id="link_premis_element">
 		<sch:rule context="premis:linkingObjectIdentifierValue">
 			<sch:let name="id_value" value="normalize-space(.)"/>
 			<sch:assert test="(count($objectid[normalize-space(.) = $id_value]) = 1)
 			or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' '))">
-				Value '<sch:value-of select="."/>' in element '<sch:name/>' is a link to nowhere. The corresponding target element '<sch:value-of select="string('$objectid')"/>' with the same value was not found.
+				Value '<sch:value-of select="."/>' in element '<sch:name/>' is a link to nowhere. The corresponding target element 'objectIdentifierValue' with the same value was not found.
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:linkingEventIdentifierValue">
 			<sch:let name="id_value" value="normalize-space(.)"/>
 			<sch:assert test="(count($eventid[normalize-space(.) = $id_value]) = 1)
 			or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' '))">
-				Value '<sch:value-of select="."/>' in element '<sch:name/>' is a link to nowhere. The corresponding target element '<sch:value-of select="string('$eventid')"/>' with the same value was not found.
+				Value '<sch:value-of select="."/>' in element '<sch:name/>' is a link to nowhere. The corresponding target element 'eventIdentifierValue' with the same value was not found.
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:linkingAgentIdentifierValue">
 			<sch:let name="id_value" value="normalize-space(.)"/>
 			<sch:assert test="(count($agentid[normalize-space(.) = $id_value]) = 1)
 			or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' '))">
-				Value '<sch:value-of select="."/>' in element '<sch:name/>' is a link to nowhere. The corresponding target element '<sch:value-of select="string('$agentid')"/>' with the same value was not found.
+				Value '<sch:value-of select="."/>' in element '<sch:name/>' is a link to nowhere. The corresponding target element 'agentIdentifierValue' with the same value was not found.
 			</sch:assert>
 		</sch:rule>
 		<sch:rule context="premis:linkingRightsStatementIdentifierValue">
 			<sch:let name="id_value" value="normalize-space(.)"/>
 			<sch:assert test="(count($rightsid[normalize-space(.) = $id_value]) = 1)
 			or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' '))">
-				Value '<sch:value-of select="."/>' in element '<sch:name/>' is a link to nowhere. The corresponding target element '<sch:value-of select="string('$rightsid')"/>' with the same value was not found.
+				Value '<sch:value-of select="."/>' in element '<sch:name/>' is a link to nowhere. The corresponding target element 'rightsStatementIdentifierValue' with the same value was not found.
 			</sch:assert>
 		</sch:rule>
 	</sch:pattern>
@@ -526,6 +525,10 @@ TODO: Native file format handling.
 			or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' ')) or contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' '))">
 				Value '<sch:value-of select="@USE"/>' in attribute '<sch:value-of select="name(@USE)"/>' found for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'. PREMIS event for migration contains ambiguous links to object identifiers.
 			</sch:assert>
+			<sch:report test="count($digiprovmd_migration) &gt; 0 and count($event_links_source_ok) &gt; 0
+			and not(contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),' '))) and not(contains(' 1.4 1.4.1 ', concat(' ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),' ')))">
+				INFO: Value '<sch:value-of select="@USE"/>' in attribute '<sch:value-of select="name(@USE)"/>' found for file '<sch:value-of select="./mets:FLocat/@xlink:href"/>'. No file format validation is executed for this file.
+			</sch:report>
 		</sch:rule>
 	</sch:pattern>
 

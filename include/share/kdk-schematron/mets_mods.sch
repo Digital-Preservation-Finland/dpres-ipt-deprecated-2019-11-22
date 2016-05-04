@@ -960,15 +960,15 @@ Validates version differences from MODS metadata.
 		<sch:param name="disallowed_element" value="mods:part"/>
 		<sch:param name="mdattribute" value="@MDTYPE"/>
 		<sch:param name="mdtype_name" value="string('MODS')"/>		
-		<sch:param name="mdtype_version" value="string('3.3')"/>
+		<sch:param name="mdtype_version" value="string('3.1')"/>
 	</sch:pattern>
 	<sch:pattern id="mods31_coordinates" is-a="required_element_smaller_version_pattern">
 		<sch:param name="context_element" value="mods:cartographics"/>
 		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="disallowed_element" value="mods:coordinates"/>
+		<sch:param name="required_element" value="mods:coordinates"/>
 		<sch:param name="mdattribute" value="@MDTYPE"/>
 		<sch:param name="mdtype_name" value="string('MODS')"/>		
-		<sch:param name="mdtype_version" value="string('3.3')"/>
+		<sch:param name="mdtype_version" value="string('3.1')"/>
 	</sch:pattern>
 	<sch:pattern id="mods31_titleInfo" is-a="required_subelements_smaller_version_pattern">
 		<sch:param name="context_element" value="mods:titleInfo"/>
