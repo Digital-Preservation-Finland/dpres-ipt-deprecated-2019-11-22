@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # vim:ft=python
 
-import os
 import sys
 import argparse
 import ipt.mets.parser
@@ -48,7 +47,7 @@ def validation(mets_parser):
                 'result': validation_result
             }
     """
-    for fileinfo in mets_parser.get_fileinfo_iterator('file-format-validation'):
+    for fileinfo in mets_parser.iter_fileinfo(filter_='file-format-validation'):
         validation_results = validate(fileinfo)
         for validation_result in validation_results:
             yield {

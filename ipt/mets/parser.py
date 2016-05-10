@@ -69,7 +69,7 @@ class LXML(object):
         """
         return self.xmlroot().xpath('//mets:file', namespaces=NAMESPACES)
 
-    def get_fileinfo_iterator(self, filter_=None):
+    def iter_fileinfo(self, filter_=None):
         """
         Get fileinfo iterator.
 

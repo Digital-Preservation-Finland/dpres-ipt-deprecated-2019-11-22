@@ -41,14 +41,14 @@ def test_get_file_location():
         "It seems there was a problem with URL unquoting a file name"
 
 
-def test_get_fileinfo_iterator():
-    """Test the get_fileinfo_array method by METS including file with arbitrary
+def test_iter_fileinfo():
+    """Test iter_fileinfo method by METS including file with arbitrary
     native file format"""
     # Omitting the arbitrary native file in METS
     mets_file = os.path.join(METSDIR, 'mets_native_marked.xml')
     mets_parser = LXML(mets_file)
     mets_parser.xmlroot()
-    fileinfo = [info for info in mets_parser.get_fileinfo_iterator(
+    fileinfo = [info for info in mets_parser.iter_fileinfo(
         'file-format-validation')]
     assert len(fileinfo) == 1
     assert fileinfo[0]['format']['mimetype'] == 'application/pdf'
@@ -57,7 +57,7 @@ def test_get_fileinfo_iterator():
     mets_file = os.path.join(METSDIR, 'mets_native_unmarked.xml')
     mets_parser = LXML(filename=mets_file)
     mets_parser.xmlroot()
-    fileinfo = [info for info in mets_parser.get_fileinfo_iterator(
+    fileinfo = [info for info in mets_parser.iter_fileinfo(
         'file-format-validation')]
     assert len(fileinfo) == 2
     assert fileinfo[0]['format']['mimetype'] == 'application/cdr'
