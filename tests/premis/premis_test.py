@@ -207,6 +207,19 @@ class TestPremisClass:
 
         assert premis.to_dict(premis_tree) == expected
 
+        premis_path = os.path.join(TESTDATADIR, 'premis_1_4.xml')
+        premis_tree = lxml.etree.parse(premis_path)
+        expected = {
+            "algorithm": "MD5",
+            "digest": "aa4bddaacf5ed1ca92b30826af257a1b",
+            "format": {
+                "mimetype": "text/csv",
+                "charset": "UTF-8",
+                "version": ""},
+            "object_id": {"value": "object-001", "type": "local"}
+        }
+        assert premis.to_dict(premis_tree) == expected
+
     def test_parse_mimetype(self, testcase):
         format_name = \
             "text/xml; charset=UTF-8; alt-format=application/mets+xml"

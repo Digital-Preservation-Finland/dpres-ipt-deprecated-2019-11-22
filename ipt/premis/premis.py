@@ -159,7 +159,7 @@ def to_dict(premis_xml):
     format_version = premis_xml.xpath(
         ".//premis:formatVersion",
         namespaces=NAMESPACES)
-    if len(format_version) == 0:
+    if len(format_version) == 0 or format_version[0].text is None:
         premis["format"]["version"] = ""
     else:
         premis["format"]["version"] = format_version[0].text
