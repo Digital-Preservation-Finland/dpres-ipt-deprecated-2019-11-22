@@ -163,6 +163,8 @@ def to_dict(premis_xml):
         premis["format"]["version"] = ""
     else:
         premis["format"]["version"] = format_version[0].text
+    if premis["format"]["mimetype"] == 'text/plain':
+        premis["format"]["version"] = premis["format"]["charset"]
     return premis
 
 
