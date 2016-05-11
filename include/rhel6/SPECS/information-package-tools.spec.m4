@@ -20,7 +20,7 @@ Source0:        %{file_prefix}-v%{file_version}%{?file_release_tag}-%{file_build
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
-Requires: python python-mimeparse python-dateutil xml-common pymongo ffmpeg
+Requires: python python-mimeparse python-dateutil xml-common pymongo
 Requires: libxslt unzip jhove jhove2 python-setuptools python-lxml
 # ClamAV installation requires these to work
 Requires: clamav clamav-db libtool-ltdl
