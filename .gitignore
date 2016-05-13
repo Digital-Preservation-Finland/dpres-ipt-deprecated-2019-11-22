@@ -3,6 +3,7 @@
 .pydev*
 .project*
 *.pyc
+.cache
 __pycache__
 INSTALLED_FILES*
 PKG-INFO
