@@ -279,3 +279,44 @@ class LXML(object):
         digest = digest.lower().strip()
 
         return {"algorithm": algorithm, "digest": digest}
+
+
+class MdWrap(object):
+
+    """Helper class for accessing metadata wrapper inside
+    <techMD>, <sourceMD>, <rightsMD> and <digiprovMD> elements.
+
+    """
+
+    def __init__(self, element):
+        """Initialize class instance with given `element`.
+
+        :element: ElementTree object containing <mdWrap>
+        """
+        self.element = element
+
+    @property
+    def mdtype(self):
+        """MDTYPE"""
+        return self.mdwrap_attr('MDTYPE')
+
+    @property
+    def mdtype_version(self):
+        """MDTYPEVERSION"""
+        return self.mdwrap_attr('MDTYPEVERSION')
+
+    @property
+    def other_mdtype(self):
+        """OTHERMDTYPE"""
+        return self.mdwrap_attr('OTHERMDTYPE')
+
+    @property
+    def xmldata(self):
+        """xmlData"""
+        return self.element.xpath(
+            'mets:mdWrap/mets:xmlData/*', namespaces=NAMESPACES)[0]
+
+    def mdwrap_attr(self, name):
+        """Return attribute from mdWrap attribute"""
+        return self.element.xpath(
+            'mets:mdWrap', namespaces=NAMESPACES)[0].attrib[name]

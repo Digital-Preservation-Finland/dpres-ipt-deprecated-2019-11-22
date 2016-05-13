@@ -7,7 +7,7 @@ import pytest
 
 import lxml.etree
 from tests.testcommon.settings import TESTDATADIR
-from ipt.mets.parser import LXML, NAMESPACES, ns_prefix
+from ipt.mets.parser import LXML, NAMESPACES, ns_prefix, MdWrap
 
 
 def mets_parser(mets_filename):
@@ -20,6 +20,15 @@ def mets_parser(mets_filename):
     """
     mets_path = os.path.join(TESTDATADIR, "mets", mets_filename)
     return LXML(filename=mets_path)
+
+
+def test_mdwrap():
+    """Test the `MdWrap` class """
+    parser = mets_parser('mets.xml')
+    print parser.element_with_id('tech003')
+    mdwrap = MdWrap(parser.element_with_id('tech003'))
+    assert mdwrap.mdtype == 'PREMIS:OBJECT'
+    assert mdwrap.xmldata.attrib[ns_prefix('xsi', 'type')] == 'premis:file'
 
 
 def test_element_with_id():
@@ -53,8 +62,10 @@ def test_get_file_location():
 
     first_file = mets_files[0]
     second_file = mets_files[1]
+
     first_file_location = parser.get_file_location(first_file)
     second_file_location = parser.get_file_location(second_file)
+
     assert first_file_location == \
         "asettamiset/122390_OPM_päätös_20.05.2008_12-02-42.pdf", \
         "It seems there was a problem with URL unquoting a file name"
