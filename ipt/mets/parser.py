@@ -15,7 +15,18 @@ NAMESPACES = {'xlink': 'http://www.w3.org/1999/xlink',
               'mets': 'http://www.loc.gov/METS/',
               'premis': 'info:lc/xmlns/premis-v2',
               'addml': 'http://www.arkivverket.no/standarder/addml',
-              'xsi': 'http://www.w3.org/2001/XMLSchema-instance'}
+              'xsi': 'http://www.w3.org/2001/XMLSchema-instance',
+              'kdk': 'http://www.kdk.fi/standards/mets/kdk-extensions'}
+
+
+def ns_prefix(namespace, tag=''):
+    """Return namespace URI prefix for given namespace.
+
+    :namespace: Name of the namespace
+    :returns: Prefix for element tag
+
+    """
+    return '{%s}%s' % (NAMESPACES[namespace], tag)
 
 
 class LXML(object):
@@ -69,7 +80,40 @@ class LXML(object):
         """
         return self.xmlroot().xpath('//mets:file', namespaces=NAMESPACES)
 
-    def iter_fileinfo(self, filter_=None):
+    def iter_elements_with_id(self, identifiers):
+        """Iterate all metadata elements under <amdSec> with given list of
+        AMDID's.
+
+        Parameter can be list or string where values are separated with
+        whitespace.
+
+        :admid_list: List of ADMID's (list or string)
+        :returns: Iterable for all references metadata elements
+
+        """
+        if isinstance(identifiers, str):
+            identifiers = identifiers.split()
+        for identifier in identifiers:
+            yield self.element_with_id(identifier)
+
+    def element_with_id(self, identifier):
+        """Return single element with given ADMID.
+
+        ADMID is single unqiue reference to one of the following elements::
+
+            <techMD>, <sourceMD>, <rightsMD>, <digiprovMD>
+
+        :admid: ADMID as string
+        :returns: References element
+
+        """
+        query = "//*[@ID='%s']" % identifier
+        results = self.xmlroot().xpath(query, namespaces=NAMESPACES)
+        print results
+        assert len(results) == 1
+        return results[0]
+
+    def get_fileinfo_iterator(self, filter_=None):
         """
         Get fileinfo iterator.
 
