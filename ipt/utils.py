@@ -1,6 +1,10 @@
 """Utility functions."""
 
+import os
 import subprocess
+import urlparse
+import urllib
+
 
 class UnknownException(Exception):
     """Unknown error."""
@@ -31,3 +35,10 @@ def run_command(cmd, stdout=subprocess.PIPE):
         stderr_result = ""
     statuscode = proc.returncode
     return statuscode, stdout_result, stderr_result
+
+
+def url2path(url):
+    url = urlparse.urlparse(url)
+    url = os.path.abspath(os.path.join(url.netloc, url.path))
+    url = urllib.unquote_plus(url)
+    url = url.lstrip('/')

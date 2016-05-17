@@ -33,20 +33,23 @@ def main(arguments=None):
 
     fileinfo = {
         "filename": args[0],
+        "schema": options.schemapath,
         "format": {
             "mimetype": "text/xml",
             "version": "1.0"
         }
     }
     validate = ipt.validator.xmllint.Xmllint(fileinfo)
-    validate.set_catalog(options.catalogpath)
-    validate.add_schema(options.schemapath)
 
-    (returncode, messages, errors) = validate.validate()
+    (valid, messages, errors) = validate.validate()
 
+    print >> sys.stdout, messages
     print >> sys.stderr, errors
 
-    return returncode
+    if not valid:
+        return 117
+
+    return 0
 
 if __name__ == '__main__':
     # If run from the command line, take out the program name from sys.argv
