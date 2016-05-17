@@ -6,7 +6,7 @@ import os
 import lxml.etree
 import urllib
 
-from utils import url2path
+from ipt.utils import url2path
 from ipt.premis import premis
 from ipt.addml import addml
 

@@ -6,7 +6,7 @@ import ipt.mets.parser
 import ipt.fileutils.checksum
 import ipt.fileutils.filefinder
 
-from utils import url2path
+from ipt.utils import url2path
 
 
 class Checker(object):
