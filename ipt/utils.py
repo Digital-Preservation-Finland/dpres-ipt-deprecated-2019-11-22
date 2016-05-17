@@ -38,7 +38,10 @@ def run_command(cmd, stdout=subprocess.PIPE):
 
 
 def url2path(url):
+    """Convert the path from a percent-encoded URL to filesystem path. E.g.
+    file://.//foo+bar/baz.zip -> 'foo bar/baz.zip'"""
+
     url = urlparse.urlparse(url)
     url = os.path.abspath(os.path.join(url.netloc, url.path))
     url = urllib.unquote_plus(url)
-    url = url.lstrip('/')
+    return url.lstrip('/')

@@ -6,6 +6,7 @@ import os
 import lxml.etree
 import urllib
 
+from utils import url2path
 from ipt.premis import premis
 from ipt.addml import addml
 
@@ -58,8 +59,7 @@ class LXML(object):
         file_url = mets_file.xpath('mets:FLocat/@xlink:href',
                                    namespaces=NAMESPACES)
         if len(file_url) > 0:
-            return urllib.unquote(
-                file_url[0]).replace('file://', '').replace('./', '')
+            return url2path(file_url)
         else:
             return None
 

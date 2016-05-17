@@ -3,9 +3,10 @@ are verified."""
 import os
 
 import ipt.mets.parser
-
 import ipt.fileutils.checksum
 import ipt.fileutils.filefinder
+
+from utils import url2path
 
 
 class Checker(object):
@@ -89,7 +90,7 @@ class Checker(object):
                 continue
 
             # and change it to normal filesystem path
-            filename = fileurl.replace('file://', '')
+            filename = url2path(fileurl)
 
             # print "filename", filename
 
@@ -98,9 +99,6 @@ class Checker(object):
                                os.path.relpath(os.path.join(
                                                self.sip_dir, filename),
                                                self.sip_dir)))
-
-            # Sanitize filenames...
-            filename = filename.lstrip('/')
 
             fixity = self.mets.get_file_fixity_with_admid(
                 mets_file.attrib['ADMID'])
