@@ -14,7 +14,7 @@ import random
 import lxml.etree
 
 from ipt.premis import premis
-from ipt.validator.libxml import Libxml
+from ipt.validator.xmllint import Xmllint
 from tests.testcommon.settings import PROJECTDIR
 
 
@@ -23,10 +23,6 @@ PREMIS_NS = "info:lc/xmlns/premis-v2"
 PREMIS = "{%s}" % PREMIS_NS
 NAMESPACES = {'p': PREMIS_NS}
 PREMIS_VERSION = "2.2"
-
-CATALOGPATH = os.path.join(
-    testcommon.settings.SHAREDIR, 'schema/catalog-local.xml')
-
 
 class TestPremisClass:
 
@@ -101,11 +97,11 @@ class TestPremisClass:
                     "version": "1.0"
                 }
             }
-            validator = Libxml(fileinfo)
-            validator.set_catalog(CATALOGPATH)
+            validator = Xmllint(fileinfo)
 
-            (returncode, stdout, stderr) = validator.validate()
-            assert "XSD validation success" in stdout
+            (valid, stdout, stderr) = validator.validate()
+            
+            assert valid
 
         print premis_document.serialize()
 

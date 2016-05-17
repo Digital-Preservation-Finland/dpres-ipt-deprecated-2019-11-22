@@ -57,7 +57,7 @@ class LXML(object):
         """
 
         file_url = mets_file.xpath('mets:FLocat/@xlink:href',
-                                   namespaces=NAMESPACES)
+                                   namespaces=NAMESPACES)[0]
         if len(file_url) > 0:
             return url2path(file_url)
         else:
@@ -105,6 +105,7 @@ class LXML(object):
         """
         filename = os.path.join(
             self.sip_dir,
+                self.sip_dir,
             self.get_filename_with_admid(admid))
 
         filename_dict = {"filename": filename}
