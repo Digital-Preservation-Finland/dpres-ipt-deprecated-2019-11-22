@@ -178,7 +178,7 @@ class TestCommandLineTools:
             "testcase": "Test invalid mets.xml",
             "sipname": "CSC_test005",
             "expected_result": {
-                "returncode": 117,
+                "returncode": 3,
                 "in_stdout": [],
                 "not_in_stdout": [],
                 "stderr": "",
@@ -308,25 +308,28 @@ class TestCommandLineTools:
 
     @pytest.mark.usefixtures("monkeypatch_Popen")
     def test_sign_xml_file(self, testcase, certificate, expected_result,
-            signature_name, sipname):
+                           signature_name, sipname):
 
-        mets_path = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips',
-            sipname, 'mets.xml')
+        mets_path = os.path.join(
+            testcommon.settings.TESTDATADIR, 'test-sips', sipname, 'mets.xml')
+
         certificate_path = os.path.join(testcommon.settings.TESTDATADIR,
                                         'sip-signature/' + certificate)
-        signature_path = os.path.join(testcommon.settings.TESTDATADIR,
-            'test-sips', sipname, signature_name)
 
-        sip_dir = tempfile.mkdtemp()
-        shutil.copy(mets_path, sip_dir)
+        temp_path = tempfile.mkdtemp()
+        shutil.copy(mets_path, temp_path)
+
+        temp_mets_path = os.path.join(temp_path, 'mets.xml')
+        signature_path = os.path.join(temp_path, signature_name)
 
         command = ipt.scripts.sign_xml_file.main
-        arguments = [certificate_path, signature_path, mets_path]
+        arguments = [certificate_path, signature_path, temp_mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
             command, arguments)
 
-        print os.listdir(sip_dir)
+        print os.listdir(temp_path)
         print returncode, stdout, stderr
+
         assert returncode == expected_result['returncode']
         assert stderr == expected_result['stderr']
 
