@@ -61,10 +61,11 @@ def mdwrap_to_fileinfo(mdwrap_element):
 
 
 def iter_fileinfo(mets_parser):
-    """TODO: Docstring for iter_fileinfo.
+    """Iterate all files in given mets document and return fileinfo
+    dictionary for each file.
 
-    :mets_parser: TODO
-    :returns: TODO
+    :mets_parser: ipt.mets.parser.LXML object
+    :returns: Iterable on fileinfo dictionaries
 
     """
 
@@ -83,4 +84,3 @@ def iter_fileinfo(mets_parser):
             fileinfo = merge_dicts(fileinfo, mdwrap_to_fileinfo(md_element))
 
         yield fileinfo
-

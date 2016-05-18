@@ -134,10 +134,7 @@ class MdWrap(object):
             'mets:mdWrap', namespaces=NAMESPACES)[0].attrib[name]
 
     def __str__(self):
-        """TODO: Docstring for __str__.
-        :returns: TODO
-
-        """
+        """Return string representation of the object"""
         return lxml.etree.tostring(self.element)
 
 
