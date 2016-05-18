@@ -45,7 +45,7 @@ class TestPremisClass:
         [{
             "testcase": 'Test generation for successful validation',
             "arguments": {
-                "return_value": 0,
+                "return_value": True,
                 "stdout": "stdout message",
                 "stderr": "stderr message"
             },
@@ -60,7 +60,7 @@ class TestPremisClass:
             {
             "testcase": 'Test event generation for unsuccessful validation',
             "arguments": {
-                "return_value": 1,
+                "return_value": False,
                 "stdout": "stdout message",
                 "stderr": "stderr message"
             },

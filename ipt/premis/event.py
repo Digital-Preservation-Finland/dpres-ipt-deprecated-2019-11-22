@@ -337,7 +337,7 @@ class Event(lxml.etree._ElementTree):
         self.root = self.root = Element(PREMIS + 'event', nsmap=NAMESPACES)
 
     def fromvalidator(
-            self, returnstatus=0, messages="", errors="",
+            self, returnstatus=True, messages="", errors="",
             linkingObject=None, linkingAgent=None):
         """
         From valdiator.
@@ -350,7 +350,7 @@ class Event(lxml.etree._ElementTree):
         self.eventDetail = "Digital object validation"
 
         self.eventOutcomeInformation = ""
-        if returnstatus == 0:
+        if returnstatus is True:
             self.eventOutcome = "success"
         else:
             self.eventOutcome = "failure"
