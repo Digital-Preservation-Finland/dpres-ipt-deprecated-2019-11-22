@@ -178,7 +178,7 @@ class TestCommandLineTools:
             "testcase": "Test invalid mets.xml",
             "sipname": "CSC_test005",
             "expected_result": {
-                "returncode": 3,
+                "returncode": 117,
                 "in_stdout": [],
                 "not_in_stdout": [],
                 "stderr": "",

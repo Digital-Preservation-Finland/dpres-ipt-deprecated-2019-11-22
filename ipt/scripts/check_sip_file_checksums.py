@@ -9,7 +9,6 @@ import errno
 import scandir
 
 import ipt.mets.parser
-import ipt.mets.file.checksum
 from ipt.validator.utils import iter_fileinfo
 from ipt.fileutils.checksum import BigFile
 
