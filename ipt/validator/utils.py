@@ -48,11 +48,12 @@ def mdwrap_to_fileinfo(mdwrap_element):
     }
 
     other_parsers = {
-        'ADDML': ipt.addml.addml.to_dict
+        'ADDML': ipt.addml.addml.to_dict,
+        'METSRIGHTS': lambda x: {}
     }
 
     try:
-        if mdwrap.mdtype == 'OTHER' and mdwrap.other_mdtype == 'ADDML':
+        if mdwrap.mdtype == 'OTHER':
             return other_parsers[mdwrap.other_mdtype](mdwrap.xmldata)
         return standard_parsers[mdwrap.mdtype](mdwrap.xmldata)
     except KeyError as exception:
