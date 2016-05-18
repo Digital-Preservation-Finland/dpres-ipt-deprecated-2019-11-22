@@ -224,7 +224,7 @@ class TestPremisClass:
             "format": {
                 "mimetype": "text/plain",
                 "charset": "UTF-8",
-                "version": "UTF-8"},
+                "version": ""},
             "object_id": {"value": "object-001", "type": "local"}
         }
         assert premis.to_dict(premis_tree) == expected
