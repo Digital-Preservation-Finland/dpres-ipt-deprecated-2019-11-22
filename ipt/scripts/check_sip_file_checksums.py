@@ -3,67 +3,94 @@
 
 import os
 import sys
-import optparse
+import argparse
+import errno
+
+import scandir
 
 import ipt.mets.parser
 import ipt.mets.file.checksum
 from ipt.validator.utils import iter_fileinfo
+from ipt.fileutils.checksum import BigFile
 
 
-def check_digital_object_checksums(mets_path):
-    """TODO: Docstring for .
+def iter_files(path):
+    """Iterate all files under path.
 
-    :mets_path: TODO
-    :returns: TODO
+    Does not iterate files that are listed in signature.sig file.
+
+    :returns: Iterable over full paths to
+
+    """
+
+    ignored_files = ['mets.xml', 'varmiste.sig', 'signature.sig']
+
+    for root, _, files in scandir.walk(path):
+        for filename in files:
+            if root == path and filename in ignored_files:
+                continue
+            yield os.path.join(root, filename)
+
+
+def check_checksums(mets_path):
+    """Check checksums for all digital objects in METS
+
+    :mets_path: Path to mets
+    :returns: Iterable containing all error messages
 
     """
 
     mets_parser = ipt.mets.parser.LXML(mets_path)
+    checked_files = {}
+
+    sip_path = os.path.dirname(mets_parser.mets_path)
+
+    def _message(fileinfo, message):
+        """Format error message"""
+        return "%s: %s" % (
+            message, os.path.relpath(fileinfo["filename"], sip_path))
 
     for fileinfo in iter_fileinfo(mets_parser):
-        print fileinfo
+
+        checksum = BigFile(fileinfo["algorithm"])
+        checked_files[fileinfo["filename"]] = None
+
+        try:
+            hex_digest = checksum.hexdigest(fileinfo["filename"])
+        except IOError as exception:
+            if exception.errno == errno.ENOENT:
+                yield _message(fileinfo, "File does not exist")
+            continue
+
+        if hex_digest == fileinfo["digest"]:
+            print _message(fileinfo, "Checksum OK")
+        else:
+            yield _message(fileinfo, "Invalid Checksum")
+
+    for path in iter_files(sip_path):
+        if path not in checked_files:
+            yield _message({'filename': path}, "Nonlisted file")
 
 
 def main(arguments=None):
     """Main loop"""
 
-    usage = "usage: %prog sip-directory"
+    args = parse_arguments(arguments)
 
-    parser = optparse.OptionParser(usage=usage)
+    returncode = 0
+    for error_message in check_checksums(args.sip_path):
+        print error_message
+        returncode = 117
 
-    (_, args) = parser.parse_args(arguments)
+    return returncode
 
-    if len(args) != 1:
-        parser.error("Must give SIP directory as argument")
 
-    mets_filename = os.path.abspath(os.path.join(args[0], 'mets.xml'))
-
-    checksum_checker = ipt.mets.file.checksum.Checker(
-        mets_filename=mets_filename)
-
-    print "Collecting list of files in '%s'" % mets_filename
-    files, _ = checksum_checker.get_files_and_checksums_from_mets_file(
-        mets_filename)
-
-    print "files", files
-
-    # print "Calculating checksums for files (ignoring: %s)" % (
-    #        ', '.join(parser.ignore_filenames))
-
-    test_result = checksum_checker.check_file_existence_and_checksums(files)
-
-    # print test_result
-
-    return_status = 0
-    for result in test_result:
-        if result[2] != 0:
-            return_status = 117
-
-        print result[0], result[1]
-
-    return return_status
+def parse_arguments(arguments):
+    """ Create arguments parser and return parsed command line argumets"""
+    parser = argparse.ArgumentParser()
+    parser.add_argument('sip_path')
+    return parser.parse_args(arguments)
 
 if __name__ == '__main__':
-    # If run from the command line, take out the program name from sys.argv
-    RETVAL = main(sys.argv[1:])
+    RETVAL = main()
     sys.exit(RETVAL)

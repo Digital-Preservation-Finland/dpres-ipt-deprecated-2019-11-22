@@ -17,7 +17,6 @@ import ipt.scripts.restructure_sip
 import ipt.scripts.sip2aip
 import ipt.scripts.sign_xml_file
 import ipt.scripts.check_sip_signature
-import ipt.scripts.check_sip_file_checksums
 import ipt.scripts.check_sip_digital_objects
 import ipt.scripts.check_xml_schema_features
 import ipt.scripts.check_xml_schematron_features
@@ -119,28 +118,6 @@ class TestCommandLineTools:
                 "stderr": ""
             }
         }],
-                "test_check_sip_file_checksums":
-        [{
-            "testcase": "Test valid checksum",
-            "sipname": "CSC_test006",
-            "expected_result": {
-                "returncode": 0,
-                "in_stdout": ["Checksum OK"],
-                "not_in_stdout": ["File does not exist", "Nonlisted file"],
-                "stderr": ""
-            }
-        },
-            {
-            "testcase": "Test invalid checksum",
-            "sipname": "CSC_test005",
-            "expected_result": {
-                "returncode": 117,
-                "in_stdout": ["File does not exist", "Nonlisted file"],
-                "not_in_stdout": ["Checksum OK"],
-                "stderr": ""
-            }
-        }
-        ],
                 "test_check_sip_digital_objects":
         [{
             "testcase": "Test valid sip package #1",
@@ -400,26 +377,6 @@ class TestCommandLineTools:
 
         for message in expected_result['in_stderr']:
             assert message in stdout
-
-    @pytest.mark.usefixtures("monkeypatch_Popen")
-    def test_check_sip_file_checksums(self, testcase, sipname, expected_result):
-
-        sip_path = os.path.join(testcommon.settings.TESTDATADIR,
-                                'test-sips/' + sipname)
-
-        command = ipt.scripts.check_sip_file_checksums.main
-        arguments = [sip_path]
-        (returncode, stdout, stderr) = testcommon.shell.run_main(
-            command, arguments)
-
-        assert returncode == expected_result['returncode']
-        assert stderr == expected_result['stderr']
-
-        for message in expected_result['in_stdout']:
-            assert message in stdout
-
-        for message in expected_result['not_in_stdout']:
-            assert message not in stdout
 
     def test_check_xml_schema_features(self, testcase, sipname, expected_result):
 

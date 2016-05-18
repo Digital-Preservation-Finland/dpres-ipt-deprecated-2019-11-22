@@ -127,3 +127,17 @@ def monkeypatch_Popen(monkeypatch, request):
         LOGGER.debug("Teardowned Popen monkeypatch")
 
     request.addfinalizer(fin)
+
+
+@pytest.fixture(scope="function")
+def temp_sip(testpath):
+    """Copy SIP from testdata to temporary path for testing """
+
+    def _temp_sip(sip_name):
+        """Copy function used inside tests used inside tests"""
+        sip_path = os.path.join('tests/data/test-sips', sip_name)
+        temp_sip_path = os.path.join(testpath, sip_name)
+        shutil.copytree(sip_path, temp_sip_path)
+        return temp_sip_path
+
+    return _temp_sip
