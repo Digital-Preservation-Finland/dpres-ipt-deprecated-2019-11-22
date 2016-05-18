@@ -176,8 +176,4 @@ def test_validation(monkeypatch):
     ]
     files = [file_ for file_ in validation(mets_parser)]
     for file_iterator in range(0, 2):
-        print "GOT", files[file_iterator]
-        print
-        print "EXPECTED", expected[file_iterator]
-        print
         assert files[file_iterator] == expected[file_iterator]
