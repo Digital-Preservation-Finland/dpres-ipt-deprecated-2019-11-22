@@ -1,8 +1,6 @@
 """Utility functions."""
 
-import os
 import subprocess
-import urlparse
 import urllib
 
 
@@ -37,10 +35,26 @@ def run_command(cmd, stdout=subprocess.PIPE):
     return statuscode, stdout_result, stderr_result
 
 
-def url2path(url):
-    """Convert the path from a percent-encoded URL to filesystem path. E.g.
-    file://.//foo+bar/baz.zip -> 'foo bar/baz.zip'"""
+def merge_dicts(*dicts):
+    """
+    Merge N dicts.
+    :dicts: a list of dicts.
+    :returns: one merged dict
+    """
+    result = {}
+    for dictionary in dicts:
+        result.update(dictionary)
+    return result
 
-    path = "/".join(
-        [urllib.unquote_plus(p) for p in url.replace('file://', '').split('/')])
-    return os.path.relpath(path)
+
+def uri_to_path(uri):
+    """Remove URI scheme from given `URI`:
+
+    file://kuvat/PICT0081.JPG -> kuvat/PICT0081.JPG
+
+    :uri: URI as string
+    :returns: Relative path as string
+
+    """
+    path = urllib.unquote(uri).replace('file://', '')
+    return path.lstrip('./')

@@ -3,8 +3,8 @@ Implements mets.xml parsing for file validation purposes. Premis.xml and
 addml.cml paring are impolemented in separate modules, but used here.
 """
 import os
+
 import lxml.etree
-import urllib
 
 from ipt.utils import url2path
 from ipt.premis import premis
@@ -38,9 +38,7 @@ class LXML(object):
     def __init__(self, filename, xmlroot=None):
         if os.path.isdir(filename):
             filename = os.path.join(filename, 'mets.xml')
-
-        self.filename = filename
-        self.sip_dir = os.path.dirname(filename)
+        self.mets_path = filename
         self._xmlroot = xmlroot
 
     def xmlroot(self):
@@ -53,32 +51,15 @@ class LXML(object):
         """
 
         if self._xmlroot is None:
-            self._xmlroot = lxml.etree.parse(self.filename)
+            self._xmlroot = lxml.etree.parse(self.mets_path)
         return self._xmlroot
-
-    @staticmethod
-    def get_file_location(mets_file):
-        """
-        Get a file location url from METS XML document. For example
-
-        Get the file url eg.
-
-            .. code-block:: xml
-        <mets:FLocat xlink:href="file://kuvat/PICT0081.JPG" LOCTYPE="URL"/>
-        """
-
-        file_url = mets_file.xpath('mets:FLocat/@xlink:href',
-                                   namespaces=NAMESPACES)[0]
-        if len(file_url) > 0:
-            return url2path(file_url)
-        else:
-            return None
 
     def mets_files(self):
         """
         Mets files.
         """
-        return self.xmlroot().xpath('//mets:file', namespaces=NAMESPACES)
+        results = self.xmlroot().xpath('//mets:file', namespaces=NAMESPACES)
+        return results
 
     def iter_elements_with_id(self, identifiers):
         """Iterate all metadata elements under <amdSec> with given list of
@@ -109,9 +90,12 @@ class LXML(object):
         """
         query = "//*[@ID='%s']" % identifier
         results = self.xmlroot().xpath(query, namespaces=NAMESPACES)
-        print results
-        assert len(results) == 1
-        return results[0]
+        if len(results) == 1:
+            return results[0]
+        else:
+            raise ValueError(
+                "Invalid indentifier '%s'. Less or more than 1 result(s) "
+                "was found: %s" % (identifier, results))
 
     def get_fileinfo_iterator(self, filter_=None):
         """
@@ -148,8 +132,7 @@ class LXML(object):
             fileinfo["object_id"]["value"]
         """
         filename = os.path.join(
-            self.sip_dir,
-                self.sip_dir,
+            os.path.dirname(self.mets_path),
             self.get_filename_with_admid(admid))
 
         filename_dict = {"filename": filename}
@@ -163,18 +146,6 @@ class LXML(object):
             premis_object_data_dict,
             addml_data_dict)
         return result_dict
-
-    @staticmethod
-    def merge_dicts(*dicts):
-        """
-        Merge N dicts.
-        :dicts: a list of dicts.
-        :returns: one merged dict
-        """
-        result = {}
-        for dictionary in dicts:
-            result.update(dictionary)
-        return result
 
     def get_addml(self):
         """find addml field from mets."""
@@ -320,3 +291,54 @@ class MdWrap(object):
         """Return attribute from mdWrap attribute"""
         return self.element.xpath(
             'mets:mdWrap', namespaces=NAMESPACES)[0].attrib[name]
+
+    def __str__(self):
+        """TODO: Docstring for __str__.
+        :returns: TODO
+
+        """
+        return lxml.etree.tostring(self.element)
+
+
+class MetsFile(object):
+
+    """Helper class for accessing METS file parameters"""
+
+    def __init__(self, element):
+        """Initialize class with given mets:file element
+
+        :element: ElementTree object
+        """
+        self.element = element
+
+    @property
+    def use(self):
+        """Return value from mets:file/ADMID attribute.
+
+        :returns: ADMID as string
+
+        """
+        return self.element.attrib.get('USE', '').strip()
+
+    @property
+    def admid(self):
+        """Return value from mets:file/ADMID attribute.
+
+        :returns: ADMID as string
+
+        """
+        return self.element.attrib["ADMID"]
+
+    @property
+    def href(self):
+        """Return file location `href` attribute from `mets:file/mets:fLocat`
+
+        :returns: Location as string
+
+        """
+        return self.flocat_attr(ns_prefix('xlink', 'href'))
+
+    def flocat_attr(self, name):
+        """Return attribute from mdWrap attribute"""
+        return self.element.xpath(
+            'mets:FLocat', namespaces=NAMESPACES)[0].attrib[name]
