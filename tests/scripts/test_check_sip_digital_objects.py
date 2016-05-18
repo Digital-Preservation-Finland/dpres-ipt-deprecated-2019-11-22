@@ -9,7 +9,7 @@ from tests.testcommon import settings
 from tests.testcommon import shell
 
 # Module to test
-from  ipt.scripts.check_sip_digital_objects import main, validation
+from ipt.scripts.check_sip_digital_objects import main, validation
 from ipt.mets.parser import LXML
 from ipt.validator.jhove import JHove
 
@@ -87,10 +87,7 @@ TESTCASES = [{
         "stdout": ['No validator for mimetype: application/kissa version: 1.0'],
         "stderr": ''
     }
-}
-]
-
-
+}]
 @pytest.mark.usefixtures("monkeypatch_Popen")
 def test_check_sip_digital_objects():
     """
@@ -105,11 +102,10 @@ def test_check_sip_digital_objects():
         (returncode, stdout, stderr) = testcommon.shell.run_main(
             main, arguments)
 
+        assert stderr == ''
+
         for match_string in case["expected_result"]["stdout"]:
             assert match_string in stdout
-
-        for match_string in case["expected_result"]["stderr"]:
-            assert match_string in stderr
 
         message = "\n".join(["got:", str(returncode), "expected:",
                          str(case["expected_result"]["returncode"]
