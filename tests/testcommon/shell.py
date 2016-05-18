@@ -1,11 +1,8 @@
 """Shell command line utilities for tests"""
 
-import os
 import sys
 import subprocess
 import cStringIO
-
-import tests.testcommon.settings
 
 
 def run_command(command):
@@ -33,7 +30,8 @@ def run_main(the_main_function, arguments):
     Usage::
 
         import scriptmodule
-        (returncode, stdout, stderr) = run_command(scriptmodule.main, options, arguments)
+        (returncode, stdout, stderr) = run_command(
+            scriptmodule.main, options, arguments)
 
     Parameters:
 
@@ -46,18 +44,19 @@ def run_main(the_main_function, arguments):
 
     stdout_original = sys.stdout
     stderr_original = sys.stderr
-    sys.stdout = cStringIO.StringIO()
-    sys.stderr = cStringIO.StringIO()
+    stdout_buffer = cStringIO.StringIO()
+    stderr_buffer = cStringIO.StringIO()
+
+    sys.stdout = stdout_buffer
+    sys.stderr = stderr_buffer
 
     returnstatus = -1
 
     try:
         returnstatus = the_main_function(arguments)
-    except BaseException as exception:
-        sys.stderr.write(str(exception))
     finally:
-        stdout = sys.stdout.getvalue()
-        stderr = sys.stderr.getvalue()
+        stdout = stdout_buffer.getvalue()
+        stderr = stderr_buffer.getvalue()
         sys.stdout = stdout_original
         sys.stderr = stderr_original
 
