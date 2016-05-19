@@ -64,7 +64,7 @@ def test_checksum_corrupted(temp_sip):
         outfile.write('a')
     (returncode, stdout, stderr) = run_main(sip_path)
     assert stderr == ''
-    assert 'Invalid Checksum' in stdout
+    assert 'Invalid Checksum: KDK_paatosseminaarin_ohjelma_10_12_201' in stdout
     assert 'tmp' not in stdout
     assert returncode == 117
 
