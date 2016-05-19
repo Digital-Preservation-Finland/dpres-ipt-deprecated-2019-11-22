@@ -53,8 +53,10 @@ def validation(mets_parser):
     for fileinfo in iter_fileinfo(mets_parser):
         validation_results = validate(fileinfo)
 
-        for validation_result in validation_results:
+        if fileinfo["use"] == 'no-file-format-validation':
+            continue
 
+        for validation_result in validation_results:
             yield {
                 'fileinfo': fileinfo,
                 'result': validation_result

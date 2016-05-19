@@ -66,13 +66,13 @@ def iter_fileinfo(mets_parser):
     for element in mets_parser.mets_files():
 
         mets_file = MetsFile(element)
-
-        if mets_file.use == 'no-file-format-validation':
-            continue
-
-        fileinfo = {'filename': os.path.join(
+        object_filename = os.path.join(
             os.path.dirname(mets_parser.mets_path),
-            uri_to_path(mets_file.href))}
+            uri_to_path(mets_file.href))
+
+        fileinfo = {
+            'filename': object_filename,
+            'use': mets_file.use}
 
         for md_element in mets_parser.iter_elements_with_id(mets_file.admid):
             fileinfo = merge_dicts(fileinfo, mdwrap_to_fileinfo(md_element))
