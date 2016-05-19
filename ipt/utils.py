@@ -56,5 +56,5 @@ def uri_to_path(uri):
     :returns: Relative path as string
 
     """
-    path = urllib.unquote(uri).replace('file://', '')
+    path = urllib.unquote_plus(uri).replace('file://', '')
     return path.lstrip('./')
