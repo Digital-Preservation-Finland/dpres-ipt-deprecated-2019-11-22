@@ -1,15 +1,11 @@
-"""
-Implements mets.xml parsing for file validation purposes. Premis.xml and
-addml.cml paring are impolemented in separate modules, but used here.
-"""
+"""Classes for reading METS XML-files"""
+
 import os
 
 import lxml.etree
 
 NAMESPACES = {'xlink': 'http://www.w3.org/1999/xlink',
               'mets': 'http://www.loc.gov/METS/',
-              'premis': 'info:lc/xmlns/premis-v2',
-              'addml': 'http://www.arkivverket.no/standarder/addml',
               'xsi': 'http://www.w3.org/2001/XMLSchema-instance',
               'kdk': 'http://www.kdk.fi/standards/mets/kdk-extensions'}
 
