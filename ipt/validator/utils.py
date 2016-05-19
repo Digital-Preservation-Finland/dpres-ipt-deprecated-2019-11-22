@@ -39,26 +39,19 @@ def mdwrap_to_fileinfo(mdwrap_element):
     mdwrap = MdWrap(mdwrap_element)
 
     standard_parsers = {
-        'PREMIS:OBJECT': p.to_dict,
-        'PREMIS:EVENT': lambda x: {},
-        'PREMIS:AGENT': lambda x: {},
-        'METSRIGHTS': lambda x: {},
-        'METSRights': lambda x: {},
-        'TEXTMD': lambda x: {}
+        'PREMIS:OBJECT': p.to_dict
     }
 
     other_parsers = {
-        'ADDML': ipt.addml.addml.to_dict,
-        'METSRIGHTS': lambda x: {}
+        'ADDML': ipt.addml.addml.to_dict
     }
 
     try:
         if mdwrap.mdtype == 'OTHER':
             return other_parsers[mdwrap.other_mdtype](mdwrap.xmldata)
         return standard_parsers[mdwrap.mdtype](mdwrap.xmldata)
-    except KeyError as exception:
-        raise KeyError("No metadata parser for mdWrap element: %s %s" % (
-            exception, mdwrap))
+    except KeyError:
+        return {}
 
 
 def iter_fileinfo(mets_parser):
