@@ -285,15 +285,8 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="context_element" value="mets:techMD/mets:mdWrap"/>
 		<sch:param name="context_condition" value="true()"/>
 		<sch:param name="context_attribute" value="@MDTYPE"/>
-		<sch:param name="valid_values" value="string('PREMIS:OBJECT; NISOIMG; OTHER')"/>
-		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
-	</sch:pattern>
-	<sch:pattern id="mets14_techMD_MDTYPE" is-a="required_values_attribute_pattern">
-		<sch:param name="context_element" value="mets:techMD/mets:mdWrap"/>
-		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="context_attribute" value="@MDTYPE"/>
 		<sch:param name="valid_values" value="string('PREMIS:OBJECT; NISOIMG; TEXTMD; OTHER')"/>
-		<sch:param name="specifications" value="string('1.4.1; 1.4')"/>
+		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
 	<sch:pattern id="mets_rightsMD_MDTYPE" is-a="required_values_attribute_pattern">
 		<sch:param name="context_element" value="mets:rightsMD/mets:mdWrap"/>
@@ -475,6 +468,13 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="context_condition" value="normalize-space(@MDTYPE)='MARC'"/>
 		<sch:param name="context_attribute" value="@MDTYPEVERSION"/>
 		<sch:param name="valid_values" value="string('marcxml=1.2;marc=marc21; marcxml=1.2;marc=finmarc')"/>
+		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
+	</sch:pattern>
+	<sch:pattern id="mets_dmdSec_MDTYPEVERSION_values_TEXTMD" is-a="required_values_attribute_pattern">
+		<sch:param name="context_element" value="mets:dmdSec/mets:mdWrap"/>
+		<sch:param name="context_condition" value="normalize-space(@MDTYPE)='TEXTMD'"/>
+		<sch:param name="context_attribute" value="@MDTYPEVERSION"/>
+		<sch:param name="valid_values" value="string('3.01a')"/>
 		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
 	</sch:pattern>
 	<sch:pattern id="mets_dmdSec_MDTYPEVERSION_values_AudioMD" is-a="required_values_attribute_pattern">

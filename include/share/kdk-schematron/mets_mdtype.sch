@@ -10,6 +10,7 @@ Validates that the used metadata type inside mdWrap element is same as defined i
 	<sch:ns prefix="fi" uri="http://www.kdk.fi/standards/mets/kdk-extensions"/>
 	<sch:ns prefix="premis" uri="info:lc/xmlns/premis-v2"/>
 	<sch:ns prefix="mix" uri="http://www.loc.gov/mix/v20"/>
+	<sch:ns prefix="textmd" uri="info:lc/xmlns/textMD-v3"/>
 	<sch:ns prefix="textmd_kdk" uri="http://www.kdk.fi/standards/textmd"/>
 	<sch:ns prefix="addml" uri="http://www.arkivverket.no/standarder/addml"/>
 	<sch:ns prefix="audiomd" uri="http://www.loc.gov/audioMD/"/>
@@ -64,7 +65,8 @@ Validates that the used metadata type inside mdWrap element is same as defined i
 			  + number(normalize-space(@MDTYPE)='DDI' and normalize-space(@MDTYPEVERSION)='3.2')*number(boolean(mets:xmlData/ddilc32:*))*count(mets:xmlData/*)
 			  + number(normalize-space(@MDTYPE)='DDI' and normalize-space(@MDTYPEVERSION)='3.1')*number(boolean(mets:xmlData/ddilc31:*))*count(mets:xmlData/*)
 			  + number(normalize-space(@MDTYPE)='DDI' and normalize-space(@MDTYPEVERSION)='2.5')*number(boolean(mets:xmlData/ddicb25:*))*count(mets:xmlData/*)
-			  + number(normalize-space(@MDTYPE)='DDI' and normalize-space(@MDTYPEVERSION)='2.1')*number(boolean(mets:xmlData/ddicb21:*))*count(mets:xmlData/*)) = 1"/>
+			  + number(normalize-space(@MDTYPE)='DDI' and normalize-space(@MDTYPEVERSION)='2.1')*number(boolean(mets:xmlData/ddicb21:*))*count(mets:xmlData/*)
+			  + number(normalize-space(@MDTYPE)='TEXTMD')*number(boolean(mets:xmlData/textmd:*))*count(mets:xmlData/*)) = 1"/>
 		<sch:param name="used_attribute" value="@MDTYPE"/>
 		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
 	</sch:pattern>
@@ -157,19 +159,19 @@ Validates that the used metadata type inside mdWrap element is same as defined i
 	<sch:pattern id="dmdsec_no_tech" is-a="disallowed_element_pattern">
 		<sch:param name="context_element" value="mets:dmdSec/mets:mdWrap/mets:xmlData"/>
 		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="disallowed_element" value="premis:object or addml:* or textmd_kdk:* or mix:* or audiomd:* or videomd:*"/>
+		<sch:param name="disallowed_element" value="premis:object or addml:* or textmd:* or textmd_kdk:* or mix:* or audiomd:* or videomd:*"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern> 
 	<sch:pattern id="rights_no_tech" is-a="disallowed_element_pattern">
 		<sch:param name="context_element" value="mets:rightsMD/mets:mdWrap/mets:xmlData"/>
 		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="disallowed_element" value="premis:object or addml:* or textmd_kdk:* or mix:* or audiomd:* or videomd:*"/>
+		<sch:param name="disallowed_element" value="premis:object or addml:* or textmd:* or textmd_kdk:* or mix:* or audiomd:* or videomd:*"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern> 
 	<sch:pattern id="digiprovmd_no_tech" is-a="disallowed_element_pattern">
 		<sch:param name="context_element" value="mets:digiprovMD/mets:mdWrap/mets:xmlData"/>
 		<sch:param name="context_condition" value="true()"/>
-		<sch:param name="disallowed_element" value="premis:object or addml:* or textmd_kdk:* or mix:* or audiomd:* or videomd:*"/>
+		<sch:param name="disallowed_element" value="premis:object or addml:* or textmd:* or textmd_kdk:* or mix:* or audiomd:* or videomd:*"/>
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern> 
 	<sch:pattern id="dmdsec_no_digiprov" is-a="disallowed_element_pattern">

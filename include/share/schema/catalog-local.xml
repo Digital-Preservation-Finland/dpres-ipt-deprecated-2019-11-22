@@ -78,7 +78,7 @@
 	<rewriteURI uriStartString="http://schema.arkivverket.no/ADDML/v8.2/addml.xsd" rewritePrefix="addml/addml.xsd"/>
 
 	<uri name="http://www.loc.gov/mix/v20" uri="mix/mix.xsd"/>
-	<uri name="info:lc/xmlns/textMD" uri="textmd/textmd.xsd"/>
+	<uri name="info:lc/xmlns/textMD-v3" uri="textmd/textmd.xsd"/>
 	<uri name="http://www.kdk.fi/standards/textmd" uri="textmd/textmd_kdk.xsd"/>
 	<uri name="http://www.loc.gov/audioMD/" uri="avmd/audiomd.xsd"/>
 	<uri name="http://www.loc.gov/videoMD/" uri="avmd/videomd.xsd"/>
