@@ -14,7 +14,6 @@ from testcommon.casegenerator import pytest_generate_tests
 # Modules to test
 import ipt.scripts.premis2html
 import ipt.scripts.restructure_sip
-import ipt.scripts.sip2aip
 import ipt.scripts.sign_xml_file
 import ipt.scripts.check_sip_signature
 import ipt.scripts.check_sip_digital_objects
@@ -107,15 +106,6 @@ class TestCommandLineTools:
                 "not_in_stdout": ["File does not exist", "Nonlisted file"],
                 "stderr": "",
                 "in_stderr": ""
-            }
-        }],
-            "test_sip2aip":
-        [{
-            "testcase": "Test create aip",
-            "expected_result": {
-                "returncode": 0,
-                "stdout": "",
-                "stderr": ""
             }
         }],
                 "test_check_sip_digital_objects":
@@ -251,38 +241,6 @@ class TestCommandLineTools:
         print returncode, stdout, stderr
         assert returncode == expected_result['returncode']
         assert stderr == expected_result['stderr']
-
-    def test_sip2aip(self, testcase, expected_result):
-
-        sip_dir = os.path.join(
-            testcommon.settings.TESTDATADIR, 'test-sips/CSC_test005')
-        aip_dir = tempfile.mkdtemp() + '/aip '
-        shutil.copytree(sip_dir, aip_dir)
-
-        command = ipt.scripts.sip2aip.main
-        arguments = [aip_dir]
-        (returncode, stdout, stderr) = testcommon.shell.run_main(
-            command,
-            arguments)
-
-        assert returncode == expected_result['returncode']
-        assert stderr == expected_result['stderr']
-
-        sip_files = os.listdir(sip_dir)
-        aip_files = os.listdir(aip_dir)
-        aip_data_files = os.listdir(aip_dir + '/data')
-        baggit_files = [
-            'data', 'manifest-md5.txt', 'bag-info.txt', 'bagit.txt']
-
-        # Test that aip contains all files from sip
-        assert len(set(sip_files) - set(aip_data_files)) == 0
-
-        # Test that aip contains all bagit files
-        for file in baggit_files:
-            assert file in baggit_files
-
-        # Test that aip doesn't contain anything more
-        assert len(baggit_files) == len(aip_files)
 
     @pytest.mark.usefixtures("monkeypatch_Popen")
     def test_restructure_sip(self, testcase, expected_result):
