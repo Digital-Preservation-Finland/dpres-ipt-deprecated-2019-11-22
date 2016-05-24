@@ -1,11 +1,11 @@
-import os
 import hashlib
 
 
-class BigFile:
+class BigFile(object):
 
     def __init__(self, algorithm='sha1'):
         # Accept MD5 and different SHA variations
+        algorithm = algorithm.lower().replace('-', '').strip()
         self.checksum = hashlib.new(algorithm)
 
     def hexdigest(self, filename):
