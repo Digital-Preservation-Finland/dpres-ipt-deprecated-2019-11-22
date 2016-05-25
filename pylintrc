@@ -1,0 +1,14 @@
+[MASTER]
+init-hook='import sys, os; sys.path.insert(0, os.getcwd())'
+ignored-classes=pytest
+ignore=
+
+[General]
+init-hook='import sys, os; sys.path.insert(0, os.getcwd())'
+ignored-classes=pytest,mongomock
+ignore=
+
+[MESSAGES CONTROL]
+# Will not fix these, because bulk_complete() is not mentioned in Luigi tutorials
+# R0223 [abstract-method] Method 'bulk_complete' is abstract in class 'Task' but is not overridden [python/pylint]
+disable=W0223
