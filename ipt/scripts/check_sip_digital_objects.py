@@ -56,19 +56,18 @@ def validation(mets_parser):
         if fileinfo["use"] == 'no-file-format-validation':
             continue
 
-        for validation_result in validation_results:
-            yield {
-                'fileinfo': fileinfo,
-                'result': validation_result
-            }
+        yield {
+            'fileinfo': fileinfo,
+            'result': validation_results
+        }
 
 
 def validation_report(results, linking_sip_type, linking_sip_id):
     """ Format validation results to Premis report"""
     report = p.Premis()
 
-    for result in results:
 
+    for result_ in results:
         related_object = p.Object()
         related_object.identifier = ""
         related_object.identifierType = linking_sip_type
@@ -85,12 +84,12 @@ def validation_report(results, linking_sip_type, linking_sip_id):
 
         linking_object = p.Object()
         linking_object.fromvalidator(
-            fileinfo=result['fileinfo'],
+            fileinfo=result_['fileinfo'],
             relatedObject=related_object)
 
         validation_event = p.Event()
         validation_event.fromvalidator(
-            *result['result'],
+            *result_['result'],
             linkingObject=linking_object,
             linkingAgent=linking_agent)
 
