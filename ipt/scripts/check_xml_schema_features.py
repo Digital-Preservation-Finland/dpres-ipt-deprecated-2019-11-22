@@ -41,12 +41,12 @@ def main(arguments=None):
     }
     validate = ipt.validator.xmllint.Xmllint(fileinfo)
 
-    (valid, messages, errors) = validate.validate()
+    validate.validate()
 
-    print >> sys.stdout, messages
-    print >> sys.stderr, errors
+    print >> sys.stdout, validate.messages()
+    print >> sys.stderr, validate.errors()
 
-    if not valid:
+    if not validate.is_valid:
         return 117
 
     return 0
