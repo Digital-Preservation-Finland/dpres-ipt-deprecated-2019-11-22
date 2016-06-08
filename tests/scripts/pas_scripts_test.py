@@ -199,30 +199,7 @@ class TestCommandLineTools:
                 "in_stderr": []
             }
         }
-            #         ],
-            #                "test_check_mets_optional_features":
-            #        [{
-            #            "testcase": "Test valid mets.xml",
-            #            "sipname": "CSC_test006",
-            #            "expected_result": {
-            #                "returncode": 0,
-            #                "in_stdout": [],
-            #                "not_in_stdout": [],
-            # "stderr": "\n", # There"s extra line wrap in stderr
-            #                "in_stderr": ""
-            #            }
-            #         },
-            #         {
-            #            "testcase": "Test invalid mets.xml",
-            #            "sipname": "CSC_test005",
-            #            "expected_result": {
-            #                "returncode": 1,
-            #                "in_stdout": [],
-            #                "not_in_stdout": [],
-            #                "stderr": "",
-            #                "in_stderr": []
-            #            }
-            #         }
+
         ]
     }
 
@@ -361,29 +338,6 @@ class TestCommandLineTools:
             assert message in stderr
 
 
-# def test_check_mets_optional_features(self, testcase, sipname,
-# expected_result):
-
-#        mets_path = os.path.join(testcommon.settings.TESTDATADIR,
-#                               'test-sips/' + sipname + '/mets.xml')
-
-
-#        command = pas_ipt.scripts.check_mets_optional_features.main
-#        arguments = [mets_path]
-#        (returncode, stdout, stderr) = testcommon.shell.run_main(
-#                                                         command, arguments)
-
-#        assert returncode == expected_result['returncode']
-
-#        for message in expected_result['in_stdout']:
-#            assert message in stdout
-
-#        for message in expected_result['not_in_stdout']:
-#            assert message not in stdout
-
-#        for message in expected_result['in_stderr']:
-#            assert message in stderr
-
     @pytest.mark.usefixtures("monkeypatch_Popen")
     def test_check_sip_digital_objects(self, testcase,
                                        filename, expected_result):
@@ -392,10 +346,7 @@ class TestCommandLineTools:
                                 filename)
         arguments = ["%s" % filename, "abc", "def"]
 
-        self.do(ipt.scripts.check_sip_digital_objects.main, arguments,
-                expected_result)
-
-    def do(self, command, arguments, expected):
+        command = ipt.scripts.check_sip_digital_objects.main
 
         (returncode, stdout, stderr) = testcommon.shell.run_main(
             command, arguments)
@@ -403,14 +354,15 @@ class TestCommandLineTools:
         print >> sys.stderr, stderr
 
         function_name = "%s.%s" % (command.__module__, command.func_name)
-        for match_string in expected["stdout"]:
+        for match_string in expected_result["stdout"]:
             assert match_string in stdout
 
-        for match_string in expected["stderr"]:
+        for match_string in expected_result["stderr"]:
             assert match_string in stderr
 
         message = "\n".join(["got:", str(returncode), "expected:",
-                             str(expected["returncode"]
+                             str(expected_result["returncode"]
                                  ), "stdout:", stdout, "stderr:",
                              stderr, "function:", function_name])
-        assert returncode == expected["returncode"], message
+
+        assert returncode == expected_result["returncode"], message
