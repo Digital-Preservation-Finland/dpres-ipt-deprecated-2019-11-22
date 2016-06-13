@@ -3,7 +3,7 @@ PREFIX=/usr
 ROOT=/
 ETC=/etc
 SHAREDIR=${ROOT}${PREFIX}/share/information-package-tools
-XMLCATALOGDIR=${ETC}/xml
+XMLCATALOGDIR=${ROOT}${ETC}/xml/information-package-tools
 PYTHONDIR=${ROOT}${PREFIX}/lib/python2.6/site-packages
 SHELLDIR=${ROOT}${PREFIX}/bin
 
@@ -26,15 +26,19 @@ install:
 	# Cleanup temporary files
 	rm -f INSTALLED_FILES
 
+	# XML Schema catalogs
+	[ -d "${XMLCATALOGDIR}" ] || mkdir -p "${XMLCATALOGDIR}"
+	cp -r --preserve=timestamp include/etc/xml/* "${XMLCATALOGDIR}"
+	rm -rf "${XMLCATALOGDIR}"/.git*
+
 	# Common data files
 	[ -d "${SHAREDIR}" ] || mkdir -p "${SHAREDIR}"
-	cp -r include/share/* "${SHAREDIR}/"
+	cp -r --preserve=timestamp include/share/* "${SHAREDIR}"
+
+	chmod -R 755 "${XMLCATALOGDIR}"
+	find "${XMLCATALOGDIR}" -type f -exec chmod 644 \{\} \;
 	chmod -R 755 "${SHAREDIR}"
 	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
-
-	# Install XML Schema catalogs
-	#if [ -a "${XMLCATALOGDIR}/catalog" ]; then mv "${XMLCATALOGDIR}/catalog" "${XMLCATALOGDIR}/catalog."`date +%s`; fi; 
-	#install -m 644 include/etc/xml/catalog "${XMLCATALOGDIR}/"
 
 	# write version module
 	python version.py > "ipt/version.py"

@@ -44,12 +44,32 @@ cat INSTALLED_FILES
 echo "--"
 
 %post
+# Add our catalogs to the system centralised catalog
+%{_bindir}/xmlcatalog --noout --add "nextCatalog" "catalog" \
+"/etc/xml/information-package-tools/digital-object-catalog.xml" \
+/etc/xml/catalog
+%{_bindir}/xmlcatalog --noout --add "nextCatalog" "catalog" \
+"/etc/xml/information-package-tools/private-catalog.xml" \
+/etc/xml/catalog
+
+%postun
+# When the package is uninstalled, remove the catalogs
+if [ "$1" = 0 ]; then
+  %{_bindir}/xmlcatalog --noout --del \
+  "/etc/xml/information-package-tools/digital-object-catalog.xml" \
+  /etc/xml/catalog
+
+  %{_bindir}/xmlcatalog --noout --del \
+  "/etc/xml/information-package-tools/private-catalog.xml" \
+  /etc/xml/catalog
+fi
 
 %clean
 
 %files -f INSTALLED_FILES
 %defattr(-,root,root,-)
 /usr/share/information-package-tools
+/etc/xml/information-package-tools
 
 # TODO: For now changelot must be last, because it is generated automatically
 # from git log command. Appending should be fixed to happen only after %changelog macro
