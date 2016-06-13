@@ -1,0 +1,9 @@
+<!DOCTYPE catalog PUBLIC "-//OASIS//DTD XML Catalogs V1.0//EN" "catalog.dtd">
+
+<!-- XML Catalog for digital object XML files. -->
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public" xml:base="./">
+	<rewriteURI uriStartString="http://www.arkisto.fi/skeemat/Sahke2_2011_12.xsd" rewritePrefix="sahke2.xsd"/>
+	<rewriteURI uriStartString="file:///C:/Users/mme.KA655/Documents/Works/Projekteja/Selvitysprojektit/Rakenteisen%20datan%20siirto%20VAPAan/ADDML/fi_addml.xsd" rewritePrefix="addml_custom.xsd"/>
+	<rewriteURI uriStartString="http://schema.arkivverket.no/ADDML/v8.2/addml.xsd" rewritePrefix="addml82.xsd"/>
+	<rewriteURI uriStartString="http://schema.arkivverket.no/ADDML/v8.3/addml.xsd" rewritePrefix="addml83.xsd"/>
+</catalog>

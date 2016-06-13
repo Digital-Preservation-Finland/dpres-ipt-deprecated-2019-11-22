@@ -29,7 +29,7 @@
 	<rewriteURI uriStartString="http://www.loc.gov/standards/alto/v2/alto-2-0.xsd" rewritePrefix="alto/2.0/alto-2-0.xsd"/>
 	<rewriteURI uriStartString="http://www.loc.gov/standards/alto/v2/alto-2-1.xsd" rewritePrefix="alto/2.1/alto-2-1.xsd"/>
 	<rewriteURI uriStartString="http://www.loc.gov/standards/alto/alto.xsd" rewritePrefix="alto/2.1/alto-2-1.xsd"/>
-	
+
 	<!-- AudioMD, VideoMD -->
 	<rewriteURI uriStartString="http://lcweb2.loc.gov/mets/Schemas/AMD.xsd" rewritePrefix="avmd/1.0/AMD.xsd"/>
 	<rewriteURI uriStartString="http://lcweb2.loc.gov/mets/Schemas/VMD.xsd" rewritePrefix="avmd/1.0/VMD.xsd"/>
@@ -95,5 +95,5 @@
 	<rewriteURI uriStartString="http://www.loc.gov/standards/textMD/textmd.xsd" rewritePrefix="textmd/2.2/textmd.xsd"/>
 	<rewriteURI uriStartString="http://www.loc.gov/standards/textMD/textmd-v3.01a.xsd" rewritePrefix="textmd/3.01a/textmd-v3.01a.xsd"/>
 	<rewriteURI uriStartString="http://www.loc.gov/standards/rights/METSRights.xsd" rewritePrefix="metsrights/METSRights.xsd"/>
-	
+
 </catalog>
