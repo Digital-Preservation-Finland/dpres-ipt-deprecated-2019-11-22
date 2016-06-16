@@ -1,11 +1,11 @@
 MOCK_CONFIG=stable-6-x86_64
-PREFIX=/usr
 ROOT=/
-ETC=/etc
-SHAREDIR=${ROOT}${PREFIX}/share/information-package-tools
-XMLCATALOGDIR=${ROOT}${ETC}/xml/information-package-tools
-PYTHONDIR=${ROOT}${PREFIX}/lib/python2.6/site-packages
-SHELLDIR=${ROOT}${PREFIX}/bin
+PREFIX=${ROOT}/usr
+ETC=${ROOT}/etc
+SHAREDIR=${PREFIX}/share/information-package-tools
+XMLCATALOGDIR=${ETC}/xml/information-package-tools
+PYTHONDIR=${PREFIX}/lib/python2.6/site-packages
+SHELLDIR=${PREFIX}/bin
 
 MODULES=fileutils mets schematron sip xml xmllint
 
@@ -27,13 +27,12 @@ install:
 	rm -f INSTALLED_FILES
 
 	# XML Schema catalogs
-	[ -d "${XMLCATALOGDIR}" ] || mkdir -p "${XMLCATALOGDIR}"
-	cp -r --preserve=timestamp include/etc/xml/* "${XMLCATALOGDIR}"
+	cp -r --preserve=timestamp include/etc "${ROOT}"
 	rm -rf "${XMLCATALOGDIR}"/.git*
 
 	# Common data files
-	[ -d "${SHAREDIR}" ] || mkdir -p "${SHAREDIR}"
-	cp -r --preserve=timestamp include/share/* "${SHAREDIR}"
+	mkdir -p ${PREFIX}/share
+	cp -r --preserve=timestamp include/share "${PREFIX}"
 
 	chmod -R 755 "${XMLCATALOGDIR}"
 	find "${XMLCATALOGDIR}" -type f -exec chmod 644 \{\} \;
