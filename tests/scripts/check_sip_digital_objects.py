@@ -11,7 +11,8 @@ from tests.testcommon import shell
 # Module to test
 from ipt.scripts.check_sip_digital_objects import main, validation
 from ipt.mets.parser import LXML
-from ipt.validator.jhove import JHove
+import ipt.validator.jhove
+from ipt.validator import BaseValidator
 
 
 METSDIR = os.path.abspath(
@@ -117,7 +118,18 @@ def test_check_sip_digital_objects():
 def test_validation(monkeypatch):
     """Test the get_fileinfo_array method by METS including file with arbitrary
     native file format"""
-    monkeypatch.setattr(JHove, "validate", lambda fileinfo: (0, "", ""))
+    class JHoveMock(BaseValidator):
+        """mock"""
+        _supported_mimetypes = {
+            'application/pdf': ['1.3', '1.4', '1.5', '1.6', 'A-1a', 'A-1b']
+        }
+
+        def validate(self):
+            """mock validate"""
+            self.messages("OK")
+
+    monkeypatch.setattr(ipt.validator.jhove, "JHovePDF", JHoveMock)
+
     # Omitting the arbitrary native file in METS
     mets_file = os.path.join(METSDIR, 'mets_native_marked.xml')
     mets_parser = LXML(mets_file)
