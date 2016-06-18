@@ -105,7 +105,7 @@ class TestPremisClass:
             validator = Xmllint(fileinfo)
 
             validator.validate()
-            
+
             assert validator.is_valid
 
         print premis_document.serialize()
