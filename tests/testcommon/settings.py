@@ -13,14 +13,13 @@
 """
 
 import os
-import sys
 
 # Defined some useful directories
 
 PROJECTDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 
 INCLUDEDIR = os.path.join(PROJECTDIR, 'include')
-SHAREDIR = os.path.join(PROJECTDIR, 'include/share')
+SHAREDIR = os.path.join(PROJECTDIR, 'include/share/information-package-tools')
 
 TESTSDIR = os.path.join(PROJECTDIR, 'tests')
 TESTDATADIR = os.path.join(TESTSDIR, 'data')

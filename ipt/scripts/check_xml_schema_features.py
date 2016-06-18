@@ -11,18 +11,20 @@ import ipt.validator.xmllint
 def main(arguments=None):
     """Main loop"""
     usage = "usage: %prog [options] xml-file-name"
-    sharepath = "/usr/share/information-package-tools/"
+    kdk_mets_catalog_path = ("/etc/xml/information-package-tools/"
+                             "kdk-mets-catalog")
 
     parser = optparse.OptionParser(usage=usage)
 
     parser.add_option("-c", "--catalog", dest="catalogpath",
                       default=os.path.join(
-                          sharepath, "schema/catalog-local.xml"),
+                          kdk_mets_catalog_path, "catalog-local.xml"),
                       help="Full path to XML catalog file",
                       metavar="FILE")
 
     parser.add_option("-s", "--schemapath", dest="schemapath",
-                      default=os.path.join(sharepath, "schema/mets/mets.xsd"),
+                      default=os.path.join(kdk_mets_catalog_path,
+                                           "mets/mets.xsd"),
                       help="XML schema filename for validation",
                       metavar="PATH")
 
