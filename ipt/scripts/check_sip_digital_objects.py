@@ -66,7 +66,6 @@ def validation_report(results, linking_sip_type, linking_sip_id):
     """ Format validation results to Premis report"""
     report = p.Premis()
 
-
     for result_ in results:
         related_object = p.Object()
         related_object.identifier = ""
@@ -89,7 +88,7 @@ def validation_report(results, linking_sip_type, linking_sip_id):
 
         validation_event = p.Event()
         validation_event.fromvalidator(
-            *result_['result'],
+            result_['result'],
             linkingObject=linking_object,
             linkingAgent=linking_agent)
 

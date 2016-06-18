@@ -45,9 +45,9 @@ class TestPremisClass:
         [{
             "testcase": 'Test generation for successful validation',
             "arguments": {
-                "return_value": True,
-                "stdout": "stdout message",
-                "stderr": "stderr message"
+                "is_valid": True,
+                "messages": "stdout message",
+                "errors": "stderr message"
             },
             "expected_result": {
                 "number_of_events": 1,
@@ -60,9 +60,9 @@ class TestPremisClass:
             {
             "testcase": 'Test event generation for unsuccessful validation',
             "arguments": {
-                "return_value": False,
-                "stdout": "stdout message",
-                "stderr": "stderr message"
+                "is_valid": False,
+                "messages": "stdout message",
+                "errors": "stderr message"
             },
             "expected_result": {
                 "number_of_events": 1,
@@ -81,7 +81,12 @@ class TestPremisClass:
         object.fromvalidator()
 
         event = premis.Event()
-        event.fromvalidator(linkingObject=object)
+        result = {
+            "is_valid": True,
+            "messages": "",
+            "errors": "",
+        }
+        event.fromvalidator(result, linkingObject=object)
 
         premis_document.insert(object)
         premis_document.insert(event)
@@ -111,7 +116,12 @@ class TestPremisClass:
         object = premis.Object()
         object.fromvalidator(fileinfo=fileinfo)
         event = premis.Event()
-        event.fromvalidator(linkingObject=object)
+        result = {
+            "is_valid": True,
+            "messages": "",
+            "errors": "",
+        }
+        event.fromvalidator(result, linkingObject=object)
 
         agent = premis.Agent()
         agent.fromvalidator()
@@ -138,9 +148,7 @@ class TestPremisClass:
         object.fromvalidator(fileinfo=fileinfo)
 
         event = premis.Event()
-        event.fromvalidator(returnstatus=arguments["return_value"],
-                            messages=arguments["stdout"],
-                            errors=arguments["stderr"],
+        event.fromvalidator(result=arguments,
                             linkingObject=object)
 
         premis_el = event.root

@@ -337,11 +337,12 @@ class Event(lxml.etree._ElementTree):
         self.root = self.root = Element(PREMIS + 'event', nsmap=NAMESPACES)
 
     def fromvalidator(
-            self, returnstatus=True, messages="", errors="",
+            self, result,
             linkingObject=None, linkingAgent=None):
         """
         From valdiator.
         """
+
         self.eventIdentifier = ""
         self.eventIdentifierType = "preservation-event-id"
         self.eventIdentifierValue = str(uuid.uuid4())
@@ -350,7 +351,7 @@ class Event(lxml.etree._ElementTree):
         self.eventDetail = "Digital object validation"
 
         self.eventOutcomeInformation = ""
-        if returnstatus is True:
+        if result["is_valid"] is True:
             self.eventOutcome = "success"
         else:
             self.eventOutcome = "failure"
@@ -358,21 +359,23 @@ class Event(lxml.etree._ElementTree):
         try:
             parser = lxml.etree.XMLParser(
                 dtd_validation=False, no_network=True)
-            tree = lxml.etree.fromstring(messages)
+            tree = lxml.etree.fromstring(result["messages"])
 
             self.eventOutcomeDetailExtension = ""
             childNodeList = tree.findall('*')
             for node in childNodeList:
-                self.eventOutcomeDetailExtension.append(node)
+                self.eventOutcomeDetailExtension = \
+                    self.eventOutcomeDetailExtension + " " + node
 
-            if errors:
-                self.eventOutcomeDetailNote = errors
+            if result["errors"]:
+                self.eventOutcomeDetailNote = result["errors"]
 
         except lxml.etree.XMLSyntaxError as exception:
-            if errors:
-                self.eventOutcomeDetailNote = messages + errors
+            if result["errors"]:
+                self.eventOutcomeDetailNote = (result["messages"] +
+                                               result["errors"])
             else:
-                self.eventOutcomeDetailNote = messages
+                self.eventOutcomeDetailNote = result["messages"]
 
         if linkingAgent:
             self.linkingAgentIdentifierType = linkingAgent.identifierType

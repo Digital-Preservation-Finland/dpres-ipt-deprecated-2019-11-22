@@ -148,7 +148,10 @@ def test_validation(monkeypatch):
         'filename': os.path.join(METSDIR, 'file.pdf')
     }
 
-    assert results["result"] == (True, "OK", "")
+    assert results["result"] == {
+        "is_valid": True,
+        "messages": "OK",
+        "errors": ""}
 
     # Returned all files in METS, where arbitrary file not marked as native
     mets_file = os.path.join(METSDIR, 'mets_native_unmarked.xml')
@@ -170,8 +173,8 @@ def test_validation(monkeypatch):
             'use': ''},
          "result": {
              "is_valid": False,
-             "messages": [],
-             "errors": ['No validator for mimetype: application/cdr version: ']
+             "messages": "",
+             "errors": 'No validator for mimetype: application/cdr version: '
              }
         },
         {"fileinfo": {
@@ -185,7 +188,10 @@ def test_validation(monkeypatch):
             'digest': '7fc2103950f2bb374c277ed4eb43bdc6',
             'filename': os.path.join(METSDIR, 'file.pdf'),
             'use': '',
-        }, "result": (True, "OK", "")
+        }, "result": {
+            "is_valid": True,
+            "messages": "OK",
+            "errors": ""}
         }
     ]
     files = [file_ for file_ in validation(mets_parser)]
