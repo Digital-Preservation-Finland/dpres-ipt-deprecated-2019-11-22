@@ -1,9 +1,8 @@
 MOCK_CONFIG=stable-6-x86_64
 ROOT=/
-PREFIX=${ROOT}/usr
-ETC=${ROOT}/etc
+PREFIX=/usr
 SHAREDIR=${PREFIX}/share/information-package-tools
-XMLCATALOGDIR=${ETC}/xml/information-package-tools
+XMLCATALOGDIR=/etc/xml/information-package-tools
 PYTHONDIR=${PREFIX}/lib/python2.6/site-packages
 SHELLDIR=${PREFIX}/bin
 
@@ -31,13 +30,13 @@ install:
 	rm -rf "${XMLCATALOGDIR}"/.git*
 
 	# Common data files
-	mkdir -p ${PREFIX}/share
-	cp -r --preserve=timestamp include/share "${PREFIX}"
+	mkdir -p "${ROOT}${PREFIX}/share"
+	cp -r --preserve=timestamp include/share "${ROOT}${PREFIX}"
 
-	chmod -R 755 "${XMLCATALOGDIR}"
-	find "${XMLCATALOGDIR}" -type f -exec chmod 644 \{\} \;
-	chmod -R 755 "${SHAREDIR}"
-	find "${SHAREDIR}" -type f -exec chmod 644 \{\} \;
+	chmod -R 755 "${ROOT}${XMLCATALOGDIR}"
+	find "${ROOT}${XMLCATALOGDIR}" -type f -exec chmod 644 \{\} \;
+	chmod -R 755 "${ROOT}${SHAREDIR}"
+	find "${ROOT}${SHAREDIR}" -type f -exec chmod 644 \{\} \;
 
 	# write version module
 	python version.py > "ipt/version.py"

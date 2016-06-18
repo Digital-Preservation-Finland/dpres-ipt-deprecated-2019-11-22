@@ -38,7 +38,7 @@ find %{_sourcedir}
 # do nothing
 
 %install
-make install ROOT="%{buildroot}"
+make install PREFIX="%{_prefix}" ROOT="%{buildroot}"
 echo "-- INSTALLED_FILES"
 cat INSTALLED_FILES
 echo "--"
