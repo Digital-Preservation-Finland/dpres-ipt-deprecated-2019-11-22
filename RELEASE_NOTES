@@ -22,3 +22,14 @@ FIX: Unsupported mimetype error fixed
 NEW: Add support for warc 0.18
 
 NEW: Refactored validator code and mets parsing.
+
+Release 0.41
+
+The XML catalogs are all now under /etc/xml/information-package-tools
+The RPM post script should configure the centralized /etc/xml/catalog
+correctly. In case that does not happen, the catalog file should have the
+following lines in it:
+
+<nextCatalog catalog="/etc/xml/information-package-tools/digital-object-catalog/digital-object-catalog.xml"/>
+<nextCatalog catalog="/etc/xml/information-package-tools/kdk-mets-catalog/catalog-local.xml"/>
+<nextCatalog catalog="/etc/xml/information-package-tools/private-catalog/private-catalog.xml"/>
