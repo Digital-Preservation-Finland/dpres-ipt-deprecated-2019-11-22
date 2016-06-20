@@ -76,12 +76,14 @@ elementFormDefault="qualified" attributeFormDefault="unqualified">
 		<xsd:complexType name="structMapType">
 			<xsd:complexContent>
 				<xsd:extension base="structMapType">
+					<xsd:sequence>
+						<xsd:element name="div" type="divType" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
 					<xsd:attribute ref="fi:PID" use="optional"/>
 					<xsd:attribute ref="fi:PIDTYPE" use="optional"/>
 				</xsd:extension>
 			</xsd:complexContent>
 		</xsd:complexType>
-
 	</xsd:redefine>
 	
 </xsd:schema>

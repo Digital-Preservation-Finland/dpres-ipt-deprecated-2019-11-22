@@ -690,7 +690,20 @@ Validates METS metadata elements and attributes, their values, and METS internal
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
 
-	<!-- StructMap attributes -->
+	<!-- StructMap div and attributes -->
+	<sch:pattern id="mets_structMap_div" is-a="required_element_pattern">
+		<sch:param name="context_element" value="mets:structMap"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="required_element" value="mets:div"/>
+		<sch:param name="specifications" value="string('')"/>
+	</sch:pattern>
+	<sch:pattern id="mets_structMap_div_max" is-a="required_max_elements_pattern">
+		<sch:param name="context_element" value="mets:structMap"/>
+		<sch:param name="context_condition" value="true()"/>
+		<sch:param name="required_element" value="mets:div"/>
+		<sch:param name="num" value="1"/>
+		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
+	</sch:pattern>
 	<sch:pattern id="mets14_structMap_PID" is-a="disallowed_attribute_pattern">
 		<sch:param name="context_element" value="mets:structMap"/>
 		<sch:param name="context_condition" value="true()"/>
