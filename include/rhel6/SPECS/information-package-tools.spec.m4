@@ -21,9 +21,9 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
 Requires: python python-mimeparse python-dateutil xml-common pymongo ghostscript
-Requires: libxslt unzip jhove jhove2 python-setuptools python-lxml
+Requires: libxslt unzip jhove python-setuptools python-lxml
 # ClamAV installation requires these to work
-Requires: clamav clamav-db libtool-ltdl
+Requires: clamav libtool-ltdl
 Requires: warc-tools >= 4.8.3
 BuildRequires:	pytest
 
