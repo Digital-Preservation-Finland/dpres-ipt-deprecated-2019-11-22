@@ -316,13 +316,21 @@ class TestCommandLineTools:
         for message in expected_result['in_stderr']:
             assert message in stdout
 
-    def test_check_xml_schema_features(self, testcase, sipname, expected_result):
+    def test_check_xml_schema_features(self, monkeypatch, testcase, sipname,
+                                       expected_result):
+
+        catalog_path = ('include/etc/xml/information-package-tools/'
+                        'kdk-mets-catalog/catalog-local.xml')
+        monkeypatch.setenv("SGML_CATALOG_FILES", catalog_path)
 
         mets_path = os.path.join(testcommon.settings.TESTDATADIR,
                                  'test-sips/' + sipname + '/mets.xml')
 
         command = ipt.scripts.check_xml_schema_features.main
-        arguments = [mets_path]
+        arguments = ["--schemapath",
+                     ("include/etc/xml/information-package-tools/" +
+                      "kdk-mets-catalog/mets/mets.xsd"),
+                     mets_path]
         (returncode, stdout, stderr) = testcommon.shell.run_main(
             command, arguments)
 
