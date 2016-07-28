@@ -361,7 +361,7 @@ Validates NISOIMG (MIX) metadata.
 	
 	<!-- The gray response curves must have a unit -->
 	<sch:pattern id="mix_grayResponseUnit" is-a="required_element_pattern">
-		<sch:param name="context_element" value="mets:techMD/mets:mdWrap/mets:xmlData/mix:mix//mix:grayResponse"/>
+		<sch:param name="context_element" value="mets:techMD/mets:mdWrap/mets:xmlData/mix:mix//mix:GrayResponse"/>
 		<sch:param name="context_condition" value="mix:grayResponseCurve"/>
 		<sch:param name="required_element" value="mix:grayResponseUnit"/>
 		<sch:param name="specifications" value="string('')"/>
@@ -458,7 +458,7 @@ Validates NISOIMG (MIX) metadata.
 		<sch:param name="specifications" value="string('')"/>
 	</sch:pattern>
 	<sch:pattern id="mix_resolutionLevels" is-a="required_element_pattern">
-		<sch:param name="context_element" value="mets:techMD/mets:mdWrap/mets:xmlData/mix:mix//mix:qualityLayers"/>
+		<sch:param name="context_element" value="mets:techMD/mets:mdWrap/mets:xmlData/mix:mix//mix:EncodingOptions"/>
 		<sch:param name="context_condition" value="true()"/>
 		<sch:param name="required_element" value="mix:resolutionLevels"/>
 		<sch:param name="specifications" value="string('')"/>

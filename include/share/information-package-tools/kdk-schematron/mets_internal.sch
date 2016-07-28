@@ -486,14 +486,14 @@ Validates METS metadata elements and attributes, their values, and METS internal
 	</sch:pattern>
 	<sch:pattern id="mets_dmdSec_MDTYPEVERSION_values_VideoMD" is-a="required_values_attribute_pattern">
 		<sch:param name="context_element" value="mets:techMD/mets:mdWrap"/>
-		<sch:param name="context_condition" value="normalize-space(@MDTYPE)='OTHER' and normalize-space(@OTHERMDTYPE)='AudioMD'"/>
+		<sch:param name="context_condition" value="normalize-space(@MDTYPE)='OTHER' and normalize-space(@OTHERMDTYPE)='VideoMD'"/>
 		<sch:param name="context_attribute" value="@MDTYPEVERSION"/>
 		<sch:param name="valid_values" value="string('2.0')"/>
 		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>
 	</sch:pattern>
 	<sch:pattern id="mets_dmdSec_MDTYPEVERSION_values_ADDML" is-a="required_values_attribute_pattern">
 		<sch:param name="context_element" value="mets:techMD/mets:mdWrap"/>
-		<sch:param name="context_condition" value="normalize-space(@MDTYPE)='OTHER' and normalize-space(@OTHERMDTYPE)='VideoMD'"/>
+		<sch:param name="context_condition" value="normalize-space(@MDTYPE)='OTHER' and normalize-space(@OTHERMDTYPE)='ADDML'"/>
 		<sch:param name="context_attribute" value="@MDTYPEVERSION"/>
 		<sch:param name="valid_values" value="string('8.2; 8.3')"/>
 		<sch:param name="specifications" value="string('not: 1.4.1; 1.4')"/>

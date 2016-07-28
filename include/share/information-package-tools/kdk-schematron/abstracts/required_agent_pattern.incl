@@ -15,7 +15,7 @@
 			<sch:assert test="(mets:agent[normalize-space(@ROLE)=$role and normalize-space(@TYPE)=$type]) or not(normalize-space($specifications)=''
 			or ((normalize-space(substring($specifications,1,4))='not:') and ((not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; ')))) and not(contains(concat('; ',normalize-space(substring-after($specifications,':')),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; ')))))
 			or ((normalize-space(substring($specifications,1,4))!='not:') and ((contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:CATALOG),'; '))) or (contains(concat('; ',normalize-space($specifications),'; '), concat('; ',normalize-space(ancestor-or-self::mets:mets/@fi:SPECIFICATION),'; '))))))">
-				Element 'mets:agent' is required in '<sch:name/>', where attributes '<sch:value-of select="@ROLE"/>' and '<sch:value-of select="@TYPE"/>' include values '<sch:value-of select="$role"/>' and '<sch:value-of select="$type"/>', respectively.
+				Such element 'mets:agent' is required in '<sch:name/>', where attributes '@ROLE' and '@TYPE' include values '<sch:value-of select="$role"/>' and '<sch:value-of select="$type"/>', respectively.
 			</sch:assert>
 		</sch:rule> 
 	</sch:pattern>

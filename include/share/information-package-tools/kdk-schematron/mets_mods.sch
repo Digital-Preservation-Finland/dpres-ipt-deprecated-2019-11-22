@@ -822,7 +822,7 @@ Validates version differences from MODS metadata.
 		<sch:param name="disallowed_attribute" value="@ID"/>
 		<sch:param name="mdattribute" value="@MDTYPE"/>
 		<sch:param name="mdtype_name" value="string('MODS')"/>		
-		<sch:param name="mdtype_version" value="string('3.1')"/>
+		<sch:param name="mdtype_version" value="string('3.2')"/>
 	</sch:pattern>
 	<sch:pattern id="mods32_note_ID" is-a="disallowed_attribute_smaller_version_pattern">
 		<sch:param name="context_element" value="mods:physicalDescription/mods:note"/>
@@ -830,7 +830,7 @@ Validates version differences from MODS metadata.
 		<sch:param name="disallowed_attribute" value="@ID"/>
 		<sch:param name="mdattribute" value="@MDTYPE"/>
 		<sch:param name="mdtype_name" value="string('MODS')"/>		
-		<sch:param name="mdtype_version" value="string('3.1')"/>
+		<sch:param name="mdtype_version" value="string('3.2')"/>
 	</sch:pattern>
 	<sch:pattern id="mods32_note" is-a="disallowed_attribute_smaller_version_pattern">
 		<sch:param name="context_element" value="mods:url"/>
@@ -838,7 +838,7 @@ Validates version differences from MODS metadata.
 		<sch:param name="disallowed_attribute" value="@note"/>
 		<sch:param name="mdattribute" value="@MDTYPE"/>
 		<sch:param name="mdtype_name" value="string('MODS')"/>		
-		<sch:param name="mdtype_version" value="string('3.1')"/>
+		<sch:param name="mdtype_version" value="string('3.2')"/>
 	</sch:pattern>	
 	<sch:pattern id="mods32_access" is-a="disallowed_attribute_smaller_version_pattern">
 		<sch:param name="context_element" value="mods:url"/>
@@ -846,7 +846,7 @@ Validates version differences from MODS metadata.
 		<sch:param name="disallowed_attribute" value="@access"/>
 		<sch:param name="mdattribute" value="@MDTYPE"/>
 		<sch:param name="mdtype_name" value="string('MODS')"/>		
-		<sch:param name="mdtype_version" value="string('3.1')"/>
+		<sch:param name="mdtype_version" value="string('3.2')"/>
 	</sch:pattern>
 	<sch:pattern id="mods32_usage" is-a="disallowed_attribute_smaller_version_pattern">
 		<sch:param name="context_element" value="mods:url"/>
@@ -854,7 +854,7 @@ Validates version differences from MODS metadata.
 		<sch:param name="disallowed_attribute" value="@usage"/>
 		<sch:param name="mdattribute" value="@MDTYPE"/>
 		<sch:param name="mdtype_name" value="string('MODS')"/>		
-		<sch:param name="mdtype_version" value="string('3.1')"/>
+		<sch:param name="mdtype_version" value="string('3.2')"/>
 	</sch:pattern>	
 	<sch:pattern id="mods32_type" is-a="disallowed_attribute_smaller_version_pattern">
 		<sch:param name="context_element" value="mods:part"/>
@@ -862,7 +862,7 @@ Validates version differences from MODS metadata.
 		<sch:param name="disallowed_attribute" value="@type"/>
 		<sch:param name="mdattribute" value="@MDTYPE"/>
 		<sch:param name="mdtype_name" value="string('MODS')"/>		
-		<sch:param name="mdtype_version" value="string('3.1')"/>
+		<sch:param name="mdtype_version" value="string('3.2')"/>
 	</sch:pattern>	
 	<sch:pattern id="mods32_order" is-a="disallowed_attribute_smaller_version_pattern">
 		<sch:param name="context_element" value="mods:part"/>
@@ -870,7 +870,7 @@ Validates version differences from MODS metadata.
 		<sch:param name="disallowed_attribute" value="@order"/>
 		<sch:param name="mdattribute" value="@MDTYPE"/>
 		<sch:param name="mdtype_name" value="string('MODS')"/>		
-		<sch:param name="mdtype_version" value="string('3.1')"/>
+		<sch:param name="mdtype_version" value="string('3.2')"/>
 	</sch:pattern>	
 	<sch:pattern id="mods32_genre" is-a="disallowed_element_smaller_version_pattern">
 		<sch:param name="context_element" value="mods:subject"/>
@@ -878,7 +878,7 @@ Validates version differences from MODS metadata.
 		<sch:param name="disallowed_element" value="mods:genre"/>
 		<sch:param name="mdattribute" value="@MDTYPE"/>
 		<sch:param name="mdtype_name" value="string('MODS')"/>		
-		<sch:param name="mdtype_version" value="string('3.3')"/>
+		<sch:param name="mdtype_version" value="string('3.2')"/>
 	</sch:pattern>
 	<sch:pattern id="mods32_digitalOrigin_values1" is-a="disallowed_value_element_smaller_version_pattern">
 		<sch:param name="context_element" value="mods:digitalOrigin"/>
@@ -991,6 +991,5 @@ Validates version differences from MODS metadata.
 		<sch:param name="mdtype_name" value="string('MODS')"/>		
 		<sch:param name="mdtype_version" value="string('3.1')"/>
 	</sch:pattern>
-
 
 </sch:schema>
