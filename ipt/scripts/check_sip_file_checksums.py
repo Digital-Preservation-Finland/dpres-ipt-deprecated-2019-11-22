@@ -67,7 +67,7 @@ def check_checksums(mets_path):
             yield _message(fileinfo, "Invalid Checksum")
 
     for path in iter_files(sip_path):
-        if path.endswith("mets_ignore_errors"):
+        if path.endswith("ignore_validation_errors"):
             continue
 
         if path not in checked_files:
