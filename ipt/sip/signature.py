@@ -151,6 +151,8 @@ class ManifestSMIME(object):
                     matches.append(os.path.join(root, filename))
         else:
             matches = self.target_path.split(',')
+            matches = [os.path.abspath(match) for match in matches]
+
         manifest_fh, manifest_filename = tempfile.mkstemp()
 
         algorithm = 'sha1'
@@ -160,7 +162,6 @@ class ManifestSMIME(object):
 
             hexdigest = checksum.hexdigest(filename)
             filename_relative = filename[len(self.manifest_base_path) + 1:]
-
             file_checksum = "%s:%s:%s\n" % (filename_relative, algorithm,
                                             hexdigest)
 
