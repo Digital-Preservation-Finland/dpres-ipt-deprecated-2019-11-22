@@ -6,6 +6,8 @@ from ipt.utils import merge_dicts, uri_to_path
 from ipt.mets.parser import MetsFile, MdWrap
 from ipt.premis import premis as p
 import ipt.addml.addml
+import ipt.videomd.videomd
+import ipt.audiomd.audiomd
 
 
 def mdwrap_to_fileinfo(mdwrap_element):
@@ -43,7 +45,9 @@ def mdwrap_to_fileinfo(mdwrap_element):
     }
 
     other_parsers = {
-        'ADDML': ipt.addml.addml.to_dict
+        'ADDML': ipt.addml.addml.to_dict,
+        'VideoMD': ipt.videomd.videomd.to_dict,
+        'AudioMD': ipt.audiomd.audiomd.to_dict
     }
 
     try:
