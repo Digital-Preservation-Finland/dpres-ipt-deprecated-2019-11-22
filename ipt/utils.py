@@ -37,13 +37,18 @@ def run_command(cmd, stdout=subprocess.PIPE):
 
 def merge_dicts(*dicts):
     """
-    Merge N dicts.
+    Merge N dicts. If dictionaries have same keys on root level,
+    they will be merged under one key as a list.
     :dicts: a list of dicts.
     :returns: one merged dict
     """
     result = {}
     for dictionary in dicts:
-        result.update(dictionary)
+        keys = [x for x in dictionary]
+        if keys[0] in dictionary and keys[0] in result:
+            result[keys[0]].append(dictionary[keys[0]][0])
+        else:
+            result.update(dictionary)
     return result
 
 
