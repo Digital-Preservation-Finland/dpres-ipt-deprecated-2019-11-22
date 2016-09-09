@@ -52,6 +52,33 @@ def merge_dicts(*dicts):
     return result
 
 
+def compare_lists_of_dicts(expected, found):
+    """
+    :excpected: a list of dicts that should be in second 'found' paramater
+    :found: a list of dicts that really exist
+    :returns: a tuple describing missing and extraneus dicts
+    """
+    missing = find_missing_dict(expected, found)
+    extra = find_missing_dict(found, expected)
+    return (missing, extra)
+
+
+def find_missing_dict(expected, found):
+    """
+    :excpected: a list of dicts that should be in second 'found' paramater
+    :found: a list of dicts that really exist
+    """
+    missing = []
+    for excpected_item in expected:
+        match = False
+        for found_item in found:
+            if excpected_item == found_item:
+                match = True
+        if not match:
+            missing.append(excpected_item)
+    return missing
+
+
 def uri_to_path(uri):
     """Remove URI scheme from given `URI`:
 
