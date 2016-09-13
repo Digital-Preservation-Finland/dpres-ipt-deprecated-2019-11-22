@@ -31,11 +31,11 @@ def to_dict(audiomd_xml):
     :audiomd_xml: audiomd etree
     :returns: a dict of audiomd data."""
 
-    audiomd = {"audiomd": {}}
+    audiomd = {"audio": []}
     if audiomd_xml is None:
         return {}
 
-    audiomd["audiomd"]["codecname"] = audiomd_xml.xpath(
-        ".//amd:codecName", namespaces=NAMESPACES)[0].text
+    audiomd["audiomd"].append({"codecname": audiomd_xml.xpath(
+        ".//amd:codecName", namespaces=NAMESPACES)[0].text})
 
     return audiomd

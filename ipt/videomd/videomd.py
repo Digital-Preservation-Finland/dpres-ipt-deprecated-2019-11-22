@@ -37,11 +37,11 @@ def to_dict(videomd_xml):
     :videomd_xml: videomd etree
     :returns: a dict of videomd data."""
 
-    videomd = {"videomd": {}}
+    videomd = {"video": []}
     if videomd_xml is None:
         return {}
 
-    videomd["videomd"]["codecname"] = videomd_xml.xpath(
-        ".//vmd:codecName", namespaces=NAMESPACES)[0].text
+    videomd["video"].append({"codecname": videomd_xml.xpath(
+        ".//vmd:codecName", namespaces=NAMESPACES)[0].text})
 
     return videomd
