@@ -69,6 +69,10 @@ def find_missing_dict(expected, found):
     :found: a list of dicts that really exist
     """
     missing = []
+    if not expected:
+        return missing
+    if not found:
+        return expected
     for excpected_item in expected:
         match = False
         for found_item in found:
