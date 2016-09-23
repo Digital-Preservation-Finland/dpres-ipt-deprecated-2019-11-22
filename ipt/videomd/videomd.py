@@ -1,4 +1,4 @@
-""" VideoMD library module. This module maps videoMD data needed by validation 
+""" VideoMD library module. This module maps videoMD data needed by validation
 to dict. VideoMD format is described below.
 
 <vmd:VIDEOMD xmlns:vmd="http://www.loc.gov/videoMD/" ANALOGDIGITALFLAG="FileDigital">
@@ -26,7 +26,10 @@ to dict. VideoMD format is described below.
         <vmd:sound>No</vmd:sound>
    </vmd:fileData>
 </vmd:VIDEOMD>
+
 """
+
+from fractions import Fraction
 
 VIDEOMD_URI = "http://www.loc.gov/videoMD/"
 NAMESPACES = {"vmd": VIDEOMD_URI}
@@ -40,8 +43,36 @@ def to_dict(videomd_xml):
     videomd = {"video": []}
     if videomd_xml is None:
         return {}
+    video = {}
+    video["duration"] = parse_element("duration", videomd_xml)
+    video["level"] = parse_element("dataRate", videomd_xml)
+    video["codec_name"] = parse_element("codecName", videomd_xml)
+    video["avg_frame_rate"] = parse_element("frameRate", videomd_xml)
+    video["width"] = parse_element("pixelsHorizontal", videomd_xml)
+    video["height"] = parse_element("pixelsVertical", videomd_xml)
+    video["display_aspect_ratio"] = parse_element("DAR", videomd_xml)
+    video["sample_aspect_ratio"] = get_sar(videomd_xml)
 
-    videomd["video"].append({"codecname": videomd_xml.xpath(
-        ".//vmd:codecName", namespaces=NAMESPACES)[0].text})
-
+    videomd["video"].append(video)
     return videomd
+
+
+def parse_element(element, videomd_xml):
+    """
+    Wrapper for xpath query.
+    """
+    query = ".//vmd:%s" % element
+    return videomd_xml.xpath(query, namespaces=NAMESPACES)[0].text
+
+
+def get_sar(videomd_xml):
+    """
+    calculate SAR from DAR and PAR. SAR = DAR / PAR.
+    :videomd_xml: input videomd-xml
+    :returns: a fractional SAR value.
+    """
+    par = Fraction(parse_element("PAR", videomd_xml))
+    dar = Fraction(parse_element("DAR", videomd_xml))
+
+    sar = dar/par
+    return "%s" % str(sar).replace("/", ":")

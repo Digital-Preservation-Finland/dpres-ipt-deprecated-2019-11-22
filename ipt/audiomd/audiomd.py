@@ -35,7 +35,18 @@ def to_dict(audiomd_xml):
     if audiomd_xml is None:
         return {}
 
-    audiomd["audiomd"].append({"codecname": audiomd_xml.xpath(
-        ".//amd:codecName", namespaces=NAMESPACES)[0].text})
+    audio = {}
+    audio["codec_name"] = parse_element("codecName", audiomd_xml)
+    audio["duration"] = parse_element("duration", audiomd_xml)
+    audio["sample_rate"] = parse_element("samplingFrequency", audiomd_xml)
+    audio["channels"] = parse_element("numChannels", audiomd_xml)
 
     return audiomd
+
+
+def parse_element(element, audiomd_xml):
+    """
+    Wrapper for xpath query.
+    """
+    query = ".//amd:%s" % element
+    return audiomd_xml.xpath(query, namespaces=NAMESPACES)[0].text
