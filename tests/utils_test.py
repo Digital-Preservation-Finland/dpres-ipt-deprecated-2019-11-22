@@ -36,3 +36,7 @@ def test_compare_lists_of_dicts():
         [AUDIOMD2], [])
     assert compare_lists_of_dicts([AUDIOMD1], [AUDIOMD1, AUDIOMD2]) == (
         [], [AUDIOMD2])
+    assert compare_lists_of_dicts([AUDIOMD1], [AUDIOMD1, AUDIOMD1]) == (
+        [], [AUDIOMD1])
+    assert compare_lists_of_dicts([AUDIOMD1, AUDIOMD1], [AUDIOMD1]) == (
+        [AUDIOMD1], [])

@@ -73,11 +73,17 @@ def find_missing_dict(expected, found):
         return missing
     if not found:
         return expected
-    for excpected_item in expected:
+    expected_ = list(expected)
+    found_ = list(found)
+    for excpected_item in expected_:
         match = False
-        for found_item in found:
+        iterator = 0
+        for found_item in found_:
             if excpected_item == found_item:
+                found_ = found_[:iterator] + found_[iterator+1:]
+                expected_ = expected_[:iterator] + expected_[iterator+1:]
                 match = True
+            iterator = iterator + 1
         if not match:
             missing.append(excpected_item)
     return missing
