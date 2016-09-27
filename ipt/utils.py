@@ -45,6 +45,8 @@ def merge_dicts(*dicts):
     result = {}
     for dictionary in dicts:
         keys = [x for x in dictionary]
+        if len(keys) == 0:
+            continue
         if keys[0] in dictionary and keys[0] in result:
             result[keys[0]].append(dictionary[keys[0]][0])
         else:
