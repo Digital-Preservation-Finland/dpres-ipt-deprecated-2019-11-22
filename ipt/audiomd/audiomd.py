@@ -40,7 +40,7 @@ def to_dict(audiomd_xml):
     audio["duration"] = parse_element("duration", audiomd_xml)
     audio["sample_rate"] = parse_element("samplingFrequency", audiomd_xml)
     audio["channels"] = parse_element("numChannels", audiomd_xml)
-
+    audiomd["audio"].append(audio)
     return audiomd
 
 
