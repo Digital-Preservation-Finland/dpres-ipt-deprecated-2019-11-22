@@ -40,3 +40,8 @@ def test_compare_lists_of_dicts():
     assert not compare_lists_of_dicts([CODEC1], [CODEC1, CODEC1])
     assert not compare_lists_of_dicts([CODEC1, CODEC1], [CODEC1])
 
+
+def test_serialize_dict():
+    assert serialize_dict(CODEC1) == "codec=foo"
+    assert serialize_dict({"a": "b", "c": "d"}) == "a=b  c=d"
+    assert serialize_dict({"c": "d", "a": "b"}) == "a=b  c=d"
