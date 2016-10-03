@@ -2,6 +2,7 @@
 
 import subprocess
 import urllib
+from collections import defaultdict
 
 
 class UnknownException(Exception):
@@ -60,35 +61,43 @@ def compare_lists_of_dicts(expected, found):
     :found: a list of dicts that really exist
     :returns: a tuple describing missing and extraneus dicts
     """
-    missing = find_missing_dict(expected, found)
-    extra = find_missing_dict(found, expected)
-    return (missing, extra)
+    expected_count = dict(count_items_in_dict(expected))
+    found_count = dict(count_items_in_dict(found))
+    if found_count != expected_count:
+        return False
+    return True
 
 
-def find_missing_dict(expected, found):
+def count_items_in_dict(expected):
     """
     :excpected: a list of dicts that should be in second 'found' paramater
-    :found: a list of dicts that really exist
+    :returns: a dict that contains a count of each item
     """
-    missing = []
+    serialized_dicts = []
     if not expected:
-        return missing
-    if not found:
-        return expected
-    expected_ = list(expected)
-    found_ = list(found)
-    for excpected_item in expected_:
-        match = False
-        iterator = 0
-        for found_item in found_:
-            if excpected_item == found_item:
-                found_ = found_[:iterator] + found_[iterator+1:]
-                expected_ = expected_[:iterator] + expected_[iterator+1:]
-                match = True
-            iterator = iterator + 1
-        if not match:
-            missing.append(excpected_item)
-    return missing
+        return {}
+    for item in expected:
+        serialized_dicts.append(serialize_dict(item))
+
+    count = defaultdict(int)
+    for item in serialized_dicts:
+        count[item] += 1
+
+    return count
+
+
+def serialize_dict(data):
+    """
+    serialize dict to string
+    :data: a dict.
+    :returns: a list of strings containing dict values
+    in format <key value>__<key value>
+    """
+    serialized_dict = ""
+    if data:
+        for key in sorted(data.iterkeys()):
+            serialized_dict = serialized_dict + "%s=%s  " % (key, data[key])
+    return serialized_dict.strip("  ")
 
 
 def uri_to_path(uri):

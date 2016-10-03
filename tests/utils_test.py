@@ -1,9 +1,13 @@
 """Test for utils.py."""
 
-from ipt.utils import merge_dicts, compare_lists_of_dicts
+from ipt.utils import merge_dicts, compare_lists_of_dicts, serialize_dict
 
-AUDIOMD1 = {"audiomd": [{"codec": "foo"}]}
-AUDIOMD2 = {"audiomd": [{"codec": "bar"}]}
+CODEC1 = {"codec": "foo"}
+CODEC2 = {"codec": "bar"}
+CODEC1_RESULT = "codec foo"
+CODEC2_RESULT = "codec bar"
+AUDIOMD1 = {"audiomd": [CODEC1]}
+AUDIOMD2 = {"audiomd": [CODEC2]}
 
 
 def test_merge_dicts():
@@ -27,16 +31,12 @@ def test_merge_dicts():
 
 def test_compare_lists_of_dicts():
     """Test list comparison of dicts."""
-    assert compare_lists_of_dicts(None, None) == ([], [])
-    assert compare_lists_of_dicts([AUDIOMD1], None) == (
-        [AUDIOMD1], [])
-    assert compare_lists_of_dicts(None, [AUDIOMD1]) == (
-        [], [AUDIOMD1])
-    assert compare_lists_of_dicts([AUDIOMD1, AUDIOMD2], [AUDIOMD1]) == (
-        [AUDIOMD2], [])
-    assert compare_lists_of_dicts([AUDIOMD1], [AUDIOMD1, AUDIOMD2]) == (
-        [], [AUDIOMD2])
-    assert compare_lists_of_dicts([AUDIOMD1], [AUDIOMD1, AUDIOMD1]) == (
-        [], [AUDIOMD1])
-    assert compare_lists_of_dicts([AUDIOMD1, AUDIOMD1], [AUDIOMD1]) == (
-        [AUDIOMD1], [])
+    assert compare_lists_of_dicts(None, None)
+    assert compare_lists_of_dicts([CODEC1, CODEC2], [CODEC1, CODEC2])
+    assert not compare_lists_of_dicts([CODEC1], None)
+    assert not compare_lists_of_dicts(None, [CODEC1])
+    assert not compare_lists_of_dicts([CODEC1, CODEC2], [CODEC1])
+    assert not compare_lists_of_dicts([CODEC1], [CODEC1, CODEC2])
+    assert not compare_lists_of_dicts([CODEC1], [CODEC1, CODEC1])
+    assert not compare_lists_of_dicts([CODEC1, CODEC1], [CODEC1])
+
