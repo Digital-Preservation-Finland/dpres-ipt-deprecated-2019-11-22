@@ -108,41 +108,6 @@ class TestCommandLineTools:
                 "in_stderr": ""
             }
         }],
-                "test_check_sip_digital_objects":
-        [{
-            "testcase": "Test valid sip package #1",
-            "filename": "CSC_test001",
-            "expected_result": {
-                "returncode": 0,
-                "stdout": "",
-                "stderr": ""
-            }
-        }, {
-            "testcase": "Test valid sip package #2",
-            "filename": "CSC_test002",
-            "expected_result": {
-                "returncode": 0,
-                "stdout": "",
-                "stderr": ""
-            }
-        }, {
-            "testcase": "Test sip with whitespace sip package #3",
-            "filename": "CSC whitespace",
-            "expected_result": {
-                "returncode": 0,
-                "stdout": "",
-                "stderr": ""
-            }
-        },
-            {
-            "testcase": "Test valid sip package #6: csc-test-valid-kdkmets-1.3",
-            "filename": "CSC_test006",
-            "expected_result": {
-                "returncode": 0,
-                "stdout": "",
-                "stderr": ""
-            }
-        }],
                 "test_check_xml_schema_features":
         [{
             "testcase": "Test valid mets.xml",
@@ -335,33 +300,3 @@ class TestCommandLineTools:
 
         for message in expected_result['in_stderr']:
             assert message in stderr
-
-
-    @pytest.mark.usefixtures("monkeypatch_Popen")
-    def test_check_sip_digital_objects(self, testcase,
-                                       filename, expected_result):
-
-        filename = os.path.join(testcommon.settings.TESTDATADIR, 'test-sips',
-                                filename)
-        arguments = ["%s" % filename, "abc", "def"]
-
-        command = ipt.scripts.check_sip_digital_objects.main
-
-        (returncode, stdout, stderr) = testcommon.shell.run_main(
-            command, arguments)
-
-        print >> sys.stderr, stderr
-
-        function_name = "%s.%s" % (command.__module__, command.func_name)
-        for match_string in expected_result["stdout"]:
-            assert match_string in stdout
-
-        for match_string in expected_result["stderr"]:
-            assert match_string in stderr
-
-        message = "\n".join(["got:", str(returncode), "expected:",
-                             str(expected_result["returncode"]
-                                 ), "stdout:", stdout, "stderr:",
-                             stderr, "function:", function_name])
-
-        assert returncode == expected_result["returncode"], message
