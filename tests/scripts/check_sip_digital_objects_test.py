@@ -138,11 +138,6 @@ def test_validation(monkeypatch):
         'filename': os.path.join(METSDIR, 'file.pdf')
     }
 
-    assert results["result"] == {
-        "is_valid": True,
-        "messages": "OK",
-        "errors": ""}
-
     # Returned all files in METS, where arbitrary file not marked as native
     mets_file = os.path.join(METSDIR, 'mets_native_unmarked.xml')
     mets_parser = LXML(filename=mets_file)
@@ -181,9 +176,11 @@ def test_validation(monkeypatch):
         }, "result": {
             "is_valid": True,
             "messages": "OK",
-            "errors": ""}
-        }
-    ]
+            "errors": "",
+            "result": {'format': {}, 'filename':
+                '/home/vagrant/information-package-tools/tests/data/mets/file.pdf'}
+            }
+        }]
     files = [file_ for file_ in validation(mets_parser)]
     for file_iterator in range(0, 2):
         assert files[file_iterator] == expected[file_iterator]
