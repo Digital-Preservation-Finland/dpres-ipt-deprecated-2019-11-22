@@ -82,7 +82,9 @@ clean: clean-rpm
 clean-rpm:
 	rm -rf rpmbuild
 
-rpm: clean-rpm
+rpm-sources:
 	create-archive.sh
 	preprocess-spec-m4-macros.sh include/rhel6
+
+rpm: clean-rpm rpm-sources
 	build-rpm.sh ${MOCK_CONFIG}
