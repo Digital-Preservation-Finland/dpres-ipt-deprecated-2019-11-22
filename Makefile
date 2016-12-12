@@ -57,7 +57,7 @@ install_deps:
 	yum -y install zip unzip
 	
 test:
-	py.test tests
+	py.test -svvvv --full-trace --junitprefix=access-rest-api --junitxml=junit.xml tests
 
 docs:
 	make -C doc html
@@ -70,10 +70,10 @@ killdocserver:
 	make -C doc killdocserver
 
 coverage:
-	coverage -e
-	coverage -x test.py
-	coverage -r -m
-	coverage -b -d coverage-html
+	py.test tests --cov=access_rest_api --cov-report=html
+	coverage report -m
+	coverage html
+	coverage xml
 
 clean: clean-rpm
 	find . -iname '*.pyc' -type f -delete

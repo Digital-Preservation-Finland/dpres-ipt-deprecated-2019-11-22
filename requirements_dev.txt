@@ -1,0 +1,5 @@
+lxml
+coverage
+pytest-coverage
+dateutils
+scandir
