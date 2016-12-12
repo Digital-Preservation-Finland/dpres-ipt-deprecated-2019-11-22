@@ -70,7 +70,7 @@ killdocserver:
 	make -C doc killdocserver
 
 coverage:
-	py.test tests --cov=information-package-tools --cov-report=html
+	py.test tests --cov=ipt --cov-report=html
 	coverage report -m
 	coverage html
 	coverage xml
