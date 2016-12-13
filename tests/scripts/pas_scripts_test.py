@@ -56,7 +56,7 @@ class TestCommandLineTools:
                 "in_stderr": ""
             }
         },
-        {
+         {
             "testcase": "Test valid signature",
             "certificate": "valid-certificate.pem",
             "sipname": "CSC_test001_signature",
@@ -107,56 +107,7 @@ class TestCommandLineTools:
                 "stderr": "",
                 "in_stderr": ""
             }
-        }],
-                "test_check_xml_schema_features":
-        [{
-            "testcase": "Test valid mets.xml",
-            "sipname": "CSC_test006",
-            "expected_result": {
-                "returncode": 0,
-                "in_stdout": [],
-                "not_in_stdout": [],
-                "stderr": "\n",  # There"s extra line wrap in stderr
-                "in_stderr": ""
-            }
-        },
-            {
-            "testcase": "Test invalid mets.xml",
-            "sipname": "CSC_test005",
-            "expected_result": {
-                "returncode": 117,
-                "in_stdout": [],
-                "not_in_stdout": [],
-                "stderr": "",
-                "in_stderr": ["fails to validate"]
-            }
-        }
-        ],
-                "test_check_xml_schematron_features":
-        [{
-            "testcase": "Test valid mets.xml",
-            "sipname": "CSC_test006",
-            "expected_result": {
-                "returncode": 0,
-                "in_stdout": [],
-                "not_in_stdout": [],
-                "stderr": "",
-                "in_stderr": ""
-            }
-        },
-            {
-            "testcase": "Test invalid mets.xml",
-            "sipname": "CSC_test005",
-            "expected_result": {
-                "returncode": 1,
-                "in_stdout": ["Error"],
-                "not_in_stdout": [],
-                "stderr": "",
-                "in_stderr": []
-            }
-        }
-
-        ]
+        }]
     }
 
     def test_premis2html(self, testcase, expected_result):
@@ -271,32 +222,3 @@ class TestCommandLineTools:
 
         for message in expected_result['in_stderr']:
             assert message in stdout
-
-    def test_check_xml_schema_features(self, monkeypatch, testcase, sipname,
-                                       expected_result):
-
-        catalog_path = ('include/etc/xml/information-package-tools/'
-                        'kdk-mets-catalog/catalog-local.xml')
-        monkeypatch.setenv("SGML_CATALOG_FILES", catalog_path)
-
-        mets_path = os.path.join(testcommon.settings.TESTDATADIR,
-                                 'test-sips/' + sipname + '/mets.xml')
-
-        command = ipt.scripts.check_xml_schema_features.main
-        arguments = ["--schemapath",
-                     ("include/etc/xml/information-package-tools/" +
-                      "kdk-mets-catalog/mets/mets.xsd"),
-                     mets_path]
-        (returncode, stdout, stderr) = testcommon.shell.run_main(
-            command, arguments)
-
-        assert returncode == expected_result['returncode'], stdout + stderr
-
-        for message in expected_result['in_stdout']:
-            assert message in stdout
-
-        for message in expected_result['not_in_stdout']:
-            assert message not in stdout
-
-        for message in expected_result['in_stderr']:
-            assert message in stderr
