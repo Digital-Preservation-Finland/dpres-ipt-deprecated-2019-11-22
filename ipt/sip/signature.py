@@ -87,7 +87,9 @@ class ManifestSMIME(object):
 
         if not os.path.exists(os.path.dirname(self.public_key)):
             os.makedirs(os.path.dirname(self.public_key))
-
+        print self.private_key
+        print self.public_key
+        print self.ca_path
         # Note, this may not be safe for UTF-8 strings in self.country etc.
         cmd = ['openssl', 'req', '-x509', '-nodes', '-days', '365', '-newkey',
                'rsa:2048', '-subj',
@@ -102,7 +104,8 @@ class ManifestSMIME(object):
 
         (stdout, stderr) = proc.communicate()
 
-        print stdout, stderr
+        print "STDERR", stderr
+        print "STDOUT", stdout
 
         cmd = ['openssl', 'x509', '-text', '-in', self.public_key]
 
@@ -173,6 +176,12 @@ class ManifestSMIME(object):
 
         cmd = ['openssl', 'smime', '-sign', '-signer', self.private_key, '-in',
                manifest_filename]
+        print "manifest_filename##", manifest_filename, os.path.isfile(manifest_filename)
+        print os.system('cat ' + manifest_filename)
+        print os.system('file ' + manifest_filename)
+        print "self.private_key##", self.private_key, os.path.isfile(self.private_key)
+        print os.system('cat ' + self.private_key)
+        print os.system('file ' + self.private_key)
 
         sign_path = os.path.join(self.manifest_base_path, self.signature_file)
         print "SIGN_PATH", sign_path
