@@ -57,7 +57,7 @@ install_deps:
 	yum -y install zip unzip
 	
 test:
-	py.test -svvvv --full-trace --junitprefix=access-rest-api --junitxml=junit.xml tests
+	py.test -svvvv --junitprefix=information-package-tools --junitxml=junit.xml tests
 
 docs:
 	make -C doc html
