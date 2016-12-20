@@ -24,7 +24,7 @@ Requires: python python-mimeparse python-dateutil xml-common pymongo ghostscript
 Requires: libxslt unzip jhove python-setuptools python-lxml
 # ClamAV installation requires these to work
 Requires: clamav libtool-ltdl
-Requires: warc-tools >= 4.8.3 ffmpeg
+Requires: warc-tools >= 4.8.3 ffmpeg kdk-mets-catalog
 BuildRequires:	pytest
 
 %description
