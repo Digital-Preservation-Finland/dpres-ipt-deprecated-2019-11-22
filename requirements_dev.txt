@@ -1,4 +1,4 @@
-lxml
+lxml==2.2.3
 coverage
 pytest-coverage
 dateutils
