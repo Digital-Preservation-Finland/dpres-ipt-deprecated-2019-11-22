@@ -3,3 +3,4 @@ coverage
 pytest-coverage
 dateutils
 scandir
+pytest
