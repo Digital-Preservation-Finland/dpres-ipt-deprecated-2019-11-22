@@ -94,8 +94,7 @@ def test_check_sip_digital_objects(case):
     assert returncode == case["expected_result"]["returncode"], message
 
 
-@pytest.fixture(autouse=True)
-def patch_jhove_pdf(monkeypatch):
+def run_validation(monkeypatch, mets_filename):
     """Patch jhove pdf validator"""
 
     class JHoveMock(BaseValidator):
@@ -110,16 +109,18 @@ def patch_jhove_pdf(monkeypatch):
 
     monkeypatch.setattr(ipt.validator.jhove, "JHovePDF", JHoveMock)
 
+    mets_file = os.path.join(METSDIR, mets_filename)
+    mets_parser = LXML(filename=mets_file)
+    mets_parser.xmlroot()
+    return [file_ for file_ in validation(mets_parser)]
 
-def test_non_native_marked():
+
+def test_non_native_marked(monkeypatch):
     """Test validation with non-native file format that has been marked with
     'no-file-format-validation'. This should validate only native file
     format"""
 
-    mets_file = os.path.join(METSDIR, 'mets_native_marked.xml')
-    mets_parser = LXML(mets_file)
-    mets_parser.xmlroot()
-    results = [result for result in validation(mets_parser)]
+    results = run_validation(monkeypatch, 'mets_native_marked.xml')
 
     assert results == [
         {"fileinfo": {
@@ -139,17 +140,13 @@ def test_non_native_marked():
              "errors": ""}}]
 
 
-def test_non_native_unmarked():
+def test_non_native_unmarked(monkeypatch):
     """Test non-native file format that has not meen marked with
     `no-file-format-validation`. This should be invalid SIP"""
 
-    mets_file = os.path.join(METSDIR, 'mets_native_unmarked.xml')
-    mets_parser = LXML(filename=mets_file)
-    mets_parser.xmlroot()
+    results = run_validation(monkeypatch, 'mets_native_unmarked.xml')
 
-    files = [file_ for file_ in validation(mets_parser)]
-
-    assert files == [
+    assert results == [
         {"fileinfo": {
             'object_id': {
                 'type': 'local',
