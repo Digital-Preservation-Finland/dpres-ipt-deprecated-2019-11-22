@@ -94,9 +94,10 @@ def test_check_sip_digital_objects(case):
     assert returncode == case["expected_result"]["returncode"], message
 
 
-def test_validation(monkeypatch):
-    """Test the get_fileinfo_array method by METS including file with arbitrary
-    native file format"""
+@pytest.fixture(autouse=True)
+def patch_jhove_pdf(monkeypatch):
+    """Patch jhove pdf validator"""
+
     class JHoveMock(BaseValidator):
         """mock"""
         _supported_mimetypes = {
@@ -109,30 +110,46 @@ def test_validation(monkeypatch):
 
     monkeypatch.setattr(ipt.validator.jhove, "JHovePDF", JHoveMock)
 
-    # Omitting the arbitrary native file in METS
+
+def test_non_native_marked():
+    """Test validation with non-native file format that has been marked with
+    'no-file-format-validation'. This should validate only native file
+    format"""
+
     mets_file = os.path.join(METSDIR, 'mets_native_marked.xml')
     mets_parser = LXML(mets_file)
     mets_parser.xmlroot()
-    results = [result for result in validation(mets_parser)][0]
-    assert results["fileinfo"] == {
-        'object_id': {
-            'type': 'local',
-            'value': 'object-002'},
-        'format': {
-            'mimetype': 'application/pdf',
-            'version': 'A-1b'},
-        'algorithm': 'MD5',
-        'digest': '7fc2103950f2bb374c277ed4eb43bdc6',
-        'use': '',
-        'filename': os.path.join(METSDIR, 'file.pdf')
-    }
+    results = [result for result in validation(mets_parser)]
 
-    # Returned all files in METS, where arbitrary file not marked as native
+    assert results == [
+        {"fileinfo": {
+            'object_id': {
+                'type': 'local',
+                'value': 'object-002'},
+            'format': {
+                'mimetype': 'application/pdf',
+                'version': 'A-1b'},
+            'algorithm': 'MD5',
+            'digest': '7fc2103950f2bb374c277ed4eb43bdc6',
+            'use': '',
+            'filename': os.path.join(METSDIR, 'file.pdf')},
+         "result": {
+             "is_valid": True,
+             "messages": "OK",
+             "errors": ""}}]
+
+
+def test_non_native_unmarked():
+    """Test non-native file format that has not meen marked with
+    `no-file-format-validation`. This should be invalid SIP"""
+
     mets_file = os.path.join(METSDIR, 'mets_native_unmarked.xml')
     mets_parser = LXML(filename=mets_file)
     mets_parser.xmlroot()
 
-    expected = [
+    files = [file_ for file_ in validation(mets_parser)]
+
+    assert files == [
         {"fileinfo": {
             'object_id': {
                 'type': 'local',
@@ -164,11 +181,5 @@ def test_validation(monkeypatch):
         }, "result": {
             "is_valid": True,
             "messages": "OK",
-            "errors": "",
-            "result": {'format': {}, 'filename':
-                '/home/vagrant/information-package-tools/tests/data/mets/file.pdf'}
-            }
+            "errors": ""}
         }]
-    files = [file_ for file_ in validation(mets_parser)]
-    for file_iterator in range(0, 2):
-        assert files[file_iterator] == expected[file_iterator]
