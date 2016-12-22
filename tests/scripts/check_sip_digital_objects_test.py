@@ -66,31 +66,32 @@ TESTCASES = [
          "stderr": ''}}]
 
 
+@pytest.mark.parametrize(
+    "case", TESTCASES, ids=[x['testcase'] for x in TESTCASES])
 @pytest.mark.usefixtures("monkeypatch_Popen")
-def test_check_sip_digital_objects():
+def test_check_sip_digital_objects(case):
     """
     Test for check_sip_digital_objects
     """
-    for case in TESTCASES:
-        filename = os.path.join(
-            testcommon.settings.TESTDATADIR, 'test-sips', case["filename"])
+    filename = os.path.join(
+        testcommon.settings.TESTDATADIR, 'test-sips', case["filename"])
 
-        arguments = [filename, "preservation-sip-id", str(uuid.uuid4())]
+    arguments = [filename, "preservation-sip-id", str(uuid.uuid4())]
 
-        (returncode, stdout, stderr) = testcommon.shell.run_main(
-            main, arguments)
+    (returncode, stdout, stderr) = shell.run_main(
+        main, arguments)
 
-        assert stderr == ''
+    assert stderr == ''
 
-        for match_string in case["expected_result"]["stdout"]:
-            assert match_string in stdout
+    for match_string in case["expected_result"]["stdout"]:
+        assert match_string in stdout
 
-        message = "\n".join([
-            "got:", str(returncode), "expected:",
-            str(case["expected_result"]["returncode"]),
-            "stdout:", stdout, "stderr:", stderr])
+    message = "\n".join([
+        "got:", str(returncode), "expected:",
+        str(case["expected_result"]["returncode"]),
+        "stdout:", stdout, "stderr:", stderr])
 
-        assert returncode == case["expected_result"]["returncode"], message
+    assert returncode == case["expected_result"]["returncode"], message
 
 
 def test_validation(monkeypatch):
