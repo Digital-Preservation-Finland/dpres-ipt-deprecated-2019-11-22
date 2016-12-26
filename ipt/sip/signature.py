@@ -60,7 +60,11 @@ class ManifestSMIME(object):
                  public_key=None, ca_path=None, target_path=None):
 
         if signature_filename:
-            self.signature_file = signature_filename
+            self.signature_file = os.path.basename(signature_filename)
+
+        self.manifest_base_path = os.path.dirname(
+            os.path.abspath(signature_filename))
+
         if ca_path:
             self.ca_path = ca_path
 
@@ -72,9 +76,6 @@ class ManifestSMIME(object):
 
         if target_path:
             self.target_path = target_path
-
-        self.manifest_base_path = os.path.abspath(
-            os.path.dirname(self.signature_file))
 
     def new_signing_key(self):
         """Create a private/public key pair used to sign KDK-PAS SIPs
