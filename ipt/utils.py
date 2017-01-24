@@ -100,6 +100,17 @@ def serialize_dict(data):
     return serialized_dict.strip("  ")
 
 
+def filter_list_of_dicts(list_of_dicts, key):
+    """Remove a key from all dicts in a list of dicts
+
+    :param list_of_dicts: The list of dictionaries
+    :param key: The key to remove from the dictionaries
+    """
+    if list_of_dicts:
+        for dict_to_edit in list_of_dicts:
+            dict_to_edit.pop(key, None)
+
+
 def uri_to_path(uri):
     """Remove URI scheme from given `URI`:
 

@@ -1,6 +1,7 @@
 """Test for utils.py."""
 
-from ipt.utils import merge_dicts, compare_lists_of_dicts, serialize_dict
+from ipt.utils import merge_dicts, compare_lists_of_dicts, serialize_dict, \
+        filter_list_of_dicts
 
 CODEC1 = {"codec": "foo"}
 CODEC2 = {"codec": "bar"}
@@ -42,6 +43,20 @@ def test_compare_lists_of_dicts():
 
 
 def test_serialize_dict():
+    """Test list serialization"""
     assert serialize_dict(CODEC1) == "codec=foo"
     assert serialize_dict({"a": "b", "c": "d"}) == "a=b  c=d"
     assert serialize_dict({"c": "d", "a": "b"}) == "a=b  c=d"
+
+def test_filter_list_of_dicts():
+    assert filter_list_of_dicts(None, None) is None
+    assert filter_list_of_dicts([{}, {}], "foo") is None
+    lod = [
+        {"foo": "bar",
+         "baz": "quux"},
+        {"baz": "lksjdf",
+         "corge": "grault"},
+    ]
+    filter_list_of_dicts(lod, "baz")
+    for a_dict in lod:
+        assert "baz" not in a_dict
