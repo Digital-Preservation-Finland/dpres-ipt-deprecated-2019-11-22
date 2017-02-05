@@ -26,3 +26,4 @@ tests/data/popen
 .venv/
 junit*.xml
 tests/data/
+include/etc/xml/information-package-tools/private-catalog
