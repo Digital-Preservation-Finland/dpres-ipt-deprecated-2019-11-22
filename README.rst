@@ -5,14 +5,7 @@ This project implements tools for creating and validating Open Archival Informat
 
 You can checkout this project from version control::
 
-        git clone https://firname.secondname@source.csc.fi/scm/git/pas/information-package-tools
-
-if you have a user account on source.csc.fi with read permissions. If not,
-contact `EDEN team`_. You can also see the current source files at:
-
-        https://source.csc.fi/scm/git/pas/information-package-tools/.
-
-.. _`EDEN team`: https://confluence.csc.fi/display/EDEN
+        git clone https://github.com/Digital-Preservation-Finland/dpres-ipt.git
 
 The project contains following files:
 
@@ -92,65 +85,6 @@ For development setup you may want, instead of copying files, to create just sym
 
         make devinstall
 
-
-Installing from RPM packages
-****************************
-
-For production deployment there are separate build scripts for RPM packages::
-
-        git clone https://firstname:lastname@source.csc.fi/scm/git/pas/pas-rpm
-
-See documentation at pas-rpm repository for instructions how to build these RPM packages.
-
-.. _setup.py: http://docs.python.org/2/distutils/setupscript.html
-
-
-Testing
-=======
-
-For development / testing it is easiest to use pre-configured VirtualBox_ virtual machines. These are managed with VagrantUp_. Required configuration files are maintained in version control::
-
-        git clone https://firstname.lastname@source.csc.fi/scm/git/pas/vm
-
-For installing and operating development virtualmachines see the docs at pas/vm repository.
-
-.. _VirtualBox: http://www.virtualbox.org
-.. _VagrantUp: http://www.vagrantup.com
-
-Start your server with and login to server::
-
-        cd vm/ingest
-        vagrant up
-        ssh ingest
-
-TODO: tools/sip path will be removed after code cleanup/ refactoring
-
-Change to project directory and run all tests::
-
-        cd scratch/information-package-tools/tools/sip
-        make test
-
-For debugging single component it is faster to run single test::
-
-        py.test -s -v tests/modulename_test.py
-
-                or continuous testing...
-
-        while true ; do
-                py.test -s -v tests/modulename_test.py
-                sleep 5
-        done
-
-If you're using a GUI editor / IDE you may find it useful to run rsync_. from `localhost` to `virtual machine`::
-
-
-        while true ; do
-                rsync -delete -e ssh -avz information-package-tools spock@ingest:scratch/
-                sleep
-        done
-
-.. _rsync: http://www.samba.org/rsync/
-
 Documentation
 =============
 
@@ -189,18 +123,9 @@ For for developing documentation you can use Python SimpleHTTPServer to access H
     ... done anf finished ...
     make killdocserver
 
-Bugs
-====
-
-Report bugs to CSC's Jira_.
-
-.. _Jira: https://jira.csc.fi/browse/KDKPAS
-
-
 Development Guidelines
 ======================
 
-#. When you identify a task, report it to Jira_.
 #. If it's more than couple of hours of work, break it into subtasks.
 #. If fixing a bug, start by writing a test that shows the bug or fix existing tests.
    If adding a feature, add a test that uses the feature.
@@ -212,7 +137,6 @@ Development Guidelines
 #. Commit with a descriptive commit message. Use max 50 characters on first line.
    You can refer to bugs in commit messages, e.g. "Fix KDKPAS-1", but
    also describe the change so that it's enough to read the commit message.
-#. After you have done a task, close the issue in Jira_.
 #. Don't add code to "future proof" the project, when the need isn't clear.
 #. When the need becomes clear, don't be afraid to refactor. Don't leave
    broken windows behind!
@@ -228,4 +152,6 @@ Development Guidelines
     `Jacob Kaplan-Moss' presentation <http://blip.tv/pycon-us-videos-2009-2010-2011/pycon-2011-writing-great-documentation-4899042>`_
         shows the qualities of good documentation.
 
-
+Copyright
+======================
+All rights reserved to CSC - IT Center for Science Ltd. 
