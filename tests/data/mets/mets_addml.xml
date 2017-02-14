@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- OBJID: Tässä uusi tunniste -->
+<mets:mets xmlns:mets="http://www.loc.gov/METS/" xmlns:fi="http://www.kdk.fi/standards/mets/kdk-extensions" xmlns:premis="info:lc/xmlns/premis-v2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:addml="http://www.arkivverket.no/standarder/addml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OBJID="" PROFILE="http://www.kdk.fi/kdk-mets-profile" fi:CATALOG="1.5.0" xsi:schemaLocation="http://www.loc.gov/METS/                             http://www.kdk.fi/standards/mets/mets.xsd">
+  <mets:metsHdr CREATEDATE="2016-03-16T14:00:00" RECORDSTATUS="submission">
+    <mets:agent ROLE="CREATOR" TYPE="ORGANIZATION">
+      <mets:name>CSC - IT Center for Science Ltd.</mets:name>
+    </mets:agent>
+  </mets:metsHdr>
+  <mets:dmdSec ID="dmdsec-001" fi:CREATED="2016-03-16">
+    <mets:mdWrap MDTYPE="DC" MDTYPEVERSION="1.1">
+      <mets:xmlData>
+        <dc:subject>Test METS for CSV validation</dc:subject>
+      </mets:xmlData>
+    </mets:mdWrap>
+  </mets:dmdSec>
+  <mets:amdSec>
+    <mets:techMD ID="techmd-001" fi:CREATED="2016-03-16">
+      <mets:mdWrap MDTYPE="PREMIS:OBJECT" MDTYPEVERSION="2.3">
+        <mets:xmlData>
+          <premis:object xsi:type="premis:file">
+            <premis:objectIdentifier>
+              <premis:objectIdentifierType>local</premis:objectIdentifierType>
+              <premis:objectIdentifierValue>object-001</premis:objectIdentifierValue>
+            </premis:objectIdentifier>
+            <premis:objectCharacteristics>
+              <premis:compositionLevel>0</premis:compositionLevel>
+              <premis:fixity>
+                <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+                <premis:messageDigest>aa4bddaacf5ed1ca92b30826af257a1b</premis:messageDigest>
+              </premis:fixity>
+              <premis:format>
+                <premis:formatDesignation>
+                  <premis:formatName>text/csv;charset=UTF-8</premis:formatName>
+                </premis:formatDesignation>
+              </premis:format>
+              <premis:creatingApplication>
+                <premis:dateCreatedByApplication>2016-03-16T14:00:00</premis:dateCreatedByApplication>
+              </premis:creatingApplication>
+            </premis:objectCharacteristics>
+          </premis:object>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:techMD>
+    <mets:techMD ID="techmd-002" fi:CREATED="2016-03-16">
+      <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="ADDML" MDTYPEVERSION="8.3">
+        <mets:xmlData>
+          <addml:addml>
+            <addml:dataset>
+              <addml:reference name="Sample"/>
+              <addml:flatFiles>
+                <addml:flatFile name="file.csv" definitionReference="ref001"/>
+                  <addml:flatFileDefinitions>
+                  <addml:flatFileDefinition name="ref001">
+                    <addml:recordDefinitions>
+                      <addml:recordDefinition name="rec001">
+                        <addml:fieldDefinitions>
+                          <addml:fieldDefinition name="name" typeReference="str">
+                            <addml:description>Person name</addml:description>
+                          </addml:fieldDefinition>
+                          <addml:fieldDefinition name="email" typeReference="str">
+                            <addml:description>Person email</addml:description>
+                          </addml:fieldDefinition>
+                        </addml:fieldDefinitions>
+                      </addml:recordDefinition>
+                    </addml:recordDefinitions>
+                  </addml:flatFileDefinition>
+                </addml:flatFileDefinitions>
+                <addml:structureTypes>
+                  <addml:flatFileTypes>
+                    <addml:flatFileType name="rec001">
+                      <addml:charset>UTF-8</addml:charset>
+                      <addml:delimFileFormat>
+                        <addml:recordSeparator>CR+LF</addml:recordSeparator>
+                        <addml:fieldSeparatingChar>;</addml:fieldSeparatingChar>
+                      </addml:delimFileFormat>
+                    </addml:flatFileType>
+                  </addml:flatFileTypes>
+                  <addml:fieldTypes>
+                    <addml:fieldType name="str">
+                      <addml:dataType>string</addml:dataType>
+                    </addml:fieldType>
+                  </addml:fieldTypes>
+                </addml:structureTypes>
+              </addml:flatFiles>
+            </addml:dataset>
+          </addml:addml>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:techMD>
+    <mets:digiprovMD ID="event-001" CREATED="2016-03-16T14:00:00">
+      <mets:mdWrap MDTYPE="PREMIS:EVENT" MDTYPEVERSION="2.3">
+        <mets:xmlData>
+          <premis:event>
+            <premis:eventIdentifier>
+              <premis:eventIdentifierType>local</premis:eventIdentifierType>
+              <premis:eventIdentifierValue>event-001</premis:eventIdentifierValue>
+            </premis:eventIdentifier>
+            <premis:eventType>creation</premis:eventType>
+            <premis:eventDateTime>2016-03-16</premis:eventDateTime>
+            <premis:eventOutcomeInformation>
+              <premis:eventOutcome>success</premis:eventOutcome>
+            </premis:eventOutcomeInformation>
+            <premis:linkingAgentIdentifier>
+              <premis:linkingAgentIdentifierType>local</premis:linkingAgentIdentifierType>
+              <premis:linkingAgentIdentifierValue>agent-001</premis:linkingAgentIdentifierValue>
+            </premis:linkingAgentIdentifier>
+          </premis:event>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:digiprovMD>
+    <mets:digiprovMD ID="agent-001" CREATED="2016-03-16T14:00:00">
+      <mets:mdWrap MDTYPE="PREMIS:AGENT" MDTYPEVERSION="2.3">
+        <mets:xmlData>
+          <premis:agent>
+            <premis:agentIdentifier>
+              <premis:agentIdentifierType>local</premis:agentIdentifierType>
+              <premis:agentIdentifierValue>agent-001</premis:agentIdentifierValue>
+            </premis:agentIdentifier>
+            <premis:agentName>CSC - IT Center for Science Ltd.</premis:agentName>
+            <premis:agentType>organization</premis:agentType>
+          </premis:agent>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:digiprovMD>
+  </mets:amdSec>
+  <mets:fileSec>
+    <mets:fileGrp>
+      <mets:file ADMID="techmd-001 techmd-002 event-001 agent-001" ID="fileid-001">
+        <mets:FLocat LOCTYPE="URL" xlink:href="file://./file.csv" xlink:type="simple"/>
+      </mets:file>
+    </mets:fileGrp>
+  </mets:fileSec>
+  <mets:structMap TYPE="physical">
+    <mets:div TYPE="file" DMDID="dmdsec-001">
+      <mets:fptr FILEID="fileid-001"/>
+    </mets:div>
+  </mets:structMap>
+</mets:mets>

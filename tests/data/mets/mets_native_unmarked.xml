@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mets:mets OBJID="f694a5d9-d168-487b-808c-120fa3da0a34"
+		PROFILE="http://www.kdk.fi/kdk-mets-profile"
+		fi:CATALOG="1.5.0"
+		xmlns:mets="http://www.loc.gov/METS/"
+        xmlns:fi="http://www.kdk.fi/standards/mets/kdk-extensions"
+        xmlns:premis="info:lc/xmlns/premis-v2"
+		xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.loc.gov/METS/
+                            http://www.kdk.fi/standards/mets/mets.xsd">
+  <mets:metsHdr CREATEDATE="2016-04-12T14:30:00" RECORDSTATUS="submission">
+    <mets:agent ROLE="CREATOR" TYPE="ORGANIZATION">
+      <mets:name>CSC - IT Center for Science Ltd.</mets:name>
+    </mets:agent>
+  </mets:metsHdr>
+  <mets:dmdSec ID="dmdsec-001" fi:CREATED="2016-04-12">
+    <mets:mdWrap MDTYPE="DC" MDTYPEVERSION="1.1">
+      <mets:xmlData>
+        <dc:subject>An example how to create a migration event from native to acceptable format</dc:subject>
+        <dc:coverage>Practically an invalid example, where CDR file will be validated normally</dc:coverage>
+      </mets:xmlData>
+    </mets:mdWrap>
+  </mets:dmdSec>
+  <mets:amdSec>
+    <mets:techMD ID="techmd-001" fi:CREATED="2016-04-12">
+      <mets:mdWrap MDTYPE="PREMIS:OBJECT" MDTYPEVERSION="2.3">
+        <mets:xmlData>
+          <premis:object xsi:type="premis:file">
+            <premis:objectIdentifier>
+              <premis:objectIdentifierType>local</premis:objectIdentifierType>
+              <premis:objectIdentifierValue>object-001</premis:objectIdentifierValue>
+            </premis:objectIdentifier>
+            <premis:objectCharacteristics>
+              <premis:compositionLevel>0</premis:compositionLevel>
+              <premis:fixity>
+                <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+                <premis:messageDigest>2a2e5816c93ee7c21ae1c84ddcf8c80a</premis:messageDigest>
+             </premis:fixity>
+              <premis:format>
+                <premis:formatDesignation>
+                  <premis:formatName>application/cdr</premis:formatName>
+                </premis:formatDesignation>
+              </premis:format>
+              <premis:creatingApplication>
+                <premis:dateCreatedByApplication>2016-03-16T14:00:00</premis:dateCreatedByApplication>
+              </premis:creatingApplication>
+            </premis:objectCharacteristics>
+          </premis:object>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:techMD>
+    <mets:techMD ID="techmd-002" fi:CREATED="2016-04-12">
+      <mets:mdWrap MDTYPE="PREMIS:OBJECT" MDTYPEVERSION="2.3">
+        <mets:xmlData>
+          <premis:object xsi:type="premis:file">
+            <premis:objectIdentifier>
+              <premis:objectIdentifierType>local</premis:objectIdentifierType>
+              <premis:objectIdentifierValue>object-002</premis:objectIdentifierValue>
+            </premis:objectIdentifier>
+            <premis:objectCharacteristics>
+              <premis:compositionLevel>0</premis:compositionLevel>
+              <premis:fixity>
+                <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+                <premis:messageDigest>7fc2103950f2bb374c277ed4eb43bdc6</premis:messageDigest>
+             </premis:fixity>
+              <premis:format>
+                <premis:formatDesignation>
+                  <premis:formatName>application/pdf</premis:formatName>
+                  <premis:formatVersion>A-1b</premis:formatVersion>
+                </premis:formatDesignation>
+              </premis:format>
+              <premis:creatingApplication>
+                <premis:dateCreatedByApplication>2016-03-16T14:00:00</premis:dateCreatedByApplication>
+              </premis:creatingApplication>
+            </premis:objectCharacteristics>
+          </premis:object>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:techMD>
+    <mets:digiprovMD ID="event-001" fi:CREATED="2016-04-12">
+      <mets:mdWrap MDTYPE="PREMIS:EVENT" MDTYPEVERSION="2.3">
+        <mets:xmlData>
+          <premis:event>
+            <premis:eventIdentifier>
+              <premis:eventIdentifierType>local</premis:eventIdentifierType>
+              <premis:eventIdentifierValue>event-001</premis:eventIdentifierValue>
+            </premis:eventIdentifier>
+            <premis:eventType>migration</premis:eventType>
+            <premis:eventDateTime>2016-03-16</premis:eventDateTime>
+            <premis:eventOutcomeInformation>
+              <premis:eventOutcome>success</premis:eventOutcome>
+            </premis:eventOutcomeInformation>
+            <premis:linkingAgentIdentifier>
+              <premis:linkingAgentIdentifierType>local</premis:linkingAgentIdentifierType>
+              <premis:linkingAgentIdentifierValue>agent-001</premis:linkingAgentIdentifierValue>
+            </premis:linkingAgentIdentifier>                     
+            <premis:linkingObjectIdentifier>
+              <premis:linkingObjectIdentifierType>local</premis:linkingObjectIdentifierType>
+              <premis:linkingObjectIdentifierValue>object-001</premis:linkingObjectIdentifierValue>
+              <premis:linkingObjectRole>source</premis:linkingObjectRole>              
+            </premis:linkingObjectIdentifier>
+            <premis:linkingObjectIdentifier>
+              <premis:linkingObjectIdentifierType>local</premis:linkingObjectIdentifierType>
+              <premis:linkingObjectIdentifierValue>object-002</premis:linkingObjectIdentifierValue>
+              <premis:linkingObjectRole>outcome</premis:linkingObjectRole>              
+            </premis:linkingObjectIdentifier>
+          </premis:event>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:digiprovMD>
+    <mets:digiprovMD ID="agent-001" fi:CREATED="2016-04-12">
+      <mets:mdWrap MDTYPE="PREMIS:AGENT" MDTYPEVERSION="2.3">
+        <mets:xmlData>
+          <premis:agent>
+            <premis:agentIdentifier>
+              <premis:agentIdentifierType>local</premis:agentIdentifierType>
+              <premis:agentIdentifierValue>agent-001</premis:agentIdentifierValue>
+            </premis:agentIdentifier>
+            <premis:agentName>CSC's Whatever Converter</premis:agentName>
+            <premis:agentType>software</premis:agentType>
+          </premis:agent>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:digiprovMD>
+  </mets:amdSec>
+  <mets:fileSec>
+    <mets:fileGrp>
+      <mets:file ADMID="techmd-001 event-001 agent-001" ID="fileid-001">
+        <mets:FLocat LOCTYPE="URL" xlink:href="file://./file.cdr" xlink:type="simple"/>
+      </mets:file>
+      <mets:file ADMID="techmd-002 event-001 agent-001" ID="fileid-002">
+        <mets:FLocat LOCTYPE="URL" xlink:href="file://./file.pdf" xlink:type="simple"/>
+      </mets:file>
+    </mets:fileGrp>
+  </mets:fileSec>
+  <mets:structMap>
+    <mets:div TYPE="logical" DMDID="dmdsec-001">
+      <mets:fptr FILEID="fileid-001"/>
+      <mets:fptr FILEID="fileid-002"/>  		
+    </mets:div>
+  </mets:structMap>
+</mets:mets>

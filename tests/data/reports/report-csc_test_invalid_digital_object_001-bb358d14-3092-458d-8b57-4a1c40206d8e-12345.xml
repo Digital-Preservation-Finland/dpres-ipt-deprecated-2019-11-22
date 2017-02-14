@@ -1,0 +1,528 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<premis:premis xmlns:premis="info:lc/xmlns/premis-v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="premis http://www.loc.gov/standards/premis/premis.xsd" version="2.2">
+  <premis:object xsi:type="premis:representation">
+    <premis:objectIdentifier>
+      <premis:objectIdentifierType>pas-transfer-id</premis:objectIdentifierType>
+      <premis:objectIdentifierValue>pas-transfer-8875e17a-949a-4d26-a5fd-981b4a56b9f2</premis:objectIdentifierValue>
+    </premis:objectIdentifier>
+    <premis:originalName>csc_test_invalid_digital_object_001.zip</premis:originalName>
+  </premis:object>
+  <premis:object xsi:type="premis:representation">
+    <premis:objectIdentifier>
+      <premis:objectIdentifierType>pas-sip-id</premis:objectIdentifierType>
+      <premis:objectIdentifierValue>pas-sip-organisaatio1-bb358d14-3092-458d-8b57-4a1c40206d8e</premis:objectIdentifierValue>
+    </premis:objectIdentifier>
+    <premis:originalName>csc_test_invalid_digital_object_001</premis:originalName>
+    <premis:environment>
+      <premis:dependency>
+        <premis:dependencyIdentifier>
+          <premis:dependencyIdentifierType>mets:OBJID</premis:dependencyIdentifierType>
+          <premis:dependencyIdentifierValue>kdk-csc-sip001</premis:dependencyIdentifierValue>
+        </premis:dependencyIdentifier>
+      </premis:dependency>
+    </premis:environment>
+    <premis:relationship>
+      <premis:relationshipType>structural</premis:relationshipType>
+      <premis:relationshipSubType>is included in</premis:relationshipSubType>
+      <premis:relatedObjectIdentification>
+        <premis:relatedObjectIdentifierType>pas-transfer-8875e17a-949a-4d26-a5fd-981b4a56b9f2</premis:relatedObjectIdentifierType>
+        <premis:relatedObjectIdentifierValue>pas-transfer-8875e17a-949a-4d26-a5fd-981b4a56b9f2</premis:relatedObjectIdentifierValue>
+      </premis:relatedObjectIdentification>
+    </premis:relationship>
+  </premis:object>
+  <premis:object xsi:type="premis:representation">
+    <premis:objectIdentifier>
+      <premis:objectIdentifierType>pas-sig-id</premis:objectIdentifierType>
+      <premis:objectIdentifierValue>pas-sig-e1d7d26c-6074-48a5-bc2c-72f392b3d175</premis:objectIdentifierValue>
+    </premis:objectIdentifier>
+    <premis:originalName>varmiste.sig</premis:originalName>
+    <premis:relationship>
+      <premis:relationshipType>structural</premis:relationshipType>
+      <premis:relationshipSubType>is included in</premis:relationshipSubType>
+      <premis:relatedObjectIdentification>
+        <premis:relatedObjectIdentifierType>pas-sip-id</premis:relatedObjectIdentifierType>
+        <premis:relatedObjectIdentifierValue>pas-sip-organisaatio1-bb358d14-3092-458d-8b57-4a1c40206d8e</premis:relatedObjectIdentifierValue>
+      </premis:relatedObjectIdentification>
+    </premis:relationship>
+  </premis:object>
+  <premis:object xsi:type="premis:representation">
+    <premis:objectIdentifier>
+      <premis:objectIdentifierType>pas-mets-id</premis:objectIdentifierType>
+      <premis:objectIdentifierValue>pas-mets-00147b2f-e581-499b-9362-ac01c99fbf4d</premis:objectIdentifierValue>
+    </premis:objectIdentifier>
+    <premis:originalName>mets.xml</premis:originalName>
+    <premis:relationship>
+      <premis:relationshipType>structural</premis:relationshipType>
+      <premis:relationshipSubType>is included in</premis:relationshipSubType>
+      <premis:relatedObjectIdentification>
+        <premis:relatedObjectIdentifierType>pas-sip-id</premis:relatedObjectIdentifierType>
+        <premis:relatedObjectIdentifierValue>pas-sip-organisaatio1-bb358d14-3092-458d-8b57-4a1c40206d8e</premis:relatedObjectIdentifierValue>
+      </premis:relatedObjectIdentification>
+    </premis:relationship>
+  </premis:object>
+  <premis:object xsi:type="premis:representation">
+    <premis:objectIdentifier>
+      <premis:objectIdentifierType>pas-aip-id</premis:objectIdentifierType>
+      <premis:objectIdentifierValue>pas-aip-bb358d14-3092-458d-8b57-4a1c40206d8e</premis:objectIdentifierValue>
+    </premis:objectIdentifier>
+    <premis:relationship>
+      <premis:relationshipType>derivation</premis:relationshipType>
+      <premis:relationshipSubType>has source</premis:relationshipSubType>
+      <premis:relatedObjectIdentification>
+        <premis:relatedObjectIdentifierType>pas-sip-id</premis:relatedObjectIdentifierType>
+        <premis:relatedObjectIdentifierValue>pas-sip-organisaatio1-bb358d14-3092-458d-8b57-4a1c40206d8e</premis:relatedObjectIdentifierValue>
+      </premis:relatedObjectIdentification>
+    </premis:relationship>
+  </premis:object>
+  <premis:event>
+    <premis:eventIdentifier>
+      <premis:eventIdentifierType>pas-event-id</premis:eventIdentifierType>
+      <premis:eventIdentifierValue>pas-event-e4ece8e9-16c8-48a0-a00f-f1b84d088908</premis:eventIdentifierValue>
+    </premis:eventIdentifier>
+    <premis:eventType>decompression</premis:eventType>
+    <premis:eventDateTime>2014-04-21T16:21:30</premis:eventDateTime>
+    <premis:eventDetail>Decompression of transferred ZIP file</premis:eventDetail>
+    <premis:eventOutcomeInformation><premis:eventOutcome>success</premis:eventOutcome><premis:eventOutcomeDetail><premis:eventOutcomeDetailNote>Archive:  /var/archivematica/sharedDirectory/currentlyProcessing/csc_test_invalid_digital_object_001-8875e17a-949a-4d26-a5fd-981b4a56b9f2.zip
+   creating: /var/archivematica/sharedDirectory/currentlyProcessing/csc_test_invalid_digital_object_001-8875e17a-949a-4d26-a5fd-981b4a56b9f2/csc_test_invalid_digital_object_001/
+  inflating: /var/archivematica/sharedDirectory/currentlyProcessing/csc_test_invalid_digital_object_001-8875e17a-949a-4d26-a5fd-981b4a56b9f2/csc_test_invalid_digital_object_001/KDK_paatosseminaarin_ohjelma_10_12_2013.pdf  
+  inflating: /var/archivematica/sharedDirectory/currentlyProcessing/csc_test_invalid_digital_object_001-8875e17a-949a-4d26-a5fd-981b4a56b9f2/csc_test_invalid_digital_object_001/mets.xml  
+  inflating: /var/archivematica/sharedDirectory/currentlyProcessing/csc_test_invalid_digital_object_001-8875e17a-949a-4d26-a5fd-981b4a56b9f2/csc_test_invalid_digital_object_001/varmiste.sig  
+</premis:eventOutcomeDetailNote></premis:eventOutcomeDetail></premis:eventOutcomeInformation>
+    <premis:linkingAgentIdentifier>
+      <premis:linkingAgentIdentifierType>pas-agent-id</premis:linkingAgentIdentifierType>
+      <premis:linkingAgentIdentifierValue>pas-agent-extractSIPTransfer.py-development</premis:linkingAgentIdentifierValue>
+    </premis:linkingAgentIdentifier>
+    <premis:linkingObjectIdentifier><premis:linkingObjectIdentifierType>pas-transfer-id</premis:linkingObjectIdentifierType><premis:linkingObjectIdentifierValue>pas-transfer-8875e17a-949a-4d26-a5fd-981b4a56b9f2</premis:linkingObjectIdentifierValue></premis:linkingObjectIdentifier>
+  </premis:event>
+  <premis:event>
+    <premis:eventIdentifier>
+      <premis:eventIdentifierType>pas-event-id</premis:eventIdentifierType>
+      <premis:eventIdentifierValue>pas-event-193f5241-5650-4631-a2d1-9317f6a3a26d</premis:eventIdentifierValue>
+    </premis:eventIdentifier>
+    <premis:eventType>virus check</premis:eventType>
+    <premis:eventDateTime>2014-04-21T16:21:42</premis:eventDateTime>
+    <premis:eventDetail>Virus check of transferred files</premis:eventDetail>
+    <premis:eventOutcomeInformation><premis:eventOutcome>success</premis:eventOutcome><premis:eventOutcomeDetail><premis:eventOutcomeDetailNote>program="Clam AV"; version="ClamAV 0.98.1"; virusDefinitions="18353/Wed Jan 15 08:43:32 2014
+"(0, '/var/archivematica/sharedDirectory/currentlyProcessing/csc_test_invalid_digital_object_001-8875e17a-949a-4d26-a5fd-981b4a56b9f2/KDK_paatosseminaarin_ohjelma_10_12_2013.pdf: OK\n/var/archivematica/sharedDirectory/currentlyProcessing/csc_test_invalid_digital_object_001-8875e17a-949a-4d26-a5fd-981b4a56b9f2/mets.xml: OK\n/var/archivematica/sharedDirectory/currentlyProcessing/csc_test_invalid_digital_object_001-8875e17a-949a-4d26-a5fd-981b4a56b9f2/varmiste.sig: OK\n\n----------- SCAN SUMMARY -----------\nKnown viruses: 3070531\nEngine version: 0.98.1\nScanned directories: 0\nScanned files: 3\nInfected files: 0\nData scanned: 0.40 MB\nData read: 0.33 MB (ratio 1.21:1)\nTime: 11.673 sec (0 m 11 s)\n', 'LibClamAV Warning: **************************************************\nLibClamAV Warning: ***  The virus database is older than 7 days!  ***\nLibClamAV Warning: ***   Please update it as soon as possible.    ***\nLibClamAV Warning: **************************************************\n')</premis:eventOutcomeDetailNote></premis:eventOutcomeDetail></premis:eventOutcomeInformation>
+    <premis:linkingAgentIdentifier>
+      <premis:linkingAgentIdentifierType>pas-agent-id</premis:linkingAgentIdentifierType>
+      <premis:linkingAgentIdentifierValue>pas-agent-check_virus_clamscan.py-development</premis:linkingAgentIdentifierValue>
+    </premis:linkingAgentIdentifier>
+    <premis:linkingObjectIdentifier><premis:linkingObjectIdentifierType>pas-transfer-id</premis:linkingObjectIdentifierType><premis:linkingObjectIdentifierValue>pas-transfer-8875e17a-949a-4d26-a5fd-981b4a56b9f2</premis:linkingObjectIdentifierValue></premis:linkingObjectIdentifier>
+  </premis:event>
+  <premis:event>
+    <premis:eventIdentifier>
+      <premis:eventIdentifierType>pas-event-id</premis:eventIdentifierType>
+      <premis:eventIdentifierValue>pas-event-f95f25d4-f00e-4a62-ba1d-941bb560d318</premis:eventIdentifierValue>
+    </premis:eventIdentifier>
+    <premis:eventType>digital signature validation</premis:eventType>
+    <premis:eventDateTime>2014-04-21T16:21:54</premis:eventDateTime>
+    <premis:eventDetail>SIP digital signature validation</premis:eventDetail>
+    <premis:eventOutcomeInformation><premis:eventOutcome>success</premis:eventOutcome><premis:eventOutcomeDetail><premis:eventOutcomeDetailNote>mets.xml sha1 &lt;fileutils.checksum.BigFile instance at 0xdb5cb0&gt; OK
+</premis:eventOutcomeDetailNote></premis:eventOutcomeDetail></premis:eventOutcomeInformation>
+    <premis:linkingAgentIdentifier>
+      <premis:linkingAgentIdentifierType>pas-agent-id</premis:linkingAgentIdentifierType>
+      <premis:linkingAgentIdentifierValue>pas-agent-verifySIPSignature.py-development</premis:linkingAgentIdentifierValue>
+    </premis:linkingAgentIdentifier>
+    <premis:linkingObjectIdentifier><premis:linkingObjectIdentifierType>pas-sig-id</premis:linkingObjectIdentifierType><premis:linkingObjectIdentifierValue>pas-sig-e1d7d26c-6074-48a5-bc2c-72f392b3d175</premis:linkingObjectIdentifierValue></premis:linkingObjectIdentifier>
+  </premis:event>
+  <premis:event>
+    <premis:eventIdentifier>
+      <premis:eventIdentifierType>pas-event-id</premis:eventIdentifierType>
+      <premis:eventIdentifierValue>pas-event-25cb20eb-9a85-4d54-8c64-498d8722fb73</premis:eventIdentifierValue>
+    </premis:eventIdentifier>
+    <premis:eventType>validation</premis:eventType>
+    <premis:eventDateTime>2014-04-21T16:22:18</premis:eventDateTime>
+    <premis:eventDetail>Additional METS validation of required features</premis:eventDetail>
+    <premis:eventOutcomeInformation><premis:eventOutcome>success</premis:eventOutcome><premis:eventOutcomeDetail><premis:eventOutcomeDetailExtension><svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:saxon="http://icl.com/saxon" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/" xmlns:kdk="http://www.kdk.fi/standards/mets/kdk-extensions" xmlns:exsl="http://exslt.org/common" xmlns:sets="http://exslt.org/sets" xmlns:str="http://exslt.org/strings" title="METS internal inspection" schemaVersion="1.4">
+  <!--   
+		   
+		   
+		 -->
+  <svrl:ns-prefix-in-attribute-values uri="http://www.loc.gov/METS/" prefix="mets"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://www.kdk.fi/standards/mets/kdk-extensions" prefix="kdk"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://exslt.org/common" prefix="exsl"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://exslt.org/sets" prefix="sets"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://exslt.org/strings" prefix="str"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:mets"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:metsHdr"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:dmdSec"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:techMD"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:rightsMD"/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:dmdSec"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:techMD"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:rightsMD"/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:mdWrap"/>
+  <svrl:fired-rule context="mets:mdWrap"/>
+  <svrl:fired-rule context="mets:mdWrap"/>
+  <svrl:fired-rule context="mets:mdWrap"/>
+  <svrl:fired-rule context="mets:mdWrap"/>
+  <svrl:fired-rule context="mets:mdWrap"/>
+  <svrl:fired-rule context="mets:mdWrap"/>
+  <svrl:fired-rule context="mets:mdWrap"/>
+  <svrl:fired-rule context="mets:mdWrap"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:file"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:div[@DMDID]"/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:file[@ADMID]"/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:fptr[@FILEID]"/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:dmdSec"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:techMD"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:rightsMD"/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:fired-rule context="mets:digiprovMD"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:file"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:mets"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:fptr"/>
+</svrl:schematron-output>
+
+<svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:saxon="http://icl.com/saxon" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/" xmlns:mix="http://www.loc.gov/mix/v20" xmlns:textmd="http://www.kdk.fi/standards/textmd" xmlns:audiomd="http://www.loc.gov/audioMD/" xmlns:videomd="http://www.loc.gov/videoMD/" xmlns:metsrights="http://cosimo.stanford.edu/sdr/metsrights/" xmlns:marc21="http://www.loc.gov/MARC21/slim" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:ead="urn:isbn:1-931666-22-9" xmlns:eac="urn:isbn:1-931666-33-4" xmlns:vra="http://www.vraweb.org/vracore4.htm" xmlns:lido="http://www.lido-schema.org" xmlns:ddilc="ddi:instance:3_1" xmlns:ddicb="ddi:codebook:2_5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:exsl="http://exslt.org/common" xmlns:sets="http://exslt.org/sets" xmlns:str="http://exslt.org/strings" title="METS external metadata type check" schemaVersion="1.4">
+  <!--   
+		   
+		   
+		 -->
+  <svrl:ns-prefix-in-attribute-values uri="http://www.loc.gov/METS/" prefix="mets"/>
+  <svrl:ns-prefix-in-attribute-values uri="info:lc/xmlns/premis-v2" prefix="premis"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://www.loc.gov/mix/v20" prefix="mix"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://www.kdk.fi/standards/textmd" prefix="textmd"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://www.loc.gov/audioMD/" prefix="audiomd"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://www.loc.gov/videoMD/" prefix="videomd"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://cosimo.stanford.edu/sdr/metsrights/" prefix="metsrights"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://www.loc.gov/MARC21/slim" prefix="marc21"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://www.loc.gov/mods/v3" prefix="mods"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://purl.org/dc/elements/1.1/" prefix="dc"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://purl.org/dc/terms/" prefix="dcterms"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://purl.org/dc/dcmitype/" prefix="dcmitype"/>
+  <svrl:ns-prefix-in-attribute-values uri="urn:isbn:1-931666-22-9" prefix="ead"/>
+  <svrl:ns-prefix-in-attribute-values uri="urn:isbn:1-931666-33-4" prefix="eac"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://www.vraweb.org/vracore4.htm" prefix="vra"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://www.lido-schema.org" prefix="lido"/>
+  <svrl:ns-prefix-in-attribute-values uri="ddi:instance:3_1" prefix="ddilc"/>
+  <svrl:ns-prefix-in-attribute-values uri="ddi:codebook:2_5" prefix="ddicb"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/1999/xlink" prefix="xlink"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://exslt.org/common" prefix="exsl"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://exslt.org/sets" prefix="sets"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://exslt.org/strings" prefix="str"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:mdWrap[@MDTYPE='PREMIS:OBJECT']"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:mdWrap[@MDTYPE='PREMIS:EVENT']"/>
+  <svrl:fired-rule context="mets:mdWrap[@MDTYPE='PREMIS:EVENT']"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:mdWrap[@MDTYPE='PREMIS:AGENT']"/>
+  <svrl:fired-rule context="mets:mdWrap[@MDTYPE='PREMIS:AGENT']"/>
+  <svrl:fired-rule context="mets:mdWrap[@MDTYPE='PREMIS:AGENT']"/>
+  <svrl:fired-rule context="mets:mdWrap[@MDTYPE='PREMIS:AGENT']"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:mdWrap[@MDTYPE='METSRIGHTS']"/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:mdWrap[@MDTYPE='DC']"/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:file"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:file"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:file"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:file"/>
+</svrl:schematron-output>
+
+<svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:saxon="http://icl.com/saxon" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/" xmlns:mix="http://www.loc.gov/mix/v20" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:exsl="http://exslt.org/common" xmlns:sets="http://exslt.org/sets" xmlns:str="http://exslt.org/strings" title="NISOIMG (MIX) metadata issues" schemaVersion="1.4">
+  <!--   
+		   
+		   
+		 -->
+  <svrl:ns-prefix-in-attribute-values uri="http://www.loc.gov/METS/" prefix="mets"/>
+  <svrl:ns-prefix-in-attribute-values uri="info:lc/xmlns/premis-v2" prefix="premis"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://www.loc.gov/mix/v20" prefix="mix"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/1999/xlink" prefix="xlink"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://exslt.org/common" prefix="exsl"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://exslt.org/sets" prefix="sets"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://exslt.org/strings" prefix="str"/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:file"/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:file"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:file"/>
+</svrl:schematron-output>
+
+<svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:saxon="http://icl.com/saxon" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:mets="http://www.loc.gov/METS/" xmlns:exsl="http://exslt.org/common" xmlns:str="http://exslt.org/strings" xmlns:sets="http://exslt.org/sets" title="PREMIS metadata check" schemaVersion="1.4">
+  <!--   
+		   
+		   
+		 -->
+  <svrl:ns-prefix-in-attribute-values uri="http://www.loc.gov/METS/" prefix="mets"/>
+  <svrl:ns-prefix-in-attribute-values uri="info:lc/xmlns/premis-v2" prefix="premis"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/2001/XMLSchema-instance" prefix="xsi"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://exslt.org/common" prefix="exsl"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://exslt.org/strings" prefix="str"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://exslt.org/sets" prefix="sets"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="premis:objectCharacteristics"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="mets:techMD//premis:format"/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="premis:messageDigestAlgorithm"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="premis:objectIdentifierValue"/>
+  <svrl:fired-rule context="premis:linkingObjectIdentifierValue"/>
+  <svrl:fired-rule context="premis:linkingObjectIdentifierValue"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="premis:eventIdentifierValue"/>
+  <svrl:fired-rule context="premis:eventIdentifierValue"/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="premis:linkingAgentIdentifierValue"/>
+  <svrl:fired-rule context="premis:linkingAgentIdentifierValue"/>
+  <svrl:fired-rule context="premis:linkingAgentIdentifierValue"/>
+  <svrl:fired-rule context="premis:linkingAgentIdentifierValue"/>
+  <svrl:fired-rule context="premis:agentIdentifierValue"/>
+  <svrl:fired-rule context="premis:agentIdentifierValue"/>
+  <svrl:fired-rule context="premis:agentIdentifierValue"/>
+  <svrl:fired-rule context="premis:agentIdentifierValue"/>
+  <svrl:active-pattern/>
+  <svrl:active-pattern/>
+  <svrl:fired-rule context="premis:objectIdentifierType"/>
+  <svrl:fired-rule context="premis:objectIdentifierValue"/>
+  <svrl:fired-rule context="premis:eventIdentifierType"/>
+  <svrl:fired-rule context="premis:eventIdentifierValue"/>
+  <svrl:fired-rule context="premis:eventIdentifierType"/>
+  <svrl:fired-rule context="premis:eventIdentifierValue"/>
+  <svrl:fired-rule context="premis:agentIdentifierType"/>
+  <svrl:fired-rule context="premis:agentIdentifierValue"/>
+  <svrl:fired-rule context="premis:agentIdentifierType"/>
+  <svrl:fired-rule context="premis:agentIdentifierValue"/>
+  <svrl:fired-rule context="premis:agentIdentifierType"/>
+  <svrl:fired-rule context="premis:agentIdentifierValue"/>
+  <svrl:fired-rule context="premis:agentIdentifierType"/>
+  <svrl:fired-rule context="premis:agentIdentifierValue"/>
+</svrl:schematron-output>
+
+</premis:eventOutcomeDetailExtension></premis:eventOutcomeDetail></premis:eventOutcomeInformation>
+    <premis:linkingAgentIdentifier>
+      <premis:linkingAgentIdentifierType>pas-agent-id</premis:linkingAgentIdentifierType>
+      <premis:linkingAgentIdentifierValue>pas-agent-verifyMetsRequiredFeatures.py-development</premis:linkingAgentIdentifierValue>
+    </premis:linkingAgentIdentifier>
+    <premis:linkingObjectIdentifier><premis:linkingObjectIdentifierType>pas-mets-id</premis:linkingObjectIdentifierType><premis:linkingObjectIdentifierValue>pas-mets-00147b2f-e581-499b-9362-ac01c99fbf4d</premis:linkingObjectIdentifierValue></premis:linkingObjectIdentifier>
+  </premis:event>
+  <premis:event>
+    <premis:eventIdentifier>
+      <premis:eventIdentifierType>pas-event-id</premis:eventIdentifierType>
+      <premis:eventIdentifierValue>pas-event-3fd60ffd-ca60-4f87-bee4-52708ab01956</premis:eventIdentifierValue>
+    </premis:eventIdentifier>
+    <premis:eventType>validation</premis:eventType>
+    <premis:eventDateTime>2014-04-21T16:22:19</premis:eventDateTime>
+    <premis:eventDetail>METS schema validation</premis:eventDetail>
+    <premis:eventOutcomeInformation><premis:eventOutcome>success</premis:eventOutcome><premis:eventOutcomeDetail><premis:eventOutcomeDetailNote>
+
+</premis:eventOutcomeDetailNote></premis:eventOutcomeDetail></premis:eventOutcomeInformation>
+    <premis:linkingAgentIdentifier>
+      <premis:linkingAgentIdentifierType>pas-agent-id</premis:linkingAgentIdentifierType>
+      <premis:linkingAgentIdentifierValue>pas-agent-verifyMetsSchemaFeatures.py-development</premis:linkingAgentIdentifierValue>
+    </premis:linkingAgentIdentifier>
+    <premis:linkingObjectIdentifier><premis:linkingObjectIdentifierType>pas-mets-id</premis:linkingObjectIdentifierType><premis:linkingObjectIdentifierValue>pas-mets-00147b2f-e581-499b-9362-ac01c99fbf4d</premis:linkingObjectIdentifierValue></premis:linkingObjectIdentifier>
+  </premis:event>
+  <premis:event>
+    <premis:eventIdentifier>
+      <premis:eventIdentifierType>pas-event-id</premis:eventIdentifierType>
+      <premis:eventIdentifierValue>pas-event-7d3bdddb-d6ac-44c1-970a-99be3f33f767</premis:eventIdentifierValue>
+    </premis:eventIdentifier>
+    <premis:eventType>validation</premis:eventType>
+    <premis:eventDateTime>2014-04-21T16:22:21</premis:eventDateTime>
+    <premis:eventDetail>Fixity check of digital objects in a SIP</premis:eventDetail>
+    <premis:eventOutcomeInformation><premis:eventOutcome>failed</premis:eventOutcome><premis:eventOutcomeDetail><premis:eventOutcomeDetailNote>Collecting list of files in '/var/archivematica/sharedDirectory/currentlyProcessing/csc_test_invalid_digital_object_001-bb358d14-3092-458d-8b57-4a1c40206d8e/mets.xml'
+files [['KDK_paatosseminaarin_ohjelma_10_12_2013.pdf', 'md5', '10f90a1b7fa6c9575f6141a310097652']]
+Checksum does not match. expected: 10f90a1b7fa6c9575f6141a310097652 got: bb6e10e99e9a29b3e09ebe2ce8bb0c89 KDK_paatosseminaarin_ohjelma_10_12_2013.pdf
+</premis:eventOutcomeDetailNote></premis:eventOutcomeDetail></premis:eventOutcomeInformation>
+    <premis:linkingAgentIdentifier>
+      <premis:linkingAgentIdentifierType>pas-agent-id</premis:linkingAgentIdentifierType>
+      <premis:linkingAgentIdentifierValue>pas-agent-verifySIPFileChecksums.py-development</premis:linkingAgentIdentifierValue>
+    </premis:linkingAgentIdentifier>
+    <premis:linkingObjectIdentifier><premis:linkingObjectIdentifierType>pas-sip-id</premis:linkingObjectIdentifierType><premis:linkingObjectIdentifierValue>pas-sip-organisaatio1-bb358d14-3092-458d-8b57-4a1c40206d8e</premis:linkingObjectIdentifierValue></premis:linkingObjectIdentifier>
+  </premis:event>
+  <premis:event>
+    <premis:eventIdentifier>
+      <premis:eventIdentifierType>pas-event-id</premis:eventIdentifierType>
+      <premis:eventIdentifierValue>pas-event-75756fe2-965f-42b2-8656-90ad9d0e05ec</premis:eventIdentifierValue>
+    </premis:eventIdentifier>
+    <premis:eventType>validation</premis:eventType>
+    <premis:eventDateTime>2014-04-21T16:22:32</premis:eventDateTime>
+    <premis:eventDetail>Validation compilation of a SIP</premis:eventDetail>
+    <premis:eventOutcomeInformation><premis:eventOutcome>success</premis:eventOutcome><premis:eventOutcomeDetail><premis:eventOutcomeDetailNote>All events completed successfully</premis:eventOutcomeDetailNote></premis:eventOutcomeDetail></premis:eventOutcomeInformation>
+    <premis:linkingAgentIdentifier>
+      <premis:linkingAgentIdentifierType>pas-agent-id</premis:linkingAgentIdentifierType>
+      <premis:linkingAgentIdentifierValue>pas-agent-createSIPInspectionReport.py-development</premis:linkingAgentIdentifierValue>
+    </premis:linkingAgentIdentifier>
+    <premis:linkingObjectIdentifier><premis:linkingObjectIdentifierType>pas-sip-id</premis:linkingObjectIdentifierType><premis:linkingObjectIdentifierValue>pas-sip-organisaatio1-bb358d14-3092-458d-8b57-4a1c40206d8e</premis:linkingObjectIdentifierValue></premis:linkingObjectIdentifier>
+  </premis:event>
+  <premis:event>
+    <premis:eventIdentifier>
+      <premis:eventIdentifierType>pas-event-id</premis:eventIdentifierType>
+      <premis:eventIdentifierValue>pas-event-a91cde6e-2387-49a7-a7e3-19900302d138</premis:eventIdentifierValue>
+    </premis:eventIdentifier>
+    <premis:eventType>creation</premis:eventType>
+    <premis:eventDateTime>2014-04-21T16:22:32</premis:eventDateTime>
+    <premis:eventDetail>Creation of AIP</premis:eventDetail>
+    <premis:eventOutcomeInformation><premis:eventOutcome>success</premis:eventOutcome><premis:eventOutcomeDetail><premis:eventOutcomeDetailNote>AIP created succesfully</premis:eventOutcomeDetailNote></premis:eventOutcomeDetail></premis:eventOutcomeInformation>
+    <premis:linkingAgentIdentifier>
+      <premis:linkingAgentIdentifierType>pas-agent-id</premis:linkingAgentIdentifierType>
+      <premis:linkingAgentIdentifierValue>pas-agent-createSIPInspectionReport.py-development</premis:linkingAgentIdentifierValue>
+    </premis:linkingAgentIdentifier>
+    <premis:linkingObjectIdentifier><premis:linkingObjectIdentifierType>pas-aip-id</premis:linkingObjectIdentifierType><premis:linkingObjectIdentifierValue>pas-aip-bb358d14-3092-458d-8b57-4a1c40206d8e</premis:linkingObjectIdentifierValue></premis:linkingObjectIdentifier>
+  </premis:event>
+  <premis:event>
+    <premis:eventIdentifier>
+      <premis:eventIdentifierType>pas-event-id</premis:eventIdentifierType>
+      <premis:eventIdentifierValue>pas-event-7d04d8df-ea1c-4af9-8368-37038533326a</premis:eventIdentifierValue>
+    </premis:eventIdentifier>
+    <premis:eventType>preservation responsibility change</premis:eventType>
+    <premis:eventDateTime>2014-04-21T16:22:32</premis:eventDateTime>
+    <premis:eventDetail>Preservation responsibility change to the DP system</premis:eventDetail>
+    <premis:eventOutcomeInformation><premis:eventOutcome>success</premis:eventOutcome><premis:eventOutcomeDetail><premis:eventOutcomeDetailNote>Preservation responsability belongs to PAS system</premis:eventOutcomeDetailNote></premis:eventOutcomeDetail></premis:eventOutcomeInformation>
+    <premis:linkingAgentIdentifier>
+      <premis:linkingAgentIdentifierType>pas-agent-id</premis:linkingAgentIdentifierType>
+      <premis:linkingAgentIdentifierValue>pas-agent-createSIPInspectionReport.py-development</premis:linkingAgentIdentifierValue>
+    </premis:linkingAgentIdentifier>
+    <premis:linkingObjectIdentifier><premis:linkingObjectIdentifierType>pas-aip-id</premis:linkingObjectIdentifierType><premis:linkingObjectIdentifierValue>pas-aip-bb358d14-3092-458d-8b57-4a1c40206d8e</premis:linkingObjectIdentifierValue></premis:linkingObjectIdentifier>
+  </premis:event>
+  <premis:agent>
+    <premis:agentIdentifier>
+      <premis:agentIdentifierType>pas-agent-id</premis:agentIdentifierType>
+      <premis:agentIdentifierValue>pas-agent-extractSIPTransfer.py-development</premis:agentIdentifierValue>
+    </premis:agentIdentifier>
+    <premis:agentName>extractSIPTransfer.py</premis:agentName>
+    <premis:agentType>software</premis:agentType>
+  </premis:agent>
+  <premis:agent>
+    <premis:agentIdentifier>
+      <premis:agentIdentifierType>pas-agent-id</premis:agentIdentifierType>
+      <premis:agentIdentifierValue>pas-agent-check_virus_clamscan.py-development</premis:agentIdentifierValue>
+    </premis:agentIdentifier>
+    <premis:agentName>check_virus_clamscan.py</premis:agentName>
+    <premis:agentType>software</premis:agentType>
+  </premis:agent>
+  <premis:agent>
+    <premis:agentIdentifier>
+      <premis:agentIdentifierType>pas-agent-id</premis:agentIdentifierType>
+      <premis:agentIdentifierValue>pas-agent-verifySIPSignature.py-development</premis:agentIdentifierValue>
+    </premis:agentIdentifier>
+    <premis:agentName>verifySIPSignature.py</premis:agentName>
+    <premis:agentType>software</premis:agentType>
+  </premis:agent>
+  <premis:agent>
+    <premis:agentIdentifier>
+      <premis:agentIdentifierType>pas-agent-id</premis:agentIdentifierType>
+      <premis:agentIdentifierValue>pas-agent-verifyMetsRequiredFeatures.py-development</premis:agentIdentifierValue>
+    </premis:agentIdentifier>
+    <premis:agentName>verifyMetsRequiredFeatures.py</premis:agentName>
+    <premis:agentType>software</premis:agentType>
+  </premis:agent>
+  <premis:agent>
+    <premis:agentIdentifier>
+      <premis:agentIdentifierType>pas-agent-id</premis:agentIdentifierType>
+      <premis:agentIdentifierValue>pas-agent-verifyMetsSchemaFeatures.py-development</premis:agentIdentifierValue>
+    </premis:agentIdentifier>
+    <premis:agentName>verifyMetsSchemaFeatures.py</premis:agentName>
+    <premis:agentType>software</premis:agentType>
+  </premis:agent>
+  <premis:agent>
+    <premis:agentIdentifier>
+      <premis:agentIdentifierType>pas-agent-id</premis:agentIdentifierType>
+      <premis:agentIdentifierValue>pas-agent-verifySIPFileChecksums.py-development</premis:agentIdentifierValue>
+    </premis:agentIdentifier>
+    <premis:agentName>verifySIPFileChecksums.py</premis:agentName>
+    <premis:agentType>software</premis:agentType>
+  </premis:agent>
+  <premis:agent>
+    <premis:agentIdentifier>
+      <premis:agentIdentifierType>pas-agent-id</premis:agentIdentifierType>
+      <premis:agentIdentifierValue>pas-agent-createSIPInspectionReport.py-development</premis:agentIdentifierValue>
+    </premis:agentIdentifier>
+    <premis:agentName>createSIPInspectionReport.py</premis:agentName>
+    <premis:agentType>software</premis:agentType>
+  </premis:agent>
+  <premis:agent>
+    <premis:agentIdentifier>
+      <premis:agentIdentifierType>pas-agent-id</premis:agentIdentifierType>
+      <premis:agentIdentifierValue>pas-agent-createSIPInspectionReport.py-development</premis:agentIdentifierValue>
+    </premis:agentIdentifier>
+    <premis:agentName>createSIPInspectionReport.py</premis:agentName>
+    <premis:agentType>software</premis:agentType>
+  </premis:agent>
+  <premis:agent>
+    <premis:agentIdentifier>
+      <premis:agentIdentifierType>pas-agent-id</premis:agentIdentifierType>
+      <premis:agentIdentifierValue>pas-agent-createSIPInspectionReport.py-development</premis:agentIdentifierValue>
+    </premis:agentIdentifier>
+    <premis:agentName>createSIPInspectionReport.py</premis:agentName>
+    <premis:agentType>software</premis:agentType>
+  </premis:agent>
+</premis:premis>

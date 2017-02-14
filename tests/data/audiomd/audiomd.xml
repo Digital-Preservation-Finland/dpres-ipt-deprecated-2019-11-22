@@ -1,0 +1,19 @@
+<amd:AUDIOMD xmlns:amd="http://www.loc.gov/audioMD/" ANALOGDIGITALFLAG="FileDigital">
+    <amd:fileData>
+        <amd:audioDataEncoding>PCM</amd:audioDataEncoding>
+        <amd:bitsPerSample>8</amd:bitsPerSample>
+        <amd:compression>
+            <amd:codecCreatorApp>SoundForge</amd:codecCreatorApp>
+            <amd:codecCreatorAppVersion>10</amd:codecCreatorAppVersion>
+            <amd:codecName>MPEG 2</amd:codecName>
+            <amd:codecQuality>lossy</amd:codecQuality>
+        </amd:compression>
+        <amd:dataRate>256</amd:dataRate>
+        <amd:dataRateMode>Fixed</amd:dataRateMode>
+        <amd:samplingFrequency>44100</amd:samplingFrequency>
+    </amd:fileData>
+    <amd:audioInfo>
+        <amd:duration>00:08:37.9942</amd:duration>
+        <amd:numChannels>1</amd:numChannels>
+    </amd:audioInfo>
+</amd:AUDIOMD>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <premis:premis xmlns:premis="info:lc/xmlns/premis-v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <premis:object xsi:type="premis:file">
+            <premis:objectIdentifier>
+                <premis:objectIdentifierType>local</premis:objectIdentifierType>
+                <premis:objectIdentifierValue>object-001</premis:objectIdentifierValue>
+            </premis:objectIdentifier>
+            <premis:objectCharacteristics>
+                <premis:compositionLevel>0</premis:compositionLevel>
+                <premis:fixity>
+                    <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+                    <premis:messageDigest>aa4bddaacf5ed1ca92b30826af257a1b</premis:messageDigest>
+                </premis:fixity>
+                <premis:format>
+                    <premis:formatDesignation>
+                        <premis:formatName>text/plain;charset=UTF-8</premis:formatName>
+                        </premis:formatDesignation>
+                </premis:format>
+                <premis:creatingApplication>
+                    <premis:dateCreatedByApplication>2016-03-16T14:00:00</premis:dateCreatedByApplication>
+                </premis:creatingApplication>
+            </premis:objectCharacteristics>
+        </premis:object>
+    </premis:premis>

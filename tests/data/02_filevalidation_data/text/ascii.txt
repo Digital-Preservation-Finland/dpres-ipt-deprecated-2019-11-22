@@ -1,0 +1,10 @@
+Crawl Name: elections-2007-sanomalehdet
+Crawl Status: Finished
+Duration Time: 4s825ms
+Total Seeds Crawled: 1
+Total Seeds not Crawled: 0
+Total Hosts Crawled: 1
+Total Documents Crawled: 3
+Processed docs/sec: 0.75
+Bandwidth in Kbytes/sec: 12
+Total Raw Data Size in Bytes: 51693 (50 KB) 

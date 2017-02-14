@@ -1,0 +1,1385 @@
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schematron/ISOMets2.sch
+warning: failed to load external entity "/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schematron/ISOMets2.sch"
+Schemas parser error : xmlSchematronParse: could not load '/home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schematron/ISOMets2.sch'.
+Schematron schema /home/spock/scratch/information-package-tools/t/0006MetsValidationData/schemas/schematron/ISOMets2.sch failed to compile
+new input from file: /home/spock/scratch/information-package-tools/t/0006MetsValidationData/sips/CSC_test001/mets.xml
+DOCUMENT
+version=1.0
+encoding=UTF-8
+URL=/home/spock/scratch/information-package-...
+standalone=true
+namespace xml href=http://www.w3.org/XML/1998/namespace
+  ELEMENT mets:mets
+    namespace dc href=http://purl.org/dc/elements/1.1/
+    namespace rts href=http://cosimo.stanford.edu/sdr/metsright...
+    namespace xsi href=http://www.w3.org/2001/XMLSchema-instanc...
+    namespace mets href=http://www.loc.gov/METS/
+    namespace xlink href=http://www.w3.org/1999/xlink
+    namespace premis href=info:lc/xmlns/premis-v2
+    namespace dcterms href=http://purl.org/dc/terms/
+    ATTRIBUTE schemaLocation
+      TEXT
+        content=http://www.loc.gov/METS/ kdk_mets.xsd
+    ATTRIBUTE OBJID
+      TEXT compact
+        content=CSC_test001
+    ATTRIBUTE PROFILE
+      TEXT
+        content=http://www.kdk.fi/kdk-mets-profile
+    TEXT compact
+      content=      
+    ELEMENT mets:metsHdr
+      ATTRIBUTE CREATEDATE
+        TEXT
+          content=2012-07-13T12:23:44
+      TEXT compact
+        content=       
+      ELEMENT mets:agent
+        ATTRIBUTE ROLE
+          TEXT compact
+            content=CREATOR
+        ATTRIBUTE TYPE
+          TEXT compact
+            content=ORGANIZATION
+        TEXT compact
+          content=          
+        ELEMENT mets:name
+          TEXT
+            content=CSC - IT Center for Science
+        TEXT compact
+          content=       
+      TEXT compact
+        content=    
+    TEXT compact
+      content=     
+    ELEMENT mets:dmdSec
+      ATTRIBUTE ID
+        TEXT
+          content=CSC_test001_object001
+      ATTRIBUTE CREATED
+        TEXT
+          content=2012-07-13T00:00:00
+      TEXT compact
+        content=       
+      ELEMENT mets:mdWrap
+        ATTRIBUTE MDTYPE
+          TEXT compact
+            content=DC
+        ATTRIBUTE schemaLocation
+          TEXT
+            content=http://purl.org/dc/elements/1.1/ http://...
+        TEXT compact
+          content=          
+        ELEMENT mets:xmlData
+          TEXT compact
+            content=             
+          ELEMENT dc:record
+            TEXT interned
+              content=                
+            ELEMENT dc:identifier
+              TEXT
+                content=CSC_test001_object001
+            TEXT interned
+              content=                
+            ELEMENT dc:title
+              TEXT compact
+                content=Testikuva
+            TEXT interned
+              content=                
+            ELEMENT dc:type
+              ATTRIBUTE type
+                TEXT
+                  content=dcterms:DCMIType
+              TEXT compact
+                content=Image
+            TEXT interned
+              content=                
+            ELEMENT dc:type
+              ATTRIBUTE lang
+                TEXT compact
+                  content=fi
+              TEXT compact
+                content=valokuva
+            TEXT interned
+              content=                
+            ELEMENT dc:subject
+              ATTRIBUTE lang
+                TEXT compact
+                  content=fi
+              TEXT compact
+                content=vuori
+            TEXT interned
+              content=                
+            ELEMENT dc:subject
+              ATTRIBUTE lang
+                TEXT compact
+                  content=fi
+              TEXT
+                content=vaellusreitti                
+            TEXT interned
+              content=                
+            ELEMENT dc:description
+              ATTRIBUTE lang
+                TEXT compact
+                  content=fi
+              TEXT
+                content=Vaellusreitti                   Galdh#C3#B8p...
+            TEXT interned
+              content=                
+            ELEMENT dc:source
+              TEXT compact
+                content=CSC_source001
+            TEXT interned
+              content=                
+            ELEMENT dcterms:isPartOf
+              TEXT
+                content=Juhan vaelluskokoelma                
+            TEXT interned
+              content=                
+            ELEMENT dcterms:isPartOf
+              TEXT compact
+                content=CSC_test001
+            TEXT interned
+              content=                
+            ELEMENT dcterms:spatial
+              TEXT
+                content=Galdh#C3#B8piggen
+            TEXT interned
+              content=                
+            ELEMENT dcterms:spatial
+              TEXT compact
+                content=Norja
+            TEXT interned
+              content=                
+            ELEMENT dcterms:temporal
+              TEXT compact
+                content=2009
+            TEXT interned
+              content=                
+            ELEMENT dc:creator
+              TEXT compact
+                content=Lehtonen, Juha
+            TEXT interned
+              content=                
+            ELEMENT dc:publisher
+              TEXT
+                content=CSC - IT Center for Science
+            TEXT interned
+              content=                
+            ELEMENT dc:format
+              TEXT compact
+                content=digitaalikuva
+            TEXT compact
+              content=             
+          TEXT compact
+            content=          
+        TEXT compact
+          content=       
+      TEXT compact
+        content=    
+    TEXT compact
+      content=     
+    ELEMENT mets:dmdSec
+      ATTRIBUTE ID
+        TEXT
+          content=CSC_test001_object002
+      ATTRIBUTE CREATED
+        TEXT
+          content=2012-07-13T00:00:00
+      TEXT compact
+        content=       
+      ELEMENT mets:mdWrap
+        ATTRIBUTE MDTYPE
+          TEXT compact
+            content=DC
+        ATTRIBUTE schemaLocation
+          TEXT
+            content=http://purl.org/dc/elements/1.1/ http://...
+        TEXT compact
+          content=          
+        ELEMENT mets:xmlData
+          TEXT compact
+            content=             
+          ELEMENT dc:record
+            TEXT interned
+              content=                
+            ELEMENT dc:identifier
+              TEXT
+                content=CSC_test001_object001
+            TEXT interned
+              content=                
+            ELEMENT dc:title
+              TEXT compact
+                content=Testikuva
+            TEXT interned
+              content=                
+            ELEMENT dc:type
+              ATTRIBUTE type
+                TEXT
+                  content=dcterms:DCMIType
+              TEXT compact
+                content=Image
+            TEXT interned
+              content=                
+            ELEMENT dc:type
+              ATTRIBUTE lang
+                TEXT compact
+                  content=fi
+              TEXT compact
+                content=valokuva
+            TEXT interned
+              content=                
+            ELEMENT dc:subject
+              ATTRIBUTE lang
+                TEXT compact
+                  content=fi
+              TEXT
+                content=j#C3#A4#C3#A4tikk#C3#B6
+            TEXT interned
+              content=                
+            ELEMENT dc:subject
+              ATTRIBUTE lang
+                TEXT compact
+                  content=fi
+              TEXT compact
+                content=vuoristo
+            TEXT interned
+              content=                
+            ELEMENT dc:description
+              ATTRIBUTE lang
+                TEXT compact
+                  content=fi
+              TEXT
+                content=J#C3#A4#C3#A4tikk#C3#B6                   Galdh#C3#B8pig...
+            TEXT interned
+              content=                
+            ELEMENT dc:source
+              TEXT compact
+                content=CSC_source001
+            TEXT interned
+              content=                
+            ELEMENT dcterms:isPartOf
+              TEXT
+                content=Juhan vaelluskokoelma                
+            TEXT interned
+              content=                
+            ELEMENT dcterms:spatial
+              TEXT compact
+                content=CSC_test001
+            TEXT interned
+              content=                
+            ELEMENT dcterms:spatial
+              TEXT
+                content=Galdh#C3#B8piggen
+            TEXT interned
+              content=                
+            ELEMENT dcterms:spatial
+              TEXT compact
+                content=Norja
+            TEXT interned
+              content=                
+            ELEMENT dcterms:temporal
+              TEXT compact
+                content=2006
+            TEXT interned
+              content=                
+            ELEMENT dc:creator
+              TEXT compact
+                content=Lehtonen, Juha
+            TEXT interned
+              content=                
+            ELEMENT dc:publisher
+              TEXT
+                content=CSC - IT Center for Science
+            TEXT interned
+              content=                
+            ELEMENT dc:format
+              TEXT compact
+                content=digitaalikuva
+            TEXT compact
+              content=             
+          TEXT compact
+            content=          
+        TEXT compact
+          content=       
+      TEXT compact
+        content=    
+    TEXT compact
+      content=     
+    ELEMENT mets:dmdSec
+      ATTRIBUTE ID
+        TEXT
+          content=CSC_test001_object003
+      ATTRIBUTE CREATED
+        TEXT
+          content=2012-07-13T00:00:00
+      TEXT compact
+        content=       
+      ELEMENT mets:mdWrap
+        ATTRIBUTE MDTYPE
+          TEXT compact
+            content=DC
+        ATTRIBUTE schemaLocation
+          TEXT
+            content=http://purl.org/dc/elements/1.1/ http://...
+        TEXT compact
+          content=          
+        ELEMENT mets:xmlData
+          TEXT compact
+            content=             
+          ELEMENT dc:record
+            TEXT interned
+              content=                
+            ELEMENT dc:identifier
+              TEXT
+                content=CSC_test001_object003
+            TEXT interned
+              content=                
+            ELEMENT dc:title
+              TEXT compact
+                content=Testikuva
+            TEXT interned
+              content=                
+            ELEMENT dc:type
+              ATTRIBUTE type
+                TEXT
+                  content=dcterms:DCMIType
+              TEXT compact
+                content=Image
+            TEXT interned
+              content=                
+            ELEMENT dc:type
+              ATTRIBUTE lang
+                TEXT compact
+                  content=fi
+              TEXT compact
+                content=valokuva
+            TEXT interned
+              content=                
+            ELEMENT dc:subject
+              ATTRIBUTE lang
+                TEXT compact
+                  content=fi
+              TEXT compact
+                content=jurtta
+            TEXT interned
+              content=                
+            ELEMENT dc:subject
+              ATTRIBUTE lang
+                TEXT compact
+                  content=fi
+              TEXT compact
+                content=asuinalue
+            TEXT interned
+              content=                
+            ELEMENT dc:description
+              ATTRIBUTE lang
+                TEXT compact
+                  content=fi
+              TEXT
+                content=Asutusta Ulan                   Batorin ...
+            TEXT interned
+              content=                
+            ELEMENT dc:source
+              TEXT compact
+                content=CSC_source001
+            TEXT interned
+              content=                
+            ELEMENT dcterms:isPartOf
+              TEXT
+                content=Juhan retkikokoelma
+            TEXT interned
+              content=                
+            ELEMENT dcterms:isPartOf
+              TEXT compact
+                content=CSC_test001
+            TEXT interned
+              content=                
+            ELEMENT dcterms:spatial
+              TEXT compact
+                content=Ulan Bator
+            TEXT interned
+              content=                
+            ELEMENT dcterms:spatial
+              TEXT compact
+                content=Mongolia
+            TEXT interned
+              content=                
+            ELEMENT dcterms:temporal
+              TEXT compact
+                content=2010
+            TEXT interned
+              content=                
+            ELEMENT dc:creator
+              TEXT compact
+                content=Lehtonen, Juha
+            TEXT interned
+              content=                
+            ELEMENT dc:publisher
+              TEXT
+                content=CSC - IT Center for Science
+            TEXT interned
+              content=                
+            ELEMENT dc:format
+              TEXT compact
+                content=digitaalikuva
+            TEXT compact
+              content=             
+          TEXT compact
+            content=          
+        TEXT compact
+          content=       
+      TEXT compact
+        content=    
+    TEXT compact
+      content=     
+    ELEMENT mets:amdSec
+      TEXT compact
+        content=        
+      ELEMENT mets:techMD
+        ATTRIBUTE ID
+          TEXT
+            content=CSC_test001_tech002
+        ATTRIBUTE CREATED
+          TEXT
+            content=2012-07-13T00:00:00
+        TEXT compact
+          content=          
+        ELEMENT mets:mdWrap
+          ATTRIBUTE MDTYPE
+            TEXT compact
+              content=PREMIS:OBJECT
+          TEXT compact
+            content=             
+          ELEMENT mets:xmlData
+            TEXT interned
+              content=                
+            ELEMENT premis:object
+              default namespace href=info:lc/xmlns/premis-v2
+              ATTRIBUTE type
+                TEXT compact
+                  content=file
+              ATTRIBUTE schemaLocation
+                TEXT
+                  content=info:lc/xmlns/premis-v2 http://www.loc.g...
+              ATTRIBUTE version
+                TEXT compact
+                  content=2.1
+              TEXT interned
+                content=                   
+              ELEMENT premis:objectIdentifier
+                TEXT interned
+                  content=                      
+                ELEMENT premis:objectIdentifierType
+                  TEXT
+                    content=UUID                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:objectIdentifierValue
+                  TEXT
+                    content=6abebf94-94f5-417c-9b60-05c16b985fdd    ...
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                   
+              ELEMENT premis:objectCharacteristics
+                TEXT interned
+                  content=                      
+                ELEMENT premis:compositionLevel
+                  TEXT
+                    content=0                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:fixity
+                  TEXT interned
+                    content=                         
+                  ELEMENT premis:messageDigestAlgorithm
+                    TEXT
+                      content=MD5                         
+                  TEXT interned
+                    content=                         
+                  ELEMENT premis:messageDigest
+                    TEXT
+                      content=11c128030f203b76f2e30eeb7454c42b        ...
+                  TEXT interned
+                    content=                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:size
+                  TEXT compact
+                    content=1422762
+                TEXT interned
+                  content=                      
+                ELEMENT premis:format
+                  TEXT interned
+                    content=                         
+                  ELEMENT premis:formatDesignation
+                    TEXT interned
+                      content=                            
+                    ELEMENT premis:formatName
+                      TEXT
+                        content=image/jpeg                            
+                    TEXT interned
+                      content=                         
+                  TEXT interned
+                    content=                         
+                  ELEMENT premis:formatRegistry
+                    TEXT interned
+                      content=                            
+                    ELEMENT premis:formatRegistryName
+                      TEXT
+                        content=PRONOM                            
+                    TEXT interned
+                      content=                            
+                    ELEMENT premis:formatRegistryKey
+                      TEXT
+                        content=x-fmt/391                            
+                    TEXT interned
+                      content=                         
+                  TEXT interned
+                    content=                      
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                
+            TEXT compact
+              content=             
+          TEXT compact
+            content=          
+        TEXT compact
+          content=       
+      TEXT compact
+        content=       
+      ELEMENT mets:techMD
+        ATTRIBUTE ID
+          TEXT
+            content=CSC_test001_tech001
+        ATTRIBUTE CREATED
+          TEXT
+            content=2012-07-13T00:00:00
+        TEXT compact
+          content=          
+        ELEMENT mets:mdWrap
+          ATTRIBUTE MDTYPE
+            TEXT compact
+              content=PREMIS:OBJECT
+          TEXT compact
+            content=             
+          ELEMENT mets:xmlData
+            TEXT interned
+              content=                
+            ELEMENT premis:object
+              default namespace href=info:lc/xmlns/premis-v2
+              ATTRIBUTE type
+                TEXT compact
+                  content=file
+              ATTRIBUTE schemaLocation
+                TEXT
+                  content=info:lc/xmlns/premis-v2 http://www.loc.g...
+              ATTRIBUTE version
+                TEXT compact
+                  content=2.1
+              TEXT interned
+                content=                   
+              ELEMENT premis:objectIdentifier
+                TEXT interned
+                  content=                      
+                ELEMENT premis:objectIdentifierType
+                  TEXT
+                    content=UUID                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:objectIdentifierValue
+                  TEXT
+                    content=5daa71c9-2241-4816-9357-cd34eef4df60    ...
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                   
+              ELEMENT premis:objectCharacteristics
+                TEXT interned
+                  content=                      
+                ELEMENT premis:compositionLevel
+                  TEXT
+                    content=0                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:fixity
+                  TEXT interned
+                    content=                         
+                  ELEMENT premis:messageDigestAlgorithm
+                    TEXT
+                      content=MD5                         
+                  TEXT interned
+                    content=                         
+                  ELEMENT premis:messageDigest
+                    TEXT
+                      content=762108c2ca8680fdb55fb67170a55e70        ...
+                  TEXT interned
+                    content=                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:size
+                  TEXT compact
+                    content=1242594
+                TEXT interned
+                  content=                      
+                ELEMENT premis:format
+                  TEXT interned
+                    content=                         
+                  ELEMENT premis:formatDesignation
+                    TEXT interned
+                      content=                            
+                    ELEMENT premis:formatName
+                      TEXT
+                        content=image/jpeg                            
+                    TEXT interned
+                      content=                         
+                  TEXT interned
+                    content=                         
+                  ELEMENT premis:formatRegistry
+                    TEXT interned
+                      content=                            
+                    ELEMENT premis:formatRegistryName
+                      TEXT
+                        content=PRONOM                            
+                    TEXT interned
+                      content=                            
+                    ELEMENT premis:formatRegistryKey
+                      TEXT
+                        content=x-fmt/391                            
+                    TEXT interned
+                      content=                         
+                  TEXT interned
+                    content=                      
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                
+            TEXT compact
+              content=             
+          TEXT compact
+            content=          
+        TEXT compact
+          content=       
+      TEXT compact
+        content=       
+      ELEMENT mets:techMD
+        ATTRIBUTE ID
+          TEXT
+            content=CSC_test001_tech003
+        ATTRIBUTE CREATED
+          TEXT
+            content=2012-07-13T00:00:00
+        TEXT compact
+          content=          
+        ELEMENT mets:mdWrap
+          ATTRIBUTE MDTYPE
+            TEXT compact
+              content=PREMIS:OBJECT
+          TEXT compact
+            content=             
+          ELEMENT mets:xmlData
+            TEXT interned
+              content=                
+            ELEMENT premis:object
+              default namespace href=info:lc/xmlns/premis-v2
+              ATTRIBUTE type
+                TEXT compact
+                  content=file
+              ATTRIBUTE schemaLocation
+                TEXT
+                  content=info:lc/xmlns/premis-v2 http://www.loc.g...
+              ATTRIBUTE version
+                TEXT compact
+                  content=2.1
+              TEXT interned
+                content=                   
+              ELEMENT premis:objectIdentifier
+                TEXT interned
+                  content=                      
+                ELEMENT premis:objectIdentifierType
+                  TEXT
+                    content=UUID                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:objectIdentifierValue
+                  TEXT
+                    content=e899fab9-293a-4282-82e7-1613889b8ad1    ...
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                   
+              ELEMENT premis:objectCharacteristics
+                TEXT interned
+                  content=                      
+                ELEMENT premis:compositionLevel
+                  TEXT
+                    content=0                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:fixity
+                  TEXT interned
+                    content=                         
+                  ELEMENT premis:messageDigestAlgorithm
+                    TEXT
+                      content=MD5                         
+                  TEXT interned
+                    content=                         
+                  ELEMENT premis:messageDigest
+                    TEXT
+                      content=c29f1b25b22318d11bc7f60cdb48029d        ...
+                  TEXT interned
+                    content=                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:size
+                  TEXT compact
+                    content=5901192
+                TEXT interned
+                  content=                      
+                ELEMENT premis:format
+                  TEXT interned
+                    content=                         
+                  ELEMENT premis:formatDesignation
+                    TEXT interned
+                      content=                            
+                    ELEMENT premis:formatName
+                      TEXT
+                        content=image/jpeg                            
+                    TEXT interned
+                      content=                         
+                  TEXT interned
+                    content=                         
+                  ELEMENT premis:formatRegistry
+                    TEXT interned
+                      content=                            
+                    ELEMENT premis:formatRegistryName
+                      TEXT
+                        content=PRONOM                            
+                    TEXT interned
+                      content=                            
+                    ELEMENT premis:formatRegistryKey
+                      TEXT
+                        content=fmt/41                            
+                    TEXT interned
+                      content=                         
+                  TEXT interned
+                    content=                      
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                
+            TEXT compact
+              content=             
+          TEXT compact
+            content=          
+        TEXT compact
+          content=       
+      TEXT compact
+        content=        
+      ELEMENT mets:rightsMD
+        ATTRIBUTE ID
+          TEXT compact
+            content=CSC_rights001
+        ATTRIBUTE CREATED
+          TEXT
+            content=2012-07-13T00:00:00
+        TEXT compact
+          content=          
+        ELEMENT mets:mdWrap
+          ATTRIBUTE MDTYPE
+            TEXT compact
+              content=METSRIGHTS
+          TEXT compact
+            content=             
+          ELEMENT mets:xmlData
+            TEXT interned
+              content=                
+            ELEMENT rts:RightsDeclarationMD
+              ATTRIBUTE RIGHTSCATEGORY
+                TEXT compact
+                  content=CONTRACTUAL
+              TEXT interned
+                content=                   
+              ELEMENT rts:Context
+                ATTRIBUTE CONTEXTCLASS
+                  TEXT compact
+                    content=GENERAL PUBLIC
+                TEXT interned
+                  content=                      
+                ELEMENT rts:Permissions
+                  ATTRIBUTE DISCOVER
+                    TEXT compact
+                      content=true
+                  ATTRIBUTE DISPLAY
+                    TEXT compact
+                      content=true
+                  ATTRIBUTE COPY
+                    TEXT compact
+                      content=false
+                  ATTRIBUTE DUPLICATE
+                    TEXT compact
+                      content=false
+                  ATTRIBUTE MODIFY
+                    TEXT compact
+                      content=false
+                  ATTRIBUTE DELETE
+                    TEXT compact
+                      content=false
+                  ATTRIBUTE PRINT
+                    TEXT compact
+                      content=true
+                  ATTRIBUTE OTHER
+                    TEXT compact
+                      content=false
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                
+            TEXT compact
+              content=             
+          TEXT compact
+            content=          
+        TEXT compact
+          content=       
+      TEXT compact
+        content=        
+      ELEMENT mets:digiprovMD
+        ATTRIBUTE ID
+          TEXT
+            content=CSC_test001_digiprov001
+        ATTRIBUTE CREATED
+          TEXT
+            content=2012-07-13T00:00:00
+        TEXT compact
+          content=          
+        ELEMENT mets:mdWrap
+          ATTRIBUTE MDTYPE
+            TEXT compact
+              content=PREMIS:EVENT
+          TEXT compact
+            content=             
+          ELEMENT mets:xmlData
+            TEXT interned
+              content=                
+            ELEMENT premis:event
+              TEXT interned
+                content=                   
+              ELEMENT premis:eventIdentifier
+                TEXT interned
+                  content=                      
+                ELEMENT premis:eventIdentifierType
+                  TEXT
+                    content=local                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:eventIdentifierValue
+                  TEXT
+                    content=CSC_test001_event001                    ...
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                   
+              ELEMENT premis:eventType
+                TEXT compact
+                  content=creation
+              TEXT interned
+                content=                   
+              ELEMENT premis:eventDateTime
+                TEXT
+                  content=2009-08-17                   
+              TEXT interned
+                content=                   
+              ELEMENT premis:eventOutcomeInformation
+                TEXT interned
+                  content=                      
+                ELEMENT premis:eventOutcome
+                  TEXT
+                    content=successful                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:eventOutcomeDetail
+                  TEXT interned
+                    content=                         
+                  ELEMENT premis:eventOutcomeDetailNote
+                    TEXT
+                      content=Valokuvan                            ott...
+                  TEXT interned
+                    content=                      
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                   
+              ELEMENT premis:linkingAgentIdentifier
+                TEXT interned
+                  content=                      
+                ELEMENT premis:linkingAgentIdentifierType
+                  TEXT
+                    content=local                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:linkingAgentIdentifierValue
+                  TEXT
+                    content=CSC_test001_agent001                    ...
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                
+            TEXT compact
+              content=             
+          TEXT compact
+            content=          
+        TEXT compact
+          content=       
+      TEXT compact
+        content=       
+      ELEMENT mets:digiprovMD
+        ATTRIBUTE ID
+          TEXT
+            content=CSC_test001_digiprov002
+        ATTRIBUTE CREATED
+          TEXT
+            content=2012-07-13T00:00:00
+        TEXT compact
+          content=          
+        ELEMENT mets:mdWrap
+          ATTRIBUTE MDTYPE
+            TEXT compact
+              content=PREMIS:EVENT
+          TEXT compact
+            content=             
+          ELEMENT mets:xmlData
+            TEXT interned
+              content=                
+            ELEMENT premis:event
+              TEXT interned
+                content=                   
+              ELEMENT premis:eventIdentifier
+                TEXT interned
+                  content=                      
+                ELEMENT premis:eventIdentifierType
+                  TEXT
+                    content=local                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:eventIdentifierValue
+                  TEXT
+                    content=CSC_test001_event002                    ...
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                   
+              ELEMENT premis:eventType
+                TEXT compact
+                  content=creation
+              TEXT interned
+                content=                   
+              ELEMENT premis:eventDateTime
+                TEXT
+                  content=2006-08-23                   
+              TEXT interned
+                content=                   
+              ELEMENT premis:eventOutcomeInformation
+                TEXT interned
+                  content=                      
+                ELEMENT premis:eventOutcome
+                  TEXT
+                    content=successful                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:eventOutcomeDetail
+                  TEXT interned
+                    content=                         
+                  ELEMENT premis:eventOutcomeDetailNote
+                    TEXT
+                      content=Valokuvan                            ott...
+                  TEXT interned
+                    content=                      
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                   
+              ELEMENT premis:linkingAgentIdentifier
+                TEXT interned
+                  content=                      
+                ELEMENT premis:linkingAgentIdentifierType
+                  TEXT
+                    content=local                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:linkingAgentIdentifierValue
+                  TEXT
+                    content=CSC_test001_agent001                    ...
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                
+            TEXT compact
+              content=             
+          TEXT compact
+            content=          
+        TEXT compact
+          content=       
+      TEXT compact
+        content=       
+      ELEMENT mets:digiprovMD
+        ATTRIBUTE ID
+          TEXT
+            content=CSC_test001_digiprov003
+        ATTRIBUTE CREATED
+          TEXT
+            content=2012-07-13T00:00:00
+        TEXT compact
+          content=          
+        ELEMENT mets:mdWrap
+          ATTRIBUTE MDTYPE
+            TEXT compact
+              content=PREMIS:EVENT
+          TEXT compact
+            content=             
+          ELEMENT mets:xmlData
+            TEXT interned
+              content=                
+            ELEMENT premis:event
+              TEXT interned
+                content=                   
+              ELEMENT premis:eventIdentifier
+                TEXT interned
+                  content=                      
+                ELEMENT premis:eventIdentifierType
+                  TEXT
+                    content=local                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:eventIdentifierValue
+                  TEXT
+                    content=CSC_test001_event001                    ...
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                   
+              ELEMENT premis:eventType
+                TEXT compact
+                  content=creation
+              TEXT interned
+                content=                   
+              ELEMENT premis:eventDateTime
+                TEXT
+                  content=2012-06-20                   
+              TEXT interned
+                content=                   
+              ELEMENT premis:eventOutcomeInformation
+                TEXT interned
+                  content=                      
+                ELEMENT premis:eventOutcome
+                  TEXT
+                    content=successful                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:eventOutcomeDetail
+                  TEXT interned
+                    content=                         
+                  ELEMENT premis:eventOutcomeDetailNote
+                    TEXT
+                      content=Valokuvan                            ott...
+                  TEXT interned
+                    content=                      
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                   
+              ELEMENT premis:linkingAgentIdentifier
+                TEXT interned
+                  content=                      
+                ELEMENT premis:linkingAgentIdentifierType
+                  TEXT
+                    content=local                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:linkingAgentIdentifierValue
+                  TEXT
+                    content=CSC_test001_agent002                    ...
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                
+            TEXT compact
+              content=             
+          TEXT compact
+            content=          
+        TEXT compact
+          content=       
+      TEXT compact
+        content=       
+      ELEMENT mets:digiprovMD
+        ATTRIBUTE ID
+          TEXT
+            content=CSC_test001_agent001
+        ATTRIBUTE CREATED
+          TEXT
+            content=2012-07-13T00:00:00
+        TEXT compact
+          content=          
+        ELEMENT mets:mdWrap
+          ATTRIBUTE MDTYPE
+            TEXT compact
+              content=PREMIS:AGENT
+          TEXT compact
+            content=             
+          ELEMENT mets:xmlData
+            TEXT interned
+              content=                
+            ELEMENT premis:agent
+              TEXT interned
+                content=                   
+              ELEMENT premis:agentIdentifier
+                TEXT interned
+                  content=                      
+                ELEMENT premis:agentIdentifierType
+                  TEXT
+                    content=local                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:agentIdentifierValue
+                  TEXT
+                    content=CSC_test001_cam001                      ...
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                   
+              ELEMENT premis:agentName
+                TEXT
+                  content=Konica Minolta DiMAGE Z2                ...
+              TEXT interned
+                content=                   
+              ELEMENT premis:agentType
+                TEXT compact
+                  content=kamera
+              TEXT interned
+                content=                
+            TEXT compact
+              content=             
+          TEXT compact
+            content=          
+        TEXT compact
+          content=       
+      TEXT compact
+        content=       
+      ELEMENT mets:digiprovMD
+        ATTRIBUTE ID
+          TEXT
+            content=CSC_test001_agent002
+        ATTRIBUTE CREATED
+          TEXT
+            content=2012-07-13T00:00:00
+        TEXT compact
+          content=          
+        ELEMENT mets:mdWrap
+          ATTRIBUTE MDTYPE
+            TEXT compact
+              content=PREMIS:AGENT
+          TEXT compact
+            content=             
+          ELEMENT mets:xmlData
+            TEXT interned
+              content=                
+            ELEMENT premis:agent
+              TEXT interned
+                content=                   
+              ELEMENT premis:agentIdentifier
+                TEXT interned
+                  content=                      
+                ELEMENT premis:agentIdentifierType
+                  TEXT
+                    content=local                      
+                TEXT interned
+                  content=                      
+                ELEMENT premis:agentIdentifierValue
+                  TEXT
+                    content=CSC_test001_cam002                      ...
+                TEXT interned
+                  content=                   
+              TEXT interned
+                content=                   
+              ELEMENT premis:agentName
+                TEXT
+                  content=Panasonic DMC-TZ6
+              TEXT interned
+                content=                   
+              ELEMENT premis:agentType
+                TEXT compact
+                  content=kamera
+              TEXT interned
+                content=                
+            TEXT compact
+              content=             
+          TEXT compact
+            content=          
+        TEXT compact
+          content=       
+      TEXT compact
+        content=    
+    TEXT compact
+      content=     
+    ELEMENT mets:fileSec
+      TEXT compact
+        content=       
+      ELEMENT mets:fileGrp
+        ATTRIBUTE USE
+          TEXT compact
+            content=testing
+        TEXT compact
+          content=          
+        ELEMENT mets:file
+          ATTRIBUTE ID
+            TEXT
+              content=CSC_test001_file001
+          ATTRIBUTE ADMID
+            TEXT
+              content=CSC_test001_tech001 CSC_test001_digiprov...
+          ATTRIBUTE CREATED
+            TEXT
+              content=2012-07-13T00:00:00
+          TEXT compact
+            content=             
+          ELEMENT mets:FLocat
+            ATTRIBUTE href
+              TEXT
+                content=file://kuvat/PICT0081.JPG
+            ATTRIBUTE LOCTYPE
+              TEXT compact
+                content=URL
+          TEXT compact
+            content=          
+        TEXT compact
+          content=          
+        ELEMENT mets:file
+          ATTRIBUTE ID
+            TEXT
+              content=CSC_test001_file002
+          ATTRIBUTE ADMID
+            TEXT
+              content=CSC_test001_tech002 CSC_test001_digiprov...
+          ATTRIBUTE CREATED
+            TEXT
+              content=2012-07-13T00:00:00
+          TEXT compact
+            content=             
+          ELEMENT mets:FLocat
+            ATTRIBUTE href
+              TEXT
+                content=file://kuvat/PICT0102.JPG
+            ATTRIBUTE LOCTYPE
+              TEXT compact
+                content=URL
+          TEXT compact
+            content=          
+        TEXT compact
+          content=          
+        ELEMENT mets:file
+          ATTRIBUTE ID
+            TEXT
+              content=CSC_test001_file003
+          ATTRIBUTE ADMID
+            TEXT
+              content=CSC_test001_tech003 CSC_test001_digiprov...
+          ATTRIBUTE CREATED
+            TEXT
+              content=2012-07-13T00:00:00
+          TEXT compact
+            content=             
+          ELEMENT mets:FLocat
+            ATTRIBUTE href
+              TEXT
+                content=file://kuvat/P1020137.JPG
+            ATTRIBUTE LOCTYPE
+              TEXT compact
+                content=URL
+          TEXT compact
+            content=          
+        TEXT compact
+          content=       
+      TEXT compact
+        content=    
+    TEXT compact
+      content=    
+    ELEMENT mets:structMap
+      TEXT compact
+        content=       
+      ELEMENT mets:div
+        ATTRIBUTE TYPE
+          TEXT compact
+            content=LOGICAL
+        ATTRIBUTE LABEL
+          TEXT compact
+            content=Testikuvia
+        TEXT compact
+          content=          
+        ELEMENT mets:div
+          ATTRIBUTE TYPE
+            TEXT compact
+              content=PHOTOGRAPHY
+          ATTRIBUTE LABEL
+            TEXT compact
+              content=CSC_source001
+          ATTRIBUTE DMDID
+            TEXT
+              content=CSC_test00DOCUMENT
+No entities in internal subset
+No entities in external subset
+1_object001
+          TEXT compact
+            content=             
+          ELEMENT mets:fptr
+            ATTRIBUTE FILEID
+              TEXT
+                content=CSC_test001_file001
+          TEXT compact
+            content=          
+        TEXT compact
+          content=          
+        ELEMENT mets:div
+          ATTRIBUTE TYPE
+            TEXT compact
+              content=PHOTOGRAPHY
+          ATTRIBUTE LABEL
+            TEXT compact
+              content=CSC_source002
+          ATTRIBUTE DMDID
+            TEXT
+              content=CSC_test001_object002
+          TEXT compact
+            content=             
+          ELEMENT mets:fptr
+            ATTRIBUTE FILEID
+              TEXT
+                content=CSC_test001_file002
+          TEXT compact
+            content=          
+        TEXT compact
+          content=          
+        ELEMENT mets:div
+          ATTRIBUTE TYPE
+            TEXT compact
+              content=PHOTOGRAPHY
+          ATTRIBUTE LABEL
+            TEXT compact
+              content=CSC_source003
+          ATTRIBUTE DMDID
+            TEXT
+              content=CSC_test001_object003
+          TEXT compact
+            content=             
+          ELEMENT mets:fptr
+            ATTRIBUTE FILEID
+              TEXT
+                content=CSC_test001_file003
+          TEXT compact
+            content=          
+        TEXT compact
+          content=       
+      TEXT compact
+        content=    
+    TEXT compact
+      content= 

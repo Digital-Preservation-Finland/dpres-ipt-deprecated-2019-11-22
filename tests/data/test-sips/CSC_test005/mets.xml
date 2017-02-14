@@ -1,0 +1,67 @@
+<mets:mets
+   OBJID="urn:oid:1.2.246.11.2159749.1.2.2012.1" PROFILE="http://www.kdk2011.fi/kdkmetsprofiili" xmlns:mets="http://www.loc.gov/METS/" xmlns:premis="info:lc/xmlns/premis-v2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rts="http://cosimo.stanford.edu/sdr/metsrights/" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <mets:metsHdr CREATEDATE="2011-03-31T15:41:12" >
+    <mets:agent ROLE="CREATOR" TYPE="ORGANIZATION" >
+      <mets:name>CSC - Tieteen tietotekniikan keskus Oy</mets:name> </mets:agent>
+  </mets:metsHdr>
+  <mets:dmdSec ID="dmd-dc" > 
+    <mets:mdWrap MDTYPE="DC" >
+      <mets:xmlData> 
+	<dc:identifier>warc_005</dc:identifier> 
+	<dc:title>CSC:n etusivu</dc:title> 
+	<dc:date>2013-11-18</dc:date> 
+	<dc:type>WARC</dc:type>
+    </mets:xmlData> </mets:mdWrap>
+  </mets:dmdSec>
+  <mets:amdSec>
+    <mets:techMD ID="tech-001" >
+      <mets:mdWrap MDTYPE="PREMIS:OBJECT" > 
+	<mets:xmlData>
+	  <premis:object> 
+	    <premis:objectCharacteristics>
+	      <premis:format> 
+		<premis:formatDesignation>
+		  <premis:formatName>application/warc</premis:formatName>
+		  <premis:formatVersion>1.0</premis:formatVersion> 
+		</premis:formatDesignation>
+	      </premis:format> 
+	      <premis:fixity>
+		<premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm> 
+		<premis:messageDigest>d1b222d223bddc517cd80798a465b71d</premis:messageDigest> 
+	      </premis:fixity>
+	    </premis:objectCharacteristics> 
+	  </premis:object>
+      </mets:xmlData> 
+      </mets:mdWrap>
+    </mets:techMD>
+
+    <mets:rightsMD ID="rights-001" > <mets:mdWrap MDTYPE="METSRights" >
+	<mets:xmlData>
+	  <rts:RightsDeclarationMD RIGHTSCATEGORY="CONTRACTUAL" >
+	    <rts:Context CONTEXTCLASS="GENERAL PUBLIC" >
+	      <rts:Permissions DISCOVER="true" DISPLAY="true" COPY="false"
+			       DUPLICATE="false" MODIFY="false" DELETE="false" PRINT="false" OTHER="false" />
+	  </rts:Context> 
+	  </rts:RightsDeclarationMD>
+	</mets:xmlData> 
+      </mets:mdWrap> 
+    </mets:rightsMD>
+    <mets:digiprovMD ID="dp-001" >
+      <mets:mdRef MDTYPE="OTHER" OTHERMDTYPE="KDKPreservationPlan"
+		  LOCTYPE="OTHER" OTHERLOCTYPE="SSID"
+		  xlink:type="simple" xlink:href="SSID.generic-jpeg.88541" /> 
+    </mets:digiprovMD>
+  </mets:amdSec>
+  <mets:fileSec> 
+    <mets:fileGrp>
+      <mets:file ID="warc-0005" ADMID="tech-001 rights-001" > 
+	<mets:FLocat LOCTYPE="URL" xlink:href="file://./DOES_NOT_EXIST.gz" />
+      </mets:file> 
+    </mets:fileGrp>
+  </mets:fileSec>
+  <mets:structMap>
+    <mets:div TYPE="warc" DMDID="dmd-dc" >
+      <mets:fptr FILEID="warc-0005" /> 
+    </mets:div>
+  </mets:structMap>
+</mets:mets>
