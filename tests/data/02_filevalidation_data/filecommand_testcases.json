@@ -1,0 +1,38 @@
+{
+    "test_validate":
+    [
+     {
+     "testcase": "Test validation for ASCII text as ISO 8859-15 charset ",
+     "filename": "02_filevalidation_data/text/ascii.txt",
+     "mimetype": "text/plain",
+     "formatVersion": "8859-15",
+     "expected_result": {
+        "status": 0,
+        "stdout": "",
+        "stderr": ""
+        }
+     },
+     {
+     "testcase": "Test validation for ISO 8859-1 as 8859-15 charset ",
+     "filename": "02_filevalidation_data/text/iso-8859.txt",
+     "mimetype": "text/plain",
+     "formatVersion": "8859-15",
+     "expected_result": {
+        "status": 0 ,
+        "stdout": "",
+        "stderr": ""
+        }
+     },
+     {
+     "testcase": "Test validation for ISO 8859-1 as ASCII charset ",
+     "filename": "02_filevalidation_data/text/iso-8859.txt",
+     "mimetype": "text/plain",
+     "formatVersion": "ASCII",
+     "expected_result": {
+        "status": 1 ,
+        "stdout": "ISO-8859 text",
+        "stderr": ""
+        }
+     }
+     ]
+}

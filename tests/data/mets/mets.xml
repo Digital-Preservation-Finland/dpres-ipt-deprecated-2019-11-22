@@ -1,0 +1,1011 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mets:mets OBJID="5b1d2e87-375d-4b13-9dda-3474b8a9bdc8"
+	PROFILE="http://www.kdk.fi/kdk-mets-profile"
+	kdk:CATALOG="1.4"
+	xmlns:mets="http://www.loc.gov/METS/"
+	xmlns:kdk="http://www.kdk.fi/standards/mets/kdk-extensions"
+	xmlns:premis="info:lc/xmlns/premis-v2"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.loc.gov/METS/
+ 		http://kdk.fi/standards/mets/mets.xsd">
+
+	<mets:metsHdr CREATEDATE="2015-06-17T16:00:00">
+		<mets:agent ROLE="CREATOR" TYPE="ORGANIZATION">
+			<mets:name>CSC - Tieteen tietotekniikan keskus</mets:name>
+		</mets:agent>
+		<mets:agent ROLE="CREATOR" TYPE="OTHER" OTHERTYPE="STRUCTURE">
+			<mets:name>Kansallinen digitaalinen kirjasto</mets:name>
+		</mets:agent>
+	</mets:metsHdr>
+
+	<mets:dmdSec ID="dmd-project-001" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Kansallinen digitaalinen kirjasto -hanke</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto</dc:subject>
+				<dc:description>Kansallinen digitaalinen kirjasto -hankkeen tavoitteet ovat kirjastojen, arkistojen ja museoiden keskeisten kansallisten tietovarantojen saatavuuden ja käytettävyyden edistäminen tietoverkoissa sekä sähköisten kulttuuriperintöaineistojen pitkäaikaissäilytysratkaisujen kehittäminen. Kansallinen digitaalinen kirjasto -hankkeen painopistealueet ovat 1. yhteisen hakupalvelun kehittäminen kirjastojen, arkistojen ja museoiden keskeisille sähköisille tietovarannoille; 2. kirjastojen, arkistojen ja museoiden keskeisten, priorisoitujen aineistojen digitointi ja liittäminen osaksi yhteistä hakupalvelua; 3. sähköisten kulttuuriperintöaineistojen pitkäaikaissäilytysratkaisujen tuottaminen; sekä 4. kulttuuri- ja kulttuuriperintöaineistojen digitointia ja sähköistä saatavuutta sekä sähköisten kulttuuriperintöaineistojen pitkäaikaissäilytystä koskevan osaamisen lisääminen. Tavoitteiden saavuttamiseksi toteutetaan yhteisen hakupalvelun ja sähköisen pitkäaikaissäilyttämisen kehittämishankkeet sekä muita toimenpiteitä.</dc:description>
+				<dc:date>2008-05-20</dc:date>
+				<dc:identifier>OPM039:00/2008</dc:identifier>
+				<dc:coverage>2008-05-20/2013-12-31</dc:coverage>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	<mets:dmdSec ID="dmd-project-002" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Kansallinen digitaalinen kirjasto -hankkeen johtoryhmä ja ohjausryhmä</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto</dc:subject>
+				<dc:description>Kansallinen digitaalinen kirjasto on opetus- ja kulttuuriministeriön toimialatasoinen sisältö- ja palvelukokonaisuus. Sen perustan muodostavat kirjastot, arkistot ja museot sekä kulttuuriperintöaineistoa säilyttävät muut organisaatiot ja näiden tietoteknisistä ratkaisuista vastaavat toimijat. Kansallisella digitaalisella kirjastolla on useita liittymäkohtia tutkimuksen tietoaineistoja tallentaviin, hallinnoiviin, välittäviin ja säilyttäviin orga-nisaatioihin. Kansallinen digitaalinen kirjasto -hankkeen tavoitteena on varmistaa kulttuurin ja tieteen digitaalisten tietovarantojen tehokas ja laadukas hallinta, jakelu ja pitkäaikaissäilytys. Lisäksi hankkeessa edistetään kulttuuriperintö- ja asiakirja-aineistojen digitointia. Tavoitteiden saavuttamiseksi vakiinnutetaan Kansallisen digitaalisen kirjaston palvelujärjestelmät. Kansalliskirjasto vastaa Kansallisen digitaalisen kirjaston asiakasliittymän ylläpitämisestä toimialatasoisena palvelujärjestelmänä. Tieteen tietotekniikan keskus CSC vastaa digitaalisten kulttuuriperintö- ja asiakirja-aineistojen keskitetyn pitkäaikais-säilytysjärjestelmän suunnittelu- ja toteuttamishankkeesta 31.12.2013 saakka.</dc:description>
+				<dc:date>2011-04-06</dc:date>
+				<dc:identifier>OKM052:00/2011</dc:identifier>
+				<dc:coverage>2011-04-06/2013-12-31</dc:coverage>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	<mets:dmdSec ID="dmd-project-003" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Kansallinen digitaalinen kirjasto -hankkeen ohjausryhmä</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto</dc:subject>
+				<dc:description>Kansallinen digitaalinen kirjasto -hankkeen tavoitteena on edistää digitaalisten kulttuuriperintö- ja kirjastoaineistojen vaikuttavuutta yhteiskunnan eri sektoreilla kehittämällä niiden luontia, hallintaa, hyödyntämistä ja säilymistä koskevia palveluita ja toimintamalleja sekä vahvistamalla tietojen ja järjestelmien yhteentoimivuutta. Kansallisen digitaalisen kirjaston Finna-asiakasliittymä on jatkuvasti kehitettävä ja laajeneva palvelu, joka tuo kirjastojen, arkistojen ja museoiden digitaaliset aineistot ja palvelut helposti saataville, edistää tiedon avointa saatavuutta ja mahdollistaa laajalle organisaatiojoukolle erillisistä käyttöliittymistä luopumisen. Kansallisen digitaalisen kirjaston pitkäaikaissäilytysratkaisu (KDK-PAS) muodostaa yhdessä Tutkimuksen tietoaineistot -hankkeessa kehitetyn TTA/ATT-PAS:in kanssa toimialatasoisen kokonaisuuden digitaalisille kulttuuriperintöaineistoille ja tutkimuksen tietoaineistoille. KDK-PAS-ratkaisun ensimmäisen vaiheen tuloksena on valmistunut digitaalisen kulttuuriperintöaineistojen säilytyspalvelu. Palvelun käyttöönoton rinnalla toteutetaan 2014-2017 PAS-ratkaisun toinen vaihe, jolla taataan aineistojen ymmärrettävyyden säilyminen ja se, että aineistoja voidaan tarkastella nykyaikaisilla ohjelmistoilla myös tulevaisuudessa. Opetus- ja kulttuuriministeriön vastuulla on kehittää, suunnitella ja ylläpitää julkisen hallinnon ydintoiminnan ja palveluiden kehittämiseen liittyviä yhteisiä arkkitehtuurilinjauksia ja -kuvauksia "koulutus, tiede ja kulttuuri" -kohdealueella. KDK-hankkeessa ylläpidetään Finna ja KDK-PAS -arkkitehtuureja sekä kehitetään kirjasto-, arkisto- ja museo -osa-alueella sektorikohtaisia ja sektoreita yhdistäviä arkkitehtuurikokonaisuuksia. Kansallinen digitaalinen kirjasto hanketta -toteutetaan yhteistyössä Avoimen tieteen ja tutkimuksen hankkeen (ATT) kanssa. KDK- ja ATT-PAS-yhteistyön lisäksi KDK-hankkeessa edistetään tietoaineistojen keräämistä ja avaamista tieteen käyttöön. KDK-hankkeen toteuttamista varten opetus- ja kulttuuriministeriö asettaa ohjausryhmän.</dc:description>
+				<dc:date>2014-04-11</dc:date>
+				<dc:identifier>OKM050:00/2014</dc:identifier>
+				<dc:coverage>2014-05-01/2016-12-31</dc:coverage>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	
+	<mets:dmdSec ID="dmd001" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Kansallinen digitaalinen kirjasto -hankkeen asettaminen</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto -hanke</dc:subject>
+				<dc:date>2008-05-20</dc:date>
+				<dc:type>Text</dc:type>
+				<dc:identifier>2008-05-20, dnro 38/040/2008</dc:identifier>
+				<dc:relation>OPM039:00/2008</dc:relation>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	<mets:dmdSec ID="dmd002" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Kansallinen digitaalinen kirjasto -hanke, pitkäaikaissäilytys-jaoston kokoonpanon muutos</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto -hanke</dc:subject>
+				<dc:date>2008-10-07</dc:date>
+				<dc:type>Text</dc:type>
+				<dc:identifier>2008-10-07, dnro 38/040/2008</dc:identifier>
+				<dc:relation>OPM039:00/2008</dc:relation>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	<mets:dmdSec ID="dmd003" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Jäsenmuutoksia</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto -hanke</dc:subject>
+				<dc:date>2009-04-21</dc:date>
+				<dc:type>Text</dc:type>
+				<dc:identifier>2009-04-21, dnro 38/040/2008</dc:identifier>
+				<dc:relation>OPM039:00/2008</dc:relation>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	<mets:dmdSec ID="dmd004" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Ehdotus kokoonpanon muuttamiseksi</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto -hanke</dc:subject>
+				<dc:date>2010-02-01</dc:date>
+				<dc:type>Text</dc:type>
+				<dc:identifier>2010-02-01, dnro 38/040/2008</dc:identifier>
+				<dc:relation>OPM039:00/2008</dc:relation>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	<mets:dmdSec ID="dmd005" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Vastaus: Kokoonpanon muuuttaminen</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto -hanke</dc:subject>
+				<dc:date>2010-02-09</dc:date>
+				<dc:type>Text</dc:type>
+				<dc:identifier>2010-02-09, dnro 38/040/2008</dc:identifier>
+				<dc:relation>OPM039:00/2008</dc:relation>
+				<dc:relation>2010-02-01, dnro 38/040/2008</dc:relation>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	<mets:dmdSec ID="dmd006" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Ehdotus kokoonpanon muuttamiseksi</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto -hanke</dc:subject>
+				<dc:date>2010-03-09</dc:date>
+				<dc:type>Text</dc:type>
+				<dc:identifier>2010-03-09, dnro 38/040/2008</dc:identifier>
+				<dc:relation>OPM039:00/2008</dc:relation>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	<mets:dmdSec ID="dmd007" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Vastaus: Kokoonpanon muuuttaminen</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto -hanke</dc:subject>
+				<dc:date>2010-03-09</dc:date>
+				<dc:type>Text</dc:type>
+				<dc:identifier>2010-03-09, dnro 38/040/2008</dc:identifier>
+				<dc:relation>OPM039:00/2008</dc:relation>
+				<dc:relation>2010-03-09, dnro 38/040/2008</dc:relation>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	<mets:dmdSec ID="dmd008" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Kansallinen digitaalinen kirjasto -hankkeen seurantaryhmän ja ohjausryhmän kokoonpanon muuttaminen</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto -hanke</dc:subject>
+				<dc:date>2010-08-26</dc:date>
+				<dc:type>Text</dc:type>
+				<dc:identifier>2010-08-26, dnro 38/040/2008</dc:identifier>
+				<dc:relation>OPM039:00/2008</dc:relation>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	<mets:dmdSec ID="dmd009" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Kansallinen digitaalinen kirjasto -hankkeen pitkäaikaissäilytyksen jatkohankkeen tukiryhmän asettaminen</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto -hanke</dc:subject>
+				<dc:date>2010-08-26</dc:date>
+				<dc:type>Text</dc:type>
+				<dc:identifier>2010-08-26, dnro 38/040/2008</dc:identifier>
+				<dc:relation>OPM039:00/2008</dc:relation>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	<mets:dmdSec ID="dmd010" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Kansallinen digitaalinen kirjasto -hankkeen pitkäaikaissäilytyksen jatkohankkeen tukiryhmän toimikauden pidentäminen</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto -hanke</dc:subject>
+				<dc:date>2011-04-06</dc:date>
+				<dc:type>Text</dc:type>
+				<dc:identifier>2011-04-06, dnro 38/040/2008</dc:identifier>
+				<dc:relation>OPM039:00/2008</dc:relation>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	<mets:dmdSec ID="dmd011" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Kansallinen digitaalinen kirjasto -hankkeen johtoryhmä ja ohjausryhmä</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto -hankkeen johtoryhmä ja ohjausryhmä</dc:subject>
+				<dc:date>2011-04-06</dc:date>
+				<dc:type>Text</dc:type>
+				<dc:identifier>2011-04-06, dnro 20/040/2011</dc:identifier>
+				<dc:relation>OKM052:00/2011</dc:relation>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	<mets:dmdSec ID="dmd012" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Varapuheenjohtajan vaihtaminen Kansallinen digitaalinen kirjasto -hankkeen johtoryhmään</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto -hankkeen johtoryhmä ja ohjausryhmä</dc:subject>
+				<dc:date>2011-10-10</dc:date>
+				<dc:type>Text</dc:type>
+				<dc:identifier>2011-10-10, dnro 83/040/2011</dc:identifier>
+				<dc:relation>OKM052:00/2011</dc:relation>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	<mets:dmdSec ID="dmd013" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Varapuheenjohtajan vaihtaminen Kansallinen digitaalinen kirjasto -hankkeen johtoryhmään</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto -hankkeen johtoryhmä ja ohjausryhmä</dc:subject>
+				<dc:date>2013-02-01</dc:date>
+				<dc:type>Text</dc:type>
+				<dc:identifier>2013-02-01, dnro 83/040/2011</dc:identifier>
+				<dc:relation>OKM052:00/2011</dc:relation>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	<mets:dmdSec ID="dmd014" kdk:CREATED="2015-04-09">
+		<mets:mdWrap MDTYPE="DC">
+			<mets:xmlData>
+				<dc:title>Kansallinen digitaalinen kirjasto -hankkeen ohjausryhmän asettaminen</dc:title>
+				<dc:creator>Opetus- ja kulttuuriministeriö</dc:creator>
+				<dc:subject>Kansallinen digitaalinen kirjasto -hankkeen ohjausryhmä</dc:subject>
+				<dc:date>2014-04-11</dc:date>
+				<dc:type>Text</dc:type>
+				<dc:identifier>2014-04-11, dnro OKM/27/040/2014</dc:identifier>
+				<dc:relation>OKM050:00/2014</dc:relation>
+				<dc:language>fi</dc:language>
+			</mets:xmlData>
+		</mets:mdWrap>
+	</mets:dmdSec>
+	
+	<mets:amdSec>
+		<mets:techMD ID="tech001" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:OBJECT">
+				<mets:xmlData>
+					<premis:object xsi:type="premis:file">
+						<premis:objectIdentifier>
+							<premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+							<premis:objectIdentifierValue>66a2987f-4e14-4aad-b262-528e1a5b64bc</premis:objectIdentifierValue>
+						</premis:objectIdentifier>
+						<premis:objectCharacteristics>
+							<premis:compositionLevel>0</premis:compositionLevel>
+							<premis:fixity>
+								<premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+								<premis:messageDigest>c3ca57c494121ac58d9d9735642ed456</premis:messageDigest>
+							</premis:fixity>
+							<premis:format>
+								<premis:formatDesignation>
+									<premis:formatName>application/pdf</premis:formatName>
+									<premis:formatVersion>A-1a</premis:formatVersion>
+								</premis:formatDesignation>
+							</premis:format>
+							<premis:creatingApplication>
+								<premis:dateCreatedByApplication>2015-04-29T13:40:00</premis:dateCreatedByApplication>
+							</premis:creatingApplication>
+						</premis:objectCharacteristics>
+						<premis:relationship>
+							<premis:relationshipType>derivation</premis:relationshipType>
+							<premis:relationshipSubType>has source</premis:relationshipSubType>
+							<premis:relatedObjectIdentification>
+								<premis:relatedObjectIdentifierType>URI</premis:relatedObjectIdentifierType>
+								<premis:relatedObjectIdentifierValue>http://http://www.hare.vn.fi/upload/Asiakirjat/14477/122390_OPM_p%C3%A4%C3%A4t%C3%B6s_20.05.2008_12-02-42.doc</premis:relatedObjectIdentifierValue>
+							</premis:relatedObjectIdentification>
+						</premis:relationship>
+					</premis:object>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:techMD>
+		<mets:techMD ID="tech002" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:OBJECT">
+				<mets:xmlData>
+					<premis:object xsi:type="premis:file">
+						<premis:objectIdentifier>
+							<premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+							<premis:objectIdentifierValue>566b25a5-8710-4184-9771-37875bc5b30a</premis:objectIdentifierValue>
+						</premis:objectIdentifier>
+						<premis:objectCharacteristics>
+							<premis:compositionLevel>0</premis:compositionLevel>
+							<premis:fixity>
+								<premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+								<premis:messageDigest>c0a3a5afb67cc17cfeba92cfef01e0b9</premis:messageDigest>
+							</premis:fixity>
+							<premis:format>
+								<premis:formatDesignation>
+									<premis:formatName>application/pdf</premis:formatName>
+									<premis:formatVersion>A-1a</premis:formatVersion>
+								</premis:formatDesignation>
+							</premis:format>
+							<premis:creatingApplication>
+								<premis:dateCreatedByApplication>2015-04-29T13:42:00</premis:dateCreatedByApplication>
+							</premis:creatingApplication>
+						</premis:objectCharacteristics>
+						<premis:relationship>
+							<premis:relationshipType>derivation</premis:relationshipType>
+							<premis:relationshipSubType>has source</premis:relationshipSubType>
+							<premis:relatedObjectIdentification>
+								<premis:relatedObjectIdentifierType>URI</premis:relatedObjectIdentifierType>
+								<premis:relatedObjectIdentifierValue>http://www.hare.vn.fi/upload/Asiakirjat/14477/128343_Vihanta.doc</premis:relatedObjectIdentifierValue>
+							</premis:relatedObjectIdentification>
+						</premis:relationship>
+					</premis:object>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:techMD>
+		<mets:techMD ID="tech003" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:OBJECT">
+				<mets:xmlData>
+					<premis:object xsi:type="premis:file">
+						<premis:objectIdentifier>
+							<premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+							<premis:objectIdentifierValue>08c7f79f-94ef-4a41-8db4-d77fedcb141f</premis:objectIdentifierValue>
+						</premis:objectIdentifier>
+						<premis:objectCharacteristics>
+							<premis:compositionLevel>0</premis:compositionLevel>
+							<premis:fixity>
+								<premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+								<premis:messageDigest>5ed2c863927721000bf5876f6bed4980</premis:messageDigest>
+							</premis:fixity>
+							<premis:format>
+								<premis:formatDesignation>
+									<premis:formatName>application/pdf</premis:formatName>
+									<premis:formatVersion>A-1a</premis:formatVersion>
+								</premis:formatDesignation>
+							</premis:format>
+							<premis:creatingApplication>
+								<premis:dateCreatedByApplication>2015-04-29T13:44:00</premis:dateCreatedByApplication>
+							</premis:creatingApplication>
+						</premis:objectCharacteristics>
+						<premis:relationship>
+							<premis:relationshipType>derivation</premis:relationshipType>
+							<premis:relationshipSubType>has source</premis:relationshipSubType>
+							<premis:relatedObjectIdentification>
+								<premis:relatedObjectIdentifierType>URI</premis:relatedObjectIdentifierType>
+								<premis:relatedObjectIdentifierValue>http://www.hare.vn.fi/upload/Asiakirjat/14477/138895_OPM_p%C3%A4%C3%A4t%C3%B6s_21.04.2009_10-59-03.doc</premis:relatedObjectIdentifierValue>
+							</premis:relatedObjectIdentification>
+							</premis:relationship>
+					</premis:object>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:techMD>
+		<mets:techMD ID="tech004" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:OBJECT">
+				<mets:xmlData>
+					<premis:object xsi:type="premis:file">
+						<premis:objectIdentifier>
+							<premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+							<premis:objectIdentifierValue>5fb24c77-25c6-448a-a06d-33f6ce80df74</premis:objectIdentifierValue>
+						</premis:objectIdentifier>
+						<premis:objectCharacteristics>
+							<premis:compositionLevel>0</premis:compositionLevel>
+							<premis:fixity>
+								<premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+								<premis:messageDigest>bd60f8caefbc0550b95e733d04d3f564</premis:messageDigest>
+							</premis:fixity>
+							<premis:format>
+								<premis:formatDesignation>
+									<premis:formatName>application/pdf</premis:formatName>
+									<premis:formatVersion>A-1a</premis:formatVersion>
+								</premis:formatDesignation>
+							</premis:format>
+							<premis:creatingApplication>
+								<premis:dateCreatedByApplication>2015-04-29T14:34:00</premis:dateCreatedByApplication>
+							</premis:creatingApplication>
+						</premis:objectCharacteristics>
+						<premis:relationship>
+							<premis:relationshipType>derivation</premis:relationshipType>
+							<premis:relationshipSubType>has source</premis:relationshipSubType>
+							<premis:relatedObjectIdentification>
+								<premis:relatedObjectIdentifierType>URI</premis:relatedObjectIdentifierType>
+								<premis:relatedObjectIdentifierValue>http://www.hare.vn.fi/upload/Asiakirjat/14477/152790_Ehdostus_kokoonpanon_muuttamiseksi.tif</premis:relatedObjectIdentifierValue>
+							</premis:relatedObjectIdentification>
+						</premis:relationship>
+					</premis:object>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:techMD>
+		<mets:techMD ID="tech005" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:OBJECT">
+				<mets:xmlData>
+					<premis:object xsi:type="premis:file">
+						<premis:objectIdentifier>
+							<premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+							<premis:objectIdentifierValue>8a9dea61-ec48-42bf-be04-3e3742ca2ba7</premis:objectIdentifierValue>
+						</premis:objectIdentifier>
+						<premis:objectCharacteristics>
+							<premis:compositionLevel>0</premis:compositionLevel>
+							<premis:fixity>
+								<premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+								<premis:messageDigest>4108923387f04e80d6e2eb4dc5760e0f</premis:messageDigest>
+							</premis:fixity>
+							<premis:format>
+								<premis:formatDesignation>
+									<premis:formatName>application/pdf</premis:formatName>
+									<premis:formatVersion>A-1a</premis:formatVersion>
+								</premis:formatDesignation>
+							</premis:format>
+							<premis:creatingApplication>
+								<premis:dateCreatedByApplication>2015-04-29T13:47:00</premis:dateCreatedByApplication>
+							</premis:creatingApplication>
+						</premis:objectCharacteristics>
+						<premis:relationship>
+							<premis:relationshipType>derivation</premis:relationshipType>
+							<premis:relationshipSubType>has source</premis:relationshipSubType>
+							<premis:relatedObjectIdentification>
+								<premis:relatedObjectIdentifierType>URI</premis:relatedObjectIdentifierType>
+								<premis:relatedObjectIdentifierValue>http://www.hare.vn.fi/upload/Asiakirjat/14477/152792_OPM_kirje_09.02.2010.doc</premis:relatedObjectIdentifierValue>
+							</premis:relatedObjectIdentification>
+						</premis:relationship>
+					</premis:object>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:techMD>
+		<mets:techMD ID="tech006" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:OBJECT">
+				<mets:xmlData>
+					<premis:object xsi:type="premis:file">
+						<premis:objectIdentifier>
+							<premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+							<premis:objectIdentifierValue>2a5605d4-14e0-4d11-ae0e-767ba150d99d</premis:objectIdentifierValue>
+						</premis:objectIdentifier>
+						<premis:objectCharacteristics>
+							<premis:compositionLevel>0</premis:compositionLevel>
+							<premis:fixity>
+								<premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+								<premis:messageDigest>6b2b5ab5e26d75464140de24c3e09b8b</premis:messageDigest>
+							</premis:fixity>
+							<premis:format>
+								<premis:formatDesignation>
+									<premis:formatName>application/pdf</premis:formatName>
+									<premis:formatVersion>A-1a</premis:formatVersion>
+								</premis:formatDesignation>
+							</premis:format>
+							<premis:creatingApplication>
+								<premis:dateCreatedByApplication>2015-04-29T14:34:00</premis:dateCreatedByApplication>
+							</premis:creatingApplication>
+						</premis:objectCharacteristics>
+						<premis:relationship>
+							<premis:relationshipType>derivation</premis:relationshipType>
+							<premis:relationshipSubType>has source</premis:relationshipSubType>
+							<premis:relatedObjectIdentification>
+								<premis:relatedObjectIdentifierType>URI</premis:relatedObjectIdentifierType>
+								<premis:relatedObjectIdentifierValue>http://www.hare.vn.fi/upload/Asiakirjat/14477/152786_ehdotus_kokoonpanon_muuttamiseksi.tif</premis:relatedObjectIdentifierValue>
+							</premis:relatedObjectIdentification>
+						</premis:relationship>
+					</premis:object>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:techMD>
+		<mets:techMD ID="tech007" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:OBJECT">
+				<mets:xmlData>
+					<premis:object xsi:type="premis:file">
+						<premis:objectIdentifier>
+							<premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+							<premis:objectIdentifierValue>2cb74cf8-78f9-4013-bd4c-83865f18cb68</premis:objectIdentifierValue>
+						</premis:objectIdentifier>
+						<premis:objectCharacteristics>
+							<premis:compositionLevel>0</premis:compositionLevel>
+							<premis:fixity>
+								<premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+								<premis:messageDigest>546f1d7e504909d526b31ec7f1c596e9</premis:messageDigest>
+							</premis:fixity>
+							<premis:format>
+								<premis:formatDesignation>
+									<premis:formatName>application/pdf</premis:formatName>
+									<premis:formatVersion>A-1a</premis:formatVersion>
+								</premis:formatDesignation>
+							</premis:format>
+							<premis:creatingApplication>
+								<premis:dateCreatedByApplication>2015-04-29T13:46:00</premis:dateCreatedByApplication>
+							</premis:creatingApplication>
+						</premis:objectCharacteristics>
+						<premis:relationship>
+							<premis:relationshipType>derivation</premis:relationshipType>
+							<premis:relationshipSubType>has source</premis:relationshipSubType>
+							<premis:relatedObjectIdentification>
+								<premis:relatedObjectIdentifierType>URI</premis:relatedObjectIdentifierType>
+								<premis:relatedObjectIdentifierValue>http://www.hare.vn.fi/upload/Asiakirjat/14477/152788_OPM_kirje_09.03.2010.doc</premis:relatedObjectIdentifierValue>
+							</premis:relatedObjectIdentification>
+						</premis:relationship>
+					</premis:object>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:techMD>
+		<mets:techMD ID="tech008" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:OBJECT">
+				<mets:xmlData>
+					<premis:object xsi:type="premis:file">
+						<premis:objectIdentifier>
+							<premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+							<premis:objectIdentifierValue>7deff76f-2a21-4561-b394-5c7a49341442</premis:objectIdentifierValue>
+						</premis:objectIdentifier>
+						<premis:objectCharacteristics>
+							<premis:compositionLevel>0</premis:compositionLevel>
+							<premis:fixity>
+								<premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+								<premis:messageDigest>97da07b2783dd4e45af24f24783f544b</premis:messageDigest>
+							</premis:fixity>
+							<premis:format>
+								<premis:formatDesignation>
+									<premis:formatName>application/pdf</premis:formatName>
+									<premis:formatVersion>A-1a</premis:formatVersion>
+								</premis:formatDesignation>
+							</premis:format>
+							<premis:creatingApplication>
+								<premis:dateCreatedByApplication>2015-04-29T13:48:00</premis:dateCreatedByApplication>
+							</premis:creatingApplication>
+						</premis:objectCharacteristics>
+						<premis:relationship>
+							<premis:relationshipType>derivation</premis:relationshipType>
+							<premis:relationshipSubType>has source</premis:relationshipSubType>
+							<premis:relatedObjectIdentification>
+								<premis:relatedObjectIdentifierType>URI</premis:relatedObjectIdentifierType>
+								<premis:relatedObjectIdentifierValue>http://www.hare.vn.fi/upload/Asiakirjat/14477/160573_muutoskirje.doc</premis:relatedObjectIdentifierValue>
+							</premis:relatedObjectIdentification>
+						</premis:relationship>
+					</premis:object>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:techMD>
+		<mets:techMD ID="tech009" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:OBJECT">
+				<mets:xmlData>
+					<premis:object xsi:type="premis:file">
+						<premis:objectIdentifier>
+							<premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+							<premis:objectIdentifierValue>e1ffaa82-6c9f-42ed-9a24-6a2e3eb8924a</premis:objectIdentifierValue>
+						</premis:objectIdentifier>
+						<premis:objectCharacteristics>
+							<premis:compositionLevel>0</premis:compositionLevel>
+							<premis:fixity>
+								<premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+								<premis:messageDigest>bf12142fdbd10e3b47e1cfeb4c257f9f</premis:messageDigest>
+							</premis:fixity>
+							<premis:format>
+								<premis:formatDesignation>
+									<premis:formatName>application/pdf</premis:formatName>
+									<premis:formatVersion>A-1a</premis:formatVersion>
+								</premis:formatDesignation>
+							</premis:format>
+							<premis:creatingApplication>
+								<premis:dateCreatedByApplication>2015-04-29T13:50:00</premis:dateCreatedByApplication>
+							</premis:creatingApplication>
+						</premis:objectCharacteristics>
+						<premis:relationship>
+							<premis:relationshipType>derivation</premis:relationshipType>
+							<premis:relationshipSubType>has source</premis:relationshipSubType>
+							<premis:relatedObjectIdentification>
+								<premis:relatedObjectIdentifierType>URI</premis:relatedObjectIdentifierType>
+								<premis:relatedObjectIdentifierValue>http://www.hare.vn.fi/upload/Asiakirjat/14477/160574_tukiryhm%C3%A4n_asettaminen.doc</premis:relatedObjectIdentifierValue>
+							</premis:relatedObjectIdentification>
+						</premis:relationship>
+					</premis:object>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:techMD>
+		<mets:techMD ID="tech010" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:OBJECT">
+				<mets:xmlData>
+					<premis:object xsi:type="premis:file">
+						<premis:objectIdentifier>
+							<premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+							<premis:objectIdentifierValue>1992fac0-cdbd-4ad5-b720-edd71230ed98</premis:objectIdentifierValue>
+						</premis:objectIdentifier>
+						<premis:objectCharacteristics>
+							<premis:compositionLevel>0</premis:compositionLevel>
+							<premis:fixity>
+								<premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+								<premis:messageDigest>28949d06248cf693ebefb8227e6ffefa</premis:messageDigest>
+							</premis:fixity>
+							<premis:format>
+								<premis:formatDesignation>
+									<premis:formatName>application/pdf</premis:formatName>
+									<premis:formatVersion>A-1a</premis:formatVersion>
+								</premis:formatDesignation>
+							</premis:format>
+							<premis:creatingApplication>
+								<premis:dateCreatedByApplication>2015-04-29T13:51:00</premis:dateCreatedByApplication>
+							</premis:creatingApplication>
+						</premis:objectCharacteristics>
+						<premis:relationship>
+							<premis:relationshipType>derivation</premis:relationshipType>
+							<premis:relationshipSubType>has source</premis:relationshipSubType>
+							<premis:relatedObjectIdentification>
+								<premis:relatedObjectIdentifierType>URI</premis:relatedObjectIdentifierType>
+								<premis:relatedObjectIdentifierValue>http://www.hare.vn.fi/upload/Asiakirjat/14477/168594_pastukiryhm%C3%A4n_toimikausipidennys.doc</premis:relatedObjectIdentifierValue>
+							</premis:relatedObjectIdentification>
+						</premis:relationship>
+					</premis:object>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:techMD>
+		<mets:techMD ID="tech011" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:OBJECT">
+				<mets:xmlData>
+					<premis:object xsi:type="premis:file">
+						<premis:objectIdentifier>
+							<premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+							<premis:objectIdentifierValue>a3eadbf2-b4be-4d50-8712-c0362acab170</premis:objectIdentifierValue>
+						</premis:objectIdentifier>
+						<premis:objectCharacteristics>
+							<premis:compositionLevel>0</premis:compositionLevel>
+							<premis:fixity>
+								<premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+								<premis:messageDigest>db48061cdb87a73b35367d922d1d2103</premis:messageDigest>
+							</premis:fixity>
+							<premis:format>
+								<premis:formatDesignation>
+									<premis:formatName>application/pdf</premis:formatName>
+									<premis:formatVersion>A-1a</premis:formatVersion>
+								</premis:formatDesignation>
+							</premis:format>
+							<premis:creatingApplication>
+								<premis:dateCreatedByApplication>2015-04-29T13:52:00</premis:dateCreatedByApplication>
+							</premis:creatingApplication>
+						</premis:objectCharacteristics>
+						<premis:relationship>
+							<premis:relationshipType>derivation</premis:relationshipType>
+							<premis:relationshipSubType>has source</premis:relationshipSubType>
+							<premis:relatedObjectIdentification>
+								<premis:relatedObjectIdentifierType>URI</premis:relatedObjectIdentifierType>
+								<premis:relatedObjectIdentifierValue>http://www.hare.vn.fi/upload/Asiakirjat/17534/168903_OPM_kirje_06.04.2011_15-41-10.doc</premis:relatedObjectIdentifierValue>
+							</premis:relatedObjectIdentification>
+						</premis:relationship>
+					</premis:object>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:techMD>
+		<mets:techMD ID="tech012" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:OBJECT">
+				<mets:xmlData>
+					<premis:object xsi:type="premis:file">
+						<premis:objectIdentifier>
+							<premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+							<premis:objectIdentifierValue>82ec15ea-3e10-4cc5-866b-932adff4fbd7</premis:objectIdentifierValue>
+						</premis:objectIdentifier>
+						<premis:objectCharacteristics>
+							<premis:compositionLevel>0</premis:compositionLevel>
+							<premis:fixity>
+								<premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+								<premis:messageDigest>9576047ad4acd8ef98cdd5fa44b24a37</premis:messageDigest>
+							</premis:fixity>
+							<premis:format>
+								<premis:formatDesignation>
+									<premis:formatName>application/pdf</premis:formatName>
+									<premis:formatVersion>A-1a</premis:formatVersion>
+								</premis:formatDesignation>
+							</premis:format>
+							<premis:creatingApplication>
+								<premis:dateCreatedByApplication>2015-04-29T14:35:00</premis:dateCreatedByApplication>
+							</premis:creatingApplication>
+						</premis:objectCharacteristics>
+						<premis:relationship>
+							<premis:relationshipType>derivation</premis:relationshipType>
+							<premis:relationshipSubType>has source</premis:relationshipSubType>
+							<premis:relatedObjectIdentification>
+								<premis:relatedObjectIdentifierType>URI</premis:relatedObjectIdentifierType>
+								<premis:relatedObjectIdentifierValue>http://www.hare.vn.fi/upload/Asiakirjat/17534/176371_Varapuheenjohtajan_vaihtaminen.pdf</premis:relatedObjectIdentifierValue>
+							</premis:relatedObjectIdentification>
+						</premis:relationship>
+					</premis:object>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:techMD>
+		<mets:techMD ID="tech013" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:OBJECT">
+				<mets:xmlData>
+					<premis:object xsi:type="premis:file">
+						<premis:objectIdentifier>
+							<premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+							<premis:objectIdentifierValue>3837a0ff-4645-4398-ae97-f07f747bfb0d</premis:objectIdentifierValue>
+						</premis:objectIdentifier>
+						<premis:objectCharacteristics>
+							<premis:compositionLevel>0</premis:compositionLevel>
+							<premis:fixity>
+								<premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+								<premis:messageDigest>6ff2c8239032d148ca8c948c4435a658</premis:messageDigest>
+							</premis:fixity>
+							<premis:format>
+								<premis:formatDesignation>
+									<premis:formatName>application/pdf</premis:formatName>
+									<premis:formatVersion>A-1a</premis:formatVersion>
+								</premis:formatDesignation>
+							</premis:format>
+							<premis:creatingApplication>
+								<premis:dateCreatedByApplication>2015-04-29T14:35:00</premis:dateCreatedByApplication>
+							</premis:creatingApplication>
+						</premis:objectCharacteristics>
+						<premis:relationship>
+							<premis:relationshipType>derivation</premis:relationshipType>
+							<premis:relationshipSubType>has source</premis:relationshipSubType>
+							<premis:relatedObjectIdentification>
+								<premis:relatedObjectIdentifierType>URI</premis:relatedObjectIdentifierType>
+								<premis:relatedObjectIdentifierValue>http://www.hare.vn.fi/upload/Asiakirjat/17534/198981_OKM+Varapuheenjohtajan+vaihtaminen+Kansallinen+dig%5B1%5D.pdf</premis:relatedObjectIdentifierValue>
+							</premis:relatedObjectIdentification>
+						</premis:relationship>
+					</premis:object>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:techMD>
+		<mets:techMD ID="tech014" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:OBJECT">
+				<mets:xmlData>
+					<premis:object xsi:type="premis:file">
+						<premis:objectIdentifier>
+							<premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+							<premis:objectIdentifierValue>9b3747ff-5df2-4630-8d99-cb5ae79c9dba</premis:objectIdentifierValue>
+						</premis:objectIdentifier>
+						<premis:objectCharacteristics>
+							<premis:compositionLevel>0</premis:compositionLevel>
+							<premis:fixity>
+								<premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+								<premis:messageDigest>60fc92a98d635f03fae52db9135b6f26</premis:messageDigest>
+							</premis:fixity>
+							<premis:format>
+								<premis:formatDesignation>
+									<premis:formatName>application/pdf</premis:formatName>
+									<premis:formatVersion>A-1a</premis:formatVersion>
+								</premis:formatDesignation>
+							</premis:format>
+							<premis:creatingApplication>
+								<premis:dateCreatedByApplication>2015-04-29T14:37:00</premis:dateCreatedByApplication>
+							</premis:creatingApplication>
+						</premis:objectCharacteristics>
+						<premis:relationship>
+							<premis:relationshipType>derivation</premis:relationshipType>
+							<premis:relationshipSubType>has source</premis:relationshipSubType>
+							<premis:relatedObjectIdentification>
+								<premis:relatedObjectIdentifierType>URI</premis:relatedObjectIdentifierType>
+								<premis:relatedObjectIdentifierValue>http://www.hare.vn.fi/upload/Asiakirjat/20295/220751_OKM_asettamisp%C3%A4%C3%A4t%C3%B6s.pdf</premis:relatedObjectIdentifierValue>
+							</premis:relatedObjectIdentification>
+						</premis:relationship>
+					</premis:object>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:techMD>	
+		
+		<mets:digiprovMD ID="event-word-pdfa" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:EVENT">
+				<mets:xmlData>
+					<premis:event>
+						<premis:eventIdentifier>
+							<premis:eventIdentifierType>UUID</premis:eventIdentifierType>
+							<premis:eventIdentifierValue>82e18c23-091f-47fa-9964-5ebb3c3cc907</premis:eventIdentifierValue>
+						</premis:eventIdentifier>
+						<premis:eventType>migration</premis:eventType>
+						<premis:eventDateTime>2015-04-29</premis:eventDateTime>
+						<premis:eventDetail>Migration from MS Word to PDF/A</premis:eventDetail>
+						<premis:eventOutcomeInformation>
+							<premis:eventOutcome>success</premis:eventOutcome>
+						</premis:eventOutcomeInformation>
+						<premis:linkingAgentIdentifier>
+							<premis:linkingAgentIdentifierType>local</premis:linkingAgentIdentifierType>
+							<premis:linkingAgentIdentifierValue>csc</premis:linkingAgentIdentifierValue>
+						</premis:linkingAgentIdentifier>
+						<premis:linkingAgentIdentifier>
+							<premis:linkingAgentIdentifierType>local</premis:linkingAgentIdentifierType>
+							<premis:linkingAgentIdentifierValue>ms-word-2013</premis:linkingAgentIdentifierValue>
+						</premis:linkingAgentIdentifier>
+					</premis:event>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:digiprovMD>
+		<mets:digiprovMD ID="event-pdf-pdfa" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:EVENT">
+				<mets:xmlData>
+					<premis:event>
+						<premis:eventIdentifier>
+							<premis:eventIdentifierType>UUID</premis:eventIdentifierType>
+							<premis:eventIdentifierValue>48b8341c-8159-4c9c-b2dc-89f80ea416a8</premis:eventIdentifierValue>
+						</premis:eventIdentifier>
+						<premis:eventType>migration</premis:eventType>
+						<premis:eventDateTime>2015-04-29</premis:eventDateTime>
+						<premis:eventDetail>Migration from PDF to PDF/A</premis:eventDetail>
+						<premis:eventOutcomeInformation>
+							<premis:eventOutcome>success</premis:eventOutcome>
+						</premis:eventOutcomeInformation>
+						<premis:linkingAgentIdentifier>
+							<premis:linkingAgentIdentifierType>local</premis:linkingAgentIdentifierType>
+							<premis:linkingAgentIdentifierValue>csc</premis:linkingAgentIdentifierValue>
+						</premis:linkingAgentIdentifier>
+						<premis:linkingAgentIdentifier>
+							<premis:linkingAgentIdentifierType>local</premis:linkingAgentIdentifierType>
+							<premis:linkingAgentIdentifierValue>gpl-ghostscript-9-10</premis:linkingAgentIdentifierValue>
+						</premis:linkingAgentIdentifier>
+					</premis:event>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:digiprovMD>
+		<mets:digiprovMD ID="event-tiff-pdf" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:EVENT">
+				<mets:xmlData>
+					<premis:event>
+						<premis:eventIdentifier>
+							<premis:eventIdentifierType>UUID</premis:eventIdentifierType>
+							<premis:eventIdentifierValue>2a06c5c2-ae53-4b8e-be41-b62c2f3f885c</premis:eventIdentifierValue>
+						</premis:eventIdentifier>
+						<premis:eventType>migration</premis:eventType>
+						<premis:eventDateTime>2015-04-29</premis:eventDateTime>
+						<premis:eventDetail>Migration from TIFF to PDF</premis:eventDetail>
+						<premis:eventOutcomeInformation>
+							<premis:eventOutcome>success</premis:eventOutcome>
+						</premis:eventOutcomeInformation>
+						<premis:linkingAgentIdentifier>
+							<premis:linkingAgentIdentifierType>local</premis:linkingAgentIdentifierType>
+							<premis:linkingAgentIdentifierValue>csc</premis:linkingAgentIdentifierValue>
+						</premis:linkingAgentIdentifier>
+						<premis:linkingAgentIdentifier>
+							<premis:linkingAgentIdentifierType>local</premis:linkingAgentIdentifierType>
+							<premis:linkingAgentIdentifierValue>pdf-xchange-printer-2012</premis:linkingAgentIdentifierValue>
+						</premis:linkingAgentIdentifier>
+					</premis:event>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:digiprovMD>
+		
+		<mets:digiprovMD ID="agent-csc" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:AGENT">
+				<mets:xmlData>
+					<premis:agent>
+						<premis:agentIdentifier>
+							<premis:agentIdentifierType>local</premis:agentIdentifierType>
+							<premis:agentIdentifierValue>csc</premis:agentIdentifierValue>
+						</premis:agentIdentifier>
+						<premis:agentName>CSC - IT Center for Science</premis:agentName>
+						<premis:agentType>organization</premis:agentType>
+					</premis:agent>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:digiprovMD>
+		<mets:digiprovMD ID="agent-gs" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:AGENT">
+				<mets:xmlData>
+					<premis:agent>
+						<premis:agentIdentifier>
+							<premis:agentIdentifierType>local</premis:agentIdentifierType>
+							<premis:agentIdentifierValue>gpl-ghostscript-9-10</premis:agentIdentifierValue>
+						</premis:agentIdentifier>
+						<premis:agentName>GPL Ghostscript 9.10</premis:agentName>
+						<premis:agentType>software</premis:agentType>
+					</premis:agent>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:digiprovMD>
+		<mets:digiprovMD ID="agent-word" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:AGENT">
+				<mets:xmlData>
+					<premis:agent>
+						<premis:agentIdentifier>
+							<premis:agentIdentifierType>local</premis:agentIdentifierType>
+							<premis:agentIdentifierValue>ms-word-2013</premis:agentIdentifierValue>
+						</premis:agentIdentifier>
+						<premis:agentName>MS Office 2013 Word</premis:agentName>
+						<premis:agentType>software</premis:agentType>
+					</premis:agent>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:digiprovMD>
+		<mets:digiprovMD ID="agent-printer" kdk:CREATED="2015-04-29">
+			<mets:mdWrap MDTYPE="PREMIS:AGENT">
+				<mets:xmlData>
+					<premis:agent>
+						<premis:agentIdentifier>
+							<premis:agentIdentifierType>local</premis:agentIdentifierType>
+							<premis:agentIdentifierValue>pdf-xchange-printer-2012</premis:agentIdentifierValue>
+						</premis:agentIdentifier>
+						<premis:agentName>PDF-XChange Printer 2012</premis:agentName>
+						<premis:agentType>software</premis:agentType>
+					</premis:agent>
+				</mets:xmlData>
+			</mets:mdWrap>
+		</mets:digiprovMD>
+	</mets:amdSec>
+
+	<mets:fileSec>
+		<mets:fileGrp>
+			<mets:file ID="file001" ADMID="tech001 event-word-pdfa agent-csc agent-word">
+				<mets:FLocat LOCTYPE="URL" xlink:type="simple" xlink:href="file://asettamiset/122390_OPM_p%C3%A4%C3%A4t%C3%B6s_20.05.2008_12-02-42.pdf"/>
+			</mets:file>
+			<mets:file ID="file002" ADMID="tech002 event-word-pdfa agent-csc agent-word">
+				<mets:FLocat LOCTYPE="URL" xlink:type="simple" xlink:href="file://asettamiset/128343_Vihanta.pdf"/>
+			</mets:file>
+			<mets:file ID="file003" ADMID="tech003 event-word-pdfa agent-csc agent-word">
+				<mets:FLocat LOCTYPE="URL" xlink:type="simple" xlink:href="file://asettamiset/138895_OPM_p%C3%A4%C3%A4t%C3%B6s_21.04.2009_10-59-03.pdf"/>
+			</mets:file>
+			<mets:file ID="file004" ADMID="tech004 event-tiff-pdf event-pdf-pdfa agent-csc agent-gs agent-printer">
+				<mets:FLocat LOCTYPE="URL" xlink:type="simple" xlink:href="file://asettamiset/152790_Ehdostus_kokoonpanon_muuttamiseksi.pdf"/>
+			</mets:file>
+			<mets:file ID="file005" ADMID="tech005 event-word-pdfa agent-csc agent-word">
+				<mets:FLocat LOCTYPE="URL" xlink:type="simple" xlink:href="file://asettamiset/152792_OPM_kirje_09.02.2010.pdf"/>
+			</mets:file>
+			<mets:file ID="file006" ADMID="tech006 event-tiff-pdf event-pdf-pdfa agent-csc agent-gs agent-printer">
+				<mets:FLocat LOCTYPE="URL" xlink:type="simple" xlink:href="file://asettamiset/152786_ehdotus_kokoonpanon_muuttamiseksi.pdf"/>
+			</mets:file>
+			<mets:file ID="file007" ADMID="tech007 event-word-pdfa agent-csc agent-word">
+				<mets:FLocat LOCTYPE="URL" xlink:type="simple" xlink:href="file://asettamiset/152788_OPM_kirje_09.03.2010.pdf"/>
+			</mets:file>
+			<mets:file ID="file008" ADMID="tech008 event-word-pdfa agent-csc agent-word">
+				<mets:FLocat LOCTYPE="URL" xlink:type="simple" xlink:href="file://asettamiset/160573_muutoskirje.pdf"/>
+			</mets:file>
+			<mets:file ID="file009" ADMID="tech009 event-word-pdfa agent-csc agent-word">
+				<mets:FLocat LOCTYPE="URL" xlink:type="simple" xlink:href="file://asettamiset/160574_tukiryhm%C3%A4n_asettaminen.pdf"/>
+			</mets:file>
+			<mets:file ID="file010" ADMID="tech010 event-word-pdfa agent-csc agent-word">
+				<mets:FLocat LOCTYPE="URL" xlink:type="simple" xlink:href="file://asettamiset/168594_pastukiryhm%C3%A4n_toimikausipidennys.pdf"/>
+			</mets:file>
+		</mets:fileGrp>
+		<mets:fileGrp>
+			<mets:file ID="file011" ADMID="tech011 event-word-pdfa agent-csc agent-word">
+				<mets:FLocat LOCTYPE="URL" xlink:type="simple" xlink:href="file://asettamiset/168903_OPM_kirje_06.04.2011_15-41-10.pdf"/>
+			</mets:file>
+			<mets:file ID="file012" ADMID="tech012 event-pdf-pdfa agent-csc agent-gs">
+				<mets:FLocat LOCTYPE="URL" xlink:type="simple" xlink:href="file://asettamiset/176371_Varapuheenjohtajan_vaihtaminen.pdf"/>
+			</mets:file>
+			<mets:file ID="file013" ADMID="tech013 event-pdf-pdfa agent-csc agent-gs">
+				<mets:FLocat LOCTYPE="URL" xlink:type="simple" xlink:href="file://asettamiset/198981_OKM_Varapuheenjohtajan_vaihtaminen_Kansallinen_dig.pdf"/>
+			</mets:file>
+		</mets:fileGrp>
+		<mets:fileGrp>
+			<mets:file ID="file014" ADMID="tech014 event-pdf-pdfa agent-csc agent-gs">
+				<mets:FLocat LOCTYPE="URL" xlink:type="simple" xlink:href="file://asettamiset/220751_OKM_asettamisp%C3%A4%C3%A4t%C3%B6s.pdf"/>
+			</mets:file>
+		</mets:fileGrp>
+	</mets:fileSec>
+
+	<mets:structMap>
+		<mets:div TYPE="KDK">
+			<mets:div TYPE="PROJECT" DMDID="dmd-project-001">
+				<mets:div TYPE="DOCUMENT" DMDID="dmd001">
+					<mets:fptr FILEID="file001"/>
+				</mets:div>
+				<mets:div TYPE="DOCUMENT" DMDID="dmd002">
+					<mets:fptr FILEID="file002"/>
+				</mets:div>
+				<mets:div TYPE="DOCUMENT" DMDID="dmd003">
+					<mets:fptr FILEID="file003"/>
+				</mets:div>
+				<mets:div TYPE="DOCUMENT" DMDID="dmd004">
+					<mets:fptr FILEID="file004"/>
+				</mets:div>
+				<mets:div TYPE="DOCUMENT" DMDID="dmd005">
+					<mets:fptr FILEID="file005"/>
+				</mets:div>
+				<mets:div TYPE="DOCUMENT" DMDID="dmd006">
+					<mets:fptr FILEID="file006"/>
+				</mets:div>
+				<mets:div TYPE="DOCUMENT" DMDID="dmd007">
+					<mets:fptr FILEID="file007"/>
+				</mets:div>
+				<mets:div TYPE="DOCUMENT" DMDID="dmd008">
+					<mets:fptr FILEID="file008"/>
+				</mets:div>
+				<mets:div TYPE="DOCUMENT" DMDID="dmd009">
+					<mets:fptr FILEID="file009"/>
+				</mets:div>
+				<mets:div TYPE="DOCUMENT" DMDID="dmd010">
+					<mets:fptr FILEID="file010"/>
+				</mets:div>
+			</mets:div>
+			<mets:div TYPE="PROJECT" DMDID="dmd-project-002">
+				<mets:div TYPE="DOCUMENT" DMDID="dmd011">
+					<mets:fptr FILEID="file011"/>
+				</mets:div>
+				<mets:div TYPE="DOCUMENT" DMDID="dmd012">
+					<mets:fptr FILEID="file012"/>
+				</mets:div>
+				<mets:div TYPE="DOCUMENT" DMDID="dmd013">
+					<mets:fptr FILEID="file013"/>
+				</mets:div>
+			</mets:div>
+			<mets:div TYPE="PROJECT" DMDID="dmd-project-003">
+				<mets:div TYPE="DOCUMENT" DMDID="dmd014">
+					<mets:fptr FILEID="file014"/>
+				</mets:div>
+			</mets:div>
+		</mets:div>
+	</mets:structMap>
+</mets:mets>

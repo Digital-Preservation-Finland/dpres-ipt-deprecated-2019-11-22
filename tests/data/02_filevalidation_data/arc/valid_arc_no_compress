@@ -1,0 +1,50 @@
+filedesc://IAH-20080430204825-00000-blackbook.arc 0.0.0.0 20080430204825 text/plain 75
+1 1 InternetArchive
+URL IP-address Archive-date Content-type Archive-length
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<arcmetadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:arc="http://archive.org/arc/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://archive.org/arc/1.0/" xsi:schemaLocation="http://archive.org/arc/1.0/ http://www.archive.org/arc/1.0/arc.xsd">
+<arc:software>Heritrix @VERSION@ http://crawler.archive.org</arc:software>
+<arc:hostname>blackbook</arc:hostname>
+<arc:ip>192.168.1.13</arc:ip>
+<dcterms:isPartOf>archive.org-shallow</dcterms:isPartOf>
+<dc:description>archive.org shallow</dc:description>
+<arc:operator>Admin</arc:operator>
+<ns0:date xmlns:ns0="http://purl.org/dc/elements/1.1/" xsi:type="dcterms:W3CDTF">2008-04-30T20:48:24+00:00</ns0:date>
+<arc:http-header-user-agent>Mozilla/5.0 (compatible; heritrix/1.14.0 +http://crawler.archive.org)</arc:http-header-user-agent>
+<arc:http-header-from>archive-crawler-agent@lists.sourceforge.net</arc:http-header-from>
+<arc:robots>classic</arc:robots>
+<dc:format>ARC file version 1.1</dc:format>
+<dcterms:conformsTo xsi:type="dcterms:URI">http://www.archive.org/web/researcher/ArcFileFormat.php</dcterms:conformsTo>
+</arcmetadata>
+
+dns:www.archive.org 68.87.76.178 20080430204825 text/dns 56
+20080430204825
+www.archive.org.  589 IN  A 207.241.229.39
+
+http://www.archive.org/robots.txt 207.241.229.39 20080430204825 text/plain 782
+HTTP/1.1 200 OK
+Date: Wed, 30 Apr 2008 20:48:24 GMT
+Server: Apache/2.0.54 (Ubuntu) PHP/5.0.5-2ubuntu1.4 mod_ssl/2.0.54 OpenSSL/0.9.7g
+Last-Modified: Sat, 02 Feb 2008 19:40:44 GMT
+ETag: "47c3-1d3-11134700"
+Accept-Ranges: bytes
+Content-Length: 467
+Connection: close
+Content-Type: text/plain; charset=UTF-8
+
+##############################################
+#
+# Welcome to the Archive!
+#
+##############################################
+# Please crawl our files.
+# We appreciate if you can crawl responsibly.
+# Stay open!
+##############################################
+User-agent: *
+Disallow: /nothing---please-crawl-us--
+
+# slow down the ask jeeves crawler which was hitting our SE a little too fast
+# via collection pages.   --Feb2008 tracey--
+User-agent: Teoma
+Crawl-Delay: 10

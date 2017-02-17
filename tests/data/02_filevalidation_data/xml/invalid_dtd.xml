@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE course SYSTEM "valid_dtd.dtd">
+<course code="AS-00" university="Aalto">
+	<name>XML Based Description Languages</name>
+	<time weekday="wed">
+		<time_of_day>14</time_of_day>
+	</time>
+	<mandatory_attendance />
+	<participant studentnumber="95444W">
+		<!-- This element is mandatory <name>Matti</name> and therefore
+             this XML document is invalid againtst DTD -->
+		<male/>
+	</participant>
+	<participant studentnumber="95231S" email="maija@tkk.com">
+		<name>Maija</name>
+		<male/>
+	</participant>
+</course>

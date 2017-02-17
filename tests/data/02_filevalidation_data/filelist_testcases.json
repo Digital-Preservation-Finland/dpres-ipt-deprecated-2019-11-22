@@ -1,0 +1,79 @@
+[
+    {
+        "name": "sample_1_4.zip",
+        "exitstatus": 117,
+        "path": "pdf_1_4",
+        "match_stdout": [
+            "Well-Formed and valid",
+            "Not well-formed",
+            "<version>1.4</version>"
+        ],
+        "match_stderr": [
+            "sample_invalid_1_4.pdf",
+            "Not well-formed"
+        ],
+        "filelist": [
+            {
+                "filename": "pdf_1_4/sample_invalid_1_4.pdf",
+                "object_id": "a",
+                "fixity": {
+                    "algorithm": "SHA1",
+                    "digest": "12e5f2da18960dc085ca27bec1ae9e3245389cb1"
+                },
+                "format": {
+                    "mimetype": "application/pdf",
+                    "version": "1.4",
+                    "registry_key": "fmt/18"
+                }
+            },
+            {
+                "filename": "pdf_1_4/sample_1_4.pdf",
+                "object_id": "a",
+                "fixity": {
+                    "algorithm": "MD5",
+                    "digest": "e487811e951470b2017d536c57231107"
+                },
+                "format": {
+                    "mimetype": "application/pdf",
+                    "version": "1.4",
+                    "registry_key": "fmt/18"
+                }
+            }
+        ]
+    },
+    {
+        "name": "sample.zip_1_3",
+        "exitstatus": 117,
+        "path": "pdf_1_3",
+        "match_stdout": [],
+        "match_stderr": [],
+        "filelist": [
+            {
+                "filename": "pdf_1_3/sample_invalid_1_3.pdf",
+                "object_id": "a",
+                "fixity": {
+                    "algorithm": "SHA1",
+                    "digest": "ea42f99308e0c9344c4f8872dae5cd2203c3ce9e"
+                },
+                "format": {
+                    "mimetype": "application/pdf",
+                    "version": "1.3",
+                    "registry_key": "fmt/17"
+                }
+            },
+            {
+                "filename": "pdf_1_3/sample_1_3.pdf",
+                "object_id": "a",
+                "fixity": {
+                    "algorithm": "MD5",
+                    "digest": "ccabd61de14873916aac2491af3f7a64658131d5"
+                },
+                "format": {
+                    "mimetype": "application/pdf",
+                    "version": "1.3",
+                    "registry_key": "fmt/17"
+                }
+            }
+        ]
+    }
+]

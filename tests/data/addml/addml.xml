@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <addml:addml xmlns:addml="http://www.arkivverket.no/standarder/addml">
+        <addml:dataset>
+            <addml:reference name="Sample"/>
+            <addml:flatFiles>
+                <addml:flatFile name="file.csv" definitionReference="ref001"/>
+                <addml:flatFileDefinitions>
+                    <addml:flatFileDefinition name="ref001">
+                        <addml:recordDefinitions>
+                            <addml:recordDefinition name="rec001">
+                                <addml:fieldDefinitions>
+                                    <addml:fieldDefinition name="name" typeReference="str">
+                                        <addml:description>Person name</addml:description>
+                                    </addml:fieldDefinition>
+                                    <addml:fieldDefinition name="email" typeReference="str">
+                                        <addml:description>Person email</addml:description>
+                                    </addml:fieldDefinition>
+                                </addml:fieldDefinitions>
+                            </addml:recordDefinition>
+                        </addml:recordDefinitions>
+                    </addml:flatFileDefinition>
+                </addml:flatFileDefinitions>
+                <addml:structureTypes>
+                    <addml:flatFileTypes>
+                        <addml:flatFileType name="rec001">
+                            <addml:charset>UTF-8</addml:charset>
+                            <addml:delimFileFormat>
+                                <addml:recordSeparator>CR+LF</addml:recordSeparator>
+                                <addml:fieldSeparatingChar>;</addml:fieldSeparatingChar>
+                            </addml:delimFileFormat>
+                        </addml:flatFileType>
+                    </addml:flatFileTypes>
+                    <addml:fieldTypes>
+                        <addml:fieldType name="str">
+                            <addml:dataType>string</addml:dataType>
+                        </addml:fieldType>
+                    </addml:fieldTypes>
+                </addml:structureTypes>
+            </addml:flatFiles>
+        </addml:dataset>
+    </addml:addml>

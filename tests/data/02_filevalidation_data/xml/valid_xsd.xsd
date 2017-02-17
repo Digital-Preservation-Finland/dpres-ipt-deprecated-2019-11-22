@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+<xs:complexType name="studioType">
+  <xs:sequence>
+    <xs:group ref="name_and_website"/>
+  </xs:sequence>
+  <xs:attribute name="id" type="xs:ID"/>
+  <xs:attributeGroup ref="timeAttrsStudio"/>
+</xs:complexType>
+
+<xs:group name="name_and_website">
+  <xs:sequence>
+    <xs:element name="name" type="xs:string"/>
+    <xs:element name="web_site" type="xs:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
+</xs:group>
+
+<xs:complexType name="actorType">
+  <xs:sequence>
+    <xs:group ref="name_and_website"/>
+    <xs:element name="gender" type="gender_category"/>
+    <xs:element name="nationality" type="xs:string"/>
+  </xs:sequence>
+  <xs:attribute name="id" type="xs:ID"/>
+  <xs:attributeGroup ref="timeAttrsActor"/>
+</xs:complexType>
+
+<xs:simpleType name="media_formats">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="blu-ray"/>
+    <xs:enumeration value="dvd"/>
+    <xs:enumeration value="vhs"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:complexType name="gender_category">
+  <xs:choice>
+    <xs:element name="female"/>
+    <xs:element name="male"/>
+  </xs:choice>
+</xs:complexType>
+
+<xs:element name="collection">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="film_studio" type="studioType" maxOccurs="unbounded"/>
+      <xs:element name="actor" type="actorType" maxOccurs="unbounded"/>
+      <xs:element name="film" type="filmType" minOccurs="2"  maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:complexType name="own_reviewType">
+  <xs:all>
+    <xs:element name="rating">
+      <xs:simpleType>
+        <xs:restriction base="xs:positiveInteger">
+          <xs:maxInclusive value="10"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:element>
+    <xs:element name="review" type="xs:string"/>
+  </xs:all>
+</xs:complexType>
+
+<xs:complexType name="filmType">
+  <xs:sequence>
+    <xs:group ref="name_and_website"/>
+    <xs:element name="format" type="media_formats"/>
+    <xs:element name="duration">
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:minExclusive value="0"/>
+          <xs:fractionDigits value="2"/>
+	</xs:restriction>
+      </xs:simpleType>
+    </xs:element>
+    <xs:element name="director" type="xs:string" maxOccurs="unbounded"/>
+    <xs:element name="actor" type="xs:IDREF" minOccurs="1" maxOccurs="unbounded"/>
+    <xs:element name="own_review" type="own_reviewType"/>
+  </xs:sequence>
+  <xs:attribute name="ean_code" type="xs:token" use="required"/>
+  <xs:attribute name="film_studio" type="xs:IDREF" use="optional"/>
+  <xs:attribute name="year_published" type="xs:gYear" use="required"/>
+  <xs:attribute name="genre" type="genre_category" use="required"/>
+</xs:complexType>
+
+<xs:attributeGroup name="timeAttrsStudio">
+  <xs:attribute name="year_formed" use="required" type="xs:gYear"/>
+  <xs:attribute name="is_active" use="required" type="xs:boolean"/>
+</xs:attributeGroup>
+
+<xs:attributeGroup name="timeAttrsActor">
+  <xs:attribute name="year_birth" use="required" type="xs:gYear"/>
+  <xs:attribute name="year_death" use="optional" type="xs:gYear"/>
+</xs:attributeGroup>
+
+<xs:simpleType name="genre_category">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="action"/>
+    <xs:enumeration value="comedy"/>
+    <xs:enumeration value="drama"/>
+    <xs:enumeration value="romance"/>
+    <xs:enumeration value="thriller"/>
+  </xs:restriction>
+</xs:simpleType>
+
+</xs:schema>

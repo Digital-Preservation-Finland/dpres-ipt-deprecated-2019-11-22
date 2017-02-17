@@ -1,0 +1,127 @@
+{
+    "test_validate":
+    [{
+     "testcase": "Test DTD validation with valid XML file",
+     "fileinfo": {
+     	"filename": "02_filevalidation_data/xml/valid_dtd.xml",
+	"format": {
+     		"mimetype": "text/xml",
+     		"version": "1.0"
+	}
+     },
+     "expected_result": {
+        "status": 0,
+        "stdout": ["DTD validation success"],
+        "stderr": ""
+     }
+     },
+     {
+     "testcase": "Test DTD validation with invalid XML file",
+     "fileinfo": {
+     	"filename": "02_filevalidation_data/xml/invalid_dtd.xml",
+	"format": {
+     		"mimetype": "text/xml",
+     		"version": "1.0"
+	}
+     },
+     "expected_result": {
+        "status": 1,
+        "stdout": "",
+        "stderr": ["DTD validation failed"]
+        }
+     },
+     {
+     "testcase": "Test XSD validation with valid XML file",
+     "fileinfo": {
+     	"filename": "02_filevalidation_data/xml/valid_xsd.xml",
+	"format": {
+
+     		"mimetype": "text/xml",
+     		"version": "1.0"
+	}
+     },
+     "expected_result": {
+        "status": 0,
+        "stdout": ["XSD validation success"],
+        "stderr": ""
+        }
+     },
+     {
+     "testcase": "Test XSD validation with invalid XML file",
+     "fileinfo": {
+     	"filename": "02_filevalidation_data/xml/invalid_xsd.xml",
+	"format": {
+     		"mimetype": "text/xml",
+     		"version": "1.0"
+	}
+     },
+     "expected_result": {
+        "status": 1,
+        "stdout": "",
+        "stderr": ["XSD validation failed"]
+        }
+     },
+     {
+     "testcase": "Test validation with well-formed XML file",
+     "fileinfo": {
+     	"filename": "02_filevalidation_data/xml/valid_wellformed.xml",
+	"format": {
+     		"mimetype": "text/xml",
+     		"version": "1.0"
+	}
+     },
+     "expected_result": {
+        "status": 1,
+        "stdout": ["Validation success", "Document is well-formed"],
+        "stderr": ""
+        }
+     }
+     ,
+     {
+     "testcase": "Test validation with not well-formed XML file",
+     "fileinfo": {
+     	"filename": "02_filevalidation_data/xml/invalid_wellformed.xml",
+     	"format": {
+		"mimetype": "text/xml",
+     		"version": "1.0"
+	}
+     },
+     "expected_result": {
+        "status": 1,
+        "stdout": "",
+        "stderr": ["Validation failed", "not well formed"]
+        }
+     }
+     ,
+     {
+     "testcase": "Test XML Schema catalog with existing schema (ALTO 1.4)",
+     "fileinfo": {
+	     "filename": "02_filevalidation_data/xml/catalog_schema_valid.xml",
+	     "format": {
+		     "mimetype": "text/xml",
+		     "version": "1.0"
+	     }
+     },
+     "expected_result": {
+     "status": 1,
+     "stdout": ["XSD validation success"],
+     "stderr": ""
+        }
+     }
+     ,
+    {
+     "testcase": "Test XML Schema catalog with non existing schema",
+     "fileinfo": {
+	     "filename": "02_filevalidation_data/xml/catalog_schema_invalid.xml",
+	     "format": {
+     		"mimetype": "text/xml",
+		"version": "1.0"
+	     }
+     },
+     "expected_result": {
+     "status": 1,
+     "stdout": "",
+     "stderr": ["XSD validation failed"]
+        }
+     }]
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<code="AS-00" university="Aalto">
+	<name>XML-perusteet</name>
+	<time weekday="wed">
+		<time_of_day>14</time_of_day>
+	</time>
+	<mandatory_attendance />
+	<participant studentnumber="95444W">
+		<name>Matti</name>
+		<male/>
+	</participant>
+	<participant studentnumber="95231S" email="maija@tkk.com">
+		<name>Maija</name>
+		<male/>
+	</participant>
+</course>

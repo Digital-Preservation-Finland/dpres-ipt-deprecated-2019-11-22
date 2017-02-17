@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<collection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="valid_xsd.xsd">
+  <!-- There's no movie studio element in XML Schema so next line is invalid -->
+  <movie_studio id="warnerbros" year_formed="1903" is_active="true">
+    <name>Warner Bros. Pictures</name>
+    <web_site>http://www.warnerbros.com</web_site>
+  </movie_studio>
+
+  <film_studio id="paramount" year_formed="1912" is_active="true">
+    <name>Paramount Pictures</name>
+    <web_site>http://www.paramount.com</web_site>
+  </film_studio>
+
+  <actor id="tomhanks" year_birth="1956">
+    <name>Tom Hanks</name>
+    <web_site>http://www.myspace.com/tomhanks</web_site>
+    <gender>
+      <male/>
+    </gender>
+    <nationality>U.S.</nationality>
+  </actor>
+
+  <actor id="audreyhepburn" year_birth="1929" year_death="1993">
+    <name>Audrey Hepburn</name>
+    <web_site>http://www.audreyhepburn.com</web_site>
+    <gender>
+      <female/>
+    </gender>
+    <nationality>Belgian</nationality>
+  </actor>
+
+  <actor id="mattdamon" year_birth="1970">
+    <name>Matt Damon</name>
+    <web_site>http://www.matt-damon.com</web_site>
+    <gender>
+      <male/>
+    </gender>
+    <nationality>U.S.</nationality>
+  </actor>
+
+  <actor id="robinwrightpenn" year_birth="1966">
+    <name>Robin Wright Penn</name>
+    <gender>
+      <female/>
+    </gender>
+    <nationality>U.S.</nationality>
+  </actor>
+
+  <film ean_code="0801056705228" film_studio="paramount" year_published="1994" genre="drama">
+    <name>Forrest Gump</name>
+    <format>dvd</format>
+    <duration>2.04</duration>
+    <director>Robert Zemeckis</director>
+    <actor>tomhanks</actor>
+    <actor>robinwrightpenn</actor>
+    <own_review>
+      <review>One of the best dramas of the 1990's.</review>
+      <rating>9</rating>
+    </own_review>
+  </film>
+
+  <film ean_code="801056812827" film_studio="warnerbros" year_published="1964" genre="romance">
+    <name>My Fair Lady</name>
+    <format>vhs</format>
+    <duration>1.45</duration>
+    <director>George Cukor</director>
+    <actor>audreyhepburn</actor>
+    <own_review>
+      <review>A true classic.</review>
+      <rating>10</rating>
+    </own_review>
+  </film>
+
+  <film ean_code="074645752822" film_studio="warnerbros" year_published="2007" genre="thriller">
+    <name>Departed</name>
+    <format>blu-ray</format>
+    <duration>2.43</duration>
+    <director>Martin Scorsese</director>
+    <actor>mattdamon</actor>
+    <own_review>
+      <review>Scorsese's Oscar-winning masterpiece.</review>
+      <rating>8</rating>
+    </own_review>
+  </film>
+
+</collection>

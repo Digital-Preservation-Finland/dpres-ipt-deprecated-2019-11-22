@@ -1,0 +1,20 @@
+<!ELEMENT time (time_of_day)>
+<!ATTLIST time
+	weekday (mon | tue | wed | thu | fri) #REQUIRED
+>
+<!ELEMENT time_of_day (#PCDATA)>
+<!-- course is the root element -->
+<!ELEMENT course (name, time+, mandatory_attendance?, participant+)>
+<!ATTLIST course
+	university CDATA #FIXED "Aalto"
+	code ID #REQUIRED
+>
+<!ELEMENT mandatory_attendance EMPTY>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT participant (name, (male | female))>
+<!ATTLIST participant
+	studentnumber CDATA #REQUIRED
+	email CDATA #IMPLIED
+>
+<!ELEMENT male EMPTY>
+<!ELEMENT female EMPTY>
