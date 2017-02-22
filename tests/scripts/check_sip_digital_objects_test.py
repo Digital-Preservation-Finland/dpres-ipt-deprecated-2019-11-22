@@ -94,89 +94,41 @@ def test_check_sip_digital_objects(case):
     assert returncode == case["expected_result"]["returncode"], message
 
 
-def run_validation(monkeypatch, mets_filename):
-    """Patch jhove pdf validator"""
+@pytest.fixture(scope="function")
+def patch_validate(monkeypatch):
+    """Patch JHovePDF validator so that it always returns valid result"""
 
-    class JHoveMock(BaseValidator):
-        """mock"""
-        _supported_mimetypes = {
-            'application/pdf': ['1.3', '1.4', '1.5', '1.6', 'A-1a', 'A-1b']
-        }
+    def _validate(fileinfo):
+        """mock validate"""
+        if 'pdf' in fileinfo["filename"]:
+            return 'success'
+        return 'failure'
 
-        def validate(self):
-            """mock validate"""
-            self.messages("OK")
+    def _iter_fileinfo(_):
+        """mock iter_fileinfo"""
+        return [
+            {"filename": "pdf", "use": ''},
+            {"filename": "cdr", "use": ''},
+            {"filename": "cdr", "use": "no-file-format-validation"},
+            {"filename": "cdr", "use": "noo-file-format-validation"}
+        ]
 
-    monkeypatch.setattr(ipt.validator.jhove, "JHovePDF", JHoveMock)
-
-    mets_file = os.path.join(METSDIR, mets_filename)
-    mets_parser = LXML(filename=mets_file)
-    mets_parser.xmlroot()
-    return [file_ for file_ in validation(mets_parser)]
+    monkeypatch.setattr(
+        ipt.scripts.check_sip_digital_objects, "validate", _validate)
+    monkeypatch.setattr(
+        ipt.scripts.check_sip_digital_objects, "iter_fileinfo", _iter_fileinfo)
 
 
-def test_non_native_marked(monkeypatch):
-    """Test validation with non-native file format that has been marked with
+@pytest.mark.usefixtures('patch_validate')
+def test_native_marked():
+    """Test validation with native file format that has been marked with
     'no-file-format-validation'. This should validate only native file
     format"""
 
-    results = run_validation(monkeypatch, 'mets_native_marked.xml')
+    results = [file_ for file_ in validation(None)]
 
     assert results == [
-        {"fileinfo": {
-            'object_id': {
-                'type': 'local',
-                'value': 'object-002'},
-            'format': {
-                'mimetype': 'application/pdf',
-                'version': 'A-1b'},
-            'algorithm': 'MD5',
-            'digest': '7fc2103950f2bb374c277ed4eb43bdc6',
-            'use': '',
-            'filename': os.path.join(METSDIR, 'file.pdf')},
-         "result": {
-             "is_valid": True,
-             "messages": "OK",
-             "errors": ""}}]
-
-
-def test_non_native_unmarked(monkeypatch):
-    """Test non-native file format that has not meen marked with
-    `no-file-format-validation`. This should be invalid SIP"""
-
-    results = run_validation(monkeypatch, 'mets_native_unmarked.xml')
-
-    assert results == [
-        {"fileinfo": {
-            'object_id': {
-                'type': 'local',
-                'value': 'object-001'},
-            'format': {
-                'mimetype': 'application/cdr',
-                'version': ''
-            },
-            'algorithm': 'MD5',
-            'digest': '2a2e5816c93ee7c21ae1c84ddcf8c80a',
-            'filename': os.path.join(METSDIR, 'file.cdr'),
-            'use': ''},
-         "result": {
-             "is_valid": False,
-             "messages": "",
-             "errors": 'No validator for mimetype: application/cdr version: '
-             }},
-        {"fileinfo": {
-            'object_id': {
-                'type': 'local',
-                'value': 'object-002'},
-            'format': {
-                'mimetype': 'application/pdf',
-                'version': 'A-1b'},
-            'algorithm': 'MD5',
-            'digest': '7fc2103950f2bb374c277ed4eb43bdc6',
-            'filename': os.path.join(METSDIR, 'file.pdf'),
-            'use': '',
-        }, "result": {
-            "is_valid": True,
-            "messages": "OK",
-            "errors": ""}
-        }]
+        {"fileinfo": {'filename': 'pdf', 'use': ''}, "result": "success"},
+        {"fileinfo": {'filename': 'cdr', 'use': ''}, "result": "failure"},
+        {"fileinfo": {'filename': 'cdr', 'use': 'noo-file-format-validation'}, "result": "failure"}
+    ]
