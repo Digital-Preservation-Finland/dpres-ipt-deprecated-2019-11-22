@@ -1,5 +1,6 @@
 """Utility functions."""
 
+import os
 import subprocess
 import urllib
 from collections import defaultdict
@@ -15,17 +16,23 @@ class ValidationException(Exception):
     pass
 
 
-def run_command(cmd, stdout=subprocess.PIPE):
+def run_command(cmd, stdout=subprocess.PIPE, ld_library_path=None):
     """Execute command. Validator specific error handling is supported
     by forwarding exceptions.
-    :cmd: commandline command.
-    :stdout: a file handle can be given, for directing stdout to file.
+    :param cmd: commandline command.
+    :param ld_library_path: the LD_LIBRARY_PATH value to use
+    :param stdout: a file handle can be given, for directing stdout to file.
     :returns: Tuple (statuscode, stdout, stderr)
     """
+    env = os.environ.copy()
+    if ld_library_path:
+        env["LD_LIBRARY_PATH"] = ld_library_path
+
     proc = subprocess.Popen(cmd,
                             stdout=stdout,
                             stderr=subprocess.PIPE,
-                            shell=False)
+                            shell=False,
+                            env=env)
 
     (stdout_result, stderr_result) = proc.communicate()
     if not stdout_result:
