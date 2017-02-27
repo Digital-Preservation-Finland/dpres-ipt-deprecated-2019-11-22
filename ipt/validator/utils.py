@@ -119,16 +119,7 @@ class UnknownFileformat(object):
             'errors': error_message}
 
 
-def validate(fileinfo):
-    """
-    Validate sip with fileinfo.
-    :returns: tuple (is_valid, messages, errors)
-    """
-    validator = iter_validator_classes(fileinfo)
-    return validator.result()
-
-
-def iter_validator_classes(fileinfo):
+def iter_validators(fileinfo):
     """
     Find a validator for digital object from given `fileinfo` record.
     :returns: validator class
@@ -144,14 +135,14 @@ def iter_validator_classes(fileinfo):
         if cls.is_supported(fileinfo):
             found_validator = True
             validator = cls(fileinfo)
-            return validator
+            yield validator
 
     for cls in JHoveBase.__subclasses__():
         if cls.is_supported(fileinfo):
             found_validator = True
             validator = cls(fileinfo)
-            return validator
+            yield validator
 
     if not found_validator:
         validator = UnknownFileformat(fileinfo)
-        return validator
+        yield validator

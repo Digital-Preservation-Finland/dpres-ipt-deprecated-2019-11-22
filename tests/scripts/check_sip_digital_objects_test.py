@@ -96,11 +96,24 @@ def test_check_sip_digital_objects(case):
 def patch_validate(monkeypatch):
     """Patch JHovePDF validator so that it always returns valid result"""
 
-    def _validate(fileinfo):
+    def _iter_validators(fileinfo):
         """mock validate"""
-        if 'pdf' in fileinfo["filename"]:
-            return 'success'
-        return 'failure'
+
+        class _Validator(object):
+            """dummy validator"""
+            # pylint: disable=too-few-public-methods
+
+            def __init__(self, fileinfo):
+                """init"""
+                self.fileinfo = fileinfo
+
+            def result(self):
+                """check result"""
+                if 'pdf' in self.fileinfo["filename"]:
+                    return 'success'
+                return 'failure'
+
+        yield _Validator(fileinfo)
 
     def _iter_fileinfo(_):
         """mock iter_fileinfo"""
@@ -112,7 +125,8 @@ def patch_validate(monkeypatch):
         ]
 
     monkeypatch.setattr(
-        ipt.scripts.check_sip_digital_objects, "validate", _validate)
+        ipt.scripts.check_sip_digital_objects, "iter_validators",
+        _iter_validators)
     monkeypatch.setattr(
         ipt.scripts.check_sip_digital_objects, "iter_fileinfo", _iter_fileinfo)
 

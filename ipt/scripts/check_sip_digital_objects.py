@@ -8,7 +8,7 @@ import ipt.mets.parser
 from ipt.premis import premis as p
 
 import ipt.version
-from ipt.validator.utils import iter_fileinfo, validate
+from ipt.validator.utils import iter_fileinfo, iter_validators
 
 
 def main(arguments=None):
@@ -50,15 +50,16 @@ def validation(mets_parser):
             }
     """
     for fileinfo in iter_fileinfo(mets_parser):
-        validation_results = validate(fileinfo)
 
         if fileinfo["use"] == 'no-file-format-validation':
             continue
 
-        yield {
-            'fileinfo': fileinfo,
-            'result': validation_results
-        }
+        validators = iter_validators(fileinfo)
+        for validator in validators:
+            yield {
+                'fileinfo': fileinfo,
+                'result': validator.result()
+            }
 
 
 def validation_report(results, linking_sip_type, linking_sip_id):
