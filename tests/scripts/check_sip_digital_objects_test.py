@@ -10,9 +10,7 @@ from tests.testcommon import shell
 
 # Module to test
 from ipt.scripts.check_sip_digital_objects import main, validation
-from ipt.mets.parser import LXML
 import ipt.validator.jhove
-from ipt.validator import BaseValidator
 
 
 METSDIR = os.path.abspath(
@@ -130,5 +128,6 @@ def test_native_marked():
     assert results == [
         {"fileinfo": {'filename': 'pdf', 'use': ''}, "result": "success"},
         {"fileinfo": {'filename': 'cdr', 'use': ''}, "result": "failure"},
-        {"fileinfo": {'filename': 'cdr', 'use': 'noo-file-format-validation'}, "result": "failure"}
+        {"fileinfo": {'filename': 'cdr', 'use': 'noo-file-format-validation'},
+         "result": "failure"}
     ]

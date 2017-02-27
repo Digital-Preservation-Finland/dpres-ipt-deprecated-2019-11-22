@@ -4,3 +4,4 @@ pytest-coverage
 dateutils
 scandir
 pytest
+wand
