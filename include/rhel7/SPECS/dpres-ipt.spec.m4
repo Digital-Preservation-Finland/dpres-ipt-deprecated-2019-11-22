@@ -9,7 +9,7 @@
 %define file_build_number M4_FILE_BUILD_NUMBER
 %define file_commit_ref M4_FILE_COMMIT_REF
 
-Name:           information-package-tools
+Name:           dpres-ipt
 Version:        %{file_version}
 Release:        %{file_release_number}%{file_release_tag}.%{file_build_number}.git%{file_commit_ref}%{?dist}
 Summary:        Tools for KDKPAS SIP/AIP/DIP-handling
@@ -25,6 +25,7 @@ Requires: libxslt unzip jhove python-setuptools python-lxml
 # ClamAV installation requires these to work
 Requires: clamav libtool-ltdl
 Requires: warc-tools >= 4.8.3 ffmpeg kdk-mets-schemas kdk-schematron pngcheck preservation-schemas
+Requires: python-wand libreoffice
 BuildRequires:	pytest
 
 %description
