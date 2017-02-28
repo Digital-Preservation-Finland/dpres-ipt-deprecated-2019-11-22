@@ -26,6 +26,8 @@ Requires: libxslt unzip jhove python-setuptools python-lxml
 Requires: clamav libtool-ltdl
 Requires: warc-tools >= 4.8.3 ffmpeg kdk-mets-schemas kdk-schematron pngcheck preservation-schemas
 Requires: python-wand libreoffice
+# Our own packaging of a newer file command than what CentOS provides
+Requires: file-5.30
 BuildRequires:	pytest
 
 %description
