@@ -30,6 +30,10 @@ Requires: python-wand libreoffice
 # Our own packaging of a newer file command than what CentOS provides
 Requires: file-5.30
 BuildRequires:	pytest
+# We could also add a Provides but that's unnecessary, we should fix the
+# dependencies that get broken by this Obsoletes. The release number here is
+# intentionally 5 so that it would always be higher than what i-p-t had.
+Obsoletes: information-package-tools <= 0.44-5
 
 %description
 Tools for KDKPAS SIP/AIP/DIP-handling.
