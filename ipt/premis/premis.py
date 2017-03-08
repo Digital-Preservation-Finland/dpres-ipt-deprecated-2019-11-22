@@ -85,7 +85,7 @@ class Premis:
         if (string is None):
             return None
 
-        root = lxml.etree.fromstring(string.decode("utf-8"))
+        root = lxml.etree.fromstring(string)
 
         events = root.findall(PREMIS + 'event')
         for event in events:
