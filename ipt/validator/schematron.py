@@ -10,7 +10,7 @@ Schematron.
 
 Schematron XSLT files must be installed at path
 
-    /usr/share/schematron/iso-schematron-xslt1/
+    /usr/share/iso-schematron-xslt1/
 
 Schematron XSLT files can be downloaded from
 
@@ -85,7 +85,8 @@ class XSLT:
     def __init__(self, cache=True):
         self.cache = cache
         self.schematron_version = 1
-        self.sharepath = '/usr/share/information-package-tools'
+        self.schematron_dirname = '/usr/share/iso-schematron-xslt%s' % (
+            self.schematron_version)
         self.cachepath = os.path.expanduser('~/.information-package-tools/'
                                             'schematron-cache')
 
@@ -153,12 +154,7 @@ class XSLT:
 
     def xslt_convert(self, xslt_template, input_filename, output_filename):
 
-        schematron_dirname = 'iso-schematron-xslt%s' % (
-            self.schematron_version)
-        schematron_xslt_path = os.path.join(self.sharepath, 'schematron',
-                                            schematron_dirname)
-
-        xslt_template = os.path.join(schematron_xslt_path, xslt_template)
+        xslt_template = os.path.join(self.schematron_dirname, xslt_template)
 
         cmd = ['xsltproc', '-o', output_filename, xslt_template,
                input_filename]
