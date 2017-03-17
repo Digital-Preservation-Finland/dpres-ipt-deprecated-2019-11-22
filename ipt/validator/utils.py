@@ -10,8 +10,19 @@ import ipt.videomd.videomd
 import ipt.audiomd.audiomd
 
 from ipt.validator.basevalidator import BaseValidator
-from ipt.validator.jhove import JHoveBase
-
+from ipt.validator.jhove import JHoveBase, JHovePDF, \
+    JHoveTiff, JHoveJPEG, JHoveHTML, JHoveGif, JHoveTextUTF8
+from ipt.validator.dummytextvalidator import DummyTextValidator
+from ipt.validator.xmllint import Xmllint
+from ipt.validator.warctools import WarctoolsWARC, WarctoolsARC
+from ipt.validator.ghost_script import GhostScript
+from ipt.validator.pngcheck import Pngcheck
+from ipt.validator.csv_validator import PythonCsv
+from ipt.validator.ffmpeg import FFMpeg
+from ipt.validator.office import Office
+from ipt.validator.file import File
+from ipt.validator.imagemagick import ImageMagick
+from ipt.validator.utils import UnknownFileformat
 
 def mdwrap_to_fileinfo(mdwrap_element):
     """Extract fileinfo dict from mdwrap element.
