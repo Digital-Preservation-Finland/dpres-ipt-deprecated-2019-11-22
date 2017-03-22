@@ -1,0 +1,3205 @@
+<!-- The Data Documentation Initiative Codebook DTD                   -->
+<!-- CodeBook.DTD                                                     -->
+<!-- Version 2.0                                                      -->
+<!-- March 7, 2003                                                    -->
+<!-- $Header: /cvsroot-fuse/ddi-alliance/ddi/dtd/Version2-0.dtd,v 1.9 2006/01/16 22:58:46 mdiggory Exp $ -->
+<!-- ==============================================                   -->
+<!-- An SGML rendition of the document analyses and element           -->
+<!-- descriptions produced by David Barber, John                      -->
+<!-- Brandt (JB), Ann Green (AG), and the ICPSR Committee.            -->
+<!-- SGML translation and attached comments by Paul                   -->
+<!-- Schaffner (PFS) and Nancy M. Vlahakis (NANMV).                   -->
+<!-- Authors include Paul Schaffner, Nancy M. Vlahakis,               -->
+<!-- Daniel Pitti, Jan Nielsen, and Jerome McDonough.                 -->
+<!-- This DTD is intended for use in producing electronic             -->
+<!-- versions of codebooks for quantitative social science data.      -->
+<!-- ==============================================                   -->
+<!--                                                                  -->
+<!-- Version history:                                                 -->
+<!--                                                                  -->
+<!--   1.0             Includes PFS-authored sections only.           -->
+<!--   1.1   19.4.96   Incorporates NANMV-authored sections.          -->
+<!--   1.1a  22.4.96   Addition of ATTLISTs to NANMV sections         -->
+<!--                 and general cleanup, in progress.                -->
+<!--                 Leading to:                                      -->
+<!--   1.2   23.4.96   First version that pretends to                 -->
+<!--                 completeness.                                    -->
+<!--   1.3   21.5.96   Incorporates 3/96-4/96 changes                 -->
+<!--                 in descriptions.                                 -->
+<!--   1.4   29.5.96   Incorporates 5/96 changes                      -->
+<!--                 in descriptions except header.                   -->
+<!--   1.4a   7.6.96   Minor repairs.                                 -->
+<!--   1.5   11.7.96   Further minor repairs occasioned by            -->
+<!--                 conversion to parameter-entity file              -->
+<!--                 (teicb1.dtd, version 1.5).                       -->
+<!--   1.6      Modified by Daniel Pitti, UC Berkeley, Library.       -->
+<!--            Provided value "PCDATA" for TEI parameter entities    -->
+<!--            to make it possible to parse and test the DTD.        -->
+<!--            Parsed with NSGMLS and Near&Far                       -->
+<!--   1.6X     Modified by Jan Nielsen (JN), Danish Data Archives.   -->
+<!--            Modifications in several places to produce a          -->
+<!--            version compliant with the W3C XML version 1.0        -->
+<!--            proposal of December 8th 1997. Parsed and tested      -->
+<!--            with Microsofts Java parser MSXML (ver. 1.0.8).       -->
+<!--            The XML 1.0 specification used is available at        -->
+<!--            http://www.w3.org/TR/PR-xml-971208.                   -->
+<!--            - and-connectors have been replaced by                -->
+<!--              sequence-connectors. The order of                   -->
+<!--              elements is unchanged.                              -->
+<!--            - tag-minimization parameters have been               -->
+<!--              removed.                                            -->
+<!--            - Parameter entity references without                 -->
+<!--              semicolons have been fixed.                         -->
+<!--            - Name groups are avoided by expansion                -->
+<!--              of element and attribute declarations.              -->
+<!--            - Element inclusions have been discarded.             -->
+<!--            - Attribute default values have been quoted.          -->
+<!--            - NUMBER data type have been replaced by CDATA        -->
+<!--              in attribute values.                                -->
+<!--     1.7    7/1/98 Modified by Jerome McDonough, U.C. Berkeley    -->
+<!--            Library Systems Office.  Extensive revisions to both  -->
+<!--            structure and content of DTD, including:              -->
+<!--            - making Study Level Title only required element      -->
+<!--            - Adding notes on mapping from DDI DTD to Dublin Core -->
+<!--     1.8    9/15/98 Modified by J. McDonough, U.C. Berkeley       -->
+<!--            Library Systems Office.  Modifications include:       -->
+<!--            - separate declarations of citation formats for       -->
+<!--              docDscr and stdyDscr portions of document combined  -->
+<!--            - an XML version of the Exchange Table Model version  -->
+<!--              of CALS Tables (from OASIS) incorporated in DTD.    -->
+<!--     1.9    12/14/98 Modified by J. McDonough, U.C. Berkeley      -->
+<!--            Library Systems Office.  Modifications include:       -->
+<!--            - origFundAg and origGrantNo elements added to        -->
+<!--              producer statement in citation in the Document      -->
+<!--              Description, to allow people                        -->
+<!--              to encode information on funding for previous       -->
+<!--              versions of the codebook.                           -->
+<!--            - Affiliation attribute added to Distributor          -->
+<!--            - deposReq element added to Data Use statement        -->
+<!--              for information on depository requirements on       -->
+<!--              papers generated from data                          -->
+<!--            - minor alterations made to attrib. vocabulary for    -->
+<!--              fileStrc                                            -->
+<!--            - vargrp attribute on var element removed as          -->
+<!--              redundant; use var attribute on vargrp element to   -->
+<!--              encode vargrp to var relationships                  -->
+<!--            - cardNo attribute added to File Location element     -->
+<!--            - default on interval attrib on var element changed   -->
+<!--              to 'discrete'                                       -->
+<!--            - catStat element made repeatable                     -->
+<!--            - controlled vocab of (start|end|single) established  -->
+<!--              for date event attributes                           -->
+<!--            - order of origProducer and software elements in      -->
+<!--              production statement in citation reversed           -->
+<!--            - DocuNo element in citation has name changed to      -->
+<!--              IDNo                                                -->
+<!--            - date of deposit element made repeatable to match    -->
+<!--              depositor                                           -->
+<!--            - recGrp and subsidiary elements reinstated beneath   -->
+<!--              the fileStrc element                                -->
+<!--     2.0    1/4/99 Modified by J. McDonough, U.C. Berkeley        -->
+<!--            Library Systems Office.  Changes include:             -->
+<!--            - new element, srcDoc, added to document description  -->
+<!--              section for encoding bibliographic cite for         -->
+<!--              original codebook from which electronic version is  -->
+<!--              derived                                             -->
+<!--            - Separate copyright element in doc. desc. replaced   -->
+<!--              by new copyright element in producer section of     -->
+<!--              citation's content model                            -->
+<!--            - catStat now includes 'table' in its content model   -->
+<!--            - 'for' attribute removed from contact element        -->
+<!--            - abstInfo eliminated.  abstract date element made    -->
+<!--              attribute of abstract.                              -->
+<!--            - Missing and missing type attribs. added to Category -->
+<!--              group                                               -->
+<!--            - new date attributes                                 -->
+<!--            - Funding Agency and Grant No elements added to       -->
+<!--              Production statement for citation element           -->
+<!--            - new range elements for valrng, invalrng             -->
+<!--            - sdatrefs added to qstn element                      -->
+<!--     2.01   - Orig[Producer|GrantNo|fundAg] removed from citation -->
+<!--              element, and duplicate GrantNo and fundAg removed   -->
+<!--              as well.  New role attribute added to grantNo and   -->
+<!--              fundAg.                                             -->
+<!--     2.02   - copyright element 2.4.2.7 removed as redundant.     -->
+<!--     2.03   - Definitions of elements modified to reflect         -->
+<!--              preliminary tag library definitions.                -->
+<!--     2.04     Implementation of suggested changes from ICPSR      -->
+<!--              OR meeting, including:                              -->
+<!--            - Data collector dropped from all citation elements   -->
+<!--              and moved to 2.3.1                                  -->
+<!--            - MARCURI attributed added to all citation elements   -->
+<!--            - New holdings element added to all citations         -->
+<!--            - Documentation source made repeatable                -->
+<!--            - dataDist element renamed to distrbtr                -->
+<!--            - New format attrib. added to biblCit to specify      -->
+<!--              citation format used                                -->
+<!--            - URI attrib. added to Series Statement               -->
+<!--            - citation elements added to all sections of 2.5      -->
+<!--            - New vocab attribute added to keywords element       -->
+<!--            - New concept subelement added to var element         -->
+<!--            - URI attribute added to Distributor element to       -->
+<!--              enable online contact of download/ordering service  -->
+<!--            - Date attrib. added to software element              -->
+<!--            - e-mail and uri attribs. added to contact element    -->
+<!--            - xml:lang attrib. changed to NMTOKEN                 -->
+<!--            - new pubrefs attrib. added to file/var/varGrp        -->
+<!--            - all URL attribs. changed to URI                     -->
+<!--            - New subelements respUnit & anlysUnit added to var   -->
+<!--            - New subelement derivation added to var              -->
+<!--            - Range element recast per NESSTAR recommendation     -->
+<!--            - New element stdCatgry under var                     -->
+<!--            - catgry attrib. added to catgryGrp to allow nesting  -->
+<!--            - vendor attrib. added to var and to labl             -->
+<!--            - varGrp attrib added to varGrp element to allow      -->
+<!--              nesting of variable groups                          -->
+<!--            - recGrp attrib. added to recGrp element              -->
+<!--            - keyvar attrib on recGrp made IDREFS                 -->
+<!--            - URI attribute added to fileDscr                     -->
+<!--            - sumDscr and dataColl made repeatable                -->
+<!--            - country attrib added to catgry element              -->
+<!--            - new major section added for access conditions,      -->
+<!--              with access-related elements from study description -->
+<!--              and elsewhere merged in.  Access attrib added to    -->
+<!--              var, varGrp, fileDscr and stdyDscr.                 -->
+<!--     2.05     EXPERIMENTAL VERSION                                -->
+<!--              Includes a variety of changes, including several    -->
+<!--              revisions to changes made as a result of the ICPSR  -->
+<!--              OR Meeting.  Experimental additions include:        -->
+<!--            - A new Link element, available in leaf elements      -->
+<!--              of the DTD, to express arbitrary links to other     -->
+<!--              elements within the codebook.                       -->
+<!--            - A new section of the codebook for local extensions, -->
+<!--              which may be defined in a new attached file called  -->
+<!--              codebook.ext.ent                                    -->
+<!--            - section 5 of the codebook, for describing access    -->
+<!--              conditions, has been eliminated, with elements      -->
+<!--              from that section reinstated in section 2.4.  Link  -->
+<!--              attributes for pointing to access information have  -->
+<!--              been preserved.                                     -->
+<!--            - controlled vocabulary added to varGrp type attrib.  -->
+<!--            - variable format attribute changed to new varFormat  -->
+<!--              element with new attributes to allow more specific  -->
+<!--              description of data storage for variable            -->
+<!--            - rectype attribute added to var element              -->
+<!--            - cardNo attribute on location renamed to RecSegNo,   -->
+<!--              a new fileid attrib. added, and location made       -->
+<!--              repeatable                                          -->
+<!--     2.06     REVISED EXPERIMENTAL                                -->
+<!--            - eliminates local extension mechanism                -->
+<!--            - category groups are now nestable                    -->
+<!--     1.00     FINAL VERSION                                       -->
+<!--            - no additional changes                               -->
+<!--     1.01     MINOR MODIFICATIONS by Perry Roland, University     -->
+<!--              of Virginia, 1/11/2001                              -->
+<!--            - added notes element to content models of            -->
+<!--              stdyDscr and dataDscr elements                      -->
+<!--            - made notes element optional & repeatable in each    -->
+<!--              content model where it occurs                       -->
+<!--            - added agency attribute to cleanOps element          -->
+<!--            - added cycle attribute to timePrd and collDate       -->
+<!--              elements                                            -->
+<!--            - added sdatrefs attribute to catgry element          -->
+<!--            - added sdatrefs attribute to notes element           -->
+<!--            - made dataChck element optional & repeatable in      -->
+<!--              content model of fileTxt element                    -->
+<!--            - added catStat element to content model of           -->
+<!--              catgryGrp element                                   -->
+<!--            - edited code examples illustrating use of level      -->
+<!--              attribute at A.1, Other Material: to reflect        -->
+<!--              correct attribute values                            -->
+<!--            - added version attribute to codeBook element to      -->
+<!--              facilitate machine processing                       -->
+<!--     1.02     MODIFICATIONS by Perry Roland, University of        -->
+<!--              Virginia, 8/8/2001 following DDI Comm. meeting in   -->
+<!--              Wash., D.C. 6/29/2001                               -->
+<!--            - added callno, label, and type attributes to         -->
+<!--              setAvail element (2.4.1)                            -->
+<!--            - added callno, label, type, and media attributes to  -->
+<!--              relMat element (2.5.1)                              -->
+<!--            - added concept element already defined in 4.3.21 to  -->
+<!--              content model of varGrp element (4.1).              -->
+<!--            - added wgtd, wgt-var and  weight attributes to       -->
+<!--              catStat element (4.3.18.4)                          -->
+<!--            - added media attribute to holdings element (A.6.8)   -->
+<!--            - added level attribute to IDNo element               -->
+<!--            - added sdatrefs attribute to qstnLit (4.3.8.2),      -->
+<!--              txt (A.3), and catStat (4.3.18.4) elements.         -->
+<!--            - altered content model of the following elements:    -->
+<!--              universe (2.2.3.7), anlyUnit (2.2.3.6), anlysUnit   -->
+<!--              (4.3.7), nation (2.2.3.3), geogCover (2.2.3.4),     -->
+<!--              geogUnit (2.2.3.5), dataKind (2.2.3.8), timeMeth    -->
+<!--              (2.3.1.1), sampProc (2.3.1.4), collMode (2.3.1.6),  -->
+<!--              srcOrig (2.3.1.8.2), resInstru (2.3.1.7), and       -->
+<!--              varGrp (4.1)                                        -->
+<!--            - created new ExtLink (external link) element (A.12)  -->
+<!--              to allow encoding of links to resources outside     -->
+<!--              the codebook                                        -->
+<!--            - modified content model of fileDscr (3.0),           -->
+<!--              added locMap (3.3), and modified dataDscr (4.0)     -->
+<!--              per http://www.socsci.umn.edu/~wlt/ddi/AGG/         -->     
+<!--              JUNE_MTG/AGG-final-schema.doc                       -->
+<!--     1.02.1   MODIFICATIONS by Wendy Thomas, University of        -->
+<!--              Minnesota, 2/20/2002 following DDI Comm. meeting in -->
+<!--              Wash., D.C. 1/15/2002                               -->
+<!--            - renumbered locMap 3.3 to 3.2 and notes 3.4 to 3.3   -->
+<!--              to reflect sequence                                 -->
+<!--            - changed attribute nCubeRef from CDATA to IDRef      -->
+<!--              (3.2.1)                                             -->
+<!--            - removed attributes col, row, colCnv, rowCnv, query  -->
+<!--              from physLoc 3.2.1.2 as they refer to               -->
+<!--              unincorporated elements of a broader proposal       -->
+<!--            - inserted explanations of concept in 4.1 and         -->
+<!--              renumbered 4.1.3 through 4.1.6 to reflect insertion -->
+<!--            - added %a.global; to nCube attribute list (4.3)      -->
+<!--            - changed attributes other and total to (Y|N) "N"     -->
+<!--              to reflect original design (4.3.18)                 -->
+<!--     1.3      MODIFICATIONS by Sanda Ionescu, ICPSR (University   -->
+<!--              of Michigan), 7/15/2002, following the DDI          -->
+<!--              Committee meeting in Washington, D.C., 6/15/2002    -->
+<!--            - changed var (4.3) attribute "wgt-var" from IDREF    -->
+<!--              to IDREFS                                           -->
+<!--            - added var attribute "weight"                        -->
+<!--            - added sumStat (4.3.14) attribute "wgt-var"          -->
+<!--            - changed sumStat attribute "weight" from IDREF to    -->
+<!--              IDREFS                                              -->
+<!--            - changed catStat (4.3.17.2 and 4.3.18.4) attribute   -->
+<!--              "weight" from IDREF to IDREFS                       -->
+<!--            - added option "nested" to attribute "type" in        -->
+<!--              fileStrc (3.1.3)                                    -->
+<!--            - added attributes "rtypeloc", "rtypewidth", and      -->
+<!--              "rtypevtype" to recGrp (3.1.3.1)                    -->
+<!--            - made elements timeDmns (4.3.12), dmns (4.3.13) and  -->
+<!--              cohort (4.3.12.1 and 4.3.13.1) optional and         -->
+<!--              repeatable                                          -->
+<!--            - made element measure (4.3.14) optional and          -->
+<!--              non-repeatable                                      -->
+<!--            - changed contents of elements CubeCoord (3.2.1.1)    -->
+<!--              and physLoc (3.2.1.2) from PCDATA to EMPTY          -->
+<!--            - changed contents of element measure (4.3.14) from   -->
+<!--              (#PCDATA|%a.phrase) to EMPTY                        -->
+<!--            - changed contents of element p from                  -->
+<!--              (#PCDATA|%a.phrase) to (#PCDATA|emph|hi|list)       -->
+<!--            - declared formatting elements div, emph, head,       -->
+<!--              hi, itm, list, label according to TEI guidelines  -->
+<!--            - changed contents of element othId to                -->
+<!--              (#PCDATA|%a.phrase;|%e.form;)*                      -->
+<!--    2.0       MODIFICATIONS made by Sanda Ionescu, ICPSR (Univ.   -->
+<!--              of Michigan), 3/7/2003, following the DDI Committee -->
+<!--              meeting in Washington, DC, 2/7/2003                 -->
+<!--            - added element geoBndBox (2.2.3.6) with its child    -->
+<!--              elements westBL (2.2.3.6.1), eastBL (2.2.3.6.2),    -->
+<!--              southBL (2.2.3.6.3), and northBL (2.2.3.6.4)        -->
+<!--            - added element boundPoly (2.2.3.7) with its child    -->
+<!--              element polygon (2.2.3.7.1), child element point    -->
+<!--              (2.2.3.7.1.1), and child elements gringLat          -->
+<!--              (2.2.3.7.1.1.1) and gringLon (2.2.3.7.1.1.2)        -->
+<!--            - renumbered elements anlyUnit, universe, dataKind    -->
+<!--              to fit new configuration                            -->
+<!--            - added attributes country and sdatrefs to generic    -->
+<!--              description of element labl (A.2)                   -->
+<!--            - added element nCubeGrp (4.2) with subelements       -->
+<!--              labl (4.2.1), txt (4.2.2), concept (4.2.3), defntn  -->
+<!--              (4.2.4), universe (4.2.5), and notes (4.2.6)        -->
+<!--            - renumbered var and all its subelements to 4.3 to    -->
+<!--              fit in new configuration                            -->
+<!--            - added attributes temporal, geog, geoVocab, and      -->
+<!--              catQnty to element var (4.3)                        -->
+<!--            - added attributes levelno, levelnm, compl, and excls --> 
+<!--              to element catgyGrp (4.3.17)                        -->
+<!--            - added attribute excls to element catgry (4.3.18)    -->
+<!--            - deleted attributes other and total from element     -->
+<!--              catgry (4.3.18)                                     -->
+<!--            - removed recursiveness of element catgry (4.3.18.5)  -->
+<!--            - added element mrow (4.3.18.5) with its subelement   -->
+<!--              mi (4.3.18.5.1) to parent element catgry (4.3.18)   -->
+<!--            - added element geoMap (4.3.24)                       -->
+<!--            - renumbered nCube and all its subelements to 4.4 to  -->
+<!--              match new configuration                             -->
+<!--            - deleted element timeDmns (4.4.12)                   -->
+<!--            - renumbered nCube subelements dmns, cohort, range,   -->
+<!--              measure, and notes to match new sequence. Also      -->
+<!--              renumbered section 4 notes to 4.5                   -->
+<!--            - made element measure (4.4.13) optional and          -->
+<!--              repeatable (had previously been non-repeatable)     -->   
+<!--            - changed declaration of attribute aggrMeth (in
+                  var 4.3 and nCube 4.4) from CDATA to
+		  (sum|average|count|mode|median|maximum|minimum)     -->
+<!--            - changed declaration of attribute nature (in var 4.3)
+                  from CDATA to (nominal|ordinal|interval|ratio)      -->
+<!--            - changed declaration of attribute additivity (in
+                  var 4.3 and nCube 4.4) from CDATA to (stock|flow|
+		  non-additive)                                       -->
+<!--            - deleted attribute "nature" from element measure
+                  (4.4.13)                                            -->
+<!--            - added xml:lang to correct issues with incorrect 
+                  xml-lang in GLOBAL attributes. (9/24/2004)          -->
+
+<!-- A NOTE ON MAPPING TO DUBLIN CORE                                 -->
+<!-- Certain elements within the Dublin Core element set map directly -->
+<!-- to elements in the DDI Codebook DTD, while others do not.  The   -->
+<!-- following mapping is recommended for anyone attempting to map    -->
+<!-- Dublin Core element searches to electronic codebooks produced    -->
+<!-- using this DTD.                                                  -->
+<!--                                                                  -->
+<!--      DC ELEMENT     DDI Codebook Element                         -->
+<!--                                                                  -->
+<!--      Title          1.1.1.1 titl (Title of Documentation)        -->
+<!--      Creator        1.1.2.1 AuthEnty (Authoring Entity)          -->
+<!--      Subject        2.2.1.1 keyword (Keywords)                   -->
+<!--                     2.2.1.2 topcClas (Topic Classification)      -->
+<!--      Description    2.2.2 abstract (Abstract)                    -->
+<!--      Publisher      1.1.3.1 producer (Producer)                  -->
+<!--                     [NOTE: The Dublin Core specifies that the    -->
+<!--                            publisher should be "the entity       -->
+<!--                            responsible for making the resource   -->
+<!--                            available *in its present form*"      -->
+<!--                            (emphasis added).  For a DDI codebook -->
+<!--                            the publisher should be the entity    -->
+<!--                            responsible for making the            -->
+<!--                            *electronic* version available.       -->
+<!--      Contributor    1.1.2.2 othId (Other Ident. & Acknowl.)      -->
+<!--      Date           1.1.3.3 prodDate (Date of Production)        -->
+<!--                     [NOTE: Theoretically, the DC Date element    -->
+<!--                            should refer to the date the          -->
+<!--                            electronic resource (e.g., the DDI    -->
+<!--                            version of the codebook) was created, -->
+<!--                            not any preceding paper version.]     -->
+<!--      Type           DOES NOT MAP TO ANY DDI CODEBOOK ELEMENT     -->
+<!--                     Suggested DC Type: "Text.x-Codebook"         -->
+<!--      Format         DOES NOT MAP TO ANY DDI CODEBOOK ELEMENT     -->
+<!--                     Suggested DC Format: "text/xml"              -->
+<!--                     [NOTE: use of MIME type text/xml based on    -->
+<!--                            Internet Draft by E.J. Whitehead, Jr. -->
+<!--                            of U.C. Irvine, and M. Murata, of     -->
+<!--                            Fuji Xerox Info. Systems.]            -->
+<!--      Identifier     Suggested DC Identifier: URN for DDI         -->
+<!--                     Codebook, if applicable.                     -->
+<!--                     Alternatively, use the IDNo element within   -->
+<!--                     the Document Description citation element.   -->
+<!--      Source         [NOTE: If a DDI electronic codebook has been -->
+<!--                            produced as the *original*            -->
+<!--                            documentation for the data from a     -->
+<!--                            study, the DC source element does not -->
+<!--                            apply.                                -->
+<!--                            If the DDI electronic codebook        -->
+<!--                            has been derived from a pre-existing  -->
+<!--                            version, then the DC Source           -->
+<!--                            refers to bibliographic information   -->
+<!--                            regarding this previous paper version.-->
+<!--                            In this case, Source would map to     -->
+<!--                            the MARCURI on the docSrc element,    -->
+<!--                            or alternatively, to the IDNo element -->
+<!--                            within the docSrc element.            -->
+<!--                     [NOTE: Use of the DC Source element is       -->
+<!--                            deprecated.  The DC Relation element  -->
+<!--                            is now preferred.]                    -->
+<!--      Language       xml:lang attribute for codeBook element      -->
+<!--      Relation       partially maps to 1.4 docSrc (Documentation  -->
+<!--                            Source).  No mapping currently exists -->
+<!--                            for the relation type component.      -->
+<!--      Coverage       2.2.3.1 timePrd (Time Period Covered)        -->
+<!--                     2.2.3.2 collDate (Date of Collection)        -->
+<!--                     2.2.3.3 nation (Country)                     -->
+<!--                     2.2.3.4 geogCover (Geographic Coverage)      -->
+<!--                     2.2.3.7 universe (Universe)                  -->
+<!--      Rights         1.1.3.2 copyright (Copyright)                -->
+<!--                                                                  -->
+<!-- Dublin Core to DDI DTD mapping suggestions created 7/1/98 by     -->
+<!-- Jerome McDonough, U.C. Berkeley Library Systems Office.          -->
+
+<!-- ===========================================================      -->
+<!--                                                                  -->
+<!--          BEGINNING OF ACTUAL DOCUMENT TYPE DEFINITION            -->
+<!--                                                                  -->
+
+<!--temporary parameter entities                                      -->
+<!ENTITY % a.global 'ID ID #IMPLIED
+            xml-lang NMTOKEN #IMPLIED
+            xml:lang NMTOKEN #IMPLIED
+            source (archive|producer) "producer"'                        >
+
+<!-- Basic text components for adding into all mixed content models   -->
+<!ENTITY % a.phrase 'Link|ExtLink'                                      >
+
+<!-- all elements using the a.date attribute should use the ISO       -->
+<!-- format of YYYY-MM-DD.                                            -->
+<!ENTITY % a.date 'date   CDATA   #IMPLIED'                             >
+
+<!ENTITY % e.cite 'titlStmt, rspStmt?, prodStmt?, distStmt?,
+            serStmt?, verStmt*, biblCit?, holdings*, notes*'            >
+
+<!-- codeBook version attribute [for application processing]          -->
+<!ENTITY % a.version 'version     CDATA     #FIXED     "2.0"'           >
+
+
+<!-- formatting elements                                              -->  
+<!ENTITY % e.form    'div|emph|head|hi|itm|list|p'                     >
+
+
+<!-- CodeBook.DTD                                                     -->
+<!-- 0.0 TOP LEVEL                                                    -->
+<!-- =============                                                    -->
+<!--                                                                  -->
+<!ELEMENT codeBook     (docDscr*
+              , stdyDscr+
+              , fileDscr*
+              , dataDscr*
+              , otherMat*)                                               >
+<!ATTLIST codeBook %a.global;
+                    %a.version;                                          >
+
+<!--                                                                  -->
+<!-- 1.0 DOCUMENT DESCRIPTION  (docDscr)                              -->
+<!-- ====================================                             -->
+<!--                                                                  -->
+<!-- The document description section of codebook DTD is intended     -->
+<!-- for information regarding the marked up document itself, rather  -->
+<!-- than the original codebook from which the electronic version     -->
+<!-- may derive.  It is similar to intent to the TEI header.          -->
+<!-- Jerome McDonough, 6/15/98                                        -->
+<!--                                                                  -->
+<!--                                                                  -->
+<!-- The Document Description, or codebook header, consists of        -->
+<!-- bibliographic information describing the marked-up codebook, or  -->
+<!-- document instance, itself; it contains the basic elements        -->
+<!-- necessary to uniquely identify the marked-up codebook. Note that -->
+<!-- the Document Description also contains a citation section for    -->
+<!-- the source documentation, that is, the hardcopy or electronic    -->
+<!-- codebook that served as the source for the marked-up codebook.   -->
+<!--                                                                  -->
+
+<!ELEMENT docDscr  (citation?
+                    , guide?
+                    , docStatus?
+                    , docSrc*
+                    , notes*)                                            >
+<!ATTLIST docDscr %a.global;                                            >
+
+<!--                                                                  -->
+<!-- 1.1 BIBLIOGRAPHIC CITATION OF CODEBOOK  (citation)               -->
+<!-- ===========================                                      -->
+<!--                                                                  -->
+<!-- This element encodes the bibliographic information describing    -->
+<!-- the electronic codebook, including title information, statement  -->
+<!-- of responsibility, production and distribution information,      -->
+<!-- series and version information, text of a preferred bibliog.     -->
+<!-- citation, and notes (if any).  It uses generic element A.6,      -->
+<!-- found at the end of the DTD.                                     -->
+
+<!--                                                                  -->
+<!-- 1.2 GUIDE TO CODEBOOK (guide)                                    -->
+<!-- ===========================                                      -->
+<!--                                                                  -->
+<!-- List of terms and definitions used in the documentation.         -->
+<!-- Provided to assist users in using the document correctly.        -->
+<!-- This element was intended to reflect the section in OSIRIS       -->
+<!-- codebooks that assisted users in reading and interpreting a      -->
+<!-- codebook.  Each OSIRIS codebook contained a sample codebook      -->
+<!-- page that defined the codebook conventions.                      -->
+<!ELEMENT guide (#PCDATA | %a.phrase; | %e.form;)*                      >
+<!ATTLIST guide %a.global;                                              >
+
+<!--                                                                  -->
+<!-- 1.3 DOCUMENTATION STATUS  (docStatus)                            -->
+<!-- =================================                                -->
+<!--                                                                  -->
+<!-- Use this field to indicate if the documentation is being         -->
+<!-- presented/distributed before it has been finalized. Some data    -->
+<!-- producers and social science data archives employ data           -->
+<!-- processing strategies that provide for release of data and       -->
+<!-- documentation at various stages of processing.                   -->
+<!ELEMENT docStatus (#PCDATA | %a.phrase; | %e.form;)*                  >
+<!ATTLIST docStatus %a.global;                                          >
+
+<!--                                                                  -->
+<!-- 1.4 DOCUMENTATION SOURCE  (docSrc)                               -->
+<!-- =================================                                -->
+<!--                                                                  -->
+<!-- Citation for the source of the marked-up documentation. This     -->
+<!-- may be either a hardcopy or a machine-readable codebook.         -->
+<!-- MARCURI attribute provided to give URI for MARC record for this  -->
+<!-- citation.                                                        -->
+<!ELEMENT docSrc (%e.cite;)                                             >
+<!ATTLIST docSrc %a.global;
+                  MARCURI   CDATA   #IMPLIED                             >
+
+<!--                                                                  -->
+<!-- 1.5 NOTES (notes)                                                -->
+<!-- =================================                                -->
+<!--                                                                  -->
+<!-- Notes element for providing additional information               -->
+<!-- to clarify and annotate codebook information regarding           -->
+<!-- citation of the Documentation.  Declaration of generic notes     -->
+<!-- ELEMENT occurs at the end of the DTD.  Jerry McDonough           -->
+
+<!--                                                                  -->
+<!-- 2.0 STUDY DESCRIPTION  (stdyDscr)                                -->
+<!-- =================================                                -->
+<!--                                                                  -->
+<!-- access attribute used to link to accCond element describing      -->
+<!-- access conditions for entire dataset.                            -->
+<!ELEMENT stdyDscr     (citation+
+                         , stdyInfo*
+                         , method*
+                         , dataAccs*
+                         , othrStdyMat*
+                         , notes*)                                       >
+<!ATTLIST stdyDscr %a.global;
+                    access   IDREFS   #IMPLIED                           >
+
+<!--                                                                  -->
+<!-- 2.1 BIBLIOGRAPHIC CITATION OF STUDY (citation)                   -->
+<!-- ==========================================                       -->
+<!--                                                                  -->
+<!-- The citation for the data collection documented by the           -->
+<!-- marked-up codebook.                                              -->
+<!-- This element encodes the bibliographic information describing    -->
+<!-- the original study, including title information, statement       -->
+<!-- of responsibility, production and distribution information,      -->
+<!-- series and version information, text of a preferred bibliog.     -->
+<!-- citation, and notes (if any).  It uses generic element A.6,      -->
+<!-- found at the end of the DTD.                                     -->
+
+<!--                                                                  -->
+<!-- 2.2 STUDY SCOPE (stdyInfo)                                       -->
+<!-- ==========================                                       -->
+<!--                                                                  -->
+<!-- This section contains information about the data collection's    -->
+<!-- scope across several dimensions, including substantive content,  -->
+<!-- geography, and time.                                             -->
+<!--                                                                  -->
+<!ELEMENT stdyInfo     (subject?
+                         , abstract*
+                         , sumDscr*
+                         , notes*)                                       >
+<!ATTLIST stdyInfo %a.global;                                           >
+
+<!--                                                                  -->
+<!-- 2.2.1 Subject Information (subject)                              -->
+<!--                                                                  -->
+<!-- Subjection information describing the data collection's          -->
+<!-- intellectual content.                                            -->
+
+<!ELEMENT subject     (keyword*
+                       , topcClas*)                                      >
+<!ATTLIST subject %a.global;                                            >
+
+<!-- 2.2.1.1 Keywords.                                                -->
+<!-- Words or phrases that describe salient aspects of a data         -->
+<!-- collection's content. Can be used for building keyword indexes   -->
+<!-- and for classification and retrieval purposes. A controlled      -->
+<!-- vocabulary can be employed. Maps to Dublin Core Subject element. -->
+<!-- Inclusion of this element in the codebook is recommended.        -->
+<!-- vocab attribute added to specify controlled vocabulary in use,   -->
+<!-- e.g., LCSH, MeSH, etc.                                           -->
+<!-- vocabURI attribute added to specify  location for full           -->
+<!-- controlled vocabulary.                                           -->
+<!ELEMENT keyword     (#PCDATA | %a.phrase; | %e.form;)*                >
+<!ATTLIST keyword     %a.global;
+                       vocab   CDATA   #IMPLIED
+                       vocabURI   CDATA   #IMPLIED                       >
+
+<!-- 2.2.1.2 Topic Classification.                                    -->
+<!-- The classification field indicates the broad substantive         -->
+<!-- topic(s) that the data cover. Library of Congress subject        -->
+<!-- terms may be used here.                                          -->
+<!-- PFS: This element is intended for use in coding
+      sections of codebooks that consist of nothing but
+      predesignated keywords and topic classifications.
+      There does not seem at present a way to group
+      keywords, should that be desirable. Perhaps too
+      the content model should allow
+      for surrounding "soup" (i.e. declare subject info to
+      contain #PCDATA (or higher) and/or keyword and
+      topcClas. There is no provision at present for
+      a coder to declare individual words selected by the
+      coder to act as keywords.                                        -->
+<!-- vocab attribute added to specify controlled vocabulary in use,   -->
+<!-- e.g., LCSH, MeSH, etc.                                           -->
+<!-- vocabURI attribute added to specify  location for full           -->
+<!-- controlled vocabulary.                                           -->
+<!-- Maps to Dublin Core Subject element.  Inclusion of this element  -->
+<!-- in the codebook is recommended.                                  -->
+<!ELEMENT topcClas     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST topcClas     %a.global;
+                        vocab   CDATA   #IMPLIED
+                        vocabURI   CDATA   #IMPLIED                      >
+
+<!--                                                                  -->
+<!-- 2.2.2 Abstract (abstract)                                        -->
+<!--                                                                  -->
+<!-- An unformatted summary describing the purpose, nature, and
+      scope of the data collection, special characteristics of its
+      contents, major subject areas covered, and what questions the
+      PIs attempted to answer when they conducted the study. A
+      listing of major variables in the study is important here. In
+      cases where a codebook contains more than one abstract (for
+      example, one might be supplied by the data producer and another
+      prepared by the data archive where the data are deposited), the
+      source and date attributes may be used to distinguish the
+      abstract versions.                                               -->
+<!-- Maps to Dublin Core Description element.  Inclusion of this      -->
+<!-- element in the codebook is recommended.                          -->
+<!-- Date attribute should follow ISO convention of YYYY-MM-DD.       -->
+<!--                                                                  -->
+<!ELEMENT abstract   (#PCDATA | %a.phrase; | %e.form;)*                 >
+<!ATTLIST abstract   %a.global;
+                      %a.date;                                           >
+
+<!--                                                                  -->
+<!-- 2.2.3 Summary Data Description (sumDscr)                         -->
+<!--                                                                  -->
+<!-- Information about a study's chronological and geographic         -->
+<!-- coverage and unit of analysis.                                   -->
+<!--                                                                  -->
+<!ELEMENT sumDscr     (timePrd*
+                       , collDate*
+                       , nation*
+                       , geogCover*
+                       , geogUnit*
+		       , geoBndBox?
+		       , boundPoly?
+                       , anlyUnit*
+                       , universe*
+                       , dataKind* )                                     >
+<!ATTLIST sumDscr     %a.global;                                        >
+
+<!-- 2.2.3.1 Time Period Covered.                                     -->
+<!-- The time period to which the data refer. This item reflects the
+      time period covered by the data, not the dates of coding or
+      making documents machine-readable or the dates the data were
+      collected. Also known as span. Use the event attribute to
+      specify "start", "end", or "single" for each date entered. The
+      ISO standard for dates (YYYY-MM-DD) is recommended for use with
+      the date attribute. Maps to Dublin Core Coverage element.
+      Inclusion of this element in the codebook is recommended.        -->
+<!ELEMENT timePrd     (#PCDATA | %a.phrase; | %e.form;)*                >
+<!ATTLIST timePrd
+      %a.global;
+      %a.date;
+      event            (start|end|single)            "single"
+      cycle             CDATA                        #IMPLIED            >
+
+<!-- 2.2.3.2 Date of Collection.                                      -->
+<!-- Contains the date(s) when the data were collected. Use the event
+      attribute to specify "start", "end", or "single" for each date
+      entered. The ISO standard for dates (YYYY-MM-DD) is recommended
+      for use with the date attribute.                                 -->
+<!-- PFS: I have added an "event" attribute in order to allow
+      the element to distinguish between (say) first day of
+      collection, only day of collection, and last day of
+      collection. See note on timePrd, which may reflect my
+      misunderstanding of the intended relationship between
+      these elements.                                                  -->
+<!-- Maps to Dublin Core Coverage element.  Inclusion of this element -->
+<!-- in the codebook is recommended.                                  -->
+<!ELEMENT collDate     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST collDate
+     %a.global;
+     %a.date;
+     event             (start|end|single)            "single"
+     cycle             CDATA                         #IMPLIED            >
+
+<!-- 2.2.3.3 Country.                                                 -->
+<!-- Indicates the country or countries covered in the file.          -->
+<!-- Attribute "abbr" added to match the attributes given to          -->
+<!-- agencies, etc., above, and                                       -->
+<!-- also to go some way toward providing an equivalent for           -->
+<!-- the TEI %placePart; entity, which adds "type" and "full"         -->
+<!-- attributes.                                                      -->
+<!-- Maps to Dublin Core Coverage element.  Inclusion of this element -->
+<!-- in the codebook is recommended.                                  -->
+<!ELEMENT nation     (#PCDATA|txt|concept|%a.phrase;|%e.form;)*          >
+<!ATTLIST nation
+     %a.global;
+     abbr             CDATA           #IMPLIED                           >
+
+<!-- 2.2.3.4 Geographic Coverage (geogCover).                         -->
+<!-- Information on the geographic coverage of the data. Include
+      the total geographic scope of the data, and any additional
+      levels of geographic coding provided in the variables.          -->
+<!-- Maps to Dublin Core Coverage element.  Inclusion of this element -->
+<!-- in the codebook is recommended.                                  -->
+<!ELEMENT geogCover    (#PCDATA|txt|concept|%a.phrase;|%e.form;)*       >
+<!ATTLIST geogCover   
+     %a.global;                                                         >
+
+<!-- 2.2.3.5 Geographic Unit.                                         -->
+<!-- Lowest level of geographic aggregation covered by the data.      -->
+<!ELEMENT geogUnit     (#PCDATA|txt|concept|%a.phrase;|%e.form;)*       >
+<!ATTLIST geogUnit     %a.global;                                       >
+
+<!-- 2.2.3.6 Geographic Bounding Box (geoBndBox)                      -->
+<!-- The fundamental geometric description for any dataset that
+     models geography. GeoBndBox is the minimum box, defined by
+     west and east longitudes and north and south latitudes,
+     that includes the largest geographic extent of the dataset's
+     geographic coverage. This element is used in the first pass
+     of a coordinate-based search. If the boundPoly element (2.2.3.7)
+     is included, then the geoBndBox element MUST be included.        -->
+     
+<!ELEMENT geoBndBox        (westBL,
+                            eastBL,
+	 		    southBL,
+		 	    northBL)                                  >
+<!ATTLIST geoBndBox        %a.global;                                 >
+
+<!-- 2.2.3.6.1 West Bounding Longitude (westBL)                       -->
+<!-- The westernmost coordinate delimiting the geographic extent
+     of the dataset. A valid range of values, expressed in decimal
+     degrees (positive east and positive north), is:
+     -180,0 <= West Bounding Longitude Value <= 180,0                 -->
+
+     
+<!ELEMENT westBL      (#PCDATA | %a.phrase;)*                         >
+<!ATTLIST westBL      %a.global;                                      >
+
+<!-- 2.2.3.6.2 East Bounding Longitude (eastBL)                       -->
+<!-- The easternmost coordinate delimiting the geographic extent
+     of the dataset. A valid range of values, expressed in decimal
+     degrees (positive east and positive north), is:
+     -180,0 <= East Bounding Longitude Value <= 180,0                 -->
+
+     
+<!ELEMENT eastBL      (#PCDATA | %a.phrase;)*                         >
+<!ATTLIST eastBL      %a.global;                                      >
+
+<!-- 2.2.3.6.3 South Bounding Latitude (southBL)                      -->
+<!-- The southernmost coordinate delimiting the geographic extent
+     of the dataset. A valid range of values, expressed in decimal
+     degrees (positive east and positive north), is:
+     -90,0 <= South Bounding Latitude Value <= 90,0 ;
+     South Bounding Latitude Value <= North Bounding Latitude
+     Value                                                            -->
+     
+<!ELEMENT southBL      (#PCDATA | %a.phrase;)*                         >
+<!ATTLIST southBL      %a.global;                                      >
+
+<!-- 2.2.3.6.4 North Bounding Latitude (northBL)                      -->
+<!-- The northernmost coordinate delimiting the geographic extent
+     of the dataset. A valid range of values, expressed in decimal
+     degrees (positive east and positive north), is:
+     -90,0 <= North Bounding Latitude Value <= 90,0 ;
+     North Bounding Latitude Value >= South Bounding Latitude
+     Value                                                            -->
+     
+<!ELEMENT northBL      (#PCDATA | %a.phrase;)*                         >
+<!ATTLIST northBL      %a.global;                                      >
+     
+<!-- 2.2.3.7 Geographic Bounding Polygon (boundPoly)	              -->
+<!-- This field allows the creation of multiple polygons to describe
+     in a more detailed manner the geographic area covered by the
+     dataset. It should only be used to define the outer boundaries
+     of a covered area. For example, in the United States, such
+     polygons can be created to define boundaries for Hawaii, Alaska
+     and the continental United States, but not interior boundaries
+     for the contiguous states. This field is used to refine a
+     coordinate-based search, not to actually map an area.
+     If the boundPoly element is used, then geoBndBox (2.2.3.6)
+     MUST be present, and all points enclosed by the boundPoly MUST
+     be contained within the geoBndBox. westBL, eastBL, southBL,
+     and northBL of the geoBndBox should each be represented in at
+     least one point of the boundPoly description.                    -->
+
+<!ELEMENT boundPoly          (polygon+)                                >
+<!ATTLIST boundPoly          %a.global;                               >
+
+<!-- 2.2.3.7.1 Polygon (polygon)                                      -->
+<!-- The minimum polygon that covers a geographical area, and is
+     delimited by at least 4 points (3 sides), in which the last
+     point coincides with the first point.       		      -->
+
+<!ELEMENT polygon          (point,
+                            point,
+			    point,
+			    point+)                                   >
+<!ATTLIST polygon          %a.global;                                 >
+
+<!-- 2.2.3.7.1.1 Point (point)                                        -->
+<!-- 0-dimensional geometric primitive, representing a position,
+     but not having extent. In this declaration, point is limited
+     to a longitude/latitude coordinate system.                        -->
+
+<!ELEMENT point           (gringLat,
+                           gringLon)                                  >
+<!ATTLIST point           %a.global;                                  >
+
+<!-- 2.2.3.7.1.1.1 G-Ring Latitude (gringLat)                         -->
+<!-- Latitude (y coordinate) of a point. Valid range expressed in
+     decimal degrees is as follows:
+     -90,0 to 90,0 degrees (latitude)                                 -->
+
+<!ELEMENT gringLat     (#PCDATA | %a.phrase;)*                        >
+<!ATTLIST gringLat     %a.global;                                     >
+
+<!-- 2.2.3.7.1.1.2 G-Ring Longitude (gringLon)                        -->
+<!-- Longitude (x coordinate) of a point. Valid range expressed in
+     decimal degrees is as follows:
+     -180,0 to 180,0 degrees (longitude)                              -->
+
+<!ELEMENT gringLon     (#PCDATA | %a.phrase;)*                        >
+<!ATTLIST gringLon     %a.global;                                     >
+                                                        
+<!-- 2.2.3.8 Unit of Analysis.                                        -->
+<!-- Basic unit of analysis or observation that the file describes:
+      individuals, families/households, groups,
+      institutions/organizations, administrative units, etc.           -->
+<!-- The DDI intends to prepare a controlled vocabulary for use in    -->
+<!-- this element, but it has yet to be developed.  Interested        -->
+<!-- parties should refer to the DDI web page at                      -->
+<!-- http://www.icpsr.umich.edu/DDI/codebook.html for information     -->
+<!-- regarding controlled vocabularies as it becomes available.       -->
+<!-- J. McDonough, 12/17/98                                           -->
+<!ELEMENT anlyUnit     (#PCDATA|txt|concept|%a.phrase;|%e.form;)*        >
+<!ATTLIST anlyUnit
+     %a.global;
+     unit               CDATA              #IMPLIED                      >
+
+<!-- 2.2.3.9 Universe.                                                -->
+<!-- A description of the population covered by the data in the file;
+      the group of persons or other elements that are the object of
+      the study and to which the study results refer. Age, nationality,
+      and residence commonly help to delineate a given universe, but
+      any of a number of factors may be involved, such as age limits,
+      sex, marital status, race, ethnic group, nationality, income,
+      veteran status, criminal convictions, etc. The universe may
+      consist of elements other than persons, such as housing units,
+      court cases, deaths, countries, etc. In general, it should be
+      possible to tell from the description of the universe whether a
+      given individual or element (hypothetical or real) is a member
+      of the population under study. Also known as universe of
+      interest, population of interest, and target population. A
+      "level" attribute is included to permit coding of the level to
+      which universe applies, i.e., the study level, the file level
+      (if different from study), or the variable level. The "clusion"
+      attribute provides for specification of groups included (I)
+      in or excluded (E) from the universe.                            -->
+<!ELEMENT universe     (#PCDATA|txt|concept|%a.phrase;|%e.form;)*        >
+<!ATTLIST universe
+     %a.global;
+     level              CDATA              #IMPLIED
+     clusion            (I|E)              "I"                           >
+
+<!-- 2.2.3.10 Kind of Data.                                            -->
+<!-- The type of data included in the file: survey data, census/enumeration
+      data, aggregate data, clinical data, event/transaction data, program
+      source code, machine-readable text, administrative records data,
+      experimental data, psychological test, textual data, coded textual,
+      coded documents, time budget diaries, observation data/ratings,
+      process-produced data, etc.                                      -->
+<!ELEMENT dataKind     (#PCDATA|txt|concept|%a.phrase;|%e.form;)*       >
+<!ATTLIST dataKind     %a.global;                                       >
+
+<!--                                                                  -->
+<!-- 2.2.4 Notes (notes)                                              -->
+<!--                                                                  -->
+<!-- Notes element added 6/8/98 per DDI Committee for                 -->
+<!-- providing additional information to                              -->
+<!-- clarify and annotate codebook information on the scope           -->
+<!-- of the data collection.  For declaration of generic notes        -->
+<!-- ELEMENT used for this tag, see the end of the DTD.  jpm          -->
+
+<!--                                                                  -->
+<!-- 2.3 METHODOLOGY AND PROCESSING (method)                          -->
+<!-- =======================================                          -->
+<!--                                                                  -->
+<!ELEMENT method     (dataColl*
+                      , notes*
+                      , anlyInfo?
+                      , stdyClas?)                                       >
+<!ATTLIST method     %a.global;                                         >
+
+<!--                                                                  -->
+<!-- 2.3.1 Data Collection Methodology (dataColl)                     -->
+<!--                                                                  -->
+<!ELEMENT dataColl     (timeMeth*
+                        , dataCollector*
+                        , frequenc*
+                        , sampProc*
+                        , deviat*
+                        , collMode*
+                        , resInstru*
+                        , sources?
+                        , collSitu*
+                        , actMin*
+                        , ConOps*
+                        , weight*
+                        , cleanOps*)                                     >
+<!ATTLIST dataColl     %a.global;                                       >
+
+<!-- 2.3.1.1 Time Method.                                             -->
+<!-- The time method or time dimension of the data collection,        -->
+<!-- e.g., panel, cross-sectional, trend, time-series, etc.           -->
+<!-- The DDI intends to prepare a controlled vocabulary for use in    -->
+<!-- this element, but it has yet to be developed.  Interested        -->
+<!-- parties should refer to the DDI web page at                      -->
+<!-- http://www.icpsr.umich.edu/DDI/codebook.html for information     -->
+<!-- regarding controlled vocabularies as it becomes available.       -->
+<!-- J. McDonough, 12/17/98                                           -->
+<!-- PFS: optional "method" attribute added to                        -->
+<!-- allow vocabulary control.                                        -->
+<!ELEMENT timeMeth     (#PCDATA|txt|concept|%a.phrase;|%e.form;)*        >
+<!ATTLIST timeMeth
+     %a.global;
+     method             CDATA            #IMPLIED                        >
+
+<!-- 2.3.1.2 Data Collector (dataCollector).                          -->
+<!-- Entity (individual, agency, or institution) responsible for      -->
+<!-- administering the questionnaire or interview or compiling the    -->
+<!-- data.                                                            -->
+<!ELEMENT dataCollector     (#PCDATA | %a.phrase; | %e.form;)*          >
+<!ATTLIST dataCollector
+     %a.global;
+     abbr                CDATA   #IMPLIED
+     affiliation         CDATA   #IMPLIED                                >
+
+<!-- 2.3.1.3 Frequency of Data Collection.                            -->
+<!-- If the data collected include more than one point in time,       -->
+<!-- indicate the frequency with which the data were collected,       -->
+<!-- e.g., monthly, quarterly, etc.                                   -->
+<!-- NANMV: need controlled vocab?                                    -->
+<!-- PFS: "Freq" attribute added to allow vocab control.              -->
+<!ELEMENT frequenc     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST frequenc
+     %a.global;
+     freq               CDATA            #IMPLIED                        >
+
+<!-- 2.3.1.4 Sampling Procedure.                                      -->
+<!-- The type of sample and sample design used to select the survey   -->
+<!-- respondents to represent the population. May include reference   -->
+<!-- to the target sample size and the sampling fraction.             -->
+<!ELEMENT sampProc     (#PCDATA|txt|concept|%a.phrase;|%e.form;)*        >
+<!ATTLIST sampProc
+     %a.global;                                                          >
+
+<!-- 2.3.1.5 Major Deviations from the Sample Design.                 -->
+<!-- Show correspondence as well as discrepancies between
+      the sampled units (obtained) and available statistics
+      for the population (age, sex-ratio, marital status,
+      etc.) as a whole.                                                -->
+<!ELEMENT deviat     (#PCDATA | %a.phrase; | %e.form;)*                 >
+<!ATTLIST deviat     %a.global;                                         >
+
+<!-- 2.3.1.6 Mode of Data Collection.                                 -->
+<!-- The method used to collect the data; instrumentation             -->
+<!-- characteristics (e.g., telephone interview, mail                 -->
+<!-- questionnaire, etc.)                                             -->
+<!ELEMENT collMode     (#PCDATA|txt|concept|%a.phrase;|%e.form;)*       >
+<!ATTLIST collMode     %a.global;                                       >
+
+<!-- 2.3.1.7 Type of Research Instrument.                             -->
+<!-- The type of data collection instrument used. "Structured"
+      indicates an instrument in which all respondents are asked the
+      same questions/tests, possibly with precoded answers. If a small
+      portion of such a questionnaire includes open-ended questions,
+      provide appropriate comments.
+      "Semi-structured" indicates that the research instrument contains
+      mainly open-ended questions. "Unstructured" indicates that in-depth
+      interviews were conducted.                                       -->
+<!-- PFS: type attrib added to allow vocabulary control.              -->
+<!ELEMENT resInstru     (#PCDATA|txt|concept|%a.phrase;|%e.form;)*       >
+<!ATTLIST resInstru
+     %a.global;
+     type                CDATA            #IMPLIED                       >
+
+<!-- 2.3.1.8 Sources Statement (sources)                              -->
+<!-- Description of sources used for the data collection.             -->
+<!-- PFS: I have changed this element to make it nestable,
+      so that the sources statement might encompass a series
+      of discrete source statements, each of which could
+      contain the facts about an individual source.                    -->
+<!--                                                                  -->
+<!ELEMENT sources     ((dataSrc*
+                        , srcOrig*
+                        , srcChar*
+                        , srcDocu*)
+                        | (sources*))                                    >
+<!ATTLIST sources     %a.global;                                        >
+
+<!-- 2.3.1.8.1 Data Sources.                                          -->
+<!-- Used to list the book(s), article(s), serial(s),
+      and/or machine-readable data file(s), if any, that
+      served as the source(s) of the data collection.                  -->
+<!ELEMENT dataSrc     (#PCDATA | %a.phrase; | %e.form;)*                >
+<!ATTLIST dataSrc     %a.global;                                        >
+
+<!-- 2.3.1.8.2 Origins of Sources.                                    -->
+<!-- For historical materials, information about the origin(s) of the
+      sources and the rules followed in establishing the sources
+      should be specified. May not be relevant to survey data.         -->
+<!ELEMENT srcOrig     (#PCDATA|txt|concept|%a.phrase;|%e.form;)*        >
+<!ATTLIST srcOrig     %a.global;                                        >
+
+<!-- 2.3.1.8.3 Characteristics of Source Noted.                       -->
+<!-- Assessment of characteristics and quality of source material.
+      May not be relevant to survey data.                              -->
+<!ELEMENT srcChar     (#PCDATA | %a.phrase; | %e.form;)*                >
+<!ATTLIST srcChar     %a.global;                                        >
+
+<!-- 2.3.1.8.4 Documentation and Access to Sources.                   -->
+<!-- Level of documentation of the original sources. May not be       -->
+<!-- relevant to survey data.                                         -->
+<!ELEMENT srcDocu     (#PCDATA | %a.phrase; | %e.form;)*                >
+<!ATTLIST srcDocu %a.global;                                            >
+
+<!-- 2.3.1.8.5 Sources Statement (sources).                           -->
+<!-- No element or attribute declaration here, as this sources is     -->
+<!-- is simply a recursive declaration within sources 2.3.1.8.        -->
+
+<!-- 2.3.1.9 Characteristics of Data Collection Situation.            -->
+<!-- Description of noteworthy aspects of the data collection
+      situation. Include information on factors such as
+      cooperativeness of respondents, duration of interviews,
+      number of call-backs, etc.                                       -->
+<!ELEMENT collSitu     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST collSitu     %a.global;                                       >
+
+<!-- 2.3.1.10 Actions to Minimize Losses.                             -->
+<!-- Summary of actions taken to minimize data loss. Include
+      information on actions such as follow-up visits, supervisory
+      checks, historical matching, estimation, etc.                    -->
+<!ELEMENT actMin     (#PCDATA | %a.phrase; | %e.form;)*                 >
+<!ATTLIST actMin     %a.global;                                         >
+
+<!-- 2.3.1.11 Control Operations.                                     -->
+<!-- Methods to facilitate data control performed by the primary      -->
+<!-- investigator or by the data archive.                             -->
+<!-- Specify any special programs used for such operations.           -->
+<!-- The ConOps element has one additional attribute, agency, which   -->
+<!-- should be used to regard the agency which performed the control  -->
+<!-- operation (e.g., PI, archive, etc.)                              -->
+<!ELEMENT ConOps     (#PCDATA | %a.phrase; | %e.form;)*                 >
+<!ATTLIST ConOps     %a.global;
+                      agency   CDATA   #IMPLIED                          >
+
+<!-- 2.3.1.12 Weighting.                                              -->
+<!-- The use of sampling procedures may make it necessary to apply
+      weights to produce accurate statistical results.  Describe here
+      the criteria for using weights in analysis of a collection.
+      If a weighting formula or coefficient was developed, provide
+      this formula, define its elements, and indicate how the
+      formula is applied to data.                                      -->
+<!ELEMENT weight     (#PCDATA | %a.phrase; | %e.form;)*                 >
+<!ATTLIST weight     %a.global;                                         >
+
+<!-- 2.3.1.13 Cleaning Operations.                                    -->
+<!-- Methods used to "clean" the data collection,
+      e.g., consistency checking, wildcode checking, etc.              -->
+
+<!ELEMENT cleanOps     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST cleanOps     %a.global;
+                        agency   CDATA   #IMPLIED                        >
+
+<!--                                                                  -->
+<!-- 2.3.2 Study-level Error Note (notes)                             -->
+<!--                                                                  -->
+<!-- This note element should now be used for any                     -->
+<!-- information annotating or clarifying the methodology             -->
+<!-- and processing of the study.  For the element                    -->
+<!-- declaration for this tag, see the generic note                   -->
+<!-- declaration at the end of the DTD.  6/8/98 Jerry                 -->
+<!-- McDonough                                                        -->
+
+<!--                                                                  -->
+<!-- 2.3.3 Data Appraisal Information (anlyInfo)                      -->
+<!--                                                                  -->
+<!ELEMENT anlyInfo     (respRate*
+                        , EstSmpErr*
+                        , dataAppr*)                                     >
+<!ATTLIST anlyInfo     %a.global;                                       >
+
+<!-- 2.3.3.1 Response Rate (respRate)                                 -->
+<!-- The percentage of sample members who provided information.       -->
+<!ELEMENT respRate     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST respRate     %a.global;                                       >
+
+<!-- 2.3.3.2 Estimates of Sampling Error (EstSmpErr)                  -->
+<!-- Measure of how precisely one can estimate a population value
+      from a given sample.                                             -->
+<!ELEMENT EstSmpErr    (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST EstSmpErr    %a.global;                                       >
+
+<!-- 2.3.3.3 Other Forms of Data Appraisal.                           -->
+<!-- Other issues pertaining to data appraisal. Describe here issues
+      such as response variance, nonresponse rate and testing for
+      bias, interviewer and response bias, confidence levels,
+      question bias, etc.                                              -->
+<!ELEMENT dataAppr     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST dataAppr     %a.global;                                       >
+
+<!--                                                                  -->
+<!-- 2.3.4 Class of the Study (stdyClas)                              -->
+<!-- Generally used to give the data archive's class or study status
+      number, which indicates the processing status of the study.
+      May also be used as a text field to describe processing status.  -->
+<!-- PFS: "Type" attrib added to allow vocabulary control.            -->
+<!--                                                                  -->
+<!ELEMENT stdyClas     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST stdyClas
+     %a.global;
+     type               CDATA            #IMPLIED                        >
+
+<!--                                                                  -->
+<!-- 2.4 DATA ACCESS (dataAccs)                                       -->
+<!-- ==========================                                       -->
+<!--                                                                  -->
+<!-- This section describes access conditions and terms of use
+      for the data collection. for the data collection. In cases
+      where access conditions differ across individual files or
+      variables, multiple access conditions can be specified. The
+      access conditions applying to a study, file, variable group, or
+      variable can be indicated by an IDREF attribute on the study
+      (2.0), file (3.0), variable group (4.1), or variable (4.3)
+      elements called "access".                                        -->
+<!ELEMENT dataAccs     (setAvail*
+                        , useStmt*
+                        , notes*)                                        >
+<!ATTLIST dataAccs  %a.global;                                          >
+
+<!--                                                                  -->
+<!-- 2.4.1 Data Set Availability                                      -->
+<!--                                                                  -->
+<!-- Information on availability and storage of the collection.
+      The "media" attribute may be used in combination with any
+      of the subelements.                                              -->
+<!ELEMENT setAvail     (accsPlac*
+                         , origArch?
+                         , avlStatus*
+                         , collSize?
+                         , complete?
+                         , fileQnty?
+                         , notes*)                                       >
+<!ATTLIST setAvail
+     %a.global;
+     media          CDATA                #IMPLIED
+     callno         CDATA                #IMPLIED
+     label          CDATA                #IMPLIED
+     type           CDATA                #IMPLIED                        >
+
+<!-- 2.4.1.1 Location.                                                -->
+<!-- Location where the data collection is currently stored. Use the  -->
+<!-- URI attribute to provide a URN or URL for the storage site or    -->
+<!-- the actual address from which the data may be downloaded.        -->
+<!ELEMENT accsPlac     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST accsPlac
+      %a.global;
+      URI           CDATA                #IMPLIED                        >
+
+<!-- 2.4.1.2 Archive Where Study Originally Stored.                   -->
+<!-- Archive from which the data collection was obtained; the
+     originating archive.                                              -->
+<!ELEMENT origArch     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST origArch %a.global;                                           >
+
+<!-- 2.4.1.3 Availability Status (avlStatus)                          -->
+<!-- Statement of collection availability. An archive may need to
+      indicate that a collection is unavailable because it is
+      embargoed for a period of time, because it has been superseded,
+      because a new edition is imminent, etc.                          -->
+<!ELEMENT avlStatus    (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST avlStatus    %a.global;                                       >
+
+<!-- 2.4.1.4 Extent of Collection.                                    -->
+<!-- Summarizes the number of physical files that exist in
+      a collection, recording the number of files that contain
+      data and noting whether the collection contains machine-
+      readable documentation and/or other supplementary files
+      and information such as data dictionaries, data definition
+      statements, or data collection instruments.                      -->
+<!-- NOTE: this element and 2.4.1.6(fileQnty) are somewhat redundant. -->
+<!-- The original intent was to have element fileQnty as a subelement -->
+<!-- of this element, however, restrictions on element inclusion in   -->
+<!-- XML apparently made this unworkable.  Elements are being left    -->
+<!-- in parallel for the moment, per DDI Committee.  6-17-98 Jerome   -->
+<!-- McDonough                                                        -->
+<!ELEMENT collSize       (#PCDATA | %a.phrase; | %e.form;)*             >
+<!ATTLIST collSize  %a.global;                                          >
+
+<!-- 2.4.1.5 Completeness of Study Stored.                            -->
+<!-- This item indicates the relationship of the data collected to
+      the amount of data coded and stored in the data collection.
+      Information as to why certain items of collected information
+      were not included in the data file stored by the archive
+      should be provided.                                              -->
+<!ELEMENT complete     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST complete %a.global;                                           >
+
+<!-- 2.4.1.6 Number of Files.                                         -->
+<!-- Total number of physical files associated with a collection.     -->
+<!ELEMENT fileQnty       (#PCDATA | %a.phrase; | %e.form;)*             >
+<!ATTLIST fileQnty  %a.global;                                          >
+
+<!-- 2.4.1.7 Collection notes.                                        -->
+<!-- Indicate additional information regarding data availability.     -->
+<!-- This element uses the generic notes declaration                  -->
+<!-- which can be found at the end of the DTD.  6-8-98,               -->
+<!-- Jerome McDonough                                                 -->
+
+<!--                                                                  -->
+<!-- 2.4.2 Date Use Statement (useStmt)                               -->
+<!--                                                                  -->
+<!-- Information on terms of use for the data collection.             -->
+<!--                                                                  -->
+<!ELEMENT useStmt   (confDec?
+                    , specPerm?
+                    , restrctn?
+                    , contact*
+                    , citReq?
+                    , deposReq?
+                    , conditions?
+                    , disclaimer?)                                       >
+<!ATTLIST useStmt %a.global;                                            >
+
+<!-- 2.4.2.1 Confidentiality Declaration (confDec)                    -->
+<!-- Used to tell if signing of a confidentiality declaration is      -->
+<!-- needed to access a resource.  The required attribute is used to  -->
+<!-- aid machine processing of this element.  The formNo attribute    -->
+<!-- indicates the number of the form that the user must fill out.    -->
+<!-- The URI attribute may be used to provide a URN or URL for online -->
+<!-- access to a confidentiality declaration form.                    -->
+<!ELEMENT confDec (#PCDATA | %a.phrase; | %e.form;)*                    >
+<!ATTLIST confDec %a.global;
+                   required   (yes|no)   "yes"
+                   formNo     CDATA      #IMPLIED
+                   URI        CDATA      #IMPLIED                        >
+
+<!-- 2.4.2.2 Special Permissions (specPerm)                           -->
+<!-- used to tell if any special permissions are needed to access a   -->
+<!-- resource. The required attribute is used to                      -->
+<!-- aid machine processing of this element.  The formNo attribute    -->
+<!-- indicates the number of the form that the user must fill out.    -->
+<!-- The URI attribute may be used to provide a URN or URL for online -->
+<!-- access to a special permissions form.                            -->
+<!ELEMENT specPerm (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST specPerm %a.global;
+                    required   (yes|no)   "yes"
+                    formNo     CDATA      #IMPLIED
+                    URI        CDATA      #IMPLIED                       >
+
+<!-- 2.4.2.3 Restrictions.                                            -->
+<!-- Any restrictions on access to or use of the collection such as
+      privacy certification or distribution restrictions. These can
+      be restrictions applied by the author, producer, or disseminator
+      of the data collection. If the data are restricted to only a
+      certain class of user, specify which type.                       -->
+<!ELEMENT restrctn (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST restrctn %a.global;                                           >
+
+<!-- 2.4.2.4 Access Authority (contact)                               -->
+<!-- Contact person or organization (with full address and telephone
+      number, if available) that controls access to a collection, if
+      different from the data distributor.                             -->
+<!-- The element "contact" is declared in section A.6.4.2             -->
+
+<!-- 2.4.2.5 Citation Requirement (citReq)                            -->
+<!-- Text of requirement that a data collection should be cited
+      properly in articles or other publications that are based on
+      analysis of the data.                                            -->
+<!ELEMENT citReq   (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST citReq   %a.global;                                           >
+
+<!-- 2.4.2.6 Deposit Requirement (deposReq)                           -->
+<!-- Information regarding user responsibility for informing archives
+      of their use of data through providing citations to the
+      published work or providing copies of it.                        -->
+<!ELEMENT deposReq   (#PCDATA | %a.phrase; | %e.form;)*                 >
+<!ATTLIST deposReq   %a.global;                                         >
+
+<!-- 2.4.2.7 Conditions (conditions)                                  -->
+<!-- Describes other use and access conditions information not        -->
+<!-- covered in the other sections of accCond.                        -->
+<!ELEMENT conditions (#PCDATA | %a.phrase; | %e.form;)*                 >
+<!ATTLIST conditions %a.global;                                         >
+
+<!-- 2.4.2.8 Disclaimer (disclaimer)                                 -->
+<!-- Information regarding responsibility for uses of the data
+      collection. Example: "The original collector of the
+      data, ICPSR, and the relevant funding agency bear no
+      responsibility for uses of this collection or for
+      interpretations or inferences based upon such uses."             -->
+<!ELEMENT disclaimer (#PCDATA | %a.phrase; | %e.form;)*                 >
+<!ATTLIST disclaimer %a.global;                                         >
+
+<!--                                                                  -->
+<!-- 2.4.3 Notes (notes)                                              -->
+<!--                                                                  -->
+<!-- Generic notes ELEMENT added to Data Access section               -->
+<!-- to enable annotation/clarification of information                -->
+<!-- regarding Data Access for the study.  Uses generic               -->
+<!-- notes element defined at end of DTD. 6/8/98 jpm                  -->
+
+<!--                                                                  -->
+<!-- 2.5 OTHER STUDY DESCRIPTION MATERIALS                            -->
+<!-- =====================================                            -->
+<!--                                                                  -->
+<!-- Other materials relating to the study description labeled and    -->
+<!-- identified by the DTD Users (encoders).                          -->
+<!ELEMENT othrStdyMat    (relMat*
+                          , relStdy*
+                          , relPubl*
+                          , othRefs*)                                    >
+<!ATTLIST othrStdyMat %a.global;                                        >
+
+<!-- 2.5.1 Related Materials.                                         -->
+<!-- Describe other materials related to the study description, such
+      as appendices, additional information on sampling found in other
+      documents, etc. Can take the form of bibliographic citations.
+      This element can contain either PCDATA or a citation or both,
+      and there can be multiple occurrences of both the  citation
+      and PCDATA within a single element.  May consist of a single URI
+      or a series of URIs comprising a series of citations/references
+      to external materials which can be objects as a whole (journal
+      articles) or parts of objects (chapters or appendices in articles
+      or documents).                                                   -->
+<!ELEMENT relMat     (#PCDATA| %a.phrase; | citation | %e.form;)*        >
+<!ATTLIST relMat     %a.global;
+                      callno            CDATA               #IMPLIED
+                      label             CDATA               #IMPLIED
+                      media             CDATA               #IMPLIED
+                      type              CDATA               #IMPLIED     >
+
+<!-- 2.5.2 Related Studies.                                           -->
+<!-- Information on the relationship of the current data
+      file to other data files (e.g., predecessors, successors,
+      sequels, abridgements) or to other editions of the same
+      data file. This would include the names of additional
+      data sets generated from the same data collection
+      vehicle plus other data sets directed at the same
+      general topic. Can take the form of bibliographic citations.     -->
+<!ELEMENT relStdy     (#PCDATA| %a.phrase; | citation | %e.form;)*      >
+<!ATTLIST relStdy     %a.global;                                        >
+
+<!-- 2.5.3 Related Publications (relPubl)                             -->
+<!-- Bibliographic and access information
+      about articles and reports based on the data in this collection.
+      Can take the form of bibliographic citations.                    -->
+<!ELEMENT relPubl     (#PCDATA| %a.phrase; | citation | %e.form;)*       >
+<!ATTLIST relPubl     %a.global;                                        >
+
+<!-- 2.5.4 Other References Note.                                     -->
+<!-- Indicate here other pertinent references. Can take the form of
+      bibliographic citations.                                         -->
+<!ELEMENT othRefs     (#PCDATA| %a.phrase; | citation | %e.form;)*      >
+<!ATTLIST othRefs     %a.global;                                        >
+
+<!--                                                                  -->
+<!-- 3.0 DATA FILES DESCRIPTION (fileDscr)                            -->
+<!-- =====================================                            -->
+<!--                                                                  -->
+<!-- Information about the data file.                                 -->
+<!-- The file description has the following additional attributes:    -->
+<!--      URI : a URN or URL that may be used to retrieve the file.   -->
+<!--      sdatrefs : summary data description references              -->
+<!--                 records the ID values of all elements within     -->
+<!--                 the summary data description (2.2.3) that apply  -->
+<!--                 to this file. These elements include: time       -->
+<!--                 period covered, date of collection, nation or    -->
+<!--                 country, geographic coverage, geographic unit,   -->
+<!--                 unit of analysis, universe, and kind of data.    -->
+<!--      methrefs : methodology and processing references            -->
+<!--                 records the ID values of all elements within     -->
+<!--                 the study methodology and processing section     -->
+<!--                 (2.3) that apply to this file.                   -->
+<!--                 These elements include information on data       -->
+<!--                 collection and data appraisal (e.g., sampling,   -->
+<!--                 sources, weighting, data cleaning, response      -->
+<!--                 rates, and sampling error estimates).            -->
+<!--       pubrefs : publication/citation references                  -->
+<!--                 records the ID values of all citation elements   -->
+<!--                 within section 2.5 or section 6.0 that pertain   -->
+<!--                 to this file.                                    -->
+<!--       access: access conditions references                       -->
+<!--               records the ID values of all elements in the       -->
+<!--               data use statment (2.4) of the document that       -->
+<!--               describe access conditions for this file.          -->
+<!ELEMENT fileDscr     (fileTxt*, locMap?, notes*)                      >
+<!ATTLIST fileDscr %a.global;
+                    URI        CDATA    #IMPLIED
+                    sdatrefs   IDREFS   #IMPLIED
+                    methrefs   IDREFS   #IMPLIED
+                    pubrefs    IDREFS   #IMPLIED
+                    access     IDREFS   #IMPLIED                         >
+
+<!--                                                                  -->
+<!-- 3.1 FILE-BY-FILE DESCRIPTION (fileTxt)                           -->
+<!-- ======================================                           -->
+<!--                                                                  -->
+<!ELEMENT fileTxt (fileName?
+                   , fileCont?
+                   , fileStrc?
+                   , dimensns?
+                   , fileType?
+                   , format?
+                   , filePlac?
+                   , dataChck*
+                   , ProcStat?
+                   , dataMsng?
+                   , software*
+                   , verStmt?)                                            >
+<!ATTLIST fileTxt %a.global;                                             >
+
+<!--                                                                  -->
+<!-- 3.1.1 File Name.                                                 -->
+<!-- Contains a short title that will be used to distinguish a
+      particular file/part from other files/parts in the data
+      collection.                                                      -->
+<!--                                                                  -->
+<!ELEMENT fileName     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST fileName  %a.global;                                          >
+
+<!--                                                                  -->
+<!-- 3.1.2 Contents of Files.                                         -->
+<!--                                                                  -->
+<!-- Abstract or description of file. An unformatted summary
+      describing the purpose, nature, and scope of the data file,
+      special characteristics of its contents, major subject areas
+      covered, and what questions the PIs attempted to answer
+      when they created the file. A listing of major variables in the
+      file is important here. In the case of multi-file collections,
+      this uniquely describes the contents of each file.               -->
+<!ELEMENT fileCont     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST fileCont  %a.global;                                          >
+
+<!--                                                                  -->
+<!-- 3.1.3 File Structure                                             -->
+<!--                                                                  -->
+<!-- Type of file structure. Use attribute of "type" to indicate
+      hierarchical, rectangular, relational or nested (the default is
+      rectangular).                                                    -->
+<!ELEMENT fileStrc (recGrp*
+                     , notes*)                                           >
+<!ATTLIST fileStrc %a.global;
+                    type (rectangular|hierarchical|relational|nested)
+                                                          "rectangular"  >
+
+<!-- 3.1.3.1 Record or Record Group (recGrp)                          -->
+<!-- Used to describe record groupings if the file is hierarchical
+      or relational. The attribute "recGrp" allows a record group to
+      indicate subsidiary record groups which nest underneath; this
+      allows for the encoding of a hierarchical structure of record
+      groups.  The attribute "rectype" indicates the type
+      of record, e.g., "A records" or "Household records." "Keyvar" is
+      an IDREF that provides the link to other record types. In a
+      hierarchical study consisting of individual and household records,
+      the "keyvar" on the person record will indicate the household
+      to which it belongs. "Rtypeloc" indicates the starting column
+      location of the record type indicator variable on each record of 
+      the data file. "Rtypewidth" specifies the width, for files with
+      many different record types. "Rtypevtype" specifies the type of
+      the indicator variable.  The "recidvar" is the unique ID of the
+      variable group itself.                                           -->
+<!ELEMENT recGrp       (labl*
+                        , recDimnsn?)                                    >
+<!ATTLIST recGrp
+     %a.global;
+     recGrp         IDREFS              #IMPLIED
+     rectype        CDATA               #IMPLIED
+     keyvar         IDREFS              #IMPLIED
+     rtypeloc       CDATA               #IMPLIED
+     rtypewidth     CDATA               "1"
+     rtypevtype     (numeric|character) "numeric"
+     recidvar       CDATA               #IMPLIED                          >
+
+<!-- 3.1.3.1.1 Label (of record)                                      -->
+<!-- A more descriptive specification of record group.                -->
+<!-- Uses generic element/attribute declaration for labl to be found  -->
+<!-- at end of Codebook DTD, section A.2.                             -->
+
+<!-- 3.1.3.1.2 Dimensions (of record)                                 -->
+<!-- Information about the physical characteristics of the record.    -->
+<!-- level attribute included per DDI Comm. Instructio ns; should be   -->
+<!-- set to 'record'.  6-17-98 Jerome McDonough                       -->
+<!ELEMENT recDimnsn (varQnty?
+                        , caseQnty?
+                        , logRecL?)                                      >
+<!ATTLIST recDimnsn
+     %a.global;
+     level          CDATA            #IMPLIED                            >
+
+<!-- 3.1.3.1.2.1 Number of variables per record (varQnty)             -->
+<!-- Uses varQnty element/attribute declaration found later in this   -->
+<!-- DTD (3.1.4.2).                                                   -->
+
+<!-- 3.1.3.1.2.2 Number of cases                                      -->
+<!-- Number of records of this type.                                  -->
+<!-- Uses caseQnty element/attribute declaration found later in this  -->
+<!-- DTD (3.1.4.1)                                                    -->
+
+<!-- 3.1.3.1.2.3 Record Length                                        -->
+<!-- Logical record length of record, i.e., number of characters of
+      data in the record.                                              -->
+<!-- Uses LogRecL element/attribute declaration found later in this   -->
+<!-- DTD (3.1.4.3)                                                    -->
+
+<!-- 3.1.3.2 Notes (on record or record group)                        -->
+<!-- Indicate any additional information regarding this record type.  -->
+<!-- Uses generic element/attribute declarations for notes found at   -->
+<!-- the end of the Codebook DTD, section A.4.                        -->
+
+<!-- 3.1.4 File Dimensions                                            -->
+<!-- Dimensions of the overall file.                                  -->
+<!ELEMENT dimensns    (caseQnty*
+                        , varQnty*
+                        , logRecL*
+                        , recPrCas*
+                        , recNumTot*)                                    >
+<!ATTLIST dimensns %a.global;                                           >
+
+<!-- 3.1.4.1 Overall Case Count                                       -->
+<!-- Number of cases or observations in the entire file. To be used
+      for rectangular files only.                                      -->
+<!ELEMENT caseQnty     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST caseQnty  %a.global;                                          >
+
+<!-- 3.1.4.2 Overall Variable Count                                   -->
+<!-- Number of variables in the entire file.To be used for
+      rectangular files only.                                          -->
+<!ELEMENT varQnty     (#PCDATA | %a.phrase; | %e.form;)*                >
+<!ATTLIST varQnty %a.global;                                            >
+
+<!-- 3.1.4.3 Logical Record Length                                    -->
+<!-- Logical record length of file, i.e., number of characters.
+      To be used for rectangular files or if all records in a
+      hierarchical file are the same length.                           -->
+<!ELEMENT logRecL (#PCDATA | %a.phrase; | %e.form;)*                    >
+<!ATTLIST logRecL %a.global;                                            >
+
+<!-- 3.1.4.4 Records per Case                                         -->
+<!-- Records per case in file. This should be used for card-image
+      data or other files in which there are multiple records
+      per case.                                                        -->
+<!ELEMENT recPrCas     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST recPrCas %a.global;                                           >
+
+<!-- 3.1.4.5 Overall Number of records (recNumTot)                    -->
+<!-- Overall record count in file. Use in instances such as files
+      with multiple cards/decks or records per case.                   -->
+<!ELEMENT recNumTot    (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST recNumTot    %a.global;                                       >
+
+<!--                                                                  -->
+<!-- 3.1.5 Type of File.                                              -->
+<!--                                                                  -->
+<!-- Types of data files include raw data (ASCII, EBCDIC, etc.) and
+      software-dependent files such as SAS datasets, SPSS export files,
+      etc. If the data are of mixed types (e.g., ASCII and packed
+      decimal), state that here. Note that the element varFormat
+      (4.3.23) permits specification of the data format at the
+      variable level.
+      The charset attribute allows you to specify the character set
+      used in the file, e.g., us-ascii, ebcdic, unicode UTF-8, etc.    -->
+<!ELEMENT fileType (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST fileType %a.global;
+                    charset   CDATA   #IMPLIED                           >
+
+<!--                                                                  -->
+<!-- 3.1.6 Data Format                                                -->
+<!--                                                                  -->
+<!-- Physical format of the data file: Logical record length format,
+      card-image format (i.e., data with multiple records per case),
+      delimited format, free format, etc.                              -->
+<!ELEMENT format   (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST format   %a.global;                                           >
+
+<!--                                                                  -->
+<!-- 3.1.7 Place of File Production.                                  -->
+<!--                                                                  -->
+<!-- Indicate whether file was produced at an archive or produced
+      elsewhere.                                                       -->
+<!ELEMENT filePlac (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST filePlac %a.global;                                           >
+
+<!--                                                                  -->
+<!-- 3.1.8 Extent of Processing Checks                                -->
+<!--                                                                  -->
+<!-- Indicate here at the file level the types of checks and
+      operations performed on the data file. A controlled vocabulary
+      may be developed for this element in the future.                 -->
+<!ELEMENT dataChck (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST dataChck %a.global;                                           >
+
+<!--                                                                  -->
+<!-- 3.1.9 Processing Status (ProcStat)                               -->
+<!--                                                                  -->
+<!-- Processing status of file, if part of a multi-file collection.
+      Some data producers and social science data archives employ data
+      processing strategies that provide for release of data and
+      documentation at various stages of processing.                   -->
+<!ELEMENT ProcStat      (#PCDATA | %a.phrase; | %e.form;)*              >
+<!ATTLIST ProcStat      %a.global;                                      >
+
+<!--                                                                  -->
+<!-- 3.1.10 Missing Data                                              -->
+<!--                                                                  -->
+<!-- This element can be used to give general information about       -->
+<!-- missing data, e.g., that missing data have been standardized     -->
+<!-- across the collection, missing data are present because of       -->
+<!-- merging, etc.                                                    -->
+<!ELEMENT dataMsng (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST dataMsng %a.global;                                           >
+
+<!--                                                                  -->
+<!-- 3.1.11 Software                                                  -->
+<!--                                                                  -->
+<!-- Software that created the file. A "version" attribute permits
+      specification of the software version number.                    -->
+<!--                                                                  -->
+<!-- This tag uses the element/attribute declaration for software     -->
+<!-- which can be found in codebook DTD section A.6.3.5               -->
+
+<!--                                                                  -->
+<!-- 3.1.12 Version Statement (verStmt)                               -->
+<!--                                                                  -->
+<!-- Version statement for the data file, if one of a multi-file
+      collection.                                                      -->
+<!-- Uses generic element/attribute declaration for verStmt to be     -->
+<!-- found at end of Codebook DTD, section A.6.6.  This tag should be -->
+<!-- used for providing information regarding the version of a        -->
+<!-- particular file (as opposed to the documentation or the study).  -->
+
+<!-- 3.2 locMap                                                       -->
+<!-- Used to describe the physical location of aggregate/tabular      -->
+<!-- data in cases where the nCube model is employed.                 -->
+
+<!ELEMENT locMap    (dataItem*)                                         >
+<!ATTLIST locMap    %a.global;                                          >
+
+<!-- 3.2.1 dataItem                                                   -->
+<!--                                                                  -->
+<!ELEMENT dataItem  (CubeCoord*, physLoc*)                              >
+<!ATTLIST dataItem  %a.global;
+                     varRef       IDREF      #IMPLIED
+                     nCubeRef     IDREF      #IMPLIED>
+
+<!-- 3.2.1.1 CubeCoord                                                -->
+<!--                                                                  -->
+<!ELEMENT CubeCoord  EMPTY                                           >
+<!ATTLIST CubeCoord %a.global;
+                     coordNo      CDATA      #IMPLIED
+                     coordVal     CDATA      #IMPLIED
+                     coordValRef  IDREF      #IMPLIED                    >
+
+<!-- 3.2.1.2 physLoc                                                  -->
+<!--                                                                  -->
+<!ELEMENT physLoc   EMPTY                                           >
+<!ATTLIST physLoc   %a.global;
+                     type         CDATA      #IMPLIED
+                     recRef       IDREF      #IMPLIED
+                     startPos     CDATA      #IMPLIED
+                     width        CDATA      #IMPLIED
+                     endPos       CDATA      #IMPLIED                    >
+
+<!-- 3.3 Notes (notes)                                                -->
+<!--                                                                  -->
+<!-- Additional information about the data file not covered in
+      other elements.                                                  -->
+<!-- This tag uses the generic element/attribute declarations         -->
+<!-- for notes which can be found at the end of the DTD.  6/30/98     -->
+<!-- Jerome McDonough                                                 -->
+
+<!--                                                                  -->
+<!-- 4.0 VARIABLE DESCRIPTION (dataDscr)                              -->
+<!-- ===================================                              -->
+<!--                                                                  -->
+<!ELEMENT dataDscr  (varGrp* , nCubeGrp* , var* , nCube*, notes*)       >
+<!ATTLIST dataDscr  %a.global;                                          >
+
+<!--                                                                  -->
+<!-- 4.1 VARIABLE GROUP (varGrp)                                      -->
+<!-- ===========================                                      -->
+<!--                                                                  -->
+<!-- A group of variables that may share a common subject,
+      arise from the interpretation of a single question, or
+      are linked by some other factor.                                 -->
+<!--                                                                  -->
+<!-- The variable group has the following additional attributes:      -->
+<!--      type : The "type" of group attribute refers to the general  -->
+<!--      type of grouping of the variables, e.g., topic, multiple    -->
+<!--      response.                                                   -->
+<!--      var : The "var" reference is used to indicate all the       -->
+<!--      constituent variable IDs in the group.                      -->
+<!--      varGrp : the "varGrp" reference is used to indicate all the -->
+<!--               subsidiary variable groups which nest underneath   -->
+<!--               the current varGrp.  This allows for the encoding  -->
+<!--               of a hierarchical structure of variable groups.    -->
+<!--      name : The unique ID for the group.                         -->
+<!--      sdatrefs : summary data description references -            -->
+<!--                 records the ID values of all elements within     -->
+<!--                 the summary data description (2.2.3) that apply  -->
+<!--                 to this variable group. These elements           -->
+<!--                 include: time period covered, date of            -->
+<!--                 collection, nation or country, geographic        -->
+<!--                 coverage, geographic unit, unit of analysis,     -->
+<!--                 universe, and kind of data.                      -->
+<!--      methrefs : methodology and processing references -          -->
+<!--                 records the ID values of all elements within     -->
+<!--                 the study methodology and processing section     -->
+<!--                 (2.3) that apply to this variable group.         -->
+<!--                 These elements include information on data       -->
+<!--                 collection and data appraisal (e.g., sampling,   -->
+<!--                 sources, weighting, data cleaning, response      -->
+<!--                 rates, and sampling error estimates).            -->
+<!--       pubrefs : publication/citation references                  -->
+<!--                 records the ID values of all citation elements   -->
+<!--                 within section 2.5 or section 5.0 that pertain   -->
+<!--                 to this variable group.                          -->
+<!--       access: access conditions references                       -->
+<!--               records the ID values of all elements in the       -->
+<!--               data use statement (2.4.2) of the document that    -->
+<!--               describe access conditions for this var group.     -->
+
+<!-- Variable groups are created this way fin order to permit
+      variables to belong to multiple groups, including multiple
+      subject groups such as a group of variables on sex and income,
+      or to a subject and a multiple response group, without causing
+      overlapping groups. Variables that are linked by use of the same
+      question need not be identified by a Variable Group element
+      because they are linked by a common unique question identifier
+      in the Variable element. Note that as a result of the strict
+      sequencing required by XML, all Variable Groups must be marked
+      up before the Variable element is opened.  That is, the mark-up
+      author cannot mark up a Variable Group, then mark up
+      its constituent variables, then mark up another Variable Group.  -->
+
+<!ELEMENT varGrp   (labl*
+                     , txt*
+                     , concept*
+                     , defntn?
+                     , universe?
+                     , notes*)                                           >
+<!ATTLIST varGrp
+     %a.global;
+     type          (section|multipleResp|grid|display|repetition|subject|
+                    version|iteration|analysis|pragmatic|record|file|
+                    randomized|other)        "other"
+     var           IDREFS                    #IMPLIED
+     varGrp        IDREFS                    #IMPLIED
+     name          CDATA                     #IMPLIED
+     sdatrefs      IDREFS                    #IMPLIED
+     methrefs      IDREFS                    #IMPLIED
+     pubrefs       IDREFS                    #IMPLIED
+     access        IDREFS                    #IMPLIED
+     nCube         CDATA                     #IMPLIED                    >
+
+<!--                                                                  -->
+<!-- 4.1.1 Variable Group Label (labl)                                -->
+<!--                                                                  -->
+<!-- A short description of the variable group.                       -->
+<!-- Uses generic element/attribute declaration for labl to be found  -->
+<!-- at the end of the Codebook DTD, section A.2.  6/30/98,           -->
+<!-- J. McDonough                                                     -->
+
+<!--                                                                  -->
+<!-- 4.1.2 Variable Group Text                                        -->
+<!--                                                                  -->
+<!-- Lengthier description of variable group.                         -->
+<!-- Uses generic txt element declared in A.3, later in DTD.          -->
+<!-- 6-8-98, Jerry McDonough                                          -->
+
+<!--                                                                  -->
+<!-- 4.1.3 Variable Group Concept                                     -->
+<!--                                                                  -->
+<!-- Defined in 4.3.21                                                -->
+
+<!--                                                                  -->
+<!-- 4.1.4 Variable Group Definition                                  -->
+<!--                                                                  -->
+<!-- Rationale for why the variables are grouped in this way.         -->
+<!--                                                                  -->
+<!ELEMENT defntn     (#PCDATA | %a.phrase; | %e.form;)*                 >
+<!ATTLIST defntn     %a.global;                                         >
+
+<!--                                                                  -->
+<!-- 4.1.5 Universe.                                                  -->
+<!--                                                                  -->
+<!-- Already declared as element "universe"
+      under Study Description, 2.2.3.7. Set level attribute to assign
+      to study level, variable-group level or (below)
+      individual variable level.                                       -->
+
+<!--                                                                  -->
+<!-- 4.1.6 notes.                                                     -->
+<!--                                                                  -->
+<!-- For clarifying information/annotation                            -->
+<!-- regarding the variable groups.  Uses the generic                 -->
+<!-- notes ELEMENT declared at the end of the DTD. 6/8/98             -->
+<!-- Jerry McDonough                                                  -->
+
+<!-- 4.2 nCube Group (nCubeGrp)                                       -->
+<!-- A group of nCubes that may share a common subject, arise
+     from the interpretation of a single question, or are linked
+     by some other factor. This element makes it possible to identify
+     all nCubes derived from a single presentation table,
+     and to provide the original table title and universe,
+     as well as reference the source. Specific nesting patterns can
+     be noted using the attribute nCubeGrp.                           -->
+<!-- Attributes:
+     type: refers to the general type of grouping of the nCubes.
+           If nCubeGrp is used to identify all the nCubes derived
+	   from a single presentation table, the option "display"
+	   should be selected in the "type" attribute. 
+     nCube: will contain all the IDs of the nCubes included
+            in the group.
+     nCubeGrp: indicates the subsidiary nCube groups nested
+               underneath the current nCubeGrp. This allows for the
+               encoding of a hierarchical structure of nCube groups.
+     name: is the unique ID for the group.
+     sdatrefs: records the ID values of all elements within the
+               summary data description (2.2.3) that apply to this
+	       nCube group.
+     methrefs: records the ID values of all elements within the study
+               methodology and processing section (2.3) that apply
+	       to this nCube group.
+     pubrefs: records the ID values of all citation elements within
+              section 2.5 or section 5.0 that pertain to this nCube
+              group.                                                  -->
+<!-- access:  access conditions references. This attribute            -->
+<!--          records the ID values of all elements in the       -->
+<!--          data use statement (2.4.2) of the document that    -->
+<!--          describe access conditions for this nCube group.   -->
+<!-- nCube groups are created in this way in order to permit nCubes
+     to belong to multiple groups, including multiple subject groups,
+     such as groups of nCubes on sex and income, or to a subject and
+     multiple response group, without causing the overlapping of
+     groups. nCubes that are linked by use of the same variable need
+     not be identified by an nCubeGrp element because they are already
+     linked by a common Variable element.                             -->
+<!ELEMENT   nCubeGrp  (labl* 
+                       , txt*
+                       , concept*
+                       , defntn?
+                       , universe?
+                       , notes*)                                          >
+<!ATTLIST nCubeGrp
+     %a.global;
+     type          (section|multipleResp|grid|display|repetition|subject|
+                    version|iteration|analysis|pragmatic|record|file|
+                    randomized|other)        "other"
+     nCube         IDREFS                    #IMPLIED
+     nCubeGrp      IDREFS                    #IMPLIED
+     name          CDATA                     #IMPLIED
+     sdatrefs      IDREFS                    #IMPLIED
+     methrefs      IDREFS                    #IMPLIED
+     pubrefs       IDREFS                    #IMPLIED
+     access        IDREFS                    #IMPLIED                   >
+
+<!--                                                                  -->
+<!-- 4.2.1 nCube Group Label (labl)                                   -->
+<!--                                                                  -->
+<!-- A short description of the nCube group.                          -->
+<!-- Uses generic element/attribute declaration for labl to be found  -->
+<!-- at the end of the Codebook DTD, section A.2.                     -->
+
+<!--                                                                  -->
+<!-- 4.2.2 nCube Group Text (txt)                                     -->
+<!--                                                                  -->
+<!-- Lengthier description of nCube group.                            -->
+<!-- Uses generic txt element declared in A.3, later in DTD.          -->
+
+<!--                                                                  -->
+<!-- 4.2.3 nCube Group Concept (concept)                              -->
+<!--                                                                  -->
+<!-- Defined in 4.3.21                                                -->
+
+<!--                                                                  -->
+<!-- 4.2.4 nCube Group Definition (defntn)                            -->
+<!--                                                                  -->
+<!-- Rationale for why the nCubes are grouped in this way.            -->
+<!-- Declared in 4.1.4                                                -->
+
+<!--                                                                  -->
+<!-- 4.2.5 nCube Group Universe (universe)                            -->
+<!--                                                                  -->
+<!-- Already declared as element "universe"
+      under Study Description, 2.2.3.9. Set level attribute to assign
+      to study level, nCube group level or (below)
+      individual nCube level.                                         -->
+
+<!--                                                                  -->
+<!-- 4.2.6 nCube Group Notes (notes)                                  -->
+<!--                                                                  -->
+<!-- For clarifying information/annotation                            -->
+<!-- regarding the nCube groups.  Uses the generic                    -->
+<!-- notes ELEMENT declared at the end of the DTD.                    -->
+
+<!--                                                                  -->
+<!-- 4.3 VARIABLE (var)                                               -->
+<!-- ==================                                               -->
+<!--                                                                  -->
+<!-- The variable element has the following additional attributes:    -->
+<!--      name : The attribute "name" is a unique ID for
+                  the variable. Following the rules of many
+                  statistical analysis systems such as SAS and SPSS,
+                  names are usually up to eight characters long.       -->
+<!--      wgt :  Whether the variable is a weight.                    -->
+<!--      wgt-var : Reference(s) to the weight variables for this
+                  variable.                                           -->
+<!--      weight : IDREF(S) to the weight element(s)in study          -->
+<!--               description (2.3.1.12)                             -->
+<!--      qstn : Question ID for the variable.                        -->
+<!--      files : IDREF of the file to which the variable belongs.    -->
+<!--      vendor : used to indicate which particular vendor's flavor  -->
+<!--               of format has been used (SAS date v. SPSS date)    -->
+<!--      dcml : Number of decimal points in the variable.            -->
+<!--      intrvl : Options are discrete (default) or coninuous        -->
+<!--      rectype : record type to which this variable belongs        -->
+<!--      sdatrefs : summary data description references -            -->
+<!--                 records the ID values of all elements within     -->
+<!--                 the summary data description (2.2.3) that apply  -->
+<!--                 to this variable. See Variable Group, 4.1        -->
+<!--      methrefs : methodology and processing references -          -->
+<!--                 records the ID values of all elements within     -->
+<!--                 the study methodology and processing section     -->
+<!--                 (2.3) that apply to this variable. See 4.1.      -->
+<!--      pubrefs :  publication/citation references                  -->
+<!--                 records the ID values of all citation elements   -->
+<!--                 within section 2.5 or section 6.0 that pertain   -->
+<!--                 to this variable.                                -->
+<!--      access:    access conditions references                     -->
+<!--                 records the ID values of all elements in the     -->
+<!--                 data use statement (2.4.2) of the document that  -->
+<!--                 describe access conditions for this variable.    -->
+<!--     "aggrMeth"  indicates the type of aggregation method used,
+                     for example 'sum', 'average', 'count'
+         "measUnit"  records the measurement unit, for example 'km',
+	             'miles', etc. 
+         "scale"     records unit of scale, for example 'x1', 'x1000' 
+         "origin"    records the point of origin for anchored scales
+         "nature"    records the nature of the variable, whether it is
+                     'nominal', 'ordinal', 'interval', or 'ratio'
+         "additivity" records type of additivity such as 'stock',
+	             'flow', 'non-additive'                           -->
+<!--      temporal:  a yes|no attribute indicating whether the
+	             variable relays time-related information.
+          geog:      a yes|no attribute indicating whether the
+	             variable relays geographic information.
+		     Additional controlled vocabulary will be added at
+		     a later date.
+          geoVocab:  records the coding scheme used in this variable
+	  catQnty:   records the number of categories found in the
+	             variable. Used primarily for aggregate data files
+		     for verifying cell counts in nCubes.              -->
+<!-- Files attribute intended to link individual variables with       -->
+<!-- the files where data on those variables may be found.  7/1/98,   -->
+<!-- J. McDonough                                                     -->
+<!ELEMENT var        (location*
+                       , labl*
+                       , imputation?
+                       , security?
+                       , embargo?
+                       , respUnit?
+                       , anlysUnit?
+                       , qstn*
+                       , valrng*
+                       , invalrng*
+                       , undocCod*
+                       , universe*
+                       , TotlResp?
+                       , sumStat*
+                       , txt*
+                       , stdCatgry*
+                       , catgryGrp*
+                       , catgry*
+                       , codInstr*
+                       , verStmt*
+                       , concept*
+                       , derivation?
+                       , varFormat?
+		       , geoMap*
+                       , notes*)                                         >
+<!ATTLIST var
+     %a.global;
+     name           CDATA                    #REQUIRED
+     wgt            (wgt|not-wgt)            "not-wgt"
+     wgt-var        IDREFS                   #IMPLIED
+     weight	    IDREFS	            #IMPLIED
+     qstn           IDREFS                   #IMPLIED
+     files          IDREFS                   #IMPLIED
+     vendor         CDATA                    #IMPLIED
+     dcml           CDATA                    #IMPLIED
+     intrvl         (contin|discrete)        "discrete"
+     rectype        CDATA                    #IMPLIED
+     sdatrefs       IDREFS                   #IMPLIED
+     methrefs       IDREFS                   #IMPLIED
+     pubrefs        IDREFS                   #IMPLIED
+     access         IDREFS                   #IMPLIED
+     aggrMeth  (sum|average|count|mode|median|maximum|minimum)  #IMPLIED
+     measUnit       CDATA                    #IMPLIED
+     scale          CDATA                    #IMPLIED
+     origin         CDATA                    #IMPLIED
+     nature    (nominal|ordinal|interval|ratio)       #IMPLIED
+     additivity  (stock|flow|non-additive)            #IMPLIED
+     temporal       (Y|N)                     "N"
+     geog           (Y|N)                     "N"
+     geoVocab       CDATA                    #IMPLIED
+     catQnty        CDATA                    #IMPLIED                   >
+
+<!--                                                                  -->
+<!-- 4.3.1 Location (location)                                        -->
+<!--                                                                  -->
+<!-- This is an empty element containing only the attributes listed
+      below. Attributes include "StartPos" (starting position of
+      variable), "EndPos" (ending position of variable), "width"
+      (number of columns the variable occupies), "RecSegNo" (the
+      record segment number, deck or card number the variable is
+      located on), and fileid, an IDREF link to the fileDscr element
+      for the file that this location is within (this is necessary in
+      cases where the same variable may be coded in two different
+      files, e.g., a logical record length type file and a card image
+      type file). Note that if there is no width or
+      ending position, then the starting position should be the ordinal
+      position in the file, and the file would be described as
+      free-format. The attribute locMap is an IDRef to the element
+      locMap (3.2) and serves as a pointer to indicate that
+      the location information for the nCube's cells (aggregate
+      data) is located in that section.                               -->
+
+<!ELEMENT location             EMPTY                                    >
+<!ATTLIST location
+      %a.global;
+      StartPos     CDATA                     #IMPLIED
+      EndPos       CDATA                     #IMPLIED
+      width        CDATA                     #IMPLIED
+      RecSegNo     CDATA                     #IMPLIED
+      fileid       IDREF                     #IMPLIED
+      locMap       IDREF                     #IMPLIED                    >
+
+<!--                                                                  -->
+<!-- 4.3.2 Variable Label                                             -->
+<!--                                                                  -->
+<!-- A descriptive phrase which defines the variable.
+      The length of this phrase may depend on the statistical analysis
+      system used (e.g., some version of SAS permit 40 character
+      labels while some versions of SPSS permit 120 characters.        -->
+<!-- Use generic "labl" tag with level set to "variable."             -->
+<!-- Element declaration for labl may be found at end                 -->
+<!-- of the DTD.  Jerry McDonough, 6-8-98                             -->
+
+<!--                                                                  -->
+<!-- 4.3.3 Imputation (imputation)                                    -->
+<!--                                                                  -->
+<!-- According to the Statistical Terminology glossary maintained by
+      the National Science Foundation, this is "the process by which
+      one estimates missing values for items that a survey respondent
+      failed to provide," and if applicable in this context, it refers
+      to the type of procedure used.                                   -->
+
+<!ELEMENT imputation (#PCDATA | %a.phrase; | %e.form;)*                 >
+<!ATTLIST imputation %a.global;                                         >
+
+<!--                                                                  -->
+<!-- 4.3.4 Security (security)                                        -->
+<!--                                                                  -->
+<!-- Provides information regarding levels of access to the variable,
+      e.g., public, subscriber, need to know. The ISO standard for
+      dates (YYYY-MM-DD) is recommended for use with the date
+      attribute.                                                       -->
+
+<!ELEMENT security   (#PCDATA | %a.phrase; | %e.form;)*                 >
+<!ATTLIST security
+     %a.global;
+     %a.date;                                                            >
+
+<!-- 4.3.5 Embargo (embargo)                                          -->
+<!-- Provides information on variables which are not currently
+      available because of policies established by the principal
+      investigators and/or data producers. The ISO standard for dates
+      (YYYY-MM-DD) is recommended for use with the date attribute.     -->
+<!ELEMENT embargo    (#PCDATA | %a.phrase; | %e.form;)*                 >
+<!ATTLIST embargo %a.global;
+                   %a.date;
+                   event   (notBefore|notAfter)   "notBefore"
+                   format  CDATA                  #IMPLIED               >
+
+<!--                                                                  -->
+<!-- 4.3.6 Response Unit (respUnit)                                   -->
+<!--                                                                  -->
+<!-- Describes who provided the information contained within the      -->
+<!-- variable, e.g., respondent, proxy, interviewer                   -->
+<!ELEMENT respUnit    (#PCDATA | %a.phrase; | %e.form;)*                >
+<!ATTLIST respUnit %a.global;                                           >
+
+<!--                                                                  -->
+<!-- 4.3.7 Analysis Unit (anlysUnit)                                  -->
+<!--                                                                  -->
+<!-- Details whom or what the variable describes.                     -->
+<!ELEMENT anlysUnit    (#PCDATA|txt|concept|%a.phrase;|%e.form;)*       >
+<!ATTLIST anlysUnit %a.global;                                          >
+
+<!--                                                                  -->
+<!-- 4.3.8 Question.                                                  -->
+<!--                                                                  -->
+<!-- The question element may have mixed content. The element itself
+      may contain text for the question, with the subelements being
+      used to provide further information about the question.
+      Alternatively, the question element may be empty and only the
+      subelements used. The element has a unique question ID
+      attribute which can be used to link a variable with other
+      variables where the same question has been asked.  This would
+      allow searching for all variables that share the same question
+      ID perhaps because the questions was asked several times in a
+      panel design. The "question" ID is a unique identifier for the
+      question. "Var" is a reference to IDs of all variables relating
+      to the question. "seqNo" refers to the sequence number of the
+      question. The attribute sdatrefs may be used to reference
+      elements in the summary data description (2.2.3) which apply to
+      this question.                                                   -->
+<!ELEMENT qstn    (#PCDATA | %a.phrase; | preQTxt | qstnLit | postQTxt
+                   | forward | backward | ivuInstr | %e.form;)*          >
+<!ATTLIST qstn
+     %a.global;
+     qstn              IDREF          #IMPLIED
+     var               IDREFS         #IMPLIED
+     seqNo             CDATA          #IMPLIED
+     sdatrefs          IDREFS         #IMPLIED                           >
+
+<!-- 4.3.8.1 PreQuestion Text                                         -->
+<!-- Text describing a set of conditions under which a question might
+      be asked.                                                        -->
+<!ELEMENT preQTxt   (#PCDATA | %a.phrase; | %e.form;)*                  >
+<!ATTLIST preQTxt    %a.global;                                         >
+
+<!-- 4.3.8.2 Literal Question                                         -->
+<!-- Text of the actual, literal question asked.                      -->
+<!ELEMENT qstnLit        (#PCDATA | %a.phrase; | %e.form;)*             >
+<!ATTLIST qstnLit
+     %a.global;
+     sdatrefs           IDREFS        #IMPLIED                           >
+
+<!-- 4.3.8.3 PostQuestion Text                                        -->
+<!-- Text describing what occurs after the literal question has been
+      asked.                                                           -->
+<!ELEMENT postQTxt  (#PCDATA | %a.phrase; | %e.form;)*                  >
+<!ATTLIST postQTxt   %a.global;                                         >
+
+<!-- 4.3.8.4 Forward Progression                                      -->
+<!-- Contains a reference to IDs of possible following questions.
+      The "qstn" IDREF may be used to specify the IDs.                 -->
+<!ELEMENT forward  (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST forward   %a.global;
+                     qstn   IDREFS   #IMPLIED                            >
+
+<!-- 4.3.8.5 Backflow                                                 -->
+<!-- Contains a reference to IDs of possible preceding questions.
+      The "qstn" IDREF may be used to specify the IDs.                 -->
+<!ELEMENT backward (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST backward  %a.global;
+                     qstn   IDREFS   #IMPLIED                            >
+
+<!-- 4.3.8.6 Interviewer Instructions (ivuInstr)                      -->
+<!-- Specific instructions to the individual conducting an
+      interview.                                                       -->
+<!ELEMENT ivuInstr  (#PCDATA | %a.phrase; | %e.form;)*                  >
+<!ATTLIST ivuInstr  %a.global;                                          >
+
+<!--                                                                  -->
+<!-- 4.3.9 Range of Valid Data Values (valrng)                        -->
+<!--                                                                  -->
+<!-- Values for a particular variable that represent legitimate
+      responses.                                                       -->
+<!-- See appendix for declarations of range, item, and key elements.  -->
+<!--                                                                  -->
+<!ELEMENT valrng  ((range | item)+, key?, notes*)                       >
+<!ATTLIST valrng
+      %a.global;                                                         >
+
+<!--                                                                  -->
+<!-- 4.3.10 Range of Invalid Data Values (invalrng)                    -->
+<!--                                                                  -->
+<!-- Values for a particular variable
+      that represent missing data, not applicable responses, etc.      -->
+<!-- See appendix for declarations of range, item, and key elements.  -->
+<!--                                                                  -->
+<!ELEMENT invalrng ((range | item)+, key?, notes*)                      >
+<!ATTLIST invalrng
+      %a.global;                                                         >
+
+<!--                                                                  -->
+<!-- 4.3.11 List of Undocumented Codes (undocCod)                     -->
+<!--                                                                  -->
+<!-- Values whose meaning is unknown.                                 -->
+<!ELEMENT undocCod (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST undocCod %a.global;                                           >
+
+<!--                                                                  -->
+<!-- 4.3.12 Universe.                                                 -->
+<!--                                                                  -->
+<!-- Element already declared under Study
+      Description. Set level attribute to assign
+      to study level, variable group or individual variable level.     -->
+
+<!-- 4.3.13 Total Responses (TotlResp)                                -->
+<!--                                                                  -->
+<!-- The number of responses to this variable.  This element might
+      be used if the number of responses does not match added case
+      counts. It may also be used to sum the frequencies for variable
+      categories.                                                      -->
+<!ELEMENT TotlResp (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST TotlResp %a.global;                                           >
+
+<!--                                                                  -->
+<!-- 4.3.14 Summary Statistics (sumStat).                             -->
+<!--                                                                  -->
+<!-- One or more statistical measures which describe the responses
+      to a particular variable and may include one or more standard
+      summaries, e.g., minimum and maximum values, etc.                -->
+<!-- Attribute weight references the weight element(s) in study       -->
+<!-- description (2.3.1.12).                                          -->
+<!--                                                                  -->
+<!ELEMENT sumStat     (#PCDATA | %a.phrase; | %e.form;)*                >
+<!ATTLIST sumStat
+      %a.global;
+      wgtd             (wgtd|not-wgtd)           "not-wgtd"
+      wgt-var	     IDREFS	       		 #IMPLIED	
+      weight           IDREFS                    #IMPLIED
+      type             (mean|medn|mode|vald|invd|min|max|stdev)
+                                                 #REQUIRED               >
+
+<!--                                                                  -->
+<!-- 4.3.15 Variable Text (txt)                                       -->
+<!--                                                                  -->
+<!-- An extended description, beyond that provided in Variable Name
+      and Label, of the variable.                                      -->
+<!-- Uses generic element/attribute declaration for txt which can be  -->
+<!-- be found at the end of the Codebook DTD.  6/30/97 J. McDonough   -->
+
+<!--                                                                  -->
+<!-- 4.3.16 Standard Categories (stdCatgry)                           -->
+<!--                                                                  -->
+<!-- Standard category groups used in this variable, like industry    -->
+<!-- codes, employment codes, or social class codes.                  -->
+<!-- Attribute of date provided to indicate version of code in place  -->
+<!-- at time of study.                                                -->
+<!-- Attribute of URI provided to indicate a URN or URL that can be   -->
+<!-- used to obtain the electronic form of the category groups.       -->
+<!ELEMENT stdCatgry   (#PCDATA | %a.phrase; | %e.form;)*                >
+<!ATTLIST stdCatgry %a.global;
+                     %a.date;
+                     URI     CDATA     #IMPLIED                          >
+
+<!--                                                                  -->
+<!-- 4.3.17 Category Group (catgryGrp)                                -->
+<!--                                                                  -->
+<!-- A description of response categories that might be grouped
+      together. The attribute "missing" indicates whether this
+      category group contains missing data or not. The attribute
+      "missType" is used to specify the type of missing data, e.g.,
+      inap., don't know, no answer, etc. A controlled vocabulary for
+      "missType" will be developed in the future.
+      The attribute catGrp is used to indicate all the subsidiary
+      category groups which nest underneath the current category
+      group.  This allows for the encoding of a hierarchical structure
+      of category groups. The "levelno" attribute allows the addition
+      of a level number, and "levelnm" allows the addition of a level
+      name to the category group. The completeness attribute (compl)
+      should be set to "false" if the category group is incomplete
+      (not a complete aggregate of all sub-nodes or children).
+      The exclusiveness attribute (excls) should be set to "false" if
+      the category group can appear in more than one place in the
+      classification hierarchy.                                        -->
+<!ELEMENT catgryGrp  (labl*, catStat*, txt*)                            >
+<!ATTLIST catgryGrp  %a.global;
+                      missing         (Y|N)                   "N"
+                      missType        CDATA                   #IMPLIED
+                      catgry          IDREFS                  #IMPLIED
+                      catGrp          IDREFS                  #IMPLIED
+		      levelno         CDATA                   #IMPLIED
+		      levelnm         CDATA                   #IMPLIED
+		      compl           (true|false)            "true"
+		      excls           (true|false)            "true"  >
+
+<!-- 4.3.17.1 Category Group Label                                    -->
+<!-- A short description of the category group.                       -->
+<!-- This tag uses the element/attribute declarations for the generic -->
+<!-- element labl to be found at the end of the Codebook DTD, section -->
+<!-- A.2.  Jerome McDonough 6/22/98                                   -->
+
+<!-- 4.3.17.2 Category Group Statistic (catStat)                      -->
+<!-- See note at 4.3.18.4                                             -->
+
+<!-- 4.3.17.3 Category Group Text                                     -->
+<!-- A fuller description of the category group.                      -->
+<!-- This tag uses the element/attribute declarations for the generic -->
+<!-- element txt to be found at the end of the Codebook DTD, section  -->
+<!-- A.3.  Jerome McDonough 6/22/98                                   -->
+
+<!--                                                                  -->
+<!-- 4.3.18 Category (catgry)                                         -->
+<!--                                                                  -->
+<!-- A description of a particular response. The attribute "missing"
+      indicates whether this category group contains missing data or
+      not. The attribute "missType" is used to specify the type of
+      missing data, e.g., inap., don't know, no answer, etc. A
+      controlled vocabulary for "missType" will be developed in the
+      future. The attribute of country allows for the denotation of
+      country-specific category values. Sdatrefs records the ID values
+      of all elements within the summary data decription (2.2.3) that
+      apply to this category. The exclusiveness attribute (excls)
+      should be set to "false" if the category can appear in more
+      than one place in the classification hierarchy.                  --> 
+
+<!ELEMENT catgry        (catValu?
+                          , labl*
+                          , txt*
+                          , catStat*
+                          , mrow?)                                    >
+<!ATTLIST catgry
+     %a.global;
+     missing         (Y|N)                   "N"
+     missType        CDATA                   #IMPLIED
+     country         CDATA                   #IMPLIED
+     sdatrefs        IDREFS                  #IMPLIED
+     excls           (true|false)            "true"                     >
+
+<!-- 4.3.18.1 Category Value                                          -->
+<!-- The explicit response.                                           -->
+<!ELEMENT catValu     (#PCDATA | %a.phrase; | %e.form;)*                >
+<!ATTLIST catValu %a.global;                                            >
+
+<!-- 4.3.18.2 Category Label                                          -->
+<!-- A short description of the response.                             -->
+<!-- Use generic labl tag, declared at end of DTD.                    -->
+
+<!-- 4.3.18.3 Category Text                                           -->
+<!-- A fuller description of the response or an elaboration on the
+      response.                                                        -->
+<!-- Use generic txt tag, declared at end of DTD.                     -->
+
+<!-- 4.3.18.4 Category Statistic (catStat).                           -->
+<!-- May include frequencies, percentages, or crosstabulation
+      results which define the category; often appears in a table.
+      The attribute "type" refers to "frequency", "percent",
+      "crosstab", etc. The URI attribute can be used to link to a
+      table.                                                           -->
+<!-- The category statistic section is presumed to contain one of     -->
+<!-- the following: 1. textual information (e.g., PCDATA), or         -->
+<!-- 2. non-parseable character data (e.g., the statistics), or       -->
+<!-- 3. some other form of external information (table, image, etc.). -->
+<!-- In the case of 1, the catStat tag can be used to markup the      -->
+<!-- character data.  In cases 2 or 3, the element can be left        -->
+<!-- empty and the URI attribute used to refer to the external        -->
+<!-- object containing the information.  Jerome McDonough 6/22/98     -->
+<!ELEMENT catStat     (#PCDATA | %a.phrase; | table | %e.form;)*         >
+<!ATTLIST catStat
+      %a.global;
+      type          (freq|percent|crosstab)         "freq"
+      URI           CDATA                           #IMPLIED
+      methrefs      IDREFS                          #IMPLIED
+      wgtd          (wgtd|not-wgtd)                 "not-wgtd"
+      wgt-var       IDREFS                          #IMPLIED
+      weight        IDREFS                          #IMPLIED
+      sdatrefs      IDREFS                          #IMPLIED             >
+
+<!-- 4.3.18.5 Mathematical Row (mrow)                                   -->
+<!-- mrow is a wrapper containing the presentation expression mi. It
+     creates a single string without spaces consisting of the
+     individual elements described within it. It can be used to
+     create a single variable by concatenating other variables into
+     a single string. It is used to create linking variables
+     composed of multiple non-contiguous parts or to define unique
+     strings for various category values of a single variable.        -->
+
+<!ELEMENT mrow      (mi*)                                              >
+<!ATTLIST mrow      %a.global;                                         >
+
+<!-- 4.3.18.5.1  Mathematical Identifier (mi)
+     Token element containing the smallest unit in the mrow that
+     carries meaning.                                                  -->
+
+<!ELEMENT mi        (#PCDATA | %a.phrase;)*                            >
+<!ATTLIST mi        %a.global;
+                     varRef     IDREF      #REQUIRED                  >  
+                                         
+<!--                                                                  -->
+<!-- 4.3.19 Coder Instructions (codInstr)                             -->
+<!--                                                                  -->
+<!-- Any special instructions to those who converted information
+      from one form to another for a particular variable.  This
+      might include the reordering of numeric information into
+      another form or the conversion of textual information into
+      numeric information.                                             -->
+<!ELEMENT codInstr  (#PCDATA | %a.phrase; | %e.form;)*                  >
+<!ATTLIST codInstr  %a.global;                                          >
+
+<!--                                                                  -->
+<!-- 4.3.20 Version Statement (verStmt)                               -->
+<!--                                                                  -->
+<!-- Version statement for the variable, if it has undergone changes. -->
+<!-- Uses generic element/declaration for verStmt which can be found  -->
+<!-- at the end of the Codebook DTD.  6/30/98 J. McDonough            -->
+
+<!--                                                                  -->
+<!-- 4.3.21 Concept (concept)                                         -->
+<!--                                                                  -->
+<!-- The general subject to which this variable may be seen as        -->
+<!-- pertaining.  This element serves the same purpose as the         -->
+<!-- keywords and topic classification elements, but at the variable  -->
+<!-- level instead of the study level.                                -->
+<!-- The vocab attribute is provided to indicate the controlled       -->
+<!-- vocabularly used in the element, if any (e.g., LCSH, Mesh, etc.) -->
+<!-- vocabURI attribute added to specify  location for full           -->
+<!-- controlled vocabulary.                                           -->
+<!ELEMENT concept  (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST concept  %a.global;
+                    vocab   CDATA   #IMPLIED
+                    vocabURI   CDATA   #IMPLIED                          >
+
+<!--                                                                  -->
+<!-- 4.3.22 Derivation (derivation)                                   -->
+<!--                                                                  -->
+<!-- Used only in the case of derived variables, this element         -->
+<!-- provides both a description of how the derivation was performed  -->
+<!-- and the command used to generate the derived variable, as well   -->
+<!-- as indicating the other variables in the study used to generate  -->
+<!-- the derivation.                                                  -->
+<!-- The var attribute provides the ID values of the other variables  -->
+<!-- in the study used to generate this derived variable.             -->
+<!ELEMENT derivation   (drvdesc?, drvcmd?)                              >
+<!ATTLIST derivation   %a.global;
+                        var   IDREFS   #IMPLIED                          >
+
+<!--                                                                  -->
+<!-- 4.3.22.1 Derivation Description (drvdesc)                        -->
+<!--                                                                  -->
+<!-- A textual description of the way in which this variable was      -->
+<!-- derived for display to users.                                    -->
+<!ELEMENT drvdesc   (#PCDATA | %a.phrase; | %e.form;)*                  >
+<!ATTLIST drvdesc   %a.global;                                          >
+
+<!--                                                                  -->
+<!-- 4.3.22.2 Derivation Command (drvcmd)                             -->
+<!--                                                                  -->
+<!-- The actual command used to generate the derived variable.        -->
+<!-- The syntax attribute is used to indicate the command language    -->
+<!-- employed (e.g., SPSS, SAS, Fortran, etc.)                        -->
+<!ELEMENT drvcmd   (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST drvcmd   %a.global;
+                    syntax   CDATA   #IMPLIED                            >
+
+<!--                                                                  -->
+<!-- 4.3.23 Variable Format (format)                                  -->
+<!--                                                                  -->
+<!-- format for the variable in question.  Format has the following   -->
+<!-- attributes:                                                      -->
+<!--      type: either character or numeric                           -->
+<!--      formatname: name for the particular format, if applicable   -->
+<!--      schema: vendor or standards body which defines the format,  -->
+<!--              one of SAS, SPSS, IBM, ANSI, ISO, XML-DATA          -->
+<!--      category: date, time, currency, other                       -->
+<!--      URI: network identifier for format definition               -->
+<!ELEMENT varFormat (#PCDATA | %a.phrase; | %e.form;)*                  >
+<!ATTLIST varFormat %a.global;
+                  type   (character | numeric)   "numeric"
+                  formatname   CDATA   #IMPLIED
+                  schema (SAS|SPSS|IBM|ANSI|ISO|XML-Data|other) "ISO"
+                  category (date | time | currency | other)   "other"
+                  URI   CDATA   #IMPLIED                                 >
+
+<!-- 4.3.24 Geographic Map (geoMap)
+     This element is used to point (using a URI) to an external map
+     that is used to display the geography in question. The levelno
+     attribute indicates the level of the geographic hierarchy relayed
+     in the map. The mapformat attribute indicates the format of
+     the map (controlled vocabulary will be developed).               -->
+
+<!ELEMENT geoMap     EMPTY                                            >
+<!ATTLIST geoMap     %a.global;
+                     URI         CDATA      #IMPLIED
+                     mapformat   CDATA      #IMPLIED
+		     levelno     CDATA      #IMPLIED                  >
+<!-- 4.3.25 Notes                                                     -->
+<!--                                                                  -->
+<!-- Used to indicate additional information regarding the variable.  -->
+<!-- Use generic "notes" element, declared at end of DTD.             -->
+
+<!--                                                                  -->
+<!-- 4.4 nCube                                                        -->
+<!-- Describes the logical structure of an n-dimensional array, in
+     which each coordinate intersects with every other dimension at
+     a single point. The nCube has been designed for use in the markup
+     of aggregate data. This element includes the following attributes:
+     The attribute "name" is a unique identifier for the nCube.
+     Following the rules of many statistical analysis systems
+     such as SAS and SPSS, names are usually up to eight characters long.
+     The "sdatrefs" are summary data description references which record
+     the ID values of all elements within the summary data description
+     section of the Study Description which might apply to the nCube.
+     These elements include: time period covered, date of collection,
+     nation or country, geographic coverage, geographic unit, unit of
+     analysis, universe, and kind of data. 
+     The "methrefs" are methodology and processing references which record
+     the ID values of all elements within the study methodology and
+     processing section of the Study Description which might apply
+     to the nCube. These elements include information on data collection
+     and data appraisal (e.g., sampling, sources, weighting, data
+     cleaning, response rates, and sampling error estimates).
+     The "pubrefs" attribute provides a link to publication/citation
+     references and records the ID values of all citations
+     elements within Section 2.5 or Section 5.0 that pertain to this nCube.
+     "Access" records the ID values of all elements in Section 2.4 of
+     the document that describe access conditions for this nCube.
+     "dmnsQnty" notes the number of dimensions in the nCube. 
+     "cellQnty" notes the total number of cells in the nCube.         -->
+
+<!--                                                                  -->
+<!ELEMENT nCube  (location*,
+                  labl*,
+                  txt*,
+                  universe*,
+                  imputation?,
+                  security?,
+                  embargo?,
+                  respUnit?,
+                  anlysUnit?,
+                  verStmt*,
+                  purpose?,
+                  dmns*,
+                  measure*,
+                  notes*)                                                >
+<!ATTLIST nCube  %a.global;
+                  name           CDATA          #IMPLIED
+                  sdatrefs       IDREFS         #IMPLIED
+                  methrefs       IDREFS         #IMPLIED
+                  pubrefs        IDREFS         #IMPLIED
+                  access         IDREFS         #IMPLIED
+                  dmnsQnty       CDATA          #IMPLIED
+                  cellQnty       CDATA          #IMPLIED                 >
+
+<!-- 4.4.11 purpose                                                   -->
+<!-- Explains the purpose for which a particular nCube was created.   -->
+<!--                                                                  -->
+
+<!ELEMENT purpose   (#PCDATA | %a.phrase; | %e.form;)*                  >
+<!ATTLIST purpose   %a.global;
+                     sdatrefs   IDREFS   #IMPLIED
+                     methrefs   IDREFS   #IMPLIED
+                     pubrefs    IDREFS   #IMPLIED
+                     URI        CDATA    #IMPLIED                        >
+
+
+<!-- 4.4.12 Dimension (dmns)                                          -->
+<!-- This element defines a variable as a dimension of the nCube,
+     and should be repeated to describe each of the cube's dimensions.
+     The attribute rank is used to define the coordinate order
+     (rank='1', rank='2', etc.). The attribute varRef is an IDREF
+     that points to the variable that makes up this dimension of the
+     nCube.                                                           -->
+<!ELEMENT dmns      (cohort*)                                            >
+<!ATTLIST dmns      %a.global;
+                     rank       CDATA    #IMPLIED
+                     varRef     IDREF    #IMPLIED                        >
+
+<!-- 4.4.12.1 Cohort (cohort)                                         -->
+<!-- The element cohort indicates that the nCube contains a limited
+     number of categories from a particular variable, as opposed to
+     the full range of categories. The attribute "catRef" is an IDREF
+     to the actual category being used. "Value" indicates the actual
+     value attached to the category that is being used.               -->
+<!ELEMENT cohort     (range*)                                           >
+<!ATTLIST cohort     %a.global;
+                     catRef      IDREF    #IMPLIED
+		     value       CDATA    #IMPLIED                      >
+     
+<!-- 4.4.13 measure                                                   -->
+<!--The element measure indicates the measurement features of the
+    cell content: type of aggregation used, measurement unit, and
+    measurement scale. An origin point is recorded for anchored scales,
+    to be used in determining relative movement along the scale.
+    Additivity indicates whether an aggregate is a stock (like the
+    population at a given point in time) or a flow (like the number of
+    births or deaths over a certain period of time). The non-additive
+    flag is to be used for measures that for logical reasons cannot be
+    aggregated to a higher level - for instance, data that only make
+    sense at a certain level of aggregation, like a classification.
+    Two nCubes may be identical except for their measure - for
+    example, a count of persons by age and percent of persons by age.
+    "Measure" is an empty element that includes the following attributes:
+    "varRef" is an IDREF.
+    "aggrMeth" indicates the type of aggregation method used,
+               for example 'sum', 'average', 'count'
+    "measUnit" records the measurement unit, for example 'km', 'miles', etc. 
+    "scale" records unit of scale, for example 'x1', 'x1000' 
+    "origin" records the point of origin for anchored scales
+    "additivity" records type of additivity such as 'stock', 'flow',
+    'non-additive'                                                    -->
+<!ELEMENT measure   EMPTY                                               >
+<!ATTLIST measure   %a.global;
+    varRef         IDREF                    #IMPLIED
+    aggrMeth (sum|average|count|mode|median|maximum|minimum)  #IMPLIED
+    measUnit       CDATA                    #IMPLIED
+    scale          CDATA                    #IMPLIED
+    origin         CDATA                    #IMPLIED
+    additivity (stock|flow|non-additive)              #IMPLIED    >
+
+<!--                                                                  -->
+<!-- 5.0 OTHER STUDY-RELATED MATERIALS                                -->
+<!-- =======================                                          -->
+<!--                                                                  -->
+<!--                                                                  -->
+<!-- This section allows for the inclusion of other materials that
+      are related to the study as identified and labeled by the DTD
+      users (encoders). Such materials could include a bibliography,
+      reports, etc. This section may serve as a "container" for other
+      machine-readable materials such as data definition statements,
+      PDF codebook, etc. Users should employ the URI attribute to
+      indicate the location of other study-related materials. The
+      "type" and "level" attributes can be used to further define
+      the related materials.                                           -->
+<!-- ELEMENT declaration of otherMat may be found at end              -->
+<!-- of DTD.                                                          -->
+
+<!-- Appendix A. Generic Lower-level Elements                         -->
+<!-- ========================================                         -->
+<!-- Note that most lower-level elements of a generic sort
+      are handled by the core TEI elements, especially
+      those grouped together by means of the parameter
+      entities #PCDATA #PCDATA #PCDATA
+      and %component.seq;                                              -->
+<!--                                                                  -->
+<!-- A.1 Other Material                                               -->
+<!-- Level attribute used in place of separate elements for
+      'other material.' Suggested values for level include
+      specifications of the item-level to which the element
+      applies: e.g., level=data; level=datafile; level=studydsc;
+      level=study.  The URI attribute doesn't have to be used in every
+      case; it's intended for capturing references to other
+      materials separate from the codebook itself.                     -->
+<!ELEMENT otherMat      (otherMat* | (labl* , txt? , notes*, table*
+                          ,citation?))                                   >
+<!ATTLIST otherMat
+      %a.global;
+      type           CDATA                 #IMPLIED
+      level (data|datafile|studydsc|study) #REQUIRED
+      URI            CDATA                 #IMPLIED                      >
+
+<!-- A.2 Label (labl)                                                  -->
+<!-- Vendor attribute added (and all labels made repeatable) to       -->
+<!-- allow for specification of different labels for use with         -->
+<!-- different vendors' software. Attribute country allows
+     specification of a different label by country for the same
+     element to which it applies. Attribute sdatrefs allows pointing
+     to specific dates, universes, or other information encoded in
+     section 2.0. Country and sdatrefs are intended to cover instances
+     of comparative data, by retaining consistency in some elements
+     over time and geography, but altering, as appropriate, information
+     pertaining to date, language, and/or location.                   -->
+<!ELEMENT labl           (#PCDATA | %a.phrase; | %e.form;)*             >
+<!ATTLIST labl
+     %a.global;
+     level          CDATA                    #IMPLIED
+     vendor         CDATA                    #IMPLIED
+     country        CDATA                    #IMPLIED
+     sdatrefs       IDREFS                   #IMPLIED                    >
+
+<!-- A.3. Descriptive Text (txt)                                      -->
+<!-- Suggested values for Level include specifications of the
+      item-level for which the text supplies a description:
+      e.g., Level=record; Level=variable; level=category               -->
+<!ELEMENT txt             (#PCDATA | %a.phrase; | table | %e.form;)*     >
+<!ATTLIST txt
+     %a.global;
+     level          CDATA                    #IMPLIED
+     sdatrefs       IDREFS                   #IMPLIED                    >
+
+<!-- A.4. Notes and comments (notes)                                  -->
+<!ELEMENT notes     (#PCDATA | %a.phrase; | table | %e.form;)*           >
+<!ATTLIST notes
+     %a.global;
+     type        CDATA         #IMPLIED
+     subject     CDATA         #IMPLIED
+     level       CDATA         #IMPLIED
+     resp        CDATA         #IMPLIED
+     sdatrefs    IDREFS        #IMPLIED                                  >
+
+<!-- A.5. Paragraph (p)                                               -->
+<!-- marks a paragraph                                                -->
+<!ELEMENT p        (#PCDATA|emph|hi|list|Link|ExtLink)*                  >
+<!ATTLIST p    
+     %a.global;
+     n           CDATA         #IMPLIED
+     rend        CDATA         #IMPLIED                                  >
+
+<!--                                                                  -->
+<!-- A.6 BIBLIOGRAPHIC CITATION (citation)                            -->
+<!-- ========================================                         -->
+<!--                                                                  -->
+<!-- Note: Citation elements may be found in three places in the DTD:
+      (1) In the Document Description, Citation (of Documentation),
+      (2) in the Document Description, Citation (of Documentation
+      Source), and in the Study Description, Citation (of Study).      -->
+<!-- MARCURI attribute provided to give URI for MARC record for this  -->
+<!-- citation.                                                        -->
+
+<!ELEMENT citation     (titlStmt
+                         , rspStmt?
+                         , prodStmt?
+                         , distStmt?
+                         , serStmt?
+                         , verStmt*
+                         , biblCit?
+                         , holdings*
+                         , notes*)                                       >
+<!ATTLIST citation    %a.global;
+                       MARCURI   CDATA     #IMPLIED                      >
+
+<!--                                                                  -->
+<!-- A.6.1 Title Statement                                            -->
+<!--                                                                  -->
+<!ELEMENT titlStmt     (titl
+                         , subTitl*
+                         , altTitl*
+                         , parTitl*
+                         , IDNo*)                                        >
+<!ATTLIST titlStmt  %a.global;                                          >
+
+<!-- A.6.1.1 Title                                                    -->
+<!-- Contains the full authoritative title of the data/documentation
+      The data collection title
+      will in most cases be identical to the title for the
+      documentation. A full title should indicate the geographic scope
+      of the data collection as well as the time period covered.       -->
+<!-- Maps to Dublin Core Title element. This element is required in
+      the Study Description citation.                                  -->
+<!ELEMENT titl          (#PCDATA | %a.phrase; | %e.form;)*              >
+<!ATTLIST titl   %a.global;                                             >
+
+<!-- A.6.1.2 Subtitle                                                 -->
+<!-- A secondary title used to amplify
+      or state certain limitations on the main title.                  -->
+<!ELEMENT subTitl       (#PCDATA | %a.phrase; | %e.form;)*              >
+<!ATTLIST subTitl       %a.global;                                      >
+
+<!-- A.6.1.3 Alternative Title                                        -->
+<!-- The alternative title may be the title by which a data
+      collection is commonly referred or it may be an abbreviation for
+      the title.                                                       -->
+<!ELEMENT altTitl       (#PCDATA | %a.phrase; | %e.form;)*              >
+<!ATTLIST altTitl       %a.global;                                      >
+
+<!-- A.6.1.4 Parallel Title:                                          -->
+<!-- Title translated into another language.                          -->
+<!ELEMENT parTitl       (#PCDATA | %a.phrase; | %e.form;)*              >
+<!ATTLIST parTitl       %a.global;                                      >
+
+<!-- A.6.1.5 Identification Number                                    -->
+<!-- Unique string or number (producer's/archive's number)            -->
+<!ELEMENT IDNo      (#PCDATA | %a.phrase; | %e.form;)*                  >
+<!ATTLIST IDNo
+     %a.global;
+     agency           CDATA            #IMPLIED
+     level            (study|file)     #IMPLIED                          >
+
+<!--                                                                  -->
+<!-- A.6.2 Responsibility Statement                                   -->
+<!--                                                                  -->
+<!ELEMENT rspStmt     (AuthEnty*
+                        , othId*)                                        >
+<!ATTLIST rspStmt  %a.global;                                           >
+
+<!-- A.6.2.1 Authoring Entity (AuthEnty).                             -->
+<!-- The person, corporate body, or agency responsible for the data/
+      documentation's substantive and intellectual content.
+      Repeat the element for each author, and use affiliation
+      attribute if available. Invert first and last name and use
+      comma.                                                           -->
+<!-- Maps to Dublin Core Creator element.  Inclusion of this element  -->
+<!-- in codebook is recommended.                                      -->
+<!--                                                                  -->
+<!ELEMENT AuthEnty     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST AuthEnty
+     %a.global;
+     affiliation       CDATA                #IMPLIED                     >
+
+<!-- A.6.2.2 Other identifications and acknowledgments                -->
+<!-- Give statements of responsibility not recorded in the title and  -->
+<!-- statement of responsibility area.  Make notes on persons or      -->
+<!-- bodies connected with the work, or significant persons or bodies -->
+<!-- connected with previous editions and not already named in the    -->
+<!-- description.                                                     -->
+<!-- Role attribute should describe individual's "job title" in       -->
+<!-- regards to study, e.g., data collection staff, research          -->
+<!-- initiator, etc.  7/2/98 J. McDonough                             -->
+<!-- Maps to Dublin Core Contributor element; see A NOTE ON           -->
+<!-- MAPPING TO DUBLIN CORE above.  Inclusion of this element         -->
+<!-- is recommended.                                                  -->
+
+<!ELEMENT othId     (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST othId
+     %a.global;
+     type           CDATA        #IMPLIED
+     role           CDATA        #IMPLIED
+     affiliation    CDATA        #IMPLIED                                >
+
+<!--                                                                  -->
+<!-- A.6.3 Production Statement (prodstmtD)                           -->
+<!--                                                                  -->
+<!ELEMENT prodStmt     (producer*
+                        , copyright?
+                        , prodDate*
+                        , prodPlac*
+                        , software*
+                        , fundAg*
+                        , grantNo*)                                      >
+<!ATTLIST prodStmt     %a.global;                                       >
+
+<!-- A.6.3.1 Producer                                                 -->
+<!-- The producer is the person or organization                       -->
+<!-- with the financial or administrative responsibility for the      -->
+<!-- physical processes whereby the data/documentation
+      is brought into existence.                                       -->
+<!-- Use the role attribute to distinguish different stages of
+      involvement in the production process, such as
+      original producer.                                               -->
+<!-- Maps to Dublin Core Publisher element; see A NOTE ON MAPPING TO  -->
+<!-- DUBLIN CORE above.  Inclusion of this element in codebook is     -->
+<!-- recommended.                                                     -->
+<!ELEMENT producer     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST producer
+     %a.global;
+     abbr         CDATA        #IMPLIED
+     affiliation  CDATA        #IMPLIED
+     role         CDATA        #IMPLIED                                  >
+
+<!-- A.6.3.2 Copyright                                                -->
+<!-- Copyright statement. Maps to Dublin Core Rights element; see
+      A NOTE ON MAPPING TO DUBLIN CORE (above). Inclusion of
+      this element is recommended.                                     -->
+<!ELEMENT copyright    (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST copyright    %a.global;                                       >
+
+<!-- A.6.3.3 Date of Production                                       -->
+<!-- Date the data/documentation was produced (not
+      archived). The ISO standard for dates ( YYYY-MM-DD)
+      is recommended.                                                  -->
+<!-- Maps to Dublin Core Date element; see A NOTE ON MAPPING TO       -->
+<!-- DUBLIN CORE above.  Inclusion of this element in codebook is     -->
+<!-- recommended.  Note that the specific production date element     -->
+<!-- which maps to the Dublin Core date is the one occurring in the   -->
+<!-- document description section for the electronic codebook itself  -->
+<!-- (not its source).                                                -->
+<!ELEMENT prodDate     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST prodDate
+     %a.global;
+     %a.date;                                                            >
+
+<!-- A.6.3.4 Place of Production.                                     -->
+<!-- Address of the archive or organization that
+      produced the data/documentation.                                 -->
+<!ELEMENT prodPlac     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST prodPlac  %a.global;                                          >
+
+<!-- A.6.3.5 Software used in Production                              -->
+<!-- Software used to produce the data/documentation. A "version"
+      attribute permits specification of the software version number.  -->
+<!-- date attribute provided to specify date (if any) for the         -->
+<!-- software release.                                                -->
+<!ELEMENT software (#PCDATA | %a.phrase; | %e.form;)*                   >
+<!ATTLIST software %a.global;
+                    %a.date;
+                    version   CDATA   #IMPLIED                           >
+
+<!-- A.6.3.6 Funding Agency/Sponsor.                                  -->
+<!-- Indicate the source(s) of funds for the conduct of the
+      research.                                                        -->
+<!ELEMENT fundAg     (#PCDATA | %a.phrase; | %e.form;)*                 >
+<!ATTLIST fundAg
+     %a.global;
+     abbr            CDATA               #IMPLIED
+     role            CDATA               #IMPLIED                        >
+
+<!-- A.6.3.7 Grant Number                                             -->
+<!-- The grant/contract number of the project that
+      sponsored the effort. If more than one, link to the
+      appropriate agency using the "agency" attribute.                 -->
+<!ELEMENT grantNo     (#PCDATA | %a.phrase; | %e.form;)*                >
+<!ATTLIST grantNo
+     %a.global;
+     agency             CDATA           #IMPLIED
+     role               CDATA           #IMPLIED                         >
+
+<!--                                                                  -->
+<!-- A.6.4 Distributor Statement                                      -->
+<!--                                                                  -->
+<!ELEMENT distStmt     (distrbtr*
+                         , contact*
+                         , depositr*
+                         , depDate*
+                         , distDate?)                                    >
+<!--                                                                  -->
+<!ATTLIST distStmt  %a.global;                                          >
+
+<!-- A.6.4.1 Distributor                                              -->
+<!-- A distributor is defined as the organization
+      designated by the author or producer to  generate
+      copies of the data/documentation including any
+      necessary editions or
+      revisions. Names and addresses may be specified, and other
+      archives may be co-distributors.                                 -->
+<!-- URI attribute for providing a URN or URL to contact ordering     -->
+<!-- service or download facility on a website.                       -->
+<!ELEMENT distrbtr      (#PCDATA | %a.phrase; | %e.form;)*              >
+<!ATTLIST distrbtr
+     %a.global;
+     abbr              CDATA           #IMPLIED
+     affiliation       CDATA           #IMPLIED
+     URI               CDATA           #IMPLIED                          >
+
+<!-- A.6.4.2 Contact Persons                                          -->
+<!-- Names and addresses of individuals responsible for the data/
+      documentation. Individuals listed as contact persons will be used
+      as resource persons regarding problems or questions raised by the
+      user community.                                                  -->
+<!-- URI attribute used to indicate a URN or URL for the home page    -->
+<!-- of the contact individual.  email attribute used to indicate     -->
+<!-- an e-mail address for the contact individual.                    -->
+<!ELEMENT contact      (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST contact   %a.global;
+                     affiliation   CDATA   #IMPLIED
+                     URI           CDATA   #IMPLIED
+                     email         CDATA   #IMPLIED                      >
+
+<!-- A.6.4.3 Depositor                                                -->
+<!-- Indicate the name of a person (or institution)
+      who provided this data/documentation to the archive originally
+      storing the it.                                                  -->
+<!ELEMENT depositr     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST depositr
+     %a.global;
+     abbr        CDATA          #IMPLIED
+     affiliation CDATA          #IMPLIED                                 >
+
+<!-- A.6.4.4 Date of Deposit                                          -->
+<!-- Date that the data/documentation was deposited with the archive
+      that originally received it. The ISO standard for dates
+      (YYYY-MM-DD) is recommended for use with the date attribute.     -->
+<!ELEMENT depDate     (#PCDATA | %a.phrase; | %e.form;)*                >
+<!ATTLIST depDate    %a.global;
+                      %a.date;                                           >
+
+<!-- A.6.4.5 Date of Distribution                                     -->
+<!-- The date the data/documentation became operational in a          -->
+<!-- computerized form and available for distribution/presentation.   -->
+<!-- The ISO standard for dates (YYYY-MM-DD) is recommended for use   -->
+<!-- with the date attribute.                                         -->
+<!ELEMENT distDate     (#PCDATA | %a.phrase; | %e.form;)*               >
+<!ATTLIST distDate    %a.global;
+                       %a.date;                                          >
+
+<!--                                                                  -->
+<!-- A.6.5 Series Statement                                           -->
+<!--                                                                  -->
+<!-- URI attributed provided to point to central Internet repository  -->
+<!-- of series information (ISO 11179)                                -->
+<!ELEMENT serStmt     (serName*
+                        , serInfo*)                                      >
+<!ATTLIST serStmt     %a.global;
+                       URI   CDATA   #IMPLIED                            >
+
+<!-- A.6.5.1 Series Name                                              -->
+<!-- The name of the data/documentation series to which the
+      data/documentation belongs.                                      -->
+<!ELEMENT serName     (#PCDATA | %a.phrase; | %e.form;)*                >
+<!ATTLIST serName
+     %a.global;
+     abbr           CDATA          #IMPLIED                              >
+
+<!-- A.6.5.2 Series Information                                       -->
+<!-- Contains a history of the series and a summary of those
+      features that apply to the series as a whole.                    -->
+<!ELEMENT serInfo     (#PCDATA | %a.phrase; | %e.form;)*                >
+<!ATTLIST serInfo    %a.global;                                         >
+
+<!--                                                                  -->
+<!-- A.6.6 Version Statement (verStmt)                                -->
+<!--                                                                  -->
+<!ELEMENT verStmt     (version?
+                        , verResp?
+                        , notes*)                                        >
+<!ATTLIST verStmt  %a.global;                                           >
+
+<!-- A.6.6.1 Version                                                  -->
+<!-- Also known as release or edition. If there have been substantive
+      changes to the data/documentation/variable since its creation,
+      this statement should be used. The ISO standard for dates
+      (YYYY-MM-DD) is recommended for use with the date attribute.     -->
+<!ELEMENT version     (#PCDATA | %a.phrase; | %e.form;)*                >
+<!ATTLIST version
+     %a.global;
+     %a.date;
+     type        CDATA           #IMPLIED                                >
+
+<!-- A.6.6.2 Version Responsibility Statement                         -->
+<!-- Used to indicate the person or organization responsible for      -->
+<!-- the version.                                                     -->
+<!ELEMENT verResp    (#PCDATA | %a.phrase; | %e.form;)*                 >
+<!ATTLIST verResp    %a.global;
+                      affiliation   CDATA   #IMPLIED                     >
+
+<!--                                                                  -->
+<!-- A.6.7 Bibliographic Citation                                     -->
+<!--                                                                  -->
+<!-- Complete bibliographic reference containing all of the
+      standard elements of a citation that can be used to
+      cite the data/documentation.                                     -->
+<!-- Attribute of format provided to specify particular citation      -->
+<!-- style used, e.g., APA, MLA, Chicago, etc.                        -->
+<!ELEMENT biblCit    (#PCDATA | %a.phrase; | %e.form;)*                 >
+<!ATTLIST biblCit %a.global;
+                   format   CDATA   #IMPLIED                             >
+
+<!--                                                                  -->
+<!-- A.6.8 Holdings Information                                       -->
+<!--                                                                  -->
+<!-- Provides information on either physical or electronic holdings   -->
+<!-- of the cited work.                                               -->
+<!-- Attributes include:                                              -->
+<!--      location: the physical location a copy is held              -->
+<!--      callno:   the call number for a work at the location        -->
+<!--                specified                                         -->
+<!--      uri:      A URN or URL for accessing the electronic copy    -->
+<!--                of the cited work                                 -->
+<!ELEMENT holdings (#PCDATA | %a.phrase; | %e.form;)*        >
+<!ATTLIST holdings %a.global;
+                    location   CDATA   #IMPLIED
+                    callno     CDATA   #IMPLIED
+                    URI        CDATA   #IMPLIED
+                    media      CDATA   #IMPLIED                          >
+
+<!--                                                                  -->
+<!-- A.7 Exchange Table Model (CALS)                                  -->
+<!--                                                                  -->
+<!ENTITY % tbls SYSTEM "Tables.dtd">
+%tbls;
+
+<!--                                                                  -->
+<!-- A.8 Variable Range (range)                                       -->
+<!--                                                                  -->
+<!-- Actual range. The "UNITS" attribute of Range permits the
+      specification of integer/real numbers.                           -->
+<!-- Example: x < 1  or  10 <= x < 20 would be expressed as           -->
+<!-- <range maxExclusive='1' /><range min='10' maxExclusive='20' />   -->
+<!ELEMENT range EMPTY                                                   >
+<!ATTLIST range %a.global;
+                 UNITS          (INT|REAL)   "INT"
+                 min            CDATA        #IMPLIED
+                 minExclusive   CDATA        #IMPLIED
+                 max            CDATA        #IMPLIED
+                 maxExclusive   CDATA        #IMPLIED                    >
+
+<!--                                                                  -->
+<!-- A.9 Variable Item (item)                                         -->
+<!--                                                                  -->
+<!-- The counterpart to Range; used to encode individual values.
+      This is an empty element consisting only of its attributes.
+      The "UNITS" attribute of Range permits the specification of
+      integer/real numbers.                                            -->
+<!ELEMENT item EMPTY                                                    >
+<!ATTLIST item %a.global;
+                UNITS   (INT|REAL)   "INT"
+                VALUE   CDATA        #REQUIRED                           >
+
+<!--                                                                  -->
+<!-- A.10 Range Key (key)                                             -->
+<!--                                                                  -->
+<!-- This element permits a listing of the category values and
+      labels. While this information is coded separately in the
+      Category element, there may be some value in having this
+      information in proximity to the range of valid and
+      invalid values. A table is permissible in this element.          -->
+<!ELEMENT key (#PCDATA | %a.phrase; | table | %e.form;)*                 >
+<!ATTLIST key %a.global;                                                >
+
+<!-- A.11 Link                                                        -->
+<!-- This element permits encoders to provide links from any          -->
+<!-- arbitrary element containing Link as a subelement to other       -->
+<!-- elements in the codebook.  Obviously, it's based on XLink, but   -->
+<!-- loosely, cause namespaces are a nightmare to process now.        -->
+<!ELEMENT Link (#PCDATA)                                                 >
+<!ATTLIST Link %a.global;
+                refs   IDREFS  #REQUIRED
+                role   CDATA   #IMPLIED
+                title  CDATA   #IMPLIED                                  >
+
+<!-- A.12 ExtLink                                                     -->
+<!-- This element permits encoders to provide links from any          -->
+<!-- arbitrary element containing ExtLink as a subelement to          -->
+<!-- electronic resources outside the codebook.                       -->
+<!ELEMENT ExtLink (#PCDATA)                                              >
+<!ATTLIST ExtLink %a.global;
+                URI    CDATA   #REQUIRED
+                role   CDATA   #IMPLIED
+                title  CDATA   #IMPLIED                                  >
+
+<!-- A.13 Division (div)                                              -->
+<!-- formatting element: marks a subdivision in a text                -->
+<!ELEMENT div       (div|head|list|p|Link|ExtLink)*                     >
+<!ATTLIST div       %a.global;
+                    n       CDATA    #IMPLIED
+                    rend    CDATA    #IMPLIED                           >
+
+
+<!-- A.14 Emphasis (emph)                                            -->
+<!-- formatting element: marks words or phrases that are emphasized  -->
+<!-- for rhetorical effect                                           -->
+<!ELEMENT emph      (#PCDATA|hi|list)*                                  >
+<!ATTLIST emph      %a.global;
+                    n       CDATA    #IMPLIED
+                    rend    CDATA    #IMPLIED                           >
+
+
+<!-- A.15 Head                                                         -->
+<!-- formatting element: marks off a heading to a division, list, etc. -->
+<!ELEMENT head     (#PCDATA|emph|hi|list|Link|ExtLink)*                 >
+<!ATTLIST head     %a.global;
+                    n       CDATA    #IMPLIED
+                    rend    CDATA    #IMPLIED
+                    type    CDATA    #IMPLIED                           > 
+
+
+
+<!-- A.16 Highlight (hi)                                              -->
+<!-- formatting element: marks a word or phrase as graphically        -->
+<!-- distinct from the surrounding text, while making no claim        -->
+<!-- for the reasons                                                  -->
+<!ELEMENT hi       (#PCDATA|emph|list)*                                 >
+<!ATTLIST hi       %a.global;
+                    n       CDATA    #IMPLIED
+                    rend    CDATA    #IMPLIED                           >
+
+
+
+<!-- A.17 Item (itm)                                                  -->
+<!-- formatting element: marks entries (items) in a list              -->
+<!ELEMENT itm     (#PCDATA|emph|hi|label|list|p|Link|ExtLink)*         >
+<!ATTLIST itm     %a.global;
+                    n       CDATA    #IMPLIED
+                    rend    CDATA    #IMPLIED                          >     
+   
+
+
+<!-- A.18 List                                                        -->
+<!-- formatting element: contains any sequence of items (entries)     -->
+<!-- organized as a list                                              -->
+<!ELEMENT list          (head|itm|label)*                            >
+<!ATTLIST list    %a.global;
+                  n       CDATA    #IMPLIED
+                  rend    CDATA    #IMPLIED
+                  type (ordered|bulleted|simple|gloss)  "simple"      >
+
+
+
+<!-- A.19 Label                                                       -->
+<!-- formatting element: contains the label associated with an item   -->
+<!-- in a list; in glossaries, marks the term being defined   -->
+<!ELEMENT label	 (#PCDATA|emph|hi|Link|ExtLink)*                       >
+<!ATTLIST label   %a.global;
+                  n       CDATA    #IMPLIED
+                  rend    CDATA    #IMPLIED                            >      
+
+
+
+
+<!--                                                                  -->     
+<!-- END OF DOCUMENT TYPE DEFINITION                                  -->
+

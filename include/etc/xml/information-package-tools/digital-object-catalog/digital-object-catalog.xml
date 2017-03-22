@@ -43,6 +43,7 @@
 	<rewriteURI uriStartString="http://dublincore.org/schemas/xmls/qdc/" rewritePrefix="dc/2008/"/>
 
 	<!-- DDI -->
+	<rewriteURI uriStartString="http://www.icpsr.umich.edu/DDI/Version2-0.dtd" rewritePrefix="ddi-codebook/2.0/Version2-0.dtd"/>
 	<rewriteURI uriStartString="http://www.ddialliance.org/Specification/DDI-Codebook/2.1/XMLSchema/Version2-1.xsd" rewritePrefix="ddi-codebook/2.1/Version2-1.xsd"/>
 	<rewriteURI uriStartString="http://www.ddialliance.org/Specification/DDI-Codebook/2.5/XMLSchema/codebook.xsd" rewritePrefix="ddi-codebook/2.5.1/codebook.xsd"/>
 	<rewriteURI uriStartString="http://www.ddialliance.org/Specification/DDI-Lifecycle/3.0/XMLSchema/" rewritePrefix="ddi-lifecycle/3.0/"/>
