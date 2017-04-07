@@ -22,7 +22,7 @@ from ipt.validator.ffmpeg import FFMpeg
 from ipt.validator.office import Office
 from ipt.validator.file import File
 from ipt.validator.imagemagick import ImageMagick
-
+from ipt.validator.pspp import PSPP
 
 def mdwrap_to_fileinfo(mdwrap_element):
     """Extract fileinfo dict from mdwrap element.
