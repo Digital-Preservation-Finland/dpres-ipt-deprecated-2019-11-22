@@ -27,6 +27,7 @@ Requires: clamav libtool-ltdl
 Requires: warc-tools >= 4.8.3 ffmpeg pngcheck
 Requires: kdk-mets-schemas preservation-schemas iso-schematron-xslt1
 Requires: python-wand libreoffice
+Requires: pspp
 # Our own packaging of a newer file command than what CentOS provides
 Requires: file-5.30
 BuildRequires:	pytest
