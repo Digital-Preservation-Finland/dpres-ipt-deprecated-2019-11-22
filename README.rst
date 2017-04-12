@@ -36,7 +36,7 @@ __ http://tox.readthedocs.org/en/latest/
 Installation
 ============
 
-This software is tested with Python 2.6 and Centos 6.x / RHEL 6.x. Software will be migrated to Python 2.7 with Centos 7.x / RHEL 7.x releases ( beginning of 2014 ).
+This software is tested with Python 2.7 with Centos 7.x / RHEL 7.x releases.
 Support for Python 3 is not planned in recent future.
 
 Installation and usage requires additional software in system $PATH:
@@ -59,6 +59,12 @@ For validating different file formats:
         * xml-xommon
         * Jhove
         * Jhove2
+        * LibreOffice
+        * PSPP
+        * pngcheck
+        * file, version 5.30 or greater
+        * ImageMagick
+        * python-wand
 
 For AIP location database:
 
@@ -68,7 +74,7 @@ For AIP location database:
 For running unit testing additional software is required:
 
         * py.test, version 2.3.4 or greater
-          
+
 
 Installing from source
 ***********************
