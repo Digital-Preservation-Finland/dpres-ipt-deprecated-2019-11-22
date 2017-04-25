@@ -84,6 +84,7 @@
 </mets:dmdSec>
 
 
+    <mets:amdSec>
     <mets:techMD ID="CSC_test001_tech001" CREATED="2012-07-13T00:00:00">
       <mets:mdWrap MDTYPE="PREMIS:OBJECT">
         <mets:xmlData>
@@ -113,7 +114,6 @@
         </mets:xmlData>
       </mets:mdWrap>
     </mets:techMD>
-    <mets:amdSec>
     <mets:techMD ID="CSC_test001_tech002" CREATED="2012-07-13T00:00:00">
       <mets:mdWrap MDTYPE="PREMIS:OBJECT">
         <mets:xmlData>

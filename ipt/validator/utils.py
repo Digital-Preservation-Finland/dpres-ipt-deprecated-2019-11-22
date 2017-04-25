@@ -92,7 +92,7 @@ def iter_fileinfo(mets_parser):
             'filename': object_filename,
             'use': mets_file.use}
 
-        for md_element in mets_parser.iter_elements_with_id(mets_file.admid):
+        for md_element in mets_parser.iter_elements_with_id(mets_file.admid, "amdSec"):
             fileinfo = merge_dicts(fileinfo, mdwrap_to_fileinfo(md_element))
 
         yield fileinfo

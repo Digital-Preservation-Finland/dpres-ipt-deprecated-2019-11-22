@@ -52,34 +52,46 @@ class LXML(object):
         results = self.xmlroot().xpath('//mets:file', namespaces=NAMESPACES)
         return results
 
-    def iter_elements_with_id(self, identifiers):
-        """Iterate all metadata elements under <amdSec> with given list of
-        AMDID's.
+    def iter_elements_with_id(self, identifiers, section=None):
+        """Iterate all metadata elements under given section with given list of
+        ADMID's. If no section is given, ADMID's are searched everywhere in the
+        file, which is extremely slow if file is large.
 
-        Parameter can be list or string where values are separated with
-        whitespace.
+        Identifier parameter can be list or string where values are separated
+        with whitespace.
 
-        :admid_list: List of ADMID's (list or string)
+        :identifiers: List of ADMID's (list or string)
+        :section: "amdSec", "dmdSec", "fileSec", or None
         :returns: Iterable for all references metadata elements
 
         """
         if isinstance(identifiers, str):
             identifiers = identifiers.split()
         for identifier in identifiers:
-            yield self.element_with_id(identifier)
+            yield self.element_with_id(identifier, section)
 
-    def element_with_id(self, identifier):
-        """Return single element with given ADMID.
+    def element_with_id(self, identifier, section=None):
+        """Return single element with given ADMID from given sectino. If no
+        section is given, ADMID is searched from everywhere in the file, which
+        is extremely slow if file is large.
 
-        ADMID is single unqiue reference to one of the following elements::
+        ID is single unqiue reference to one of the following elements::
 
             <techMD>, <sourceMD>, <rightsMD>, <digiprovMD>
 
-        :admid: ADMID as string
+        :identifier: ADMID as string
         :returns: References element
 
         """
-        query = "//*[@ID='%s']" % identifier
+        if section == "amdSec":
+            query = "/mets:mets/mets:amdSec/*[@ID='{}']".format(identifier)
+        elif section == "dmdSec":
+            query = "/mets:mets/mets:dmdSec[@ID='{}']".format(identifier)
+        elif section == "fileSec":
+            query = "/mets:mets/mets:fileSec/mets:fileGrp/"
+            "mets:file[@ID='{}']".format(identifier)
+        else:
+            query = "//*[@ID='%s']" % identifier
         results = self.xmlroot().xpath(query, namespaces=NAMESPACES)
         if len(results) == 1:
             return results[0]
