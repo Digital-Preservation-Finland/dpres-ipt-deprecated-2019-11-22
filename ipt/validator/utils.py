@@ -52,6 +52,11 @@ def mdwrap_to_fileinfo(mdwrap_element):
 
     """
 
+    if mdwrap_element is None:
+        return {'format': {'mimetype': None, 'version': None},
+                'object_id': {'type': None, 'value': None}
+                }
+
     mdwrap = MdWrap(mdwrap_element)
 
     standard_parsers = {
@@ -63,6 +68,7 @@ def mdwrap_to_fileinfo(mdwrap_element):
         'VideoMD': ipt.videomd.videomd.to_dict,
         'AudioMD': ipt.audiomd.audiomd.to_dict
     }
+
 
     try:
         if mdwrap.mdtype == 'OTHER':
@@ -92,8 +98,10 @@ def iter_fileinfo(mets_parser):
             'filename': object_filename,
             'use': mets_file.use}
 
-        for md_element in mets_parser.iter_elements_with_id(mets_file.admid, "amdSec"):
-            fileinfo = merge_dicts(fileinfo, mdwrap_to_fileinfo(md_element))
+        for md_element in mets_parser.iter_elements_with_id(mets_file.admid,
+                                                            "amdSec"):
+            fileinfo = merge_dicts(fileinfo,
+                    mdwrap_to_fileinfo(md_element))
 
         yield fileinfo
 

@@ -61,6 +61,13 @@ TESTCASES = [
          "returncode": 117,
          "stdout": ['No validator for mimetype: '
                     'application/kissa version: 1.0'],
+         "stderr": ''}},
+    {"testcase": 'Missing ADMID',
+     "filename": 'CSC_test_missing_admid',
+     "expected_result": {
+         "returncode": 117,
+         "stdout": ['No validator for mimetype: '
+                    'None version: None'],
          "stderr": ''}}]
 
 

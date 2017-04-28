@@ -96,9 +96,7 @@ class LXML(object):
         if len(results) == 1:
             return results[0]
         else:
-            raise ValueError(
-                "Invalid indentifier '%s'. Less or more than 1 result(s) "
-                "was found: %s" % (identifier, results))
+            return None
 
 
 class MdWrap(object):
