@@ -71,7 +71,7 @@ class LXML(object):
             yield self.element_with_id(identifier, section)
 
     def element_with_id(self, identifier, section=None):
-        """Return single element with given ADMID from given sectino. If no
+        """Return single element with given ADMID from given section. If no
         section is given, ADMID is searched from everywhere in the file, which
         is extremely slow if file is large.
 
