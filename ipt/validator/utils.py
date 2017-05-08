@@ -113,6 +113,11 @@ def iter_fileinfo(mets_parser):
             fileinfo = merge_dicts(fileinfo,
                                    {'object_id':{'type':None,
                                                  'value':None}})
+        try:
+            fileinfo['algorithm']
+        except KeyError:
+            fileinfo = merge_dicts(fileinfo,
+                                   {'algorithm': None})
 
         yield fileinfo
 

@@ -83,6 +83,18 @@ def test_checksum_missing_file(temp_sip):
     assert returncode == 117
 
 
+def test_checksum_missing_algorithm(temp_sip):
+    """Test valid METS with missing digital objects"""
+
+    sip_path = temp_sip('CSC_test_missing_admid')
+
+    (returncode, stdout, stderr) = run_main(sip_path)
+    assert stderr == ''
+    assert 'Could not find checksum algorithm: kuvat/PICT0102.JPG' in stdout
+    assert 'tmp' not in stdout
+    assert returncode == 117
+
+
 def test_checksum_extra_file(temp_sip):
     """Test valid METS with extra digital objects"""
 

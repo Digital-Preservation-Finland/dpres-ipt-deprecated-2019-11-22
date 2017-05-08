@@ -51,20 +51,25 @@ def check_checksums(mets_path):
 
     for fileinfo in iter_fileinfo(mets_parser):
 
-        checksum = BigFile(fileinfo["algorithm"])
         checked_files[fileinfo["filename"]] = None
 
-        try:
-            hex_digest = checksum.hexdigest(fileinfo["filename"])
-        except IOError as exception:
-            if exception.errno == errno.ENOENT:
-                yield _message(fileinfo, "File does not exist")
-            continue
-
-        if hex_digest == fileinfo["digest"]:
-            print _message(fileinfo, "Checksum OK")
+        if fileinfo['algorithm'] is None:
+            yield _message(fileinfo, "Could not find checksum algorithm")
         else:
-            yield _message(fileinfo, "Invalid Checksum")
+
+            checksum = BigFile(fileinfo["algorithm"])
+
+            try:
+                hex_digest = checksum.hexdigest(fileinfo["filename"])
+            except IOError as exception:
+                if exception.errno == errno.ENOENT:
+                    yield _message(fileinfo, "File does not exist")
+                continue
+
+            if hex_digest == fileinfo["digest"]:
+                print _message(fileinfo, "Checksum OK")
+            else:
+                yield _message(fileinfo, "Invalid Checksum")
 
     for path in iter_files(sip_path):
         if path.endswith("ignore_validation_errors"):
