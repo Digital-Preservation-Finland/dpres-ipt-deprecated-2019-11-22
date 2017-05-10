@@ -5,29 +5,46 @@ from ipt.utils import merge_dicts, compare_lists_of_dicts, serialize_dict, \
 
 CODEC1 = {"codec": "foo"}
 CODEC2 = {"codec": "bar"}
-CODEC1_RESULT = "codec foo"
-CODEC2_RESULT = "codec bar"
 AUDIOMD1 = {"audiomd": [CODEC1]}
 AUDIOMD2 = {"audiomd": [CODEC2]}
+VIDEOMD = {"codec": "foo", "duration": "bar",}
+AUDIOVIDEOMD = {"audiomd": [CODEC1], "videomd": [VIDEOMD]}
+FORMAT1 = {'format':{'mimetype':None, 'version':'1.0'}}
+FORMAT2 = {'format':{'mimetype':'image/ipeg', 'version':None}}
 
 
 def test_merge_dicts():
-    """Test for merge dict."""
+    """Tests for merge dict."""
     fileinfo = {'filename': "sippi"}
     addml = {"addml": {"charset": "UTF-8"}}
 
+    # Simple merge
     fileinfo = merge_dicts(fileinfo, AUDIOMD1)
     assert fileinfo == {"audiomd": [{"codec": "foo"}], "filename": "sippi"}
 
+    # Merge dicts that contain list-elements with same key
     fileinfo = merge_dicts(fileinfo, AUDIOMD2)
+    assert fileinfo == {"audiomd": [{"codec": "foo"}, {"codec": "bar"}], "filename": "sippi"}
+
+    # Merge dicts that contain multiple list-elements
+    fileinfo = merge_dicts(fileinfo, AUDIOVIDEOMD)
     assert fileinfo == {
-        "audiomd": [{"codec": "foo"}, {"codec": "bar"}], "filename": "sippi"}
+        "audiomd": [{"codec": "foo"}, {"codec": "bar"}, {"codec": "foo"}],
+        "filename": "sippi",
+        "videomd": [{"codec": "foo", "duration":"bar"}]}
 
     fileinfo = merge_dicts(fileinfo, addml)
     assert fileinfo == {
-        "audiomd": [{"codec": "foo"}, {"codec": "bar"}],
+        "audiomd": [{"codec": "foo"}, {"codec": "bar"}, {"codec": "foo"}],
         "filename": "sippi",
+        "videomd": [{"codec": "foo", "duration": "bar"}],
         "addml": {"charset": "UTF-8"}}
+
+    # Merge dict in dict. Merge NoneType elements.
+    fileinfo = merge_dicts(FORMAT1, FORMAT2)
+    assert fileinfo == {'format':{'mimetype':'image/ipeg', 'version':'1.0'}}
+
+
 
 
 def test_compare_lists_of_dicts():

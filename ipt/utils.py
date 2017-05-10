@@ -45,8 +45,10 @@ def run_command(cmd, stdout=subprocess.PIPE, ld_library_path=None):
 
 def merge_dicts(*dicts):
     """
-    Merge N dicts. If dictionaries have same keys on root level, and the type
-    of value is list, they will be merged under one key as a list.
+    Merge N dictionaries. List and dict type elements with same key will be
+    merged. Elements of other type cannot be merged. If value of an element is
+    None, it will be overwritten by value from other dictionary with the same
+    key.
     :dicts: a list of dicts.
     :returns: one merged dict
     """
@@ -56,8 +58,17 @@ def merge_dicts(*dicts):
         if len(keys) == 0:
             continue
         for key in keys:
-            if key in result and result[key] is not None:
-                result[key].append(dictionary[key])
+            if key in result:
+                if isinstance(result[key], dict) and isinstance(dictionary[key], dict):
+                    result[key] = merge_dicts(result[key], dictionary[key])
+                elif isinstance(result[key], list) and isinstance(dictionary[key], list):
+                    result[key] = result[key] + dictionary[key]
+                elif result[key] is None:
+                    result[key] = dictionary[key]
+                elif dictionary[key] is None:
+                    continue
+                else:
+                    raise TypeError('Only lists and dictionaries can be merged.')
             else:
                 result[key] = dictionary[key]
     return result

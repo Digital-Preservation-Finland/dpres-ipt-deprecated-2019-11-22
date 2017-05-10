@@ -94,30 +94,18 @@ def iter_fileinfo(mets_parser):
 
         fileinfo = {
             'filename': object_filename,
-            'use': mets_file.use}
+            'use': mets_file.use,
+            'format':{'mimetype':None,
+                      'version':None},
+            'object_id':{'type':None,
+                         'value':None},
+            'algorithm': None
+            }
 
         for md_element in mets_parser.iter_elements_with_id(mets_file.admid,
                                                             "amdSec"):
             fileinfo = merge_dicts(fileinfo,
                                    mdwrap_to_fileinfo(md_element))
-
-        try:
-            fileinfo['format']
-        except KeyError:
-            fileinfo = merge_dicts(fileinfo,
-                                   {'format':{'mimetype':None,
-                                              'version':None}},)
-        try:
-            fileinfo['object_id']
-        except KeyError:
-            fileinfo = merge_dicts(fileinfo,
-                                   {'object_id':{'type':None,
-                                                 'value':None}})
-        try:
-            fileinfo['algorithm']
-        except KeyError:
-            fileinfo = merge_dicts(fileinfo,
-                                   {'algorithm': None})
 
         yield fileinfo
 
