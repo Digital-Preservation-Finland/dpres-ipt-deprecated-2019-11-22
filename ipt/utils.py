@@ -54,10 +54,9 @@ def merge_dicts(*dicts):
     """
     result = {}
     for dictionary in dicts:
-        keys = [x for x in dictionary]
-        if len(keys) == 0:
+        if len(dictionary) == 0:
             continue
-        for key in keys:
+        for key in dictionary.keys():
             if key in result:
                 if isinstance(result[key], dict) and isinstance(dictionary[key], dict):
                     result[key] = merge_dicts(result[key], dictionary[key])
