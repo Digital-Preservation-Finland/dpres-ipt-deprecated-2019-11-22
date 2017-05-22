@@ -87,8 +87,7 @@ class XSLT:
         self.schematron_version = 1
         self.schematron_dirname = '/usr/share/iso-schematron-xslt%s' % (
             self.schematron_version)
-        self.cachepath = os.path.expanduser('~/.information-package-tools/'
-                                            'schematron-cache')
+        self.cachepath = os.path.expanduser('~/.dpres-ipt/schematron-cache')
 
     def validate_file(self, schematron_schema, xml_file):
 

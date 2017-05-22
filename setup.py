@@ -17,7 +17,7 @@ def scripts_list():
     return scripts
 
 def main():
-    """Install information-package-tools Python libraries"""
+    """Install dpres-ipt Python libraries"""
     setup(
         name='ipt',
 	packages=find_packages(exclude=['tests', 'tests.*']),

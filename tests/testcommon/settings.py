@@ -26,6 +26,6 @@ TESTDATADIR = os.path.join(TESTSDIR, 'data')
 
 # Check all directories exist
 
-for directory in [PROJECTDIR, INCLUDEDIR, SHAREDIR,
-                  TESTSDIR, TESTDATADIR]:
-    assert os.path.isdir(directory), "No such directory: " + directory
+# for directory in [PROJECTDIR, INCLUDEDIR, SHAREDIR,
+#                  TESTSDIR, TESTDATADIR]:
+#    assert os.path.isdir(directory), "No such directory: " + directory

@@ -1,8 +1,6 @@
 MOCK_CONFIG=stable-6-x86_64
 ROOT=/
 PREFIX=/usr
-SHAREDIR=${PREFIX}/share/information-package-tools
-XMLCATALOGDIR=/etc/xml/information-package-tools
 PYTHONDIR=${PREFIX}/lib/python2.6/site-packages
 SHELLDIR=${PREFIX}/bin
 
@@ -12,11 +10,11 @@ all: info
 
 info:
 	@echo
-	@echo "PAS information-package-tools"
+	@echo "PAS dpres-ipt"
 	@echo
 	@echo "Usage:"
 	@echo "  make test 			- Run all unit tests"
-	@echo "  make install		- Install information-package-tools"
+	@echo "  make install		- Install dpres-ipt"
 	@echo "  make devinstall	- Quick and Dirty development installation"
 	@echo "  make install_deps	- Install required packages with yum"
 	@echo
@@ -24,19 +22,6 @@ info:
 install:
 	# Cleanup temporary files
 	rm -f INSTALLED_FILES
-
-	# XML Schema catalogs
-	cp -r --preserve=timestamp include/etc "${ROOT}"
-	rm -rf "${XMLCATALOGDIR}"/.git*
-
-	# Common data files
-	mkdir -p "${ROOT}${PREFIX}/share"
-	cp -r --preserve=timestamp include/share "${ROOT}${PREFIX}"
-
-	chmod -R 755 "${ROOT}${XMLCATALOGDIR}"
-	find "${ROOT}${XMLCATALOGDIR}" -type f -exec chmod 644 \{\} \;
-	chmod -R 755 "${ROOT}${SHAREDIR}"
-	find "${ROOT}${SHAREDIR}" -type f -exec chmod 644 \{\} \;
 
 	# write version module
 	python version.py > "ipt/version.py"

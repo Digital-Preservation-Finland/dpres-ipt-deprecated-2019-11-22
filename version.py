@@ -52,7 +52,7 @@ def write_pkg_info():
             PKG_INFO_FILENAME)
     with open(PKG_INFO_FILENAME, 'w') as info:
         info.write("Metadata-Version: 1.0\n")
-        info.write("Name: microservice\n")
+        info.write("Name: dpres-ipt\n")
         info.write("Version: %s\n" % version)
         info.write("Summary: UNKNOWN\n")
         info.write("Home-page: UNKNOWN\n")
