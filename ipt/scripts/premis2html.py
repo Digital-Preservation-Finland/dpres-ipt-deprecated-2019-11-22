@@ -18,7 +18,7 @@ import optparse
 import os
 import subprocess
 
-XSLT_PATH = "/usr/share/preservation-schemas/stylesheet.xml"
+XSLT_PATH = "/usr/share/dpres-xml-schemas/preservation_schemas/stylesheet.xml"
 
 
 def main(arguments=None):
