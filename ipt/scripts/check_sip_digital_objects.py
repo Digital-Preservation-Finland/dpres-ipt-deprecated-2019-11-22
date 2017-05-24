@@ -8,7 +8,8 @@ import ipt.mets.parser
 from ipt.premis import premis as p
 
 import ipt.version
-from ipt.validator.utils import iter_fileinfo, iter_validators
+from ipt.validator.utils import iter_fileinfo
+from ipt.validator.validators import iter_validators
 
 
 def main(arguments=None):
