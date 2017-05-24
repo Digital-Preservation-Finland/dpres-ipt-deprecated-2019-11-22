@@ -92,35 +92,3 @@ def iter_fileinfo(mets_parser):
                                    mdwrap_to_fileinfo(md_element))
 
         yield fileinfo
-
-
-class UnknownFileformat(object):
-    """
-    Validator class for unknown filetypes. This will always result as
-    invalid validation result.
-    """
-
-    def __init__(self, fileinfo):
-        """
-        Initialize object
-        """
-        self.fileinfo = fileinfo
-
-    def validate(self):
-        """
-        No implementation
-        """
-        pass
-
-    def result(self):
-        """
-        Return validation result
-        """
-        error_message = 'No validator for mimetype: %s version: %s' % (
-            self.fileinfo['format']['mimetype'],
-            self.fileinfo['format']['version'])
-
-        return {
-            'is_valid': False,
-            'messages': "",
-            'errors': error_message}
