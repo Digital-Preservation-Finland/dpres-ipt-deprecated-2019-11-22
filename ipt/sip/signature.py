@@ -235,8 +235,12 @@ class ManifestSMIME(object):
             algorithm, hexdigest, filename = self.parse_manifest_line(line)
             if not algorithm:
                 continue
+            filepath = os.path.join(self.manifest_base_path, filename)
+            if not os.path.isfile(filepath):
+                raise InvalidSignatureError(
+                    'Invalid signature file. File does not exist: %s' % filepath)
             checksum_ok = checksum.verify_file(
-                os.path.join(self.manifest_base_path, filename),
+                filepath,
                 hexdigest)
             if checksum_ok:
                 print "%s %s %s OK" % (filename, algorithm, hexdigest)
