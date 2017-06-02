@@ -11,14 +11,14 @@ import ipt.validator.xmllint
 def main(arguments=None):
     """Main loop"""
     usage = "usage: %prog [options] xml-file-name"
-    catalog_path = ("/etc/xml/dpres-xml-schemas/xml_catalogs")
-    schema_path = ("/etc/xml/dpres-xml-schemas/xml_schemas")
+    catalog_path = ("/etc/xml/dpres-xml-schemas/schema_catalogs")
+    schema_path = ("/etc/xml/dpres-xml-schemas/schema_catalogs/schemas")
 
     parser = optparse.OptionParser(usage=usage)
 
     parser.add_option("-c", "--catalog", dest="catalogpath",
                       default=os.path.join(
-                          catalog_path, "xml_catalog.xml"),
+                          catalog_path, "catalog_main.xml"),
                       help="Full path to XML catalog file",
                       metavar="FILE")
 

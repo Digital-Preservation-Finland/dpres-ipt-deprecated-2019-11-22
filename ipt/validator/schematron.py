@@ -85,7 +85,7 @@ class XSLT:
     def __init__(self, cache=True):
         self.cache = cache
         self.schematron_version = 1
-        self.schematron_dirname = '/usr/share/iso-schematron-xslt%s' % (
+        self.schematron_dirname = '/usr/share/dpres-xml-schemas/schematron/iso-schematron-xslt%s' % (
             self.schematron_version)
         self.cachepath = os.path.expanduser('~/.dpres-ipt/schematron-cache')
 

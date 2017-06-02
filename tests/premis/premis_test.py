@@ -77,7 +77,7 @@ class TestPremisClass:
     def test_premis_xsd_validation(self, monkeypatch, testcase):
 
         # catalog_path = ('/etc/xml/dpres-xml-schemas/'
-        #                 'xml_catalogs/xml_catalog.xml')
+        #                 'schema_catalogs/catalog_main.xml')
         # monkeypatch.setenv("SGML_CATALOG_FILES", catalog_path)
         premis_document = premis.Premis()
         object = premis.Object()
