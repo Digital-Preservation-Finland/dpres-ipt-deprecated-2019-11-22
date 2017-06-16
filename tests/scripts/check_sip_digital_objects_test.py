@@ -75,6 +75,12 @@ TESTCASES = [
          "returncode": 117,
          "stdout": ['No validator for mimetype: '
                     'None version: None'],
+         "stderr": ''}},
+    {"testcase": 'Invalid warc',
+     "filename": 'csc-test-invalid-warc',
+     "expected_result": {
+         "returncode": 117,
+         "stdout": ['Validation failed: returncode 255'],
          "stderr": ''}}]
 
 

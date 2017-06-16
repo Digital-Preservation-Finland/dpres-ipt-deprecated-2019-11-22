@@ -3,6 +3,8 @@
 import os
 import subprocess
 import urllib
+import unicodedata
+import string
 from collections import defaultdict
 
 
@@ -140,3 +142,11 @@ def uri_to_path(uri):
     """
     path = urllib.unquote_plus(uri).replace('file://', '')
     return path.lstrip('./')
+
+
+def sanitaze_string(dirty_string):
+    """Strip non-printable control characters from unicode string"""
+    sanitazed_string = "".join(
+        char for char in dirty_string if unicodedata.category(char)[0] != "C"
+        or char in string.printable)
+    return sanitazed_string
