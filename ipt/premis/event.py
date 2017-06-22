@@ -1,11 +1,9 @@
 import datetime
-import uuid
 import dateutil.tz
+import uuid
 
 import lxml.etree
 from lxml.etree import Element, SubElement, tostring
-
-from ipt.utils import sanitaze_string
 
 PREMIS_NS = "info:lc/xmlns/premis-v2"
 PREMIS = "{%s}" % PREMIS_NS
@@ -212,7 +210,7 @@ class Event(lxml.etree._ElementTree):
         if value:
             element = SubElement(
                 self.eventOutcomeDetail, PREMIS + "eventOutcomeDetailNote")
-            element.text = sanitaze_string(value.decode("utf-8"))
+            element.text = value.decode("utf-8")
 
     @property
     def eventOutcomeDetailExtension(self):
