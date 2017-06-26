@@ -340,7 +340,7 @@ class Event(lxml.etree._ElementTree):
             self, result,
             linkingObject=None, linkingAgent=None):
         """
-        From valdiator.
+        From validator.
         """
 
         self.eventIdentifier = ""
