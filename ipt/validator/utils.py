@@ -24,6 +24,7 @@ from ipt.validator.office import Office
 from ipt.validator.file import File
 from ipt.validator.imagemagick import ImageMagick
 from ipt.validator.pspp import PSPP
+from ipt.validator.vnu import Vnu
 
 
 def mdwrap_to_fileinfo(mdwrap_element):
