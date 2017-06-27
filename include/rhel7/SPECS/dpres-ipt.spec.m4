@@ -30,6 +30,8 @@ Requires: python-wand libreoffice
 Requires: pspp
 # Our own packaging of a newer file command than what CentOS provides
 Requires: file-5.30
+# For xmllint XHTML validation
+Requires: xhtml1-dtds
 BuildRequires:	pytest
 # We could also add a Provides but that's unnecessary, we should fix the
 # dependencies that get broken by this Obsoletes. The release number here is
