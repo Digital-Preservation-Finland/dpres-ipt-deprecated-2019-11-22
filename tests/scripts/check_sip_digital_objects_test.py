@@ -84,14 +84,6 @@ TESTCASES = [
                     'warc errors at',
                     'File version check error'],
          "stderr": ''}},
-    {"testcase": 'Invalid gzipped warc',
-     "filename": 'csc-test-invalid-warc-gz',
-     "expected_result": {
-         "returncode": 117,
-         "stdout": ['Validation failed: returncode 255',
-                    'warc errors at',
-                    'File version check error'],
-         "stderr": ''}},
     {"testcase": 'Invalid warc renamed to .gz',
      "filename": 'csc-test-invalid-warc-not-gz',
      "expected_result": {
