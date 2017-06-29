@@ -32,6 +32,7 @@ Requires: pspp
 Requires: file-5.30
 # For xmllint XHTML validation
 Requires: xhtml1-dtds
+Requires: vnu
 BuildRequires:	pytest
 # We could also add a Provides but that's unnecessary, we should fix the
 # dependencies that get broken by this Obsoletes. The release number here is
