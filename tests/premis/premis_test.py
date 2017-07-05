@@ -254,5 +254,9 @@ class TestPremisClass:
         result = premis.parse_mimetype(format_name)
 
         assert result['format']['mimetype'] == 'application/x-internet-archive'
-        print result
         assert 'charset' not in result
+
+        format_name = "application/xml, text/xml"
+        result = premis.parse_mimetype(format_name)
+        assert "erroneous-mimetype" in result["format"]
+        assert result["format"]["mimetype"] == format_name

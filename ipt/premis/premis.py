@@ -1,6 +1,7 @@
 import lxml.etree
 from lxml.etree import Element, SubElement, tostring
 from email.message import Message
+import mimeparse
 
 from object import Object
 from event import Event
@@ -172,15 +173,22 @@ def parse_mimetype(mimetype):
 
     ..seealso:: https://www.ietf.org/rfc/rfc2045.txt
     """
-    msg = Message()
-    msg.add_header('Content-type', mimetype)
-
-    mimetype = msg.get_content_type()
-    charset = msg.get_param('charset')
-    alt_format = msg.get_param('alt-format')
     result = {"format": {}}
-    if mimetype:
+    # If the mime type can't be parsed, add the erroneous-mimetype item, which
+    # can be checked when selecting validators. We need the original mimetype
+    # for the error message printed by the UnknownFileformat validator.
+    try:
+        result_mimetype = mimeparse.parse_mime_type(mimetype)
+    except mimeparse.MimeTypeParseException:
+        result["format"]["erroneous-mimetype"] = True
         result["format"]["mimetype"] = mimetype
+        return result
+
+    params = result_mimetype[2]
+    charset = params.get('charset')
+    alt_format = params.get('alt-format')
+    result["format"]["mimetype"] = (result_mimetype[0] + "/" +
+                                    result_mimetype[1])
     if charset:
         result["format"]["charset"] = charset
     if alt_format:

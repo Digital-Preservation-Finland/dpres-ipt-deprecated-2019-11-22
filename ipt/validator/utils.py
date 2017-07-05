@@ -155,6 +155,12 @@ def iter_validators(fileinfo):
     # pylint: disable=no-member
 
     found_validator = False
+
+    if "erroneous-mimetype" in fileinfo:
+        validator = UnknownFileformat(fileinfo)
+        yield validator
+        return
+
     for cls in BaseValidator.__subclasses__():
         if cls.is_supported(fileinfo):
             found_validator = True
