@@ -5,3 +5,4 @@ dateutils
 scandir
 pytest
 wand
+python-mimeparse
