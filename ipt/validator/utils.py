@@ -156,7 +156,7 @@ def iter_validators(fileinfo):
 
     found_validator = False
 
-    if "erroneous-mimetype" in fileinfo:
+    if fileinfo.get("erroneous-mimetype", False):
         validator = UnknownFileformat(fileinfo)
         yield validator
         return
