@@ -34,9 +34,9 @@ def main(arguments=None):
 def parse_arguments(arguments):
     """ Create arguments parser and return parsed command line argumets"""
     parser = argparse.ArgumentParser()
-    parser.add_argument('sip_path')
-    parser.add_argument('linking_sip_type')
-    parser.add_argument('linking_sip_id')
+    parser.add_argument('sip_path', help='Path to information package')
+    parser.add_argument('linking_sip_type', default=' ')
+    parser.add_argument('linking_sip_id', default=' ')
 
     return parser.parse_args(arguments)
 

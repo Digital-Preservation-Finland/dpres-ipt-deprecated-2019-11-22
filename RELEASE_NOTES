@@ -33,3 +33,9 @@ following lines in it:
 <nextCatalog catalog="/etc/xml/information-package-tools/digital-object-catalog/digital-object-catalog.xml"/>
 <nextCatalog catalog="/etc/xml/information-package-tools/kdk-mets-catalog/catalog-local.xml"/>
 <nextCatalog catalog="/etc/xml/information-package-tools/private-catalog/private-catalog.xml"/>
+
+Release 0.53
+
+XML/Schematron catalogs and signature code moved to dpres-xml-schemas and
+dpres-signature repositories, respectively.
+
