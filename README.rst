@@ -1,11 +1,16 @@
-Overview: Information Package Tools
-===================================
+Information Package Tools
+=========================
 
-Tools for creating and validating Submission/Archival/Dissemination Information Packages (SIP/AIP/DIP) based on Open Archival Information System (OAIS) standard.
+This repository contains tools for validating Submission/Archival/Dissemination Information
+Packages (SIP/AIP/DIP) based on Open Archival Information System (OAIS) standard.
 
+The tools are used in the preservation services of Finnish National Digital Library
+and Open Science and Research Initiative. The aim is to provide digital preservation
+services for culture and research to ensure the access and use of materials long in
+the future.
 
 Installation
-============
+------------
 
 This software is tested with Python 2.7 with Centos 7.x / RHEL 7.x releases.
 Support for Python 3 is not planned in recent future.
@@ -15,15 +20,17 @@ Installation and usage requires additional software in system $PATH:
         * Python 2.7
         * GNU Make
 
-For managing information packages, install:
+Install the scripts with command::
 
-        * Tar
-        * Gzip
+        make install
 
-For validating METS documents and different file formats:
+Additional requirements
++++++++++++++++++++++++
+
+The following software is required to validate METS documents and different file formats:
 
         * dpres-xml-schemas, see https://github.com/Digital-Preservation-Finland/dpres-xml-schemas
-        * libxslt / xmllint & xsltproc ( with exslt and Saxon line number extensions )
+        * libxml2 & libxslt / xmllint & xsltproc ( with exslt and Saxon line number extensions )
         * python-lxml
         * python-mimeparse
         * python-dateutil
@@ -35,6 +42,8 @@ For validating METS documents and different file formats:
         * file, version 5.30 or greater
         * ImageMagick
         * python-wand
+        * warctools
+        * Gzip
 
 Form the above list, you can install the python-* software with command::
 
@@ -43,22 +52,22 @@ Form the above list, you can install the python-* software with command::
 Other software listed above needs to be installed separately.
 
 Usage
-=====
+-----
 
 To validate a METS document::
 
-        python ipt/scripts/check_xml_schema_features.py <METS document>
-        python ipt/scripts/check_xml_schematron_features.py <METS document>
+        check-xml-schema-features <METS document>
+        check-xml-schematron-features <METS document>
 
 To validate digital objects in an information package::
 
-        python ipt/scripts/check-sip-digital_objects.py <package directory>
+        check-sip-digital-objects <package directory>
 
 To check fixity of digital objects in an information package::
 
-        python ipt/scripts/check_sip_file_checksums.py <package directory>
+        check-sip-file-checksums <package directory>
 
 Copyright
-=========
+---------
 All rights reserved to CSC - IT Center for Science Ltd.
 
