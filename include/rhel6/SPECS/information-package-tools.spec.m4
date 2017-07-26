@@ -44,6 +44,16 @@ cat INSTALLED_FILES
 echo "--"
 
 %post
+# Remove any existing entries to prevent duplicates
+%{_bindir}/xmlcatalog --noout --del \
+"/etc/xml/information-package-tools/digital-object-catalog/digital-object-catalog.xml" \
+/etc/xml/catalog
+%{_bindir}/xmlcatalog --noout --del \
+"/etc/xml/information-package-tools/kdk-mets-catalog/catalog-local.xml" \
+/etc/xml/catalog
+%{_bindir}/xmlcatalog --noout --del \
+"/etc/xml/information-package-tools/private-catalog/private-catalog.xml" \
+/etc/xml/catalog
 # Add our catalogs to the system centralised catalog
 %{_bindir}/xmlcatalog --noout --add "nextCatalog" "catalog" \
 "/etc/xml/information-package-tools/digital-object-catalog/digital-object-catalog.xml" \
