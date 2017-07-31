@@ -1,7 +1,7 @@
-MOCK_CONFIG=stable-6-x86_64
+MOCK_CONFIG=stable-7-x86_64
 ROOT=/
 PREFIX=/usr
-PYTHONDIR=${PREFIX}/lib/python2.6/site-packages
+PYTHONDIR=${PREFIX}/lib/python2.7/site-packages
 SHELLDIR=${PREFIX}/bin
 
 MODULES=fileutils mets schematron sip xml xmllint
