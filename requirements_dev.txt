@@ -6,3 +6,4 @@ scandir
 pytest
 wand
 python-mimeparse
+pytest-timeout

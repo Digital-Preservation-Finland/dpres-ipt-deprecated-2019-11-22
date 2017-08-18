@@ -1,0 +1,14 @@
+WARC/0.18
+bug
+WARC-Type: warcinfo
+WARC-Date: 2009-04-119T12:48:17-0400
+WARC-Record-ID: d4360e52-06c3-41c8-bb13-62db3a622ca7
+Content-Type: application/warc-fields
+Content-Length: 222
+
+software: Nutch 1.0-dev (modified for clueweb09)
+isPartOf: clueweb09-
+description: clueweb09 crawl with WARC output
+format: WARC file version 0.18
+conformsTo: http://www.archive.org/documents/WarcFileFormat-0.18.html
+
