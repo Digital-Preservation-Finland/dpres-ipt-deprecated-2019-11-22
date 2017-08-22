@@ -84,6 +84,21 @@ TESTCASES = [
                     'warc errors at',
                     'File version check error'],
          "stderr": ''}},
+    {"testcase": 'Invalid arc',
+     "filename": 'csc-test-invalid-arc-invalid-start-byte',
+     "expected_result": {
+         "returncode": 117,
+         "stdout": ['Validation failed: returncode 1',
+                    'Exception: missing headers'],
+         "stderr": ''}},
+    {"testcase": 'Invalid arc',
+     "filename": 'csc-test-invalid-arc-xml-incompatible-string',
+     "expected_result": {
+         "returncode": 117,
+         "stdout": ['Validation failed: returncode 1',
+                    'WARNING: Unable to parse HTTP-header: ',
+                    'Exception: expected 14 bytes but only read 0'],
+         "stderr": ''}},
     {"testcase": 'Invalid warc renamed to .gz',
      "filename": 'csc-test-invalid-warc-not-gz',
      "expected_result": {
