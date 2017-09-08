@@ -20,9 +20,9 @@ def to_dict(addml_xml):
         ".//addml:fieldSeparatingChar",
         namespaces=NAMESPACES)[0].text
     headers = addml_xml.xpath(
-        ".//addml:description", namespaces=NAMESPACES)
+        ".//addml:fieldDefinition[@name]", namespaces=NAMESPACES)
     header_list = []
     for header in headers:
-        header_list.append(header.text)
+        header_list.append(header.attrib["name"])
     addml["addml"]["headers"] = header_list
     return addml

@@ -17,7 +17,7 @@ def test_to_dict():
             "charset": "UTF-8",
             "separator": "CR+LF",
             "delimiter": ";",
-            "headers": ["Person name", "Person email"]
+            "headers": ["name", "email"]
         }
     }
 
