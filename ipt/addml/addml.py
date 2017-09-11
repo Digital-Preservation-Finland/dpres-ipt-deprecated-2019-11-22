@@ -24,5 +24,5 @@ def to_dict(addml_xml):
     header_list = []
     for header in headers:
         header_list.append(header.attrib["name"])
-    addml["addml"]["headers"] = header_list
+    addml["addml"]["header_fields"] = header_list
     return addml
