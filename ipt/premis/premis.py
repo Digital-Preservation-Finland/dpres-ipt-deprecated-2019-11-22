@@ -1,11 +1,10 @@
 import lxml.etree
-from lxml.etree import Element, SubElement, tostring
-from email.message import Message
-import mimeparse
+from lxml.etree import Element, tostring
 
-from object import Object
-from event import Event
-from agent import Agent
+from ipt.premis.object import Object
+from ipt.premis.event import Event
+from ipt.premis.agent import Agent
+from ipt.utils import parse_mimetype
 
 PREMIS_NS = "info:lc/xmlns/premis-v2"
 PREMIS = "{%s}" % PREMIS_NS
@@ -166,32 +165,3 @@ def to_dict(premis_xml):
         premis["format"]["version"] = format_version[0].text
 
     return premis
-
-
-def parse_mimetype(mimetype):
-    """Parse mimetype information from Content-type string.
-
-    ..seealso:: https://www.ietf.org/rfc/rfc2045.txt
-    """
-    result = {"format": {}}
-    # If the mime type can't be parsed, add the erroneous-mimetype item, which
-    # can be checked when selecting validators. We need the original mimetype
-    # for the error message printed by the UnknownFileformat validator.
-    try:
-        result_mimetype = mimeparse.parse_mime_type(mimetype)
-    except mimeparse.MimeTypeParseException:
-        result["format"]["erroneous-mimetype"] = True
-        result["format"]["mimetype"] = mimetype
-        return result
-
-    params = result_mimetype[2]
-    charset = params.get('charset')
-    alt_format = params.get('alt-format')
-    result["format"]["mimetype"] = (result_mimetype[0] + "/" +
-                                    result_mimetype[1])
-    if charset:
-        result["format"]["charset"] = charset
-    if alt_format:
-        result["format"]["alt-format"] = alt_format
-
-    return result
