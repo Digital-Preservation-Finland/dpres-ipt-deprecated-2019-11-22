@@ -1,11 +1,15 @@
 #!/usr/bin/python
 """Validate all digital objects in a given METS document"""
 
+import os
 import sys
+import uuid
 import argparse
 
-import ipt.mets.parser
-from ipt.premis import premis as p
+import xml_helpers.utils
+import mets
+import premis
+from ipt.report import report as p
 
 import ipt.version
 from ipt.validator.utils import iter_fileinfo
@@ -16,16 +20,14 @@ def main(arguments=None):
     """ The main method for check-sip-digital-objects script"""
 
     args = parse_arguments(arguments)
-    mets_parser = ipt.mets.parser.LXML(args.sip_path)
-
     report = validation_report(
-        validation(mets_parser),
+        validation(args.sip_path),
         args.linking_sip_type,
         args.linking_sip_id)
 
-    print report.serialize()
+    print xml_helpers.utils.serialize(report)
 
-    if report.contains_errors():
+    if p.contains_errors(report):
         return 117
 
     return 0
@@ -41,7 +43,7 @@ def parse_arguments(arguments):
     return parser.parse_args(arguments)
 
 
-def validation(mets_parser):
+def validation(mets_path):
     """
     Call validation for all files enumerated in mets.xml files.
     :mets_parser: LXML class for mets parsing
@@ -50,7 +52,12 @@ def validation(mets_parser):
                 'result': validation_result
             }
     """
-    for fileinfo in iter_fileinfo(mets_parser):
+    mets_tree = None
+    if mets_path is not None:
+        if os.path.isdir(mets_path):
+            mets_path = os.path.join(mets_path, 'mets.xml')
+        mets_tree = mets.parse(mets_path)
+    for fileinfo in iter_fileinfo(mets_tree, mets_path):
 
         if fileinfo["use"] == 'no-file-format-validation':
             continue
@@ -65,38 +72,34 @@ def validation(mets_parser):
 
 def validation_report(results, linking_sip_type, linking_sip_id):
     """ Format validation results to Premis report"""
-    report = p.Premis()
 
+    childs = []
     for result_ in results:
-        related_object = p.Object()
-        related_object.identifier = ""
-        related_object.identifierType = linking_sip_type
-        related_object.identifierValue = linking_sip_id
-
-        linking_agent = p.Agent()
+        related_id = premis.identifier(linking_sip_type, linking_sip_id, 'object')
+        agent_id_value = str(uuid.uuid4())
+        agent_id = premis.identifier('preservation-agent-id', str(uuid.uuid4()), 'agent')
         agent_name = "%s-%s" % (__file__, ipt.version.__version__)
-        linking_agent.fromvalidator(
-            agentIdentifierType="preservation-agent-id",
-            agentIdentifierValue=agent_name,
-            agentName=agent_name)
-        linking_agent.type = "software"
-        report.insert(linking_agent)
+        report_agent = premis.agent(agent_id, agent_name, 'software')
 
-        linking_object = p.Object()
-        linking_object.fromvalidator(
+        report_object = p.object_fromvalidator(
             fileinfo=result_['fileinfo'],
-            relatedObject=related_object)
+            relatedObject=related_id)
+        obj_id = premis.parse_identifier(report_object, 'object')
+        (link_id_type, link_id_val) = premis.get_identifier_type_value(obj_id)
 
-        validation_event = p.Event()
-        validation_event.fromvalidator(
+        report_event = p.event_fromvalidator(
             result_['result'],
-            linkingObject=linking_object,
-            linkingAgent=linking_agent)
+            linkingObject=premis.identifier(link_id_type, link_id_val, 'linkingObject'),
+            linkingAgent=premis.identifier('preservation-agent-id', agent_id_value, 'linkingAgent'))
 
-        report.insert(linking_object)
-        report.insert(validation_event)
+        childs.append(report_object)
+        childs.append(report_event)
+        childs.append(report_agent)
 
-    return report
+    if childs == []:
+        childs = None
+
+    return premis.premis(child_elements=childs)
 
 
 if __name__ == '__main__':

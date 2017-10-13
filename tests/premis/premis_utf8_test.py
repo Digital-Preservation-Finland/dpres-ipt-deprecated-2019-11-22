@@ -7,7 +7,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import testcommon.settings
-from ipt.premis import premis
+# from ipt.report import report as premis
 
 
 class TestPremisUtf8Support:

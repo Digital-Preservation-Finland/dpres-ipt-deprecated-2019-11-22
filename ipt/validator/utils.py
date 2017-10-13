@@ -2,12 +2,12 @@
 
 import os
 
-from ipt.utils import merge_dicts, uri_to_path
-from ipt.mets.parser import MetsFile, MdWrap
-from ipt.premis import premis as p
+from ipt.utils import merge_dicts, uri_to_path, parse_mimetype
 import ipt.addml.addml
 import ipt.videomd.videomd
 import ipt.audiomd.audiomd
+import mets
+import premis
 
 
 def mdwrap_to_fileinfo(mdwrap_element):
@@ -40,10 +40,12 @@ def mdwrap_to_fileinfo(mdwrap_element):
     if mdwrap_element is None:
         return {}
 
-    mdwrap = MdWrap(mdwrap_element)
+    wraptype = mets.parse_wrap_mdtype(mdwrap_element)
+    mdtype = wraptype['mdtype']
+    othermdtype = wraptype['othermdtype']
 
     standard_parsers = {
-        'PREMIS:OBJECT': p.to_dict
+        'PREMIS:OBJECT': premis_to_dict
     }
 
     other_parsers = {
@@ -53,14 +55,14 @@ def mdwrap_to_fileinfo(mdwrap_element):
     }
 
     try:
-        if mdwrap.mdtype == 'OTHER':
-            return other_parsers[mdwrap.other_mdtype](mdwrap.xmldata)
-        return standard_parsers[mdwrap.mdtype](mdwrap.xmldata)
+        if othermdtype is not None:
+            return other_parsers[othermdtyp](mets.parse_xmldata(mdwrap_element))
+        return standard_parsers[mdtype](mets.parse_xmldata(mdwrap_element))
     except KeyError:
         return {}
 
 
-def iter_fileinfo(mets_parser):
+def iter_fileinfo(mets_tree, mets_path):
     """Iterate all files in given mets document and return fileinfo
     dictionary for each file.
 
@@ -69,16 +71,16 @@ def iter_fileinfo(mets_parser):
 
     """
 
-    for element in mets_parser.mets_files():
+    for element in mets.parse_files(mets_tree):
 
-        mets_file = MetsFile(element)
+        loc = mets.parse_flocats(element)[0]
         object_filename = os.path.join(
-            os.path.dirname(mets_parser.mets_path),
-            uri_to_path(mets_file.href))
+            os.path.dirname(mets_path),
+            uri_to_path(mets.parse_href(loc)))
 
         fileinfo = {
             'filename': object_filename,
-            'use': mets_file.use,
+            'use': mets.parse_use(element),
             'format':{'mimetype':None,
                       'version':None},
             'object_id':{'type':None,
@@ -86,9 +88,34 @@ def iter_fileinfo(mets_parser):
             'algorithm': None
             }
 
-        for md_element in mets_parser.iter_elements_with_id(mets_file.admid,
+        for section in mets.iter_elements_with_id(mets_tree, mets.parse_admid(element),
                                                             "amdSec"):
-            fileinfo = merge_dicts(fileinfo,
-                                   mdwrap_to_fileinfo(md_element))
+            if section is not None:
+                fileinfo = merge_dicts(
+                    fileinfo, mdwrap_to_fileinfo(mets.parse_mdwrap(section)))
 
         yield fileinfo
+
+
+def premis_to_dict(premis_xml):
+    """Get premis information about digital object and turn it into a
+    dictionary.
+    :premis_xml: lxml.etree object containing premis oject of the digital
+    object.
+    :returns: dictionary containing basic information of digital object.
+    """
+    premis_dict = {"object_id": {}}
+    if premis_xml is None:
+        return {}
+    (premis_dict["algorithm"], premis_dict["digest"]) = premis.parse_digest(premis_xml)
+    (format_name, format_version) = premis.parse_format(premis_xml)
+    (premis_dict["object_id"]["type"],
+    premis_dict["object_id"]["value"]) = premis.get_identifier_type_value(premis.parse_identifier(premis_xml, 'object'))
+    premis_dict.update(parse_mimetype(format_name))
+    if format_version is None:
+        premis_dict["format"]["version"] = ""
+    else:
+        premis_dict["format"]["version"] = format_version
+
+    return premis_dict
+

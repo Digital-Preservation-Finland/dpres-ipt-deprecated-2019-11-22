@@ -8,7 +8,7 @@ import errno
 
 import scandir
 
-import ipt.mets.parser
+import mets
 from ipt.validator.utils import iter_fileinfo
 from ipt.fileutils.checksum import BigFile
 
@@ -39,18 +39,20 @@ def check_checksums(mets_path):
 
     """
 
-    mets_parser = ipt.mets.parser.LXML(mets_path)
     checked_files = {}
 
-    sip_path = os.path.dirname(mets_parser.mets_path)
+    if os.path.isdir(mets_path):
+        mets_path = os.path.join(mets_path, 'mets.xml')
+
+    sip_path = os.path.dirname(mets_path)
 
     def _message(fileinfo, message):
         """Format error message"""
         return "%s: %s" % (
             message, os.path.relpath(fileinfo["filename"], sip_path))
 
-    for fileinfo in iter_fileinfo(mets_parser):
-
+    mets_tree = mets.parse(mets_path)
+    for fileinfo in iter_fileinfo(mets_tree, mets_path):
         checked_files[fileinfo["filename"]] = None
 
         if fileinfo['algorithm'] is None:

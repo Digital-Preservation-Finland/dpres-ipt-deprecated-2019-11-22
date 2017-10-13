@@ -13,7 +13,7 @@ from testcommon.casegenerator import pytest_generate_tests
 import random
 import lxml.etree
 
-from ipt.premis import premis
+# from ipt.report import report as premis
 from ipt.validator.xmllint import Xmllint
 from tests.testcommon.settings import PROJECTDIR
 

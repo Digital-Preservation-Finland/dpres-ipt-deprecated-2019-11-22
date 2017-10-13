@@ -160,7 +160,7 @@ def patch_validate(monkeypatch):
 
         yield _Validator(fileinfo)
 
-    def _iter_fileinfo(_):
+    def _iter_fileinfo(foo, foob):
         """mock iter_fileinfo"""
         return [
             {"filename": "pdf", "use": ''},
