@@ -56,7 +56,7 @@ def validation(mets_path):
     if mets_path is not None:
         if os.path.isdir(mets_path):
             mets_path = os.path.join(mets_path, 'mets.xml')
-        mets_tree = mets.parse(mets_path)
+        mets_tree = xml_helpers.utils.readfile(mets_path)
     for fileinfo in iter_fileinfo(mets_tree, mets_path):
 
         if fileinfo["use"] == 'no-file-format-validation':
@@ -85,7 +85,7 @@ def validation_report(results, linking_sip_type, linking_sip_id):
             fileinfo=result_['fileinfo'],
             relatedObject=related_id)
         obj_id = premis.parse_identifier(report_object, 'object')
-        (link_id_type, link_id_val) = premis.get_identifier_type_value(obj_id)
+        (link_id_type, link_id_val) = premis.parse_identifier_type_value(obj_id)
 
         report_event = p.event_fromvalidator(
             result_['result'],

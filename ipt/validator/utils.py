@@ -56,7 +56,7 @@ def mdwrap_to_fileinfo(mdwrap_element):
 
     try:
         if othermdtype is not None:
-            return other_parsers[othermdtyp](mets.parse_xmldata(mdwrap_element))
+            return other_parsers[othermdtype](mets.parse_xmldata(mdwrap_element))
         return standard_parsers[mdtype](mets.parse_xmldata(mdwrap_element))
     except KeyError:
         return {}
@@ -107,10 +107,10 @@ def premis_to_dict(premis_xml):
     premis_dict = {"object_id": {}}
     if premis_xml is None:
         return {}
-    (premis_dict["algorithm"], premis_dict["digest"]) = premis.parse_digest(premis_xml)
+    (premis_dict["algorithm"], premis_dict["digest"]) = premis.parse_fixity(premis_xml)
     (format_name, format_version) = premis.parse_format(premis_xml)
     (premis_dict["object_id"]["type"],
-    premis_dict["object_id"]["value"]) = premis.get_identifier_type_value(premis.parse_identifier(premis_xml, 'object'))
+    premis_dict["object_id"]["value"]) = premis.parse_identifier_type_value(premis.parse_identifier(premis_xml, 'object'))
     premis_dict.update(parse_mimetype(format_name))
     if format_version is None:
         premis_dict["format"]["version"] = ""

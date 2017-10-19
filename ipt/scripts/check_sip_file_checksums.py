@@ -9,6 +9,7 @@ import errno
 import scandir
 
 import mets
+import xml_helpers.utils as u
 from ipt.validator.utils import iter_fileinfo
 from ipt.fileutils.checksum import BigFile
 
@@ -51,7 +52,7 @@ def check_checksums(mets_path):
         return "%s: %s" % (
             message, os.path.relpath(fileinfo["filename"], sip_path))
 
-    mets_tree = mets.parse(mets_path)
+    mets_tree = u.readfile(mets_path)
     for fileinfo in iter_fileinfo(mets_tree, mets_path):
         checked_files[fileinfo["filename"]] = None
 
