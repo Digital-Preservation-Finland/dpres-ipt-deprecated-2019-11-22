@@ -76,9 +76,8 @@ def validation_report(results, linking_sip_type, linking_sip_id):
     childs = []
     for result_ in results:
         related_id = premis.identifier(linking_sip_type, linking_sip_id, 'object')
-        agent_id_value = str(uuid.uuid4())
-        agent_id = premis.identifier('preservation-agent-id', agent_id_value, 'agent')
         agent_name = "%s-%s" % (__file__, ipt.version.__version__)
+        agent_id = premis.identifier('preservation-agent-id', agent_name, 'agent')
         report_agent = premis.agent(agent_id, agent_name, 'software')
 
         report_object = p.object_fromvalidator(
@@ -90,7 +89,7 @@ def validation_report(results, linking_sip_type, linking_sip_id):
         report_event = p.event_fromvalidator(
             result_['result'],
             linkingObject=premis.identifier(link_id_type, link_id_val, 'linkingObject'),
-            linkingAgent=premis.identifier('preservation-agent-id', agent_id_value, 'linkingAgent'))
+            linkingAgent=premis.identifier('preservation-agent-id', agent_name, 'linkingAgent'))
 
         childs.append(report_object)
         childs.append(report_event)
