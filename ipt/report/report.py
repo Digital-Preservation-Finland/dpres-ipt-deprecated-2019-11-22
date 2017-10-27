@@ -71,8 +71,9 @@ def event_fromvalidator(result,
         else:
             detail_note = result["messages"]
 
-    childs = premis.outcome(outresult, detail_note=detail_note, detail_extension=detail_extension)
-        
+    outcome = premis.outcome(outresult, detail_note=detail_note, detail_extension=detail_extension)
+    childs = [outcome]
+
     if linkingAgent is not None:
         childs.append(linkingAgent)
 
