@@ -77,7 +77,7 @@ def validation_report(results, linking_sip_type, linking_sip_id):
     for result_ in results:
         related_id = premis.identifier(linking_sip_type, linking_sip_id, 'object')
         agent_id_value = str(uuid.uuid4())
-        agent_id = premis.identifier('preservation-agent-id', str(uuid.uuid4()), 'agent')
+        agent_id = premis.identifier('preservation-agent-id', agent_id_value, 'agent')
         agent_name = "%s-%s" % (__file__, ipt.version.__version__)
         report_agent = premis.agent(agent_id, agent_name, 'software')
 
