@@ -25,7 +25,7 @@ Requires: libxslt unzip jhove python-setuptools python-lxml
 # ClamAV installation requires these to work
 Requires: clamav libtool-ltdl
 Requires: warc-tools >= 4.8.3 ffmpeg pngcheck
-Requires: dpres-xml-schemas
+Requires: dpres-xml-schemas xml-helpers mets premis
 Requires: python-wand libreoffice
 Requires: pspp
 # Our own packaging of a newer file command than what CentOS provides
