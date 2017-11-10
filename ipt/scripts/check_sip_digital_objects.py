@@ -5,11 +5,12 @@ import os
 import sys
 import uuid
 import argparse
+import datetime
+import lxml.etree
 
 import xml_helpers.utils
 import mets
 import premis
-from ipt.report import report as p
 
 import ipt.version
 from ipt.validator.utils import iter_fileinfo
@@ -27,7 +28,7 @@ def main(arguments=None):
 
     print xml_helpers.utils.serialize(report)
 
-    if p.contains_errors(report):
+    if contains_errors(report):
         return 117
 
     return 0
@@ -41,6 +42,14 @@ def parse_arguments(arguments):
     parser.add_argument('linking_sip_id', default=' ')
 
     return parser.parse_args(arguments)
+
+
+def contains_errors(report):
+    events = report.findall('.//'+premis.premis_ns('eventOutcome'))
+    for event in events:
+        if event.text == 'failure':
+            return True
+    return False
 
 
 def validation(mets_path):
@@ -74,23 +83,60 @@ def validation_report(results, linking_sip_type, linking_sip_id):
     """ Format validation results to Premis report"""
 
     childs = []
-    for result_ in results:
-        related_id = premis.identifier(linking_sip_type, linking_sip_id, 'object')
-        agent_name = "%s-%s" % (__file__, ipt.version.__version__)
-        agent_id = premis.identifier('preservation-agent-id', agent_name, 'agent')
+    for given_result in results:
+
+        # Create PREMIS agent
+        agent_name = 'check_sip_digital_objects.py-v0.0'
+        agent_id = premis.identifier(
+            'preservation-agent-id', agent_name+'-'+str(uuid.uuid4()), 'agent')
         report_agent = premis.agent(agent_id, agent_name, 'software')
 
-        report_object = p.object_fromvalidator(
-            fileinfo=result_['fileinfo'],
-            relatedObject=related_id)
-        obj_id = premis.parse_identifier(report_object, 'object')
-        (link_id_type, link_id_val) = premis.parse_identifier_type_value(obj_id)
+        # Create PREMIS object
 
-        report_event = p.event_fromvalidator(
-            result_['result'],
-            linkingObject=premis.identifier(link_id_type, link_id_val, 'linkingObject'),
-            linkingAgent=premis.identifier('preservation-agent-id', agent_name, 'linkingAgent'))
+        object_id = premis.identifier('preservation-object-id', str(uuid.uuid4()))
 
+        fileinfo = given_result['fileinfo']
+        result = given_result['result']
+
+        dep_id = premis.identifier(
+            fileinfo['object_id']['type'], fileinfo['object_id']['value'])
+        environ = premis.environment(dep_id)
+
+        related_id = premis.identifier(linking_sip_type, linking_sip_id, 'object')
+        related = premis.relationship('structural', 'is included in', related_id)
+
+        report_object = premis.object(
+            object_id, fileinfo['filename'], child_elements=[environ, related],
+            representation=True)
+
+        # Create PREMIS event        
+
+        event_id = premis.identifier(
+            "preservation-event-id", str(uuid.uuid4()), 'event')
+        outresult = 'success' if result["is_valid"] is True else 'failure'
+        detail_extension = None
+        try:
+            parser = lxml.etree.XMLParser(
+                dtd_validation=False, no_network=True)
+            tree = lxml.etree.fromstring(result["messages"])
+            detail_extension = u.serialize(tree)
+            detail_note = result["errors"] if result["errors"] else None
+
+        except lxml.etree.XMLSyntaxError as exception:
+            if result["errors"]:
+                detail_note = (result["messages"] + result["errors"])
+            else:
+                detail_note = result["messages"]
+
+        outcome = premis.outcome(outresult, detail_note=detail_note,
+                                 detail_extension=detail_extension)
+
+        report_event = premis.event(
+            event_id, "validation", datetime.datetime.now().isoformat(),
+            "Digital object validation", child_elements=[outcome],
+            linking_objects=[report_object], linking_agents=[report_agent])
+
+        # Add to report list
         childs.append(report_object)
         childs.append(report_event)
         childs.append(report_agent)
