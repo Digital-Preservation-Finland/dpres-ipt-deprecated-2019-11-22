@@ -86,9 +86,9 @@ def validation_report(results, linking_sip_type, linking_sip_id):
     for given_result in results:
 
         # Create PREMIS agent
-        agent_name = 'check_sip_digital_objects.py-v0.0'
+        agent_name = "%s-%s" % (__file__, ipt.version.__version__)
         agent_id = premis.identifier(
-            'preservation-agent-id', agent_name+'-'+str(uuid.uuid4()), 'agent')
+            'preservation-agent-id', agent_name, 'agent')
         report_agent = premis.agent(agent_id, agent_name, 'software')
 
         # Create PREMIS object
