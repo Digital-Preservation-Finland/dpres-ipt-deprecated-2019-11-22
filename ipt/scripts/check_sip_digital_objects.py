@@ -88,12 +88,15 @@ def validation_report(results, linking_sip_type, linking_sip_id):
         # Create PREMIS agent
         agent_name = "%s-%s" % (__file__, ipt.version.__version__)
         agent_id = premis.identifier(
-            'preservation-agent-id', agent_name, 'agent')
-        report_agent = premis.agent(agent_id, agent_name, 'software')
+            identifier_type='preservation-agent-id',
+            identifier_value=agent_name, prefix='agent')
+        report_agent = premis.agent(agent_id=agent_id, agent_name=agent_name,
+                                    agent_type='software')
 
         # Create PREMIS object
 
-        object_id = premis.identifier('preservation-object-id', str(uuid.uuid4()))
+        object_id = premis.identifier('preservation-object-id',
+                                      str(uuid.uuid4()))
 
         fileinfo = given_result['fileinfo']
         result = given_result['result']
@@ -102,17 +105,23 @@ def validation_report(results, linking_sip_type, linking_sip_id):
             fileinfo['object_id']['type'], fileinfo['object_id']['value'])
         environ = premis.environment(dep_id)
 
-        related_id = premis.identifier(linking_sip_type, linking_sip_id, 'object')
-        related = premis.relationship('structural', 'is included in', related_id)
+        related_id = premis.identifier(
+            identifier_type=linking_sip_type, identifier_value=linking_sip_id,
+            prefix='object')
+        related = premis.relationship(
+            relationship_type='structural',
+            relationship_subtype='is included in', related_object=related_id)
 
         report_object = premis.object(
-            object_id, fileinfo['filename'], child_elements=[environ, related],
+            object_id=object_id, original_name=fileinfo['filename'],
+            child_elements=[environ, related],
             representation=True)
 
         # Create PREMIS event        
 
         event_id = premis.identifier(
-            "preservation-event-id", str(uuid.uuid4()), 'event')
+            identifier_type="preservation-event-id",
+            identifier_value=str(uuid.uuid4()), prefix='event')
         outresult = 'success' if result["is_valid"] is True else 'failure'
         detail_extension = None
         try:
@@ -128,12 +137,14 @@ def validation_report(results, linking_sip_type, linking_sip_id):
             else:
                 detail_note = result["messages"]
 
-        outcome = premis.outcome(outresult, detail_note=detail_note,
+        outcome = premis.outcome(outcome=outresult, detail_note=detail_note,
                                  detail_extension=detail_extension)
 
         report_event = premis.event(
-            event_id, "validation", datetime.datetime.now().isoformat(),
-            "Digital object validation", child_elements=[outcome],
+            event_id=event_id, event_type="validation",
+            event_date_time=datetime.datetime.now().isoformat(),
+            event_detail="Digital object validation",
+            child_elements=[outcome],
             linking_objects=[report_object], linking_agents=[report_agent])
 
         # Add to report list
