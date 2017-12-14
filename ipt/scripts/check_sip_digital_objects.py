@@ -127,8 +127,7 @@ def validation_report(results, linking_sip_type, linking_sip_id):
         try:
             parser = lxml.etree.XMLParser(
                 dtd_validation=False, no_network=True)
-            tree = lxml.etree.fromstring(result["messages"])
-            detail_extension = xml_helpers.utils.serialize(tree)
+            detail_extension = lxml.etree.fromstring(result["messages"])
             detail_note = result["errors"] if result["errors"] else None
 
         except lxml.etree.XMLSyntaxError as exception:
