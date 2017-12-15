@@ -20,7 +20,7 @@ Source0:        %{file_prefix}-v%{file_version}%{?file_release_tag}-%{file_build
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
-Requires: python python2-mimeparse python-dateutil xml-common pymongo ghostscript
+Requires: python python2-mimeparse python-dateutil xml-common ghostscript
 Requires: libxslt unzip jhove python-setuptools python-lxml veraPDF
 # ClamAV installation requires these to work
 Requires: clamav libtool-ltdl
