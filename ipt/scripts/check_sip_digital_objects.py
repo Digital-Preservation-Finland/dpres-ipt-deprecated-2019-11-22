@@ -82,10 +82,9 @@ def validation(mets_path):
 def validation_report(results, linking_sip_type, linking_sip_id):
     """ Format validation results to Premis report"""
 
-    childs = []
-    for given_result in results:
-
-        # Create PREMIS agent
+    # Create PREMIS agent, only one agent is needed
+    # TODO: Agent could be the used validator instead of script file
+    if results is not None:
         agent_name = "%s-%s" % (__file__, ipt.version.__version__)
         agent_id = premis.identifier(
             identifier_type='preservation-agent-id',
@@ -93,32 +92,42 @@ def validation_report(results, linking_sip_type, linking_sip_id):
         report_agent = premis.agent(agent_id=agent_id, agent_name=agent_name,
                                     agent_type='software')
 
-        # Create PREMIS object
-
-        object_id = premis.identifier('preservation-object-id',
-                                      str(uuid.uuid4()))
+    childs = [report_agent]
+    object_list = []
+    for given_result in results:
 
         fileinfo = given_result['fileinfo']
         result = given_result['result']
 
-        dep_id = premis.identifier(
-            fileinfo['object_id']['type'], fileinfo['object_id']['value'])
-        environ = premis.environment(dep_id)
+        # Create PREMIS object only if not already in the report
+        if fileinfo['object_id']['value'] not in object_list:
 
-        related_id = premis.identifier(
-            identifier_type=linking_sip_type, identifier_value=linking_sip_id,
-            prefix='object')
-        related = premis.relationship(
-            relationship_type='structural',
-            relationship_subtype='is included in', related_object=related_id)
+            object_list.append(fileinfo['object_id']['value']) 
 
-        report_object = premis.object(
-            object_id=object_id, original_name=fileinfo['filename'],
-            child_elements=[environ, related],
-            representation=True)
+            dep_id = premis.identifier(
+                fileinfo['object_id']['type'], fileinfo['object_id']['value'])
+            environ = premis.environment(dep_id)
+
+            related_id = premis.identifier(
+                identifier_type=linking_sip_type,
+                identifier_value=linking_sip_id,
+                prefix='object')
+            related = premis.relationship(
+                relationship_type='structural',
+                relationship_subtype='is included in',
+                related_object=related_id)
+
+            object_id = premis.identifier('preservation-object-id',
+                                          str(uuid.uuid4()))
+
+            report_object = premis.object(
+                object_id=object_id, original_name=fileinfo['filename'],
+                child_elements=[environ, related],
+                representation=True)
+
+            childs.append(report_object)
 
         # Create PREMIS event        
-
         event_id = premis.identifier(
             identifier_type="preservation-event-id",
             identifier_value=str(uuid.uuid4()), prefix='event')
@@ -146,10 +155,7 @@ def validation_report(results, linking_sip_type, linking_sip_id):
             child_elements=[outcome],
             linking_objects=[report_object], linking_agents=[report_agent])
 
-        # Add to report list
-        childs.append(report_object)
         childs.append(report_event)
-        childs.append(report_agent)
 
     if childs == []:
         childs = None
