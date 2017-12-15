@@ -4,12 +4,13 @@ import os
 import uuid
 
 import pytest
+import premis
 
 from tests import testcommon
 from tests.testcommon import shell
 
 # Module to test
-from ipt.scripts.check_sip_digital_objects import main, validation
+from ipt.scripts.check_sip_digital_objects import main, validation, validation_report
 import ipt.validator.jhove
 
 
@@ -108,6 +109,33 @@ TESTCASES = [
                     'File version check error'],
          "stderr": ''}}]
 
+RESULT_CASES = [
+    [{"result": {"is_valid": True, "messages": "OK", "errors": None},
+     "fileinfo": {
+         "filename": "file.txt", "object_id": {
+             "type": "id-type", "value": "id-value"}}}],
+    [{"result": {"is_valid": True, "messages": "OK", "errors": None},
+      "fileinfo": {
+          "filename": "file.txt", "object_id": {
+              "type": "id-type", "value": "id-value"}}},
+     {"result": {"is_valid": True, "messages": "OK too", "errors": None},
+      "fileinfo": {
+          "filename": "file.txt", "object_id": {
+              "type": "id-type", "value": "id-value"}}}],
+    [{"result": {"is_valid": True, "messages": "OK", "errors": None},
+      "fileinfo": {
+          "filename": "file.txt", "object_id": {
+              "type": "id-type", "value": "id-value-1"}}},
+     {"result": {"is_valid": True, "messages": "OK too", "errors": None},
+      "fileinfo": {
+          "filename": "file.txt", "object_id": {
+              "type": "id-type", "value": "id-value-1"}}},
+     {"result": {"is_valid": True, "messages": "OK", "errors": None},
+      "fileinfo": {
+          "filename": "file2.txt", "object_id": {
+              "type": "id-type", "value": "id-value-2"}}}]
+    ]
+
 
 @pytest.mark.parametrize(
     "case", TESTCASES, ids=[x['testcase'] for x in TESTCASES])
@@ -135,6 +163,20 @@ def test_check_sip_digital_objects(case):
         "stdout:", stdout, "stderr:", stderr])
 
     assert returncode == case["expected_result"]["returncode"], message
+
+
+@pytest.mark.parametrize(
+    "results, object_count, event_count",
+        [(RESULT_CASES[0], 1, 1),
+         (RESULT_CASES[1], 1, 2),
+         (RESULT_CASES[2], 2, 3)
+        ])
+def test_validation_report(results, object_count, event_count):
+    """Test that validation report creates correct number of premis sections"""
+    premis_xml = validation_report(results, 'sip-type', 'sip-value')
+    assert premis.object_count(premis_xml) == object_count
+    assert premis.event_count(premis_xml) == event_count
+    assert premis.agent_count(premis_xml) == 1
 
 
 @pytest.fixture(scope="function")
