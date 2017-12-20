@@ -85,10 +85,12 @@ def validation_report(results, linking_sip_type, linking_sip_id):
     # Create PREMIS agent, only one agent is needed
     # TODO: Agent could be the used validator instead of script file
     if results is not None:
-        agent_name = "%s-%s" % (__file__, ipt.version.__version__)
+        agent_name = "check_sip_digital_objects.py-v0.0"
+        agent_id_value = 'preservation-agent-'+agent_name+'-'+ \
+            str(uuid.uuid4())
         agent_id = premis.identifier(
             identifier_type='preservation-agent-id',
-            identifier_value=agent_name, prefix='agent')
+            identifier_value=agent_id_value, prefix='agent')
         report_agent = premis.agent(agent_id=agent_id, agent_name=agent_name,
                                     agent_type='software')
 
