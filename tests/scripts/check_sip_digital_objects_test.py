@@ -109,31 +109,42 @@ TESTCASES = [
                     'File version check error'],
          "stderr": ''}}]
 
+
+"""
+This list contains the following cases:
+(1) One validation is done for one digital object
+(2) Two validations are done for one object
+(3) Two validations are done for one digital object and one to another
+    (i.e. 2 events for 1 object and 1 event for 1 object)
+"""
 RESULT_CASES = [
+    # One validation event for one object
     [{"result": {"is_valid": True, "messages": "OK", "errors": None},
      "fileinfo": {
          "filename": "file.txt", "object_id": {
-             "type": "id-type", "value": "id-value"}}}],
+             "type": "id-type", "value": "only-one-object"}}}],
+    # Two validation events for one object
     [{"result": {"is_valid": True, "messages": "OK", "errors": None},
       "fileinfo": {
           "filename": "file.txt", "object_id": {
-              "type": "id-type", "value": "id-value"}}},
+              "type": "id-type", "value": "this-id-should-be-added-only-once"}}},
      {"result": {"is_valid": True, "messages": "OK too", "errors": None},
       "fileinfo": {
           "filename": "file.txt", "object_id": {
-              "type": "id-type", "value": "id-value"}}}],
+              "type": "id-type", "value": "this-id-should-be-added-only-once"}}}],
+    # Two validation events for one object and one event for one object
     [{"result": {"is_valid": True, "messages": "OK", "errors": None},
       "fileinfo": {
           "filename": "file.txt", "object_id": {
-              "type": "id-type", "value": "id-value-1"}}},
+              "type": "id-type", "value": "this-id-should-be-added-only-once"}}},
      {"result": {"is_valid": True, "messages": "OK too", "errors": None},
       "fileinfo": {
           "filename": "file.txt", "object_id": {
-              "type": "id-type", "value": "id-value-1"}}},
+              "type": "id-type", "value": "this-id-should-be-added-only-once"}}},
      {"result": {"is_valid": True, "messages": "OK", "errors": None},
       "fileinfo": {
           "filename": "file2.txt", "object_id": {
-              "type": "id-type", "value": "id-value-2"}}}]
+              "type": "id-type", "value": "this-id-should-not-be-forgotten"}}}]
     ]
 
 

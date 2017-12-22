@@ -82,20 +82,22 @@ def validation(mets_path):
 def validation_report(results, linking_sip_type, linking_sip_id):
     """ Format validation results to Premis report"""
 
+    if results is None:
+        raise TypeError
+
     # Create PREMIS agent, only one agent is needed
     # TODO: Agent could be the used validator instead of script file
-    if results is not None:
-        agent_name = "check_sip_digital_objects.py-v0.0"
-        agent_id_value = 'preservation-agent-'+agent_name+'-'+ \
-            str(uuid.uuid4())
-        agent_id = premis.identifier(
-            identifier_type='preservation-agent-id',
-            identifier_value=agent_id_value, prefix='agent')
-        report_agent = premis.agent(agent_id=agent_id, agent_name=agent_name,
-                                    agent_type='software')
+    agent_name = "check_sip_digital_objects.py-v0.0"
+    agent_id_value = 'preservation-agent-'+agent_name+'-'+ \
+        str(uuid.uuid4())
+    agent_id = premis.identifier(
+        identifier_type='preservation-agent-id',
+        identifier_value=agent_id_value, prefix='agent')
+    report_agent = premis.agent(agent_id=agent_id, agent_name=agent_name,
+                                agent_type='software')
 
     childs = [report_agent]
-    object_list = []
+    object_list = set()
     for given_result in results:
 
         fileinfo = given_result['fileinfo']
@@ -104,7 +106,7 @@ def validation_report(results, linking_sip_type, linking_sip_id):
         # Create PREMIS object only if not already in the report
         if fileinfo['object_id']['value'] not in object_list:
 
-            object_list.append(fileinfo['object_id']['value']) 
+            object_list.add(fileinfo['object_id']['value']) 
 
             dep_id = premis.identifier(
                 fileinfo['object_id']['type'], fileinfo['object_id']['value'])
@@ -158,9 +160,6 @@ def validation_report(results, linking_sip_type, linking_sip_id):
             linking_objects=[report_object], linking_agents=[report_agent])
 
         childs.append(report_event)
-
-    if childs == []:
-        childs = None
 
     return premis.premis(child_elements=childs)
 
