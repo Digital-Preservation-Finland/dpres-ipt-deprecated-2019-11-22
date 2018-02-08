@@ -27,15 +27,18 @@ Install the scripts with command::
 Additional requirements
 +++++++++++++++++++++++
 
-The following software is required to validate METS documents and different file formats:
+The following software is required for validation tools, depending on the file formats in the package:
 
         * dpres-xml-schemas, see https://github.com/Digital-Preservation-Finland/dpres-xml-schemas
+        * mets, see https://github.com/Digital-Preservation-Finland/mets
+        * premis, see https://github.com/Digital-Preservation-Finland/premis
         * libxml2 & libxslt / xmllint & xsltproc ( with exslt and Saxon line number extensions )
         * python-lxml
         * python-mimeparse
         * python-dateutil
         * xml-common
         * Jhove
+        * veraPDF
         * LibreOffice
         * PSPP
         * pngcheck
@@ -45,9 +48,9 @@ The following software is required to validate METS documents and different file
         * warctools
         * Gzip
 
-Form the above list, you can install the python-* software with command::
+Form the above list, you can install the Python related software with command::
 
-        pip install -r requirements_dev.txt
+        pip install -r requirements_github.txt
 
 Other software listed above needs to be installed separately.
 

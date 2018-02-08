@@ -1,0 +1,12 @@
+lxml
+coverage
+pytest-coverage
+dateutils
+scandir
+pytest
+wand
+python-mimeparse
+pytest-timeout
+https://github.com/Digital-Preservation-Finland/xml-helpers.git#egg=xml_helpers
+https://github.com/Digital-Preservation-Finland/mets.git#egg=mets
+https://github.com/Digital-Preservation-Finland/premis.git#egg=premis
