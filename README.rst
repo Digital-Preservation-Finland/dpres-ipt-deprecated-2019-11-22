@@ -30,6 +30,7 @@ Additional requirements
 The following software is required for validation tools, depending on the file formats in the package:
 
         * dpres-xml-schemas, see https://github.com/Digital-Preservation-Finland/dpres-xml-schemas
+        * xml-helpers, see https://github.com/Digital-Preservation-Finland/xml-helpers
         * mets, see https://github.com/Digital-Preservation-Finland/mets
         * premis, see https://github.com/Digital-Preservation-Finland/premis
         * libxml2 & libxslt / xmllint & xsltproc ( with exslt and Saxon line number extensions )
