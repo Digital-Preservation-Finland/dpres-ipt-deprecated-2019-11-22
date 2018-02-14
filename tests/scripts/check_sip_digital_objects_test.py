@@ -120,29 +120,29 @@ This list contains the following cases:
 RESULT_CASES = [
     # One validation event for one object
     [{"result": {"is_valid": True, "messages": "OK", "errors": None},
-     "fileinfo": {
+     "metadata_info": {
          "filename": "file.txt", "object_id": {
              "type": "id-type", "value": "only-one-object"}}}],
     # Two validation events for one object
     [{"result": {"is_valid": True, "messages": "OK", "errors": None},
-      "fileinfo": {
+      "metadata_info": {
           "filename": "file.txt", "object_id": {
               "type": "id-type", "value": "this-id-should-be-added-only-once"}}},
      {"result": {"is_valid": True, "messages": "OK too", "errors": None},
-      "fileinfo": {
+      "metadata_info": {
           "filename": "file.txt", "object_id": {
               "type": "id-type", "value": "this-id-should-be-added-only-once"}}}],
     # Two validation events for one object and one event for one object
     [{"result": {"is_valid": True, "messages": "OK", "errors": None},
-      "fileinfo": {
+      "metadata_info": {
           "filename": "file.txt", "object_id": {
               "type": "id-type", "value": "this-id-should-be-added-only-once"}}},
      {"result": {"is_valid": True, "messages": "OK too", "errors": None},
-      "fileinfo": {
+      "metadata_info": {
           "filename": "file.txt", "object_id": {
               "type": "id-type", "value": "this-id-should-be-added-only-once"}}},
      {"result": {"is_valid": True, "messages": "OK", "errors": None},
-      "fileinfo": {
+      "metadata_info": {
           "filename": "file2.txt", "object_id": {
               "type": "id-type", "value": "this-id-should-not-be-forgotten"}}}]
     ]
@@ -194,27 +194,27 @@ def test_validation_report(results, object_count, event_count):
 def patch_validate(monkeypatch):
     """Patch JHovePDF validator so that it always returns valid result"""
 
-    def _iter_validators(fileinfo):
+    def _iter_validators(metadata_info):
         """mock validate"""
 
         class _Validator(object):
             """dummy validator"""
             # pylint: disable=too-few-public-methods
 
-            def __init__(self, fileinfo):
+            def __init__(self, metadata_info):
                 """init"""
-                self.fileinfo = fileinfo
+                self.metadata_info = metadata_info
 
             def result(self):
                 """check result"""
-                if 'pdf' in self.fileinfo["filename"]:
+                if 'pdf' in self.metadata_info["filename"]:
                     return 'success'
                 return 'failure'
 
-        yield _Validator(fileinfo)
+        yield _Validator(metadata_info)
 
-    def _iter_fileinfo(foo, foob):
-        """mock iter_fileinfo"""
+    def _iter_metadata_info(foo, foob):
+        """mock iter_metadata_info"""
         return [
             {"filename": "pdf", "use": ''},
             {"filename": "cdr", "use": ''},
@@ -226,7 +226,7 @@ def patch_validate(monkeypatch):
         ipt.scripts.check_sip_digital_objects, "iter_validators",
         _iter_validators)
     monkeypatch.setattr(
-        ipt.scripts.check_sip_digital_objects, "iter_fileinfo", _iter_fileinfo)
+        ipt.scripts.check_sip_digital_objects, "iter_metadata_info", _iter_metadata_info)
 
 
 @pytest.mark.usefixtures('patch_validate')
@@ -238,8 +238,8 @@ def test_native_marked():
     results = [file_ for file_ in validation(None)]
 
     assert results == [
-        {"fileinfo": {'filename': 'pdf', 'use': ''}, "result": "success"},
-        {"fileinfo": {'filename': 'cdr', 'use': ''}, "result": "failure"},
-        {"fileinfo": {'filename': 'cdr', 'use': 'noo-file-format-validation'},
+        {"metadata_info": {'filename': 'pdf', 'use': ''}, "result": "success"},
+        {"metadata_info": {'filename': 'cdr', 'use': ''}, "result": "failure"},
+        {"metadata_info": {'filename': 'cdr', 'use': 'noo-file-format-validation'},
          "result": "failure"}
     ]

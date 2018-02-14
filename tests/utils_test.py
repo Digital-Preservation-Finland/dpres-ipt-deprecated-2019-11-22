@@ -15,34 +15,34 @@ FORMAT2 = {'format':{'mimetype':'image/ipeg', 'version':None}}
 
 def test_merge_dicts():
     """Tests for merge dict."""
-    fileinfo = {'filename': "sippi"}
+    metadata_info = {'filename': "sippi"}
     addml = {"addml": {"charset": "UTF-8"}}
 
     # Simple merge
-    fileinfo = merge_dicts(fileinfo, AUDIOMD1)
-    assert fileinfo == {"audiomd": [{"codec": "foo"}], "filename": "sippi"}
+    metadata_info = merge_dicts(metadata_info, AUDIOMD1)
+    assert metadata_info == {"audiomd": [{"codec": "foo"}], "filename": "sippi"}
 
     # Merge dicts that contain list-elements with same key
-    fileinfo = merge_dicts(fileinfo, AUDIOMD2)
-    assert fileinfo == {"audiomd": [{"codec": "foo"}, {"codec": "bar"}], "filename": "sippi"}
+    metadata_info = merge_dicts(metadata_info, AUDIOMD2)
+    assert metadata_info == {"audiomd": [{"codec": "foo"}, {"codec": "bar"}], "filename": "sippi"}
 
     # Merge dicts that contain multiple list-elements
-    fileinfo = merge_dicts(fileinfo, AUDIOVIDEOMD)
-    assert fileinfo == {
+    metadata_info = merge_dicts(metadata_info, AUDIOVIDEOMD)
+    assert metadata_info == {
         "audiomd": [{"codec": "foo"}, {"codec": "bar"}, {"codec": "foo"}],
         "filename": "sippi",
         "videomd": [{"codec": "foo", "duration":"bar"}]}
 
-    fileinfo = merge_dicts(fileinfo, addml)
-    assert fileinfo == {
+    metadata_info = merge_dicts(metadata_info, addml)
+    assert metadata_info == {
         "audiomd": [{"codec": "foo"}, {"codec": "bar"}, {"codec": "foo"}],
         "filename": "sippi",
         "videomd": [{"codec": "foo", "duration": "bar"}],
         "addml": {"charset": "UTF-8"}}
 
     # Merge dict in dict. Merge NoneType elements.
-    fileinfo = merge_dicts(FORMAT1, FORMAT2)
-    assert fileinfo == {'format':{'mimetype':'image/ipeg', 'version':'1.0'}}
+    metadata_info = merge_dicts(FORMAT1, FORMAT2)
+    assert metadata_info == {'format':{'mimetype':'image/ipeg', 'version':'1.0'}}
 
 
 

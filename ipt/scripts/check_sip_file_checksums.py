@@ -10,7 +10,7 @@ import scandir
 
 import mets
 import xml_helpers.utils as u
-from ipt.validator.utils import iter_fileinfo
+from ipt.validator.utils import iter_metadata_info
 from ipt.fileutils.checksum import BigFile
 
 
@@ -47,32 +47,32 @@ def check_checksums(mets_path):
 
     sip_path = os.path.dirname(mets_path)
 
-    def _message(fileinfo, message):
+    def _message(metadata_info, message):
         """Format error message"""
         return "%s: %s" % (
-            message, os.path.relpath(fileinfo["filename"], sip_path))
+            message, os.path.relpath(metadata_info["filename"], sip_path))
 
     mets_tree = u.readfile(mets_path)
-    for fileinfo in iter_fileinfo(mets_tree, mets_path):
-        checked_files[fileinfo["filename"]] = None
+    for metadata_info in iter_metadata_info(mets_tree, mets_path):
+        checked_files[metadata_info["filename"]] = None
 
-        if fileinfo['algorithm'] is None:
-            yield _message(fileinfo, "Could not find checksum algorithm")
+        if metadata_info['algorithm'] is None:
+            yield _message(metadata_info, "Could not find checksum algorithm")
         else:
 
-            checksum = BigFile(fileinfo["algorithm"])
+            checksum = BigFile(metadata_info["algorithm"])
 
             try:
-                hex_digest = checksum.hexdigest(fileinfo["filename"])
+                hex_digest = checksum.hexdigest(metadata_info["filename"])
             except IOError as exception:
                 if exception.errno == errno.ENOENT:
-                    yield _message(fileinfo, "File does not exist")
+                    yield _message(metadata_info, "File does not exist")
                 continue
 
-            if hex_digest == fileinfo["digest"]:
-                print _message(fileinfo, "Checksum OK")
+            if hex_digest == metadata_info["digest"]:
+                print _message(metadata_info, "Checksum OK")
             else:
-                yield _message(fileinfo, "Invalid Checksum")
+                yield _message(metadata_info, "Invalid Checksum")
 
     for path in iter_files(sip_path):
         if path.endswith("ignore_validation_errors"):

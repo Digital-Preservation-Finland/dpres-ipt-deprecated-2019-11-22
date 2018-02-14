@@ -2,7 +2,7 @@
     "test_validate":
     [{
      "testcase": "Test DTD validation with valid XML file",
-     "fileinfo": {
+     "metadata_info": {
      	"filename": "02_filevalidation_data/xml/valid_dtd.xml",
 	"format": {
      		"mimetype": "text/xml",
@@ -17,7 +17,7 @@
      },
      {
      "testcase": "Test DTD validation with invalid XML file",
-     "fileinfo": {
+     "metadata_info": {
      	"filename": "02_filevalidation_data/xml/invalid_dtd.xml",
 	"format": {
      		"mimetype": "text/xml",
@@ -32,7 +32,7 @@
      },
      {
      "testcase": "Test XSD validation with valid XML file",
-     "fileinfo": {
+     "metadata_info": {
      	"filename": "02_filevalidation_data/xml/valid_xsd.xml",
 	"format": {
 
@@ -48,7 +48,7 @@
      },
      {
      "testcase": "Test XSD validation with invalid XML file",
-     "fileinfo": {
+     "metadata_info": {
      	"filename": "02_filevalidation_data/xml/invalid_xsd.xml",
 	"format": {
      		"mimetype": "text/xml",
@@ -63,7 +63,7 @@
      },
      {
      "testcase": "Test validation with well-formed XML file",
-     "fileinfo": {
+     "metadata_info": {
      	"filename": "02_filevalidation_data/xml/valid_wellformed.xml",
 	"format": {
      		"mimetype": "text/xml",
@@ -79,7 +79,7 @@
      ,
      {
      "testcase": "Test validation with not well-formed XML file",
-     "fileinfo": {
+     "metadata_info": {
      	"filename": "02_filevalidation_data/xml/invalid_wellformed.xml",
      	"format": {
 		"mimetype": "text/xml",
@@ -95,7 +95,7 @@
      ,
      {
      "testcase": "Test XML Schema catalog with existing schema (ALTO 1.4)",
-     "fileinfo": {
+     "metadata_info": {
 	     "filename": "02_filevalidation_data/xml/catalog_schema_valid.xml",
 	     "format": {
 		     "mimetype": "text/xml",
@@ -111,7 +111,7 @@
      ,
     {
      "testcase": "Test XML Schema catalog with non existing schema",
-     "fileinfo": {
+     "metadata_info": {
 	     "filename": "02_filevalidation_data/xml/catalog_schema_invalid.xml",
 	     "format": {
      		"mimetype": "text/xml",

@@ -13,7 +13,7 @@ import mets
 import premis
 
 import ipt.version
-from ipt.validator.utils import iter_fileinfo
+from ipt.validator.utils import iter_metadata_info
 from ipt.validator.validators import iter_validators
 
 
@@ -57,7 +57,7 @@ def validation(mets_path):
     Call validation for all files enumerated in mets.xml files.
     :mets_parser: LXML class for mets parsing
     :yields: {
-                'fileinfo': fileinfo,
+                'metadata_info': metadata_info,
                 'result': validation_result
             }
     """
@@ -66,15 +66,15 @@ def validation(mets_path):
         if os.path.isdir(mets_path):
             mets_path = os.path.join(mets_path, 'mets.xml')
         mets_tree = xml_helpers.utils.readfile(mets_path)
-    for fileinfo in iter_fileinfo(mets_tree, mets_path):
+    for metadata_info in iter_metadata_info(mets_tree, mets_path):
 
-        if fileinfo["use"] == 'no-file-format-validation':
+        if metadata_info["use"] == 'no-file-format-validation':
             continue
 
-        validators = iter_validators(fileinfo)
+        validators = iter_validators(metadata_info)
         for validator in validators:
             yield {
-                'fileinfo': fileinfo,
+                'metadata_info': metadata_info,
                 'result': validator.result()
             }
 
@@ -100,16 +100,16 @@ def validation_report(results, linking_sip_type, linking_sip_id):
     object_list = set()
     for given_result in results:
 
-        fileinfo = given_result['fileinfo']
+        metadata_info = given_result['metadata_info']
         result = given_result['result']
 
         # Create PREMIS object only if not already in the report
-        if fileinfo['object_id']['value'] not in object_list:
+        if metadata_info['object_id']['value'] not in object_list:
 
-            object_list.add(fileinfo['object_id']['value']) 
+            object_list.add(metadata_info['object_id']['value']) 
 
             dep_id = premis.identifier(
-                fileinfo['object_id']['type'], fileinfo['object_id']['value'])
+                metadata_info['object_id']['type'], metadata_info['object_id']['value'])
             environ = premis.environment(dep_id)
 
             related_id = premis.identifier(
@@ -125,7 +125,7 @@ def validation_report(results, linking_sip_type, linking_sip_id):
                                           str(uuid.uuid4()))
 
             report_object = premis.object(
-                object_id=object_id, original_name=fileinfo['filename'],
+                object_id=object_id, original_name=metadata_info['filename'],
                 child_elements=[environ, related],
                 representation=True)
 

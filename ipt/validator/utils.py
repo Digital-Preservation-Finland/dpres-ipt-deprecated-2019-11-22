@@ -10,8 +10,8 @@ import mets
 import premis
 
 
-def mdwrap_to_fileinfo(mdwrap_element):
-    """Extract fileinfo dict from mdwrap element.
+def mdwrap_to_metadata_info(mdwrap_element):
+    """Extract metadata_info dict from mdwrap element.
 
     TODO: This should be implemented in metadata-parser classes, similar
     implementation is already working with digital object validators::
@@ -24,13 +24,13 @@ def mdwrap_to_fileinfo(mdwrap_element):
             def to_json():
                 ...
 
-        def md_to_fileinfo():
+        def md_to_metadata_info():
             parsers [ MdParser, ... ]
             for parser in parsers:
                 if not MdParser.is_supported(mdwrap):
                     continue
                 merge_dict(
-                    fileinfo,
+                    metadata_info,
                     MdParser().from_xmldata(mdwrap.xmldata).to_json())
 
     :mdwrap: mdWrap element as ElementTree object
@@ -62,12 +62,12 @@ def mdwrap_to_fileinfo(mdwrap_element):
         return {}
 
 
-def iter_fileinfo(mets_tree, mets_path):
-    """Iterate all files in given mets document and return fileinfo
+def iter_metadata_info(mets_tree, mets_path):
+    """Iterate all files in given mets document and return metadata_info
     dictionary for each file.
 
     :mets_parser: ipt.mets.parser.LXML object
-    :returns: Iterable on fileinfo dictionaries
+    :returns: Iterable on metadata_info dictionaries
 
     """
 
@@ -78,7 +78,7 @@ def iter_fileinfo(mets_tree, mets_path):
             os.path.dirname(mets_path),
             uri_to_path(mets.parse_href(loc)))
 
-        fileinfo = {
+        metadata_info = {
             'filename': object_filename,
             'use': mets.parse_use(element),
             'format':{'mimetype':None,
@@ -91,10 +91,10 @@ def iter_fileinfo(mets_tree, mets_path):
         for section in mets.iter_elements_with_id(mets_tree, mets.parse_admid(element),
                                                             "amdSec"):
             if section is not None:
-                fileinfo = merge_dicts(
-                    fileinfo, mdwrap_to_fileinfo(mets.parse_mdwrap(section)))
+                metadata_info = merge_dicts(
+                    metadata_info, mdwrap_to_metadata_info(mets.parse_mdwrap(section)))
 
-        yield fileinfo
+        yield metadata_info
 
 
 def premis_to_dict(premis_xml):

@@ -32,7 +32,7 @@ def main(arguments=None):
     if len(args) != 1:
         parser.error("Must give XML filename as argument")
 
-    fileinfo = {
+    metadata_info = {
         "filename": args[0],
         "schema": options.schemapath,
         "format": {
@@ -40,7 +40,7 @@ def main(arguments=None):
             "version": "1.0"
         }
     }
-    validate = ipt.validator.xmllint.Xmllint(fileinfo)
+    validate = ipt.validator.xmllint.Xmllint(metadata_info)
 
     validate.validate()
 
