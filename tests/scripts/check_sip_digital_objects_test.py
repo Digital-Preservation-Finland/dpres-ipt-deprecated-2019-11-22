@@ -25,6 +25,12 @@ TESTCASES = [
          "returncode": 0,
          "stdout": '',
          "stderr": ''}},
+    {"testcase": 'Test valid sip package wit bitstream and representation',
+     "filename": 'CSC_test001_object_types',
+     "expected_result": {
+         "returncode": 117,
+         "stdout": 'No validator for mimetype: test-bitstream-format',
+         "stderr": ''}},
     {"testcase": 'Test valid sip package #2',
      "filename": 'CSC_test002',
      "expected_result": {
@@ -121,29 +127,29 @@ RESULT_CASES = [
     # One validation event for one object
     [{"result": {"is_valid": True, "messages": "OK", "errors": None},
      "metadata_info": {
-         "filename": "file.txt", "object_id": {
+         "type": "file", "filename": "file.txt", "object_id": {
              "type": "id-type", "value": "only-one-object"}}}],
     # Two validation events for one object
     [{"result": {"is_valid": True, "messages": "OK", "errors": None},
       "metadata_info": {
-          "filename": "file.txt", "object_id": {
+          "type": "file", "filename": "file.txt", "object_id": {
               "type": "id-type", "value": "this-id-should-be-added-only-once"}}},
      {"result": {"is_valid": True, "messages": "OK too", "errors": None},
       "metadata_info": {
-          "filename": "file.txt", "object_id": {
+          "type": "file", "filename": "file.txt", "object_id": {
               "type": "id-type", "value": "this-id-should-be-added-only-once"}}}],
     # Two validation events for one object and one event for one object
     [{"result": {"is_valid": True, "messages": "OK", "errors": None},
       "metadata_info": {
-          "filename": "file.txt", "object_id": {
+          "type": "file", "filename": "file.txt", "object_id": {
               "type": "id-type", "value": "this-id-should-be-added-only-once"}}},
      {"result": {"is_valid": True, "messages": "OK too", "errors": None},
       "metadata_info": {
-          "filename": "file.txt", "object_id": {
+          "type": "file", "filename": "file.txt", "object_id": {
               "type": "id-type", "value": "this-id-should-be-added-only-once"}}},
      {"result": {"is_valid": True, "messages": "OK", "errors": None},
       "metadata_info": {
-          "filename": "file2.txt", "object_id": {
+          "type": "file", "filename": "file2.txt", "object_id": {
               "type": "id-type", "value": "this-id-should-not-be-forgotten"}}}]
     ]
 
@@ -216,10 +222,10 @@ def patch_validate(monkeypatch):
     def _iter_metadata_info(foo, foob):
         """mock iter_metadata_info"""
         return [
-            {"filename": "pdf", "use": ''},
-            {"filename": "cdr", "use": ''},
-            {"filename": "cdr", "use": "no-file-format-validation"},
-            {"filename": "cdr", "use": "noo-file-format-validation"}
+            {"type": "file", "filename": "pdf", "use": ''},
+            {"type": "file", "filename": "cdr", "use": ''},
+            {"type": "file", "filename": "cdr", "use": "no-file-format-validation"},
+            {"type": "file", "filename": "cdr", "use": "noo-file-format-validation"}
         ]
 
     monkeypatch.setattr(
@@ -238,8 +244,8 @@ def test_native_marked():
     results = [file_ for file_ in validation(None)]
 
     assert results == [
-        {"metadata_info": {'filename': 'pdf', 'use': ''}, "result": "success"},
-        {"metadata_info": {'filename': 'cdr', 'use': ''}, "result": "failure"},
-        {"metadata_info": {'filename': 'cdr', 'use': 'noo-file-format-validation'},
+        {"metadata_info": {'type': 'file', 'filename': 'pdf', 'use': ''}, "result": "success"},
+        {"metadata_info": {'type': 'file', 'filename': 'cdr', 'use': ''}, "result": "failure"},
+        {"metadata_info": {'type': 'file', 'filename': 'cdr', 'use': 'noo-file-format-validation'},
          "result": "failure"}
     ]

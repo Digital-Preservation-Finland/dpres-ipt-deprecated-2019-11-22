@@ -54,6 +54,18 @@ def test_checksum_ok(temp_sip):
     assert returncode == 0
 
 
+def test_checksum_object_types(temp_sip):
+    """Test valid METS with uncorrupted digital objects"""
+
+    (returncode, stdout, stderr) = run_main(temp_sip('CSC_test001_object_types'))
+    assert stderr == ''
+    for line in stdout.splitlines():
+        assert 'Checksum OK' in line
+    assert 'Checksum OK: kuvat/P1020137.JPG' in stdout
+    assert 'tmp' not in stdout
+    assert returncode == 0
+
+
 def test_checksum_corrupted(temp_sip):
     """Test valid METS with corrupted digital objects"""
 

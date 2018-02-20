@@ -62,6 +62,30 @@ def mdwrap_to_metadata_info(mdwrap_element):
         return {}
 
 
+def create_metadata_info(mets_tree, element, object_filename, use, type):
+    """Create meadata_info
+    """
+    metadata_info = {
+        'filename': object_filename,
+        'use': use,
+        'type': type, 
+        'format':{'mimetype':None,
+                  'version':None},
+        'object_id':{'type':None,
+                     'value':None},
+        'algorithm': None,
+        'digest': None
+    }
+
+    for section in mets.iter_elements_with_id(mets_tree, mets.parse_admid(element),
+                                                            "amdSec"):
+        if section is not None:
+            metadata_info = merge_dicts(
+                metadata_info, mdwrap_to_metadata_info(mets.parse_mdwrap(section)))
+
+    return metadata_info
+
+
 def iter_metadata_info(mets_tree, mets_path):
     """Iterate all files in given mets document and return metadata_info
     dictionary for each file.
@@ -77,22 +101,17 @@ def iter_metadata_info(mets_tree, mets_path):
         object_filename = os.path.join(
             os.path.dirname(mets_path),
             uri_to_path(mets.parse_href(loc)))
+        use = mets.parse_use(element)
 
-        metadata_info = {
-            'filename': object_filename,
-            'use': mets.parse_use(element),
-            'format':{'mimetype':None,
-                      'version':None},
-            'object_id':{'type':None,
-                         'value':None},
-            'algorithm': None
-            }
+        for stream_elem in mets.parse_streams(element):
 
-        for section in mets.iter_elements_with_id(mets_tree, mets.parse_admid(element),
-                                                            "amdSec"):
-            if section is not None:
-                metadata_info = merge_dicts(
-                    metadata_info, mdwrap_to_metadata_info(mets.parse_mdwrap(section)))
+            metadata_info = create_metadata_info(
+                mets_tree, stream_elem, object_filename, use, 'bitstream')
+
+            yield metadata_info
+
+        metadata_info = create_metadata_info(
+            mets_tree, element, object_filename, use, 'file')
 
         yield metadata_info
 
@@ -104,13 +123,22 @@ def premis_to_dict(premis_xml):
     object.
     :returns: dictionary containing basic information of digital object.
     """
-    premis_dict = {"object_id": {}}
     if premis_xml is None:
         return {}
-    (premis_dict["algorithm"], premis_dict["digest"]) = premis.parse_fixity(premis_xml)
-    (format_name, format_version) = premis.parse_format(premis_xml)
+    if premis_xml.tag != '{%s}object' % premis.PREMIS_NS:
+        return {}
+    try:
+        object_type = premis.parse_object_type(premis_xml).strip()
+    except IndexError:
+        object_type = 'file'
+    if object_type.endswith('representation'):
+        return {}
+    premis_dict = {"object_id": {}}
     (premis_dict["object_id"]["type"],
     premis_dict["object_id"]["value"]) = premis.parse_identifier_type_value(premis.parse_identifier(premis_xml, 'object'))
+    if object_type.endswith('file'):
+        (premis_dict["algorithm"], premis_dict["digest"]) = premis.parse_fixity(premis_xml)
+    (format_name, format_version) = premis.parse_format(premis_xml)
     premis_dict.update(parse_mimetype(format_name))
     if format_version is None:
         premis_dict["format"]["version"] = ""
