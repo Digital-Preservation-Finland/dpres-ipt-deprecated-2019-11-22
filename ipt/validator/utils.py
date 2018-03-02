@@ -2,12 +2,13 @@
 
 import os
 
+import mets
+import premis
+
 from ipt.utils import merge_dicts, uri_to_path, parse_mimetype
 import ipt.addml.addml
 import ipt.videomd.videomd
 import ipt.audiomd.audiomd
-import mets
-import premis
 
 
 def mdwrap_to_metadata_info(mdwrap_element):
@@ -63,34 +64,50 @@ def mdwrap_to_metadata_info(mdwrap_element):
 
 
 def create_metadata_info(mets_tree, element, object_filename, use, type):
-    """Create meadata_info
+    """Create a dictionary of technical metadata from mets metadata for
+    a given section that can either be about a digital object
+    or a bitstream. The function combines the created metadata_info
+    dictionary with metadata from the mets amdSec section.
+
+    :mets_tree: metadata in mets xml format
+    :element: the metadata section with the ID to be parsed
+    :object_filename: path to the digital object
+    :use: the use attribute value for the digital object
+    :type: type of object, i.e. a 'file' or a 'bitstream'
+
+    :returns: metadata_info as a dict
+
     """
     metadata_info = {
         'filename': object_filename,
         'use': use,
-        'type': type, 
-        'format':{'mimetype':None,
-                  'version':None},
-        'object_id':{'type':None,
-                     'value':None},
+        'type': type,
+        'format': {'mimetype': None,
+                   'version': None},
+        'object_id': {'type': None,
+                      'value': None},
         'algorithm': None,
         'digest': None
     }
 
-    for section in mets.iter_elements_with_id(mets_tree, mets.parse_admid(element),
-                                                            "amdSec"):
+    for section in mets.iter_elements_with_id(mets_tree,
+                                              mets.parse_admid(element),
+                                              "amdSec"):
         if section is not None:
             metadata_info = merge_dicts(
-                metadata_info, mdwrap_to_metadata_info(mets.parse_mdwrap(section)))
+                metadata_info, mdwrap_to_metadata_info(
+                    mets.parse_mdwrap(section)))
 
     return metadata_info
 
 
 def iter_metadata_info(mets_tree, mets_path):
     """Iterate all files in given mets document and return metadata_info
-    dictionary for each file.
+    dictionary for each file and bitstream.
 
-    :mets_parser: ipt.mets.parser.LXML object
+    :mets_tree: metadata in mets xml format
+    :mets_path: path to the mets document
+
     :returns: Iterable on metadata_info dictionaries
 
     """
@@ -106,12 +123,14 @@ def iter_metadata_info(mets_tree, mets_path):
         for stream_elem in mets.parse_streams(element):
 
             metadata_info = create_metadata_info(
-                mets_tree, stream_elem, object_filename, use, 'bitstream')
+                mets_tree=mets_tree, element=stream_elem,
+                object_filename=object_filename, use=use, type='bitstream')
 
             yield metadata_info
 
         metadata_info = create_metadata_info(
-            mets_tree, element, object_filename, use, 'file')
+            mets_tree=mets_tree, element=element,
+            object_filename=object_filename, use=use, type='file')
 
         yield metadata_info
 
@@ -135,9 +154,11 @@ def premis_to_dict(premis_xml):
         return {}
     premis_dict = {"object_id": {}}
     (premis_dict["object_id"]["type"],
-    premis_dict["object_id"]["value"]) = premis.parse_identifier_type_value(premis.parse_identifier(premis_xml, 'object'))
+     premis_dict["object_id"]["value"]) = premis.parse_identifier_type_value(
+         premis.parse_identifier(premis_xml, 'object'))
     if object_type.endswith('file'):
-        (premis_dict["algorithm"], premis_dict["digest"]) = premis.parse_fixity(premis_xml)
+        (premis_dict["algorithm"],
+         premis_dict["digest"]) = premis.parse_fixity(premis_xml)
     (format_name, format_version) = premis.parse_format(premis_xml)
     premis_dict.update(parse_mimetype(format_name))
     if format_version is None:
@@ -146,4 +167,3 @@ def premis_to_dict(premis_xml):
         premis_dict["format"]["version"] = format_version
 
     return premis_dict
-
