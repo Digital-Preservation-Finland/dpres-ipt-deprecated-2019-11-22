@@ -99,7 +99,7 @@ class XSLT:
             # print "xslt", xslt_filename, "xml", xml_file, "result",
             # tmpfile.name
 
-            # Step 4 - Validate XML file with Schematron XSLT transformation (
+            # Step 5 - Validate XML file with Schematron XSLT transformation (
             result = self.xslt_convert(
                 xslt_filename, xml_file, tmpfile.name)
 
@@ -136,11 +136,17 @@ class XSLT:
                 os.path.join(tempdir, 'step1.xsl'),
                 os.path.join(tempdir, 'step2.xsl'))
 
-            # Step 3 - Generage xsl file for validating XML ( step3.xsl ->
+            # Step 3 - Optimize
+            self.xslt_convert(
+                'optimize_schematron.xsl',
+                os.path.join(tempdir, 'step2.xsl'),
+                os.path.join(tempdir, 'step3.xsl'))
+
+            # Step 4 - Generage xsl file for validating XML ( step3.xsl ->
             # schema.sch.<sha digest>.xsl )
             self.xslt_convert(
                 'iso_svrl_for_xslt%s.xsl' % self.schematron_version,
-                os.path.join(tempdir, 'step2.xsl'),
+                os.path.join(tempdir, 'step3.xsl'),
                 os.path.join(tempdir, 'validator.xsl'))
 
             shutil.move(os.path.join(tempdir, 'validator.xsl'),
