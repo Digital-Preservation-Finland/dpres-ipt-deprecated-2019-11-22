@@ -15,10 +15,11 @@ def main(arguments=None):
     parser = optparse.OptionParser(usage=usage)
 
     parser.add_option("-s", "--schemapath", dest="schemapath",
-                      help="Path to KDK-PAS schematron schemas",
+                      help="Path to schematron schemas",
                       metavar="PATH")
 
     (options, args) = parser.parse_args(arguments)
+
 
     if len(args) != 1:
         parser.error("Must give a path to an XML file as argument")
@@ -31,17 +32,16 @@ def main(arguments=None):
     if os.path.isdir(filename):
         filename = os.path.join(filename, 'mets.xml')
 
-    validate = ipt.validator.schematron.XSLT()
+    validator = ipt.validator.schematron.SchematronValidator()
 
-    result = validate.validate_file(options.schemapath, filename)
+    validator.validate(filename, options.schemapath)
 
-    print result.messages
+    print validator.messages
 
-    if len(result.errors.strip('\n \t')) > 0:
-        print >>sys.stderr, result.errors
+    if len(validator.errors.strip('\n \t')) > 0:
+        print >>sys.stderr, validator.errors
 
-    if result.has_errors():
-        print result
+    if validator.document_has_errors():
         return 117
 
     return 0
