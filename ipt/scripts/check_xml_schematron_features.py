@@ -34,14 +34,14 @@ def main(arguments=None):
 
     validator = ipt.validator.schematron.SchematronValidator()
 
-    validator.validate(filename, options.schemapath)
+    validator.schematron_validation(filename, options.schemapath)
 
     print validator.messages
 
     if len(validator.errors.strip('\n \t')) > 0:
         print >>sys.stderr, validator.errors
 
-    if validator.document_has_errors():
+    if not validator.document_valid():
         return 117
 
     return 0
