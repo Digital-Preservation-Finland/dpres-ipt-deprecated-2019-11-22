@@ -170,8 +170,11 @@ class SchematronValidator(object):
             /var/cache/schematron-validation/<schema.sch>.<sha digest>.xslt
 
         """
-        if not os.path.exists(self.cachepath):
+        try:
             os.makedirs(self.cachepath)
+        except OSError:
+            if not os.path.isdir(self.cachepath):
+                raise
 
         checksum = ipt.fileutils.checksum.BigFile('sha1')
         schema_digest = checksum.hexdigest(schematron_schema)
