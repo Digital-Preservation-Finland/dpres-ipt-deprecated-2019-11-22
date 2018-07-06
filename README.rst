@@ -51,7 +51,7 @@ The following software is required for validation tools, depending on the file f
         * warctools
         * Gzip
 
-Form the above list, you can install the Python related software with command::
+You can install the software listed in requirements_github.txt with the following command::
 
         pip install -r requirements_github.txt
 
