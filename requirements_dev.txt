@@ -7,6 +7,6 @@ pytest
 wand
 python-mimeparse
 pytest-timeout
-git+https://source.csc.fi/scm/git/pas/xml-helpers@develop#egg=xml_helpers
-git+https://source.csc.fi/scm/git/pas/mets@develop#egg=mets
-git+https://source.csc.fi/scm/git/pas/premis@develop#egg=premis
+git+https://gitlab.csc.fi/dpres/xml-helpers.git@develop#egg=xml_helpers
+git+https://gitlab.csc.fi/dpres/mets.git@develop#egg=mets
+git+https://gitlab.csc.fi/dpres/premis.git@develop#egg=premis
