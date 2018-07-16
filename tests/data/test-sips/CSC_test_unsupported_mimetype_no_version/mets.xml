@@ -58,7 +58,7 @@
   <mets:fileSec>
     <mets:fileGrp>
       <mets:file ID="warc-0005" ADMID="tech-001 rights-001" >
-	<mets:FLocat LOCTYPE="URL" xlink:href="file://./DOES_NOT_EXIST.gz" />
+	<mets:FLocat LOCTYPE="URL" xlink:href="file://./" />
       </mets:file>
     </mets:fileGrp>
   </mets:fileSec>
