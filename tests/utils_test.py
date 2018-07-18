@@ -1,7 +1,7 @@
 """Test for utils.py."""
 
 from ipt.utils import merge_dicts, compare_lists_of_dicts, serialize_dict, \
-        filter_list_of_dicts
+    find_max_complete
 
 CODEC1 = {"codec": "foo"}
 CODEC2 = {"codec": "bar"}
@@ -65,15 +65,56 @@ def test_serialize_dict():
     assert serialize_dict({"a": "b", "c": "d"}) == "a=b  c=d"
     assert serialize_dict({"c": "d", "a": "b"}) == "a=b  c=d"
 
-def test_filter_list_of_dicts():
-    assert filter_list_of_dicts(None, None) is None
-    assert filter_list_of_dicts([{}, {}], "foo") is None
-    lod = [
-        {"foo": "bar",
-         "baz": "quux"},
-        {"baz": "lksjdf",
-         "corge": "grault"},
-    ]
-    filter_list_of_dicts(lod, "baz")
-    for a_dict in lod:
-        assert "baz" not in a_dict
+
+def test_find_max_complete():
+    assert find_max_complete(None, None) == ([], [])
+    assert find_max_complete([], []) == ([], [])
+
+    list1 = [{"format": {"mimetype": "video/mp4",
+                         "version": None},
+              "video": {"width": '1920',
+                        "height": '1080',
+                        "avg_frame_rate": "25"}},
+             {"format": {"mimetype": "video/mpeg",
+                         "version": "1"},
+              "video": {"width": '320',
+                        "height": '240',
+                        "bit_rate": '0.32',
+                        "avg_frame_rate": "29.97"}}]
+    list2 = [{"format": {"mimetype": "video/mp4",
+                         "version": None},
+              "video": {"width": '1920',
+                        "height": '1080',
+                        "bit_rate": '0.32',
+                        "avg_frame_rate": "25"}},
+             {"format": {"mimetype": "video/mpeg",
+                         "version": "1"},
+              "video": {"width": '320',
+                        "bit_rate": '0.32',
+                        "avg_frame_rate": "29.97"}}]
+    expect = [{"format": {"mimetype": "video/mp4",
+                          "version": None},
+               "video": {"width": '1920',
+                         "avg_frame_rate": "25"}},
+              {"format": {"mimetype": "video/mpeg",
+                          "version": "1"},
+               "video": {"width": '320',
+                         "avg_frame_rate": "29.97"}}]
+
+    (res1, res2) = find_max_complete(list1, list2)
+    assert res1 == expect
+    assert res2 == expect
+
+    (res1, res2) = find_max_complete(list1, list2, ['height'])
+    expect[0]['video']['height'] = '1080'
+    assert res2 == expect
+
+    expect[1]['video']['height'] = '240'
+    assert res1 == expect
+
+    (res1, res2) = find_max_complete(list1, [{'format': {'foo': 'bar'}}], ['mimetype'])
+    assert res1 == [{"format": {"mimetype": "video/mp4"}}, {"format": {"mimetype": "video/mpeg"}}]
+    assert res2 == [{'format': {}}]
+    (res1, res2) = find_max_complete([{'format': {'foo': 'bar'}}], None, ['format', 'mimetype'])
+    assert res1 == [{'format': {'foo': 'bar'}}]
+    assert res2 == []

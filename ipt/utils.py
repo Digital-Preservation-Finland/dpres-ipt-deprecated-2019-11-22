@@ -4,6 +4,7 @@ import os
 import subprocess
 import urllib
 from collections import defaultdict
+from copy import deepcopy
 import mimeparse
 
 
@@ -119,17 +120,6 @@ def serialize_dict(data):
     return serialized_dict.strip("  ")
 
 
-def filter_list_of_dicts(list_of_dicts, key):
-    """Remove a key from all dicts in a list of dicts
-
-    :param list_of_dicts: The list of dictionaries
-    :param key: The key to remove from the dictionaries
-    """
-    if list_of_dicts:
-        for dict_to_edit in list_of_dicts:
-            dict_to_edit.pop(key, None)
-
-
 def uri_to_path(uri):
     """Remove URI scheme from given `URI`:
 
@@ -170,3 +160,105 @@ def parse_mimetype(mimetype):
         result["format"]["alt-format"] = alt_format
 
     return result
+
+
+def handle_div(div):
+    """
+    Change a string containing a division or a decimal number to a
+    string containing a decimal number with max 2 digits.
+    :div: e.g. "16/9" or "1.7777778"
+    :returns: e.g. "1.78"
+    """
+    try:
+        if '/' in div:
+            div = float(div.split('/')[0])/float(div.split('/')[1])
+        else:
+            div = float(div)
+        return ("%.2f" % round(div, 2)).rstrip('0').rstrip('.')
+    except ValueError:
+        return div
+    except ZeroDivisionError:
+        return div
+
+
+def find_max_complete(list1, list2, forcekeys=None):
+    """
+    Finds such version in two lists of dicts, where all the elements in all
+    dicts exists. Handles also sublists inside dicts and subdicts inside dicts
+    and sublists recursively. In other words, removes such elements that do not
+    exist in one or more of the given dicts.
+    :list1: List of dicts
+    :list2: List of dicts
+    :forcekeys: List of those keys which will not be changed or removed, if exists
+    :returns: Filtered list1 and list2
+    """
+    included_keys = {}
+    if list1 is None:
+        list1 = []
+    if list2 is None:
+        list2 = []
+    if list1:
+        included_keys['root_key'] = set(list1[0])
+    elif list2:
+        included_keys['root_key'] = set(list2[0])
+    else:
+        return (list1, list2)
+    included_keys = _find_keys(list1, list2, included_keys, 'root_key')
+    return _filter_dicts(deepcopy(list1), deepcopy(list2), included_keys, 'root_key', forcekeys)
+
+
+def _find_keys(list1, list2, included_keys, parent_key):
+    """
+    Recursive function for find_max_complete.
+    Finds keys for each dicts and subdicts.
+    """
+    if not parent_key in included_keys:
+        if list1:
+            included_keys[parent_key] = set(list1[0].keys())
+        elif list2:
+            included_keys[parent_key] = set(list2[0].keys())
+        else:
+            included_keys[parent_key] = set([])
+
+    for dictionary in list1 + list2:
+        if not isinstance(dictionary, dict):
+            continue
+        included_keys[parent_key] = included_keys[parent_key].intersection(set(dictionary.keys()))
+
+    for dict1 in list1:
+        for dict2 in list2:
+            for key in included_keys[parent_key]:
+                if isinstance(dict1[key], list) and isinstance(dict2[key], list):
+                    included_keys = _find_keys(dict1[key], dict2[key], included_keys, key)
+                elif isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
+                    included_keys = _find_keys([dict1[key]], [dict2[key]], included_keys, key)
+    return included_keys
+
+
+def _filter_dicts(list1, list2, included_keys, parent_key, forcekeys):
+    """
+    Recursive function for find_max_complete.
+    Filters lists according to given keys.
+    """
+    for listx in [list1, list2]:
+        for index in range(0,len(listx)):
+            tmpdict = {key: listx[index][key] for key in included_keys[parent_key]}
+            if forcekeys:
+                for key in set(listx[index].keys()).intersection(set(forcekeys)):
+                    tmpdict[key] = listx[index][key]
+            listx[index] = tmpdict
+
+    for dict1 in list1:
+        for dict2 in list2:
+            for key in included_keys[parent_key]:
+                if isinstance(dict1[key], list) and isinstance(dict2[key], list):
+                    (dict1[key], dict2[key]) = \
+                        _filter_dicts(dict1[key], dict2[key], included_keys, key, forcekeys)
+                elif isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
+                    (sublist1, sublist2) = \
+                        _filter_dicts([dict1[key]], [dict2[key]], included_keys, key, forcekeys)
+                    if sublist1 and sublist2:
+                        dict1[key] = sublist1[0]
+                        dict2[key] = sublist2[0]
+
+    return (list1, list2)

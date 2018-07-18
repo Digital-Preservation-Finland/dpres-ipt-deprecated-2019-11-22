@@ -63,7 +63,7 @@ def mdwrap_to_metadata_info(mdwrap_element):
         return {}
 
 
-def create_metadata_info(mets_tree, element, object_filename, use, type):
+def create_metadata_info(mets_tree, element, object_filename, use, object_type):
     """Create a dictionary of technical metadata from mets metadata for
     a given section that can either be about a digital object
     or a bitstream. The function combines the created metadata_info
@@ -73,22 +73,28 @@ def create_metadata_info(mets_tree, element, object_filename, use, type):
     :element: the metadata section with the ID to be parsed
     :object_filename: path to the digital object
     :use: the use attribute value for the digital object
-    :type: type of object, i.e. a 'file' or a 'bitstream'
+    :object_type: type of object, i.e. a 'file' or a 'bitstream'
 
     :returns: metadata_info as a dict
-
     """
-    metadata_info = {
-        'filename': object_filename,
-        'use': use,
-        'type': type,
-        'format': {'mimetype': None,
-                   'version': None},
-        'object_id': {'type': None,
-                      'value': None},
-        'algorithm': None,
-        'digest': None
-    }
+
+    metadata_info = {}
+    if object_type == 'file':
+        metadata_info = {
+            'filename': object_filename,
+            'use': use,
+            'format': {'mimetype': None,
+                       'version': None},
+            'object_id': {'type': None,
+                          'value': None},
+            'algorithm': None,
+            'digest': None
+        }
+    elif object_type == 'bitstream':
+        metadata_info = {
+            'format': {'mimetype': None,
+                       'version': None}
+        }
 
     for section in mets.iter_elements_with_id(mets_tree,
                                               mets.parse_admid(element),
@@ -120,17 +126,27 @@ def iter_metadata_info(mets_tree, mets_path):
             uri_to_path(mets.parse_href(loc)))
         use = mets.parse_use(element)
 
-        for stream_elem in mets.parse_streams(element):
-
-            metadata_info = create_metadata_info(
-                mets_tree=mets_tree, element=stream_elem,
-                object_filename=object_filename, use=use, type='bitstream')
-
-            yield metadata_info
-
         metadata_info = create_metadata_info(
             mets_tree=mets_tree, element=element,
-            object_filename=object_filename, use=use, type='file')
+            object_filename=object_filename, use=use, object_type='file')
+
+        metadata_info['audio_streams'] = []
+        metadata_info['video_streams'] = []
+        for stream_elem in mets.parse_streams(element):
+
+            stream_info = create_metadata_info(
+                mets_tree=mets_tree, element=stream_elem,
+                object_filename=object_filename, use=use,
+                object_type='bitstream')
+            if 'audio' in stream_info:
+                metadata_info['audio_streams'].append(stream_info)
+            elif 'video' in stream_info:
+                metadata_info['video_streams'].append(stream_info)
+
+        if not metadata_info['audio_streams']:
+            metadata_info.pop('audio_streams')
+        if not metadata_info['video_streams']:
+            metadata_info.pop('video_streams')
 
         yield metadata_info
 

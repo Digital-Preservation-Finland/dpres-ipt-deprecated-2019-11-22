@@ -55,9 +55,6 @@ def check_checksums(mets_path):
     mets_tree = u.readfile(mets_path)
     for metadata_info in iter_metadata_info(mets_tree, mets_path):
 
-        if metadata_info["type"] == "bitstream":
-            continue
-
         checked_files[metadata_info["filename"]] = None
 
         if metadata_info['algorithm'] is None:

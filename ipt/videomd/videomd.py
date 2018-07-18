@@ -29,7 +29,7 @@ to dict. VideoMD format is described below.
 
 """
 
-from fractions import Fraction
+from ipt.utils import handle_div
 
 VIDEOMD_URI = "http://www.loc.gov/videoMD/"
 NAMESPACES = {"vmd": VIDEOMD_URI}
@@ -40,21 +40,16 @@ def to_dict(videomd_xml):
     :videomd_xml: videomd etree
     :returns: a dict of videomd data."""
 
-    videomd = {"video": []}
     if videomd_xml is None:
-        return {}
+        return None
     video = {}
-    video["duration"] = parse_element("duration", videomd_xml)
-    video["level"] = parse_element("dataRate", videomd_xml)
-    video["codec_name"] = parse_element("codecName", videomd_xml)
-    video["avg_frame_rate"] = parse_element("frameRate", videomd_xml)
+    video["bit_rate"] = handle_div(parse_element("dataRate", videomd_xml))
+    video["avg_frame_rate"] = handle_div(parse_element("frameRate", videomd_xml))
     video["width"] = parse_element("pixelsHorizontal", videomd_xml)
     video["height"] = parse_element("pixelsVertical", videomd_xml)
-    video["display_aspect_ratio"] = parse_element("DAR", videomd_xml)
-    video["sample_aspect_ratio"] = get_sar(videomd_xml)
+    video["display_aspect_ratio"] = handle_div(parse_element("DAR", videomd_xml))
 
-    videomd["video"].append(video)
-    return videomd
+    return video
 
 
 def parse_element(element, videomd_xml):
@@ -63,16 +58,3 @@ def parse_element(element, videomd_xml):
     """
     query = ".//vmd:%s" % element
     return videomd_xml.xpath(query, namespaces=NAMESPACES)[0].text
-
-
-def get_sar(videomd_xml):
-    """
-    calculate SAR from DAR and PAR. SAR = DAR / PAR.
-    :videomd_xml: input videomd-xml
-    :returns: a fractional SAR value.
-    """
-    par = Fraction(parse_element("PAR", videomd_xml))
-    dar = Fraction(parse_element("DAR", videomd_xml))
-
-    sar = dar/par
-    return "%s" % str(sar).replace("/", ":")

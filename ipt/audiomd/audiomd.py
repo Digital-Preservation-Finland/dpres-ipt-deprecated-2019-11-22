@@ -22,6 +22,8 @@ to dict. AudioMD format is described below.
 </amd:AUDIOMD>
 """
 
+from ipt.utils import handle_div
+
 AUDIOMD_URI = "http://www.loc.gov/audioMD/"
 NAMESPACES = {"amd": AUDIOMD_URI}
 
@@ -31,17 +33,16 @@ def to_dict(audiomd_xml):
     :audiomd_xml: audiomd etree
     :returns: a dict of audiomd data."""
 
-    audiomd = {"audio": []}
     if audiomd_xml is None:
-        return {}
+        return None
 
     audio = {}
-    audio["codec_name"] = parse_element("codecName", audiomd_xml)
-    audio["duration"] = parse_element("duration", audiomd_xml)
-    audio["sample_rate"] = parse_element("samplingFrequency", audiomd_xml)
+    audio["bits_per_sample"] = parse_element("bitsPerSample", audiomd_xml)
+    audio["data_rate"] =handle_div(parse_element("dataRate", audiomd_xml))
+    audio["sample_rate"] = handle_div(
+        parse_element("samplingFrequency", audiomd_xml))
     audio["channels"] = parse_element("numChannels", audiomd_xml)
-    audiomd["audio"].append(audio)
-    return audiomd
+    return audio
 
 
 def parse_element(element, audiomd_xml):

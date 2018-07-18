@@ -5,6 +5,7 @@
 *.pyc
 .cache
 __pycache__
+.pytest_cache/
 INSTALLED_FILES*
 PKG-INFO
 build/

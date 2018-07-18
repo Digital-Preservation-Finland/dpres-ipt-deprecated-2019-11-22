@@ -10,7 +10,7 @@
         </amd:compression>
         <amd:dataRate>256</amd:dataRate>
         <amd:dataRateMode>Fixed</amd:dataRateMode>
-        <amd:samplingFrequency>44100</amd:samplingFrequency>
+        <amd:samplingFrequency>44.1</amd:samplingFrequency>
     </amd:fileData>
     <amd:audioInfo>
         <amd:duration>00:08:37.9942</amd:duration>
