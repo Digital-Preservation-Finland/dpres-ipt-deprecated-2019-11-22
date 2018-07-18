@@ -14,7 +14,7 @@ def test_to_dict():
     expected = {
             'channels': '1',
             'bits_per_sample': '8',
-            'data_rate': '256',
+            'bit_rate': '256',
             'sample_rate': '44.1'}
 
     assert to_dict(audiomd_tree) == expected

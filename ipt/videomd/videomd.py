@@ -48,7 +48,10 @@ def to_dict(videomd_xml):
     video["width"] = parse_element("pixelsHorizontal", videomd_xml)
     video["height"] = parse_element("pixelsVertical", videomd_xml)
     video["display_aspect_ratio"] = handle_div(parse_element("DAR", videomd_xml))
-
+    for key in ['avg_frame_rate', 'bit_rate', 'width', 'height',
+                'display_aspect_ratio']:
+        if video[key] in ['0', '(:unav)', '(:etal)']:
+            video.pop(key)
     return video
 
 

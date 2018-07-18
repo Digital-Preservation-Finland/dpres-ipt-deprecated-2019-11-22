@@ -38,10 +38,13 @@ def to_dict(audiomd_xml):
 
     audio = {}
     audio["bits_per_sample"] = parse_element("bitsPerSample", audiomd_xml)
-    audio["data_rate"] =handle_div(parse_element("dataRate", audiomd_xml))
+    audio["bit_rate"] =handle_div(parse_element("dataRate", audiomd_xml))
     audio["sample_rate"] = handle_div(
         parse_element("samplingFrequency", audiomd_xml))
     audio["channels"] = parse_element("numChannels", audiomd_xml)
+    for key in ['bits_per_sample', 'bit_rate', 'sample_rate', 'channels']:
+        if audio[key] in ['0', '(:unav)']:
+            audio.pop(key)
     return audio
 
 
