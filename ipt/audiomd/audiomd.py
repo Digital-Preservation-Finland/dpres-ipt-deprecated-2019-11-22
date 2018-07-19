@@ -1,7 +1,8 @@
-""" AudioMD library module. This module maps videoMD data needed by validation 
-to dict. AudioMD format is described below.
+""" AudioMD library module. This module maps videoMD data needed by
+validation to dict. AudioMD format is described below.
 
-<amd:AUDIOMD xmlns:amd="http://www.loc.gov/audioMD/" ANALOGDIGITALFLAG="FileDigital">
+<amd:AUDIOMD xmlns:amd="http://www.loc.gov/audioMD/"
+ANALOGDIGITALFLAG="FileDigital">
     <amd:fileData>
         <amd:audioDataEncoding>PCM</amd:audioDataEncoding>
         <amd:bitsPerSample>8</amd:bitsPerSample>
@@ -38,7 +39,7 @@ def to_dict(audiomd_xml):
 
     audio = {}
     audio["bits_per_sample"] = parse_element("bitsPerSample", audiomd_xml)
-    audio["bit_rate"] =handle_div(parse_element("dataRate", audiomd_xml))
+    audio["bit_rate"] = handle_div(parse_element("dataRate", audiomd_xml))
     audio["sample_rate"] = handle_div(
         parse_element("samplingFrequency", audiomd_xml))
     audio["channels"] = parse_element("numChannels", audiomd_xml)

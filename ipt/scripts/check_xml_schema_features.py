@@ -52,6 +52,7 @@ def main(arguments=None):
 
     return 0
 
+
 if __name__ == '__main__':
     # If run from the command line, take out the program name from sys.argv
     RETVAL = main(sys.argv[1:])

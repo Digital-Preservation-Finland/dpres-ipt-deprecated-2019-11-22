@@ -10,7 +10,8 @@ from tests import testcommon
 from tests.testcommon import shell
 
 # Module to test
-from ipt.scripts.check_sip_digital_objects import main, validation, validation_report
+from ipt.scripts.check_sip_digital_objects import main, validation, \
+    validation_report
 import ipt.validator.jhove
 
 
@@ -127,30 +128,35 @@ RESULT_CASES = [
     # One validation event for one object
     [{"result": {"is_valid": True, "messages": "OK", "errors": None},
      "metadata_info": {
-         "type": "file", "filename": "file.txt", "object_id": {
+         "filename": "file.txt", "object_id": {
              "type": "id-type", "value": "only-one-object"}}}],
     # Two validation events for one object
     [{"result": {"is_valid": True, "messages": "OK", "errors": None},
       "metadata_info": {
-          "type": "file", "filename": "file.txt", "object_id": {
-              "type": "id-type", "value": "this-id-should-be-added-only-once"}}},
+          "filename": "file.txt", "object_id": {
+              "type": "id-type",
+              "value": "this-id-should-be-added-only-once"}}},
      {"result": {"is_valid": True, "messages": "OK too", "errors": None},
       "metadata_info": {
-          "type": "file", "filename": "file.txt", "object_id": {
-              "type": "id-type", "value": "this-id-should-be-added-only-once"}}}],
+          "filename": "file.txt", "object_id": {
+              "type": "id-type",
+              "value": "this-id-should-be-added-only-once"}}}],
     # Two validation events for one object and one event for one object
     [{"result": {"is_valid": True, "messages": "OK", "errors": None},
       "metadata_info": {
-          "type": "file", "filename": "file.txt", "object_id": {
-              "type": "id-type", "value": "this-id-should-be-added-only-once"}}},
+          "filename": "file.txt", "object_id": {
+              "type": "id-type",
+              "value": "this-id-should-be-added-only-once"}}},
      {"result": {"is_valid": True, "messages": "OK too", "errors": None},
       "metadata_info": {
-          "type": "file", "filename": "file.txt", "object_id": {
-              "type": "id-type", "value": "this-id-should-be-added-only-once"}}},
+          "filename": "file.txt", "object_id": {
+              "type": "id-type",
+              "value": "this-id-should-be-added-only-once"}}},
      {"result": {"is_valid": True, "messages": "OK", "errors": None},
       "metadata_info": {
-          "type": "file", "filename": "file2.txt", "object_id": {
-              "type": "id-type", "value": "this-id-should-not-be-forgotten"}}}]
+          "filename": "file2.txt", "object_id": {
+              "type": "id-type",
+              "value": "this-id-should-not-be-forgotten"}}}]
     ]
 
 
@@ -184,10 +190,9 @@ def test_check_sip_digital_objects(case):
 
 @pytest.mark.parametrize(
     "results, object_count, event_count",
-        [(RESULT_CASES[0], 1, 1),
-         (RESULT_CASES[1], 1, 2),
-         (RESULT_CASES[2], 2, 3)
-        ])
+    [(RESULT_CASES[0], 1, 1),
+     (RESULT_CASES[1], 1, 2),
+     (RESULT_CASES[2], 2, 3)])
 def test_validation_report(results, object_count, event_count):
     """Test that validation report creates correct number of premis sections"""
     premis_xml = validation_report(results, 'sip-type', 'sip-value')
@@ -221,18 +226,17 @@ def patch_validate(monkeypatch):
 
     def _iter_metadata_info(foo, foob):
         """mock iter_metadata_info"""
-        return [
-            {"type": "file", "filename": "pdf", "use": ''},
-            {"type": "file", "filename": "cdr", "use": ''},
-            {"type": "file", "filename": "cdr", "use": "no-file-format-validation"},
-            {"type": "file", "filename": "cdr", "use": "noo-file-format-validation"}
-        ]
+        return [{"filename": "pdf", "use": ''},
+                {"filename": "cdr", "use": ''},
+                {"filename": "cdr", "use": "no-file-format-validation"},
+                {"filename": "cdr", "use": "noo-file-format-validation"}]
 
     monkeypatch.setattr(
         ipt.scripts.check_sip_digital_objects, "iter_validators",
         _iter_validators)
     monkeypatch.setattr(
-        ipt.scripts.check_sip_digital_objects, "iter_metadata_info", _iter_metadata_info)
+        ipt.scripts.check_sip_digital_objects, "iter_metadata_info",
+        _iter_metadata_info)
 
 
 @pytest.mark.usefixtures('patch_validate')
@@ -244,8 +248,9 @@ def test_native_marked():
     results = [file_ for file_ in validation(None)]
 
     assert results == [
-        {"metadata_info": {'type': 'file', 'filename': 'pdf', 'use': ''}, "result": "success"},
-        {"metadata_info": {'type': 'file', 'filename': 'cdr', 'use': ''}, "result": "failure"},
-        {"metadata_info": {'type': 'file', 'filename': 'cdr', 'use': 'noo-file-format-validation'},
+        {"metadata_info": {'filename': 'pdf', 'use': ''}, "result": "success"},
+        {"metadata_info": {'filename': 'cdr', 'use': ''}, "result": "failure"},
+        {"metadata_info": {'filename': 'cdr',
+                           'use': 'noo-file-format-validation'},
          "result": "failure"}
     ]

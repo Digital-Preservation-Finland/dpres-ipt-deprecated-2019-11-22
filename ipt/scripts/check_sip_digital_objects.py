@@ -9,10 +9,8 @@ import datetime
 import lxml.etree
 
 import xml_helpers.utils
-import mets
 import premis
 
-import ipt.version
 from ipt.validator.utils import iter_metadata_info
 from ipt.validator.validators import iter_validators
 
@@ -88,7 +86,7 @@ def validation_report(results, linking_sip_type, linking_sip_id):
     # Create PREMIS agent, only one agent is needed
     # TODO: Agent could be the used validator instead of script file
     agent_name = "check_sip_digital_objects.py-v0.0"
-    agent_id_value = 'preservation-agent-'+agent_name+'-'+ \
+    agent_id_value = 'preservation-agent-'+agent_name+'-' + \
         str(uuid.uuid4())
     agent_id = premis.identifier(
         identifier_type='preservation-agent-id',
@@ -106,10 +104,11 @@ def validation_report(results, linking_sip_type, linking_sip_id):
         # Create PREMIS object only if not already in the report
         if metadata_info['object_id']['value'] not in object_list:
 
-            object_list.add(metadata_info['object_id']['value']) 
+            object_list.add(metadata_info['object_id']['value'])
 
             dep_id = premis.identifier(
-                metadata_info['object_id']['type'], metadata_info['object_id']['value'])
+                metadata_info['object_id']['type'],
+                metadata_info['object_id']['value'])
             environ = premis.environment(dep_id)
 
             related_id = premis.identifier(
@@ -131,19 +130,17 @@ def validation_report(results, linking_sip_type, linking_sip_id):
 
             childs.append(report_object)
 
-        # Create PREMIS event        
+        # Create PREMIS event
         event_id = premis.identifier(
             identifier_type="preservation-event-id",
             identifier_value=str(uuid.uuid4()), prefix='event')
         outresult = 'success' if result["is_valid"] is True else 'failure'
         detail_extension = None
         try:
-            parser = lxml.etree.XMLParser(
-                dtd_validation=False, no_network=True)
             detail_extension = lxml.etree.fromstring(result["messages"])
             detail_note = result["errors"] if result["errors"] else None
 
-        except lxml.etree.XMLSyntaxError as exception:
+        except lxml.etree.XMLSyntaxError:
             if result["errors"]:
                 detail_note = (result["messages"] + result["errors"])
             else:

@@ -1,7 +1,8 @@
 """ VideoMD library module. This module maps videoMD data needed by validation
 to dict. VideoMD format is described below.
 
-<vmd:VIDEOMD xmlns:vmd="http://www.loc.gov/videoMD/" ANALOGDIGITALFLAG="FileDigital">
+<vmd:VIDEOMD xmlns:vmd="http://www.loc.gov/videoMD/"
+ANALOGDIGITALFLAG="FileDigital">
     <vmd:fileData>
         <vmd:duration>01:31:37</vmd:duration>
         <vmd:dataRate>8</vmd:dataRate>
@@ -44,10 +45,12 @@ def to_dict(videomd_xml):
         return None
     video = {}
     video["bit_rate"] = handle_div(parse_element("dataRate", videomd_xml))
-    video["avg_frame_rate"] = handle_div(parse_element("frameRate", videomd_xml))
+    video["avg_frame_rate"] = handle_div(
+        parse_element("frameRate", videomd_xml))
     video["width"] = parse_element("pixelsHorizontal", videomd_xml)
     video["height"] = parse_element("pixelsVertical", videomd_xml)
-    video["display_aspect_ratio"] = handle_div(parse_element("DAR", videomd_xml))
+    video["display_aspect_ratio"] = handle_div(
+        parse_element("DAR", videomd_xml))
     for key in ['avg_frame_rate', 'bit_rate', 'width', 'height',
                 'display_aspect_ratio']:
         if video[key] in ['0', '(:unav)', '(:etal)']:

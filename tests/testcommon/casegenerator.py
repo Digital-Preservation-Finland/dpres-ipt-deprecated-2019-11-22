@@ -12,7 +12,7 @@ Your test module should look something like this:
 
         testcases = {
             "test_first_test_function" : [
-                { 
+                {
                     "name" : 'CSC_test001',
                     "testdata": [],
                     "expected_result": []
@@ -26,7 +26,7 @@ Your test module should look something like this:
             ]
 
         }
-        
+
         def test_first_test_function(self, name, testdata,
                                            expected_result):
 

@@ -8,7 +8,6 @@ import errno
 
 import scandir
 
-import mets
 import xml_helpers.utils as u
 from ipt.validator.utils import iter_metadata_info
 from ipt.fileutils.checksum import BigFile
@@ -101,6 +100,7 @@ def parse_arguments(arguments):
     parser = argparse.ArgumentParser()
     parser.add_argument('sip_path')
     return parser.parse_args(arguments)
+
 
 if __name__ == '__main__':
     RETVAL = main()

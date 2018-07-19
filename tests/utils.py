@@ -40,4 +40,3 @@ class Directory(str):
             return self.subdir(attr)
         except Exception as exception:
             raise AttributeError(str(exception))
-            

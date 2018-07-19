@@ -20,7 +20,6 @@ def main(arguments=None):
 
     (options, args) = parser.parse_args(arguments)
 
-
     if len(args) != 1:
         parser.error("Must give a path to an XML file as argument")
 
@@ -45,6 +44,7 @@ def main(arguments=None):
         return 117
 
     return 0
+
 
 if __name__ == '__main__':
     # If run from the command line, take out the program name from sys.argv

@@ -57,7 +57,8 @@ def test_checksum_ok(temp_sip):
 def test_checksum_object_types(temp_sip):
     """Test valid METS with uncorrupted digital objects"""
 
-    (returncode, stdout, stderr) = run_main(temp_sip('CSC_test001_object_types'))
+    (returncode, stdout, stderr) = run_main(
+        temp_sip('CSC_test001_object_types'))
     assert stderr == ''
     for line in stdout.splitlines():
         assert 'Checksum OK' in line

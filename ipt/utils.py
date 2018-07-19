@@ -60,16 +60,19 @@ def merge_dicts(*dicts):
             continue
         for key in dictionary.keys():
             if key in result:
-                if isinstance(result[key], dict) and isinstance(dictionary[key], dict):
+                if isinstance(result[key], dict) and \
+                        isinstance(dictionary[key], dict):
                     result[key] = merge_dicts(result[key], dictionary[key])
-                elif isinstance(result[key], list) and isinstance(dictionary[key], list):
+                elif isinstance(result[key], list) and \
+                        isinstance(dictionary[key], list):
                     result[key] = result[key] + dictionary[key]
                 elif result[key] is None:
                     result[key] = dictionary[key]
                 elif dictionary[key] is None:
                     continue
                 else:
-                    raise TypeError('Only lists and dictionaries can be merged.')
+                    raise TypeError(
+                        'Only lists and dictionaries can be merged.')
             else:
                 result[key] = dictionary[key]
     return result
@@ -77,7 +80,7 @@ def merge_dicts(*dicts):
 
 def compare_lists_of_dicts(expected, found):
     """
-    :excpected: a list of dicts that should be in second 'found' paramater
+    :excpected: a list of dicts that should be in second 'found' parameter
     :found: a list of dicts that really exist
     :returns: a tuple describing missing and extraneus dicts
     """
@@ -189,7 +192,8 @@ def find_max_complete(list1, list2, forcekeys=None):
     exist in one or more of the given dicts.
     :list1: List of dicts
     :list2: List of dicts
-    :forcekeys: List of those keys which will not be changed or removed, if exists
+    :forcekeys: List of those keys which will not be changed or removed, if
+                exists
     :returns: Filtered list1 and list2
     """
     included_keys = {}
@@ -203,8 +207,12 @@ def find_max_complete(list1, list2, forcekeys=None):
         included_keys['root_key'] = set(list2[0])
     else:
         return (list1, list2)
-    included_keys = _find_keys(list1, list2, included_keys, 'root_key')
-    return _filter_dicts(deepcopy(list1), deepcopy(list2), included_keys, 'root_key', forcekeys)
+    included_keys = _find_keys(list1=list1, list2=list2,
+                               included_keys=included_keys,
+                               parent_key='root_key')
+    return _filter_dicts(list1=deepcopy(list1), list2=deepcopy(list2),
+                         included_keys=included_keys, parent_key='root_key',
+                         forcekeys=forcekeys)
 
 
 def _find_keys(list1, list2, included_keys, parent_key):
@@ -212,7 +220,7 @@ def _find_keys(list1, list2, included_keys, parent_key):
     Recursive function for find_max_complete.
     Finds keys for each dicts and subdicts.
     """
-    if not parent_key in included_keys:
+    if parent_key not in included_keys:
         if list1:
             included_keys[parent_key] = set(list1[0].keys())
         elif list2:
@@ -223,15 +231,20 @@ def _find_keys(list1, list2, included_keys, parent_key):
     for dictionary in list1 + list2:
         if not isinstance(dictionary, dict):
             continue
-        included_keys[parent_key] = included_keys[parent_key].intersection(set(dictionary.keys()))
+        included_keys[parent_key] = included_keys[parent_key].\
+            intersection(set(dictionary.keys()))
 
     for dict1 in list1:
         for dict2 in list2:
             for key in included_keys[parent_key]:
-                if isinstance(dict1[key], list) and isinstance(dict2[key], list):
-                    included_keys = _find_keys(dict1[key], dict2[key], included_keys, key)
-                elif isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
-                    included_keys = _find_keys([dict1[key]], [dict2[key]], included_keys, key)
+                if isinstance(dict1[key], list) and \
+                        isinstance(dict2[key], list):
+                    included_keys = _find_keys(
+                        dict1[key], dict2[key], included_keys, key)
+                elif isinstance(dict1[key], dict) and \
+                        isinstance(dict2[key], dict):
+                    included_keys = _find_keys(
+                        [dict1[key]], [dict2[key]], included_keys, key)
     return included_keys
 
 
@@ -241,22 +254,28 @@ def _filter_dicts(list1, list2, included_keys, parent_key, forcekeys):
     Filters lists according to given keys.
     """
     for listx in [list1, list2]:
-        for index in range(0,len(listx)):
-            tmpdict = {key: listx[index][key] for key in included_keys[parent_key]}
+        for index in range(0, len(listx)):
+            tmpdict = {key: listx[index][key]
+                       for key in included_keys[parent_key]}
             if forcekeys:
-                for key in set(listx[index].keys()).intersection(set(forcekeys)):
+                for key in set(listx[index].keys()).\
+                               intersection(set(forcekeys)):
                     tmpdict[key] = listx[index][key]
             listx[index] = tmpdict
 
     for dict1 in list1:
         for dict2 in list2:
             for key in included_keys[parent_key]:
-                if isinstance(dict1[key], list) and isinstance(dict2[key], list):
+                if isinstance(dict1[key], list) and \
+                        isinstance(dict2[key], list):
                     (dict1[key], dict2[key]) = \
-                        _filter_dicts(dict1[key], dict2[key], included_keys, key, forcekeys)
-                elif isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
+                        _filter_dicts(dict1[key], dict2[key],
+                                      included_keys, key, forcekeys)
+                elif isinstance(dict1[key], dict) and \
+                        isinstance(dict2[key], dict):
                     (sublist1, sublist2) = \
-                        _filter_dicts([dict1[key]], [dict2[key]], included_keys, key, forcekeys)
+                        _filter_dicts([dict1[key]], [dict2[key]],
+                                      included_keys, key, forcekeys)
                     if sublist1 and sublist2:
                         dict1[key] = sublist1[0]
                         dict2[key] = sublist2[0]

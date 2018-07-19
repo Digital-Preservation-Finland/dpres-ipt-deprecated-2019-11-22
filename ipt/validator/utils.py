@@ -57,13 +57,15 @@ def mdwrap_to_metadata_info(mdwrap_element):
 
     try:
         if othermdtype is not None:
-            return other_parsers[othermdtype](mets.parse_xmldata(mdwrap_element))
+            return other_parsers[othermdtype](
+                mets.parse_xmldata(mdwrap_element))
         return standard_parsers[mdtype](mets.parse_xmldata(mdwrap_element))
     except KeyError:
         return {}
 
 
-def create_metadata_info(mets_tree, element, object_filename, use, object_type):
+def create_metadata_info(mets_tree, element, object_filename, use,
+                         object_type):
     """Create a dictionary of technical metadata from mets metadata for
     a given section that can either be about a digital object
     or a bitstream. The function combines the created metadata_info
