@@ -5,6 +5,7 @@ import subprocess
 import urllib
 from collections import defaultdict
 from copy import deepcopy
+from fractions import Fraction
 import mimeparse
 
 
@@ -169,18 +170,14 @@ def handle_div(div):
     """
     Change a string containing a division or a decimal number to a
     string containing a decimal number with max 2 digits.
+    Returns original string if ValueError of ZeroDivisionError raised.
     :div: e.g. "16/9" or "1.7777778"
     :returns: e.g. "1.78"
     """
     try:
-        if '/' in div:
-            div = float(div.split('/')[0])/float(div.split('/')[1])
-        else:
-            div = float(div)
+        div = float(Fraction(div))
         return ("%.2f" % round(div, 2)).rstrip('0').rstrip('.')
-    except ValueError:
-        return div
-    except ZeroDivisionError:
+    except (ValueError, ZeroDivisionError):
         return div
 
 
