@@ -50,6 +50,13 @@ TESTCASES = [
          "returncode": 0,
          "stdout": '',
          "stderr": ''}},
+    {"testcase": 'Test valid sip package #7: csc-test-metadata-text-plain',
+     "filename": 'csc-test-metadata-text-plain',
+     "expected_result": {
+         "returncode": 0,
+         "stdout": ['Detected mimetype text/html instead of reported '
+                    'mimetype text/plain.'],
+         "stderr": ''}},
     {"testcase": 'Unsupported file version',
      "filename": 'CSC_test_unsupported_version',
      "expected_result": {
