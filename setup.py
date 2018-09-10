@@ -24,7 +24,9 @@ def main():
         name='ipt',
         packages=find_packages(exclude=['tests', 'tests.*']),
         version=get_version(),
-        entry_points={'console_scripts': scripts_list()})
+        entry_points={'console_scripts': scripts_list()},
+        install_requires=['python-mimeparse', 'scandir', 'wand']
+    )
 
 
 if __name__ == '__main__':
