@@ -1,0 +1,100 @@
+<mets:mets OBJID="csc-test-audiomd" PROFILE="http://digitalpreservation.fi/mets-profiles/cultural-heritage" fi:CONTRACTID="urn:uuid:11b2435d-a826-49ab-9718-30abf2f1473d" fi:CATALOG="1.7.0" xmlns:mets="http://www.loc.gov/METS/" xmlns:premis="info:lc/xmlns/premis-v2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:amd="http://www.loc.gov/audioMD/" xmlns:fi="http://digitalpreservation.fi/schemas/mets/fi-extensions" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/METS/ http://digitalpreservation.fi/schemas/mets/mets.xsd">
+  <mets:metsHdr CREATEDATE="2018-09-18T13:01:00">
+    <mets:agent ROLE="CREATOR" TYPE="ORGANIZATION">
+      <mets:name>CSC - IT Center for Science ltd.</mets:name>
+    </mets:agent>
+  </mets:metsHdr>
+  <mets:dmdSec ID="dmd-dc" fi:CREATED="2018-09-18">
+    <mets:mdWrap MDTYPE="DC" MDTYPEVERSION="1.1">
+      <mets:xmlData>
+        <dc:identifier>test001</dc:identifier>
+        <dc:title>audio file</dc:title>
+        <dc:date>2018-09-18</dc:date>
+        <dc:type>sound</dc:type>
+      </mets:xmlData>
+    </mets:mdWrap>
+  </mets:dmdSec>
+  <mets:amdSec>
+    <mets:techMD ID="tech-001" fi:CREATED="2018-09-18">
+      <mets:mdWrap MDTYPE="PREMIS:OBJECT" MDTYPEVERSION="2.3">
+        <mets:xmlData>
+          <premis:object xsi:type="premis:file">
+            <premis:objectIdentifier>
+              <premis:objectIdentifierType>UUID</premis:objectIdentifierType>
+              <premis:objectIdentifierValue>3650af32-1e22-4738-a157-fc62ca70f8af</premis:objectIdentifierValue>
+            </premis:objectIdentifier>
+            <premis:objectCharacteristics>
+              <premis:compositionLevel>0</premis:compositionLevel>
+              <premis:fixity>
+                <premis:messageDigestAlgorithm>MD5</premis:messageDigestAlgorithm>
+                <premis:messageDigest>2b1a74ecc1fa89f182e42bca7719c555</premis:messageDigest>
+              </premis:fixity>
+              <premis:format>
+                <premis:formatDesignation>
+                <premis:formatName>audio/x-wav</premis:formatName>
+                </premis:formatDesignation>
+              </premis:format>
+              <premis:creatingApplication>
+                <premis:dateCreatedByApplication>2018-09-18</premis:dateCreatedByApplication>
+              </premis:creatingApplication>
+            </premis:objectCharacteristics>
+          </premis:object>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:techMD>
+    <mets:techMD ID="audiomd-001" fi:CREATED="2018-09-18">
+      <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="AudioMD" MDTYPEVERSION="2.0">
+        <mets:xmlData>
+          <amd:AUDIOMD ANALOGDIGITALFLAG="FileDigital">
+            <amd:fileData>
+              <amd:audioDataEncoding>PCM</amd:audioDataEncoding>
+              <amd:bitsPerSample>16</amd:bitsPerSample>
+              <amd:compression>
+                <amd:codecCreatorApp>(:unap)</amd:codecCreatorApp>
+                <amd:codecCreatorAppVersion>(:unap)</amd:codecCreatorAppVersion>
+                <amd:codecName>(:unap)</amd:codecName>
+                <amd:codecQuality>lossless</amd:codecQuality>
+              </amd:compression>
+              <amd:dataRate>768000</amd:dataRate>
+              <amd:dataRateMode>Fixed</amd:dataRateMode>
+              <amd:samplingFrequency>48</amd:samplingFrequency>
+            </amd:fileData>
+            <amd:audioInfo>
+              <amd:duration>00:00:00.77</amd:duration>
+              <amd:numChannels>1</amd:numChannels>
+            </amd:audioInfo>
+          </amd:AUDIOMD>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:techMD>
+    <mets:digiprovMD ID="dp-001" fi:CREATED="2018-09-18">
+      <mets:mdWrap MDTYPE="PREMIS:EVENT" MDTYPEVERSION="2.3">
+        <mets:xmlData>
+          <premis:event>
+            <premis:eventIdentifier>
+              <premis:eventIdentifierType>uuid</premis:eventIdentifierType>
+              <premis:eventIdentifierValue>3610f192-4f44-4ccd-b074-be85cdc4f164</premis:eventIdentifierValue>
+            </premis:eventIdentifier>
+            <premis:eventType>creation</premis:eventType>
+            <premis:eventDateTime>2018-09-17</premis:eventDateTime>
+            <premis:eventOutcomeInformation>
+              <premis:eventOutcome>success</premis:eventOutcome>
+            </premis:eventOutcomeInformation>
+          </premis:event>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:digiprovMD>
+  </mets:amdSec>
+  <mets:fileSec>
+    <mets:fileGrp>
+      <mets:file ID="html-001" ADMID="tech-001 audiomd-001 dp-001">
+        <mets:FLocat LOCTYPE="URL" xlink:type="simple" xlink:href="file://audio.wav" />
+      </mets:file>
+    </mets:fileGrp>
+  </mets:fileSec>
+  <mets:structMap>
+    <mets:div TYPE="logical" DMDID="dmd-dc">
+      <mets:fptr FILEID="html-001" />
+    </mets:div>
+  </mets:structMap>
+</mets:mets>

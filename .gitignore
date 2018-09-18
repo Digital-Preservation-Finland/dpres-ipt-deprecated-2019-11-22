@@ -25,5 +25,6 @@ Thumbs.db
 rpmbuild
 tests/data/popen
 .venv/
+venv/
 junit*.xml
 include/etc/xml/information-package-tools/private-catalog
