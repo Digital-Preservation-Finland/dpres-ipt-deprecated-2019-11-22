@@ -142,7 +142,7 @@ def validation_report(results, linking_sip_type, linking_sip_id):
 
         except lxml.etree.XMLSyntaxError:
             if result["errors"]:
-                detail_note = (result["messages"] + result["errors"])
+                detail_note = (result["messages"] + '\n' + result["errors"])
             else:
                 detail_note = result["messages"]
 
