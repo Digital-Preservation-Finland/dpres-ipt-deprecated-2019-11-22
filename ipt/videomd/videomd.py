@@ -43,18 +43,18 @@ def to_dict(videomd_xml):
 
     if videomd_xml is None:
         return None
-    video = {}
-    video["bit_rate"] = handle_div(parse_element("dataRate", videomd_xml))
-    video["avg_frame_rate"] = handle_div(
+    video = {"video": {}}
+    video["video"]["bit_rate"] = handle_div(parse_element("dataRate", videomd_xml))
+    video["video"]["avg_frame_rate"] = handle_div(
         parse_element("frameRate", videomd_xml))
-    video["width"] = parse_element("pixelsHorizontal", videomd_xml)
-    video["height"] = parse_element("pixelsVertical", videomd_xml)
-    video["display_aspect_ratio"] = handle_div(
+    video["video"]["width"] = parse_element("pixelsHorizontal", videomd_xml)
+    video["video"]["height"] = parse_element("pixelsVertical", videomd_xml)
+    video["video"]["display_aspect_ratio"] = handle_div(
         parse_element("DAR", videomd_xml))
     for key in ['avg_frame_rate', 'bit_rate', 'width', 'height',
                 'display_aspect_ratio']:
-        if video[key] in ['0', '(:unav)', '(:etal)']:
-            video.pop(key)
+        if video["video"][key] in ['0', '(:unav)', '(:etal)']:
+            video["video"].pop(key)
     return video
 
 

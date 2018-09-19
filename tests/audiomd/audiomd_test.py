@@ -12,9 +12,11 @@ def test_to_dict():
     audiomd_path = os.path.join(TESTDATADIR, 'audiomd.xml')
     audiomd_tree = lxml.etree.parse(audiomd_path)
     expected = {
+        'audio': {
             'channels': '1',
             'bits_per_sample': '8',
             'bit_rate': '256',
             'sample_rate': '44.1'}
+        }
 
     assert to_dict(audiomd_tree) == expected
