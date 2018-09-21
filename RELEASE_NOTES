@@ -39,3 +39,12 @@ Release 0.53
 XML/Schematron catalogs and signature code moved to dpres-xml-schemas and
 dpres-signature repositories, respectively.
 
+Release 0.76
+
+Supports PREMIS containers and bitstreams in SIP technical metadata.
+Adds support for PDF/A-2 documents and HTML5 documents.
+The following file formats are handled differently with new tools:
+DPX files, UTF-8 text files, XHTML documents, PDFs, PDF/A-1 files, CSV files
+Character encoding validation has been updated.
+Separate text validation for files reported as text/plain in the SIP metadata.
+Updates to MPEG audio and video validation. 
