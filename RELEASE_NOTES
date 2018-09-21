@@ -48,3 +48,6 @@ DPX files, UTF-8 text files, XHTML documents, PDFs, PDF/A-1 files, CSV files
 Character encoding validation has been updated.
 Separate text validation for files reported as text/plain in the SIP metadata.
 Updates to MPEG audio and video validation. 
+
+Release 0.77
+Adds support for WAV and BWF audio files.
