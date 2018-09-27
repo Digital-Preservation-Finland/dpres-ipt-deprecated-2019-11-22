@@ -69,6 +69,17 @@ def validation(mets_path):
         if metadata_info["use"] == 'no-file-format-validation':
             continue
 
+        if metadata_info["errors"]:
+            yield {
+                'metadata_info': metadata_info,
+                'result': {
+                    'is_valid': False,
+                    'messages': "Failed parsing metadata, skipping validation.",
+                    'errors': metadata_info["errors"],
+                    'result': None
+                }
+            }
+
         validators = iter_validators(metadata_info)
         for validator in validators:
             yield {

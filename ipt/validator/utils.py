@@ -90,7 +90,8 @@ def create_metadata_info(mets_tree, element, object_filename, use,
             'object_id': {'type': None,
                           'value': None},
             'algorithm': None,
-            'digest': None
+            'digest': None,
+            'errors': None
         }
     elif object_type == 'bitstream':
         metadata_info = {
@@ -102,9 +103,12 @@ def create_metadata_info(mets_tree, element, object_filename, use,
                                               mets.parse_admid(element),
                                               "amdSec"):
         if section is not None:
-            metadata_info = merge_dicts(
-                metadata_info, mdwrap_to_metadata_info(
-                    mets.parse_mdwrap(section)))
+            try:
+                metadata_info = merge_dicts(
+                    metadata_info, mdwrap_to_metadata_info(
+                        mets.parse_mdwrap(section)))
+            except TypeError as exception:
+                metadata_info["errors"] = str(exception)
 
     return metadata_info
 
