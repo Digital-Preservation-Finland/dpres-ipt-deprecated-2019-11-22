@@ -108,7 +108,9 @@ def create_metadata_info(mets_tree, element, object_filename, use,
                     metadata_info, mdwrap_to_metadata_info(
                         mets.parse_mdwrap(section)))
             except TypeError as exception:
-                metadata_info["errors"] = str(exception)
+                metadata_info["errors"] = (str(exception) + ' Duplicate or '
+                                           'conflicting values detected when '
+                                           'merging techMD metadata.')
 
     return metadata_info
 
