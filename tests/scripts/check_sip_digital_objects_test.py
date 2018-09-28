@@ -236,10 +236,12 @@ def patch_validate(monkeypatch):
 
     def _iter_metadata_info(foo, foob):
         """mock iter_metadata_info"""
-        return [{"filename": "pdf", "use": ''},
-                {"filename": "cdr", "use": ''},
-                {"filename": "cdr", "use": "no-file-format-validation"},
-                {"filename": "cdr", "use": "noo-file-format-validation"}]
+        return [{"filename": "pdf", "use": '', 'errors': None},
+                {"filename": "cdr", "use": '', 'errors': None},
+                {"filename": "cdr", "use": "no-file-format-validation",
+                 "errors": None},
+                {"filename": "cdr", "use": "noo-file-format-validation",
+                 "errors": None}]
 
     monkeypatch.setattr(
         ipt.scripts.check_sip_digital_objects, "iter_validators",
@@ -258,9 +260,14 @@ def test_native_marked():
     results = [file_ for file_ in validation(None)]
 
     assert results == [
-        {"metadata_info": {'filename': 'pdf', 'use': ''}, "result": "success"},
-        {"metadata_info": {'filename': 'cdr', 'use': ''}, "result": "failure"},
+        {"metadata_info": {
+            'filename': 'pdf', 'use': '', 'errors': None},
+         "result": "success"},
+        {"metadata_info": {
+            'filename': 'cdr', 'use': '', 'errors': None},
+         "result": "failure"},
         {"metadata_info": {'filename': 'cdr',
-                           'use': 'noo-file-format-validation'},
+                           'use': 'noo-file-format-validation',
+                           'errors': None},
          "result": "failure"}
     ]
