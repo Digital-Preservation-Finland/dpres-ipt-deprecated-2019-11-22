@@ -74,18 +74,20 @@ def validation(mets_path):
                 'metadata_info': metadata_info,
                 'result': {
                     'is_valid': False,
-                    'messages': "Failed parsing metadata, skipping validation.",
+                    'messages': ("Failed parsing metadata, skipping "
+                                 "validation."),
                     'errors': metadata_info["errors"],
                     'result': None
                 }
             }
 
-        validators = iter_validators(metadata_info)
-        for validator in validators:
-            yield {
-                'metadata_info': metadata_info,
-                'result': validator.result()
-            }
+        else:
+            validators = iter_validators(metadata_info)
+            for validator in validators:
+                yield {
+                    'metadata_info': metadata_info,
+                    'result': validator.result()
+                }
 
 
 def validation_report(results, linking_sip_type, linking_sip_id):

@@ -271,3 +271,32 @@ def test_native_marked():
                            'errors': None},
          "result": "failure"}
     ]
+
+
+@pytest.fixture(scope="function")
+def patch_metadata_info(monkeypatch):
+    """Patch metadata_info"""
+
+    def _iter_metadata_info(foo, foob):
+        """mock iter_metadata_info"""
+        return [{"filename": "pdf", "use": '', 'errors': 'Cannot merge dicts'}]
+
+    monkeypatch.setattr(
+        ipt.scripts.check_sip_digital_objects, "iter_metadata_info",
+        _iter_metadata_info)
+
+
+@pytest.mark.usefixtures('patch_metadata_info')
+def test_metadata_info_erros():
+    """Test validation with native file format that has been marked with
+    'no-file-format-validation'. This should validate only native file
+    format"""
+
+    results = [x for x in validation(None)]
+
+    assert 'result' in results[0]
+    assert results[0]['result'] == {
+        'is_valid': False, 'messages': ('Failed parsing metadata, '
+                                        'skipping validation.'),
+        'errors': 'Cannot merge dicts', 'result': None
+        }

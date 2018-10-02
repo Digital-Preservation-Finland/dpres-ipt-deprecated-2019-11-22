@@ -1,5 +1,6 @@
 """Test for utils.py."""
 
+import pytest
 from ipt.utils import merge_dicts, compare_lists_of_dicts, serialize_dict, \
     find_max_complete
 
@@ -11,6 +12,7 @@ VIDEOMD = {"codec": "foo", "duration": "bar"}
 AUDIOVIDEOMD = {"audiomd": [CODEC1], "videomd": [VIDEOMD]}
 FORMAT1 = {'format': {'mimetype': None, 'version': '1.0'}}
 FORMAT2 = {'format': {'mimetype': 'image/ipeg', 'version': None}}
+FORMAT3 = {'format': {'mimetype': 'image/ipeg', 'version': None}}
 
 
 def test_merge_dicts():
@@ -46,6 +48,10 @@ def test_merge_dicts():
     metadata_info = merge_dicts(FORMAT1, FORMAT2)
     assert metadata_info == {'format': {'mimetype': 'image/ipeg',
                                         'version': '1.0'}}
+
+    # Try to merge dicts that contain duplicate values
+    with pytest.raises(TypeError):
+        merge_dicts(FORMAT2, FORMAT3)
 
 
 def test_compare_lists_of_dicts():
