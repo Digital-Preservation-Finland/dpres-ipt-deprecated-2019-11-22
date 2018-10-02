@@ -110,7 +110,9 @@ def create_metadata_info(mets_tree, element, object_filename, use,
             except TypeError as exception:
                 metadata_info["errors"] = (str(exception) + ' Duplicate or '
                                            'conflicting values detected when '
-                                           'merging techMD metadata.')
+                                           'merging metadata from '
+                                           'techMD sections %s.' % ', '.join(
+                                               mets.parse_admid(element)))
 
     return metadata_info
 
