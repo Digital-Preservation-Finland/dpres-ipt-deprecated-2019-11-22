@@ -19,23 +19,25 @@ class ValidationException(Exception):
     pass
 
 
-def run_command(cmd, stdout=subprocess.PIPE, ld_library_path=None):
+def run_command(cmd, stdout=subprocess.PIPE, env=None):
     """Execute command. Validator specific error handling is supported
     by forwarding exceptions.
     :param cmd: commandline command.
-    :param ld_library_path: the LD_LIBRARY_PATH value to use
+    :param env: Override process environment variables
     :param stdout: a file handle can be given, for directing stdout to file.
     :returns: Tuple (statuscode, stdout, stderr)
     """
-    env = os.environ.copy()
-    if ld_library_path:
-        env["LD_LIBRARY_PATH"] = ld_library_path
+    _env = os.environ.copy()
+
+    if env:
+        for key, value in env.iteritems():
+            _env[key] = value
 
     proc = subprocess.Popen(cmd,
                             stdout=stdout,
                             stderr=subprocess.PIPE,
                             shell=False,
-                            env=env)
+                            env=_env)
 
     (stdout_result, stderr_result) = proc.communicate()
     if not stdout_result:
