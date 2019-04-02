@@ -10,7 +10,7 @@ Schematron.
 
 Schematron XSLT files must be installed at path
 
-    /usr/share/dpres-xml-schemas/schematron_xslt1/
+    /usr/share/iso_schematron_xslt1/
 
 Schematron XSLT files can be downloaded from
 
@@ -44,7 +44,7 @@ class SchematronValidator(object):
         self.verbose = False
         self.cache = True
         self.cachepath = os.path.expanduser('~/.dpres-ipt/schematron-cache')
-        self.schematron_dirname = '/usr/share/dpres-xml-schemas/schematron/schematron_xslt1'
+        self.schematron_dirname = '/usr/share/iso_schematron_xslt1'
         self.messages = None
         self.errors = None
         self.returncode = None

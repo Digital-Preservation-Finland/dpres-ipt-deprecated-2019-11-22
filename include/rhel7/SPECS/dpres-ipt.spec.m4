@@ -21,7 +21,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
 Requires: python python2-mimeparse python-dateutil xml-common ghostscript
-Requires: libxslt unzip jhove python-setuptools python-lxml veraPDF dpx-validator
+Requires: libxslt unzip jhove python-setuptools python-lxml veraPDF dpx-validator iso-schematron-xslt1
 # ClamAV installation requires these to work
 Requires: clamav libtool-ltdl
 Requires: warc-tools >= 4.8.3 ffmpeg pngcheck
